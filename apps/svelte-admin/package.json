@@ -1,0 +1,18 @@
+{
+  "name": "@fex/svelte-admin",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@fex/components-svelte": "workspace:*",
+    "@fex/styles": "workspace:*",
+    "@sveltejs/kit": "latest",
+    "@tailwindcss/vite": "catalog:",
+    "svelte": "5.56.4",
+    "vite": "catalog:"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "latest",
+    "svelte-check": "latest",
+    "typescript": "catalog:"
+  }
+}

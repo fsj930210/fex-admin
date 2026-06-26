@@ -1,0 +1,18 @@
+{
+  "name": "solid-admin",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/solid-admin/src",
+  "projectType": "application",
+  "targets": {
+    "dev": { "command": "vite --host 127.0.0.1 --port 4002 --strictPort", "options": { "cwd": "apps/solid-admin" } },
+    "build": {
+      "command": "vite build",
+      "options": { "cwd": "apps/solid-admin" },
+      "outputs": ["{projectRoot}/dist"]
+    },
+    "typecheck": { "command": "tsc --noEmit -p apps/solid-admin/tsconfig.json" },
+    "lint": {
+      "command": "oxlint apps/solid-admin/src apps/solid-admin/vite.config.ts"
+    }
+  }
+}

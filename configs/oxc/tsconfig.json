@@ -1,0 +1,4 @@
+{
+  "extends": "@fex/config-tsconfig/app.json",
+  "include": ["oxlint/**/*.ts", "oxfmt/**/*.ts", "oxlint.config.ts", "oxfmt.config.ts"]
+}

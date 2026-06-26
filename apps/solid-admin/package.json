@@ -1,0 +1,17 @@
+{
+  "name": "@fex/solid-admin",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@fex/components-solid": "workspace:*",
+    "@fex/styles": "workspace:*",
+    "@solidjs/router": "latest",
+    "@tailwindcss/vite": "catalog:",
+    "solid-js": "1.9.13",
+    "vite": "catalog:",
+    "vite-plugin-solid": "latest"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
+  }
+}

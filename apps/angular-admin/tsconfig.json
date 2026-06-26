@@ -1,0 +1,9 @@
+{
+  "extends": "@fex/config-tsconfig/angular-app.json",
+  "compilerOptions": {
+    "paths": {
+      "@fex/components-angular/button": ["../../packages/components/angular/src/button.ts"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}

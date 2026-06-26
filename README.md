@@ -1,2 +1,9 @@
-# fex-admin
-中后台管理系统，包含前端主流UI库的实现
+# Fex Admin
+
+Framework-agnostic admin foundations and native React, Vue, Solid, Svelte and Angular applications.
+
+```bash
+pnpm install
+pnpm nx run-many -t lint,typecheck,build
+pnpm dev:react
+```

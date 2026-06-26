@@ -1,0 +1,9 @@
+{
+  "name": "components-react",
+  "sourceRoot": "packages/components/react/src",
+  "projectType": "library",
+  "targets": {
+    "typecheck": { "command": "tsc --noEmit -p packages/components/react/tsconfig.json" },
+    "lint": { "command": "oxlint packages/components/react/src" }
+  }
+}

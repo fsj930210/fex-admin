@@ -1,0 +1,16 @@
+{
+  "name": "@fex/config-tsconfig",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./base.json": "./base.json",
+    "./app.json": "./app.json",
+    "./library.json": "./library.json",
+    "./node.json": "./node.json",
+    "./react-app.json": "./react-app.json",
+    "./vue-app.json": "./vue-app.json",
+    "./solid-app.json": "./solid-app.json",
+    "./svelte-app.json": "./svelte-app.json",
+    "./angular-app.json": "./angular-app.json"
+  }
+}

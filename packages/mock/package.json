@@ -1,0 +1,14 @@
+{
+  "name": "@fex/mock",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./browser": "./src/browser.ts",
+    "./node": "./src/node.ts"
+  },
+  "dependencies": {
+    "msw": "latest"
+  }
+}

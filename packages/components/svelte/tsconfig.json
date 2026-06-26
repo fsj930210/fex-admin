@@ -1,0 +1,1 @@
+{ "extends": "@fex/config-tsconfig/svelte-app.json", "include": ["src"] }

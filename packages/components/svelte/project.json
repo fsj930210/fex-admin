@@ -1,0 +1,9 @@
+{
+  "name": "components-svelte",
+  "sourceRoot": "packages/components/svelte/src",
+  "projectType": "library",
+  "targets": {
+    "typecheck": { "command": "svelte-check --tsconfig packages/components/svelte/tsconfig.json" },
+    "lint": { "command": "oxlint packages/components/svelte/src" }
+  }
+}

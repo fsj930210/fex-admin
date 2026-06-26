@@ -1,0 +1,9 @@
+{
+  "name": "utils",
+  "sourceRoot": "packages/utils/src",
+  "projectType": "library",
+  "targets": {
+    "typecheck": { "command": "tsc --noEmit -p packages/utils/tsconfig.json" },
+    "lint": { "command": "oxlint packages/utils/src" }
+  }
+}

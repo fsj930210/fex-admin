@@ -1,0 +1,12 @@
+{
+  "name": "@fex/components-styles",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./button": "./src/button.ts"
+  },
+  "dependencies": {
+    "class-variance-authority": "latest"
+  }
+}

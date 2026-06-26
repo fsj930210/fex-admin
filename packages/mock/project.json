@@ -1,0 +1,9 @@
+{
+  "name": "mock",
+  "sourceRoot": "packages/mock/src",
+  "projectType": "library",
+  "targets": {
+    "typecheck": { "command": "tsc --noEmit -p packages/mock/tsconfig.json" },
+    "lint": { "command": "oxlint packages/mock/src" }
+  }
+}

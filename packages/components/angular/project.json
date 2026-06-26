@@ -1,0 +1,9 @@
+{
+  "name": "components-angular",
+  "sourceRoot": "packages/components/angular/src",
+  "projectType": "library",
+  "targets": {
+    "typecheck": { "command": "ngc -p packages/components/angular/tsconfig.json --noEmit" },
+    "lint": { "command": "oxlint packages/components/angular/src" }
+  }
+}

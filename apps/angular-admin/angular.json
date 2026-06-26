@@ -1,0 +1,38 @@
+{
+  "$schema": "../../node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "projects": {
+    "angular-admin": {
+      "projectType": "application",
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "fex",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/main.ts",
+            "tsConfig": "tsconfig.app.json",
+            "index": "index.html",
+            "outputPath": "../../dist/apps/angular-admin",
+            "assets": [{ "glob": "**/*", "input": "public", "output": "/" }]
+          },
+          "configurations": {
+            "production": { "outputHashing": "all" },
+            "development": { "optimization": false, "sourceMap": true }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": { "buildTarget": "angular-admin:build:production" },
+            "development": { "buildTarget": "angular-admin:build:development" }
+          },
+          "defaultConfiguration": "development",
+          "options": { "port": 4000 }
+        }
+      }
+    }
+  }
+}

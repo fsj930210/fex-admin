@@ -1,0 +1,9 @@
+{
+  "name": "config-tsconfig",
+  "sourceRoot": "configs/tsconfig",
+  "projectType": "library",
+  "targets": {
+    "lint": { "command": "oxlint configs/tsconfig/check.ts" },
+    "typecheck": { "command": "tsc --noEmit -p configs/tsconfig/check.json" }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "extends": "@fex/config-tsconfig/base.json",
+  "files": [],
+  "references": [
+    { "path": "./apps/docs" },
+    { "path": "./apps/react-admin" },
+    { "path": "./apps/vue-admin" },
+    { "path": "./apps/solid-admin" },
+    { "path": "./apps/svelte-admin" },
+    { "path": "./apps/angular-admin" },
+    { "path": "./packages/components/core" },
+    { "path": "./packages/components/react" },
+    { "path": "./packages/components/vue" },
+    { "path": "./packages/components/solid" },
+    { "path": "./packages/components/svelte" },
+    { "path": "./packages/components/angular" },
+    { "path": "./packages/styles" },
+    { "path": "./packages/utils" },
+    { "path": "./packages/mock" }
+  ]
+}

@@ -1,0 +1,1 @@
+{ "extends": "@fex/config-tsconfig/angular-app.json", "include": ["src"] }

@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+@import './theme.css';
+@import './themes/light.css';
+@import './themes/dark.css';
+@import './density.css';
+@import './responsive.css';
+@import './globals.css';
+@import './animations.css';
+@import './utilities.css';
+
+@source "../../../apps";
+@source "../../components";

@@ -1,0 +1,9 @@
+{
+  "name": "config-oxc",
+  "sourceRoot": "configs/oxc",
+  "projectType": "library",
+  "targets": {
+    "lint": { "command": "oxlint configs/oxc" },
+    "typecheck": { "command": "tsc --noEmit -p configs/oxc/tsconfig.json" }
+  }
+}

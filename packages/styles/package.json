@@ -1,0 +1,19 @@
+{
+  "name": "@fex/styles",
+  "private": true,
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.css"
+    }
+  },
+  "devDependencies": {
+    "@fex/config-oxc": "workspace:*",
+    "@fex/config-tsconfig": "workspace:*",
+    "tailwindcss": "catalog:"
+  }
+}

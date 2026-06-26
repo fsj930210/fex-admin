@@ -1,0 +1,9 @@
+{
+  "name": "components-styles",
+  "sourceRoot": "packages/components/styles/src",
+  "projectType": "library",
+  "targets": {
+    "typecheck": { "command": "tsc --noEmit -p packages/components/styles/tsconfig.json" },
+    "lint": { "command": "oxlint packages/components/styles/src" }
+  }
+}

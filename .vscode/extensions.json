@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "oxc.oxc-vscode",
+    "nrwl.angular-console",
+    "bradlc.vscode-tailwindcss",
+    "unifiedjs.vscode-mdx",
+    "vue.volar",
+    "svelte.svelte-vscode",
+    "angular.ng-template"
+  ],
+  "unwantedRecommendations": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+}

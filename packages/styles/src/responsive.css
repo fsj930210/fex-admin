@@ -1,0 +1,11 @@
+@media (min-width: 48rem) {
+  :root {
+    --page-padding: var(--space-2xl);
+  }
+}
+
+@media (min-width: 80rem) {
+  :root {
+    --page-padding: var(--space-2xl);
+  }
+}

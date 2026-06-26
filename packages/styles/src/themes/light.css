@@ -1,0 +1,52 @@
+:root,
+.light,
+[data-theme='light'] {
+  color-scheme: light;
+
+  --background: oklch(1 0 0);
+  --secondary-background: oklch(0.97 0 0);
+  --muted-background: oklch(0.97 0 0);
+  --hover-background: oklch(0.94 0 0);
+  --selected-background: color-mix(in oklch, var(--primary) 10%, var(--background));
+  --disabled-background: oklch(0.97 0 0);
+  --card-background: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover-background: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
+  --foreground: oklch(0.145 0 0);
+  --secondary-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(0.68 0 0);
+  --disabled-foreground: color-mix(in oklch, var(--foreground) 35%, var(--background));
+  --placeholder-foreground: oklch(0.556 0 0);
+  --inverse-foreground: oklch(0.985 0 0);
+
+  --border: oklch(0.922 0 0);
+  --hover-border: color-mix(in oklch, var(--border) 76%, var(--foreground));
+  --focus-border: oklch(0.708 0 0);
+  --disabled-border: color-mix(in oklch, var(--border) 70%, var(--background));
+
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --link: oklch(0.61 0.22 264);
+  --link-hover: oklch(0.55 0.24 264);
+  --danger: oklch(0.577 0.245 27.325);
+  --danger-foreground: oklch(0.985 0 0);
+  --success: oklch(0.6 0.118 184.704);
+  --warning: oklch(0.828 0.189 84.429);
+  --info: oklch(0.61 0.22 264);
+  --gradient-lime: oklch(0.78 0.2 145);
+  --gradient-ocean: oklch(0.66 0.18 245);
+  --gradient-wine: oklch(0.56 0.23 335);
+  --gradient-rust: oklch(0.68 0.21 42);
+
+  --focus-ring: color-mix(in oklch, var(--focus-border) 38%, transparent);
+  --mask: oklch(0 0 0 / 48%);
+  --scrollbar-size: 6px;
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: oklch(0 0 0 / 14%);
+  --scrollbar-thumb-hover: oklch(0 0 0 / 24%);
+  --shadow-color: oklch(0 0 0 / 10%);
+  --shadow: 0 1px 3px var(--shadow-color);
+  --shadow-popup: 0 12px 32px var(--shadow-color);
+}

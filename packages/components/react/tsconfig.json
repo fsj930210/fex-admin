@@ -1,0 +1,1 @@
+{ "extends": "@fex/config-tsconfig/react-app.json", "include": ["src"] }

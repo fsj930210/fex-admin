@@ -1,0 +1,67 @@
+@theme inline {
+  --color-background: var(--background);
+  --color-secondary-background: var(--secondary-background);
+  --color-muted-background: var(--muted-background);
+  --color-hover-background: var(--hover-background);
+  --color-selected-background: var(--selected-background);
+  --color-disabled-background: var(--disabled-background);
+  --color-card-background: var(--card-background);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover-background: var(--popover-background);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-foreground: var(--foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-disabled-foreground: var(--disabled-foreground);
+  --color-placeholder-foreground: var(--placeholder-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-link: var(--link);
+  --color-link-hover: var(--link-hover);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-border: var(--border);
+  --color-hover-border: var(--hover-border);
+  --color-focus-border: var(--focus-border);
+  --color-disabled-border: var(--disabled-border);
+  --color-focus: var(--focus-ring);
+  --color-scrollbar-thumb: var(--scrollbar-thumb);
+  --color-scrollbar-thumb-hover: var(--scrollbar-thumb-hover);
+  --color-scrollbar-track: var(--scrollbar-track);
+  --font-sans: var(--font-family);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+  --shadow-card: var(--shadow);
+  --shadow-popup: var(--shadow-popup);
+  --spacing-space-xs: var(--space-xs);
+  --spacing-space-sm: var(--space-sm);
+  --spacing-space-md: var(--space-md);
+  --spacing-space-lg: var(--space-lg);
+  --spacing-space-xl: var(--space-xl);
+  --spacing-space-2xl: var(--space-2xl);
+  --spacing-page-padding: var(--page-padding);
+  --spacing-scrollbar: var(--scrollbar-size);
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+}
+
+:root {
+  --font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  --radius: 0.5rem;
+  --duration: 200ms;
+  --easing: cubic-bezier(0.2, 0, 0, 1);
+  --z-sticky: 100;
+  --z-dropdown: 200;
+  --z-drawer: 300;
+  --z-dialog: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+}

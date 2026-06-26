@@ -1,0 +1,21 @@
+{
+  "name": "@fex/docs",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@fex/styles": "workspace:*",
+    "@mdx-js/react": "latest",
+    "@mdx-js/rollup": "latest",
+    "@tailwindcss/vite": "catalog:",
+    "@vitejs/plugin-react": "latest",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-router": "7.13.1",
+    "vite": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "catalog:"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@fex/config-oxc",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./oxlint/base": "./oxlint/base.ts",
+    "./oxlint/react": "./oxlint/react.ts",
+    "./oxlint/vue": "./oxlint/vue.ts",
+    "./oxlint/solid": "./oxlint/solid.ts",
+    "./oxlint/svelte": "./oxlint/svelte.ts",
+    "./oxlint/angular": "./oxlint/angular.ts",
+    "./oxfmt/base": "./oxfmt/base.ts"
+  },
+  "devDependencies": {
+    "@fex/config-tsconfig": "workspace:*"
+  }
+}

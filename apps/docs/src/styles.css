@@ -1,0 +1,46 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui;
+  color: #172033;
+  background: #fff;
+}
+body {
+  margin: 0;
+}
+.docs-shell {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 820px);
+  min-height: 100vh;
+}
+aside {
+  padding: 32px;
+  border-right: 1px solid #e5eaf1;
+  background: #f8fafc;
+}
+nav {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+nav a {
+  color: #596579;
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+nav a.active {
+  color: #075fd8;
+  background: #eaf3ff;
+}
+article {
+  padding: 56px 64px;
+  line-height: 1.7;
+}
+h1 {
+  font-size: 38px;
+  letter-spacing: -0.03em;
+}
+code {
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: #f0f3f7;
+}

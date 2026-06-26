@@ -1,0 +1,21 @@
+{
+  "name": "angular-admin",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/angular-admin/src",
+  "projectType": "application",
+  "targets": {
+    "dev": {
+      "command": "ng serve --project angular-admin --host 127.0.0.1 --port 4000",
+      "options": { "cwd": "apps/angular-admin" }
+    },
+    "build": {
+      "command": "ng build angular-admin",
+      "options": { "cwd": "apps/angular-admin" },
+      "outputs": ["{workspaceRoot}/dist/apps/angular-admin"]
+    },
+    "typecheck": { "command": "ngc -p apps/angular-admin/tsconfig.json --noEmit" },
+    "lint": {
+      "command": "oxlint apps/angular-admin/src"
+    }
+  }
+}

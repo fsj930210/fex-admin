@@ -1,0 +1,19 @@
+{
+  "name": "@fex/components-angular",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./button": "./src/button/button.ts"
+  },
+  "dependencies": {
+    "@angular/common": "22.0.2",
+    "@fex/components-styles": "workspace:*"
+  },
+  "devDependencies": {
+    "@angular/core": "22.0.2"
+  },
+  "peerDependencies": {
+    "@angular/core": "^22.0.0"
+  }
+}

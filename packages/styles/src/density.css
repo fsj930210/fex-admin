@@ -1,0 +1,22 @@
+:root,
+[data-density='default'] {
+  --density-scale: 1;
+}
+
+[data-density='compact'] {
+  --density-scale: 0.875;
+}
+
+[data-density='comfortable'] {
+  --density-scale: 1.125;
+}
+
+:root {
+  --space-xs: calc(4px * var(--density-scale));
+  --space-sm: calc(6px * var(--density-scale));
+  --space-md: calc(8px * var(--density-scale));
+  --space-lg: calc(12px * var(--density-scale));
+  --space-xl: calc(16px * var(--density-scale));
+  --space-2xl: calc(24px * var(--density-scale));
+  --page-padding: var(--space-md);
+}

@@ -1,0 +1,1 @@
+{ "extends": "@fex/config-tsconfig/solid-app.json", "include": ["src"] }

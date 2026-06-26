@@ -1,0 +1,20 @@
+{
+  "name": "@fex/react-admin",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@fex/components-react": "workspace:*",
+    "@fex/styles": "workspace:*",
+    "@tailwindcss/vite": "catalog:",
+    "@vitejs/plugin-react": "latest",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-router": "7.13.1",
+    "vite": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "catalog:"
+  }
+}

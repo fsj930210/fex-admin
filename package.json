@@ -1,0 +1,35 @@
+{
+  "name": "fex-admin",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nx run-many -t dev --all --parallel=6",
+    "dev:docs": "nx dev docs",
+    "build": "nx run-many -t build",
+    "typecheck": "nx run-many -t typecheck",
+    "lint": "nx run-many -t lint",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "check": "nx run-many -t lint,typecheck,build",
+    "dev:react": "nx dev react-admin",
+    "dev:vue": "nx dev vue-admin",
+    "dev:solid": "nx dev solid-admin",
+    "dev:svelte": "nx dev svelte-admin",
+    "dev:angular": "nx dev angular-admin"
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "22.0.2",
+    "@fex/config-oxc": "workspace:*",
+    "@fex/config-tsconfig": "workspace:*",
+    "@nx/js": "23.0.1",
+    "@nx/vite": "23.0.1",
+    "nx": "23.0.1",
+    "oxfmt": "0.56.0",
+    "oxlint": "1.71.0",
+    "svelte-check": "latest",
+    "typescript": "6.0.3",
+    "vite": "8.1.0",
+    "vue-tsc": "latest"
+  },
+  "packageManager": "pnpm@11.4.0"
+}

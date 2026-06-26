@@ -1,0 +1,20 @@
+{
+  "name": "@fex/components-react",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./button": "./src/button/button.tsx"
+  },
+  "dependencies": {
+    "@fex/components-styles": "workspace:*",
+    "@fex/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "react": "19.2.7"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  }
+}

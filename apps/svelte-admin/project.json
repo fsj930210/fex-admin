@@ -1,0 +1,21 @@
+{
+  "name": "svelte-admin",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/svelte-admin/src",
+  "projectType": "application",
+  "targets": {
+    "dev": { "command": "vite --host 127.0.0.1 --port 4003 --strictPort", "options": { "cwd": "apps/svelte-admin" } },
+    "build": {
+      "command": "vite build",
+      "options": { "cwd": "apps/svelte-admin" },
+      "outputs": ["{projectRoot}/dist"]
+    },
+    "typecheck": {
+      "command": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+      "options": { "cwd": "apps/svelte-admin" }
+    },
+    "lint": {
+      "command": "oxlint apps/svelte-admin/src apps/svelte-admin/vite.config.ts"
+    }
+  }
+}

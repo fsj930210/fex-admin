@@ -1,0 +1,26 @@
+{
+  "name": "@fex/angular-admin",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@angular/animations": "22.0.2",
+    "@angular/build": "22.0.2",
+    "@angular/common": "22.0.2",
+    "@angular/compiler": "22.0.2",
+    "@angular/core": "22.0.2",
+    "@angular/platform-browser": "22.0.2",
+    "@angular/router": "22.0.2",
+    "@fex/components-angular": "workspace:*",
+    "@fex/components-styles": "workspace:*",
+    "@fex/styles": "workspace:*",
+    "rxjs": "latest",
+    "tslib": "latest",
+    "zone.js": "latest"
+  },
+  "devDependencies": {
+    "@angular/cli": "22.0.2",
+    "@angular/compiler-cli": "22.0.2",
+    "@tailwindcss/postcss": "catalog:",
+    "typescript": "catalog:"
+  }
+}

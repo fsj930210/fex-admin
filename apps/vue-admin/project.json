@@ -1,0 +1,16 @@
+{
+  "name": "vue-admin",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/vue-admin/src",
+  "projectType": "application",
+  "targets": {
+    "dev": { "command": "vite --host 127.0.0.1 --port 4004 --strictPort", "options": { "cwd": "apps/vue-admin" } },
+    "build": {
+      "command": "vite build",
+      "options": { "cwd": "apps/vue-admin" },
+      "outputs": ["{projectRoot}/dist"]
+    },
+    "typecheck": { "command": "vue-tsc --noEmit -p apps/vue-admin/tsconfig.json" },
+    "lint": { "command": "oxlint apps/vue-admin/src apps/vue-admin/vite.config.ts" }
+  }
+}

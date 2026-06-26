@@ -1,0 +1,9 @@
+{
+  "name": "components-solid",
+  "sourceRoot": "packages/components/solid/src",
+  "projectType": "library",
+  "targets": {
+    "typecheck": { "command": "tsc --noEmit -p packages/components/solid/tsconfig.json" },
+    "lint": { "command": "oxlint packages/components/solid/src" }
+  }
+}
