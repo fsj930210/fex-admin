@@ -4,6 +4,7 @@
   "type": "module",
   "dependencies": {
     "@fex/styles": "workspace:*",
+    "@fex/utils": "workspace:*",
     "@mdx-js/react": "latest",
     "@mdx-js/rollup": "latest",
     "@tailwindcss/vite": "catalog:",

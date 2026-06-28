@@ -12,5 +12,8 @@
     "./solid-app.json": "./solid-app.json",
     "./svelte-app.json": "./svelte-app.json",
     "./angular-app.json": "./angular-app.json"
+  },
+  "dependencies": {
+    "@fex/utils": "workspace:*"
   }
 }

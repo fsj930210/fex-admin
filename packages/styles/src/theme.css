@@ -38,6 +38,7 @@
   --radius-xl: calc(var(--radius) + 8px);
   --shadow-card: var(--shadow);
   --shadow-popup: var(--shadow-popup);
+  --spacing-space-2xs: var(--space-2xs);
   --spacing-space-xs: var(--space-xs);
   --spacing-space-sm: var(--space-sm);
   --spacing-space-md: var(--space-md);

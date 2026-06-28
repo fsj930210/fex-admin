@@ -5,6 +5,7 @@
   "dependencies": {
     "@fex/components-vue": "workspace:*",
     "@fex/styles": "workspace:*",
+    "@fex/utils": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "@vitejs/plugin-vue": "latest",
     "vite": "catalog:",

@@ -1,5 +1,6 @@
 import { A } from '@solidjs/router'
-import { Button } from '@fex/components-solid/button'
+import { Button as PrimitiveButton } from '@fex/components-solid/primitive/button'
+import { Button } from '@fex/components-solid/ui/button'
 import { For } from 'solid-js'
 
 const variants = ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link', 'dashed'] as const
@@ -30,6 +31,20 @@ export function ButtonPage() {
         <A href="/">返回首页</A>
         <h1 class="text-2xl font-semibold">Button</h1>
       </header>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-medium">Primitive</h2>
+        <div class="flex flex-wrap gap-3">
+          <PrimitiveButton>Primitive button</PrimitiveButton>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-medium">Ui</h2>
+        <div class="flex flex-wrap gap-3">
+          <For each={variants}>{(variant) => <Button variant={variant}>{variant}</Button>}</For>
+        </div>
+      </section>
 
       <section class="space-y-3">
         <h2 class="text-lg font-medium">Variants</h2>

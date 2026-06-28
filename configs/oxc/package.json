@@ -11,6 +11,9 @@
     "./oxlint/angular": "./oxlint/angular.ts",
     "./oxfmt/base": "./oxfmt/base.ts"
   },
+  "dependencies": {
+    "@fex/utils": "workspace:*"
+  },
   "devDependencies": {
     "@fex/config-tsconfig": "workspace:*"
   }

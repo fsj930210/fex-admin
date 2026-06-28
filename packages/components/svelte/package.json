@@ -4,10 +4,26 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
-    "./button": "./src/button/button.svelte"
+    "./button": "./src/ui/button/button.ts",
+    "./primitive/button": "./src/primitive/button/button.svelte",
+    "./ui/button": "./src/ui/button/button.ts",
+    "./card": "./src/ui/card/card.ts",
+    "./primitive/card": "./src/primitive/card/card.svelte",
+    "./ui/card": "./src/ui/card/card.ts",
+    "./primitive/card-header": "./src/primitive/card/card-header.svelte",
+    "./primitive/card-title": "./src/primitive/card/card-title.svelte",
+    "./primitive/card-description": "./src/primitive/card/card-description.svelte",
+    "./primitive/card-content": "./src/primitive/card/card-content.svelte",
+    "./primitive/card-footer": "./src/primitive/card/card-footer.svelte",
+    "./ui/card-header": "./src/primitive/card/card-header.svelte",
+    "./ui/card-title": "./src/primitive/card/card-title.svelte",
+    "./ui/card-description": "./src/primitive/card/card-description.svelte",
+    "./ui/card-content": "./src/primitive/card/card-content.svelte",
+    "./ui/card-footer": "./src/primitive/card/card-footer.svelte"
   },
   "dependencies": {
-    "@fex/components-styles": "workspace:*"
+    "@fex/components-styles": "workspace:*",
+    "@fex/utils": "workspace:*"
   },
   "devDependencies": {
     "svelte": "5.56.4"

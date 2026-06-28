@@ -1,0 +1,27 @@
+import { readFile, writeFile } from 'node:fs/promises'
+import path from 'node:path'
+
+const workspaceRoot = process.cwd()
+const angularPackagePath = path.join(workspaceRoot, 'packages/components/angular/package.json')
+const outputPath = path.join(workspaceRoot, 'tsconfig.angular-workspace.json')
+
+const angularPackage = JSON.parse(await readFile(angularPackagePath, 'utf8'))
+const componentPaths = Object.fromEntries(
+  Object.entries(angularPackage.exports)
+    .filter(([subpath, target]) => subpath.startsWith('./') && target.endsWith('.ts'))
+    .map(([subpath, target]) => [
+      `@fex/components-angular/${subpath.slice(2)}`,
+      [path.posix.join('packages/components/angular', target.slice(2))],
+    ]),
+)
+
+const tsconfig = {
+  extends: '@fex/config-tsconfig/angular-app.json',
+  compilerOptions: {
+    baseUrl: '.',
+    ignoreDeprecations: '6.0',
+    paths: componentPaths,
+  },
+}
+
+await writeFile(outputPath, `${JSON.stringify(tsconfig, null, 2)}\n`)

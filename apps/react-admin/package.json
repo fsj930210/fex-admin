@@ -5,6 +5,7 @@
   "dependencies": {
     "@fex/components-react": "workspace:*",
     "@fex/styles": "workspace:*",
+    "@fex/utils": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "@vitejs/plugin-react": "latest",
     "react": "19.2.7",

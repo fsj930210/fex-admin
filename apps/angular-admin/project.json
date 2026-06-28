@@ -6,6 +6,7 @@
   "targets": {
     "dev": {
       "command": "ng serve --project angular-admin --host 127.0.0.1 --port 4000",
+      "dependsOn": [{ "projects": ["components-angular"], "target": "sync-paths" }],
       "options": { "cwd": "apps/angular-admin" }
     },
     "build": {

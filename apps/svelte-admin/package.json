@@ -5,6 +5,7 @@
   "dependencies": {
     "@fex/components-svelte": "workspace:*",
     "@fex/styles": "workspace:*",
+    "@fex/utils": "workspace:*",
     "@sveltejs/kit": "latest",
     "@tailwindcss/vite": "catalog:",
     "svelte": "5.56.4",

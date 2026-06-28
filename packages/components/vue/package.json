@@ -4,10 +4,16 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
-    "./button": "./src/button/button.vue"
+    "./button": "./src/ui/button/button.ts",
+    "./primitive/button": "./src/primitive/button/button.vue",
+    "./ui/button": "./src/ui/button/button.ts",
+    "./card": "./src/ui/card/card.ts",
+    "./primitive/card": "./src/primitive/card/card.ts",
+    "./ui/card": "./src/ui/card/card.ts"
   },
   "dependencies": {
-    "@fex/components-styles": "workspace:*"
+    "@fex/components-styles": "workspace:*",
+    "@fex/utils": "workspace:*"
   },
   "devDependencies": {
     "vue": "3.5.38"

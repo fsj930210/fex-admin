@@ -1,0 +1,27 @@
+{
+  "extends": "@fex/config-tsconfig/angular-app.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "@fex/components-angular/button": [
+        "packages/components/angular/src/ui/button/button.ts"
+      ],
+      "@fex/components-angular/primitive/button": [
+        "packages/components/angular/src/primitive/button/button.ts"
+      ],
+      "@fex/components-angular/ui/button": [
+        "packages/components/angular/src/ui/button/button.ts"
+      ],
+      "@fex/components-angular/card": [
+        "packages/components/angular/src/ui/card/card.ts"
+      ],
+      "@fex/components-angular/primitive/card": [
+        "packages/components/angular/src/primitive/card/card.ts"
+      ],
+      "@fex/components-angular/ui/card": [
+        "packages/components/angular/src/ui/card/card.ts"
+      ]
+    }
+  }
+}

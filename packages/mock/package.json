@@ -9,6 +9,7 @@
     "./node": "./src/node.ts"
   },
   "dependencies": {
+    "@fex/utils": "workspace:*",
     "msw": "latest"
   }
 }

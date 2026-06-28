@@ -1,16 +1,33 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { RouterLink } from "@angular/router";
-import { Button } from "@fex/components-angular/button";
+import { Button as PrimitiveButton } from "@fex/components-angular/primitive/button";
+import { Button } from "@fex/components-angular/ui/button";
 
 @Component({
   selector: "fex-button-page",
-  imports: [Button, RouterLink],
+  imports: [PrimitiveButton, Button, RouterLink],
   template: `
     <main class="space-y-8 p-6">
       <header class="space-y-2">
         <a routerLink="/">返回首页</a>
         <h1 class="text-2xl font-semibold">Button</h1>
       </header>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-medium">Primitive</h2>
+        <div class="flex flex-wrap gap-3">
+          <button fex-button-primitive>Primitive button</button>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-medium">Ui</h2>
+        <div class="flex flex-wrap gap-3">
+          @for (variant of variants; track variant) {
+            <button fex-button [variant]="variant">{{ variant }}</button>
+          }
+        </div>
+      </section>
 
       <section class="space-y-3">
         <h2 class="text-lg font-medium">Variants</h2>

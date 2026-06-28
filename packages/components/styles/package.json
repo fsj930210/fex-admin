@@ -4,7 +4,8 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
-    "./button": "./src/button.ts"
+    "./button": "./src/button.ts",
+    "./card": "./src/card.ts"
   },
   "dependencies": {
     "class-variance-authority": "latest"

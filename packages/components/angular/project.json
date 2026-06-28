@@ -3,6 +3,10 @@
   "sourceRoot": "packages/components/angular/src",
   "projectType": "library",
   "targets": {
+    "sync-paths": {
+      "command": "node packages/components/angular/scripts/sync-tsconfig-paths.mjs",
+      "options": { "cwd": "{workspaceRoot}" }
+    },
     "typecheck": { "command": "ngc -p packages/components/angular/tsconfig.json --noEmit" },
     "lint": { "command": "oxlint packages/components/angular/src" }
   }

@@ -1,5 +1,6 @@
 <script lang="ts">
-  import Button from '@fex/components-svelte/button'
+  import PrimitiveButton from '@fex/components-svelte/primitive/button'
+  import Button from '@fex/components-svelte/ui/button'
 
   const variants = ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link', 'dashed'] as const
   const sizes = ['xs', 'sm', 'default', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'] as const
@@ -26,6 +27,22 @@
     <a href="/">返回首页</a>
     <h1 class="text-2xl font-semibold">Button</h1>
   </header>
+
+  <section class="space-y-3">
+    <h2 class="text-lg font-medium">Primitive</h2>
+    <div class="flex flex-wrap gap-3">
+      <PrimitiveButton>Primitive button</PrimitiveButton>
+    </div>
+  </section>
+
+  <section class="space-y-3">
+    <h2 class="text-lg font-medium">Ui</h2>
+    <div class="flex flex-wrap gap-3">
+      {#each variants as variant}
+        <Button {variant}>{variant}</Button>
+      {/each}
+    </div>
+  </section>
 
   <section class="space-y-3">
     <h2 class="text-lg font-medium">Variants</h2>

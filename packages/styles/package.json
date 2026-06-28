@@ -11,6 +11,9 @@
       "default": "./src/index.css"
     }
   },
+  "dependencies": {
+    "@fex/utils": "workspace:*"
+  },
   "devDependencies": {
     "@fex/config-oxc": "workspace:*",
     "@fex/config-tsconfig": "workspace:*",

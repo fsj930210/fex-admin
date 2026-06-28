@@ -5,6 +5,7 @@
   "dependencies": {
     "@fex/components-solid": "workspace:*",
     "@fex/styles": "workspace:*",
+    "@fex/utils": "workspace:*",
     "@solidjs/router": "latest",
     "@tailwindcss/vite": "catalog:",
     "solid-js": "1.9.13",

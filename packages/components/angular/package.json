@@ -4,16 +4,23 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
-    "./button": "./src/button/button.ts"
+    "./button": "./src/ui/button/button.ts",
+    "./primitive/button": "./src/primitive/button/button.ts",
+    "./ui/button": "./src/ui/button/button.ts",
+    "./card": "./src/ui/card/card.ts",
+    "./primitive/card": "./src/primitive/card/card.ts",
+    "./ui/card": "./src/ui/card/card.ts"
   },
   "dependencies": {
-    "@angular/common": "22.0.2",
-    "@fex/components-styles": "workspace:*"
+    "@fex/components-styles": "workspace:*",
+    "@fex/utils": "workspace:*"
   },
   "devDependencies": {
+    "@angular/common": "22.0.2",
     "@angular/core": "22.0.2"
   },
   "peerDependencies": {
+    "@angular/common": "^22.0.0",
     "@angular/core": "^22.0.0"
   }
 }

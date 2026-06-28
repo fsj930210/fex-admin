@@ -160,7 +160,7 @@
 
 - 跨框架组件应优先把无框架逻辑沉淀到 `packages/components/core`，再在各框架包里适配。
 - 同一类能力如果 React、Vue、Solid、Svelte、Angular 都会用，先抽出纯逻辑、类型和算法到 `packages/components/core` 或 `packages/utils`；各框架包只封装生命周期、响应式绑定、DOM 适配和框架 API。
-- 纯展示组件如果没有跨框架共享的状态机、算法、交互协议、数据转换或复杂可访问性行为，不要为了“统一”强行创建 core 层；优先把视觉样式、CSS 变量、variant、size、状态样式和 data attribute 规则沉淀到 `packages/styles`，各框架组件只做 props、slot/children、class 合并、原生属性透传和事件透传等薄封装。
+- 纯展示组件如果没有跨框架共享的状态机、算法、交互协议、数据转换或复杂可访问性行为，不要为了“统一”强行创建 core 层；设计 token、全局变量和基础 Tailwind source 配置放在 `packages/styles`，组件自身的 class 组合、variant、size、状态样式和 data attribute 规则必须沉淀到 `packages/components/styles`，各框架组件只做 props、slot/children、class 合并、原生属性透传和事件透传等薄封装。
 - 只有当展示组件演进出必须跨框架保持一致的行为逻辑时，才引入 `packages/components/core`，例如受控/非受控状态、键盘导航、选择模型、焦点管理、弹层协议、复杂 ARIA 行为或非平凡 variant 计算；不要仅仅为了复用 class 字符串或简单 props 映射而增加 core 抽象。
 - 简单组件优先使用单文件实现和文件级子路径导出，例如 `src/button.tsx`，Props 类型、组件类型和少量局部 helper 直接在组件文件内声明并按需导出，通过 `package.json` 的 `exports` 暴露 `./button`；不要为了单个组件提前创建 `button/index.ts`、`button/index.tsx`、`button.types.ts` 或模板化目录。只有当组件出现多个强相关文件、子组件、feature、hook/composable/primitive、locale、adapter、测试或文档需要共同归组时，才升级为 `src/button/button.tsx` 等目录结构；目录内也不要使用 `index.ts` 作为桶文件，类型文件只在多文件共享复杂公共类型时按需创建。
 - 复杂跨框架组件如果需要在 core 中维护可变状态并通知 UI 刷新，必须优先沉淀一套可复用的 core store/subscription 基础设施，例如 `getSnapshot`、`subscribe`、`setSnapshot`、`updateSnapshot`，由 Tree、Dialog、Popover、Menu、Table 等 controller 复用；不要在每个组件里重复实现一套发布订阅、监听集合、通知循环或状态快照管理。
@@ -176,6 +176,14 @@
 
 - 写 UI 前先查 `packages/components/*` 和当前 app 的 `src/components` 是否已有可复用组件，特别是按钮、弹窗、表单项、表格、布局类组件。
 - 样式优先使用 `@fex/styles` 提供的全局变量、主题、工具类和既有 CSS 分层；不要在业务组件中复制大段主题色、阴影、间距规则。
+- `packages/components/*` 中的 UI 组件实现文件不要直接书写具体 Tailwind 样式；组件默认样式、尺寸、variant、状态样式、slot 样式必须统一放到 `packages/components/styles/src/<component>.ts`，通过 `class-variance-authority` 导出类似 `buttonClassName` 的 className 生成函数，各框架组件只调用这些函数，并必须使用 `@fex/utils` 的 `cn` 显式合并用户传入的 `class`/`className`，不要依赖 `cva` 或框架自身的隐式合并。
+- `packages/components/styles` 中每新增一个组件样式模块，都必须同步在该包 `package.json` 的 `exports` 中暴露文件级子路径，例如 `./button`、`./card`；业务和框架组件只能通过公开子路径导入，不要导入 `src/**` 私有路径。
+- 组件间距必须使用系统 spacing token，但不能机械把“默认尺寸”理解成一律使用 `space-md`。`space-md` 当前是 8px，适合紧凑内部 gap、小控件局部间隔；Card、Panel、Dialog、示例展示块这类承载内容的 surface，默认 padding 应根据视觉密度使用更合适的 token，例如 `space-xl`，避免内容贴边。组件间距选择必须按组件语义和同类组件规格保持一致。
+- padding、margin、gap 等 spacing class 要优先使用最简表达；四边相同写 `p-space-*`，横纵不同才写 `px-space-* py-space-*`，单边不同才写具体方向，避免无意义重复。
+- 每个 UI 库都必须显式分层为 `primitive` 和 `ui`，其中 `primitive` 只承载底层结构、基础行为和最小样式协议，`ui` 承载面向业务的推荐封装和默认组合；少数真正复杂且高复用的工作流型组件可以额外有 `pro` 层，但 `pro` 只用于数据表、复杂表单、远程选择器这类明确的工作流封装。
+- 组件的 demo 和文档必须同时覆盖 `primitive`、`ui`，如果某个组件存在 `pro` 层也必须一并覆盖；demo 页面要用统一的 `Card` 容器承载各段示例，不能再手写散落的 section 容器。
+- `ui` 层的结构化 API 要优先采用显式对象形态来承载部件级样式与状态，例如 `partClassName`、`partStyle`、`slotProps` 之类的清晰结构，不要把 header/content/footer 等部件的样式塞进扁平 props，也不要让调用方依赖 DOM 深层 class。
+- 新增组件样式前必须先参考 `packages/components/styles/src/button.ts` 的组织方式：基础 class 用数组拼接，variant/size/effect 等用 `cva` 表达，组件包实现只消费样式函数，不把默认样式散落在 React/Vue/Solid/Svelte/Angular 文件里。
 - 样式命名和组件结构要支持扩展，不要依赖脆弱的深层选择器覆盖。
 - 管理后台界面应以信息密度、可扫描性、稳定布局和可维护交互为优先，不做营销页式的大面积装饰。
 - `packages/components/*` 下新增或修改对外组件时，必须同步补充详细完整的 Markdown 文档。

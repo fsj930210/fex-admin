@@ -4,7 +4,15 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
-    "./button": "./src/button/button.tsx"
+    "./button": "./src/ui/button/button.tsx",
+    "./primitive/button": "./src/primitive/button/button.tsx",
+    "./ui/button": "./src/ui/button/button.tsx",
+    "./card": "./src/ui/card/card.tsx",
+    "./primitive/card": "./src/primitive/card/card.tsx",
+    "./ui/card": "./src/ui/card/card.tsx",
+    "./primitive/dialog": "./src/primitive/dialog/index.ts",
+    "./ui/dialog": "./src/ui/dialog/index.ts",
+    "./pro/dialog": "./src/pro/dialog/index.ts"
   },
   "dependencies": {
     "@fex/components-styles": "workspace:*",

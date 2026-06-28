@@ -6,4 +6,9 @@ export const componentRoutes: Routes = [
     loadComponent: () =>
       import('../../pages/button/index.component').then((module) => module.ButtonComponent),
   },
+  {
+    path: 'card',
+    loadComponent: () =>
+      import('../../pages/card/index.component').then((module) => module.CardComponent),
+  },
 ]

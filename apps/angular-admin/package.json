@@ -13,6 +13,7 @@
     "@fex/components-angular": "workspace:*",
     "@fex/components-styles": "workspace:*",
     "@fex/styles": "workspace:*",
+    "@fex/utils": "workspace:*",
     "rxjs": "latest",
     "tslib": "latest",
     "zone.js": "latest"

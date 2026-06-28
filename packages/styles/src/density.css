@@ -12,6 +12,7 @@
 }
 
 :root {
+  --space-2xs: calc(3px * var(--density-scale));
   --space-xs: calc(4px * var(--density-scale));
   --space-sm: calc(6px * var(--density-scale));
   --space-md: calc(8px * var(--density-scale));

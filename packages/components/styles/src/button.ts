@@ -1,17 +1,21 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
+export const buttonPrimitiveClassName = [
+  'group inline-flex items-center justify-center whitespace-nowrap',
+  'rounded-md font-medium leading-normal',
+  'cursor-pointer select-none border',
+  'shadow-[0_1px_1px_rgb(0_0_0/0.04)] transition-[background-color,color,border-color,box-shadow,opacity]',
+  'duration-150 ease-out',
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2',
+  'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-45',
+  'data-[loading=true]:pointer-events-none data-[loading=true]:cursor-wait data-[loading=true]:opacity-75',
+  '[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  'gap-space-md px-space-xl py-space-2xs',
+  'border-border bg-background text-foreground hover:bg-muted-background',
+].join(' ')
+
 export const buttonClassName = cva(
-  [
-    'group inline-flex items-center justify-center whitespace-nowrap',
-    'rounded-md text-sm font-medium leading-normal',
-    'cursor-pointer select-none border',
-    'shadow-[0_1px_1px_rgb(0_0_0/0.04)] transition-[background-color,color,border-color,box-shadow,opacity]',
-    'duration-150 ease-out',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2',
-    'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-45',
-    'data-[loading=true]:pointer-events-none data-[loading=true]:cursor-wait data-[loading=true]:opacity-75',
-    '[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
-  ].join(' '),
+  buttonPrimitiveClassName,
   {
     variants: {
       variant: {
@@ -48,14 +52,14 @@ export const buttonClassName = cva(
           'bg-[size:400%] bg-[linear-gradient(-45deg,var(--gradient-lime),var(--gradient-ocean),var(--gradient-wine),var(--gradient-rust))] animate-gradient-flow',
       },
       size: {
-        default: 'min-h-10 gap-2 px-4 py-2',
-        xs: 'min-h-8 gap-1.5 rounded-[min(var(--radius),10px)] px-3 py-1.5 text-xs [&_svg]:size-3.5',
-        sm: 'min-h-9 gap-1.5 rounded-[min(var(--radius),12px)] px-3.5 py-2 text-[0.8125rem] [&_svg]:size-3.5',
-        lg: 'min-h-11 gap-2 px-5 py-2.5 text-[0.9375rem]',
-        icon: 'size-10 p-0',
-        'icon-xs': 'size-8 rounded-[min(var(--radius),10px)] p-0 [&_svg]:size-3.5',
-        'icon-sm': 'size-9 rounded-[min(var(--radius),12px)] p-0 [&_svg]:size-3.5',
-        'icon-lg': 'size-11 p-0',
+        default: 'gap-space-md px-space-xl py-space-2xs',
+        xs: 'gap-space-xs rounded-[min(var(--radius),10px)] px-space-lg py-space-xs text-xs [&_svg]:size-3.5',
+        sm: 'gap-space-sm rounded-[min(var(--radius),12px)] px-space-lg py-space-sm text-[0.8125rem] [&_svg]:size-3.5',
+        lg: 'gap-space-lg px-space-2xl py-space-lg text-[0.9375rem]',
+        icon: 'p-space-md',
+        'icon-xs': 'rounded-[min(var(--radius),10px)] p-space-xs [&_svg]:size-3.5',
+        'icon-sm': 'rounded-[min(var(--radius),12px)] p-space-sm [&_svg]:size-3.5',
+        'icon-lg': 'p-space-lg',
       },
     },
     defaultVariants: {
@@ -65,43 +69,27 @@ export const buttonClassName = cva(
   },
 )
 
-export const buttonIconClassName = cva('inline-flex shrink-0 items-center justify-center', {
-  variants: {
-    placement: {
-      start: '',
-      end: '',
-    },
-    effect: {
-      default: '',
-      'expand-icon': '',
-      'ring-hover': '',
-      shine: '',
-      'shine-hover': '',
-      'gooey-right': '',
-      'gooey-left': '',
-      underline: '',
-      'hover-underline': '',
-      'gradient-slide-show': '',
-    },
-  },
-  compoundVariants: [
-    {
-      placement: 'start',
-      effect: 'expand-icon',
-      class:
-        'w-0 translate-x-[0%] pr-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-[100%] group-hover:pr-2 group-hover:opacity-100',
-    },
-    {
-      placement: 'end',
-      effect: 'expand-icon',
-      class:
-        'w-0 translate-x-[100%] pl-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pl-2 group-hover:opacity-100',
-    },
-  ],
-  defaultVariants: {
-    effect: 'default',
-  },
-})
+const buttonIconBaseClassName = 'inline-flex shrink-0 items-center justify-center'
+
+const buttonExpandIconClassName = {
+  start:
+    'w-0 translate-x-[0%] pr-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-[100%] group-hover:pr-2 group-hover:opacity-100',
+  end:
+    'w-0 translate-x-[100%] pl-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pl-2 group-hover:opacity-100',
+} satisfies Record<'start' | 'end', string>
+
+export function buttonIconClassName({
+  placement,
+  effect,
+}: {
+  placement: 'start' | 'end'
+  effect?: ButtonStyleProps['effect']
+}) {
+  return [
+    buttonIconBaseClassName,
+    effect === 'expand-icon' ? buttonExpandIconClassName[placement] : '',
+  ].join(' ')
+}
 
 export const buttonSpinnerClassName =
   'size-[1em] animate-spin'
