@@ -35,6 +35,10 @@ import {
 
 | Name | Type | Default | Required | Description |
 | --- | --- | --- | --- | --- |
+| `title` | `string` | `undefined` | No | Header title content. |
+| `description` | `string` | `undefined` | No | Header description content. |
+| `footer` | `TemplateRef<unknown>` | `undefined` | No | Footer content template. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | No | Quick spacing preset for the card layout. |
 | `class` | `string` | `undefined` | No | Extra classes merged with the component defaults. |
 | native attributes | `HTMLElement attributes` | `undefined` | No | Standard host attributes are passed through. |
 
@@ -48,7 +52,7 @@ Card has no internal state, so it does not have controlled or uncontrolled modes
 
 ## Notes
 
-Use CardHeader, CardContent, and CardFooter to keep spacing consistent. Add dividers such as `border-b border-border` at the composition site.
+`size` provides quick spacing presets, and spacing is controlled by `--card-spacing` on the card root for custom values.
 
 ## Common Composition
 

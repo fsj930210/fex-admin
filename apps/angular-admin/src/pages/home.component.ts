@@ -4,15 +4,22 @@ import { RouterLink } from '@angular/router'
 @Component({
   selector: 'fex-home',
   imports: [RouterLink],
-  template: `
-    <main>
-      <h1>Angular Admin</h1>
-      <p>Vite 与 Angular Router 已连接。</p>
-      <a routerLink="/button">Button</a>
-      <a routerLink="/card">Card</a>
-      <a routerLink="/route-test">测试路由</a>
-    </main>
-  `,
+  host: { class: 'block' },
+  templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {}
+export class HomeComponent {
+  protected readonly componentLinks = [
+    { to: '/button', label: 'Button' },
+    { to: '/card', label: 'Card' },
+    { to: '/alert', label: 'Alert' },
+    { to: '/badge', label: 'Badge' },
+    { to: '/empty', label: 'Empty' },
+    { to: '/input', label: 'Input' },
+    { to: '/kbd', label: 'Kbd' },
+    { to: '/pagination', label: 'Pagination' },
+    { to: '/spinner', label: 'Spinner' },
+    { to: '/table', label: 'Table' },
+    { to: '/textarea', label: 'Textarea' },
+  ] as const
+}

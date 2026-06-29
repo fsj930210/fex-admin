@@ -9,31 +9,53 @@
   import CardTitle from '../../primitive/card/card-title.svelte'
 
   type SectionClass = {
+    root?: string
     header?: string
+    title?: string
+    description?: string
     content?: string
     footer?: string
   }
 
   type SectionStyle = {
+    root?: HTMLAttributes<HTMLDivElement>['style']
     header?: HTMLAttributes<HTMLDivElement>['style']
+    title?: HTMLAttributes<HTMLDivElement>['style']
+    description?: HTMLAttributes<HTMLDivElement>['style']
     content?: HTMLAttributes<HTMLDivElement>['style']
     footer?: HTMLAttributes<HTMLDivElement>['style']
   }
+
+  type CardSize = 'sm' | 'md' | 'lg'
 
   interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'class' | 'style' | 'title'> {
     title?: Snippet | string
     description?: Snippet | string
     footer?: Snippet | string
+    size?: CardSize
     class?: SectionClass
     style?: SectionStyle
     children?: Snippet
   }
 
-  let { title, description, footer, class: className, style, children, ...rest }: CardProps = $props()
+  let { title, description, footer, size, class: className, style, children, ...rest }: CardProps = $props()
 
+  const rootProps = $derived({
+    'data-size': size ?? 'md',
+    ...(className?.root ? { class: className.root } : {}),
+    ...(style?.root ? { style: style.root } : {}),
+  })
   const headerProps = $derived({
     ...(className?.header ? { class: className.header } : {}),
     ...(style?.header ? { style: style.header } : {}),
+  })
+  const titleProps = $derived({
+    ...(className?.title ? { class: className.title } : {}),
+    ...(style?.title ? { style: style.title } : {}),
+  })
+  const descriptionProps = $derived({
+    ...(className?.description ? { class: className.description } : {}),
+    ...(style?.description ? { style: style.description } : {}),
   })
   const contentProps = $derived({
     ...(className?.content ? { class: className.content } : {}),
@@ -45,11 +67,11 @@
   })
 </script>
 
-<PrimitiveCard {...rest}>
+<PrimitiveCard {...rest} {...rootProps}>
   {#if title || description}
     <CardHeader {...headerProps}>
       {#if title}
-        <CardTitle>
+        <CardTitle {...titleProps}>
           {#if typeof title === 'function'}
             {@render title()}
           {:else}
@@ -58,7 +80,7 @@
         </CardTitle>
       {/if}
       {#if description}
-        <CardDescription>
+        <CardDescription {...descriptionProps}>
           {#if typeof description === 'function'}
             {@render description()}
           {:else}

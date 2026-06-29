@@ -26,6 +26,7 @@ import { cn } from "@fex/utils";
   host: {
     "[class]": "hostClassName()",
     "data-slot": "card",
+    "[attr.data-size]": "size()",
   },
   template: `
     @if (title() || description()) {
@@ -55,8 +56,9 @@ export class Card {
   title = input<string | undefined>();
   description = input<string | undefined>();
   footer = input<TemplateRef<unknown> | undefined>();
+  size = input<"sm" | "md" | "lg">("md");
 
-  protected readonly hostClassName = computed(() => cn(cardClassName(), this.initialClassName));
+  protected readonly hostClassName = computed(() => cn(cardClassName, this.initialClassName));
 }
 
 export { CardContent, CardDescription, CardFooter, CardHeader, CardTitle };

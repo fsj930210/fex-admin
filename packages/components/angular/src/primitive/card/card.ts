@@ -15,11 +15,11 @@ import {
   inject,
 } from "@angular/core";
 
-function createHostClass(className: () => string) {
+function createHostClass(className: string) {
   const elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   const initialClassName = elementRef.nativeElement.getAttribute("class") ?? "";
 
-  return computed(() => cn(className(), initialClassName));
+  return computed(() => cn(className, initialClassName));
 }
 
 @Component({

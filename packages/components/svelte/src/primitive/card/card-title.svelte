@@ -11,7 +11,7 @@
 
   let { class: className, children, ...rest }: CardTitleProps = $props()
 
-  const classList = $derived(cn(cardTitleClassName(), className))
+  const classList = $derived(cn(cardTitleClassName, className))
 </script>
 
 <div {...rest} data-slot="card-title" class={classList}>

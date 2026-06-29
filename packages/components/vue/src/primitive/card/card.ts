@@ -9,7 +9,7 @@ import {
 import { cn } from '@fex/utils'
 import { defineComponent, h } from 'vue'
 
-function createCardPart(name: string, slot: string, className: () => string) {
+function createCardPart(name: string, slot: string, className: string) {
   return defineComponent({
     name,
     inheritAttrs: false,
@@ -20,7 +20,7 @@ function createCardPart(name: string, slot: string, className: () => string) {
           {
             ...attrs,
             'data-slot': slot,
-            class: cn(className(), attrs.class as string | undefined),
+            class: cn(className, attrs.class as string | undefined),
           },
           slots.default?.(),
         )

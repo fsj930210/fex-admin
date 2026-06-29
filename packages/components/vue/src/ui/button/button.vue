@@ -6,6 +6,7 @@ import {
 } from '@fex/components-styles/button'
 import { cn } from '@fex/utils'
 import { computed, useAttrs } from 'vue'
+import { LoadingIcon } from '../../icon/loading'
 import PrimitiveButton from '../../primitive/button/button.vue'
 
 type ButtonVariant = 'default' | 'outline' | 'secondary' | 'ghost' | 'destructive' | 'link' | 'dashed'
@@ -73,19 +74,7 @@ const className = computed(() =>
       :class="buttonIconClassName({ placement: 'start', effect })"
       data-icon="inline-start"
     >
-      <svg
-        v-if="loading"
-        :class="buttonSpinnerClassName"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        :stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-      </svg>
+      <LoadingIcon v-if="loading" :class="buttonSpinnerClassName" />
       <slot v-else name="icon" />
     </span>
     <slot />
@@ -94,19 +83,7 @@ const className = computed(() =>
       :class="buttonIconClassName({ placement: 'end', effect })"
       data-icon="inline-end"
     >
-      <svg
-        v-if="loading"
-        :class="buttonSpinnerClassName"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        :stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-      </svg>
+      <LoadingIcon v-if="loading" :class="buttonSpinnerClassName" />
       <slot v-else name="icon" />
     </span>
   </PrimitiveButton>

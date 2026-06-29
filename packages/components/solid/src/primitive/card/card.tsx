@@ -12,12 +12,12 @@ import { splitProps } from 'solid-js'
 
 type CardPartProps = ParentProps<JSX.HTMLAttributes<HTMLDivElement>>
 
-function createCardPart(slot: string, className: () => string) {
+function createCardPart(slot: string, className: string) {
   return function CardPart(props: CardPartProps) {
     const [local, rest] = splitProps(props, ['class', 'children'])
 
     return (
-      <div {...rest} data-slot={slot} class={cn(className(), local.class)}>
+      <div {...rest} data-slot={slot} class={cn(className, local.class)}>
         {local.children}
       </div>
     )

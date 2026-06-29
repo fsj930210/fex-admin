@@ -42,6 +42,62 @@
       <ng-template #footerTemplate>
         <span class="text-sm text-muted-foreground">Footer content</span>
       </ng-template>
+      <ng-template #loginFooterTemplate>
+        <div class="grid w-full gap-space-md">
+          <div class="rounded-md bg-foreground px-space-lg py-space-sm text-center text-sm font-medium text-background">
+            Login
+          </div>
+          <div class="rounded-md border border-border bg-background px-space-lg py-space-sm text-center text-sm font-medium text-foreground">
+            Login with Google
+          </div>
+        </div>
+      </ng-template>
+
+      <fex-card title="Spacing" description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。">
+        <div class="flex flex-wrap gap-space-sm">
+          @for (option of spacingOptions; track option.value) {
+            <button
+              class="rounded-md border px-space-lg py-space-xs text-sm transition-colors"
+              [class.border-focus]="spacing() === option.value"
+              [class.bg-muted-background]="spacing() === option.value"
+              [class.text-foreground]="spacing() === option.value"
+              [class.border-border]="spacing() !== option.value"
+              [class.bg-background]="spacing() !== option.value"
+              [class.text-muted-foreground]="spacing() !== option.value"
+              type="button"
+              (click)="spacing.set(option.value)"
+            >
+              {{ option.label }}
+            </button>
+          }
+        </div>
+        <div class="mt-space-xl flex justify-center">
+          <fex-card
+            class="w-full max-w-md"
+            title="Login to your account"
+            description="Enter your email below to login to your account"
+            [size]="selectedSpacing().size"
+            [style.--card-spacing]="selectedSpacing().spacing"
+            [footer]="loginFooterTemplate"
+          >
+            <div class="grid gap-space-lg">
+              <div class="grid gap-space-sm">
+                <div class="text-sm font-medium text-foreground">Email</div>
+                <div class="h-9 rounded-md border border-border bg-background px-space-lg py-space-sm text-sm text-muted-foreground">
+                  m@example.com
+                </div>
+              </div>
+              <div class="grid gap-space-sm">
+                <div class="flex items-center justify-between gap-space-md text-sm font-medium text-foreground">
+                  <span>Password</span>
+                  <span class="font-normal text-muted-foreground">Forgot your password?</span>
+                </div>
+                <div class="h-9 rounded-md border border-border bg-background"></div>
+              </div>
+            </div>
+          </fex-card>
+        </div>
+      </fex-card>
 
       <fex-card title="With Footer" description="需要底部操作区时使用 footer。" [footer]="footerTemplate">
         <p class="text-sm leading-6 text-muted-foreground">

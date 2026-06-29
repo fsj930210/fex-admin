@@ -7,6 +7,7 @@ import {
 import { cn } from '@fex/utils'
 import type { ButtonHTMLAttributes, ReactNode, Ref } from 'react'
 import { Button as PrimitiveButton } from '../../primitive/button/button'
+import { LoadingIcon } from '../../icon/loading'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, ButtonStyleProps {
   ref?: Ref<HTMLButtonElement>
@@ -14,21 +15,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, Bu
   iconPlacement?: 'start' | 'end'
   loading?: boolean
 }
-
-const LoadingIcon = () => (
-  <svg
-    className={buttonSpinnerClassName}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-  </svg>
-)
 
 export function Button({
   className,
@@ -45,7 +31,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const isDisabled = disabled || loading
-  const iconNode = loading ? <LoadingIcon /> : icon
+  const iconNode = loading ? <LoadingIcon className={buttonSpinnerClassName} /> : icon
 
   return (
     <PrimitiveButton
@@ -61,7 +47,10 @@ export function Button({
       disabled={isDisabled}
     >
       {iconPlacement === 'start' && iconNode ? (
-        <span className={buttonIconClassName({ placement: 'start', effect })} data-icon="inline-start">
+        <span
+          className={buttonIconClassName({ placement: 'start', effect })}
+          data-icon="inline-start"
+        >
           {iconNode}
         </span>
       ) : null}

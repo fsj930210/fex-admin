@@ -178,7 +178,8 @@
 - 样式优先使用 `@fex/styles` 提供的全局变量、主题、工具类和既有 CSS 分层；不要在业务组件中复制大段主题色、阴影、间距规则。
 - `packages/components/*` 中的 UI 组件实现文件不要直接书写具体 Tailwind 样式；组件默认样式、尺寸、variant、状态样式、slot 样式必须统一放到 `packages/components/styles/src/<component>.ts`，通过 `class-variance-authority` 导出类似 `buttonClassName` 的 className 生成函数，各框架组件只调用这些函数，并必须使用 `@fex/utils` 的 `cn` 显式合并用户传入的 `class`/`className`，不要依赖 `cva` 或框架自身的隐式合并。
 - `packages/components/styles` 中每新增一个组件样式模块，都必须同步在该包 `package.json` 的 `exports` 中暴露文件级子路径，例如 `./button`、`./card`；业务和框架组件只能通过公开子路径导入，不要导入 `src/**` 私有路径。
-- 组件间距必须使用系统 spacing token，但不能机械把“默认尺寸”理解成一律使用 `space-md`。`space-md` 当前是 8px，适合紧凑内部 gap、小控件局部间隔；Card、Panel、Dialog、示例展示块这类承载内容的 surface，默认 padding 应根据视觉密度使用更合适的 token，例如 `space-xl`，避免内容贴边。组件间距选择必须按组件语义和同类组件规格保持一致。
+- 页面级布局、组件与组件之间、示例区块之间的 padding、margin、gap 优先使用系统 spacing token，并受密度策略影响；但组件内部的规格化尺寸和间距，例如 Button 的高度、内部 px/gap、Card 的 content inset/header gap/footer padding，必须按组件设计规格使用固定值或组件私有 CSS 变量，不要直接绑定 `--space-*`，避免切换 density 后基础组件内部视觉被动变形。
+- 组件默认圆角统一使用 `rounded-md` / `var(--radius-md)`，当前为 8px。Button、Input、Select、Textarea、Card、Dialog、Popover、Dropdown、Sheet 等基础控件和容器组件默认都用 md；只有明确的组件设计规格或特殊场景需要更大/更小圆角时，才允许局部覆盖，并要保持同类组件一致。
 - padding、margin、gap 等 spacing class 要优先使用最简表达；四边相同写 `p-space-*`，横纵不同才写 `px-space-* py-space-*`，单边不同才写具体方向，避免无意义重复。
 - 每个 UI 库都必须显式分层为 `primitive` 和 `ui`，其中 `primitive` 只承载底层结构、基础行为和最小样式协议，`ui` 承载面向业务的推荐封装和默认组合；少数真正复杂且高复用的工作流型组件可以额外有 `pro` 层，但 `pro` 只用于数据表、复杂表单、远程选择器这类明确的工作流封装。
 - 组件的 demo 和文档必须同时覆盖 `primitive`、`ui`，如果某个组件存在 `pro` 层也必须一并覆盖；demo 页面要用统一的 `Card` 容器承载各段示例，不能再手写散落的 section 容器。
@@ -190,6 +191,7 @@
 - 组件文档必须包含组件用途、导入路径、核心使用示例、Props 表格、事件/回调说明、受控/非受控说明、注意事项和常见组合方式。
 - 新增或修改对外组件时，必须同步在对应框架 app 中增加同名示例路由，例如 Button 对应 `/button`；示例页必须按组件示例页面目录化规则放置，例如 `src/pages/Button/index.tsx`、`src/pages/Button/index.vue`、`src/pages/button/index.component.ts` 或 SvelteKit 的 `src/routes/button/+page.svelte`，不要另起不符合项目结构的页面文件位置。暂时不要依赖 docs app 承载组件示例。示例必须完整覆盖组件公开 props、每个 variant/size/effect、loading、icon、禁用态、受控/非受控等关键状态，不能只放一个最小用法。
 - 组件实现、Markdown 文档和各框架 app 示例必须作为同一批改动一起完成；如果组件支持多框架实现，各框架示例都要使用本框架组件包的公开 exports 子路径，不要导入 `src/**` 私有路径。
+- 多框架组件 demo 以 React demo 为唯一基准：优先先更新 React 组件代码和 React demo；只有在用户明确要求“同步其它框架”时，才同步 Vue/Solid/Svelte/Angular demo。同步时其它框架 demo 的样式、布局、排版、交互方式、示例顺序、展示文案和使用方式必须与 React demo 保持一致，只允许因框架语法差异做等价改写。
 - Props 必须使用 Markdown table 展示，至少包含参数名、类型、默认值、是否必填、说明。
 - 核心使用示例必须是可复制粘贴即可运行的完整代码片段，不能只写伪代码或省略关键导入。
 - 如果组件支持多框架实现，各框架示例要分别给出对应导入路径和最小可运行用法。

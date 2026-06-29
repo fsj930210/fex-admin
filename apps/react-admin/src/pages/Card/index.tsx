@@ -6,9 +6,29 @@ import {
   CardTitle,
 } from '@fex/components-react/primitive/card'
 import Card from '@fex/components-react/ui/card'
+import { type CSSProperties, useState } from 'react'
 import { Link } from 'react-router'
 
+type SpacingOption = {
+  label: string
+  value: 'sm' | 'md' | 'lg' | 'custom'
+  size: 'sm' | 'md' | 'lg'
+  rootStyle?: CSSProperties
+}
+
+const defaultSpacingOption: SpacingOption = { label: 'md', value: 'md', size: 'md' }
+
+const spacingOptions: SpacingOption[] = [
+  { label: 'sm', value: 'sm', size: 'sm' },
+  defaultSpacingOption,
+  { label: 'lg', value: 'lg', size: 'lg' },
+  { label: '40px', value: 'custom', size: 'md', rootStyle: { '--card-spacing': '40px' } as CSSProperties },
+]
+
 export function CardPage() {
+  const [spacing, setSpacing] = useState<SpacingOption['value']>('md')
+  const selectedSpacing = spacingOptions.find((option) => option.value === spacing) ?? defaultSpacingOption
+
   return (
     <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
       <div className="mx-auto w-full max-w-5xl space-y-space-xl">
@@ -49,6 +69,63 @@ export function CardPage() {
             <p className="text-sm leading-6 text-foreground">
               Card 默认使用系统边框、背景、圆角和 spacing token，适合作为组件示例页的基础展示容器。
             </p>
+          </Card>
+
+          <Card title="Spacing" description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。">
+            <div className="flex flex-wrap gap-space-sm">
+              {spacingOptions.map((option) => (
+                <button
+                  key={option.value}
+                  className={[
+                    'rounded-md border px-space-lg py-space-xs text-sm transition-colors',
+                    spacing === option.value
+                      ? 'border-focus bg-muted-background text-foreground'
+                      : 'border-border bg-background text-muted-foreground hover:bg-muted-background hover:text-foreground',
+                  ].join(' ')}
+                  type="button"
+                  onClick={() => setSpacing(option.value)}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+            <div className="mt-space-xl flex justify-center">
+              <Card
+                size={selectedSpacing.size}
+                title="Login to your account"
+                description="Enter your email below to login to your account"
+                footer={
+                  <div className="grid w-full gap-space-md">
+                    <div className="rounded-md bg-foreground px-space-lg py-space-sm text-center text-sm font-medium text-background">
+                      Login
+                    </div>
+                    <div className="rounded-md border border-border bg-background px-space-lg py-space-sm text-center text-sm font-medium text-foreground">
+                      Login with Google
+                    </div>
+                  </div>
+                }
+                className={{
+                  root: 'w-full max-w-md',
+                }}
+                {...(selectedSpacing.rootStyle ? { style: { root: selectedSpacing.rootStyle } } : {})}
+              >
+                <div className="grid gap-space-lg">
+                  <div className="grid gap-space-sm">
+                    <div className="text-sm font-medium text-foreground">Email</div>
+                    <div className="h-9 rounded-md border border-border bg-background px-space-lg py-space-sm text-sm text-muted-foreground">
+                      m@example.com
+                    </div>
+                  </div>
+                  <div className="grid gap-space-sm">
+                    <div className="flex items-center justify-between gap-space-md text-sm font-medium text-foreground">
+                      <span>Password</span>
+                      <span className="font-normal text-muted-foreground">Forgot your password?</span>
+                    </div>
+                    <div className="h-9 rounded-md border border-border bg-background" />
+                  </div>
+                </div>
+              </Card>
+            </div>
           </Card>
 
           <Card

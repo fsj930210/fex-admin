@@ -11,4 +11,43 @@ export const componentRoutes: Routes = [
     loadComponent: () =>
       import('../../pages/card/index.component').then((module) => module.CardComponent),
   },
+  {
+    path: 'alert',
+    loadComponent: () => import('../../pages/alert/index.component').then((module) => module.AlertComponent),
+  },
+  {
+    path: 'badge',
+    loadComponent: () => import('../../pages/badge/index.component').then((module) => module.BadgeComponent),
+  },
+  {
+    path: 'empty',
+    loadComponent: () => import('../../pages/empty/index.component').then((module) => module.EmptyComponent),
+  },
+  {
+    path: 'input',
+    loadComponent: () => import('../../pages/input/index.component').then((module) => module.InputComponent),
+  },
+  {
+    path: 'kbd',
+    loadComponent: () => import('../../pages/kbd/index.component').then((module) => module.KbdComponent),
+  },
+  {
+    path: 'pagination',
+    loadComponent: () =>
+      import('../../pages/pagination/index.component').then((module) => module.PaginationComponent),
+  },
+  {
+    path: 'spinner',
+    loadComponent: () =>
+      import('../../pages/spinner/index.component').then((module) => module.SpinnerComponent),
+  },
+  {
+    path: 'table',
+    loadComponent: () => import('../../pages/table/index.component').then((module) => module.TableComponent),
+  },
+  {
+    path: 'textarea',
+    loadComponent: () =>
+      import('../../pages/textarea/index.component').then((module) => module.TextareaComponent),
+  },
 ]

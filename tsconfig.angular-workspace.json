@@ -4,6 +4,12 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
+      "@fex/components-angular/primitive/alert": [
+        "packages/components/angular/src/primitive/alert/alert.ts"
+      ],
+      "@fex/components-angular/primitive/badge": [
+        "packages/components/angular/src/primitive/badge/badge.ts"
+      ],
       "@fex/components-angular/button": [
         "packages/components/angular/src/ui/button/button.ts"
       ],
@@ -21,6 +27,27 @@
       ],
       "@fex/components-angular/ui/card": [
         "packages/components/angular/src/ui/card/card.ts"
+      ],
+      "@fex/components-angular/primitive/empty": [
+        "packages/components/angular/src/primitive/empty/empty.ts"
+      ],
+      "@fex/components-angular/primitive/input": [
+        "packages/components/angular/src/primitive/input/input.ts"
+      ],
+      "@fex/components-angular/primitive/kbd": [
+        "packages/components/angular/src/primitive/kbd/kbd.ts"
+      ],
+      "@fex/components-angular/primitive/pagination": [
+        "packages/components/angular/src/primitive/pagination/pagination.ts"
+      ],
+      "@fex/components-angular/primitive/spinner": [
+        "packages/components/angular/src/primitive/spinner/spinner.ts"
+      ],
+      "@fex/components-angular/primitive/table": [
+        "packages/components/angular/src/primitive/table/table.ts"
+      ],
+      "@fex/components-angular/primitive/textarea": [
+        "packages/components/angular/src/primitive/textarea/textarea.ts"
       ]
     }
   }

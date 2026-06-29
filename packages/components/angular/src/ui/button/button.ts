@@ -5,7 +5,6 @@ import {
 } from "@fex/components-styles/button";
 import { buttonPrimitiveClassName } from "@fex/components-angular/primitive/button";
 import { cn } from "@fex/utils";
-import { NgTemplateOutlet } from "@angular/common";
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
@@ -15,6 +14,7 @@ import {
   inject,
   input,
 } from "@angular/core";
+import { LoadingIcon } from "../../icon/loading";
 
 type ButtonVariant =
   | "default"
@@ -41,7 +41,7 @@ type ButtonEffect =
 @Component({
   selector: "button[fex-button]",
   standalone: true,
-  imports: [NgTemplateOutlet],
+  imports: [LoadingIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     "[class]": "hostClassName()",

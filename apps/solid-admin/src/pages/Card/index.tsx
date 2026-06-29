@@ -7,8 +7,30 @@ import {
   CardTitle,
 } from '@fex/components-solid/primitive/card'
 import Card from '@fex/components-solid/ui/card'
+import { createMemo, createSignal } from 'solid-js'
+
+type SpacingOption = {
+  label: string
+  value: 'sm' | 'md' | 'lg' | 'custom'
+  size: 'sm' | 'md' | 'lg'
+  rootStyle?: { '--card-spacing': string }
+}
+
+const defaultSpacingOption: SpacingOption = { label: 'md', value: 'md', size: 'md' }
+
+const spacingOptions: SpacingOption[] = [
+  { label: 'sm', value: 'sm', size: 'sm' },
+  defaultSpacingOption,
+  { label: 'lg', value: 'lg', size: 'lg' },
+  { label: '40px', value: 'custom', size: 'md', rootStyle: { '--card-spacing': '40px' } },
+]
 
 export function CardPage() {
+  const [spacing, setSpacing] = createSignal<SpacingOption['value']>('md')
+  const selectedSpacing = createMemo(
+    () => spacingOptions.find((option) => option.value === spacing()) ?? defaultSpacingOption,
+  )
+
   return (
     <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
       <div class="mx-auto w-full max-w-5xl space-y-space-xl">
@@ -49,6 +71,60 @@ export function CardPage() {
             <p class="text-sm leading-6 text-foreground">
               Card 默认使用系统边框、背景、圆角和 spacing token，适合作为组件示例页的基础展示容器。
             </p>
+          </Card>
+
+          <Card title="Spacing" description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。">
+            <div class="flex flex-wrap gap-space-sm">
+              {spacingOptions.map((option) => (
+                <button
+                  class={[
+                    'rounded-md border px-space-lg py-space-xs text-sm transition-colors',
+                    spacing() === option.value
+                      ? 'border-focus bg-muted-background text-foreground'
+                      : 'border-border bg-background text-muted-foreground hover:bg-muted-background hover:text-foreground',
+                  ].join(' ')}
+                  type="button"
+                  onClick={() => setSpacing(option.value)}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+            <div class="mt-space-xl flex justify-center">
+              <Card
+                size={selectedSpacing().size}
+                title="Login to your account"
+                description="Enter your email below to login to your account"
+                footer={
+                  <div class="grid w-full gap-space-md">
+                    <div class="rounded-md bg-foreground px-space-lg py-space-sm text-center text-sm font-medium text-background">
+                      Login
+                    </div>
+                    <div class="rounded-md border border-border bg-background px-space-lg py-space-sm text-center text-sm font-medium text-foreground">
+                      Login with Google
+                    </div>
+                  </div>
+                }
+                class={{ root: 'w-full max-w-md' }}
+                style={{ root: selectedSpacing().rootStyle ?? {} }}
+              >
+                <div class="grid gap-space-lg">
+                  <div class="grid gap-space-sm">
+                    <div class="text-sm font-medium text-foreground">Email</div>
+                    <div class="h-9 rounded-md border border-border bg-background px-space-lg py-space-sm text-sm text-muted-foreground">
+                      m@example.com
+                    </div>
+                  </div>
+                  <div class="grid gap-space-sm">
+                    <div class="flex items-center justify-between gap-space-md text-sm font-medium text-foreground">
+                      <span>Password</span>
+                      <span class="font-normal text-muted-foreground">Forgot your password?</span>
+                    </div>
+                    <div class="h-9 rounded-md border border-border bg-background" />
+                  </div>
+                </div>
+              </Card>
+            </div>
           </Card>
 
           <Card

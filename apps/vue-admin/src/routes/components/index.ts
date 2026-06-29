@@ -1,4 +1,13 @@
 export const componentRoutes = [
   { path: '/button', component: () => import('../../pages/Button/index.vue') },
   { path: '/card', component: () => import('../../pages/Card/index.vue') },
+  { path: '/alert', component: () => import('../../pages/Alert/index.vue') },
+  { path: '/badge', component: () => import('../../pages/Badge/index.vue') },
+  { path: '/empty', component: () => import('../../pages/Empty/index.vue') },
+  { path: '/input', component: () => import('../../pages/Input/index.vue') },
+  { path: '/kbd', component: () => import('../../pages/Kbd/index.vue') },
+  { path: '/pagination', component: () => import('../../pages/Pagination/index.vue') },
+  { path: '/spinner', component: () => import('../../pages/Spinner/index.vue') },
+  { path: '/table', component: () => import('../../pages/Table/index.vue') },
+  { path: '/textarea', component: () => import('../../pages/Textarea/index.vue') },
 ]

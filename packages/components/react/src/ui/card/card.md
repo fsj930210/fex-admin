@@ -29,8 +29,9 @@ export function Example() {
 | `title` | `ReactNode` | `undefined` | No | Header title content. |
 | `description` | `ReactNode` | `undefined` | No | Header description content. |
 | `footer` | `ReactNode` | `undefined` | No | Footer content. |
-| `className` | `{ header?: string; content?: string; footer?: string }` | `undefined` | No | Section classes merged with each card section. |
-| `style` | `{ header?: CSSProperties; content?: CSSProperties; footer?: CSSProperties }` | `undefined` | No | Section inline styles. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | No | Quick spacing preset for the card layout. |
+| `className` | `{ root?: string; header?: string; title?: string; description?: string; content?: string; footer?: string }` | `undefined` | No | Part classes merged with each card part. Set `root` to override `--card-spacing`. |
+| `style` | `{ root?: CSSProperties; header?: CSSProperties; title?: CSSProperties; description?: CSSProperties; content?: CSSProperties; footer?: CSSProperties }` | `undefined` | No | Part inline styles. Set `root` to override `--card-spacing`. |
 | native `div` props | `Omit<ComponentProps<'div'>, 'className' \| 'style'>` | `undefined` | No | Standard `div` attributes are passed through. |
 
 ## Events
@@ -43,7 +44,7 @@ Card has no internal state, so it does not have controlled or uncontrolled modes
 
 ## Notes
 
-Use `ui/card` for the default title, description, content, and footer layout. `className` and `style` are structured section objects for header, content, and footer.
+Use `ui/card` for the default title, description, content, and footer layout. `size` provides quick spacing presets, and spacing is controlled by `--card-spacing` on the card root for custom values.
 
 ## Common Composition
 

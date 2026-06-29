@@ -4,8 +4,17 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    "./alert": "./src/alert.ts",
+    "./badge": "./src/badge.ts",
     "./button": "./src/button.ts",
-    "./card": "./src/card.ts"
+    "./card": "./src/card.ts",
+    "./empty": "./src/empty.ts",
+    "./input": "./src/input.ts",
+    "./kbd": "./src/kbd.ts",
+    "./pagination": "./src/pagination.ts",
+    "./spinner": "./src/spinner.ts",
+    "./table": "./src/table.ts",
+    "./textarea": "./src/textarea.ts"
   },
   "dependencies": {
     "class-variance-authority": "latest"

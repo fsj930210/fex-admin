@@ -7,7 +7,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ className, ref, type = 'button', ...props }: ButtonProps) {
-  return <button {...props} ref={ref} type={type} className={cn(buttonPrimitiveClassName, className)} data-slot="button" />
+  return (
+    <button
+      {...props}
+      ref={ref}
+      type={type}
+      className={cn(buttonPrimitiveClassName, className)}
+      data-slot="button"
+    />
+  )
 }
-
-export default Button

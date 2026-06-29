@@ -39,8 +39,13 @@ export function Example() {
 
 | Name | Type | Default | Required | Description |
 | --- | --- | --- | --- | --- |
-| `class` | `string` | `undefined` | No | Extra classes merged with the component defaults. |
-| native `div` props | `ComponentProps<'div'>` | `undefined` | No | Standard `div` attributes are passed through. |
+| `title` | `JSX.Element` | `undefined` | No | Header title content. |
+| `description` | `JSX.Element` | `undefined` | No | Header description content. |
+| `footer` | `JSX.Element` | `undefined` | No | Footer content. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | No | Quick spacing preset for the card layout. |
+| `class` | `{ root?: string; header?: string; title?: string; description?: string; content?: string; footer?: string }` | `undefined` | No | Part classes merged with each card part. Set `root` to override `--card-spacing`. |
+| `style` | `{ root?: JSX.CSSProperties; header?: JSX.CSSProperties; title?: JSX.CSSProperties; description?: JSX.CSSProperties; content?: JSX.CSSProperties; footer?: JSX.CSSProperties }` | `undefined` | No | Part inline styles. Set `root` to override `--card-spacing`. |
+| native `div` props | `Omit<JSX.HTMLAttributes<HTMLDivElement>, 'class' \| 'style' \| 'title'>` | `undefined` | No | Standard `div` attributes are passed through. |
 
 ## Events
 
@@ -52,7 +57,7 @@ Card has no internal state, so it does not have controlled or uncontrolled modes
 
 ## Notes
 
-Use `CardHeader`, `CardContent`, and `CardFooter` to keep spacing consistent. Add dividers such as `border-b border-border` at the composition site.
+`size` provides quick spacing presets, and spacing is controlled by `--card-spacing` on the card root for custom values.
 
 ## Common Composition
 
