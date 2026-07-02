@@ -6,21 +6,8 @@ import {
   cardHeaderClassName,
   cardTitleClassName,
 } from "@fex/components-styles/card";
-import { cn } from "@fex/utils";
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  ElementRef,
-  inject,
-} from "@angular/core";
-
-function createHostClass(className: string) {
-  const elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-  const initialClassName = elementRef.nativeElement.getAttribute("class") ?? "";
-
-  return computed(() => cn(className, initialClassName));
-}
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { createHostClassName } from "../../signals/host-class";
 
 @Component({
   selector: "fex-card-primitive",
@@ -33,7 +20,7 @@ function createHostClass(className: string) {
   template: "<ng-content />",
 })
 export class Card {
-  protected readonly hostClassName = createHostClass(cardClassName);
+  protected readonly hostClassName = createHostClassName(cardClassName);
 }
 
 @Component({
@@ -47,7 +34,7 @@ export class Card {
   template: "<ng-content />",
 })
 export class CardHeader {
-  protected readonly hostClassName = createHostClass(cardHeaderClassName);
+  protected readonly hostClassName = createHostClassName(cardHeaderClassName);
 }
 
 @Component({
@@ -61,7 +48,7 @@ export class CardHeader {
   template: "<ng-content />",
 })
 export class CardTitle {
-  protected readonly hostClassName = createHostClass(cardTitleClassName);
+  protected readonly hostClassName = createHostClassName(cardTitleClassName);
 }
 
 @Component({
@@ -75,7 +62,7 @@ export class CardTitle {
   template: "<ng-content />",
 })
 export class CardDescription {
-  protected readonly hostClassName = createHostClass(cardDescriptionClassName);
+  protected readonly hostClassName = createHostClassName(cardDescriptionClassName);
 }
 
 @Component({
@@ -89,7 +76,7 @@ export class CardDescription {
   template: "<ng-content />",
 })
 export class CardContent {
-  protected readonly hostClassName = createHostClass(cardContentClassName);
+  protected readonly hostClassName = createHostClassName(cardContentClassName);
 }
 
 @Component({
@@ -103,5 +90,5 @@ export class CardContent {
   template: "<ng-content />",
 })
 export class CardFooter {
-  protected readonly hostClassName = createHostClass(cardFooterClassName);
+  protected readonly hostClassName = createHostClassName(cardFooterClassName);
 }

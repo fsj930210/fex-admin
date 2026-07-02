@@ -7,4 +7,4 @@
   let { class: className, children, ...rest }: Props = $props()
   const classList = $derived(cn(paginationClassName, className))
 </script>
-<nav {...rest} role="navigation" aria-label="pagination" data-slot="pagination" class={classList}>{@render children?.()}</nav>
+<nav {...rest} aria-label="pagination" data-slot="pagination" class={classList}>{@render children?.()}</nav>

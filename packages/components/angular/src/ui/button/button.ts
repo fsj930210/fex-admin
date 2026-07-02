@@ -10,11 +10,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  ElementRef,
-  inject,
   input,
 } from "@angular/core";
 import { LoadingIcon } from "../../icon/loading";
+import { createHostClassName } from "../../signals/host-class";
 
 type ButtonVariant =
   | "default"
@@ -39,7 +38,7 @@ type ButtonEffect =
   | "gradient-slide-show";
 
 @Component({
-  selector: "button[fex-button]",
+  selector: "button[fexButton]",
   standalone: true,
   imports: [LoadingIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -55,10 +54,6 @@ type ButtonEffect =
   templateUrl: "./button.html",
 })
 export class Button {
-  private readonly elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
-
-  private readonly initialClassName = this.elementRef.nativeElement.getAttribute("class") ?? "";
-
   variant = input<ButtonVariant>("default");
   size = input<ButtonSize>("default");
   effect = input<ButtonEffect | undefined>();
@@ -71,9 +66,9 @@ export class Button {
 
   protected readonly disabledState = computed(() => this.disabled() || this.loading());
 
-  protected readonly hostClassName = computed(() =>
+  protected readonly hostClassName = createHostClassName(() =>
     cn(
-      buttonPrimitiveClassName(this.initialClassName),
+      buttonPrimitiveClassName(),
       buttonClassName({
         variant: this.variant(),
         size: this.size(),

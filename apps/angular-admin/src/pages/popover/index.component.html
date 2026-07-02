@@ -1,0 +1,179 @@
+<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
+  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
+    <header class="space-y-space-xl">
+      <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">Back home</a>
+      <div>
+        <h1 class="text-2xl font-semibold text-foreground">Popover</h1>
+        <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+          Angular adapter for the shared core floating overlay, covering triggers, placement,
+          controlled state and custom popup containers.
+        </p>
+      </div>
+    </header>
+
+    <div class="space-y-space-xl">
+      <fex-card title="Primitive" description="Low-level composition API. Trigger uses Angular attribute directive binding.">
+        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <fex-popover side="bottom" align="start" [sideOffset]="8" [arrow]="true">
+            <button fexPopoverTrigger class="text-sm text-foreground hover:text-primary">Primitive trigger</button>
+            <fex-popover-content>
+              <fex-popover-arrow />
+              <fex-popover-header class="w-64">
+                <fex-popover-title>Primitive content</fex-popover-title>
+                <fex-popover-description>Content uses shared floating variables and data attributes.</fex-popover-description>
+              </fex-popover-header>
+            </fex-popover-content>
+          </fex-popover>
+        </div>
+      </fex-card>
+
+      <fex-card title="Ui" description="Business UI can compose Button without an extra wrapper protocol.">
+        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <fex-popover placement="bottomLeft" [sideOffset]="8" [arrow]="true">
+            <button fexPopoverTrigger [class]="outlineButtonClass">Click</button>
+            <fex-popover-content>
+              <fex-popover-arrow />
+              <fex-popover-header class="w-64">
+                <fex-popover-title>Click trigger</fex-popover-title>
+                <fex-popover-description>The popover opens immediately while positioning stays in CSS variables.</fex-popover-description>
+              </fex-popover-header>
+            </fex-popover-content>
+          </fex-popover>
+        </div>
+      </fex-card>
+
+      <fex-card title="Triggers" description="Supports click, hover, focus and context-menu.">
+        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <fex-popover [trigger]="['hover', 'focus']" [hoverCloseDelay]="120" [arrow]="true">
+            <button fexPopoverTrigger [class]="secondaryButtonClass">Hover or focus</button>
+            <fex-popover-content>
+              <fex-popover-arrow />
+              <fex-popover-header class="w-64">
+                <fex-popover-title>Combined trigger</fex-popover-title>
+                <fex-popover-description>Hover and focus share one trigger source model, so they do not close each other incorrectly.</fex-popover-description>
+              </fex-popover-header>
+            </fex-popover-content>
+          </fex-popover>
+
+          <fex-popover [trigger]="['context-menu']" placement="rightTop" [sideOffset]="8">
+            <button fexPopoverTrigger [class]="outlineButtonClass">Right click</button>
+            <fex-popover-content>
+              <fex-popover-header class="w-64">
+                <fex-popover-title>Context menu trigger</fex-popover-title>
+                <fex-popover-description>This is still Popover content; future ContextMenu will reuse the same trigger and floating core with Menu.</fex-popover-description>
+              </fex-popover-header>
+            </fex-popover-content>
+          </fex-popover>
+        </div>
+      </fex-card>
+
+      <fex-card title="Placement" description="Supports antd placement and Radix side/align options.">
+        <div class="flex w-full flex-col items-center gap-space-md py-space-lg">
+          @for (group of placementGroups; track $index; let rowIndex = $index) {
+            <div class="grid w-full max-w-xl grid-cols-[repeat(3,minmax(80px,1fr))] items-center gap-x-space-lg gap-y-space-md">
+              @if (rowIndex > 0 && rowIndex < 4) {
+                <div class="justify-self-start">
+                  <fex-popover [placement]="group[0].placement" [sideOffset]="10" [arrow]="true">
+                    <button fexPopoverTrigger [class]="outlineButtonClass + ' w-24'">{{ group[0].label }}</button>
+                    <fex-popover-content>
+                      <fex-popover-arrow />
+                      <fex-popover-header class="w-44">
+                        <fex-popover-title>{{ group[0].placement }}</fex-popover-title>
+                        <fex-popover-description>Edge placements flip instead of shifting across the trigger.</fex-popover-description>
+                      </fex-popover-header>
+                    </fex-popover-content>
+                  </fex-popover>
+                </div>
+                <div></div>
+                <div class="justify-self-end">
+                  <fex-popover [placement]="group[1].placement" [sideOffset]="10" [arrow]="true">
+                    <button fexPopoverTrigger [class]="outlineButtonClass + ' w-24'">{{ group[1].label }}</button>
+                    <fex-popover-content>
+                      <fex-popover-arrow />
+                      <fex-popover-header class="w-44">
+                        <fex-popover-title>{{ group[1].placement }}</fex-popover-title>
+                        <fex-popover-description>Edge placements flip instead of shifting across the trigger.</fex-popover-description>
+                      </fex-popover-header>
+                    </fex-popover-content>
+                  </fex-popover>
+                </div>
+              } @else {
+                @for (item of group; track item.placement) {
+                  <div class="justify-self-center">
+                    <fex-popover [placement]="item.placement" [sideOffset]="10" [arrow]="true">
+                      <button fexPopoverTrigger [class]="outlineButtonClass + ' w-24'">{{ item.label }}</button>
+                      <fex-popover-content>
+                        <fex-popover-arrow />
+                        <fex-popover-header class="w-44">
+                          <fex-popover-title>{{ item.placement }}</fex-popover-title>
+                          <fex-popover-description>Single-axis placements shift; edge placements only flip.</fex-popover-description>
+                        </fex-popover-header>
+                      </fex-popover-content>
+                    </fex-popover>
+                  </div>
+                }
+              }
+            </div>
+          }
+        </div>
+      </fex-card>
+
+      <fex-card title="Offsets" description="Tune main-axis sideOffset and cross-axis alignOffset.">
+        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <fex-popover placement="bottomLeft" [sideOffset]="18" [arrow]="true">
+            <button fexPopoverTrigger [class]="outlineButtonClass">sideOffset 18</button>
+            <fex-popover-content>
+              <fex-popover-arrow />
+              <fex-popover-header class="w-64">
+                <fex-popover-title>Main-axis offset</fex-popover-title>
+                <fex-popover-description>sideOffset increases the distance between trigger and content.</fex-popover-description>
+              </fex-popover-header>
+            </fex-popover-content>
+          </fex-popover>
+
+          <fex-popover placement="bottomLeft" [sideOffset]="8" [alignOffset]="28" [arrow]="true">
+            <button fexPopoverTrigger [class]="outlineButtonClass">alignOffset 28</button>
+            <fex-popover-content>
+              <fex-popover-arrow />
+              <fex-popover-header class="w-64">
+                <fex-popover-title>Cross-axis offset</fex-popover-title>
+                <fex-popover-description>alignOffset moves the aligned edge along the cross axis.</fex-popover-description>
+              </fex-popover-header>
+            </fex-popover-content>
+          </fex-popover>
+        </div>
+      </fex-card>
+
+      <fex-card title="Controlled" description="Controlled mode only requests outside updates.">
+        <div class="flex min-w-0 flex-wrap items-center gap-space-md">
+          <fex-popover [open]="open" (openChange)="setOpen($event)" placement="bottomLeft" [arrow]="true">
+            <button fexPopoverTrigger [class]="open ? secondaryButtonClass : outlineButtonClass">
+              {{ open ? "Controlled open" : "Controlled closed" }}
+            </button>
+            <fex-popover-content>
+              <fex-popover-arrow />
+              <fex-popover-header class="w-64">
+                <fex-popover-title>Controlled popover</fex-popover-title>
+                <fex-popover-description>Click outside or press Escape to request closing through onOpenChange.</fex-popover-description>
+              </fex-popover-header>
+            </fex-popover-content>
+          </fex-popover>
+        </div>
+      </fex-card>
+
+      <fex-card title="getPopupContainer" description="Portal can mount into a custom container.">
+        <div #popupContainer class="relative min-h-40 rounded-md border border-dashed p-space-lg">
+          <fex-popover [getPopupContainer]="getPopupContainer" placement="bottomLeft">
+            <button fexPopoverTrigger [class]="outlineButtonClass">Mount inside dashed box</button>
+            <fex-popover-content>
+              <fex-popover-header class="w-64">
+                <fex-popover-title>Custom container</fex-popover-title>
+                <fex-popover-description>The portal node is rendered inside the dashed container.</fex-popover-description>
+              </fex-popover-header>
+            </fex-popover-content>
+          </fex-popover>
+        </div>
+      </fex-card>
+    </div>
+  </div>
+</main>

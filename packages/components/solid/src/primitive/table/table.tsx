@@ -3,23 +3,47 @@ import { cn } from '@fex/utils'
 import type { JSX, ParentProps } from 'solid-js'
 import { splitProps } from 'solid-js'
 
-export function Table(props: ParentProps<JSX.TableHTMLAttributes<HTMLTableElement>>) {
+type TableSectionProps = ParentProps<JSX.HTMLAttributes<HTMLTableSectionElement>>
+type TableRowProps = ParentProps<JSX.HTMLAttributes<HTMLTableRowElement>>
+type TableCellProps = ParentProps<JSX.HTMLAttributes<HTMLTableCellElement>>
+type TableCaptionProps = ParentProps<JSX.HTMLAttributes<HTMLTableCaptionElement>>
+
+export function Table(props: ParentProps<JSX.HTMLAttributes<HTMLTableElement>>) {
   const [local, rest] = splitProps(props, ['class', 'children'])
   return <div data-slot="table-container" class={tableContainerClassName}><table {...rest} data-slot="table" class={cn(tableClassName, local.class)}>{local.children}</table></div>
 }
 
-function createPart<T extends HTMLElement>(tag: string, slot: string, className: string) {
-  return function Part(props: ParentProps<JSX.HTMLAttributes<T>>) {
-    const [local, rest] = splitProps(props, ['class', 'children'])
-    const Tag = tag as keyof JSX.IntrinsicElements
-    return <Tag {...rest} data-slot={slot} class={cn(className, local.class)}>{local.children}</Tag>
-  }
+export function TableHeader(props: TableSectionProps) {
+  const [local, rest] = splitProps(props, ['class', 'children'])
+  return <thead {...rest} data-slot="table-header" class={cn(tableHeaderClassName, local.class)}>{local.children}</thead>
 }
 
-export const TableHeader = createPart<HTMLTableSectionElement>('thead', 'table-header', tableHeaderClassName)
-export const TableBody = createPart<HTMLTableSectionElement>('tbody', 'table-body', tableBodyClassName)
-export const TableFooter = createPart<HTMLTableSectionElement>('tfoot', 'table-footer', tableFooterClassName)
-export const TableRow = createPart<HTMLTableRowElement>('tr', 'table-row', tableRowClassName)
-export const TableHead = createPart<HTMLTableCellElement>('th', 'table-head', tableHeadClassName)
-export const TableCell = createPart<HTMLTableCellElement>('td', 'table-cell', tableCellClassName)
-export const TableCaption = createPart<HTMLTableCaptionElement>('caption', 'table-caption', tableCaptionClassName)
+export function TableBody(props: TableSectionProps) {
+  const [local, rest] = splitProps(props, ['class', 'children'])
+  return <tbody {...rest} data-slot="table-body" class={cn(tableBodyClassName, local.class)}>{local.children}</tbody>
+}
+
+export function TableFooter(props: TableSectionProps) {
+  const [local, rest] = splitProps(props, ['class', 'children'])
+  return <tfoot {...rest} data-slot="table-footer" class={cn(tableFooterClassName, local.class)}>{local.children}</tfoot>
+}
+
+export function TableRow(props: TableRowProps) {
+  const [local, rest] = splitProps(props, ['class', 'children'])
+  return <tr {...rest} data-slot="table-row" class={cn(tableRowClassName, local.class)}>{local.children}</tr>
+}
+
+export function TableHead(props: TableCellProps) {
+  const [local, rest] = splitProps(props, ['class', 'children'])
+  return <th {...rest} data-slot="table-head" class={cn(tableHeadClassName, local.class)}>{local.children}</th>
+}
+
+export function TableCell(props: TableCellProps) {
+  const [local, rest] = splitProps(props, ['class', 'children'])
+  return <td {...rest} data-slot="table-cell" class={cn(tableCellClassName, local.class)}>{local.children}</td>
+}
+
+export function TableCaption(props: TableCaptionProps) {
+  const [local, rest] = splitProps(props, ['class', 'children'])
+  return <caption {...rest} data-slot="table-caption" class={cn(tableCaptionClassName, local.class)}>{local.children}</caption>
+}

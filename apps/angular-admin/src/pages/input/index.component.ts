@@ -4,7 +4,7 @@ import { Input } from '@fex/components-angular/primitive/input'
 import Card from '@fex/components-angular/ui/card'
 
 @Component({
-  selector: 'fex-input-page',
+  selector: 'fexInput-page',
   imports: [RouterLink, Card, Input],
   host: { class: 'block' },
   templateUrl: './index.component.html',

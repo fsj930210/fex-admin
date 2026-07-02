@@ -89,6 +89,9 @@ importers:
       '@fex/components-angular':
         specifier: workspace:*
         version: link:../../packages/components/angular
+      '@fex/components-core':
+        specifier: workspace:*
+        version: link:../../packages/components/core
       '@fex/components-styles':
         specifier: workspace:*
         version: link:../../packages/components/styles
@@ -98,6 +101,9 @@ importers:
       '@fex/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      '@floating-ui/dom':
+        specifier: ^1.7.6
+        version: 1.7.6
       rxjs:
         specifier: latest
         version: 7.8.2
@@ -271,6 +277,12 @@ importers:
 
   apps/vue-admin:
     dependencies:
+      '@fex/components-core':
+        specifier: workspace:*
+        version: link:../../packages/components/core
+      '@fex/components-styles':
+        specifier: workspace:*
+        version: link:../../packages/components/styles
       '@fex/components-vue':
         specifier: workspace:*
         version: link:../../packages/components/vue
@@ -280,6 +292,9 @@ importers:
       '@fex/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      '@floating-ui/dom':
+        specifier: ^1.7.6
+        version: 1.7.6
       '@tailwindcss/vite':
         specifier: 'catalog:'
         version: 4.3.1(vite@8.1.0(@types/node@26.0.0)(esbuild@0.28.1)(jiti@2.7.0)(sass@1.99.0)(yaml@2.9.0))
@@ -321,6 +336,9 @@ importers:
 
   packages/components/angular:
     dependencies:
+      '@fex/components-core':
+        specifier: workspace:*
+        version: link:../core
       '@fex/components-styles':
         specifier: workspace:*
         version: link:../styles
@@ -335,10 +353,17 @@ importers:
         specifier: 22.0.2
         version: 22.0.2(@angular/compiler@22.0.2)(rxjs@7.8.2)(zone.js@0.16.2)
 
-  packages/components/core: {}
+  packages/components/core:
+    dependencies:
+      '@floating-ui/dom':
+        specifier: ^1.7.6
+        version: 1.7.6
 
   packages/components/react:
     dependencies:
+      '@fex/components-core':
+        specifier: workspace:*
+        version: link:../core
       '@fex/components-styles':
         specifier: workspace:*
         version: link:../styles
@@ -349,12 +374,21 @@ importers:
       '@types/react':
         specifier: latest
         version: 19.2.17
+      '@types/react-dom':
+        specifier: latest
+        version: 19.2.3(@types/react@19.2.17)
       react:
         specifier: 19.2.7
         version: 19.2.7
+      react-dom:
+        specifier: 19.2.7
+        version: 19.2.7(react@19.2.7)
 
   packages/components/solid:
     dependencies:
+      '@fex/components-core':
+        specifier: workspace:*
+        version: link:../core
       '@fex/components-styles':
         specifier: workspace:*
         version: link:../styles
@@ -374,6 +408,9 @@ importers:
 
   packages/components/svelte:
     dependencies:
+      '@fex/components-core':
+        specifier: workspace:*
+        version: link:../core
       '@fex/components-styles':
         specifier: workspace:*
         version: link:../styles
@@ -387,6 +424,9 @@ importers:
 
   packages/components/vue:
     dependencies:
+      '@fex/components-core':
+        specifier: workspace:*
+        version: link:../core
       '@fex/components-styles':
         specifier: workspace:*
         version: link:../styles
@@ -1541,6 +1581,15 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@floating-ui/core@1.7.5':
+    resolution: {integrity: sha512-1Ih4WTWyw0+lKyFMcBHGbb5U5FtuHJuujoyyr5zTaWS5EYMeT6Jb2AuDeftsCsEuchO+mM2ij5+q9crhydzLhQ==}
+
+  '@floating-ui/dom@1.7.6':
+    resolution: {integrity: sha512-9gZSAI5XM36880PPMm//9dfiEngYoC6Am2izES1FF406YFsjvyBMmeJ2g4SAju3xWwtuynNRFL2s9hgxpLI5SQ==}
+
+  '@floating-ui/utils@0.2.11':
+    resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
 
   '@gar/promise-retry@1.0.3':
     resolution: {integrity: sha512-GmzA9ckNokPypTg10pgpeHNQe7ph+iIKKmhKu3Ob9ANkswreCx7R3cKmY781K8QK3AqVL3xVh9A42JvIAbkkSA==}
@@ -6660,6 +6709,17 @@ snapshots:
 
   '@esbuild/win32-x64@0.28.1':
     optional: true
+
+  '@floating-ui/core@1.7.5':
+    dependencies:
+      '@floating-ui/utils': 0.2.11
+
+  '@floating-ui/dom@1.7.6':
+    dependencies:
+      '@floating-ui/core': 1.7.5
+      '@floating-ui/utils': 0.2.11
+
+  '@floating-ui/utils@0.2.11': {}
 
   '@gar/promise-retry@1.0.3': {}
 

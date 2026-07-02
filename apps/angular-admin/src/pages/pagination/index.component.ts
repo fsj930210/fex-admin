@@ -4,7 +4,7 @@ import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, Pagi
 import Card from '@fex/components-angular/ui/card'
 
 @Component({
-  selector: 'fex-pagination-page',
+  selector: 'fexPagination-page',
   imports: [RouterLink, Card, Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious],
   host: { class: 'block' },
   templateUrl: './index.component.html',

@@ -2,9 +2,10 @@
 
 ## 核心目标
 
-- 所有代码都要以低重复渲染、高性能、高可维护、高扩展为基础。
+- 所有代码都要以低重复渲染、高可维护、高性能、高扩展为基础；可维护性优先于局部性能技巧，性能优化必须建立在清晰边界和可验证事实之上。
 - 不写“当下能跑、后面难修”的代码：避免隐式副作用、重复状态、过度抽象、过深组件、过宽 Context、到处监听 state 的实现。
 - 优先复用仓库已有组件、工具、样式、mock、配置；确实通用的能力要沉淀到对应 `packages/*`，不要在多个 app 里复制。
+- 严禁用猜测来写代码或修 bug。遇到异常、样式偏移、交互错位、状态不同步等问题，必须先观察真实 DOM、事件、状态快照、computed style、日志或最小复现，定位根因后再改；不能因为“看起来可能是某个原因”就直接打补丁。
 
 ## 仓库定位
 
@@ -34,6 +35,8 @@
 ## 工作方式
 
 - 修改前先看相关目录里已有组件、工具、样式、配置和调用方式。
+- 排查问题时先全局观察链路，再缩小范围：从用户行为、组件 API、状态来源、core 逻辑、框架适配、DOM 输出和样式结果逐层确认。不要只盯着报错点或视觉结果附近反复 patch。
+- 每次修复都要能说清楚“根因是什么、证据是什么、为什么这个改动能解决”，不能把猜测写进代码，也不能用兼容性分支掩盖未确认的根因。
 - 不要把另一个框架或另一个 app 的约定直接搬到当前目标；多框架实现要保持行为一致，但写法要符合各自框架最佳实践。
 - 保持改动聚焦：只改和任务直接相关的文件，不做顺手重构、不改无关格式、不清理用户已有改动。
 - 默认不运行 `typecheck`、`lint`、`build`、`format`，除非用户明确要求。需要检查运行效果时，优先使用已有本地服务地址；不要为了查看页面主动启动服务，除非用户要求。
@@ -55,6 +58,10 @@
 - Svelte 通用 store、action、rune/helper 放在 `packages/components/svelte/src/stores`、`packages/components/svelte/src/actions`、`packages/components/svelte/src/utils` 或该包既有同类目录。
 - Angular 通用 signal helper、service、directive、pipe、form helper 放在 `packages/components/angular/src` 下按能力分层，例如 `signals`、`services`、`directives`、`pipes`、`forms`。
 - 新增框架公共能力后必须通过对应 package 的 `package.json` 子路径 `exports` 暴露，优先使用文件级 pattern，例如 `./hooks/*`、`./composables/*`、`./primitives/*`、`./stores/*`、`./actions/*`、`./signals/*`。不要用 `src/index.ts` 或 `src/hooks/index.ts` 这类桶文件聚合导出，也不要让业务侧使用深层私有路径。
+- 同一框架组件包内不把 `primitive`、`ui`、`hooks`、`composables`、`icon`、`pro` 拆成独立 package；它们是同一个框架 package 下的公开分层目录，由该 package 的 `exports` 统一管理。
+- 框架组件包的 `package.json` exports 必须按类别分组保持清晰，组件相关入口集中在一起：先集中列出 `./primitive/*`，再集中列出 `./ui/*`，再集中列出 `./pro/*`，再集中列出 `./icon/*`。组件入口不要再提供无层级的 `./button`、`./card` 这类根级快捷路径。非组件逻辑能力放在组件入口之后，再按类别集中列出 `./hooks/*` / `./composables/*` / `./primitives/*` / `./stores/*` / `./actions/*` 等。不要按单个组件把 `./primitive/button`、`./ui/button`、`./pro/button`、`./icon/loading`、`./primitive/card`、`./ui/card` 交错排列。
+- 每个框架组件包都要沉淀本框架的通用能力，不允许只有 React 有 hooks，Vue/Solid/Svelte/Angular 在各组件里重复写同类逻辑。凡是两个以上组件需要的能力，例如 class 合并、受控/非受控状态、订阅 core store、合并 ref/element、读取最新值、挂载/卸载清理、portal/container 解析、外部点击关闭、键盘关闭等，都必须抽到对应框架公共目录并通过 exports 暴露。
+- 只有跨组件、跨业务、可被用户直接复用的能力才能放到框架级 `hooks`、`composables`、`primitives`、`stores` 等公共目录。只服务某个组件族内部的 context、provider、use-xxx-context、slot props adapter、dismiss registry 等私有能力，必须放在该组件目录内，例如 `src/primitive/popover/context.ts` 或同目录私有 helper，不要放到全局 `src/composables` / `src/hooks` 造成“看似公共、实际私有”的 API。
 - 多组件组合时区分容器组件和逻辑组件：
   - 容器组件只负责组装、布局、转发 props、协调兄弟组件。
   - 逻辑组件负责具体交互和 UI。
@@ -67,6 +74,8 @@
   - Svelte：逻辑放到 store、action、rune/helper 或普通模块函数，组件只负责状态绑定和模板展示。
   - Angular：逻辑放到 signal helper、service、directive、form helper 或组件内清晰的私有方法，模板只绑定 signal/computed 和事件。
 - UI 展示层不要直接混入请求、权限、复杂数据转换、跨组件通信和副作用监听；这些逻辑应在容器、service、adapter 或框架专属逻辑单元中处理。
+- Popover、Dialog、Menu、Select、Tree、Table 等复杂组件必须提供可单独消费的逻辑层：React 暴露明确的 `useXxx` / `useXxxPart` hook，Vue 暴露面向自定义 UI 的 composable 或 slot props，Solid/Svelte/Angular 暴露各自框架等价能力。默认 UI 只能是这些逻辑能力的一个消费方，用户不喜欢默认 UI 时，应能基于逻辑层快速实现自己的 DOM 和样式。
+- 组件私有 context hook 不等于可复用逻辑层。`usePopoverContext` 这类只读取内部 provider 的函数只能服务内置子组件，不能当作用户自定义 UI 的公开逻辑 API。
 - 状态尽量靠近使用处；只在多个远距离节点确实共享时提升。不要为了“方便传参”创建过大的全局状态或 Context。
 - 不保留重复状态。能由 props、路由参数、服务数据、表单值推导出来的数据，优先推导，不额外存一份。
 - 复杂数据转换优先放在 service 层、adapter 函数或纯工具函数中，组件只消费适合渲染的数据结构。
@@ -113,10 +122,12 @@
 ## Vue 规范
 
 - Vue 代码优先使用 Composition API 和 `<script setup>`，逻辑按可复用 composable 拆分。
+- Vue UI 组件默认使用 SFC + `<template>` 表达结构，尤其是层级较多、slot 较多、状态分支较多的组件。不要为了和其它框架写法表面一致，把 Vue UI 写成大段 `h()` / render function；只有动态组件工厂、极小无结构封装、需要完全程序化生成 vnode 的明确场景才允许使用 `h()`，并要在代码附近说明原因。
+- Vue 组件结构和交互逻辑要分离：复杂交互放 composable、组件私有 helper 或 core adapter，SFC 负责模板、绑定和事件转发。不要把大量状态机、DOM 订阅、跨组件通信和样式拼装混在同一个 SFC 里。
 - 使用 `ref`、`computed`、`watch`、`watchEffect` 时要区分职责：派生数据用 `computed`，事件逻辑放事件回调，外部副作用才用 `watch`。
 - Vue 也要少用 `watch`、`watchEffect`。不要用监听模式串联分页、筛选、表单、弹窗等普通业务流程，优先在事件回调里处理。
 - 少用深度监听和大对象响应式。大型静态配置优先使用普通常量、`shallowRef`、`markRaw` 或拆成更小响应单元。
-- `watch` 必须有明确原因，不要用它替代事件回调；如果监听多个来源，要保证依赖来源清晰。
+- `watch` / `watchEffect` 必须有明确原因，不要用它替代事件回调；如果监听多个来源，要保证依赖来源清晰。必须使用时要在附近写简短注释说明监听的是哪个外部系统或框架边界、为什么不能用事件回调或 `computed`、清理逻辑在哪里。
 - 模板中避免调用昂贵函数；需要派生的展示值优先使用 `computed`。
 - 组件 props 和 emits 要显式声明类型，双向绑定使用清晰的 `v-model` 命名，不要隐式修改 props。
 - 列表渲染必须使用稳定 `:key`，不要用数组下标作为可变列表 key。
@@ -144,6 +155,7 @@
 ## Angular 规范
 
 - Angular 代码采用 Signal-first 思路：优先使用 `signal`、`computed`、`effect`、signal inputs/outputs、resource 等现代 Angular 响应能力组织状态和异步数据。
+- Angular 顶层或核心元素的用户扩展 class 必须通过原生 `class="..."` 传入并自动合并，不设计 `customClass`、`hostClass`、`xxxClass` 这类替代属性。多个组件都需要读取并合并宿主初始 class 时，必须沉淀为 Angular 公共 signal/helper/directive，不要在每个组件里重复写 `ElementRef + getAttribute('class') + cn(...)`。
 - `signal` 管理本地可变状态，`computed` 管理派生数据，`effect` 只用于外部系统同步；不要用 `effect` 监听 signal 再补做普通业务逻辑。
 - Angular 也要少用监听式 `effect` 串联业务流程；用户动作、表单变化、分页筛选等优先在事件处理或表单回调中完成。
 - 组件优先使用 standalone component、强类型表单和清晰的依赖注入边界。
@@ -153,7 +165,7 @@
 - RxJS 仍然可以使用，但不再作为普通组件状态的默认方案。它适合事件流、复杂异步流、取消/合并/节流、WebSocket、路由或第三方库 Observable 边界。
 - RxJS 和 Signal 互通时优先使用 `@angular/core/rxjs-interop`，例如 `toSignal`、`toObservable`、`rxResource`；不要在组件里反复手写订阅同步状态。
 - 订阅要有清晰生命周期，优先使用 `async` pipe、`takeUntilDestroyed`、`toSignal` 自动清理或框架提供的清理能力。
-- 当`template`超过20行后就不能使用`inline template`改用`html`，如果一段代码重复出现了两次那么应该提取出来作为模板，而不是在多个地方写一样的代码，`svg`代码也要遵循，比如有两个地方使用相同的`icon`必须提取出来作为模板，然后引用模板
+- Angular 的 inline template 只允许用于极短的单节点投影或空模板，例如 `<ng-content />`、`''` 这类一眼能读完的场景。只要模板包含多个并列元素、结构分支、绑定较多、插值、重复 SVG、或需要换行排版，就必须使用独立 `.html` 文件；不要把 10 行、20 行甚至更长的模板字符串塞在 `.ts` metadata 里。如果一段模板代码重复出现了两次，应提取为组件、模板片段或共享 icon，而不是在多个地方复制；SVG 也遵循同样规则，比如有两个地方使用相同 icon 必须提取后引用。
 - 如果是顶层或者核心元素需要扩展`class`，不要自定义一个属性名传入`class`，而是做合并，顶层或者核心元素用户扩展`class`只能是`class='bg-muted-background'`
 
 ## 跨框架组件与性能
@@ -182,8 +194,11 @@
 - 组件默认圆角统一使用 `rounded-md` / `var(--radius-md)`，当前为 8px。Button、Input、Select、Textarea、Card、Dialog、Popover、Dropdown、Sheet 等基础控件和容器组件默认都用 md；只有明确的组件设计规格或特殊场景需要更大/更小圆角时，才允许局部覆盖，并要保持同类组件一致。
 - padding、margin、gap 等 spacing class 要优先使用最简表达；四边相同写 `p-space-*`，横纵不同才写 `px-space-* py-space-*`，单边不同才写具体方向，避免无意义重复。
 - 每个 UI 库都必须显式分层为 `primitive` 和 `ui`，其中 `primitive` 只承载底层结构、基础行为和最小样式协议，`ui` 承载面向业务的推荐封装和默认组合；少数真正复杂且高复用的工作流型组件可以额外有 `pro` 层，但 `pro` 只用于数据表、复杂表单、远程选择器这类明确的工作流封装。
+- 当前约定不把同一框架内的 `primitive`、`ui`、`hooks`、`icon` 拆成多个 package；按框架一个 package 管理，包内按类别目录分层。边界以该框架 package 的公开 `exports` 为准，业务侧和示例侧都只能通过公开子路径导入。
+- 跨框架 primitive 中凡是需要把行为挂到调用方元素上的能力，例如 Trigger、Close、Item、Anchor 等，统一使用 render prop / slot props / template context 传出 `props`、`ref` 或框架等价绑定能力、`state`；禁止把 `asChild` 作为公共 API，也不要用 clone child、隐式增强子节点或要求用户组件转发 ref 作为基础范式。
 - 组件的 demo 和文档必须同时覆盖 `primitive`、`ui`，如果某个组件存在 `pro` 层也必须一并覆盖；demo 页面要用统一的 `Card` 容器承载各段示例，不能再手写散落的 section 容器。
 - `ui` 层的结构化 API 要优先采用显式对象形态来承载部件级样式与状态，例如 `partClassName`、`partStyle`、`slotProps` 之类的清晰结构，不要把 header/content/footer 等部件的样式塞进扁平 props，也不要让调用方依赖 DOM 深层 class。
+- `ui` 组件如果暴露多个部件的 class/style，必须使用结构化对象 API，不要新增 `headerClassName`、`contentClassName`、`footerClassName`、`headerStyle`、`contentStyle` 这类扁平 props。统一优先使用类似 `className={{ header, content, footer }}` / `class={{ header, content, footer }}`、`style={{ header, content, footer }}`、`partClassName`、`partStyle` 的对象形态；具体命名按框架习惯保持一致。primitive 层优先只承载宿主元素 class/style 合并，复杂部件定制主要放在 ui 层。
 - 新增组件样式前必须先参考 `packages/components/styles/src/button.ts` 的组织方式：基础 class 用数组拼接，variant/size/effect 等用 `cva` 表达，组件包实现只消费样式函数，不把默认样式散落在 React/Vue/Solid/Svelte/Angular 文件里。
 - 样式命名和组件结构要支持扩展，不要依赖脆弱的深层选择器覆盖。
 - 管理后台界面应以信息密度、可扫描性、稳定布局和可维护交互为优先，不做营销页式的大面积装饰。

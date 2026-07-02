@@ -34,6 +34,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Pagination'), 'PaginationPage'),
   },
   {
+    path: '/popover',
+    element: createLazyRouteElement(() => import('../../pages/Popover'), 'PopoverPage'),
+  },
+  {
     path: '/spinner',
     element: createLazyRouteElement(() => import('../../pages/Spinner'), 'SpinnerPage'),
   },

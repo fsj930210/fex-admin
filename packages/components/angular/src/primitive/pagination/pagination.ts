@@ -1,29 +1,53 @@
 import { paginationClassName, paginationContentClassName, paginationEllipsisClassName, paginationLinkClassName, paginationSrOnlyClassName, paginationTextClassName, paginationTextLinkClassName } from "@fex/components-styles/pagination";
 import { cn } from "@fex/utils";
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
 import { ChevronLeftIcon, ChevronRightIcon } from "../../icon/chevron";
 import { EllipsisIcon } from "../../icon/more";
+import { createHostClassName } from "../../signals/host-class";
 
-function initialClassName() {
-  return inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.getAttribute("class") ?? "";
+@Component({
+  selector: "nav[fexPagination]",
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    "[class]": "hostClassName()",
+    "role": "navigation",
+    "aria-label": "pagination",
+    "data-slot": "pagination",
+  },
+  template: "<ng-content />",
+})
+export class Pagination {
+  protected readonly hostClassName = createHostClassName(paginationClassName);
 }
 
-function createClass(className: string) {
-  const initial = initialClassName();
-  return computed(() => cn(className, initial));
+@Component({
+  selector: "ul[fexPaginationContent]",
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    "[class]": "hostClassName()",
+    "data-slot": "pagination-content",
+  },
+  template: "<ng-content />",
+})
+export class PaginationContent {
+  protected readonly hostClassName = createHostClassName(paginationContentClassName);
 }
 
-@Component({ selector: "nav[fex-pagination]", standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { "[class]": "hostClassName()", "role": "navigation", "aria-label": "pagination", "data-slot": "pagination" }, template: "<ng-content />" })
-export class Pagination { protected readonly hostClassName = createClass(paginationClassName); }
-
-@Component({ selector: "ul[fex-pagination-content]", standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { "[class]": "hostClassName()", "data-slot": "pagination-content" }, template: "<ng-content />" })
-export class PaginationContent { protected readonly hostClassName = createClass(paginationContentClassName); }
-
-@Component({ selector: "li[fex-pagination-item]", standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { "data-slot": "pagination-item" }, template: "<ng-content />" })
+@Component({
+  selector: "li[fexPaginationItem]",
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    "data-slot": "pagination-item",
+  },
+  template: "<ng-content />",
+})
 export class PaginationItem {}
 
 @Component({
-  selector: "a[fex-pagination-link]",
+  selector: "a[fexPaginationLink]",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { "[class]": "hostClassName()", "[attr.aria-current]": "isActive() ? 'page' : null", "data-slot": "pagination-link", "[attr.data-active]": "isActive() ? 'true' : null" },
@@ -32,28 +56,58 @@ export class PaginationItem {}
 export class PaginationLink {
   readonly isActive = input(false);
   readonly size = input<"default" | "icon">("icon");
-  private readonly initialClassName = initialClassName();
-  protected readonly hostClassName = computed(() => cn(paginationLinkClassName, this.size() === "default" ? paginationTextLinkClassName : "", this.initialClassName));
+  protected readonly hostClassName = createHostClassName(() => cn(paginationLinkClassName, this.size() === "default" ? paginationTextLinkClassName : ""));
 }
 
-@Component({ selector: "a[fex-pagination-previous]", standalone: true, imports: [ChevronLeftIcon], changeDetection: ChangeDetectionStrategy.OnPush, host: { "[class]": "hostClassName()", "aria-label": "Go to previous page", "data-slot": "pagination-link" }, template: '<fex-chevron-left-icon /><span [class]="textClassName">{{ text() }}</span>' })
+@Component({
+  selector: "a[fexPaginationPrevious]",
+  standalone: true,
+  imports: [ChevronLeftIcon],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    "[class]": "hostClassName()",
+    "aria-label": "Go to previous page",
+    "data-slot": "pagination-link",
+  },
+  templateUrl: "./pagination-previous.html",
+})
 export class PaginationPrevious {
   readonly text = input("Previous");
   protected readonly textClassName = paginationTextClassName;
-  private readonly initialClassName = initialClassName();
-  protected readonly hostClassName = computed(() => cn(paginationLinkClassName, paginationTextLinkClassName, this.initialClassName));
+  protected readonly hostClassName = createHostClassName(cn(paginationLinkClassName, paginationTextLinkClassName));
 }
 
-@Component({ selector: "a[fex-pagination-next]", standalone: true, imports: [ChevronRightIcon], changeDetection: ChangeDetectionStrategy.OnPush, host: { "[class]": "hostClassName()", "aria-label": "Go to next page", "data-slot": "pagination-link" }, template: '<span [class]="textClassName">{{ text() }}</span><fex-chevron-right-icon />' })
+@Component({
+  selector: "a[fexPaginationNext]",
+  standalone: true,
+  imports: [ChevronRightIcon],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    "[class]": "hostClassName()",
+    "aria-label": "Go to next page",
+    "data-slot": "pagination-link",
+  },
+  templateUrl: "./pagination-next.html",
+})
 export class PaginationNext {
   readonly text = input("Next");
   protected readonly textClassName = paginationTextClassName;
-  private readonly initialClassName = initialClassName();
-  protected readonly hostClassName = computed(() => cn(paginationLinkClassName, paginationTextLinkClassName, this.initialClassName));
+  protected readonly hostClassName = createHostClassName(cn(paginationLinkClassName, paginationTextLinkClassName));
 }
 
-@Component({ selector: "span[fex-pagination-ellipsis]", standalone: true, imports: [EllipsisIcon], changeDetection: ChangeDetectionStrategy.OnPush, host: { "[class]": "hostClassName()", "aria-hidden": "true", "data-slot": "pagination-ellipsis" }, template: '<fex-ellipsis-icon /><span [class]="srOnlyClassName">More pages</span>' })
+@Component({
+  selector: "span[fexPaginationEllipsis]",
+  standalone: true,
+  imports: [EllipsisIcon],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    "[class]": "hostClassName()",
+    "aria-hidden": "true",
+    "data-slot": "pagination-ellipsis",
+  },
+  templateUrl: "./pagination-ellipsis.html",
+})
 export class PaginationEllipsis {
   protected readonly srOnlyClassName = paginationSrOnlyClassName;
-  protected readonly hostClassName = createClass(paginationEllipsisClassName);
+  protected readonly hostClassName = createHostClassName(paginationEllipsisClassName);
 }

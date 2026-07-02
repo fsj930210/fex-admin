@@ -37,6 +37,11 @@ export const componentRoutes: Routes = [
       import('../../pages/pagination/index.component').then((module) => module.PaginationComponent),
   },
   {
+    path: 'popover',
+    loadComponent: () =>
+      import('../../pages/popover/index.component').then((module) => module.PopoverComponent),
+  },
+  {
     path: 'spinner',
     loadComponent: () =>
       import('../../pages/spinner/index.component').then((module) => module.SpinnerComponent),

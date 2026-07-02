@@ -4,6 +4,16 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./store/create-store": "./src/store/create-store.ts",
+    "./disclosure/create-disclosure": "./src/disclosure/create-disclosure.ts",
+    "./floating/create-floating": "./src/floating/create-floating.ts",
+    "./floating/placement": "./src/floating/placement.ts",
+    "./overlay/create-overlay": "./src/overlay/create-overlay.ts",
+    "./overlay/create-floating-overlay": "./src/overlay/create-floating-overlay.ts",
+    "./overlay/trigger/create-trigger": "./src/overlay/trigger/create-trigger.ts"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.7.6"
   }
 }

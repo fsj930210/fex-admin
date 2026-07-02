@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { paginationTextClassName } from '@fex/components-styles/pagination'
+  import { paginationLinkClassName, paginationTextClassName, paginationTextLinkClassName } from '@fex/components-styles/pagination'
+  import { cn } from '@fex/utils'
   import type { HTMLAnchorAttributes } from 'svelte/elements'
   import ChevronLeftIcon from '../../icon/chevron-left.svelte'
-  import PaginationLink from './pagination-link.svelte'
-  interface Props extends HTMLAnchorAttributes { text?: string }
-  let { text = 'Previous', ...rest }: Props = $props()
+  interface Props extends Omit<HTMLAnchorAttributes, 'class'> { class?: string | undefined; text?: string }
+  let { class: className, text = 'Previous', ...rest }: Props = $props()
+  const classList = $derived(cn(paginationLinkClassName, paginationTextLinkClassName, className))
 </script>
-<PaginationLink {...rest} aria-label="Go to previous page" size="default"><ChevronLeftIcon /><span class={paginationTextClassName}>{text}</span></PaginationLink>
+<a {...rest} aria-label="Go to previous page" data-slot="pagination-link" class={classList}><ChevronLeftIcon /><span class={paginationTextClassName}>{text}</span></a>

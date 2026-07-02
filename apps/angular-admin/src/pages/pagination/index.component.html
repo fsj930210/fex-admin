@@ -1,6 +1,6 @@
 <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
   <div class="mx-auto w-full max-w-5xl space-y-space-xl">
     <header class="space-y-space-md"><a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">返回首页</a><h1 class="text-2xl font-semibold text-foreground">Pagination</h1><p class="max-w-2xl text-sm leading-6 text-muted-foreground">分页结构只负责可访问语义和基础交互样式。</p></header>
-    <fex-card title="Primitive" description="上一页、页码、省略号和下一页组合。"><nav fex-pagination><ul fex-pagination-content><li fex-pagination-item><a fex-pagination-previous href="#previous" text="上一页"></a></li><li fex-pagination-item><a fex-pagination-link href="#1">1</a></li><li fex-pagination-item><a fex-pagination-link href="#2" [isActive]="true">2</a></li><li fex-pagination-item><span fex-pagination-ellipsis></span></li><li fex-pagination-item><a fex-pagination-next href="#next" text="下一页"></a></li></ul></nav></fex-card>
+    <fex-card title="Primitive" description="上一页、页码、省略号和下一页组合。"><nav fexPagination><ul fexPaginationContent><li fexPaginationItem><a fexPaginationPrevious href="#previous" text="上一页"></a></li><li fexPaginationItem><a fexPaginationLink href="#1">1</a></li><li fexPaginationItem><a fexPaginationLink href="#2" [isActive]="true">2</a></li><li fexPaginationItem><span fexPaginationEllipsis></span></li><li fexPaginationItem><a fexPaginationNext href="#next" text="下一页"></a></li></ul></nav></fex-card>
   </div>
 </main>

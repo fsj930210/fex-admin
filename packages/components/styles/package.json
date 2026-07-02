@@ -12,6 +12,7 @@
     "./input": "./src/input.ts",
     "./kbd": "./src/kbd.ts",
     "./pagination": "./src/pagination.ts",
+    "./popover": "./src/popover.ts",
     "./spinner": "./src/spinner.ts",
     "./table": "./src/table.ts",
     "./textarea": "./src/textarea.ts"

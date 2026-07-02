@@ -15,6 +15,7 @@ const KbdPage = lazy(() => import('../../pages/Kbd').then((module) => ({ default
 const PaginationPage = lazy(() =>
   import('../../pages/Pagination').then((module) => ({ default: module.PaginationPage })),
 )
+const PopoverPage = lazy(() => import('../../pages/Popover').then((module) => ({ default: module.PopoverPage })))
 const SpinnerPage = lazy(() => import('../../pages/Spinner').then((module) => ({ default: module.SpinnerPage })))
 const TablePage = lazy(() => import('../../pages/Table').then((module) => ({ default: module.TablePage })))
 const TextareaPage = lazy(() =>
@@ -53,6 +54,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/pagination',
     component: PaginationPage,
+  },
+  {
+    path: '/popover',
+    component: PopoverPage,
   },
   {
     path: '/spinner',

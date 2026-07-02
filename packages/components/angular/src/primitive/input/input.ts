@@ -1,13 +1,12 @@
 import { inputClassName as inputStyleClassName } from "@fex/components-styles/input";
-import { cn } from "@fex/utils";
-import { Directive, ElementRef, inject } from "@angular/core";
+import { Directive } from "@angular/core";
+import { createHostClassName } from "../../signals/host-class";
 
 @Directive({
-  selector: "input[fex-input]",
+  selector: "input[fexInput]",
   standalone: true,
-  host: { "[class]": "hostClassName", "data-slot": "input" },
+  host: { "[class]": "hostClassName()", "data-slot": "input" },
 })
 export class Input {
-  private readonly elementRef = inject<ElementRef<HTMLInputElement>>(ElementRef);
-  protected readonly hostClassName = cn(inputStyleClassName, this.elementRef.nativeElement.getAttribute("class") ?? "");
+  protected readonly hostClassName = createHostClassName(inputStyleClassName);
 }

@@ -1,0 +1,18 @@
+@if (title() || description()) {
+  <fex-card-header>
+    @if (title()) {
+      <fex-card-title>{{ title() }}</fex-card-title>
+    }
+    @if (description()) {
+      <fex-card-description>{{ description() }}</fex-card-description>
+    }
+  </fex-card-header>
+}
+<fex-card-content>
+  <ng-content />
+</fex-card-content>
+@if (footer()) {
+  <fex-card-footer>
+    <ng-container *ngTemplateOutlet="footer() ?? null" />
+  </fex-card-footer>
+}

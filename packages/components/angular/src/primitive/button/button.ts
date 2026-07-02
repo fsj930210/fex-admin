@@ -1,27 +1,22 @@
 import { buttonPrimitiveClassName as buttonPrimitiveStyleClassName } from "@fex/components-styles/button";
 import { cn } from "@fex/utils";
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  inject,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { createHostClassName } from "../../signals/host-class";
 
 export function buttonPrimitiveClassName(className?: string) {
   return cn(buttonPrimitiveStyleClassName, className);
 }
 
 @Component({
-  selector: "button[fex-button-primitive]",
+  selector: "button[fexButtonPrimitive]",
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    "[class]": "hostClassName",
+    "[class]": "hostClassName()",
     "data-slot": "button",
   },
   template: "<ng-content />",
 })
 export class Button {
-  private readonly elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
-  protected readonly hostClassName = buttonPrimitiveClassName(this.elementRef.nativeElement.getAttribute("class") ?? "");
+  protected readonly hostClassName = createHostClassName(buttonPrimitiveClassName());
 }

@@ -3,9 +3,12 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@fex/components-core": "workspace:*",
     "@fex/components-vue": "workspace:*",
+    "@fex/components-styles": "workspace:*",
     "@fex/styles": "workspace:*",
     "@fex/utils": "workspace:*",
+    "@floating-ui/dom": "^1.7.6",
     "@tailwindcss/vite": "catalog:",
     "@vitejs/plugin-vue": "latest",
     "vite": "catalog:",

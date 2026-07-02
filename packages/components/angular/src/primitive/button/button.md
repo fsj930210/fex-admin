@@ -12,7 +12,7 @@ import { Button } from '@fex/components-angular/primitive/button'
 @Component({
   standalone: true,
   imports: [Button],
-  template: `<button fex-button-primitive>Save</button>`,
+  template: `<button fexButtonPrimitive>Save</button>`,
 })
 export class Example {}
 ```

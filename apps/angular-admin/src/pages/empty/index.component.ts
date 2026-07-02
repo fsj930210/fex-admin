@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@fex/components-angular/primitive/empty'
-import { Badge } from '@fex/components-angular/primitive/badge'
+import { Badge } from '@fex/components-angular/ui/badge'
 import Card from '@fex/components-angular/ui/card'
 
 @Component({

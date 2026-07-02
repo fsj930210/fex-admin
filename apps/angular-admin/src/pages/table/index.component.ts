@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@fex/components-angular/primitive/table'
-import { Badge } from '@fex/components-angular/primitive/badge'
+import { Badge } from '@fex/components-angular/ui/badge'
 import Card from '@fex/components-angular/ui/card'
 
 @Component({
-  selector: 'fex-table-page',
+  selector: 'fexTable-page',
   imports: [RouterLink, Card, Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, Badge],
   host: { class: 'block' },
   templateUrl: './index.component.html',

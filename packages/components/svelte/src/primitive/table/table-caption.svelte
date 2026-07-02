@@ -3,7 +3,7 @@
   import { cn } from '@fex/utils'
   import type { Snippet } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
-  interface Props extends Omit<HTMLAttributes<HTMLTableCaptionElement>, 'class'> { class?: string; children?: Snippet }
+  interface Props extends Omit<HTMLAttributes<HTMLElement>, 'class'> { class?: string | undefined; children?: Snippet }
   let { class: className, children, ...rest }: Props = $props()
   const classList = $derived(cn(tableCaptionClassName, className))
 </script>

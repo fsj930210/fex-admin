@@ -10,6 +10,7 @@ const componentLinks = [
   { href: '/input', label: 'Input' },
   { href: '/kbd', label: 'Kbd' },
   { href: '/pagination', label: 'Pagination' },
+  { href: '/popover', label: 'Popover' },
   { href: '/spinner', label: 'Spinner' },
   { href: '/table', label: 'Table' },
   { href: '/textarea', label: 'Textarea' },

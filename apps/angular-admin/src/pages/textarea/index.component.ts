@@ -4,7 +4,7 @@ import { Textarea } from '@fex/components-angular/primitive/textarea'
 import Card from '@fex/components-angular/ui/card'
 
 @Component({
-  selector: 'fex-textarea-page',
+  selector: 'fexTextarea-page',
   imports: [RouterLink, Card, Textarea],
   host: { class: 'block' },
   templateUrl: './index.component.html',

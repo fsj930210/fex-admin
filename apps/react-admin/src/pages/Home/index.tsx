@@ -10,6 +10,7 @@ export function HomePage() {
     { to: '/input', label: 'Input' },
     { to: '/kbd', label: 'Kbd' },
     { to: '/pagination', label: 'Pagination' },
+    { to: '/popover', label: 'Popover' },
     { to: '/spinner', label: 'Spinner' },
     { to: '/table', label: 'Table' },
     { to: '/textarea', label: 'Textarea' },

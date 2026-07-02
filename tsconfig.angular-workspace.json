@@ -4,29 +4,35 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
+      "@fex/components-core/store/create-store": [
+        "packages/components/core/src/store/create-store.ts"
+      ],
+      "@fex/components-core/disclosure/create-disclosure": [
+        "packages/components/core/src/disclosure/create-disclosure.ts"
+      ],
+      "@fex/components-core/overlay/create-overlay": [
+        "packages/components/core/src/overlay/create-overlay.ts"
+      ],
+      "@fex/components-core/overlay/create-floating-overlay": [
+        "packages/components/core/src/overlay/create-floating-overlay.ts"
+      ],
+      "@fex/components-core/overlay/trigger/create-trigger": [
+        "packages/components/core/src/overlay/trigger/create-trigger.ts"
+      ],
+      "@fex/components-core/overlay/floating/create-floating": [
+        "packages/components/core/src/overlay/floating/create-floating.ts"
+      ],
+      "@fex/components-core/overlay/floating/placement": [
+        "packages/components/core/src/overlay/floating/placement.ts"
+      ],
       "@fex/components-angular/primitive/alert": [
         "packages/components/angular/src/primitive/alert/alert.ts"
-      ],
-      "@fex/components-angular/primitive/badge": [
-        "packages/components/angular/src/primitive/badge/badge.ts"
-      ],
-      "@fex/components-angular/button": [
-        "packages/components/angular/src/ui/button/button.ts"
       ],
       "@fex/components-angular/primitive/button": [
         "packages/components/angular/src/primitive/button/button.ts"
       ],
-      "@fex/components-angular/ui/button": [
-        "packages/components/angular/src/ui/button/button.ts"
-      ],
-      "@fex/components-angular/card": [
-        "packages/components/angular/src/ui/card/card.ts"
-      ],
       "@fex/components-angular/primitive/card": [
         "packages/components/angular/src/primitive/card/card.ts"
-      ],
-      "@fex/components-angular/ui/card": [
-        "packages/components/angular/src/ui/card/card.ts"
       ],
       "@fex/components-angular/primitive/empty": [
         "packages/components/angular/src/primitive/empty/empty.ts"
@@ -34,20 +40,47 @@
       "@fex/components-angular/primitive/input": [
         "packages/components/angular/src/primitive/input/input.ts"
       ],
-      "@fex/components-angular/primitive/kbd": [
-        "packages/components/angular/src/primitive/kbd/kbd.ts"
-      ],
       "@fex/components-angular/primitive/pagination": [
         "packages/components/angular/src/primitive/pagination/pagination.ts"
       ],
-      "@fex/components-angular/primitive/spinner": [
-        "packages/components/angular/src/primitive/spinner/spinner.ts"
+      "@fex/components-angular/primitive/popover": [
+        "packages/components/angular/src/primitive/popover/popover.ts"
       ],
       "@fex/components-angular/primitive/table": [
         "packages/components/angular/src/primitive/table/table.ts"
       ],
       "@fex/components-angular/primitive/textarea": [
         "packages/components/angular/src/primitive/textarea/textarea.ts"
+      ],
+      "@fex/components-angular/ui/badge": [
+        "packages/components/angular/src/ui/badge/badge.ts"
+      ],
+      "@fex/components-angular/ui/button": [
+        "packages/components/angular/src/ui/button/button.ts"
+      ],
+      "@fex/components-angular/ui/card": [
+        "packages/components/angular/src/ui/card/card.ts"
+      ],
+      "@fex/components-angular/ui/kbd": [
+        "packages/components/angular/src/ui/kbd/kbd.ts"
+      ],
+      "@fex/components-angular/ui/spinner": [
+        "packages/components/angular/src/ui/spinner/spinner.ts"
+      ],
+      "@fex/components-angular/icon/chevron": [
+        "packages/components/angular/src/icon/chevron.ts"
+      ],
+      "@fex/components-angular/icon/loading": [
+        "packages/components/angular/src/icon/loading.ts"
+      ],
+      "@fex/components-angular/icon/more": [
+        "packages/components/angular/src/icon/more.ts"
+      ],
+      "@fex/components-angular/signals/core-store-signal": [
+        "packages/components/angular/src/signals/core-store-signal.ts"
+      ],
+      "@fex/components-angular/signals/host-class": [
+        "packages/components/angular/src/signals/host-class.ts"
       ]
     }
   }

@@ -11,9 +11,11 @@
     "@angular/platform-browser": "22.0.2",
     "@angular/router": "22.0.2",
     "@fex/components-angular": "workspace:*",
+    "@fex/components-core": "workspace:*",
     "@fex/components-styles": "workspace:*",
     "@fex/styles": "workspace:*",
     "@fex/utils": "workspace:*",
+    "@floating-ui/dom": "^1.7.6",
     "rxjs": "latest",
     "tslib": "latest",
     "zone.js": "latest"
