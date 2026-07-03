@@ -13,6 +13,8 @@
     "./kbd": "./src/kbd.ts",
     "./pagination": "./src/pagination.ts",
     "./popover": "./src/popover.ts",
+    "./dropzone": "./src/dropzone.ts",
+    "./sortable": "./src/sortable.ts",
     "./spinner": "./src/spinner.ts",
     "./table": "./src/table.ts",
     "./textarea": "./src/textarea.ts"

@@ -46,6 +46,18 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Table'), 'TablePage'),
   },
   {
+    path: '/sortable',
+    element: createLazyRouteElement(() => import('../../pages/Sortable'), 'SortablePage'),
+  },
+  {
+    path: '/interactions',
+    element: createLazyRouteElement(() => import('../../pages/Interactions'), 'InteractionsPage'),
+  },
+  {
+    path: '/resizable',
+    element: createLazyRouteElement(() => import('../../pages/Resizable'), 'ResizablePage'),
+  },
+  {
     path: '/textarea',
     element: createLazyRouteElement(() => import('../../pages/Textarea'), 'TextareaPage'),
   },

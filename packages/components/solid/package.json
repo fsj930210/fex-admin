@@ -21,7 +21,9 @@
     "./icon/chevron": "./src/icon/chevron.tsx",
     "./icon/loading": "./src/icon/loading.tsx",
     "./icon/more": "./src/icon/more.tsx",
-    "./primitives/create-core-store-signal": "./src/primitives/create-core-store-signal.ts"
+    "./primitives/create-core-store-signal": "./src/primitives/create-core-store-signal.ts",
+    "./primitives/create-move": "./src/primitives/create-move.ts",
+    "./primitives/create-resize": "./src/primitives/create-resize.ts"
   },
   "dependencies": {
     "@fex/components-core": "workspace:*",

@@ -7,8 +7,35 @@
       "@fex/components-core/store/create-store": [
         "packages/components/core/src/store/create-store.ts"
       ],
+      "@fex/components-core/dropzone/accept": [
+        "packages/components/core/src/dropzone/accept.ts"
+      ],
+      "@fex/components-core/dropzone/files": [
+        "packages/components/core/src/dropzone/files.ts"
+      ],
+      "@fex/components-core/dropzone/types": [
+        "packages/components/core/src/dropzone/types.ts"
+      ],
+      "@fex/components-core/dropzone/validate": [
+        "packages/components/core/src/dropzone/validate.ts"
+      ],
       "@fex/components-core/disclosure/create-disclosure": [
         "packages/components/core/src/disclosure/create-disclosure.ts"
+      ],
+      "@fex/components-core/floating/create-floating": [
+        "packages/components/core/src/floating/create-floating.ts"
+      ],
+      "@fex/components-core/floating/placement": [
+        "packages/components/core/src/floating/placement.ts"
+      ],
+      "@fex/components-core/interactions/bounds": [
+        "packages/components/core/src/interactions/bounds.ts"
+      ],
+      "@fex/components-core/interactions/rect": [
+        "packages/components/core/src/interactions/rect.ts"
+      ],
+      "@fex/components-core/interactions/types": [
+        "packages/components/core/src/interactions/types.ts"
       ],
       "@fex/components-core/overlay/create-overlay": [
         "packages/components/core/src/overlay/create-overlay.ts"
@@ -19,11 +46,23 @@
       "@fex/components-core/overlay/trigger/create-trigger": [
         "packages/components/core/src/overlay/trigger/create-trigger.ts"
       ],
-      "@fex/components-core/overlay/floating/create-floating": [
-        "packages/components/core/src/overlay/floating/create-floating.ts"
+      "@fex/components-core/resizable/layout": [
+        "packages/components/core/src/resizable/layout.ts"
       ],
-      "@fex/components-core/overlay/floating/placement": [
-        "packages/components/core/src/overlay/floating/placement.ts"
+      "@fex/components-core/resizable/types": [
+        "packages/components/core/src/resizable/types.ts"
+      ],
+      "@fex/components-core/sortable/array-move": [
+        "packages/components/core/src/sortable/array-move.ts"
+      ],
+      "@fex/components-core/sortable/containers": [
+        "packages/components/core/src/sortable/containers.ts"
+      ],
+      "@fex/components-core/sortable/motion": [
+        "packages/components/core/src/sortable/motion.ts"
+      ],
+      "@fex/components-core/sortable/types": [
+        "packages/components/core/src/sortable/types.ts"
       ],
       "@fex/components-angular/primitive/alert": [
         "packages/components/angular/src/primitive/alert/alert.ts"

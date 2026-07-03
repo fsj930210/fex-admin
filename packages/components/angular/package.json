@@ -21,6 +21,8 @@
     "./icon/chevron": "./src/icon/chevron.ts",
     "./icon/loading": "./src/icon/loading.ts",
     "./icon/more": "./src/icon/more.ts",
+    "./directives/move": "./src/directives/move.ts",
+    "./directives/resize": "./src/directives/resize.ts",
     "./signals/core-store-signal": "./src/signals/core-store-signal.ts",
     "./signals/host-class": "./src/signals/host-class.ts"
   },

@@ -6,12 +6,30 @@
   "exports": {
     ".": "./src/index.ts",
     "./store/create-store": "./src/store/create-store.ts",
+    "./dropzone/accept": "./src/dropzone/accept.ts",
+    "./dropzone/create-dropzone-controller": "./src/dropzone/create-dropzone-controller.ts",
+    "./dropzone/files": "./src/dropzone/files.ts",
+    "./dropzone/types": "./src/dropzone/types.ts",
+    "./dropzone/validate": "./src/dropzone/validate.ts",
     "./disclosure/create-disclosure": "./src/disclosure/create-disclosure.ts",
     "./floating/create-floating": "./src/floating/create-floating.ts",
     "./floating/placement": "./src/floating/placement.ts",
+    "./interactions/bounds": "./src/interactions/bounds.ts",
+    "./interactions/create-move-controller": "./src/interactions/create-move-controller.ts",
+    "./interactions/create-resize-controller": "./src/interactions/create-resize-controller.ts",
+    "./interactions/dnd-store": "./src/interactions/dnd-store.ts",
+    "./interactions/rect": "./src/interactions/rect.ts",
+    "./interactions/types": "./src/interactions/types.ts",
     "./overlay/create-overlay": "./src/overlay/create-overlay.ts",
     "./overlay/create-floating-overlay": "./src/overlay/create-floating-overlay.ts",
-    "./overlay/trigger/create-trigger": "./src/overlay/trigger/create-trigger.ts"
+    "./overlay/trigger/create-trigger": "./src/overlay/trigger/create-trigger.ts",
+    "./resizable/layout": "./src/resizable/layout.ts",
+    "./resizable/types": "./src/resizable/types.ts",
+    "./sortable/array-move": "./src/sortable/array-move.ts",
+    "./sortable/containers": "./src/sortable/containers.ts",
+    "./sortable/create-sortable-controller": "./src/sortable/create-sortable-controller.ts",
+    "./sortable/motion": "./src/sortable/motion.ts",
+    "./sortable/types": "./src/sortable/types.ts"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.7.6"

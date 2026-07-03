@@ -12,6 +12,7 @@
     "./primitive/input": "./src/primitive/input/input.tsx",
     "./primitive/pagination": "./src/primitive/pagination/pagination.tsx",
     "./primitive/popover": "./src/primitive/popover/popover.tsx",
+    "./primitive/sortable": "./src/primitive/sortable/sortable.tsx",
     "./primitive/table": "./src/primitive/table/table.tsx",
     "./primitive/textarea": "./src/primitive/textarea/textarea.tsx",
     "./ui/badge": "./src/ui/badge/badge.tsx",
@@ -19,15 +20,24 @@
     "./ui/card": "./src/ui/card/card.tsx",
     "./ui/dialog": "./src/ui/dialog/index.ts",
     "./ui/kbd": "./src/ui/kbd/kbd.tsx",
+    "./ui/resizable": "./src/ui/resizable/resizable.tsx",
     "./ui/spinner": "./src/ui/spinner/spinner.tsx",
     "./pro/dialog": "./src/pro/dialog/index.ts",
     "./icon/chevron": "./src/icon/chevron.tsx",
     "./icon/loading": "./src/icon/loading.tsx",
     "./icon/more": "./src/icon/more.tsx",
+    "./hooks/use-composed-ref": "./src/hooks/use-composed-ref.ts",
     "./hooks/use-core-store": "./src/hooks/use-core-store.ts",
-    "./hooks/use-composed-ref": "./src/hooks/use-composed-ref.ts"
+    "./hooks/use-draggable": "./src/hooks/use-draggable.ts",
+    "./hooks/use-droppable": "./src/hooks/use-droppable.ts",
+    "./hooks/use-dropzone": "./src/hooks/use-dropzone.ts",
+    "./hooks/use-move": "./src/hooks/use-move.ts",
+    "./hooks/use-resize": "./src/hooks/use-resize.ts",
+    "./hooks/use-sortable": "./src/hooks/use-sortable.ts"
   },
   "dependencies": {
+    "@atlaskit/pragmatic-drag-and-drop": "^2.0.1",
+    "@atlaskit/pragmatic-drag-and-drop-hitbox": "^2.0.0",
     "@fex/components-core": "workspace:*",
     "@fex/components-styles": "workspace:*",
     "@fex/utils": "workspace:*"
@@ -35,8 +45,8 @@
   "devDependencies": {
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "react-dom": "19.2.7",
-    "react": "19.2.7"
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "peerDependencies": {
     "react": "^19.0.0",

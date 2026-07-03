@@ -61,7 +61,9 @@
     "./icon/chevron-right": "./src/icon/chevron-right.svelte",
     "./icon/loading": "./src/icon/loading.svelte",
     "./icon/more": "./src/icon/more.svelte",
-    "./stores/core-store": "./src/stores/core-store.ts"
+    "./stores/core-store": "./src/stores/core-store.ts",
+    "./actions/move": "./src/actions/move.ts",
+    "./actions/resize": "./src/actions/resize.ts"
   },
   "dependencies": {
     "@fex/components-core": "workspace:*",
