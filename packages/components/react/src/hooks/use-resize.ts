@@ -6,6 +6,10 @@ import type { CSSProperties, HTMLAttributes, RefCallback } from 'react'
 import { useControllableState } from './use-controllable-state'
 import { useMemoizedFn } from './use-memoized-fn'
 
+type DataAttributes = {
+  [key: `data-${string}`]: string | boolean | undefined
+}
+
 export interface UseResizeOptions {
   rect?: Rect
   defaultRect?: Rect
@@ -51,6 +55,8 @@ export function useResize({
         onResize: setCurrentRect,
         onResizeEnd,
       }),
+    // Controller is an external imperative instance; option changes are synced below.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   )
   const snapshot = useSyncExternalStore(
@@ -85,7 +91,7 @@ export function useResize({
   ])
 
   const getTargetProps = useMemoizedFn(
-    (): HTMLAttributes<HTMLElement> & { ref: RefCallback<HTMLElement>; style: CSSProperties } => ({
+    (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement>; style: CSSProperties } => ({
       ref: controller.setTarget,
       style: getStyle(snapshot.rect, snapshot.resizing),
       'data-resizing': snapshot.resizing || undefined,
@@ -93,7 +99,7 @@ export function useResize({
   )
 
   const getHandleProps = useMemoizedFn(
-    (edge: ResizeEdge): HTMLAttributes<HTMLElement> & { ref: RefCallback<HTMLElement> } => ({
+    (edge: ResizeEdge): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => ({
       ref: () => {},
       onPointerDown: (event) => {
         if (disabled || !controller.start(pointerEventToInput(event.nativeEvent), edge)) {

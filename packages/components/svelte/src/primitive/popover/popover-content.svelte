@@ -17,6 +17,11 @@
   const classList = $derived(cn(popoverContentClassName(), className))
   // x/y/strategy 由 core 写入 CSS 变量；Svelte 不订阅坐标，避免 autoUpdate 高频触发模板更新。
 
+  function handleDocumentPointerDown(event: PointerEvent) {
+    // 统一走 registry 判断 trigger/content/arrow 边界，避免每个 Svelte 子组件重复判断。
+    dismissOpenPopovers(event)
+  }
+
   $effect(() => {
     // bind:this 拿到真实 DOM 后注册给 core。content 同时是 floating element 和 dismiss 边界。
     // 清理时只清掉当前元素，避免 Svelte 快速重建 DOM 时把新元素误置空。
@@ -34,19 +39,15 @@
     // 必须在 effect 中读取 $snapshot.open，不能缓存成普通变量，否则打开后不会注册 dismiss 监听。
     if (!$snapshot.open || !contentElement) return
     const ownerDocument = contentElement.ownerDocument
-    const handlePointerDown = (event: PointerEvent) => {
-      // 统一走 registry 判断 trigger/content/arrow 边界，避免每个 Svelte 子组件重复判断。
-      dismissOpenPopovers(event)
-    }
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         overlay.dismiss.escapeKey(eventInfo(event))
       }
     }
-    ownerDocument.addEventListener('pointerdown', handlePointerDown, true)
+    ownerDocument.addEventListener('pointerdown', handleDocumentPointerDown, true)
     ownerDocument.addEventListener('keydown', handleKeyDown, true)
     return () => {
-      ownerDocument.removeEventListener('pointerdown', handlePointerDown, true)
+      ownerDocument.removeEventListener('pointerdown', handleDocumentPointerDown, true)
       ownerDocument.removeEventListener('keydown', handleKeyDown, true)
     }
   })

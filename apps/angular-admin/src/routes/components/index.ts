@@ -51,6 +51,21 @@ export const componentRoutes: Routes = [
     loadComponent: () => import('../../pages/table/index.component').then((module) => module.TableComponent),
   },
   {
+    path: 'sortable',
+    loadComponent: () =>
+      import('../../pages/sortable/index.component').then((module) => module.SortableComponent),
+  },
+  {
+    path: 'interactions',
+    loadComponent: () =>
+      import('../../pages/interactions/index.component').then((module) => module.InteractionsComponent),
+  },
+  {
+    path: 'resizable',
+    loadComponent: () =>
+      import('../../pages/resizable/index.component').then((module) => module.ResizableComponent),
+  },
+  {
     path: 'textarea',
     loadComponent: () =>
       import('../../pages/textarea/index.component').then((module) => module.TextareaComponent),

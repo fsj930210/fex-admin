@@ -13,6 +13,9 @@ const componentLinks = [
   { href: '/popover', label: 'Popover' },
   { href: '/spinner', label: 'Spinner' },
   { href: '/table', label: 'Table' },
+  { href: '/sortable', label: 'Sortable' },
+  { href: '/interactions', label: 'Interactions' },
+  { href: '/resizable', label: 'Resizable' },
   { href: '/textarea', label: 'Textarea' },
 ] as const
 

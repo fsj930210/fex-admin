@@ -1,7 +1,8 @@
 import { createResizeController } from '@fex/components-core/interactions/create-resize-controller'
 import { defaultRect, rectToStyle } from '@fex/components-core/interactions/rect'
 import type { Rect, ResizeEdge, ResizeEdges } from '@fex/components-core/interactions/types'
-import { computed, onBeforeUnmount, ref, shallowRef, watchEffect } from 'vue'
+import { computed, onBeforeUnmount, ref, shallowRef } from 'vue'
+import type { CSSProperties } from 'vue'
 
 export interface UseResizeOptions {
   rect?: Rect
@@ -40,8 +41,7 @@ export function useResize(options: UseResizeOptions = {}) {
     snapshot.value = controller.getSnapshot()
   })
 
-  watchEffect(() => {
-    controller.setTarget(targetRef.value)
+  function updateController() {
     controller.updateOptions({
       rect: options.rect ?? rect.value,
       edges: options.edges,
@@ -56,7 +56,17 @@ export function useResize(options: UseResizeOptions = {}) {
       },
       onResizeEnd: options.onResizeEnd,
     })
-  })
+  }
+
+  function setTarget(element: HTMLElement | null) {
+    if (targetRef.value === element) {
+      return
+    }
+
+    targetRef.value = element
+    controller.setTarget(element)
+    updateController()
+  }
 
   onBeforeUnmount(() => {
     unsubscribe()
@@ -67,12 +77,13 @@ export function useResize(options: UseResizeOptions = {}) {
     return {
       onPointerdown: (event: PointerEvent) => start(event, edge),
       onMousedown: (event: MouseEvent) => startMouse(event, edge),
-      style: { touchAction: 'none', userSelect: 'none' },
+      style: { touchAction: 'none', userSelect: 'none' } as CSSProperties,
       'data-resize-handle': edge,
     }
   }
 
   function start(event: PointerEvent, edge: ResizeEdge) {
+    updateController()
     if (options.disabled || !controller.start(toPointerInput(event), edge)) {
       return
     }
@@ -83,6 +94,7 @@ export function useResize(options: UseResizeOptions = {}) {
   }
 
   function startMouse(event: MouseEvent, edge: ResizeEdge) {
+    updateController()
     if (options.disabled || !controller.start(toMouseInput(event), edge)) {
       return
     }
@@ -120,7 +132,7 @@ export function useResize(options: UseResizeOptions = {}) {
     window.removeEventListener('mouseup', onMouseUp)
   }
 
-  const style = computed(() => ({
+  const style = computed<CSSProperties>(() => ({
     ...rectToStyle(snapshot.value.rect),
     boxSizing: 'border-box',
     willChange: snapshot.value.resizing ? 'width, height, transform' : undefined,
@@ -128,6 +140,7 @@ export function useResize(options: UseResizeOptions = {}) {
 
   return {
     targetRef,
+    setTarget,
     resizing: computed(() => snapshot.value.resizing),
     rect: computed(() => snapshot.value.rect),
     style,

@@ -22,8 +22,12 @@
     "./icon/loading": "./src/icon/loading.ts",
     "./icon/more": "./src/icon/more.ts",
     "./composables/use-core-store": "./src/composables/use-core-store.ts",
+    "./composables/use-draggable": "./src/composables/use-draggable.ts",
+    "./composables/use-droppable": "./src/composables/use-droppable.ts",
+    "./composables/use-dropzone": "./src/composables/use-dropzone.ts",
     "./composables/use-move": "./src/composables/use-move.ts",
-    "./composables/use-resize": "./src/composables/use-resize.ts"
+    "./composables/use-resize": "./src/composables/use-resize.ts",
+    "./composables/use-sortable": "./src/composables/use-sortable.ts"
   },
   "dependencies": {
     "@fex/components-core": "workspace:*",

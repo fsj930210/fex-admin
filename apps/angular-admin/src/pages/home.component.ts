@@ -21,6 +21,9 @@ export class HomeComponent {
     { to: '/popover', label: 'Popover' },
     { to: '/spinner', label: 'Spinner' },
     { to: '/table', label: 'Table' },
+    { to: '/sortable', label: 'Sortable' },
+    { to: '/interactions', label: 'Interactions' },
+    { to: '/resizable', label: 'Resizable' },
     { to: '/textarea', label: 'Textarea' },
   ] as const
 }

@@ -9,12 +9,16 @@ import type { SortableAxis, SortableId, SortableItems, SortableMotionOptions } f
 import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect'
 import { useMemoizedFn } from './use-memoized-fn'
 
+type DataAttributes = {
+  [key: `data-${string}`]: string | boolean | undefined
+}
+
 export interface UseSortableOptions<TItems extends SortableItems> {
   items: TItems
-  axis?: SortableAxis
+  axis?: SortableAxis | undefined
   disabled?: boolean
-  animation?: SortableMotionOptions
-  onChange?: (items: TItems) => void
+  animation?: SortableMotionOptions | undefined
+  onChange?: ((items: TItems) => void) | undefined
 }
 
 export function useSortable<TItems extends SortableItems>({
@@ -26,6 +30,8 @@ export function useSortable<TItems extends SortableItems>({
 }: UseSortableOptions<TItems>) {
   const controller = useMemo(
     () => createSortableController({ items, axis, animation, onChange }),
+    // Controller is an external imperative instance; option changes are synced below.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   )
   const snapshot = useSyncExternalStore(
@@ -39,7 +45,7 @@ export function useSortable<TItems extends SortableItems>({
   }, [animation, axis, controller, items, onChange])
 
   const getContainerProps = useMemoizedFn(
-    (containerId = DEFAULT_SORTABLE_CONTAINER_ID): HTMLAttributes<HTMLElement> & { ref: RefCallback<HTMLElement> } => {
+    (containerId = DEFAULT_SORTABLE_CONTAINER_ID): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => {
       let cleanup: (() => void) | undefined
 
       return {
@@ -54,7 +60,7 @@ export function useSortable<TItems extends SortableItems>({
 
   const getItemProps = useMemoizedFn(
     (id: SortableId, containerId = DEFAULT_SORTABLE_CONTAINER_ID):
-      HTMLAttributes<HTMLElement> & { ref: RefCallback<HTMLElement> } => {
+      HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => {
       let cleanup: (() => void) | undefined
 
       return {
@@ -92,7 +98,7 @@ export function useSortable<TItems extends SortableItems>({
     },
   )
 
-  const getHandleProps = useMemoizedFn((): HTMLAttributes<HTMLElement> => ({
+  const getHandleProps = useMemoizedFn((): HTMLAttributes<HTMLElement> & DataAttributes => ({
     'data-sortable-handle': '',
   }))
 

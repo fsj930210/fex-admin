@@ -101,9 +101,15 @@ export function ResizablePanel({
   ...props
 }: ResizablePanelProps) {
   const context = useResizableContext()
-  const index = context.registerPanel({ id, defaultSize, minSize, maxSize })
-  const fallbackLayout = normalizePanelLayout([{ id, defaultSize, minSize, maxSize }], [defaultSize ?? 100])
-  const basis = context.layout[index] ?? defaultSize ?? fallbackLayout[0]
+  const panelConfig = {
+    id,
+    ...(defaultSize !== undefined ? { defaultSize } : {}),
+    ...(minSize !== undefined ? { minSize } : {}),
+    ...(maxSize !== undefined ? { maxSize } : {}),
+  }
+  const index = context.registerPanel(panelConfig)
+  const fallbackLayout = normalizePanelLayout([panelConfig], [defaultSize ?? 100])
+  const basis = context.layout[index] ?? defaultSize ?? fallbackLayout[0] ?? 100
 
   return (
     <div
@@ -142,12 +148,13 @@ export function ResizableHandle({ index, disabled, className, onKeyDown, ...prop
     if (!size || !handleRef.current) {
       return
     }
+    const groupSize: number = size
 
     handleRef.current.setPointerCapture(event.pointerId)
 
     function onPointerMove(moveEvent: PointerEvent) {
       const current = context.direction === 'horizontal' ? moveEvent.clientX : moveEvent.clientY
-      context.resizeHandle(handleIndex, ((current - previous) / size) * 100)
+      context.resizeHandle(handleIndex, ((current - previous) / groupSize) * 100)
       previous = current
     }
 

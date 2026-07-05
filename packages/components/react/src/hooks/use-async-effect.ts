@@ -31,6 +31,8 @@ function useAsyncEffect(
     return () => {
       cancelled = true;
     };
+    // Async effect follows the caller-provided dependency list.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }
 

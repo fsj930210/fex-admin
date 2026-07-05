@@ -20,6 +20,8 @@ const useMount = (fn: MountCallback) => {
       return;
     }
     return result;
+    // Mount callbacks intentionally run once; callers that need updates should use update-effect hooks.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 

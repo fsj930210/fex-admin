@@ -4,6 +4,6 @@
   "projectType": "library",
   "targets": {
     "typecheck": { "command": "tsc --noEmit -p packages/styles/tsconfig.json" },
-    "lint": { "command": "oxlint packages/styles/src/index.ts" }
+    "lint": { "command": "oxlint packages/styles/src/index.d.ts" }
   }
 }

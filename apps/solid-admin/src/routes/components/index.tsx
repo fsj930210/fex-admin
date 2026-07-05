@@ -18,6 +18,13 @@ const PaginationPage = lazy(() =>
 const PopoverPage = lazy(() => import('../../pages/Popover').then((module) => ({ default: module.PopoverPage })))
 const SpinnerPage = lazy(() => import('../../pages/Spinner').then((module) => ({ default: module.SpinnerPage })))
 const TablePage = lazy(() => import('../../pages/Table').then((module) => ({ default: module.TablePage })))
+const SortablePage = lazy(() => import('../../pages/Sortable').then((module) => ({ default: module.SortablePage })))
+const InteractionsPage = lazy(() =>
+  import('../../pages/Interactions').then((module) => ({ default: module.InteractionsPage })),
+)
+const ResizablePage = lazy(() =>
+  import('../../pages/Resizable').then((module) => ({ default: module.ResizablePage })),
+)
 const TextareaPage = lazy(() =>
   import('../../pages/Textarea').then((module) => ({ default: module.TextareaPage })),
 )
@@ -66,6 +73,18 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/table',
     component: TablePage,
+  },
+  {
+    path: '/sortable',
+    component: SortablePage,
+  },
+  {
+    path: '/interactions',
+    component: InteractionsPage,
+  },
+  {
+    path: '/resizable',
+    component: ResizablePage,
   },
   {
     path: '/textarea',

@@ -37,10 +37,16 @@ export function resizePanelPair({
     return layout
   }
 
-  const beforeSize = clampSize(next[beforeIndex] + delta, before)
-  const consumed = beforeSize - next[beforeIndex]
-  const afterSize = clampSize(next[afterIndex] - consumed, after)
-  const returned = next[afterIndex] - consumed - afterSize
+  const currentBefore = next[beforeIndex]
+  const currentAfter = next[afterIndex]
+  if (currentBefore === undefined || currentAfter === undefined) {
+    return layout
+  }
+
+  const beforeSize = clampSize(currentBefore + delta, before)
+  const consumed = beforeSize - currentBefore
+  const afterSize = clampSize(currentAfter - consumed, after)
+  const returned = currentAfter - consumed - afterSize
 
   next[beforeIndex] = beforeSize + returned
   next[afterIndex] = afterSize
@@ -60,4 +66,3 @@ function normalizeSum(values: number[]) {
 
   return values.map((value) => (value / sum) * 100)
 }
-

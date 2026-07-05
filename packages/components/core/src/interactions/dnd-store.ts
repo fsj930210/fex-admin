@@ -6,11 +6,11 @@ export interface DndDropTarget {
   id: string
   element: HTMLElement
   data: Record<string, unknown>
-  edges?: DropEdge[]
-  canDrop?: (source: DndSourceData) => boolean
-  onDragEnter?: (args: DndDropArgs) => void
-  onDragLeave?: () => void
-  onDrop?: (args: DndDropArgs) => void
+  edges?: DropEdge[] | undefined
+  canDrop?: ((source: DndSourceData) => boolean) | undefined
+  onDragEnter?: ((args: DndDropArgs) => void) | undefined
+  onDragLeave?: (() => void) | undefined
+  onDrop?: ((args: DndDropArgs) => void) | undefined
 }
 
 export interface DndDropArgs {

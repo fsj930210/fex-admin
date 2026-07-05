@@ -5,6 +5,10 @@ import type { ChangeEvent, DragEvent, HTMLAttributes, InputHTMLAttributes, RefCa
 import type { DropzoneFileRejection, DropzoneValidationOptions } from '@fex/components-core/dropzone/types'
 import { useMemoizedFn } from './use-memoized-fn'
 
+type DataAttributes = {
+  [key: `data-${string}`]: string | boolean | undefined
+}
+
 export interface UseDropzoneOptions extends DropzoneValidationOptions {
   disabled?: boolean
   onDropFiles?: (files: File[]) => void
@@ -14,6 +18,8 @@ export interface UseDropzoneOptions extends DropzoneValidationOptions {
 export function useDropzone(options: UseDropzoneOptions = {}) {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [rootElement, setRootElement] = useState<HTMLElement | null>(null)
+  // Controller is an external imperative instance; option changes are synced below.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const controller = useMemo(() => createDropzoneController(options), [])
   const snapshot = useSyncExternalStore(
     controller.subscribe,
@@ -59,7 +65,7 @@ export function useDropzone(options: UseDropzoneOptions = {}) {
   })
 
   const getRootProps = useMemoizedFn(
-    (): HTMLAttributes<HTMLElement> & { ref: RefCallback<HTMLElement> } => ({
+    (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => ({
       ref: setRootElement,
       onClick: () => {
         if (!options.disabled) {

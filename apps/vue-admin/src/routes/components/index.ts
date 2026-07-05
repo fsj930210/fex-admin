@@ -10,5 +10,8 @@ export const componentRoutes = [
   { path: '/popover', component: () => import('../../pages/Popover/index.vue') },
   { path: '/spinner', component: () => import('../../pages/Spinner/index.vue') },
   { path: '/table', component: () => import('../../pages/Table/index.vue') },
+  { path: '/sortable', component: () => import('../../pages/Sortable/index.vue') },
+  { path: '/interactions', component: () => import('../../pages/Interactions/index.vue') },
+  { path: '/resizable', component: () => import('../../pages/Resizable/index.vue') },
   { path: '/textarea', component: () => import('../../pages/Textarea/index.vue') },
 ]

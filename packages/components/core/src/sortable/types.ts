@@ -21,7 +21,7 @@ export interface SortableSnapshot {
 export interface SortableMotionStyle {
   transform?: string
   transition?: string
-  zIndex?: number
+  zIndex?: string
 }
 
 export interface SortableMotionOptions {

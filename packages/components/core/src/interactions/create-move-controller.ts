@@ -4,10 +4,10 @@ import type { InteractionAxis, Point } from './types'
 
 export interface MoveControllerOptions {
   position: Point
-  axis?: InteractionAxis
-  bounds?: 'viewport' | 'parent' | HTMLElement | false
-  onMove?: (position: Point) => void
-  onMoveEnd?: (position: Point) => void
+  axis?: InteractionAxis | undefined
+  bounds?: 'viewport' | 'parent' | HTMLElement | false | undefined
+  onMove?: ((position: Point) => void) | undefined
+  onMoveEnd?: ((position: Point) => void) | undefined
 }
 
 export interface MoveControllerSnapshot {
@@ -128,14 +128,14 @@ export function createMoveController(options: MoveControllerOptions) {
       return
     }
 
-    const nextPosition = resolveMoveRect({
+    const moveInput = {
       startPosition: session.startPosition,
       startPointer: session.startPointer,
       currentPointer: { x: latestPointer.clientX, y: latestPointer.clientY },
       targetRect: session.targetRect,
       boundsRect: session.boundsRect,
-      axis: currentOptions.axis,
-    })
+    }
+    const nextPosition = resolveMoveRect(currentOptions.axis ? { ...moveInput, axis: currentOptions.axis } : moveInput)
     setSnapshot({ position: nextPosition })
     currentOptions.onMove?.(nextPosition)
   }

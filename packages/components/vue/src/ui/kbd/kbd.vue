@@ -3,7 +3,7 @@ import { kbdClassName } from '@fex/components-styles/kbd'
 import { cn } from '@fex/utils'
 import { useAttrs } from 'vue'
 
-defineOptions({ name: 'Kbd', inheritAttrs: false })
+defineOptions({ name: 'FexKbd', inheritAttrs: false })
 
 const attrs = useAttrs()
 </script>

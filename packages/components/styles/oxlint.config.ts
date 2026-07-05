@@ -1,1 +1,1 @@
-export { default } from '@fex/config-oxc/oxlint'
+export { default } from '@fex/config-oxc/oxlint/base'

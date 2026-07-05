@@ -7,7 +7,6 @@ import {
 } from './containers'
 import { SortableMotionRegistry } from './motion'
 import type {
-  RectLike,
   SortableAxis,
   SortableControllerSnapshot,
   SortableId,
@@ -16,11 +15,13 @@ import type {
   SortableOverlayRect,
 } from './types'
 
+const SORTABLE_SWAP_OVERLAP_RATIO = 0.35
+
 export interface SortableControllerOptions<TItems extends SortableItems> {
   items: TItems
-  axis?: SortableAxis
-  animation?: SortableMotionOptions
-  onChange?: (items: TItems) => void
+  axis?: SortableAxis | undefined
+  animation?: SortableMotionOptions | undefined
+  onChange?: ((items: TItems) => void) | undefined
 }
 
 export interface SortablePointerInput {
@@ -213,10 +214,10 @@ export function createSortableController<TItems extends SortableItems>({
   function getItemStyle(id: SortableId) {
     if (snapshot.activeId === id && snapshot.dragging) {
       return {
-        width: snapshot.activeRect?.width,
-        height: snapshot.activeRect?.height,
-        minWidth: snapshot.activeRect?.width,
-        minHeight: snapshot.activeRect?.height,
+        width: toPx(snapshot.activeRect?.width),
+        height: toPx(snapshot.activeRect?.height),
+        minWidth: toPx(snapshot.activeRect?.width),
+        minHeight: toPx(snapshot.activeRect?.height),
         boxSizing: 'border-box',
         flexShrink: 0,
         visibility: 'hidden',
@@ -238,10 +239,10 @@ export function createSortableController<TItems extends SortableItems>({
 
     return {
       position: 'fixed',
-      top: snapshot.activeRect.top,
-      left: snapshot.activeRect.left,
-      width: snapshot.activeRect.width,
-      height: snapshot.activeRect.height,
+      top: toPx(snapshot.activeRect.top),
+      left: toPx(snapshot.activeRect.left),
+      width: toPx(snapshot.activeRect.width),
+      height: toPx(snapshot.activeRect.height),
       transform: `translate3d(${snapshot.dragOffset.x}px, ${snapshot.dragOffset.y}px, 0)`,
       opacity: 1,
       visibility: 'visible',
@@ -254,7 +255,7 @@ export function createSortableController<TItems extends SortableItems>({
       isolation: 'isolate',
       contain: 'layout paint',
       pointerEvents: 'none',
-      zIndex: 2147483647,
+      zIndex: '2147483647',
       willChange: 'transform',
     } as const
   }
@@ -292,38 +293,95 @@ export function createSortableController<TItems extends SortableItems>({
       width: active.activeRect.width,
       height: active.activeRect.height,
     }
-    const crossedTarget = containerItems
-      .filter((id) => id !== active.id)
-      .map((id) => {
-        const element = itemElements.get(getItemKey(id, containerId))
-        const rect = element?.getBoundingClientRect()
-        if (!rect) {
-          return null
-        }
-
-        return {
-          index: containerItems.indexOf(id),
-          overlap: getMainAxisOverlap(activeRect, rect),
-          threshold: Math.min(
-            axis === 'x' ? activeRect.width : activeRect.height,
-            axis === 'x' ? rect.width : rect.height,
-          ) * 0.5,
-        }
-      })
-      .filter((item): item is { index: number; overlap: number; threshold: number } => Boolean(item))
-      .filter((item) => item.overlap > item.threshold)
-      .sort((left, right) => right.overlap - left.overlap)[0]
-
-    if (!crossedTarget) {
+    const toIndex = getNextIndexByAdjacentOverlap(containerItems, active.id, containerId, activeRect, dragOffset)
+    if (toIndex === null) {
       return previewItems
     }
 
-    const toIndex = crossedTarget.index > from.index ? crossedTarget.index + 1 : crossedTarget.index
     if (from.containerId === containerId && from.index === toIndex) {
       return previewItems
     }
 
     return moveSortableItem(previewItems, from, { containerId, index: toIndex })
+  }
+
+  function getNextIndexByAdjacentOverlap(
+    containerItems: SortableId[],
+    activeId: SortableId,
+    containerId: string,
+    activeRect: { left: number; right: number; top: number; bottom: number; width: number; height: number },
+    dragOffset: { x: number; y: number },
+  ) {
+    const activeIndex = containerItems.indexOf(activeId)
+
+    if (activeIndex >= 0) {
+      const previousRect = getItemRect(containerItems[activeIndex - 1], containerId)
+      const nextRect = getItemRect(containerItems[activeIndex + 1], containerId)
+      const mainOffset = axis === 'x' ? dragOffset.x : dragOffset.y
+
+      if (mainOffset > 0 && nextRect && getMainAxisOverlap(activeRect, nextRect) >= getMainAxisSize(nextRect) * SORTABLE_SWAP_OVERLAP_RATIO) {
+        return activeIndex + 1
+      }
+      if (mainOffset < 0 && previousRect && getMainAxisOverlap(activeRect, previousRect) >= getMainAxisSize(previousRect) * SORTABLE_SWAP_OVERLAP_RATIO) {
+        return activeIndex - 1
+      }
+
+      return null
+    }
+
+    const activeCenter = getMainAxisCenter(activeRect)
+    const insertionIndex = containerItems.reduce((index, id) => {
+      const center = getItemMainAxisCenter(id, containerId)
+      return center !== null && activeCenter > center ? index + 1 : index
+    }, 0)
+
+    return Math.max(0, Math.min(insertionIndex, containerItems.length))
+  }
+
+  function getItemRect(id: SortableId | undefined, containerId: string) {
+    if (!id) {
+      return null
+    }
+
+    const rect = itemElements.get(getItemKey(id, containerId))?.getBoundingClientRect()
+    return rect
+      ? {
+          left: rect.left,
+          right: rect.left + rect.width,
+          top: rect.top,
+          bottom: rect.top + rect.height,
+          width: rect.width,
+          height: rect.height,
+        }
+      : null
+  }
+
+  function getItemMainAxisCenter(id: SortableId | undefined, containerId: string) {
+    if (!id) {
+      return null
+    }
+
+    const rect = itemElements.get(getItemKey(id, containerId))?.getBoundingClientRect()
+    return rect ? getMainAxisCenter(rect) : null
+  }
+
+  function getMainAxisCenter(rect: { left: number; top: number; width: number; height: number }) {
+    return axis === 'x' ? rect.left + rect.width / 2 : rect.top + rect.height / 2
+  }
+
+  function getMainAxisSize(rect: { width: number; height: number }) {
+    return axis === 'x' ? rect.width : rect.height
+  }
+
+  function getMainAxisOverlap(
+    activeRect: { left: number; right: number; top: number; bottom: number },
+    targetRect: { left: number; right: number; top: number; bottom: number },
+  ) {
+    if (axis === 'x') {
+      return Math.max(0, Math.min(activeRect.right, targetRect.right) - Math.max(activeRect.left, targetRect.left))
+    }
+
+    return Math.max(0, Math.min(activeRect.bottom, targetRect.bottom) - Math.max(activeRect.top, targetRect.top))
   }
 
   function getContainerIdAtPoint(clientX: number, clientY: number) {
@@ -370,24 +428,6 @@ export function createSortableController<TItems extends SortableItems>({
     return null
   }
 
-  function getMainAxisOverlap(
-    active: {
-      left: number
-      right: number
-      top: number
-      bottom: number
-      width: number
-      height: number
-    },
-    target: RectLike,
-  ) {
-    if (axis === 'x') {
-      return Math.max(0, Math.min(active.right, target.left + target.width) - Math.max(active.left, target.left))
-    }
-
-    return Math.max(0, Math.min(active.bottom, target.top + target.height) - Math.max(active.top, target.top))
-  }
-
   return {
     getSnapshot,
     subscribe,
@@ -416,6 +456,10 @@ function toOverlayRect(rect: DOMRect): SortableOverlayRect {
 
 function getItemKey(id: SortableId, containerId: string) {
   return `${containerId}:${id}`
+}
+
+function toPx(value: number | undefined) {
+  return value === undefined ? undefined : `${value}px`
 }
 
 export { DEFAULT_SORTABLE_CONTAINER_ID }

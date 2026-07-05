@@ -1,4 +1,5 @@
-import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, inject } from '@angular/core'
+import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output, inject } from '@angular/core'
+import type { OnDestroy, OnInit } from '@angular/core'
 import { createResizeController } from '@fex/components-core/interactions/create-resize-controller'
 import { defaultRect, rectToStyle } from '@fex/components-core/interactions/rect'
 import type { Rect, ResizeEdge, ResizeEdges } from '@fex/components-core/interactions/types'
@@ -9,8 +10,8 @@ import type { Rect, ResizeEdge, ResizeEdges } from '@fex/components-core/interac
 })
 export class FexResizeDirective implements OnInit, OnDestroy {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
-  private cleanupWindow?: () => void
-  private unsubscribe?: () => void
+  private cleanupWindow: (() => void) | undefined
+  private unsubscribe: (() => void) | undefined
   private controller = createResizeController({
     rect: defaultRect,
     onResize: (rect) => this.resize.emit(rect),
@@ -33,13 +34,8 @@ export class FexResizeDirective implements OnInit, OnDestroy {
     const element = this.elementRef.nativeElement
     this.controller.setTarget(element)
     this.updateController()
-    this.unsubscribe = this.controller.subscribe(() => {
-      const style = rectToStyle(this.controller.getSnapshot().rect)
-      element.style.transform = style.transform
-      element.style.width = style.width
-      element.style.height = style.height
-      element.style.boxSizing = 'border-box'
-    })
+    this.applySnapshot()
+    this.unsubscribe = this.controller.subscribe(() => this.applySnapshot())
     element.addEventListener('pointerdown', this.onPointerDown)
   }
 
@@ -53,20 +49,30 @@ export class FexResizeDirective implements OnInit, OnDestroy {
   private updateController() {
     this.controller.updateOptions({
       rect: this.rect,
-      edges: this.edges,
-      minWidth: this.minWidth,
-      maxWidth: this.maxWidth,
-      minHeight: this.minHeight,
-      maxHeight: this.maxHeight,
-      bounds: this.bounds,
       onResize: (rect) => this.resize.emit(rect),
       onResizeEnd: (rect) => this.resizeEnd.emit(rect),
+      ...(this.edges === undefined ? {} : { edges: this.edges }),
+      ...(this.minWidth === undefined ? {} : { minWidth: this.minWidth }),
+      ...(this.maxWidth === undefined ? {} : { maxWidth: this.maxWidth }),
+      ...(this.minHeight === undefined ? {} : { minHeight: this.minHeight }),
+      ...(this.maxHeight === undefined ? {} : { maxHeight: this.maxHeight }),
+      ...(this.bounds === undefined ? {} : { bounds: this.bounds }),
     })
+  }
+
+  private applySnapshot() {
+    const style = rectToStyle(this.controller.getSnapshot().rect)
+    const element = this.elementRef.nativeElement
+    element.style.transform = style.transform
+    element.style.width = style.width
+    element.style.height = style.height
+    element.style.boxSizing = 'border-box'
   }
 
   private readonly onPointerDown = (event: PointerEvent) => {
     this.updateController()
-    if (this.disabled || !this.controller.start(toInput(event), this.edge)) {
+    const edge = getResizeEdge(event.target, this.elementRef.nativeElement) ?? this.edge
+    if (this.disabled || !this.controller.start(toInput(event), edge)) {
       return
     }
 
@@ -91,6 +97,26 @@ export class FexResizeDirective implements OnInit, OnDestroy {
   }
 }
 
+@Directive({
+  selector: '[fexResizeHandle]',
+  standalone: true,
+})
+export class FexResizeHandleDirective {
+  @Input({ alias: 'fexResizeHandle', required: true }) edge!: ResizeEdge
+
+  @HostBinding('attr.data-resize-edge')
+  protected get dataResizeEdge() {
+    return this.edge
+  }
+
+  @HostListener('pointerdown', ['$event'])
+  protected onPointerDown(event: PointerEvent) {
+    if (event.currentTarget instanceof HTMLElement) {
+      event.currentTarget.dataset.resizeEdge = this.edge
+    }
+  }
+}
+
 function toInput(event: PointerEvent) {
   return {
     button: event.button,
@@ -99,4 +125,17 @@ function toInput(event: PointerEvent) {
     clientY: event.clientY,
     preventDefault: () => event.preventDefault(),
   }
+}
+
+function getResizeEdge(target: EventTarget | null, boundary: HTMLElement) {
+  let current = target instanceof HTMLElement ? target : null
+  while (current && current !== boundary) {
+    const edge = current.dataset.resizeEdge
+    if (edge) {
+      return edge as ResizeEdge
+    }
+    current = current.parentElement
+  }
+
+  return null
 }

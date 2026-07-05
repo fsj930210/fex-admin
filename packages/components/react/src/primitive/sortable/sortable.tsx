@@ -2,7 +2,7 @@ import { sortableClassName, sortableItemClassName } from '@fex/components-styles
 import { cn } from '@fex/utils'
 import { createContext, use } from 'react'
 import { createPortal } from 'react-dom'
-import type { CSSProperties, HTMLAttributes, ReactNode } from 'react'
+import type { ButtonHTMLAttributes, CSSProperties, HTMLAttributes, ReactNode } from 'react'
 import type { SortableAxis, SortableId, SortableItems } from '@fex/components-core/sortable/types'
 import { useSortable } from '../../hooks/use-sortable'
 
@@ -93,7 +93,7 @@ export function SortableItem({
   )
 }
 
-export interface SortableHandleProps extends HTMLAttributes<HTMLButtonElement> {}
+export interface SortableHandleProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export function SortableHandle({ className, type = 'button', ...props }: SortableHandleProps) {
   const sortable = useSortableContext()

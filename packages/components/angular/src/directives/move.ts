@@ -1,4 +1,5 @@
-import { Directive, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, inject } from '@angular/core'
+import { Directive, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core'
+import type { OnDestroy, OnInit } from '@angular/core'
 import { createMoveController } from '@fex/components-core/interactions/create-move-controller'
 import type { InteractionAxis, Point } from '@fex/components-core/interactions/types'
 
@@ -8,8 +9,8 @@ import type { InteractionAxis, Point } from '@fex/components-core/interactions/t
 })
 export class FexMoveDirective implements OnInit, OnDestroy {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
-  private cleanupWindow?: () => void
-  private unsubscribe?: () => void
+  private cleanupWindow: (() => void) | undefined
+  private unsubscribe: (() => void) | undefined
   private controller = createMoveController({
     position: { x: 0, y: 0 },
     onMove: (position) => this.move.emit(position),
@@ -19,6 +20,7 @@ export class FexMoveDirective implements OnInit, OnDestroy {
   @Input() position: Point = { x: 0, y: 0 }
   @Input() axis?: InteractionAxis
   @Input() bounds?: 'viewport' | 'parent' | HTMLElement | false
+  @Input() moveHandle?: HTMLElement | null
   @Input() disabled = false
   @Output() move = new EventEmitter<Point>()
   @Output() moveEnd = new EventEmitter<Point>()
@@ -28,16 +30,13 @@ export class FexMoveDirective implements OnInit, OnDestroy {
     this.controller.setTarget(element)
     this.controller.updateOptions({
       position: this.position,
-      axis: this.axis,
-      bounds: this.bounds,
       onMove: (position) => this.move.emit(position),
       onMoveEnd: (position) => this.moveEnd.emit(position),
+      ...(this.axis ? { axis: this.axis } : {}),
+      ...(this.bounds === undefined ? {} : { bounds: this.bounds }),
     })
-    this.unsubscribe = this.controller.subscribe(() => {
-      const snapshot = this.controller.getSnapshot()
-      element.style.transform = `translate3d(${snapshot.position.x}px, ${snapshot.position.y}px, 0)`
-      element.style.willChange = snapshot.moving ? 'transform' : ''
-    })
+    this.applySnapshot()
+    this.unsubscribe = this.controller.subscribe(() => this.applySnapshot())
     element.addEventListener('pointerdown', this.onPointerDown)
   }
 
@@ -49,6 +48,9 @@ export class FexMoveDirective implements OnInit, OnDestroy {
   }
 
   private readonly onPointerDown = (event: PointerEvent) => {
+    if (this.moveHandle && event.target instanceof Node && !this.moveHandle.contains(event.target)) {
+      return
+    }
     if (this.disabled || !this.controller.start(toInput(event))) {
       return
     }
@@ -71,6 +73,13 @@ export class FexMoveDirective implements OnInit, OnDestroy {
     this.cleanupWindow?.()
     this.cleanupWindow = undefined
     this.controller.end({ pointerId: event.pointerId })
+  }
+
+  private applySnapshot() {
+    const snapshot = this.controller.getSnapshot()
+    const element = this.elementRef.nativeElement
+    element.style.transform = `translate3d(${snapshot.position.x}px, ${snapshot.position.y}px, 0)`
+    element.style.willChange = snapshot.moving ? 'transform' : ''
   }
 }
 

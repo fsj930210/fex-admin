@@ -51,6 +51,12 @@ function isSameTriggers(left: OverlayTrigger[], right: OverlayTrigger[]) {
   return left.length === right.length && left.every((item, index) => item === right[index])
 }
 
+function clearTimer(timer: ReturnType<typeof setTimeout> | undefined) {
+  if (timer) {
+    clearTimeout(timer)
+  }
+}
+
 export function createTrigger(options: TriggerOptions): TriggerBehavior {
   let currentOptions = options
   let triggers = normalizeTriggers(options.trigger, options.allowedTriggers)
@@ -60,12 +66,6 @@ export function createTrigger(options: TriggerOptions): TriggerBehavior {
   let openTimer: ReturnType<typeof setTimeout> | undefined
   let closeTimer: ReturnType<typeof setTimeout> | undefined
   let pointerInsideContent = false
-
-  function clearTimer(timer: ReturnType<typeof setTimeout> | undefined) {
-    if (timer) {
-      clearTimeout(timer)
-    }
-  }
 
   function hasTrigger(trigger: OverlayTrigger) {
     return !currentOptions.disabled && triggers.includes(trigger)

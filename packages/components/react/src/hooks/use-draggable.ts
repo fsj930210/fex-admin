@@ -10,6 +10,10 @@ import type { CSSProperties, HTMLAttributes, RefCallback } from 'react'
 import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect'
 import { useMemoizedFn } from './use-memoized-fn'
 
+type DataAttributes = {
+  [key: `data-${string}`]: string | boolean | undefined
+}
+
 export interface UseDraggableOptions<TData extends Record<string, unknown> = Record<string, unknown>> {
   id: string
   type?: string
@@ -126,13 +130,14 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
     element.addEventListener('dragstart', onDragStart)
     element.addEventListener('dragend', onDragEnd)
 
-    const cleanupPragmatic = draggable({
+    const draggableOptions = {
       element,
-      dragHandle: handle ?? undefined,
       getInitialData,
       onDragStart: () => setDragging(true),
       onDrop: () => setDragging(false),
-    })
+      ...(handle ? { dragHandle: handle } : {}),
+    }
+    const cleanupPragmatic = draggable(draggableOptions)
 
     return () => {
       element.removeEventListener('pointerdown', onPointerDown)
@@ -143,7 +148,7 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
   }, [disabled, element, getInitialData, handle, startFallbackDrag])
 
   const getDragProps = useMemoizedFn(
-    (): HTMLAttributes<HTMLElement> & { ref: RefCallback<HTMLElement> } => ({
+    (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => ({
       ref: setElement,
       draggable: false,
       'data-dragging': dragging || undefined,
@@ -152,7 +157,7 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
   )
 
   const getHandleProps = useMemoizedFn(
-    (): HTMLAttributes<HTMLElement> & { ref: RefCallback<HTMLElement> } => ({
+    (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => ({
       ref: setHandle,
       'data-drag-handle': '',
     }),

@@ -7,7 +7,6 @@ import {
 } from "@fex/components-styles/popover";
 import {
   createFloatingOverlay,
-  type FloatingOverlay,
   type FloatingOverlayOptions,
 } from "@fex/components-core/overlay/create-floating-overlay";
 import type { OverlayTrigger } from "@fex/components-core/overlay/trigger/create-trigger";

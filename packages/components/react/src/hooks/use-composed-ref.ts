@@ -17,6 +17,8 @@ export function useComposedRef<T>(...refs: Array<Ref<T> | undefined>) {
         assignRef(ref, value)
       }
     },
+    // Recompose only when the caller-provided ref list changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     refs,
   )
 }

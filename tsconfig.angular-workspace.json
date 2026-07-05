@@ -10,6 +10,9 @@
       "@fex/components-core/dropzone/accept": [
         "packages/components/core/src/dropzone/accept.ts"
       ],
+      "@fex/components-core/dropzone/create-dropzone-controller": [
+        "packages/components/core/src/dropzone/create-dropzone-controller.ts"
+      ],
       "@fex/components-core/dropzone/files": [
         "packages/components/core/src/dropzone/files.ts"
       ],
@@ -30,6 +33,15 @@
       ],
       "@fex/components-core/interactions/bounds": [
         "packages/components/core/src/interactions/bounds.ts"
+      ],
+      "@fex/components-core/interactions/create-move-controller": [
+        "packages/components/core/src/interactions/create-move-controller.ts"
+      ],
+      "@fex/components-core/interactions/create-resize-controller": [
+        "packages/components/core/src/interactions/create-resize-controller.ts"
+      ],
+      "@fex/components-core/interactions/dnd-store": [
+        "packages/components/core/src/interactions/dnd-store.ts"
       ],
       "@fex/components-core/interactions/rect": [
         "packages/components/core/src/interactions/rect.ts"
@@ -57,6 +69,9 @@
       ],
       "@fex/components-core/sortable/containers": [
         "packages/components/core/src/sortable/containers.ts"
+      ],
+      "@fex/components-core/sortable/create-sortable-controller": [
+        "packages/components/core/src/sortable/create-sortable-controller.ts"
       ],
       "@fex/components-core/sortable/motion": [
         "packages/components/core/src/sortable/motion.ts"
@@ -114,6 +129,24 @@
       ],
       "@fex/components-angular/icon/more": [
         "packages/components/angular/src/icon/more.ts"
+      ],
+      "@fex/components-angular/directives/draggable": [
+        "packages/components/angular/src/directives/draggable.ts"
+      ],
+      "@fex/components-angular/directives/droppable": [
+        "packages/components/angular/src/directives/droppable.ts"
+      ],
+      "@fex/components-angular/directives/dropzone": [
+        "packages/components/angular/src/directives/dropzone.ts"
+      ],
+      "@fex/components-angular/directives/move": [
+        "packages/components/angular/src/directives/move.ts"
+      ],
+      "@fex/components-angular/directives/resize": [
+        "packages/components/angular/src/directives/resize.ts"
+      ],
+      "@fex/components-angular/directives/sortable": [
+        "packages/components/angular/src/directives/sortable.ts"
       ],
       "@fex/components-angular/signals/core-store-signal": [
         "packages/components/angular/src/signals/core-store-signal.ts"

@@ -1,7 +1,8 @@
 import { createResizeController } from '@fex/components-core/interactions/create-resize-controller'
 import { defaultRect, rectToStyle } from '@fex/components-core/interactions/rect'
 import type { Rect, ResizeEdge, ResizeEdges } from '@fex/components-core/interactions/types'
-import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js'
+import { createMemo, createSignal, onCleanup, untrack } from 'solid-js'
+import type { JSX } from 'solid-js'
 
 export interface CreateResizeOptions {
   rect?: Rect
@@ -18,7 +19,6 @@ export interface CreateResizeOptions {
 }
 
 export function createResize(options: CreateResizeOptions = {}) {
-  const [target, setTarget] = createSignal<HTMLElement | null>(null)
   const [snapshot, setSnapshot] = createSignal({
     resizing: false,
     rect: options.rect ?? options.defaultRect ?? defaultRect,
@@ -41,10 +41,9 @@ export function createResize(options: CreateResizeOptions = {}) {
     controller.cancel()
   })
 
-  createEffect(() => {
-    controller.setTarget(target())
+  function updateController() {
     controller.updateOptions({
-      rect: options.rect ?? snapshot().rect,
+      rect: options.rect ?? untrack(() => snapshot().rect),
       edges: options.edges,
       minWidth: options.minWidth,
       maxWidth: options.maxWidth,
@@ -54,17 +53,23 @@ export function createResize(options: CreateResizeOptions = {}) {
       onResize: options.onResize,
       onResizeEnd: options.onResizeEnd,
     })
-  })
+  }
+
+  function setTargetElement(element: HTMLElement | null) {
+    controller.setTarget(element)
+    updateController()
+  }
 
   function getHandleProps(edge: ResizeEdge) {
     return {
       onPointerDown: (event: PointerEvent) => start(event, edge),
-      style: { 'touch-action': 'none', 'user-select': 'none' },
+      style: { 'touch-action': 'none', 'user-select': 'none' } as JSX.CSSProperties,
       'data-resize-handle': edge,
     }
   }
 
   function start(event: PointerEvent, edge: ResizeEdge) {
+    updateController()
     if (options.disabled || !controller.start(toInput(event), edge)) {
       return
     }
@@ -96,7 +101,7 @@ export function createResize(options: CreateResizeOptions = {}) {
   }))
 
   return {
-    setTarget,
+    setTarget: setTargetElement,
     resizing: () => snapshot().resizing,
     rect: () => snapshot().rect,
     style,

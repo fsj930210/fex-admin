@@ -11,6 +11,10 @@ import type { DropEdge } from '@fex/components-core/interactions/types'
 import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect'
 import { useMemoizedFn } from './use-memoized-fn'
 
+type DataAttributes = {
+  [key: `data-${string}`]: string | boolean | undefined
+}
+
 export interface UseDroppableOptions<TData extends Record<string, unknown> = Record<string, unknown>> {
   id: string
   accept?: string | string[]
@@ -58,21 +62,22 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
     if (!element || disabled) {
       return
     }
+    const targetElement: HTMLElement = element
 
     const cleanupFallback = registerDndDropTarget({
       id,
-      element,
+      element: targetElement,
       data: data ?? {},
-      edges,
       canDrop: acceptsSource,
-      onDragEnter: ({ source, target, edge }) => {
+      ...(edges ? { edges } : {}),
+      onDragEnter: ({ source, target, edge: nextEdge }) => {
         setOver(true)
         setDropAllowed(true)
-        setEdge(edge)
+        setEdge(nextEdge)
         onDragEnter?.({
           source,
           target: target as TData & { id: string },
-          edge,
+          edge: nextEdge,
         })
       },
       onDragLeave: () => {
@@ -81,14 +86,14 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
         setEdge(null)
         onDragLeave?.()
       },
-      onDrop: ({ source, target, edge }) => {
+      onDrop: ({ source, target, edge: nextEdge }) => {
         setOver(false)
         setDropAllowed(false)
         setEdge(null)
         onDrop?.({
           source,
           target: target as TData & { id: string },
-          edge,
+          edge: nextEdge,
         })
       },
     })
@@ -98,7 +103,7 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
       if (!source) {
         return
       }
-      const nextEdge = edges ? getNativeEdgeFromPoint(element, { x: event.clientX, y: event.clientY }, edges) : null
+      const nextEdge = edges ? getNativeEdgeFromPoint(targetElement, { x: event.clientX, y: event.clientY }, edges) : null
       setOver(true)
       setDropAllowed(acceptsSource(source))
       setEdge(nextEdge)
@@ -119,7 +124,7 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
         event.dataTransfer.dropEffect = 'move'
       }
       setDropAllowed(true)
-      setEdge(edges ? getNativeEdgeFromPoint(element, { x: event.clientX, y: event.clientY }, edges) : null)
+      setEdge(edges ? getNativeEdgeFromPoint(targetElement, { x: event.clientX, y: event.clientY }, edges) : null)
     }
 
     function onNativeDrop(event: globalThis.DragEvent) {
@@ -128,7 +133,7 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
         return
       }
       event.preventDefault()
-      const nextEdge = edges ? getNativeEdgeFromPoint(element, { x: event.clientX, y: event.clientY }, edges) : null
+      const nextEdge = edges ? getNativeEdgeFromPoint(targetElement, { x: event.clientX, y: event.clientY }, edges) : null
       setOver(false)
       setDropAllowed(false)
       setEdge(null)
@@ -139,16 +144,16 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
       })
     }
 
-    element.addEventListener('dragenter', onNativeDragEnter)
-    element.addEventListener('dragover', onNativeDragOver)
-    element.addEventListener('drop', onNativeDrop)
+    targetElement.addEventListener('dragenter', onNativeDragEnter)
+    targetElement.addEventListener('dragover', onNativeDragOver)
+    targetElement.addEventListener('drop', onNativeDrop)
 
     const cleanupPragmatic = dropTargetForElements({
       element,
       canDrop: ({ source }) => acceptsSource(source.data),
       getData: ({ input }) => {
         const base = { id, ...(data ?? {}) }
-        return edges ? attachClosestEdge(base, { element, input, allowedEdges: toPragmaticEdges(edges) }) : base
+        return edges ? attachClosestEdge(base, { element: targetElement, input, allowedEdges: toPragmaticEdges(edges) }) : base
       },
       onDragEnter: ({ self, source }) => {
         setOver(true)
@@ -185,16 +190,16 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
     })
 
     return () => {
-      element.removeEventListener('dragenter', onNativeDragEnter)
-      element.removeEventListener('dragover', onNativeDragOver)
-      element.removeEventListener('drop', onNativeDrop)
+      targetElement.removeEventListener('dragenter', onNativeDragEnter)
+      targetElement.removeEventListener('dragover', onNativeDragOver)
+      targetElement.removeEventListener('drop', onNativeDrop)
       cleanupFallback()
       cleanupPragmatic()
     }
   }, [acceptsSource, data, disabled, edges, element, id, onDragEnter, onDragLeave, onDrop])
 
   const getDropProps = useMemoizedFn(
-    (): HTMLAttributes<HTMLElement> & { ref: RefCallback<HTMLElement> } => ({
+    (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => ({
       ref: setElement,
       onDragEnter: (event) => {
         const source = getNativeSource(event)

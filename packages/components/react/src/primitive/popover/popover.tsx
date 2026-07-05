@@ -298,7 +298,6 @@ export function usePopoverContent({
   onPointerEnter,
   onPointerLeave,
   onKeyDown,
-  children,
   ...props
 }: PopoverContentProps) {
   const { arrowRef, overlay, snapshot, triggerRef } = usePopover('usePopoverContent')

@@ -206,11 +206,11 @@ function DroppableZone({
 }) {
   const droppable = useDroppable({
     id,
-    accept,
     edges: ['top', 'bottom'],
     onDragEnter: ({ source }) => onChanged(`${String(source.id)} is over ${title}.`),
     onDragLeave: () => onChanged('Drop a draggable item into a zone.'),
     onDrop: ({ source, edge }) => onDropped(source, edge),
+    ...(accept ? { accept } : {}),
   })
 
   return (

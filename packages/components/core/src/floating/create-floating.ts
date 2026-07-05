@@ -240,7 +240,7 @@ export function createFloating(options: FloatingOptions = {}): Floating {
   async function update() {
     const reference = getReference()
     const floating = floatingElement
-    const arrow = arrowElement
+    const currentArrow = arrowElement
     const version = updateVersion
     if (!reference || !floating) {
       // reference 或 floating 缺失时无法计算位置。
@@ -280,7 +280,7 @@ export function createFloating(options: FloatingOptions = {}): Floating {
       referenceHeight: referenceRect.height,
       ...(arrowData?.x !== undefined ? { arrowX: arrowData.x } : {}),
       ...(arrowData?.y !== undefined ? { arrowY: arrowData.y } : {}),
-      ...(arrow && arrowElement === arrow ? { arrowSize: arrow.offsetWidth } : {}),
+      ...(currentArrow && arrowElement === currentArrow ? { arrowSize: currentArrow.offsetWidth } : {}),
       ...(currentOptions.zIndex !== undefined ? { zIndex: currentOptions.zIndex } : {}),
     })
 
@@ -295,8 +295,8 @@ export function createFloating(options: FloatingOptions = {}): Floating {
     // 发生 flip 后如果 adapter 继续用原始 placement，最常见的问题就是内容位置正确但箭头方向错误。
     floating.setAttribute('data-side', resultParts.side)
     floating.setAttribute('data-placement', placement)
-    if (arrow) {
-      arrow.setAttribute('data-side', resultParts.side)
+    if (currentArrow) {
+      currentArrow.setAttribute('data-side', resultParts.side)
     }
 
     const nextSnapshot = {

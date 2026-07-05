@@ -22,8 +22,12 @@
     "./icon/loading": "./src/icon/loading.tsx",
     "./icon/more": "./src/icon/more.tsx",
     "./primitives/create-core-store-signal": "./src/primitives/create-core-store-signal.ts",
+    "./primitives/create-draggable": "./src/primitives/create-draggable.ts",
+    "./primitives/create-droppable": "./src/primitives/create-droppable.ts",
+    "./primitives/create-dropzone": "./src/primitives/create-dropzone.ts",
     "./primitives/create-move": "./src/primitives/create-move.ts",
-    "./primitives/create-resize": "./src/primitives/create-resize.ts"
+    "./primitives/create-resize": "./src/primitives/create-resize.ts",
+    "./primitives/create-sortable": "./src/primitives/create-sortable.ts"
   },
   "dependencies": {
     "@fex/components-core": "workspace:*",

@@ -4,7 +4,7 @@ import type { Rect, ResizeEdge, ResizeEdges } from '@fex/components-core/interac
 
 export interface ResizeActionOptions {
   rect?: Rect
-  edge: ResizeEdge
+  edge?: ResizeEdge
   edges?: ResizeEdges
   minWidth?: number
   maxWidth?: number
@@ -32,16 +32,14 @@ export function resizeAction(node: HTMLElement, options: ResizeActionOptions) {
   })
 
   controller.setTarget(node)
+  applySnapshot()
   const unsubscribe = controller.subscribe(() => {
-    const style = rectToStyle(controller.getSnapshot().rect)
-    node.style.transform = style.transform
-    node.style.width = style.width
-    node.style.height = style.height
-    node.style.boxSizing = 'border-box'
+    applySnapshot()
   })
 
   function onPointerDown(event: PointerEvent) {
-    if (currentOptions.disabled || !controller.start(toInput(event), currentOptions.edge)) {
+    const edge = getEventEdge(event) ?? currentOptions.edge
+    if (currentOptions.disabled || !edge || !controller.start(toInput(event), edge)) {
       return
     }
 
@@ -89,6 +87,23 @@ export function resizeAction(node: HTMLElement, options: ResizeActionOptions) {
       controller.cancel()
     },
   }
+
+  function applySnapshot() {
+    const style = rectToStyle(controller.getSnapshot().rect)
+    node.style.transform = style.transform
+    node.style.width = style.width
+    node.style.height = style.height
+    node.style.boxSizing = 'border-box'
+  }
+}
+
+function getEventEdge(event: PointerEvent) {
+  const target = event.target
+  if (!(target instanceof HTMLElement)) {
+    return null
+  }
+
+  return target.closest<HTMLElement>('[data-resize-edge]')?.dataset.resizeEdge as ResizeEdge | undefined ?? null
 }
 
 function toInput(event: PointerEvent) {

@@ -5,6 +5,10 @@ import type { CSSProperties, HTMLAttributes, PointerEvent, RefCallback } from 'r
 import { useControllableState } from './use-controllable-state'
 import { useMemoizedFn } from './use-memoized-fn'
 
+type DataAttributes = {
+  [key: `data-${string}`]: string | boolean | undefined
+}
+
 export interface UseMoveOptions {
   position?: Point
   defaultPosition?: Point
@@ -38,6 +42,8 @@ export function useMove({
         onMove: setCurrentPosition,
         onMoveEnd,
       }),
+    // Controller is an external imperative instance; option changes are synced below.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   )
   const snapshot = useSyncExternalStore(
@@ -79,7 +85,7 @@ export function useMove({
   })
 
   const getTargetProps = useMemoizedFn(
-    (): HTMLAttributes<HTMLElement> & { ref: RefCallback<HTMLElement>; style: CSSProperties } => ({
+    (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement>; style: CSSProperties } => ({
       ref: controller.setTarget,
       style: getStyle(snapshot.position, snapshot.moving),
       'data-moving': snapshot.moving || undefined,
@@ -92,7 +98,7 @@ export function useMove({
   )
 
   const getHandleProps = useMemoizedFn(
-    (): HTMLAttributes<HTMLElement> & { ref: RefCallback<HTMLElement> } => {
+    (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => {
       handleUsedRef.current = true
 
       return {

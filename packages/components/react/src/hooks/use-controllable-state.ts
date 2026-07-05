@@ -16,10 +16,10 @@ export interface Options<T> {
 export type Props<T = unknown> = Record<string, unknown> & Partial<StandardProps<T>>;
 
 export interface StandardProps<T> {
-  value?: T;
-  defaultValue?: T;
-  onChange?: (val: T) => void;
-  isEqual?: (prev: T, next: T) => boolean;
+  value?: T | undefined;
+  defaultValue?: T | undefined;
+  onChange?: ((val: T) => void) | undefined;
+  isEqual?: ((prev: T, next: T) => boolean) | undefined;
 }
 
 function isStateUpdater<T>(value: SetStateAction<T>): value is (prevState: T) => T {

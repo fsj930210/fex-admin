@@ -1,6 +1,6 @@
 import { createMoveController } from '@fex/components-core/interactions/create-move-controller'
 import type { InteractionAxis, Point } from '@fex/components-core/interactions/types'
-import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js'
+import { createMemo, createSignal, onCleanup, untrack } from 'solid-js'
 
 export interface CreateMoveOptions {
   position?: Point
@@ -35,25 +35,25 @@ export function createMove(options: CreateMoveOptions = {}) {
     controller.cancel()
   })
 
-  createEffect(() => bind())
+  function setTargetElement(element: HTMLElement | null) {
+    setTarget(element)
+    bind(element, handle())
+  }
 
-  function bind() {
-    controller.setTarget(target())
+  function setHandleElement(element: HTMLElement | null) {
+    setHandle(element)
+    bind(target(), element)
+  }
+
+  function bind(targetElement: HTMLElement | null, _handleElement: HTMLElement | null) {
+    controller.setTarget(targetElement)
     controller.updateOptions({
-      position: options.position ?? snapshot().position,
+      position: options.position ?? untrack(() => snapshot().position),
       axis: options.axis,
       bounds: options.bounds,
       onMove: options.onMove,
       onMoveEnd: options.onMoveEnd,
     })
-
-    const element = handle() ?? target()
-    if (!element || options.disabled) {
-      return
-    }
-
-    element.addEventListener('pointerdown', onPointerDown)
-    onCleanup(() => element.removeEventListener('pointerdown', onPointerDown))
   }
 
   function onPointerDown(event: PointerEvent) {
@@ -87,9 +87,13 @@ export function createMove(options: CreateMoveOptions = {}) {
   }))
 
   return {
-    setTarget,
-    setHandle,
+    setTarget: setTargetElement,
+    setHandle: setHandleElement,
     bind,
+    getHandleProps: () => ({
+      onPointerDown,
+      'data-move-handle': '',
+    }),
     moving: () => snapshot().moving,
     position: () => snapshot().position,
     style,

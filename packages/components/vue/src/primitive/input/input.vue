@@ -3,7 +3,7 @@ import { inputClassName } from '@fex/components-styles/input'
 import { cn } from '@fex/utils'
 import { useAttrs } from 'vue'
 
-defineOptions({ name: 'Input', inheritAttrs: false })
+defineOptions({ name: 'FexInput', inheritAttrs: false })
 
 const attrs = useAttrs()
 </script>

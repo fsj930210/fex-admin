@@ -6,14 +6,14 @@ import type { Rect, ResizeEdge, ResizeEdges } from './types'
 
 export interface ResizeControllerOptions {
   rect: Rect
-  edges?: ResizeEdges
-  minWidth?: number
-  maxWidth?: number
-  minHeight?: number
-  maxHeight?: number
-  bounds?: 'viewport' | 'parent' | HTMLElement | false
-  onResize?: (rect: Rect) => void
-  onResizeEnd?: (rect: Rect) => void
+  edges?: ResizeEdges | undefined
+  minWidth?: number | undefined
+  maxWidth?: number | undefined
+  minHeight?: number | undefined
+  maxHeight?: number | undefined
+  bounds?: 'viewport' | 'parent' | HTMLElement | false | undefined
+  onResize?: ((rect: Rect) => void) | undefined
+  onResizeEnd?: ((rect: Rect) => void) | undefined
 }
 
 export interface ResizeControllerSnapshot {

@@ -62,8 +62,12 @@
     "./icon/loading": "./src/icon/loading.svelte",
     "./icon/more": "./src/icon/more.svelte",
     "./stores/core-store": "./src/stores/core-store.ts",
+    "./actions/draggable": "./src/actions/draggable.ts",
+    "./actions/droppable": "./src/actions/droppable.ts",
+    "./actions/dropzone": "./src/actions/dropzone.ts",
     "./actions/move": "./src/actions/move.ts",
-    "./actions/resize": "./src/actions/resize.ts"
+    "./actions/resize": "./src/actions/resize.ts",
+    "./actions/sortable": "./src/actions/sortable.ts"
   },
   "dependencies": {
     "@fex/components-core": "workspace:*",

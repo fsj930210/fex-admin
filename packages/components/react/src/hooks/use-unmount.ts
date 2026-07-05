@@ -15,6 +15,8 @@ const useUnmount = (fn: () => void) => {
     () => () => {
       fnRef.current();
     },
+    // fnRef is stable and always points at the latest cleanup callback.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 };

@@ -1,6 +1,7 @@
 import { createMoveController } from '@fex/components-core/interactions/create-move-controller'
 import type { InteractionAxis, Point } from '@fex/components-core/interactions/types'
-import { computed, onBeforeUnmount, ref, shallowRef, watchEffect } from 'vue'
+import { computed, onBeforeUnmount, ref, shallowRef } from 'vue'
+import type { CSSProperties } from 'vue'
 
 export interface UseMoveOptions {
   position?: Point
@@ -32,12 +33,10 @@ export function useMove(options: UseMoveOptions = {}) {
     snapshot.value = controller.getSnapshot()
   })
 
-  watchEffect((onCleanup) => {
-    const target = targetRef.value
-    const handle = handleRef.value ?? target
-    controller.setTarget(target)
+  function updateController() {
+    controller.setTarget(targetRef.value)
     controller.updateOptions({
-      position: options.position ?? position.value,
+      position: options.position ?? controller.getSnapshot().position,
       axis: options.axis,
       bounds: options.bounds,
       onMove: (nextPosition) => {
@@ -46,49 +45,63 @@ export function useMove(options: UseMoveOptions = {}) {
       },
       onMoveEnd: options.onMoveEnd,
     })
+  }
 
-    if (!handle || options.disabled) {
+  function setTarget(element: HTMLElement | null) {
+    if (targetRef.value === element) {
       return
     }
 
-    function onPointerDown(event: PointerEvent) {
-      if (!controller.start(toInput(event))) {
-        return
-      }
+    targetRef.value = element
+    updateController()
+  }
 
-      window.addEventListener('pointermove', onPointerMove, { passive: false })
-      window.addEventListener('pointerup', onPointerUp)
-      window.addEventListener('pointercancel', onPointerUp)
+  function setHandle(element: HTMLElement | null) {
+    if (handleRef.value === element) {
+      return
     }
 
-    function onPointerMove(event: PointerEvent) {
-      controller.move(toInput(event))
+    handleRef.value = element
+    updateController()
+  }
+
+  function onPointerDown(event: PointerEvent) {
+    const handle = handleRef.value
+    if (handle && event.target instanceof Node && !handle.contains(event.target)) {
+      return
+    }
+    updateController()
+    if (!controller.start(toInput(event))) {
+      return
     }
 
-    function onPointerUp(event: PointerEvent) {
-      cleanup()
-      controller.end({ pointerId: event.pointerId })
-    }
+    window.addEventListener('pointermove', onPointerMove, { passive: false })
+    window.addEventListener('pointerup', onPointerUp)
+    window.addEventListener('pointercancel', onPointerUp)
+  }
 
-    function cleanup() {
-      window.removeEventListener('pointermove', onPointerMove)
-      window.removeEventListener('pointerup', onPointerUp)
-      window.removeEventListener('pointercancel', onPointerUp)
-    }
+  function onPointerMove(event: PointerEvent) {
+    controller.move(toInput(event))
+  }
 
-    handle.addEventListener('pointerdown', onPointerDown)
-    onCleanup(() => {
-      handle.removeEventListener('pointerdown', onPointerDown)
-      cleanup()
-    })
-  })
+  function onPointerUp(event: PointerEvent) {
+    cleanup()
+    controller.end({ pointerId: event.pointerId })
+  }
+
+  function cleanup() {
+    window.removeEventListener('pointermove', onPointerMove)
+    window.removeEventListener('pointerup', onPointerUp)
+    window.removeEventListener('pointercancel', onPointerUp)
+  }
 
   onBeforeUnmount(() => {
+    cleanup()
     unsubscribe()
     controller.cancel()
   })
 
-  const style = computed(() => ({
+  const style = computed<CSSProperties>(() => ({
     transform: `translate3d(${snapshot.value.position.x}px, ${snapshot.value.position.y}px, 0)`,
     willChange: snapshot.value.moving ? 'transform' : undefined,
   }))
@@ -96,6 +109,9 @@ export function useMove(options: UseMoveOptions = {}) {
   return {
     targetRef,
     handleRef,
+    setTarget,
+    setHandle,
+    onPointerDown,
     moving: computed(() => snapshot.value.moving),
     position: computed(() => snapshot.value.position),
     style,

@@ -22,11 +22,14 @@ export function moveAction(node: HTMLElement, options: MoveActionOptions = {}) {
   })
 
   controller.setTarget(node)
-  const unsubscribe = controller.subscribe(() => {
+  function applySnapshot() {
     const snapshot = controller.getSnapshot()
     node.style.transform = `translate3d(${snapshot.position.x}px, ${snapshot.position.y}px, 0)`
     node.style.willChange = snapshot.moving ? 'transform' : ''
-  })
+  }
+
+  applySnapshot()
+  const unsubscribe = controller.subscribe(applySnapshot)
 
   function onPointerDown(event: PointerEvent) {
     if (currentOptions.disabled || !controller.start(toInput(event))) {
@@ -65,6 +68,7 @@ export function moveAction(node: HTMLElement, options: MoveActionOptions = {}) {
         onMove: nextOptions.onMove,
         onMoveEnd: nextOptions.onMoveEnd,
       })
+      applySnapshot()
     },
     destroy() {
       node.removeEventListener('pointerdown', onPointerDown)

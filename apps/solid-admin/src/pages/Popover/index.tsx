@@ -223,7 +223,7 @@ export function PopoverPage(): JSX.Element {
           </DemoSection>
 
           <Card title="getPopupContainer" description="Demo.">
-            <div ref={container} class="relative min-h-40 rounded-md border border-dashed p-space-lg">
+            <div ref={(element) => { container = element }} class="relative min-h-40 rounded-md border border-dashed p-space-lg">
               <Popover getPopupContainer={() => container ?? document.body} placement="bottomLeft">
                 <PopoverTrigger>{(slot) => <TriggerButton slot={slot} class={outlineButtonClass}>Mount inside dashed box</TriggerButton>}</PopoverTrigger>
                 <PopoverPortal>
