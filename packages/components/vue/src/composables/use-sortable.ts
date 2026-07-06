@@ -12,6 +12,7 @@ export interface UseSortableOptions<TItems extends SortableItems> {
 }
 
 export function useSortable<TItems extends SortableItems>(options: UseSortableOptions<TItems>) {
+  let currentOptions = options
   const controller = createSortableController(options)
   const snapshot = shallowRef(controller.getSnapshot())
   const cleanups = new Set<() => void>()
@@ -20,6 +21,7 @@ export function useSortable<TItems extends SortableItems>(options: UseSortableOp
   })
 
   function update(next: UseSortableOptions<TItems>) {
+    currentOptions = next
     controller.updateOptions(next)
   }
 
@@ -40,7 +42,7 @@ export function useSortable<TItems extends SortableItems>(options: UseSortableOp
   }
 
   function onItemPointerDown(event: PointerEvent, id: SortableId, containerId = DEFAULT_SORTABLE_CONTAINER_ID) {
-    if (options.disabled || !controller.startPointerDrag(toInput(event), id, containerId)) {
+    if (currentOptions.disabled || !controller.startPointerDrag(toInput(event), id, containerId)) {
       return
     }
 
@@ -71,7 +73,7 @@ export function useSortable<TItems extends SortableItems>(options: UseSortableOp
 
   return {
     snapshot,
-    previewItems: computed(() => restoreSortableItems(options.items, snapshot.value.items)),
+    previewItems: computed(() => restoreSortableItems(currentOptions.items, snapshot.value.items)),
     update,
     setContainerRef,
     setItemRef,

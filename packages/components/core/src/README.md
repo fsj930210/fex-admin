@@ -10,6 +10,7 @@ core/src
   disclosure/   展开/收起状态，只关心 open/close/toggle
   floating/     浮动定位能力，封装 Floating UI，不关心 open/close
   overlay/      浮层生命周期、层级、触发和关闭行为
+  sortable/     拖拽排序能力，负责命中、预览顺序、位移动画和 snapshot
 ```
 
 ## 依赖方向

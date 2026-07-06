@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import useUnmount from "./use-unmount";
 
 export function useCopyToClipboard({
   timeout = 2000,
@@ -43,14 +44,11 @@ export function useCopyToClipboard({
     );
   };
 
-  // Cleanup timeout on unmount
-  React.useEffect(() => {
-    return (): void => {
-      if (timeoutIdRef.current) {
-        clearTimeout(timeoutIdRef.current);
-      }
-    };
-  }, []);
+  useUnmount(() => {
+    if (timeoutIdRef.current) {
+      clearTimeout(timeoutIdRef.current);
+    }
+  });
 
   return { copyToClipboard, isCopied };
 }

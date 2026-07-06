@@ -1,7 +1,6 @@
 import {
   createContext,
   use,
-  useEffect,
   useMemo,
   useRef,
   useState,
@@ -21,7 +20,7 @@ import {
   type FloatingOverlayOptions,
 } from '@fex/components-core/overlay/create-floating-overlay'
 import type { OverlayTrigger } from '@fex/components-core/overlay/trigger/create-trigger'
-import { cn } from '@fex/utils'
+import { cn, shallowEqualObject } from '@fex/utils'
 import {
   popoverArrowClassName,
   popoverContentClassName,
@@ -33,6 +32,7 @@ import { useComposedRef } from '../../hooks/use-composed-ref'
 import { useCoreStore } from '../../hooks/use-core-store'
 import { useLazyRef } from '../../hooks/use-lazy-ref'
 import { useMemoizedFn } from '../../hooks/use-memoized-fn'
+import useUnmount from '../../hooks/use-unmount'
 
 type PopoverContextValue = {
   arrowRef: React.RefObject<HTMLElement | null>
@@ -129,21 +129,15 @@ export function PopoverRoot({
   const triggerRef = useRef<HTMLElement | null>(null)
   const arrowRef = useRef<HTMLElement | null>(null)
   const overlay = overlayRef.current
+  const latestOverlayOptionsRef = useRef<FloatingOverlayOptions>(overlayOptions)
 
-  useEffect(() => {
-    // Core overlay is an external imperative instance; keep its options aligned with React props.
-    // 这里必须每次渲染后同步 options，因为 trigger/placement/dismiss 等 props 都可能变化；
-    // overlay 实例本身保持稳定，避免重建后丢失 DOM 引用、定时器和订阅。
+  if (!shallowEqualObject(latestOverlayOptionsRef.current, overlayOptions)) {
+    // 同步稳定 core controller 的输入，避免每次 render 后再用 effect 补同步。
+    latestOverlayOptionsRef.current = overlayOptions
     overlay.setOptions(overlayOptions)
-  })
+  }
 
-  useEffect(
-    () => () => {
-      // Core owns timers, DOM observers and subscriptions that must be released on unmount.
-      overlay.destroy()
-    },
-    [overlay],
-  )
+  useUnmount(() => overlay.destroy())
 
   return (
     <PopoverContext value={{ arrowRef, overlay, triggerRef, arrow: Boolean(arrow) }}>
@@ -300,50 +294,11 @@ export function usePopoverContent({
   onKeyDown,
   ...props
 }: PopoverContentProps) {
-  const { arrowRef, overlay, snapshot, triggerRef } = usePopover('usePopoverContent')
-  const contentRef = useRef<HTMLDivElement | null>(null)
+  const { overlay, snapshot } = usePopover('usePopoverContent')
   const setContentElement = useMemoizedFn((element: HTMLDivElement | null) => {
-    contentRef.current = element
     overlay.setFloatingElement(element)
   })
   const composedRef = useComposedRef<HTMLDivElement>(setContentElement, ref)
-
-  useEffect(() => {
-    if (!snapshot.open) {
-      return
-    }
-    // Dismiss listeners live at document level so portals and custom containers work consistently.
-    // 监听 ownerDocument 而不是全局 document，是为了支持 iframe 或自定义 popup container。
-    const documentElement = contentRef.current?.ownerDocument ?? document
-
-    function handlePointerDown(event: globalThis.PointerEvent) {
-      const target = event.target
-      if (target instanceof Node && triggerRef.current?.contains(target)) {
-        return
-      }
-      if (target instanceof Node && contentRef.current?.contains(target)) {
-        return
-      }
-      if (target instanceof Node && arrowRef.current?.contains(target)) {
-        return
-      }
-      // 到这里说明点击既不在 trigger/content/arrow 内，交给 core overlay 做顶层判断和关闭。
-      overlay.dismiss.outsidePointer(toEventInfo(event))
-    }
-
-    function handleKeyDown(event: globalThis.KeyboardEvent) {
-      if (event.key === 'Escape') {
-        overlay.dismiss.escapeKey(toEventInfo(event))
-      }
-    }
-
-    documentElement.addEventListener('pointerdown', handlePointerDown, true)
-    documentElement.addEventListener('keydown', handleKeyDown, true)
-    return () => {
-      documentElement.removeEventListener('pointerdown', handlePointerDown, true)
-      documentElement.removeEventListener('keydown', handleKeyDown, true)
-    }
-  }, [arrowRef, overlay, snapshot.open, triggerRef])
 
   if (!snapshot.mounted) {
     return { mounted: false as const, props: null, snapshot }
@@ -384,9 +339,6 @@ export function usePopoverContent({
       },
       onKeyDown: (event: KeyboardEvent<HTMLDivElement>) => {
         onKeyDown?.(event)
-        if (!event.defaultPrevented && event.key === 'Escape') {
-          overlay.dismiss.escapeKey(toEventInfo(event))
-        }
       },
     },
   }

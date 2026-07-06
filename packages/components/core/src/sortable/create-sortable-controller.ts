@@ -15,6 +15,7 @@ import type {
   SortableOverlayRect,
 } from './types'
 
+// 相邻换位使用重叠阈值，而不是指针刚过中心点就换位，避免拖动时来回抖动。
 const SORTABLE_SWAP_OVERLAP_RATIO = 0.35
 
 export interface SortableControllerOptions<TItems extends SortableItems> {
@@ -102,6 +103,7 @@ export function createSortableController<TItems extends SortableItems>({
     animation = next.animation
     onChange = next.onChange
 
+    // 拖拽中保留 previewItems，避免受控 props 回流把当前手势中的预览顺序冲掉。
     if (!snapshot.dragging) {
       previewItems = normalizeSortableItems(next.items)
       setSnapshot({ items: previewItems })
@@ -261,6 +263,7 @@ export function createSortableController<TItems extends SortableItems>({
   }
 
   function scheduleMotion(nextItems: Record<string, SortableId[]>) {
+    // FLIP：先测量旧位置，再更新预览顺序，下一帧测量新位置并输出反向位移。
     motion.measureFirst()
     previewItems = nextItems
     setSnapshot({ items: nextItems })

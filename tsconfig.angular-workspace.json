@@ -100,6 +100,9 @@
       "@fex/components-angular/primitive/popover": [
         "packages/components/angular/src/primitive/popover/popover.ts"
       ],
+      "@fex/components-angular/primitive/sortable": [
+        "packages/components/angular/src/primitive/sortable/sortable.ts"
+      ],
       "@fex/components-angular/primitive/table": [
         "packages/components/angular/src/primitive/table/table.ts"
       ],

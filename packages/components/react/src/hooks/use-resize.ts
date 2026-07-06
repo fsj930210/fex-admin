@@ -1,7 +1,8 @@
 import { createResizeController } from '@fex/components-core/interactions/create-resize-controller'
 import { defaultRect as defaultCoreRect, rectToStyle } from '@fex/components-core/interactions/rect'
 import type { Rect, ResizeEdge, ResizeEdges } from '@fex/components-core/interactions/types'
-import { useEffect, useMemo, useSyncExternalStore } from 'react'
+import { shallowEqualObject } from '@fex/utils'
+import { useMemo, useRef, useSyncExternalStore } from 'react'
 import type { CSSProperties, HTMLAttributes, RefCallback } from 'react'
 import { useControllableState } from './use-controllable-state'
 import { useMemoizedFn } from './use-memoized-fn'
@@ -42,53 +43,31 @@ export function useResize({
     defaultValue: defaultRect,
     onChange: onResize,
   })
-  const controller = useMemo(
-    () =>
-      createResizeController({
-        rect: currentRect,
-        edges,
-        minWidth,
-        maxWidth,
-        minHeight,
-        maxHeight,
-        bounds,
-        onResize: setCurrentRect,
-        onResizeEnd,
-      }),
-    // Controller is an external imperative instance; option changes are synced below.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+  const controllerOptions = {
+    rect: currentRect,
+    edges,
+    minWidth,
+    maxWidth,
+    minHeight,
+    maxHeight,
+    bounds,
+    onResize: setCurrentRect,
+    onResizeEnd,
+  }
+  const latestControllerOptionsRef = useRef(controllerOptions)
+  // controller 持有 DOM 引用和 resize 会话，必须保持稳定；上方浅比较负责同步最新输入。
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const controller = useMemo(() => createResizeController(controllerOptions), [])
   const snapshot = useSyncExternalStore(
     controller.subscribe,
     controller.getSnapshot,
     controller.getSnapshot,
   )
 
-  useEffect(() => {
-    controller.updateOptions({
-      rect: currentRect,
-      edges,
-      minWidth,
-      maxWidth,
-      minHeight,
-      maxHeight,
-      bounds,
-      onResize: setCurrentRect,
-      onResizeEnd,
-    })
-  }, [
-    bounds,
-    controller,
-    currentRect,
-    edges,
-    maxHeight,
-    maxWidth,
-    minHeight,
-    minWidth,
-    onResizeEnd,
-    setCurrentRect,
-  ])
+  if (!shallowEqualObject(latestControllerOptionsRef.current, controllerOptions)) {
+    latestControllerOptionsRef.current = controllerOptions
+    controller.updateOptions(controllerOptions)
+  }
 
   const getTargetProps = useMemoizedFn(
     (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement>; style: CSSProperties } => ({

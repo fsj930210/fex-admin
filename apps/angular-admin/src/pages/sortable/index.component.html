@@ -11,14 +11,12 @@
     </header>
 
     <div class="space-y-space-xl">
-      <fex-card title="List" description="Drag any row. Items swap while you move, not only after drop.">
-        <div
-          #listSortable="fexSortableContainer"
-          fexSortableContainer
+      <fex-card title="Sortable Component" description="Use the primitive component for common one-container lists.">
+        <fex-sortable
+          #listSortable="fexSortable"
           [items]="tasks"
           axis="y"
           (itemsChange)="tasks = $event"
-          class="space-y-space-sm"
         >
           @for (task of listSortable.previewItems(); track task) {
             <div
@@ -32,7 +30,7 @@
               {{ task }}
             </div>
           }
-        </div>
+        </fex-sortable>
         @if (listSortable.activeId(); as activeId) {
           <div data-sortable-overlay class="flex min-h-12 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70" [ngStyle]="listSortable.getOverlayStyle()">
             <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>

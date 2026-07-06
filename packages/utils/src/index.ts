@@ -30,3 +30,19 @@ export function isThenable<T = unknown>(value: unknown): value is PromiseLike<T>
     isFunction((value as { then?: unknown }).then)
   )
 }
+
+export function shallowEqualObject(left: object, right: object): boolean {
+  if (Object.is(left, right)) {
+    return true
+  }
+
+  const leftKeys = Object.keys(left)
+  const rightKeys = Object.keys(right)
+  if (leftKeys.length !== rightKeys.length) {
+    return false
+  }
+
+  const leftRecord = left as Record<string, unknown>
+  const rightRecord = right as Record<string, unknown>
+  return leftKeys.every((key) => Object.is(leftRecord[key], rightRecord[key]))
+}

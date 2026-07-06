@@ -1,18 +1,10 @@
 <script lang="ts">
+  import { SortableHandle, SortableItem, SortableOverlay, SortableRoot } from '@fex/components-svelte/primitive/sortable'
   import { createSortableAction } from '@fex/components-svelte/actions/sortable'
   import Card from '@fex/components-svelte/ui/card'
 
   const initialTasks = ['Backlog', 'Design', 'Build', 'Review']
   let tasks = $state(initialTasks)
-  const sortable = createSortableAction<string[]>({
-    items: initialTasks,
-    axis: 'y',
-    onChange: (items) => (tasks = items),
-    onSnapshot: (nextSnapshot) => (snapshot = nextSnapshot),
-  })
-  const controller = sortable.controller
-  let snapshot = $state(controller.getSnapshot())
-  const previewTasks = $derived((snapshot.items.default ?? tasks) as string[])
   const initialPanels = { source: ['Name', 'Role', 'Email'], target: ['Status', 'Created at'] }
   let panels = $state(initialPanels)
   const panelSortable = createSortableAction<typeof initialPanels>({
@@ -53,14 +45,6 @@
       .join(';')
   }
 
-  function taskContainer(node: HTMLElement) {
-    return sortable.container(node)
-  }
-
-  function taskItem(node: HTMLElement, id: string) {
-    return sortable.item(node, { id })
-  }
-
   function panelContainer(node: HTMLElement, containerId: string) {
     return panelSortable.container(node, containerId)
   }
@@ -75,6 +59,10 @@
 
   function columnItem(node: HTMLElement, id: string) {
     return columnSortable.item(node, { id })
+  }
+
+  function asArrayItems(items: string[] | Record<string, string[]>) {
+    return Array.isArray(items) ? items : []
   }
 </script>
 
@@ -91,21 +79,23 @@
     </header>
 
     <div class="space-y-space-xl">
-      <Card title="List" description="Drag any row. Items swap while you move, not only after drop.">
-        <div use:taskContainer class="space-y-space-sm">
-          {#each previewTasks as task (task)}
-            <div use:taskItem={task} class="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing" style={styleToString((snapshot.motionVersion, controller.getItemStyle(task)))}>
-              <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
+      <Card title="Sortable Component" description="Use the primitive component for common one-container lists.">
+        <SortableRoot items={tasks} axis="y" onChange={(items) => (tasks = items as string[])}>
+          {#snippet children({ items })}
+            {#each asArrayItems(items) as task (task)}
+              <SortableItem id={task}>
+                <SortableHandle class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</SortableHandle>
               {task}
-            </div>
-          {/each}
-        </div>
-        {#if snapshot.activeId}
-          <div data-sortable-overlay="" class="flex min-h-12 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70" style={styleToString((snapshot.motionVersion, controller.getOverlayStyle()))}>
-            <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
-            {snapshot.activeId}
-          </div>
-        {/if}
+              </SortableItem>
+            {/each}
+            <SortableOverlay class="flex min-h-12 items-center gap-space-sm px-space-md text-sm font-medium">
+              {#snippet children({ activeId })}
+                <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
+                {activeId}
+              {/snippet}
+            </SortableOverlay>
+          {/snippet}
+        </SortableRoot>
       </Card>
 
       <Card title="Multiple Containers" description="The same sortable hook supports transfer panels.">

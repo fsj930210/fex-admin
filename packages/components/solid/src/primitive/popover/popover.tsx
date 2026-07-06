@@ -20,7 +20,6 @@ import { cn } from '@fex/utils'
 import { Portal } from 'solid-js/web'
 import {
   createContext,
-  createEffect,
   createSignal,
   onCleanup,
   Show,
@@ -141,8 +140,7 @@ export function Popover(props: PopoverProps) {
       hoverOpenDelay: local.hoverOpenDelay,
       onOpenChange(nextOpen, info) {
         if (local.open === undefined) {
-          // Solid 非受控模式通过 signal 保存 open，再同步给 core。
-          // 受控模式不能写本地 open，否则 props.open 和 core snapshot 会分叉。
+          // Solid 非受控模式写本地 signal；受控模式等待 props.open 回流，避免和 core snapshot 分叉。
           setOpen(nextOpen)
           overlay.setOptions(makeOptions(nextOpen))
         }
@@ -151,9 +149,9 @@ export function Popover(props: PopoverProps) {
     }
   }
   function syncOptions() {
-    // Solid props 是访问器语义，必须在 effect 中重新读取 local.xxx 后同步到 core。
-    // overlay 实例保持稳定，只更新 options，避免丢失 DOM 引用和 autoUpdate 状态。
+    // Solid props 是访问器语义；渲染时同步到稳定的 core 实例，不重建 DOM 引用和 autoUpdate。
     overlay.setOptions(makeOptions(local.open ?? open()))
+    return null
   }
   const overlay = createFloatingOverlay({
     ...makeOptions(open()),
@@ -162,21 +160,18 @@ export function Popover(props: PopoverProps) {
   const dismissRecord = { arrowElement, overlay, triggerElement, contentElement }
   dismissRecords.add(dismissRecord)
 
-  createEffect(() => {
-    // 这是同步外部 core 实例的 effect，不承载业务流转。
-    // 用户点击、hover、focus 仍然直接调用 overlay.trigger。
-    syncOptions()
-  })
-
   onCleanup(() => {
     dismissRecords.delete(dismissRecord)
     overlay.destroy()
   })
 
   return (
-    <PopoverContext.Provider value={{ arrow: Boolean(local.arrow), arrowElement, contentElement, overlay, snapshot, triggerElement }}>
-      {local.children}
-    </PopoverContext.Provider>
+    <>
+      {syncOptions()}
+      <PopoverContext.Provider value={{ arrow: Boolean(local.arrow), arrowElement, contentElement, overlay, snapshot, triggerElement }}>
+        {local.children}
+      </PopoverContext.Provider>
+    </>
   )
 }
 
@@ -209,7 +204,6 @@ export function PopoverTrigger(props: PopoverTriggerProps) {
 
   function setReference(element: HTMLButtonElement) {
     // ref 回调把真实 trigger DOM 注册给 core floating。
-    // Solid 条件渲染可能替换元素，cleanup 中必须清空 reference。
     triggerElement.current = element
     overlay.setReferenceElement(element)
   }
@@ -221,8 +215,7 @@ export function PopoverTrigger(props: PopoverTriggerProps) {
 
   return local.children({
     ref: setReference,
-    // 这里返回当前 snapshot 给 render prop。调用方若要响应更新，应在 children 内读取 state 或使用 props；
-    // adapter 自身不能把 snapshot().open 缓存到普通变量，否则后续不会追踪。
+    // 调用方若要响应更新，应在 children 内读取 state，不能缓存成普通变量。
     state: snapshot(),
     props: {
       type: 'button',
@@ -264,38 +257,18 @@ export function PopoverContent(props: PopoverContentProps) {
   const { contentElement, overlay, snapshot } = usePopover('PopoverContent')
 
   function setContentElement(element: HTMLDivElement) {
-    // content DOM 同时是 overlay layer 和 floating element，必须在挂载时同步给 core。
+    // content DOM 同时是 overlay layer 和 floating element。
     contentElement.current = element
     overlay.setFloatingElement(element)
   }
 
-  createEffect(() => {
-    // 这个 effect 只管理 document 级 dismiss 监听；它依赖 snapshot().open 和 contentElement.current。
-    // 如果把 snapshot().open 提前读成普通值，面板打开后监听不会注册，ESC/外部点击会失效。
-    if (!snapshot().open || !contentElement.current) return
-    const ownerDocument = contentElement.current.ownerDocument
-    const handlePointerDown = (event: PointerEvent) => {
-      dismissOpenPopovers(event)
-    }
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        overlay.dismiss.escapeKey(eventInfo(event))
-      }
-    }
-    ownerDocument.addEventListener('pointerdown', handlePointerDown, true)
-    ownerDocument.addEventListener('keydown', handleKeyDown, true)
-    onCleanup(() => {
-      ownerDocument.removeEventListener('pointerdown', handlePointerDown, true)
-      ownerDocument.removeEventListener('keydown', handleKeyDown, true)
-    })
-  })
 
   onCleanup(() => {
     contentElement.current = null
     overlay.setFloatingElement(null)
   })
 
-  // 坐标由 core 直接写 CSS 变量，Solid adapter 不订阅 x/y，避免 autoUpdate 高频触发组件计算。
+  // 坐标由 core 写 CSS 变量，Solid adapter 不订阅 x/y，避免 autoUpdate 高频触发组件计算。
   return (
     <Show when={snapshot().mounted}>
       <div
@@ -325,8 +298,7 @@ export function PopoverArrow(props: PopoverArrowProps) {
   const [local] = splitProps(props, ['class'])
   const { arrow, arrowElement, overlay, snapshot } = usePopover('PopoverArrow')
   const sideStyle = () => {
-    // sideStyle 必须是函数并在 JSX 中调用，才能让 Solid 追踪 snapshot().side。
-    // 如果初始化时计算成对象，flip 后箭头方向不会更新。
+    // sideStyle 必须在 JSX 中调用，才能追踪 snapshot().side。
     return snapshot().side === 'left' || snapshot().side === 'right'
       ? {
           top: 'clamp(var(--popover-arrow-inset,32px), var(--floating-arrow-y,50%), calc(100% - var(--popover-arrow-inset,32px)))',

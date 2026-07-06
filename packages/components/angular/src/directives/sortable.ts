@@ -4,6 +4,13 @@ import { DEFAULT_SORTABLE_CONTAINER_ID, createSortableController } from '@fex/co
 import { restoreSortableItems } from '@fex/components-core/sortable/containers'
 import type { SortableAxis, SortableId, SortableItems, SortableMotionOptions } from '@fex/components-core/sortable/types'
 
+export interface FexSortableHost<TItems extends SortableItems = SortableItems> {
+  controller: ReturnType<typeof createSortableController<TItems>>
+  getOverlayStyle(): Record<string, string | number | undefined>
+  getMotionStyle(id: SortableId): Record<string, string | number | undefined>
+  registerMotionTarget(id: SortableId, element: HTMLElement | null): void | (() => void)
+}
+
 @Directive({
   selector: '[fexSortableContainer]',
   standalone: true,
@@ -74,7 +81,7 @@ export class FexSortableContainerDirective<TItems extends SortableItems = Sortab
 export class FexSortableRegionDirective implements OnInit, OnDestroy {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
   private cleanup?: () => void
-  @Input({ required: true }) sortable!: FexSortableContainerDirective<any>
+  @Input({ required: true }) sortable!: FexSortableHost<any>
   @Input({ required: true }) containerId!: string
 
   ngOnInit() {
@@ -94,7 +101,7 @@ export class FexSortableItemDirective implements OnInit, OnDestroy {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
   private cleanup?: () => void
   private unsubscribe?: () => void
-  @Input({ required: true }) sortable!: FexSortableContainerDirective<any>
+  @Input({ required: true }) sortable!: FexSortableHost<any>
   @Input({ required: true }) sortableId!: SortableId
   @Input() containerId = DEFAULT_SORTABLE_CONTAINER_ID
   @Input() disabled = false

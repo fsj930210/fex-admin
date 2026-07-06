@@ -11,6 +11,7 @@
     "./primitive/input": "./src/primitive/input/input.tsx",
     "./primitive/pagination": "./src/primitive/pagination/pagination.tsx",
     "./primitive/popover": "./src/primitive/popover/popover.tsx",
+    "./primitive/sortable": "./src/primitive/sortable/sortable.tsx",
     "./primitive/table": "./src/primitive/table/table.tsx",
     "./primitive/textarea": "./src/primitive/textarea/textarea.tsx",
     "./ui/badge": "./src/ui/badge/badge.tsx",

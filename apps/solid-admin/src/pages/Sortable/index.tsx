@@ -1,5 +1,6 @@
 import { A } from '@solidjs/router'
 import { createSortable } from '@fex/components-solid/primitives/create-sortable'
+import { Sortable } from '@fex/components-solid/primitive/sortable'
 import { Card } from '@fex/components-solid/ui/card'
 import { For, Show, createSignal, type JSX } from 'solid-js'
 import { Portal } from 'solid-js/web'
@@ -18,9 +19,18 @@ export function SortablePage() {
   const [tasks, setTasks] = createSignal(initialTasks)
   const [panels, setPanels] = createSignal(initialPanels)
   const [columns, setColumns] = createSignal(initialColumns)
-  const listSortable = createSortable({ items: tasks(), axis: 'y', onChange: setTasks })
   const panelSortable = createSortable({ items: panels(), onChange: setPanels })
   const tableSortable = createSortable({ items: columns(), axis: 'x', onChange: setColumns })
+  const panelItems = () => panelSortable.snapshot().dragging ? panelSortable.previewItems() as typeof initialPanels : panels()
+  const tableColumns = () => tableSortable.snapshot().dragging ? tableSortable.previewItems() as string[] : columns()
+  function startPanelSort(event: PointerEvent, item: string, containerId: string) {
+    panelSortable.update({ items: panels(), onChange: setPanels })
+    panelSortable.onPointerDown(event, item, containerId)
+  }
+  function startTableSort(event: PointerEvent, column: string) {
+    tableSortable.update({ items: columns(), axis: 'x', onChange: setColumns })
+    tableSortable.onPointerDown(event, column)
+  }
 
   return (
     <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
@@ -33,27 +43,31 @@ export function SortablePage() {
           </div>
         </header>
         <div class="space-y-space-xl">
-          <Card title="List" description="Drag any row. Items swap while you move, not only after drop.">
-            <div ref={listSortable.setContainer()} class="space-y-space-sm">
-              <For each={listSortable.previewItems() as string[]}>
-                {(task) => (
-                  <div data-sortable-id={task} ref={listSortable.setItem(task)} onPointerDown={(event) => listSortable.onPointerDown(event, task)} style={listSortable.getItemStyle(task) as JSX.CSSProperties} class="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing">
-                    <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>{task}
-                  </div>
-                )}
-              </For>
-            </div>
-            <Show when={typeof listSortable.snapshot().activeId === 'string'}>
-              <Portal><div data-sortable-overlay="" class="flex min-h-12 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70" style={listSortable.getOverlayStyle() as JSX.CSSProperties}><span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>{listSortable.snapshot().activeId}</div></Portal>
-            </Show>
+          <Card title="Sortable Component" description="Use the primitive component for common one-container lists.">
+            <Sortable.Root items={tasks()} axis="y" onChange={setTasks}>
+              {({ items }) => (
+                <>
+                  <For each={items}>
+                    {(task) => (
+                      <Sortable.Item id={task} class="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing data-[active]:shadow-lg">
+                        <Sortable.Handle class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</Sortable.Handle>{task}
+                      </Sortable.Item>
+                    )}
+                  </For>
+                  <Sortable.Overlay>
+                    {(activeId) => <div class="flex min-h-12 items-center gap-space-sm"><span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>{activeId}</div>}
+                  </Sortable.Overlay>
+                </>
+              )}
+            </Sortable.Root>
           </Card>
           <Card title="Multiple Containers" description="The same sortable hook supports transfer panels.">
             <div class="grid gap-space-md md:grid-cols-2">
-              <For each={Object.entries(panelSortable.previewItems() as typeof initialPanels)}>
+              <For each={Object.entries(panelItems())}>
                 {([containerId, items]) => (
                   <div ref={panelSortable.setContainer(containerId)} class="min-h-56 rounded-md border border-border bg-background p-space-md">
                     <h2 class="mb-space-md text-sm font-medium capitalize text-muted-foreground">{containerId}</h2>
-                    <For each={items}>{(item) => <div data-sortable-id={item} ref={panelSortable.setItem(item, containerId)} onPointerDown={(event) => panelSortable.onPointerDown(event, item, containerId)} style={panelSortable.getItemStyle(item) as JSX.CSSProperties} class="mb-space-sm flex min-h-11 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing"><span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>{item}</div>}</For>
+                    <For each={items}>{(item) => <div data-sortable-id={item} ref={panelSortable.setItem(item, containerId)} onPointerDown={(event) => startPanelSort(event, item, containerId)} style={panelSortable.getItemStyle(item) as JSX.CSSProperties} class="mb-space-sm flex min-h-11 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing"><span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>{item}</div>}</For>
                   </div>
                 )}
               </For>
@@ -65,9 +79,9 @@ export function SortablePage() {
           <Card title="Table Columns" description="useSortable can share motion styles across header and body cells.">
             <div ref={tableSortable.setContainer()} class="overflow-hidden rounded-md border border-border bg-background">
               <table class="w-full table-fixed border-collapse text-sm"><thead><tr>
-                <For each={tableSortable.previewItems() as string[]}>{(column) => <th data-sortable-id={column} ref={tableSortable.setItem(column)} onPointerDown={(event) => tableSortable.onPointerDown(event, column)} style={tableSortable.getItemStyle(column) as JSX.CSSProperties} class="cursor-grab touch-none select-none border-b border-border bg-card px-space-md py-space-md text-left font-medium text-muted-foreground transition-[transform,background-color,box-shadow,opacity] hover:bg-muted-background active:cursor-grabbing"><span class="inline-flex items-center gap-space-sm"><span class="text-muted-foreground">::</span>{columnLabels[column]}</span></th>}</For>
+                <For each={tableColumns()}>{(column) => <th data-sortable-id={column} ref={tableSortable.setItem(column)} onPointerDown={(event) => startTableSort(event, column)} style={tableSortable.getItemStyle(column) as JSX.CSSProperties} class="cursor-grab touch-none select-none border-b border-border bg-card px-space-md py-space-md text-left font-medium text-muted-foreground transition-[transform,background-color,box-shadow,opacity] hover:bg-muted-background active:cursor-grabbing"><span class="inline-flex items-center gap-space-sm"><span class="text-muted-foreground">::</span>{columnLabels[column]}</span></th>}</For>
               </tr></thead><tbody>
-                <For each={rows}>{(row) => <tr class="border-b border-border last:border-0"><For each={tableSortable.previewItems() as string[]}>{(column) => <td class="px-space-md py-space-sm" style={{ ...tableSortable.getMotionStyle(column), visibility: tableSortable.snapshot().activeId === column ? 'hidden' : undefined } as JSX.CSSProperties}>{row[column as keyof typeof row]}</td>}</For></tr>}</For>
+                <For each={rows}>{(row) => <tr class="border-b border-border last:border-0"><For each={tableColumns()}>{(column) => <td class="px-space-md py-space-sm" style={{ ...tableSortable.getMotionStyle(column), visibility: tableSortable.snapshot().activeId === column ? 'hidden' : undefined } as JSX.CSSProperties}>{row[column as keyof typeof row]}</td>}</For></tr>}</For>
               </tbody></table>
             </div>
             <Show when={typeof tableSortable.snapshot().activeId === 'string'}>

@@ -1,6 +1,7 @@
 import { createMoveController } from '@fex/components-core/interactions/create-move-controller'
 import type { InteractionAxis, Point } from '@fex/components-core/interactions/types'
-import { useEffect, useMemo, useRef, useSyncExternalStore } from 'react'
+import { shallowEqualObject } from '@fex/utils'
+import { useMemo, useRef, useSyncExternalStore } from 'react'
 import type { CSSProperties, HTMLAttributes, PointerEvent, RefCallback } from 'react'
 import { useControllableState } from './use-controllable-state'
 import { useMemoizedFn } from './use-memoized-fn'
@@ -33,19 +34,17 @@ export function useMove({
     defaultValue: defaultPosition,
     onChange: onMove,
   })
-  const controller = useMemo(
-    () =>
-      createMoveController({
-        position: currentPosition,
-        axis,
-        bounds,
-        onMove: setCurrentPosition,
-        onMoveEnd,
-      }),
-    // Controller is an external imperative instance; option changes are synced below.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+  const controllerOptions = {
+    position: currentPosition,
+    axis,
+    bounds,
+    onMove: setCurrentPosition,
+    onMoveEnd,
+  }
+  const latestControllerOptionsRef = useRef(controllerOptions)
+  // controller 持有 DOM 引用和拖拽会话，必须保持稳定；上方浅比较负责同步最新输入。
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const controller = useMemo(() => createMoveController(controllerOptions), [])
   const snapshot = useSyncExternalStore(
     controller.subscribe,
     controller.getSnapshot,
@@ -53,15 +52,10 @@ export function useMove({
   )
   const handleUsedRef = useRef(false)
 
-  useEffect(() => {
-    controller.updateOptions({
-      position: currentPosition,
-      axis,
-      bounds,
-      onMove: setCurrentPosition,
-      onMoveEnd,
-    })
-  }, [axis, bounds, controller, currentPosition, onMoveEnd, setCurrentPosition])
+  if (!shallowEqualObject(latestControllerOptionsRef.current, controllerOptions)) {
+    latestControllerOptionsRef.current = controllerOptions
+    controller.updateOptions(controllerOptions)
+  }
 
   const startMove = useMemoizedFn((event: PointerEvent<HTMLElement>) => {
     if (disabled || !controller.start(pointerEventToInput(event.nativeEvent))) {

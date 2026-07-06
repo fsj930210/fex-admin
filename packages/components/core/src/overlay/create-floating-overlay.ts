@@ -34,12 +34,29 @@ export interface FloatingOverlay
   destroy: () => void
 }
 
+function toEventInfo(event: Event & Partial<PointerEvent>) {
+  return {
+    target: event.target,
+    currentTarget: event.currentTarget,
+    clientX: event.clientX,
+    clientY: event.clientY,
+    button: event.button,
+    pointerType: event.pointerType,
+    event,
+    preventDefault: event.preventDefault.bind(event),
+    stopPropagation: event.stopPropagation.bind(event),
+  }
+}
+
+
 export function createFloatingOverlay(options: FloatingOverlayOptions = {}): FloatingOverlay {
   let currentOptions = options
   let referenceElement: HTMLElement | null = null
-  // createFloatingOverlay 是面向 Popover/Tooltip 这类组件的组合器：
-  // overlay 负责开关、挂载、关闭协议；floating 只负责 DOM 定位；trigger 只负责把用户事件转成开关请求。
-  // 这里不把 floating 重新做成 overlay 的子能力，是为了让 Dialog 可以只用 overlay，虚拟菜单可以只用 floating。
+  let floatingElement: HTMLElement | null = null
+  let arrowElement: HTMLElement | null = null
+  let dismissDocument: Document | null = null
+  // Combines overlay state, floating DOM positioning, and trigger event requests.
+  // Keep the instance stable; framework adapters update options instead of recreating it.
   const overlay = createOverlay(options)
   const floating = createFloating(options)
 
@@ -73,8 +90,7 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
       trigger: trigger.getTriggers(),
     }
     const snapshot = store.getSnapshot()
-    // 组合 snapshot 只有在语义字段变化时才写入 store。
-    // 这样 adapter 不会因为内部模块重复通知而做无意义刷新，也能避免跨框架响应式层收到过多更新。
+    // Only publish semantic snapshot changes to avoid noisy adapter refreshes.
     if (
       snapshot.open === nextSnapshot.open &&
       snapshot.mounted === nextSnapshot.mounted &&
@@ -92,9 +108,62 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
     return nextSnapshot
   }
 
+
+  function isInsideDismissBoundary(target: EventTarget | null) {
+    return (
+      target instanceof Node &&
+      (referenceElement?.contains(target) ||
+        floatingElement?.contains(target) ||
+        arrowElement?.contains(target))
+    )
+  }
+
+  function handleDocumentPointerDown(event: PointerEvent) {
+    if (isInsideDismissBoundary(event.target)) {
+      return
+    }
+    trigger.clear({ reason: 'outside-pointer', event }, false)
+    overlay.dismiss.outsidePointer(toEventInfo(event))
+  }
+
+  function handleDocumentKeyDown(event: KeyboardEvent) {
+    if (event.key !== 'Escape') {
+      return
+    }
+    trigger.clear({ reason: 'escape-key', event }, false)
+    overlay.dismiss.escapeKey(toEventInfo(event))
+  }
+
+  function stopDocumentDismiss() {
+    if (!dismissDocument) {
+      return
+    }
+    dismissDocument.removeEventListener('pointerdown', handleDocumentPointerDown, true)
+    dismissDocument.removeEventListener('keydown', handleDocumentKeyDown, true)
+    dismissDocument = null
+  }
+
+  function syncDocumentDismiss(nextSnapshot = store.getSnapshot()) {
+    const dismiss = currentOptions.dismiss
+    const dismissDisabled = dismiss?.escapeKey === false && dismiss.outsidePointer === false
+    if (dismissDisabled || !nextSnapshot.open || !nextSnapshot.mounted || !floatingElement) {
+      stopDocumentDismiss()
+      return
+    }
+
+    const ownerDocument = floatingElement.ownerDocument
+    if (dismissDocument === ownerDocument) {
+      return
+    }
+
+    stopDocumentDismiss()
+    dismissDocument = ownerDocument
+    ownerDocument.addEventListener('pointerdown', handleDocumentPointerDown, true)
+    ownerDocument.addEventListener('keydown', handleDocumentKeyDown, true)
+  }
+
   function syncAutoUpdate(nextSnapshot = store.getSnapshot()) {
-    // Floating UI 的 autoUpdate 需要真实 DOM 已经挂载。
-    // 所以必须同时满足 open 和 mounted，再启动滚动、resize、布局变化监听。
+    // Floating UI 的 autoUpdate 需要真实 DOM 已经挂载，所以必须同时满足 open 和 mounted。
     if (nextSnapshot.open && nextSnapshot.mounted) {
       void floating.update()
       floating.startAutoUpdate()
@@ -106,6 +175,7 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
   function emitFromOverlay() {
     const nextSnapshot = readSnapshot()
     syncAutoUpdate(nextSnapshot)
+    syncDocumentDismiss(nextSnapshot)
   }
 
   function emitFromFloating() {
@@ -143,14 +213,20 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
     setReferenceElement: (element) => {
       referenceElement = element
       floating.setReferenceElement(element)
+      syncDocumentDismiss()
     },
     setFloatingElement: (element) => {
-      // floatingElement 同时也是 overlay layer 元素：overlay 用它判断层级和外部交互，
-      // floating 用它写入定位 CSS 变量。两个模块共享同一个 DOM，但职责保持分开。
+      floatingElement = element
+      // floatingElement 同时是 overlay layer 边界和 floating 定位元素。
       overlay.setLayerElement(element)
       floating.setFloatingElement(element)
+      syncDocumentDismiss()
     },
-    setArrowElement: floating.setArrowElement,
+    setArrowElement: (element) => {
+      arrowElement = element
+      floating.setArrowElement(element)
+      syncDocumentDismiss()
+    },
     setVirtualReference: floating.setVirtualReference,
     updatePosition: floating.update,
     resolvePopupContainer: () => {
@@ -179,6 +255,7 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
     trigger: trigger.trigger,
     content: trigger.content,
     destroy: () => {
+      stopDocumentDismiss()
       unsubscribeOverlay()
       unsubscribeFloating()
       trigger.destroy()

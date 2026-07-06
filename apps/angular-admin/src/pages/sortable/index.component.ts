@@ -2,15 +2,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { NgStyle } from '@angular/common'
 import { RouterLink } from '@angular/router'
 import {
+  FexSortable,
   FexSortableContainerDirective,
   FexSortableItemDirective,
   FexSortableRegionDirective,
-} from '@fex/components-angular/directives/sortable'
+} from '@fex/components-angular/primitive/sortable'
 import Card from '@fex/components-angular/ui/card'
 
 @Component({
   selector: 'fex-sortable-page',
-  imports: [RouterLink, NgStyle, Card, FexSortableContainerDirective, FexSortableRegionDirective, FexSortableItemDirective],
+  imports: [RouterLink, NgStyle, Card, FexSortable, FexSortableContainerDirective, FexSortableRegionDirective, FexSortableItemDirective],
   host: { class: 'block' },
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

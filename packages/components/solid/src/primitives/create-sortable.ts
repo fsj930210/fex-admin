@@ -13,10 +13,17 @@ export interface CreateSortableOptions<TItems extends SortableItems> {
 }
 
 export function createSortable<TItems extends SortableItems>(options: CreateSortableOptions<TItems>) {
+  let currentOptions = options
   const controller = createSortableController(options)
   const [snapshot, setSnapshot] = createSignal(controller.getSnapshot())
   const cleanups = new Set<() => void>()
   const unsubscribe = controller.subscribe(() => setSnapshot(controller.getSnapshot()))
+
+  function update(next: CreateSortableOptions<TItems>) {
+    currentOptions = next
+    controller.updateOptions(next)
+    setSnapshot(controller.getSnapshot())
+  }
 
   function setContainer(containerId = DEFAULT_SORTABLE_CONTAINER_ID) {
     return (element: HTMLElement | null) => {
@@ -35,7 +42,7 @@ export function createSortable<TItems extends SortableItems>(options: CreateSort
   }
 
   function onPointerDown(event: PointerEvent, id: SortableId, containerId = DEFAULT_SORTABLE_CONTAINER_ID) {
-    if (options.disabled || !controller.startPointerDrag(toInput(event), id, containerId)) {
+    if (currentOptions.disabled || !controller.startPointerDrag(toInput(event), id, containerId)) {
       return
     }
 
@@ -66,7 +73,8 @@ export function createSortable<TItems extends SortableItems>(options: CreateSort
 
   return {
     snapshot,
-    previewItems: createMemo(() => restoreSortableItems(options.items, snapshot().items)),
+    previewItems: createMemo(() => restoreSortableItems(currentOptions.items, snapshot().items)),
+    update,
     setContainer,
     setItem,
     onPointerDown,

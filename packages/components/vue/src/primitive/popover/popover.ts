@@ -1,4 +1,4 @@
-export { default as Popover } from './popover.vue'
+export { Popover } from './popover-root'
 export { default as PopoverArrow } from './popover-arrow.vue'
 export { default as PopoverContent } from './popover-content.vue'
 export { default as PopoverDescription } from './popover-description.vue'

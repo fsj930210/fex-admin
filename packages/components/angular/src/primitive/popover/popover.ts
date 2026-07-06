@@ -25,11 +25,10 @@ import {
 import type { AfterViewInit, OnChanges, OnDestroy } from "@angular/core";
 import { createCoreStoreSignal } from "../../signals/core-store-signal";
 import { createHostClassName } from "../../signals/host-class";
-import { PopoverDomService, type PopoverDismissListeners, type PopoverPortalMount } from "./popover-dom";
+import { PopoverDomService, type PopoverPortalMount } from "./popover-dom";
 
 function eventInfo(event: Event & Partial<PointerEvent>) {
-  // Angular HostListener 传入的是原生事件，core 只需要框架无关的事件快照和控制方法。
-  // 这里统一转换，避免各 directive 重复拼 event payload。
+  // Angular HostListener 传入原生事件，这里统一转换成 core 使用的框架无关事件快照。
   return {
     target: event.target,
     currentTarget: event.currentTarget,
@@ -67,8 +66,7 @@ export class PopoverRegistry {
     this.popovers.forEach((popover) => {
       if (!popover.snapshot().open) return;
       if (target instanceof Node) {
-        // Angular content 会被移动到 popup container，不能只靠组件树判断内外部。
-        // 必须用真实 DOM 边界过滤 trigger/content/arrow。
+        // content 会被移动到 popup container，必须用真实 DOM 边界判断内外部。
         if (
           popover.referenceElement?.contains(target) ||
           popover.contentElement?.contains(target) ||
@@ -105,8 +103,7 @@ export class Popover implements OnChanges, OnDestroy {
   @Output() openChange = new EventEmitter<boolean>();
 
   private localOpen = this.defaultOpen;
-  // 这三个 DOM 引用是 adapter 和 core 之间的桥：trigger 用于定位基准，
-  // content 用于浮层定位和外部点击边界，arrow 用于 Floating UI arrow middleware。
+  // 这些 DOM 引用是 adapter 和 core 之间的桥：trigger 用于定位，content/arrow 用于浮层边界和箭头计算。
   referenceElement: HTMLElement | null = null;
   contentElement: HTMLElement | null = null;
   arrowElement: HTMLElement | null = null;
@@ -125,7 +122,6 @@ export class Popover implements OnChanges, OnDestroy {
     onOpenChange: (nextOpen) => {
       if (this.open === undefined) {
         // 非受控模式写本地状态；受控模式等待 @Input open 回流。
-        // 两边都写会让 Angular input 和 core snapshot 短暂分叉。
         this.localOpen = nextOpen;
         this.syncOptions();
       }
@@ -137,8 +133,7 @@ export class Popover implements OnChanges, OnDestroy {
   private readonly unregister = this.registry.register(this);
 
   syncOptions() {
-    // overlay 是外部命令式实例，Angular input 变化时只同步 options，不重建实例。
-    // 重建会丢失已注册 DOM、document 监听和 Floating UI autoUpdate 状态。
+    // overlay 是外部命令式实例；Angular input 变化时只同步 options，不重建实例。
     this.overlay.setOptions({
       open: this.open ?? this.localOpen,
       trigger: this.trigger,
@@ -185,7 +180,7 @@ export class PopoverTrigger implements AfterViewInit {
   private readonly elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
 
   ngAfterViewInit() {
-    // View 初始化后才能拿到真实 button DOM；此时注册 reference，floating 才能计算位置。
+    // View 初始化后才能拿到真实 button DOM，并注册给 floating 作为 reference。
     this.popover.referenceElement = this.elementRef.nativeElement;
     this.popover.overlay.setReferenceElement(this.elementRef.nativeElement);
   }
@@ -250,36 +245,22 @@ export class PopoverTrigger implements AfterViewInit {
 })
 export class PopoverContent implements AfterViewInit, OnDestroy {
   protected readonly popover = inject(Popover);
-  private readonly registry = inject(PopoverRegistry);
   private readonly domService = inject(PopoverDomService);
   private readonly elementRef = inject<ElementRef<HTMLDivElement>>(ElementRef);
-  private dismissListeners?: PopoverDismissListeners;
   private portalMount?: PopoverPortalMount;
   protected readonly hostClassName = createHostClassName(popoverContentClassName());
 
   ngAfterViewInit() {
     const element = this.elementRef.nativeElement;
     const popupContainer = this.popover.overlay.resolvePopupContainer();
-    // Angular 没有 React Portal/Svelte Teleport 这种内置写法，这里通过 DOM service 把 content 移到容器。
-    // 移动后仍然要把真实 element 注册给 core，不能用组件宿主的逻辑位置推断。
+    // Angular 通过 DOM service 把 content 移到容器，移动后仍然注册真实 element 给 core。
     this.portalMount = this.domService.mountFloatingElement(element, popupContainer);
     this.popover.contentElement = element;
     this.popover.overlay.setFloatingElement(element);
 
-    const handlePointerDown = (event: PointerEvent) => {
-      // document 级 dismiss 监听要走 registry，用真实 DOM 边界判断是否在其它 popover 内。
-      this.registry.closeOutsidePopovers(event);
-    };
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (!this.popover.snapshot().open || event.key !== "Escape") return;
-      this.popover.overlay.dismiss.escapeKey(eventInfo(event));
-    };
-
-    this.dismissListeners = this.domService.listenForDismiss(element, handlePointerDown, handleKeyDown);
   }
 
   ngOnDestroy() {
-    this.dismissListeners?.cleanup();
     if (this.popover.contentElement === this.elementRef.nativeElement) {
       this.popover.contentElement = null;
     }
@@ -308,8 +289,7 @@ export class PopoverArrow implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     const element = this.elementRef.nativeElement;
-    // arrow 不只是装饰元素，它会作为 Floating UI arrow middleware 的输入。
-    // 注册后 core 才能写入 --floating-arrow-x/y，并更新 data-side。
+    // arrow 是 Floating UI arrow middleware 的输入，注册后 core 会写入箭头坐标。
     this.popover.arrowElement = element;
     this.popover.overlay.setArrowElement(element);
   }

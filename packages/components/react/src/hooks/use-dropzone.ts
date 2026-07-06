@@ -1,6 +1,7 @@
 import { createDropzoneController } from '@fex/components-core/dropzone/create-dropzone-controller'
 import { getFilesFromDataTransfer } from '@fex/components-core/dropzone/files'
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
+import { shallowEqualObject } from '@fex/utils'
+import { useMemo, useRef, useState, useSyncExternalStore } from 'react'
 import type { ChangeEvent, DragEvent, HTMLAttributes, InputHTMLAttributes, RefCallback } from 'react'
 import type { DropzoneFileRejection, DropzoneValidationOptions } from '@fex/components-core/dropzone/types'
 import { useMemoizedFn } from './use-memoized-fn'
@@ -18,7 +19,8 @@ export interface UseDropzoneOptions extends DropzoneValidationOptions {
 export function useDropzone(options: UseDropzoneOptions = {}) {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [rootElement, setRootElement] = useState<HTMLElement | null>(null)
-  // Controller is an external imperative instance; option changes are synced below.
+  const latestOptionsRef = useRef(options)
+  // controller 是稳定 core 实例，后续只在 options 引用变化时同步输入。
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const controller = useMemo(() => createDropzoneController(options), [])
   const snapshot = useSyncExternalStore(
@@ -27,9 +29,10 @@ export function useDropzone(options: UseDropzoneOptions = {}) {
     controller.getSnapshot,
   )
 
-  useEffect(() => {
+  if (!shallowEqualObject(latestOptionsRef.current, options)) {
+    latestOptionsRef.current = options
     controller.updateOptions(options)
-  }, [controller, options])
+  }
 
   const onDragEnter = useMemoizedFn((event: DragEvent<HTMLElement>) => {
     if (options.disabled) {

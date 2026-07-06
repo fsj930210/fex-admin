@@ -11,20 +11,20 @@
 
   let { children, container, forceMount }: PopoverPortalProps = $props()
   const { overlay, snapshot } = getContext<PopoverContext>(popoverContextKey)
-  let portalElement = $state<HTMLDivElement>()
 
-  $effect(() => {
-    if (!portalElement || (!$snapshot.mounted && !forceMount)) return
+  function portalAction(element: HTMLDivElement) {
     const target = container ?? overlay.resolvePopupContainer() ?? document.body
-    target.appendChild(portalElement)
-    return () => {
-      portalElement?.remove()
+    target.appendChild(element)
+    return {
+      destroy() {
+        element.remove()
+      },
     }
-  })
+  }
 </script>
 
 {#if $snapshot.mounted || forceMount}
-  <div bind:this={portalElement} data-slot="popover-portal" style="display: contents">
+  <div use:portalAction data-slot="popover-portal" style="display: contents">
     {@render children?.()}
   </div>
 {/if}

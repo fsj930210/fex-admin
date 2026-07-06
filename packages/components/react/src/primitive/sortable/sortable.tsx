@@ -21,7 +21,7 @@ export interface SortableRootProps<TItems extends SortableItems>
   items: TItems
   axis?: SortableAxis
   containerId?: string
-  children: ReactNode
+  children: ReactNode | ((state: { items: TItems }) => ReactNode)
   onChange?: (items: TItems) => void
 }
 
@@ -40,7 +40,7 @@ export function SortableRoot<TItems extends SortableItems>({
   return (
     <SortableContext value={sortable}>
       <div {...props} {...containerProps} className={cn(sortableClassName, className)}>
-        {children}
+        {typeof children === 'function' ? children({ items: sortable.previewItems as TItems }) : children}
       </div>
     </SortableContext>
   )

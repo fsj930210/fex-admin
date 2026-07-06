@@ -17,8 +17,9 @@ export interface SortableActionOptions<TItems extends SortableItems> {
 }
 
 export function createSortableAction<TItems extends SortableItems>(options: SortableActionOptions<TItems>) {
+  let currentOptions = options
   const controller = createSortableController(options)
-  const unsubscribe = controller.subscribe(() => options.onSnapshot?.(controller.getSnapshot()))
+  const unsubscribe = controller.subscribe(() => currentOptions.onSnapshot?.(controller.getSnapshot()))
   const cleanups = new Set<() => void>()
 
   function container(node: HTMLElement, containerId = DEFAULT_SORTABLE_CONTAINER_ID) {
@@ -41,7 +42,7 @@ export function createSortableAction<TItems extends SortableItems>(options: Sort
     node.dataset.sortableContainerId = containerId
 
     function onPointerDown(event: PointerEvent) {
-      if (options.disabled || !controller.startPointerDrag(toInput(event), itemOptions.id, containerId)) {
+      if (currentOptions.disabled || !controller.startPointerDrag(toInput(event), itemOptions.id, containerId)) {
         return
       }
 
@@ -75,6 +76,11 @@ export function createSortableAction<TItems extends SortableItems>(options: Sort
 
   return {
     controller,
+    updateOptions(nextOptions: SortableActionOptions<TItems>) {
+      currentOptions = nextOptions
+      controller.updateOptions(nextOptions)
+      currentOptions.onSnapshot?.(controller.getSnapshot())
+    },
     container,
     item,
     getPreviewItems() {

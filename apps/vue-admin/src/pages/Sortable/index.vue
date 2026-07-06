@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Card from '@fex/components-vue/ui/card'
 import { useSortable } from '@fex/components-vue/composables/use-sortable'
+import { Sortable } from '@fex/components-vue/primitive/sortable'
 import { computed, ref } from 'vue'
 
 const initialTasks = ['Backlog', 'Design', 'Build', 'Review']
@@ -24,13 +25,11 @@ const columnLabels: Record<string, string> = {
 const tasks = ref(initialTasks)
 const panels = ref(initialPanels)
 const columns = ref(initialColumns)
-const listSortable = useSortable({ items: tasks.value, axis: 'y', onChange: updateTasks })
 const panelSortable = useSortable({ items: panels.value, onChange: updatePanels })
 const tableSortable = useSortable({ items: columns.value, axis: 'x', onChange: updateColumns })
 
-function updateTasks(items: string[]) {
-  tasks.value = items
-  listSortable.update({ items, axis: 'y', onChange: updateTasks })
+function updateTasks(items: unknown) {
+  tasks.value = items as string[]
 }
 
 function updatePanels(items: typeof initialPanels) {
@@ -43,7 +42,6 @@ function updateColumns(items: string[]) {
   tableSortable.update({ items, axis: 'x', onChange: updateColumns })
 }
 
-const previewTasks = computed(() => listSortable.previewItems.value as string[])
 const previewPanels = computed(() => panelSortable.previewItems.value as typeof initialPanels)
 const previewColumns = computed(() => tableSortable.previewItems.value as string[])
 </script>
@@ -62,33 +60,24 @@ const previewColumns = computed(() => tableSortable.previewItems.value as string
       </header>
 
       <div class="space-y-space-xl">
-        <Card title="List" description="Drag any row. Items swap while you move, not only after drop.">
-          <div :ref="listSortable.setContainerRef()" class="space-y-space-sm">
-            <div
-              v-for="task in previewTasks"
+        <Card title="Sortable Component" description="Use the primitive component for common one-container lists.">
+          <Sortable.Root :items="tasks" axis="y" @change="updateTasks" v-slot="{ items }">
+            <Sortable.Item
+              v-for="task in items"
+              :id="task"
               :key="task"
-              :ref="listSortable.setItemRef(task)"
-              :data-sortable-id="task"
-              class="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing"
-              :style="listSortable.getItemStyle(task)"
-              :data-dragging="listSortable.snapshot.value.activeId === task || undefined"
-              @pointerdown="(event) => listSortable.onItemPointerDown(event, task)"
+              class="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing data-[active]:shadow-lg"
             >
-              <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
+              <Sortable.Handle class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</Sortable.Handle>
               {{ task }}
-            </div>
-          </div>
-          <Teleport to="body">
-            <div
-              v-if="typeof listSortable.snapshot.value.activeId === 'string'"
-              data-sortable-overlay
-              class="flex min-h-12 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
-              :style="listSortable.getOverlayStyle()"
-            >
-              <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
-              {{ listSortable.snapshot.value.activeId }}
-            </div>
-          </Teleport>
+            </Sortable.Item>
+            <Sortable.Overlay v-slot="{ activeId }">
+              <div class="flex min-h-12 items-center gap-space-sm">
+                <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
+                {{ activeId }}
+              </div>
+            </Sortable.Overlay>
+          </Sortable.Root>
         </Card>
 
         <Card title="Multiple Containers" description="The same sortable hook supports transfer panels.">

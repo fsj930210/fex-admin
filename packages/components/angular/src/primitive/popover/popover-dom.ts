@@ -4,10 +4,6 @@ export interface PopoverPortalMount {
   cleanup(): void;
 }
 
-export interface PopoverDismissListeners {
-  cleanup(): void;
-}
-
 @Injectable()
 export class PopoverDomService {
   mountFloatingElement(element: HTMLElement, container: HTMLElement | null | undefined): PopoverPortalMount {
@@ -23,24 +19,6 @@ export class PopoverDomService {
         if (originalParent && element.parentNode !== originalParent) {
           originalParent.appendChild(element);
         }
-      },
-    };
-  }
-
-  listenForDismiss(
-    element: HTMLElement,
-    onPointerDown: (event: PointerEvent) => void,
-    onKeyDown: (event: KeyboardEvent) => void,
-  ): PopoverDismissListeners {
-    const ownerDocument = element.ownerDocument;
-
-    ownerDocument.addEventListener("pointerdown", onPointerDown, true);
-    ownerDocument.addEventListener("keydown", onKeyDown, true);
-
-    return {
-      cleanup: () => {
-        ownerDocument.removeEventListener("pointerdown", onPointerDown, true);
-        ownerDocument.removeEventListener("keydown", onKeyDown, true);
       },
     };
   }

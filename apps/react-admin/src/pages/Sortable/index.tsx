@@ -1,4 +1,5 @@
 import { useSortable } from '@fex/components-react/hooks/use-sortable'
+import { Sortable } from '@fex/components-react/primitive/sortable'
 import { Card } from '@fex/components-react/ui/card'
 import { cn } from '@fex/utils'
 import { useState } from 'react'
@@ -31,10 +32,8 @@ export function SortablePage() {
   const [tasks, setTasks] = useState(initialTasks)
   const [panels, setPanels] = useState(initialPanels)
   const [columns, setColumns] = useState(initialColumns)
-  const listSortable = useSortable({ items: tasks, axis: 'y', onChange: setTasks })
   const panelSortable = useSortable({ items: panels, onChange: setPanels })
   const tableSortable = useSortable({ items: columns, axis: 'x', onChange: setColumns })
-  const previewTasks = listSortable.previewItems as string[]
   const previewPanels = panelSortable.previewItems as typeof panels
   const previewColumns = tableSortable.previewItems as string[]
 
@@ -55,37 +54,35 @@ export function SortablePage() {
         </header>
 
         <div className="space-y-space-xl">
-          <Card title="List" description="Drag any row. Items swap while you move, not only after drop.">
-            <div {...listSortable.getContainerProps()} className="space-y-space-sm">
-              {previewTasks.map((task) => (
-                <div
-                  key={task}
-                  {...listSortable.getItemProps(task)}
-                  className={cn(
-                    'flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing',
-                    listSortable.activeId === task && 'shadow-lg',
-                  )}
-                >
-                  <span className="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">
-                    ::
-                  </span>
-                  {task}
-                </div>
-              ))}
-            </div>
-            {typeof listSortable.activeId === 'string' && previewTasks.includes(listSortable.activeId) && createPortal(
-              <div
-                data-sortable-overlay=""
-                className="flex min-h-12 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
-                style={listSortable.getOverlayStyle()}
-              >
-                <span className="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">
-                  ::
-                </span>
-                {listSortable.activeId}
-              </div>,
-              document.body,
-            )}
+          <Card title="Sortable Component" description="Use the primitive component for common one-container lists.">
+            <Sortable.Root items={tasks} axis="y" onChange={setTasks}>
+              {({ items }) => (
+                <>
+                  {items.map((task) => (
+                    <Sortable.Item
+                      key={task}
+                      id={task}
+                      className="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing data-[active]:shadow-lg"
+                    >
+                      <Sortable.Handle className="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">
+                        ::
+                      </Sortable.Handle>
+                      {task}
+                    </Sortable.Item>
+                  ))}
+                  <Sortable.Overlay>
+                    {({ activeId }) => (
+                      <div className="flex min-h-12 items-center gap-space-sm">
+                        <span className="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">
+                          ::
+                        </span>
+                        {activeId}
+                      </div>
+                    )}
+                  </Sortable.Overlay>
+                </>
+              )}
+            </Sortable.Root>
           </Card>
 
           <Card title="Multiple Containers" description="The same sortable hook supports transfer panels.">
