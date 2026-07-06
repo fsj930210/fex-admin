@@ -1,4 +1,5 @@
 import { createLazyRouteElement } from '../lazy'
+import { ListboxPage } from '../../pages/Listbox'
 
 export const componentRoutes = [
   {
@@ -28,6 +29,10 @@ export const componentRoutes = [
   {
     path: '/kbd',
     element: createLazyRouteElement(() => import('../../pages/Kbd'), 'KbdPage'),
+  },
+  {
+    path: '/listbox',
+    element: <ListboxPage />,
   },
   {
     path: '/pagination',

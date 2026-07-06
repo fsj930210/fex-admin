@@ -7,6 +7,7 @@
     { href: '/empty', label: 'Empty' },
     { href: '/input', label: 'Input' },
     { href: '/kbd', label: 'Kbd' },
+    { href: '/listbox', label: 'Listbox' },
     { href: '/pagination', label: 'Pagination' },
     { href: '/popover', label: 'Popover' },
     { href: '/spinner', label: 'Spinner' },

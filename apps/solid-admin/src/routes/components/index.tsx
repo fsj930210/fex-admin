@@ -12,6 +12,7 @@ const BadgePage = lazy(() => import('../../pages/Badge').then((module) => ({ def
 const EmptyPage = lazy(() => import('../../pages/Empty').then((module) => ({ default: module.EmptyPage })))
 const InputPage = lazy(() => import('../../pages/Input').then((module) => ({ default: module.InputPage })))
 const KbdPage = lazy(() => import('../../pages/Kbd').then((module) => ({ default: module.KbdPage })))
+const ListboxPage = lazy(() => import('../../pages/Listbox').then((module) => ({ default: module.ListboxPage })))
 const PaginationPage = lazy(() =>
   import('../../pages/Pagination').then((module) => ({ default: module.PaginationPage })),
 )
@@ -57,6 +58,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/kbd',
     component: KbdPage,
+  },
+  {
+    path: '/listbox',
+    component: ListboxPage,
   },
   {
     path: '/pagination',

@@ -64,6 +64,15 @@
       "@fex/components-core/resizable/types": [
         "packages/components/core/src/resizable/types.ts"
       ],
+      "@fex/components-core/selection/create-selection-controller": [
+        "packages/components/core/src/selection/create-selection-controller.ts"
+      ],
+      "@fex/components-core/selection/types": [
+        "packages/components/core/src/selection/types.ts"
+      ],
+      "@fex/components-core/selection/utils": [
+        "packages/components/core/src/selection/utils.ts"
+      ],
       "@fex/components-core/sortable/array-move": [
         "packages/components/core/src/sortable/array-move.ts"
       ],
@@ -94,6 +103,9 @@
       "@fex/components-angular/primitive/input": [
         "packages/components/angular/src/primitive/input/input.ts"
       ],
+      "@fex/components-angular/primitive/listbox": [
+        "packages/components/angular/src/primitive/listbox/listbox.ts"
+      ],
       "@fex/components-angular/primitive/pagination": [
         "packages/components/angular/src/primitive/pagination/pagination.ts"
       ],
@@ -120,6 +132,9 @@
       ],
       "@fex/components-angular/ui/kbd": [
         "packages/components/angular/src/ui/kbd/kbd.ts"
+      ],
+      "@fex/components-angular/ui/listbox": [
+        "packages/components/angular/src/ui/listbox/listbox.ts"
       ],
       "@fex/components-angular/ui/spinner": [
         "packages/components/angular/src/ui/spinner/spinner.ts"

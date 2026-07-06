@@ -7,6 +7,7 @@ const componentLinks = [
   { to: '/empty', label: 'Empty' },
   { to: '/input', label: 'Input' },
   { to: '/kbd', label: 'Kbd' },
+  { to: '/listbox', label: 'Listbox' },
   { to: '/pagination', label: 'Pagination' },
   { to: '/popover', label: 'Popover' },
   { to: '/spinner', label: 'Spinner' },

@@ -32,6 +32,11 @@ export const componentRoutes: Routes = [
     loadComponent: () => import('../../pages/kbd/index.component').then((module) => module.KbdComponent),
   },
   {
+    path: 'listbox',
+    loadComponent: () =>
+      import('../../pages/listbox/index.component').then((module) => module.ListboxComponent),
+  },
+  {
     path: 'pagination',
     loadComponent: () =>
       import('../../pages/pagination/index.component').then((module) => module.PaginationComponent),
