@@ -1,0 +1,83 @@
+<div role="group" data-slot="menu-list" [attr.data-orientation]="orientation()" [class]="listClassName()">
+  <ng-container
+    [ngTemplateOutlet]="itemsTemplate"
+    [ngTemplateOutletContext]="{ items: items(), hidden: false }"
+  />
+</div>
+
+<ng-template #itemsTemplate let-items="items" let-hidden="hidden">
+  @for (item of items; track keyFor(item, $index)) {
+    @if (isMenuNodeItem(item)) {
+      @let entry = entryFor(item);
+      @if (entry) {
+        @let info = getItemInfo(entry);
+        <div data-slot="menu-node">
+          <button
+            type="button"
+            role="menuitem"
+            [attr.tabindex]="info.disabled || hidden ? -1 : 0"
+            [attr.aria-disabled]="info.disabled || null"
+            [attr.aria-expanded]="info.hasChildren ? info.expanded : null"
+            data-slot="menu-item"
+            [attr.data-selected]="info.selected ? 'true' : 'false'"
+            [attr.data-expanded]="info.expanded ? 'true' : 'false'"
+            [attr.data-disabled]="info.disabled ? 'true' : null"
+            [class]="itemClassName()"
+            [attr.style]="itemStyle(info)"
+            (click)="clickItem(info, hidden)"
+            (keydown.enter)="clickItem(info, hidden)"
+            (keydown.space)="$event.preventDefault(); clickItem(info, hidden)"
+          >
+            @if (itemTemplate()) {
+              <ng-container
+                [ngTemplateOutlet]="itemTemplate()!"
+                [ngTemplateOutletContext]="{ $implicit: info }"
+              />
+            } @else {
+              @if (info.item.icon) {
+                <span data-slot="menu-item-icon" [class]="menuItemIconClassName">{{ info.item.icon }}</span>
+              }
+              <span data-slot="menu-item-label" [class]="menuItemLabelClassName">{{ info.item.label }}</span>
+              @if (info.item.suffix) {
+                <span data-slot="menu-item-suffix" [class]="menuItemSuffixClassName">{{ info.item.suffix }}</span>
+              }
+              @if (info.hasChildren) {
+                <span data-slot="menu-expand-icon" aria-hidden="true" [class]="menuExpandIconClassName">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                </span>
+              }
+            }
+          </button>
+          @if (info.hasChildren) {
+            <div
+              [class]="menuSubMenuContentClassName"
+              [attr.data-expanded]="info.expanded ? 'true' : 'false'"
+              [attr.aria-hidden]="info.expanded ? null : 'true'"
+            >
+              <div [class]="menuSubMenuInnerClassName">
+                <ng-container
+                  [ngTemplateOutlet]="itemsTemplate"
+                  [ngTemplateOutletContext]="{ items: info.item.children ?? [], hidden: hidden || !info.expanded }"
+                />
+              </div>
+            </div>
+          }
+        </div>
+      }
+    } @else if (item.type === "divider") {
+      <div role="separator" data-slot="menu-divider" [class]="menuDividerClassName"></div>
+    } @else {
+      <div role="group" data-slot="menu-group" [class]="menuGroupClassName">
+        @if (item.label) {
+          <div data-slot="menu-group-label" [class]="menuGroupLabelClassName">{{ item.label }}</div>
+        }
+        <ng-container
+          [ngTemplateOutlet]="itemsTemplate"
+          [ngTemplateOutletContext]="{ items: item.children, hidden: hidden }"
+        />
+      </div>
+    }
+  }
+</ng-template>

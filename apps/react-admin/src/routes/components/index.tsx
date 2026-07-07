@@ -35,6 +35,10 @@ export const componentRoutes = [
     element: <ListboxPage />,
   },
   {
+    path: '/menu',
+    element: createLazyRouteElement(() => import('../../pages/Menu'), 'MenuPage'),
+  },
+  {
     path: '/pagination',
     element: createLazyRouteElement(() => import('../../pages/Pagination'), 'PaginationPage'),
   },

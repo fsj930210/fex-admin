@@ -37,6 +37,10 @@ export const componentRoutes: Routes = [
       import('../../pages/listbox/index.component').then((module) => module.ListboxComponent),
   },
   {
+    path: 'menu',
+    loadComponent: () => import('../../pages/menu/index.component').then((module) => module.MenuComponent),
+  },
+  {
     path: 'pagination',
     loadComponent: () =>
       import('../../pages/pagination/index.component').then((module) => module.PaginationComponent),

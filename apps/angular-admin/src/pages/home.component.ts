@@ -18,6 +18,7 @@ export class HomeComponent {
     { to: '/input', label: 'Input' },
     { to: '/kbd', label: 'Kbd' },
     { to: '/listbox', label: 'Listbox' },
+    { to: '/menu', label: 'Menu' },
     { to: '/pagination', label: 'Pagination' },
     { to: '/popover', label: 'Popover' },
     { to: '/spinner', label: 'Spinner' },

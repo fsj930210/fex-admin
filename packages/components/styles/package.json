@@ -12,6 +12,7 @@
     "./input": "./src/input.ts",
     "./kbd": "./src/kbd.ts",
     "./listbox": "./src/listbox.ts",
+    "./menu": "./src/menu.ts",
     "./pagination": "./src/pagination.ts",
     "./popover": "./src/popover.ts",
     "./dropzone": "./src/dropzone.ts",

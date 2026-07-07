@@ -25,6 +25,15 @@
       "@fex/components-core/disclosure/create-disclosure": [
         "packages/components/core/src/disclosure/create-disclosure.ts"
       ],
+      "@fex/components-core/expansion/create-expansion-controller": [
+        "packages/components/core/src/expansion/create-expansion-controller.ts"
+      ],
+      "@fex/components-core/expansion/types": [
+        "packages/components/core/src/expansion/types.ts"
+      ],
+      "@fex/components-core/expansion/utils": [
+        "packages/components/core/src/expansion/utils.ts"
+      ],
       "@fex/components-core/floating/create-floating": [
         "packages/components/core/src/floating/create-floating.ts"
       ],
@@ -106,6 +115,12 @@
       "@fex/components-angular/primitive/listbox": [
         "packages/components/angular/src/primitive/listbox/listbox.ts"
       ],
+      "@fex/components-angular/primitive/menu": [
+        "packages/components/angular/src/primitive/menu/menu.ts"
+      ],
+      "@fex/components-angular/primitive/menu-types": [
+        "packages/components/angular/src/primitive/menu/menu-types.ts"
+      ],
       "@fex/components-angular/primitive/pagination": [
         "packages/components/angular/src/primitive/pagination/pagination.ts"
       ],
@@ -136,8 +151,14 @@
       "@fex/components-angular/ui/listbox": [
         "packages/components/angular/src/ui/listbox/listbox.ts"
       ],
+      "@fex/components-angular/ui/menu": [
+        "packages/components/angular/src/ui/menu/menu.ts"
+      ],
       "@fex/components-angular/ui/spinner": [
         "packages/components/angular/src/ui/spinner/spinner.ts"
+      ],
+      "@fex/components-angular/icon/check": [
+        "packages/components/angular/src/icon/check.ts"
       ],
       "@fex/components-angular/icon/chevron": [
         "packages/components/angular/src/icon/chevron.ts"

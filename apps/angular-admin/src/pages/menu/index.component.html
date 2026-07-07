@@ -1,0 +1,139 @@
+<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
+  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
+    <header class="space-y-space-md">
+      <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">Back home</a>
+      <div>
+        <h1 class="text-2xl font-semibold text-foreground">Menu</h1>
+        <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+          Nested menu body built from shared expansion, selection and tree traversal helpers.
+        </p>
+      </div>
+    </header>
+
+    <div class="grid gap-space-xl lg:grid-cols-2">
+      <fex-card title="Basic" description="Items, nested children, group, divider and disabled state.">
+        <fex-menu [items]="menuItems" [defaultExpandKeys]="['system']" [defaultSelectedKeys]="['dashboard']" />
+      </fex-card>
+
+      <fex-card title="Horizontal" description="Horizontal displays top-level items; nested popup menus belong to Dropdown or Popover composition.">
+        <fex-menu [items]="horizontalItems" orientation="horizontal" [defaultSelectedKeys]="['analytics']" />
+      </fex-card>
+
+      <fex-card title="Controlled" description="Controlled expanded and selected key arrays.">
+        <fex-menu
+          [items]="menuItems"
+          [expandKeys]="expandKeys()"
+          [selectedKeys]="selectedKeys()"
+          [expandMultiple]="false"
+          (expandChange)="setExpandKeys($event)"
+          (select)="setSelectedKeys($event)"
+        />
+      </fex-card>
+
+      <fex-card title="Multiple Selection" description="Leaf item selection can opt into multiple keys.">
+        <fex-menu
+          [items]="menuItems"
+          [defaultExpandKeys]="['system', 'content']"
+          [defaultSelectedKeys]="['users', 'articles']"
+          [selectMultiple]="true"
+        />
+      </fex-card>
+
+      <fex-card title="Suffix" description="Right-side content can be provided by data.">
+        <fex-menu [items]="menuItems" [defaultExpandKeys]="['system', 'content']" [defaultSelectedKeys]="['comments']" />
+      </fex-card>
+
+      <fex-card title="Custom Item" description="itemTemplate replaces the whole item content area.">
+        <ng-template #customItem let-info>
+          <span class="inline-flex size-4 shrink-0 items-center justify-center text-xs">{{ info.item.icon || "." }}</span>
+          <span class="min-w-0 flex-1 truncate">
+            {{ info.item.label }}
+            @if (info.selected) {
+              <span class="ml-2 text-xs text-primary">selected</span>
+            }
+          </span>
+          @if (info.hasChildren) {
+            <span class="text-xs text-muted-foreground">{{ info.expanded ? "open" : "closed" }}</span>
+          }
+        </ng-template>
+        <fex-menu [items]="menuItems" [defaultExpandKeys]="['system']" [itemTemplate]="customItem" />
+      </fex-card>
+
+      <fex-card title="Headless Helper" description="Primitive tree helpers can drive custom DOM.">
+        <nav class="space-y-1" role="menu">
+          <ng-container
+            [ngTemplateOutlet]="headlessItemsTemplate"
+            [ngTemplateOutletContext]="{ items: headlessRootItems }"
+          />
+        </nav>
+      </fex-card>
+    </div>
+  </div>
+</main>
+
+<ng-template #minusIcon>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-icon lucide-minus size-4" aria-hidden="true">
+    <path d="M5 12h14" />
+  </svg>
+</ng-template>
+
+<ng-template #plusIcon>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus size-4" aria-hidden="true">
+    <path d="M5 12h14" />
+    <path d="M12 5v14" />
+  </svg>
+</ng-template>
+
+<ng-template #headlessItemsTemplate let-items="items">
+  @for (item of items; track keyForHeadlessItem(item, $index)) {
+    @if (isMenuNodeItem(item)) {
+      @let entry = headlessEntryFor(item.key);
+      @if (entry) {
+        @let info = headlessInfo(entry);
+        <div>
+          <button
+            type="button"
+            role="menuitem"
+            class="flex h-8 w-full items-center rounded-md px-2 text-left text-sm hover:bg-muted-background data-[selected=true]:bg-primary/10 data-[selected=true]:text-primary"
+            [attr.data-selected]="info.selected ? 'true' : 'false'"
+            [attr.style]="headlessStyle(entry)"
+            (click)="clickHeadless(entry)"
+          >
+            <span class="min-w-0 flex-1 truncate">{{ entry.node.label }}</span>
+            @if (info.hasChildren) {
+              <span class="inline-flex size-4 shrink-0 items-center justify-center text-muted-foreground">
+                <ng-container [ngTemplateOutlet]="info.expanded ? minusIcon : plusIcon" />
+              </span>
+            }
+          </button>
+          @if (info.hasChildren) {
+            <div
+              class="grid overflow-hidden transition-[grid-template-rows,opacity] duration-150 ease-out"
+              [style.grid-template-rows]="info.expanded ? '1fr' : '0fr'"
+              [style.opacity]="info.expanded ? 1 : 0"
+            >
+              <div class="min-h-0 overflow-hidden">
+                <ng-container
+                  [ngTemplateOutlet]="headlessItemsTemplate"
+                  [ngTemplateOutletContext]="{ items: entry.node.children ?? [] }"
+                />
+              </div>
+            </div>
+          }
+        </div>
+      }
+    } @else if (item.type === "divider") {
+      <div class="my-1 h-px bg-border"></div>
+    } @else {
+      <div class="py-1">
+        @if (item.label) {
+          <div class="px-2 py-1 text-xs font-medium text-muted-foreground">{{ item.label }}</div>
+        }
+        <ng-container
+          [ngTemplateOutlet]="headlessItemsTemplate"
+          [ngTemplateOutletContext]="{ items: item.children }"
+        />
+      </div>
+    }
+  }
+</ng-template>

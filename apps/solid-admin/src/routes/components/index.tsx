@@ -13,6 +13,7 @@ const EmptyPage = lazy(() => import('../../pages/Empty').then((module) => ({ def
 const InputPage = lazy(() => import('../../pages/Input').then((module) => ({ default: module.InputPage })))
 const KbdPage = lazy(() => import('../../pages/Kbd').then((module) => ({ default: module.KbdPage })))
 const ListboxPage = lazy(() => import('../../pages/Listbox').then((module) => ({ default: module.ListboxPage })))
+const MenuPage = lazy(() => import('../../pages/Menu').then((module) => ({ default: module.MenuPage })))
 const PaginationPage = lazy(() =>
   import('../../pages/Pagination').then((module) => ({ default: module.PaginationPage })),
 )
@@ -62,6 +63,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/listbox',
     component: ListboxPage,
+  },
+  {
+    path: '/menu',
+    component: MenuPage,
   },
   {
     path: '/pagination',

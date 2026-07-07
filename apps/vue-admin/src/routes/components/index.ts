@@ -7,6 +7,7 @@ export const componentRoutes = [
   { path: '/input', component: () => import('../../pages/Input/index.vue') },
   { path: '/kbd', component: () => import('../../pages/Kbd/index.vue') },
   { path: '/listbox', component: () => import('../../pages/Listbox/index.vue') },
+  { path: '/menu', component: () => import('../../pages/Menu/index.vue') },
   { path: '/pagination', component: () => import('../../pages/Pagination/index.vue') },
   { path: '/popover', component: () => import('../../pages/Popover/index.vue') },
   { path: '/spinner', component: () => import('../../pages/Spinner/index.vue') },

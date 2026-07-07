@@ -8,6 +8,7 @@
     { href: '/input', label: 'Input' },
     { href: '/kbd', label: 'Kbd' },
     { href: '/listbox', label: 'Listbox' },
+    { href: '/menu', label: 'Menu' },
     { href: '/pagination', label: 'Pagination' },
     { href: '/popover', label: 'Popover' },
     { href: '/spinner', label: 'Spinner' },
