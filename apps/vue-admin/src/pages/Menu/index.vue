@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineComponent, h, ref } from 'vue'
+import { defineComponent, h, ref, type VNodeChild } from 'vue'
 import { useMenu, type MenuNodeEntry } from '@fex/components-vue/primitive/menu'
 import { Menu, type MenuItem, type MenuKey, type MenuRenderItemInfo } from '@fex/components-vue/ui/menu'
 import Card from '@fex/components-vue/ui/card'
@@ -80,7 +80,7 @@ function renderCustomItem(info: MenuRenderItemInfo) {
 const HeadlessMenu = defineComponent({
   name: 'HeadlessMenu',
   setup() {
-    function renderItems(items: readonly MenuItem[]) {
+    function renderItems(items: readonly MenuItem[]): VNodeChild[] {
       return items.map((item, index) => {
         if ('type' in item) {
           if (item.type === 'divider') {
@@ -98,7 +98,7 @@ const HeadlessMenu = defineComponent({
       })
     }
 
-    function renderNode(entry: MenuNodeEntry) {
+    function renderNode(entry: MenuNodeEntry): VNodeChild {
       const info = headlessMenu.getItemInfo(entry)
 
       return h('div', { key: info.key }, [
@@ -113,7 +113,7 @@ const HeadlessMenu = defineComponent({
             onClick: () => headlessMenu.clickItem(info),
           },
           [
-            h('span', { class: 'min-w-0 flex-1 truncate' }, info.item.label),
+            h('span', { class: 'min-w-0 flex-1 truncate' }, info.item.label ?? ''),
             info.hasChildren
               ? h('span', { class: 'inline-flex size-4 shrink-0 items-center justify-center text-muted-foreground' }, [
                   info.expanded ? MinusIcon() : PlusIcon(),

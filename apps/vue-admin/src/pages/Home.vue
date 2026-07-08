@@ -2,6 +2,7 @@
 const componentLinks = [
   { to: '/button', label: 'Button' },
   { to: '/card', label: 'Card' },
+  { to: '/checkbox', label: 'Checkbox' },
   { to: '/alert', label: 'Alert' },
   { to: '/badge', label: 'Badge' },
   { to: '/empty', label: 'Empty' },
@@ -11,7 +12,10 @@ const componentLinks = [
   { to: '/menu', label: 'Menu' },
   { to: '/pagination', label: 'Pagination' },
   { to: '/popover', label: 'Popover' },
+  { to: '/radio', label: 'Radio' },
   { to: '/spinner', label: 'Spinner' },
+  { to: '/slider', label: 'Slider' },
+  { to: '/switch', label: 'Switch' },
   { to: '/table', label: 'Table' },
   { to: '/sortable', label: 'Sortable' },
   { to: '/interactions', label: 'Interactions' },

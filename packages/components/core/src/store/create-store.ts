@@ -1,5 +1,10 @@
 export type StoreListener = () => void
 
+export interface SnapshotStore<TSnapshot> {
+  getSnapshot: () => TSnapshot
+  subscribe: (listener: StoreListener) => () => void
+}
+
 export interface Store<TSnapshot> {
   getSnapshot: () => TSnapshot
   setSnapshot: (nextSnapshot: TSnapshot) => void

@@ -11,6 +11,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Card'), 'CardPage'),
   },
   {
+    path: '/checkbox',
+    element: createLazyRouteElement(() => import('../../pages/Checkbox'), 'CheckboxPage'),
+  },
+  {
     path: '/alert',
     element: createLazyRouteElement(() => import('../../pages/Alert'), 'AlertPage'),
   },
@@ -47,8 +51,20 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Popover'), 'PopoverPage'),
   },
   {
+    path: '/radio',
+    element: createLazyRouteElement(() => import('../../pages/Radio'), 'RadioPage'),
+  },
+  {
     path: '/spinner',
     element: createLazyRouteElement(() => import('../../pages/Spinner'), 'SpinnerPage'),
+  },
+  {
+    path: '/slider',
+    element: createLazyRouteElement(() => import('../../pages/Slider'), 'SliderPage'),
+  },
+  {
+    path: '/switch',
+    element: createLazyRouteElement(() => import('../../pages/Switch'), 'SwitchPage'),
   },
   {
     path: '/table',

@@ -15,14 +15,13 @@
   } from '@fex/components-styles/menu'
   import { cn } from '@fex/utils'
   import {
-    getMenuNodeEntries,
     isMenuNodeItem,
-    normalizeMenuKeys,
     type MenuItem,
     type MenuKey,
     type MenuNodeEntry,
     type MenuRenderItemInfo,
   } from '../../primitive/menu/menu'
+  import { useMenuState } from './use-menu.svelte'
   import type { Snippet } from 'svelte'
 
   type PartClass = {
@@ -75,49 +74,19 @@
     onSelect?: (keys: MenuKey[], info: MenuRenderItemInfo) => void
   } = $props()
 
-  let uncontrolledExpandKeys = $state(normalizeMenuKeys(defaultExpandKeys, expandMultiple))
-  let uncontrolledSelectedKeys = $state(normalizeMenuKeys(defaultSelectedKeys, selectMultiple))
-  let nodeEntries = $derived(getMenuNodeEntries(items))
-  let entryMap = $derived(new Map(nodeEntries.map((entry) => [entry.key, entry])))
-  let currentExpandKeys = $derived(expandKeys ?? uncontrolledExpandKeys)
-  let currentSelectedKeys = $derived(selectedKeys ?? uncontrolledSelectedKeys)
-
-  function getItemInfo(entry: MenuNodeEntry): MenuRenderItemInfo {
-    return {
-      item: entry.node,
-      key: entry.key,
-      level: entry.level,
-      index: entry.index,
-      selected: currentSelectedKeys.includes(entry.key),
-      expanded: currentExpandKeys.includes(entry.key),
-      disabled: disabled || entry.node.disabled === true,
-      hasChildren: entry.hasChildren,
-    }
-  }
-
-  function clickItem(info: MenuRenderItemInfo) {
-    if (info.disabled) return
-    if (info.hasChildren) {
-      const nextKeys = normalizeMenuKeys(
-        info.expanded ? currentExpandKeys.filter((key) => key !== info.key) : [...currentExpandKeys, info.key],
-        expandMultiple,
-      )
-      if (expandKeys === undefined) uncontrolledExpandKeys = nextKeys
-      onExpandChange?.(nextKeys, info)
-      return
-    }
-    if (!selectable) return
-    const nextKeys = normalizeMenuKeys(
-      selectMultiple
-        ? info.selected
-          ? currentSelectedKeys.filter((key) => key !== info.key)
-          : [...currentSelectedKeys, info.key]
-        : [info.key],
-      selectMultiple,
-    )
-    if (selectedKeys === undefined) uncontrolledSelectedKeys = nextKeys
-    onSelect?.(nextKeys, info)
-  }
+  const menu = useMenuState(() => ({
+    items,
+    expandKeys,
+    defaultExpandKeys,
+    expandMultiple,
+    selectedKeys,
+    defaultSelectedKeys,
+    selectMultiple,
+    selectable,
+    disabled,
+    onExpandChange,
+    onSelect,
+  }))
 
   function textOf(value: string | import('svelte').Snippet | undefined) {
     return typeof value === 'string' ? value : ''
@@ -131,7 +100,7 @@
 {/snippet}
 
 {#snippet renderNode(entry: MenuNodeEntry, hidden: boolean)}
-  {@const info = getItemInfo(entry)}
+  {@const info = menu.getItemInfo(entry)}
   <div data-slot="menu-node">
     <button
       type="button"
@@ -145,11 +114,11 @@
       data-disabled={info.disabled ? 'true' : undefined}
       class={cn(menuItemClassName({ orientation }), className?.item)}
       style={orientation === 'vertical' ? `padding-left: calc(var(--menu-item-padding-x) + ${info.level * indent}px)` : undefined}
-      onclick={() => !hidden && clickItem(info)}
+      onclick={() => !hidden && menu.clickItem(info)}
       onkeydown={(event) => {
         if (hidden || (event.key !== 'Enter' && event.key !== ' ')) return
         event.preventDefault()
-        clickItem(info)
+        menu.clickItem(info)
       }}
     >
       {#if renderItem}
@@ -180,7 +149,7 @@
 {#snippet renderItems(menuItems: readonly MenuItem[], hidden: boolean)}
   {#each menuItems as item, index (isMenuNodeItem(item) ? item.key : item.key ?? `${item.type}-${index}`)}
     {#if isMenuNodeItem(item)}
-      {@const entry = entryMap.get(item.key)}
+      {@const entry = menu.entryMap.get(item.key)}
       {#if entry}{@render renderNode(entry, hidden)}{/if}
     {:else if item.type === 'divider'}
       <div role="separator" data-slot="menu-divider" class={cn(menuDividerClassName, className?.divider)}></div>

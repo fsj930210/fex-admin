@@ -7,6 +7,33 @@
       "@fex/components-core/store/create-store": [
         "packages/components/core/src/store/create-store.ts"
       ],
+      "@fex/components-core/toggle/create-toggle-controller": [
+        "packages/components/core/src/toggle/create-toggle-controller.ts"
+      ],
+      "@fex/components-core/toggle/types": [
+        "packages/components/core/src/toggle/types.ts"
+      ],
+      "@fex/components-core/slider/create-slider-controller": [
+        "packages/components/core/src/slider/create-slider-controller.ts"
+      ],
+      "@fex/components-core/slider/types": [
+        "packages/components/core/src/slider/types.ts"
+      ],
+      "@fex/components-core/slider/utils": [
+        "packages/components/core/src/slider/utils.ts"
+      ],
+      "@fex/components-core/checkbox/create-checkbox-controller": [
+        "packages/components/core/src/checkbox/create-checkbox-controller.ts"
+      ],
+      "@fex/components-core/checkbox/create-checkbox-group-controller": [
+        "packages/components/core/src/checkbox/create-checkbox-group-controller.ts"
+      ],
+      "@fex/components-core/checkbox/types": [
+        "packages/components/core/src/checkbox/types.ts"
+      ],
+      "@fex/components-core/checkbox/utils": [
+        "packages/components/core/src/checkbox/utils.ts"
+      ],
       "@fex/components-core/dropzone/accept": [
         "packages/components/core/src/dropzone/accept.ts"
       ],
@@ -106,6 +133,9 @@
       "@fex/components-angular/primitive/card": [
         "packages/components/angular/src/primitive/card/card.ts"
       ],
+      "@fex/components-angular/primitive/checkbox": [
+        "packages/components/angular/src/primitive/checkbox/checkbox.ts"
+      ],
       "@fex/components-angular/primitive/empty": [
         "packages/components/angular/src/primitive/empty/empty.ts"
       ],
@@ -127,8 +157,17 @@
       "@fex/components-angular/primitive/popover": [
         "packages/components/angular/src/primitive/popover/popover.ts"
       ],
+      "@fex/components-angular/primitive/radio": [
+        "packages/components/angular/src/primitive/radio/radio.ts"
+      ],
+      "@fex/components-angular/primitive/slider": [
+        "packages/components/angular/src/primitive/slider/slider-primitive.ts"
+      ],
       "@fex/components-angular/primitive/sortable": [
         "packages/components/angular/src/primitive/sortable/sortable.ts"
+      ],
+      "@fex/components-angular/primitive/switch": [
+        "packages/components/angular/src/primitive/switch/switch.ts"
       ],
       "@fex/components-angular/primitive/table": [
         "packages/components/angular/src/primitive/table/table.ts"
@@ -144,6 +183,9 @@
       ],
       "@fex/components-angular/ui/card": [
         "packages/components/angular/src/ui/card/card.ts"
+      ],
+      "@fex/components-angular/ui/checkbox": [
+        "packages/components/angular/src/ui/checkbox/checkbox.ts"
       ],
       "@fex/components-angular/ui/kbd": [
         "packages/components/angular/src/ui/kbd/kbd.ts"
@@ -165,6 +207,9 @@
       ],
       "@fex/components-angular/icon/loading": [
         "packages/components/angular/src/icon/loading.ts"
+      ],
+      "@fex/components-angular/icon/minus": [
+        "packages/components/angular/src/icon/minus.ts"
       ],
       "@fex/components-angular/icon/more": [
         "packages/components/angular/src/icon/more.ts"

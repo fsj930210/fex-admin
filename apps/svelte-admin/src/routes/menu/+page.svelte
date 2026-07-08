@@ -1,7 +1,7 @@
 <script lang="ts">
   import Card from '@fex/components-svelte/ui/card'
   import Menu from '@fex/components-svelte/ui/menu'
-  import { getMenuNodeEntries, isMenuNodeItem, normalizeMenuKeys, type MenuItem, type MenuKey, type MenuNodeEntry } from '@fex/components-svelte/primitive/menu'
+  import { getMenuNodeEntries, isMenuNodeItem, normalizeMenuKeys, type MenuItem, type MenuKey, type MenuNodeEntry, type MenuRenderItemInfo } from '@fex/components-svelte/primitive/menu'
 
   const menuItems: MenuItem[] = [
     { key: 'dashboard', label: 'Dashboard', icon: 'D' },
@@ -79,7 +79,7 @@
   </svg>
 {/snippet}
 
-{#snippet customItem(info)}
+{#snippet customItem(info: MenuRenderItemInfo)}
   <span class="inline-flex size-4 shrink-0 items-center justify-center text-xs">{info.item.icon ?? '.'}</span>
   <span class="min-w-0 flex-1 truncate">
     {info.item.label}
@@ -88,7 +88,7 @@
   {#if info.hasChildren}<span class="text-xs text-muted-foreground">{info.expanded ? 'open' : 'closed'}</span>{/if}
 {/snippet}
 
-{#snippet renderHeadlessItems(items)}
+{#snippet renderHeadlessItems(items: readonly MenuItem[])}
   {#each items as item, index (isMenuNodeItem(item) ? item.key : item.key ?? `${item.type}-${index}`)}
     {#if isMenuNodeItem(item)}
       {@const entry = headlessEntryMap.get(item.key)}
@@ -104,7 +104,7 @@
   {/each}
 {/snippet}
 
-{#snippet renderHeadlessNode(entry)}
+{#snippet renderHeadlessNode(entry: MenuNodeEntry)}
   {@const info = headlessInfo(entry)}
   <div>
     <button

@@ -1,9 +1,5 @@
 export type SelectionValue = string | number
 
-export type CheckedState = 'checked' | 'unchecked'
-
-export type GroupCheckedState = CheckedState | 'indeterminate'
-
 export interface SelectionChangeMeta {
   previousValues: SelectionValue[]
   changedValues: SelectionValue[]
@@ -28,8 +24,6 @@ export interface SelectionController {
   subscribe: (listener: () => void) => () => void
   isSelected: (value: SelectionValue) => boolean
   isDisabled: (value: SelectionValue) => boolean
-  getCheckedState: (value: SelectionValue) => CheckedState
-  getGroupCheckedState: (values: readonly SelectionValue[]) => GroupCheckedState
   select: (value: SelectionValue) => void
   unselect: (value: SelectionValue) => void
   toggle: (value: SelectionValue) => void

@@ -12,6 +12,11 @@ export const componentRoutes: Routes = [
       import('../../pages/card/index.component').then((module) => module.CardComponent),
   },
   {
+    path: 'checkbox',
+    loadComponent: () =>
+      import('../../pages/checkbox/index.component').then((module) => module.CheckboxComponent),
+  },
+  {
     path: 'alert',
     loadComponent: () => import('../../pages/alert/index.component').then((module) => module.AlertComponent),
   },
@@ -51,9 +56,21 @@ export const componentRoutes: Routes = [
       import('../../pages/popover/index.component').then((module) => module.PopoverComponent),
   },
   {
+    path: 'radio',
+    loadComponent: () => import('../../pages/radio/index.component').then((module) => module.RadioComponent),
+  },
+  {
     path: 'spinner',
     loadComponent: () =>
       import('../../pages/spinner/index.component').then((module) => module.SpinnerComponent),
+  },
+  {
+    path: 'slider',
+    loadComponent: () => import('../../pages/slider/index.component').then((module) => module.SliderComponent),
+  },
+  {
+    path: 'switch',
+    loadComponent: () => import('../../pages/switch/index.component').then((module) => module.SwitchComponent),
   },
   {
     path: 'table',

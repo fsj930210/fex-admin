@@ -1,0 +1,73 @@
+<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
+  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
+    <header class="space-y-space-xl">
+      <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">Back home</a>
+      <div>
+        <h1 class="text-2xl font-semibold text-foreground">Slider</h1>
+        <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">Primitive slider with shared core value logic.</p>
+      </div>
+    </header>
+    <div class="space-y-space-xl">
+      <fex-card title="Basic" description="Uncontrolled slider uses defaultValue.">
+        <div class="grid gap-space-sm">
+          <div fexSliderPrimitive defaultValue="32" aria-label="Volume" (valueChange)="basicValue.set($event)">
+            <span fexSliderTrack><span fexSliderRange></span></span>
+            <span fexSliderThumb aria-label="Volume"></span>
+          </div>
+          <p class="text-sm text-muted-foreground">Current value: {{ basicValue().join(', ') }}</p>
+        </div>
+      </fex-card>
+      <fex-card title="Controlled" description="Controlled slider uses value and valueChange.">
+        <div class="grid gap-space-sm">
+          <div fexSliderPrimitive [value]="controlledValue()" aria-label="Controlled slider" (valueChange)="controlledValue.set($event)">
+            <span fexSliderTrack><span fexSliderRange></span></span>
+            <span fexSliderThumb aria-label="Controlled slider"></span>
+          </div>
+          <p class="text-sm text-muted-foreground">Current value: {{ controlledValue().join(', ') }}</p>
+        </div>
+      </fex-card>
+      <fex-card title="Range" description="Use an array with two values for a range slider.">
+        <div class="grid gap-space-sm">
+          <div fexSliderPrimitive defaultValue="20,80" minStepsBetweenThumbs="4" aria-label="Range slider" (valueChange)="rangeValue.set($event)">
+            <span fexSliderTrack><span fexSliderRange></span></span>
+            <span fexSliderThumb index="0" aria-label="Minimum value"></span>
+            <span fexSliderThumb index="1" aria-label="Maximum value"></span>
+          </div>
+          <p class="text-sm text-muted-foreground">Current value: {{ rangeValue().join(', ') }}</p>
+        </div>
+      </fex-card>
+      <fex-card title="Multiple Thumbs" description="Use more than two values to create multiple thumbs.">
+        <div class="grid gap-space-sm">
+          <div fexSliderPrimitive defaultValue="15,45,75" minStepsBetweenThumbs="4" aria-label="Multiple thumbs slider" (valueChange)="multipleValue.set($event)">
+            <span fexSliderTrack><span fexSliderRange></span></span>
+            <span fexSliderThumb index="0" aria-label="First value"></span>
+            <span fexSliderThumb index="1" aria-label="Second value"></span>
+            <span fexSliderThumb index="2" aria-label="Third value"></span>
+          </div>
+          <p class="text-sm text-muted-foreground">Current value: {{ multipleValue().join(', ') }}</p>
+        </div>
+      </fex-card>
+      <fex-card title="Orientation" description="Slider supports horizontal and vertical orientation.">
+        <div class="flex items-center gap-space-xl">
+          <div class="w-full max-w-md">
+            <div fexSliderPrimitive defaultValue="45" aria-label="Horizontal slider"><span fexSliderTrack><span fexSliderRange></span></span><span fexSliderThumb aria-label="Horizontal slider"></span></div>
+          </div>
+          <div fexSliderPrimitive orientation="vertical" defaultValue="60" aria-label="Vertical slider"><span fexSliderTrack><span fexSliderRange></span></span><span fexSliderThumb aria-label="Vertical slider"></span></div>
+        </div>
+      </fex-card>
+      <fex-card title="Sizes" description="Slider supports sm, default, and lg sizes.">
+        <div class="grid gap-space-md">
+          <div fexSliderPrimitive size="sm" defaultValue="25" aria-label="Small slider"><span fexSliderTrack><span fexSliderRange></span></span><span fexSliderThumb aria-label="Small slider"></span></div>
+          <div fexSliderPrimitive defaultValue="50" aria-label="Default slider"><span fexSliderTrack><span fexSliderRange></span></span><span fexSliderThumb aria-label="Default slider"></span></div>
+          <div fexSliderPrimitive size="lg" defaultValue="75" aria-label="Large slider"><span fexSliderTrack><span fexSliderRange></span></span><span fexSliderThumb aria-label="Large slider"></span></div>
+        </div>
+      </fex-card>
+      <fex-card title="Disabled" description="Disabled state blocks input.">
+        <div class="grid gap-space-sm">
+          <div fexSliderPrimitive disabled defaultValue="60" aria-label="Disabled slider"><span fexSliderTrack><span fexSliderRange></span></span><span fexSliderThumb aria-label="Disabled slider"></span></div>
+          <p class="text-sm text-muted-foreground">Current value: 60</p>
+        </div>
+      </fex-card>
+    </div>
+  </div>
+</main>

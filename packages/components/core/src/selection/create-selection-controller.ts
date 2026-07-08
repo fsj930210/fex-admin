@@ -1,7 +1,5 @@
 import { createStore } from '../store/create-store'
 import type {
-  CheckedState,
-  GroupCheckedState,
   SelectionController,
   SelectionOptions,
   SelectionValue,
@@ -83,24 +81,6 @@ export function createSelectionController(options: SelectionOptions = {}): Selec
     subscribe: store.subscribe,
     isSelected: (value) => getCurrentSnapshot().values.includes(value),
     isDisabled: (value) => getDisabledValues().has(value),
-    getCheckedState: (value): CheckedState =>
-      getCurrentSnapshot().values.includes(value) ? 'checked' : 'unchecked',
-    getGroupCheckedState: (values): GroupCheckedState => {
-      const enabledValues = values.filter((value) => !getDisabledValues().has(value))
-
-      if (enabledValues.length === 0) {
-        return 'unchecked'
-      }
-
-      const selectedValues = new Set(getCurrentSnapshot().values)
-      const selectedCount = enabledValues.filter((value) => selectedValues.has(value)).length
-
-      if (selectedCount === 0) {
-        return 'unchecked'
-      }
-
-      return selectedCount === enabledValues.length ? 'checked' : 'indeterminate'
-    },
     select: (value) => {
       if (controller.isDisabled(value)) {
         return

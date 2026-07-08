@@ -4,6 +4,7 @@ import { For } from 'solid-js'
 const componentLinks = [
   { href: '/button', label: 'Button' },
   { href: '/card', label: 'Card' },
+  { href: '/checkbox', label: 'Checkbox' },
   { href: '/alert', label: 'Alert' },
   { href: '/badge', label: 'Badge' },
   { href: '/empty', label: 'Empty' },
@@ -13,7 +14,10 @@ const componentLinks = [
   { href: '/menu', label: 'Menu' },
   { href: '/pagination', label: 'Pagination' },
   { href: '/popover', label: 'Popover' },
+  { href: '/radio', label: 'Radio' },
   { href: '/spinner', label: 'Spinner' },
+  { href: '/slider', label: 'Slider' },
+  { href: '/switch', label: 'Switch' },
   { href: '/table', label: 'Table' },
   { href: '/sortable', label: 'Sortable' },
   { href: '/interactions', label: 'Interactions' },

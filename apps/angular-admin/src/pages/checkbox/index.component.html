@@ -1,0 +1,74 @@
+<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
+  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
+    <header class="space-y-space-xl">
+      <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">Back home</a>
+      <div>
+        <h1 class="text-2xl font-semibold text-foreground">Checkbox</h1>
+        <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+          Boolean checks, grouped layouts, indeterminate state, disabled state, and aria-invalid styling.
+        </p>
+      </div>
+    </header>
+
+    <div class="space-y-space-xl">
+      <fex-card title="Primitive" description="Self-owned checkbox primitive exported as low-level parts.">
+        <button fexCheckboxPrimitive [defaultChecked]="true" aria-label="Primitive checkbox"></button>
+      </fex-card>
+
+      <fex-card title="Basic" description="Default UI wrapper with native data and aria attributes.">
+        <div class="grid min-w-0 gap-space-md">
+          <div class="inline-flex items-center gap-2 text-sm"><button fexCheckbox [defaultChecked]="true"></button><span>Enable notifications</span></div>
+          <div class="inline-flex items-center gap-2 text-sm"><button fexCheckbox aria-invalid="true"></button><span>Invalid style from aria-invalid</span></div>
+        </div>
+      </fex-card>
+
+      <fex-card title="Controlled" description="Controlled state uses checked and checkedChange.">
+        <div class="grid min-w-0 gap-space-md">
+          <div class="inline-flex items-center gap-2 text-sm">
+            <button fexCheckbox [checked]="controlled()" (checkedChange)="controlled.set($event.checked)"></button>
+            <span>Controlled checkbox</span>
+          </div>
+          <p class="text-sm text-muted-foreground">Current value: {{ controlled() }}</p>
+        </div>
+      </fex-card>
+
+      <fex-card title="Indeterminate" description="Compose check-all behavior from normal events.">
+        <div class="grid min-w-0 gap-space-md">
+          <div class="inline-flex items-center gap-2 text-sm">
+            <button fexCheckbox [checked]="checkAllState()" (checkedChange)="partialValue.set($event.checked === true ? optionValues : [])"></button>
+            <span>Check all permissions</span>
+          </div>
+          <div fexCheckboxGroup>
+            @for (option of options; track option.value) {
+            <div class="inline-flex items-center gap-2 text-sm">
+              <button fexCheckbox [checked]="partialValue().includes(option.value)" (checkedChange)="setPartialValue(option.value, $event.checked)"></button>
+              <span>{{ option.label }}</span>
+            </div>
+            }
+          </div>
+        </div>
+      </fex-card>
+
+      <fex-card title="Group" description="CheckboxGroup is a layout wrapper; value arrays stay in the caller.">
+        <div class="grid min-w-0 gap-space-md">
+          <div fexCheckboxGroup orientation="horizontal">
+            @for (option of options; track option.value) {
+            <div class="inline-flex items-center gap-2 text-sm">
+              <button fexCheckbox [checked]="permissions().includes(option.value)" (checkedChange)="setPermission(option.value, $event.checked)"></button>
+              <span>{{ option.label }}</span>
+            </div>
+            }
+          </div>
+          <p class="text-sm text-muted-foreground">Selected: {{ permissions().join(', ') || 'none' }}</p>
+        </div>
+      </fex-card>
+
+      <fex-card title="Disabled" description="Disabled state comes from the Root disabled prop.">
+        <div fexCheckboxGroup>
+          <div class="inline-flex items-center gap-2 text-sm"><button fexCheckbox disabled></button><span>Disabled unchecked</span></div>
+          <div class="inline-flex items-center gap-2 text-sm"><button fexCheckbox disabled [defaultChecked]="true"></button><span>Disabled checked</span></div>
+        </div>
+      </fex-card>
+    </div>
+  </div>
+</main>
