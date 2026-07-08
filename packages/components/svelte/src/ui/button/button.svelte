@@ -12,9 +12,10 @@
   import PrimitiveButton from '../../primitive/button/button.svelte'
 
   interface ButtonProps extends Omit<HTMLButtonAttributes, 'class' | 'disabled'>, ButtonStyleProps {
+    action?: (element: HTMLButtonElement) => { destroy?: () => void } | void
     iconPlacement?: 'start' | 'end'
     loading?: boolean
-    disabled?: boolean
+    disabled?: boolean | null
     class?: string
     children?: Snippet
     icon?: Snippet
@@ -28,6 +29,7 @@
     loading = false,
     disabled = false,
     type = 'button',
+    action,
     class: className,
     children,
     icon,
@@ -37,6 +39,15 @@
 
   const classList = $derived(cn(buttonClassName({ variant, size, effect }), className))
   const isDisabled = $derived(disabled || loading)
+
+  function buttonAction(element: HTMLButtonElement) {
+    const cleanup = action?.(element)
+    return {
+      destroy() {
+        cleanup?.destroy?.()
+      },
+    }
+  }
 </script>
 
 <PrimitiveButton
@@ -49,6 +60,7 @@
   data-loading={loading ? 'true' : undefined}
   disabled={isDisabled}
   type={type}
+  action={buttonAction}
   {onclick}
 >
   {#if iconPlacement === 'start' && (loading || icon)}

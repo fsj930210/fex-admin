@@ -2,6 +2,7 @@ export const componentRoutes = [
   { path: '/button', component: () => import('../../pages/Button/index.vue') },
   { path: '/card', component: () => import('../../pages/Card/index.vue') },
   { path: '/checkbox', component: () => import('../../pages/Checkbox/index.vue') },
+  { path: '/dialog', component: () => import('../../pages/Dialog/index.vue') },
   { path: '/alert', component: () => import('../../pages/Alert/index.vue') },
   { path: '/badge', component: () => import('../../pages/Badge/index.vue') },
   { path: '/empty', component: () => import('../../pages/Empty/index.vue') },

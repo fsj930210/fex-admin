@@ -10,6 +10,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  contentChild,
+  ElementRef,
   input,
 } from "@angular/core";
 import { LoadingIcon } from "../../icon/loading";
@@ -63,8 +65,16 @@ export class Button {
   disabled = input(false, { transform: booleanAttribute });
 
   protected readonly spinnerClassName = buttonSpinnerClassName;
+  private readonly startIcon = contentChild("[slot=start]", { read: ElementRef });
+  private readonly endIcon = contentChild("[slot=end]", { read: ElementRef });
 
   protected readonly disabledState = computed(() => this.disabled() || this.loading());
+  protected readonly showStartIcon = computed(
+    () => this.iconPlacement() === "start" && (this.loading() || Boolean(this.startIcon())),
+  );
+  protected readonly showEndIcon = computed(
+    () => this.iconPlacement() === "end" && (this.loading() || Boolean(this.endIcon())),
+  );
 
   protected readonly hostClassName = createHostClassName(() =>
     cn(

@@ -10,6 +10,7 @@ const CardPage = lazy(() =>
 const CheckboxPage = lazy(() =>
   import('../../pages/Checkbox').then((module) => ({ default: module.CheckboxPage })),
 )
+const DialogPage = lazy(() => import('../../pages/Dialog').then((module) => ({ default: module.DialogPage })))
 const AlertPage = lazy(() => import('../../pages/Alert').then((module) => ({ default: module.AlertPage })))
 const BadgePage = lazy(() => import('../../pages/Badge').then((module) => ({ default: module.BadgePage })))
 const EmptyPage = lazy(() => import('../../pages/Empty').then((module) => ({ default: module.EmptyPage })))
@@ -49,6 +50,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/checkbox',
     component: CheckboxPage,
+  },
+  {
+    path: '/dialog',
+    component: DialogPage,
   },
   {
     path: '/alert',

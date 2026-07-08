@@ -8,6 +8,7 @@
     "./primitive/button": "./src/primitive/button/button.vue",
     "./primitive/card": "./src/primitive/card/card.ts",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.ts",
+    "./primitive/dialog": "./src/primitive/dialog/dialog.ts",
     "./primitive/empty": "./src/primitive/empty/empty.ts",
     "./primitive/input": "./src/primitive/input/input.ts",
     "./primitive/listbox": "./src/primitive/listbox/listbox.ts",

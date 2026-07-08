@@ -17,6 +17,10 @@ export const componentRoutes: Routes = [
       import('../../pages/checkbox/index.component').then((module) => module.CheckboxComponent),
   },
   {
+    path: 'dialog',
+    loadComponent: () => import('../../pages/dialog/index.component').then((module) => module.DialogComponent),
+  },
+  {
     path: 'alert',
     loadComponent: () => import('../../pages/alert/index.component').then((module) => module.AlertComponent),
   },

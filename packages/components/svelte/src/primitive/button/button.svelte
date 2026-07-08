@@ -5,14 +5,24 @@
   import type { HTMLButtonAttributes } from 'svelte/elements'
 
   interface ButtonProps extends Omit<HTMLButtonAttributes, 'class'> {
+    action?: (element: HTMLButtonElement) => { destroy?: () => void } | void
     class?: string
     children?: Snippet
   }
 
-  let { class: className, children, type = 'button', ...rest }: ButtonProps = $props()
+  let { action, class: className, children, type = 'button', ...rest }: ButtonProps = $props()
   const classList = $derived(cn(buttonPrimitiveClassName, className))
+
+  function buttonAction(element: HTMLButtonElement) {
+    const cleanup = action?.(element)
+    return {
+      destroy() {
+        cleanup?.destroy?.()
+      },
+    }
+  }
 </script>
 
-<button {...rest} class={classList} data-slot="button" {type}>
+<button {...rest} class={classList} data-slot="button" {type} use:buttonAction>
   {@render children?.()}
 </button>

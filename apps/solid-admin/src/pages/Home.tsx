@@ -5,6 +5,7 @@ const componentLinks = [
   { href: '/button', label: 'Button' },
   { href: '/card', label: 'Card' },
   { href: '/checkbox', label: 'Checkbox' },
+  { href: '/dialog', label: 'Dialog' },
   { href: '/alert', label: 'Alert' },
   { href: '/badge', label: 'Badge' },
   { href: '/empty', label: 'Empty' },

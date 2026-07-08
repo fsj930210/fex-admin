@@ -34,6 +34,12 @@
       "@fex/components-core/checkbox/utils": [
         "packages/components/core/src/checkbox/utils.ts"
       ],
+      "@fex/components-core/dialog/create-dialog-controller": [
+        "packages/components/core/src/dialog/create-dialog-controller.ts"
+      ],
+      "@fex/components-core/dialog/types": [
+        "packages/components/core/src/dialog/types.ts"
+      ],
       "@fex/components-core/dropzone/accept": [
         "packages/components/core/src/dropzone/accept.ts"
       ],
@@ -135,6 +141,9 @@
       ],
       "@fex/components-angular/primitive/checkbox": [
         "packages/components/angular/src/primitive/checkbox/checkbox.ts"
+      ],
+      "@fex/components-angular/primitive/dialog": [
+        "packages/components/angular/src/primitive/dialog/dialog.ts"
       ],
       "@fex/components-angular/primitive/empty": [
         "packages/components/angular/src/primitive/empty/empty.ts"

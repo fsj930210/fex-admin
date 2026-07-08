@@ -8,6 +8,7 @@
     "./primitive/button": "./src/primitive/button/button.tsx",
     "./primitive/card": "./src/primitive/card/card.tsx",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.tsx",
+    "./primitive/dialog": "./src/primitive/dialog/dialog.tsx",
     "./primitive/empty": "./src/primitive/empty/empty.tsx",
     "./primitive/input": "./src/primitive/input/input.tsx",
     "./primitive/listbox": "./src/primitive/listbox/listbox.tsx",

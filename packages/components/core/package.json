@@ -15,6 +15,8 @@
     "./checkbox/create-checkbox-group-controller": "./src/checkbox/create-checkbox-group-controller.ts",
     "./checkbox/types": "./src/checkbox/types.ts",
     "./checkbox/utils": "./src/checkbox/utils.ts",
+    "./dialog/create-dialog-controller": "./src/dialog/create-dialog-controller.ts",
+    "./dialog/types": "./src/dialog/types.ts",
     "./dropzone/accept": "./src/dropzone/accept.ts",
     "./dropzone/create-dropzone-controller": "./src/dropzone/create-dropzone-controller.ts",
     "./dropzone/files": "./src/dropzone/files.ts",

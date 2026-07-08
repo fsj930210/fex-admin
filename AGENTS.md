@@ -265,5 +265,6 @@
 
 - 开发阶段默认不要运行 `build`。除非用户明确要求构建、发布前验证、排查仅生产构建出现的问题，或者用户直接要求运行对应命令，否则不要主动执行 `pnpm build`、`nx build` 或各 app/package 的 build target。
 - 修改组件、样式和示例页后的优先验证方式是使用固定本地端口打开真实页面，直接在浏览器里检查 DOM、computed style、动画和交互表现。
+- 新增或修改组件 demo、示例路由、导航入口后，必须在对应固定端口用浏览器实际打开页面验证，不能只依赖 typecheck 或凭代码判断。验证至少包括：页面能打开且无运行时红屏/控制台错误；示例入口能点击；弹窗、浮层、菜单等交互组件必须实际触发一次打开和关闭；React/Vue/Solid/Svelte/Angular 多框架同步 demo 时，必须抽查各框架页面的关键样式规格是否一致，例如按钮尺寸、间距、弹层位置、footer 布局和遮罩效果。发现任一框架打不开或视觉明显不一致，必须先修复并重新浏览器验证后再交付。
 - 需要做类型层面的快速确认时，优先只跑受影响项目的 `typecheck`；不要把 `build` 当作日常开发验证手段。
 - `@fex/styles` 的 Tailwind `@source` 必须统一配置在 `packages/styles/src/index.css`，覆盖 apps 和 packages/components 下所有会书写 class 的源码文件类型，例如 `ts`、`tsx`、`vue`、`svelte`、`html`。不要在具体组件、具体组件样式文件或 `packages/components/styles` 里维护人工 `@source inline(...)` 清单。

@@ -9,6 +9,7 @@
     "./button": "./src/button.ts",
     "./card": "./src/card.ts",
     "./checkbox": "./src/checkbox.ts",
+    "./dialog": "./src/dialog.ts",
     "./empty": "./src/empty.ts",
     "./input": "./src/input.ts",
     "./kbd": "./src/kbd.ts",

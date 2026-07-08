@@ -15,6 +15,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Checkbox'), 'CheckboxPage'),
   },
   {
+    path: '/dialog',
+    element: createLazyRouteElement(() => import('../../pages/Dialog'), 'DialogPage'),
+  },
+  {
     path: '/alert',
     element: createLazyRouteElement(() => import('../../pages/Alert'), 'AlertPage'),
   },

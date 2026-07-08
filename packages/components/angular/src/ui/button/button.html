@@ -1,4 +1,4 @@
-@if (iconPlacement() === 'start') {
+@if (showStartIcon()) {
 <span [class]="startIconClassName()" data-icon="inline-start">
   @if (loading()) {
   <fex-loading-icon [class]="spinnerClassName" />
@@ -10,7 +10,7 @@
 
 <ng-content />
 
-@if (iconPlacement() === 'end') {
+@if (showEndIcon()) {
 <span [class]="endIconClassName()" data-icon="inline-end">
   @if (loading()) {
   <fex-loading-icon [class]="spinnerClassName" />

@@ -4,8 +4,9 @@ export function HomePage() {
   const componentLinks = [
     { to: '/button', label: 'Button' },
     { to: '/card', label: 'Card' },
-    { to: '/checkbox', label: 'Checkbox' },
-    { to: '/alert', label: 'Alert' },
+  { to: '/checkbox', label: 'Checkbox' },
+  { to: '/dialog', label: 'Dialog' },
+  { to: '/alert', label: 'Alert' },
     { to: '/badge', label: 'Badge' },
     { to: '/empty', label: 'Empty' },
     { to: '/input', label: 'Input' },
