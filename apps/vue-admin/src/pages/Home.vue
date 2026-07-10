@@ -18,6 +18,7 @@ const componentLinks = [
   { to: '/slider', label: 'Slider' },
   { to: '/switch', label: 'Switch' },
   { to: '/table', label: 'Table' },
+  { to: '/toast', label: 'Toast' },
   { to: '/sortable', label: 'Sortable' },
   { to: '/interactions', label: 'Interactions' },
   { to: '/resizable', label: 'Resizable' },

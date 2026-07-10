@@ -3,10 +3,11 @@ import {
   createSortableController,
 } from '@fex/components-core/sortable/create-sortable-controller'
 import { restoreSortableItems } from '@fex/components-core/sortable/containers'
-import { useMemo, useSyncExternalStore } from 'react'
+import { useRef, useSyncExternalStore } from 'react'
 import type { CSSProperties, HTMLAttributes, PointerEvent, RefCallback } from 'react'
 import type { SortableAxis, SortableId, SortableItems, SortableMotionOptions } from '@fex/components-core/sortable/types'
-import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect'
+import { shallowEqualObject } from '@fex/utils'
+import { useLazyRef } from './use-lazy-ref'
 import { useMemoizedFn } from './use-memoized-fn'
 
 type DataAttributes = {
@@ -28,21 +29,19 @@ export function useSortable<TItems extends SortableItems>({
   animation,
   onChange,
 }: UseSortableOptions<TItems>) {
-  const controller = useMemo(
-    () => createSortableController({ items, axis, animation, onChange }),
-    // Controller is an external imperative instance; option changes are synced below.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  )
+  const controllerOptions = { items, axis, animation, onChange }
+  const latestOptionsRef = useRef(controllerOptions)
+  const controller = useLazyRef(() => createSortableController(controllerOptions)).current
   const snapshot = useSyncExternalStore(
     controller.subscribe,
     controller.getSnapshot,
     controller.getSnapshot,
   )
 
-  useIsomorphicLayoutEffect(() => {
-    controller.updateOptions({ items, axis, animation, onChange })
-  }, [animation, axis, controller, items, onChange])
+  if (!shallowEqualObject(latestOptionsRef.current, controllerOptions)) {
+    latestOptionsRef.current = controllerOptions
+    controller.updateOptions(controllerOptions)
+  }
 
   const getContainerProps = useMemoizedFn(
     (containerId = DEFAULT_SORTABLE_CONTAINER_ID): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => {

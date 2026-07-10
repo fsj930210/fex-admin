@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { defineComponent, h, ref, type VNodeChild } from 'vue'
-import { useMenu, type MenuNodeEntry } from '@fex/components-vue/primitive/menu'
-import { Menu, type MenuItem, type MenuKey, type MenuRenderItemInfo } from '@fex/components-vue/ui/menu'
+import { computed, ref } from 'vue'
+import type { MenuNodeEntry } from '@fex/components-vue/primitive/menu'
+import { useMenu } from '@fex/components-vue/composables/use-menu'
+import { Menu, type MenuItem, type MenuKey } from '@fex/components-vue/ui/menu'
+import { MinusIcon } from '@fex/components-vue/icon/minus'
+import { PlusIcon } from '@fex/components-vue/icon/plus'
 import Card from '@fex/components-vue/ui/card'
 
 const menuItems: MenuItem[] = [
@@ -53,87 +56,9 @@ function headlessButtonStyle(entry: MenuNodeEntry) {
   return { paddingLeft: `${8 + info.level * 18}px` }
 }
 
-function MinusIcon() {
-  return h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', class: 'lucide lucide-minus-icon lucide-minus size-4', 'aria-hidden': 'true' }, [
-    h('path', { d: 'M5 12h14' }),
-  ])
-}
-
-function PlusIcon() {
-  return h('svg', { xmlns: 'http://www.w3.org/2000/svg', width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', class: 'lucide lucide-plus-icon lucide-plus size-4', 'aria-hidden': 'true' }, [
-    h('path', { d: 'M5 12h14' }),
-    h('path', { d: 'M12 5v14' }),
-  ])
-}
-
-function renderCustomItem(info: MenuRenderItemInfo) {
-  return [
-    h('span', { class: 'inline-flex size-4 shrink-0 items-center justify-center text-xs' }, info.item.icon ?? '.'),
-    h('span', { class: 'min-w-0 flex-1 truncate' }, [
-      info.item.label,
-      info.selected ? h('span', { class: 'ml-2 text-xs text-primary' }, 'selected') : null,
-    ]),
-    info.hasChildren ? h('span', { class: 'text-xs text-muted-foreground' }, info.expanded ? 'open' : 'closed') : null,
-  ]
-}
-
-const HeadlessMenu = defineComponent({
-  name: 'HeadlessMenu',
-  setup() {
-    function renderItems(items: readonly MenuItem[]): VNodeChild[] {
-      return items.map((item, index) => {
-        if ('type' in item) {
-          if (item.type === 'divider') {
-            return h('div', { key: item.key ?? `divider-${index}`, class: 'my-1 h-px bg-border' })
-          }
-
-          return h('div', { key: item.key ?? `group-${index}`, class: 'py-1' }, [
-            item.label ? h('div', { class: 'px-2 py-1 text-xs font-medium text-muted-foreground' }, item.label) : null,
-            renderItems(item.children),
-          ])
-        }
-
-        const entry = headlessEntryFor(item.key)
-        return entry ? renderNode(entry) : null
-      })
-    }
-
-    function renderNode(entry: MenuNodeEntry): VNodeChild {
-      const info = headlessMenu.getItemInfo(entry)
-
-      return h('div', { key: info.key }, [
-        h(
-          'button',
-          {
-            type: 'button',
-            role: 'menuitem',
-            class: 'flex h-8 w-full items-center rounded-md px-2 text-left text-sm hover:bg-muted-background data-[selected=true]:bg-primary/10 data-[selected=true]:text-primary',
-            style: headlessButtonStyle(entry),
-            'data-selected': info.selected ? 'true' : 'false',
-            onClick: () => headlessMenu.clickItem(info),
-          },
-          [
-            h('span', { class: 'min-w-0 flex-1 truncate' }, info.item.label ?? ''),
-            info.hasChildren
-              ? h('span', { class: 'inline-flex size-4 shrink-0 items-center justify-center text-muted-foreground' }, [
-                  info.expanded ? MinusIcon() : PlusIcon(),
-                ])
-              : null,
-          ],
-        ),
-        info.hasChildren
-          ? h('div', {
-              class: 'grid overflow-hidden transition-[grid-template-rows,opacity] duration-150 ease-out',
-              style: { gridTemplateRows: info.expanded ? '1fr' : '0fr', opacity: info.expanded ? 1 : 0 },
-              'aria-hidden': info.expanded ? undefined : 'true',
-            }, [h('div', { class: 'min-h-0 overflow-hidden' }, renderItems(info.item.children ?? []))])
-          : null,
-      ])
-    }
-
-    return () => h('nav', { class: 'space-y-1', role: 'menu' }, renderItems(menuItems))
-  },
-})
+const headlessEntries = computed(() => headlessMenu.nodeItems.value.filter((entry) =>
+  entry.keyPath.slice(0, -1).every((key) => !headlessEntryFor(key) || headlessMenu.currentExpandKeys.value.includes(key)),
+))
 </script>
 
 <template>
@@ -173,10 +98,21 @@ const HeadlessMenu = defineComponent({
           <Menu :items="menuItems" :default-expand-keys="['system', 'content']" :default-selected-keys="['comments']" />
         </Card>
         <Card title="Custom Item" description="renderItem replaces the whole item content area.">
-          <Menu :items="menuItems" :default-expand-keys="['system']" :render-item="renderCustomItem" />
+          <Menu :items="menuItems" :default-expand-keys="['system']">
+            <template #item="{ info }">
+              <span class="inline-flex size-4 shrink-0 items-center justify-center text-xs">{{ info.item.icon ?? '.' }}</span>
+              <span class="min-w-0 flex-1 truncate">{{ info.item.label }}<span v-if="info.selected" class="ml-2 text-xs text-primary">selected</span></span>
+              <span v-if="info.hasChildren" class="text-xs text-muted-foreground">{{ info.expanded ? 'open' : 'closed' }}</span>
+            </template>
+          </Menu>
         </Card>
         <Card title="Headless Composable" description="useMenu exposes state and events for custom DOM.">
-          <HeadlessMenu />
+          <nav class="space-y-1" role="menu">
+            <button v-for="entry in headlessEntries" :key="entry.key" type="button" role="menuitem" class="flex h-8 w-full items-center rounded-md px-2 text-left text-sm hover:bg-muted-background data-[selected=true]:bg-primary/10 data-[selected=true]:text-primary" :style="headlessButtonStyle(entry)" :data-selected="headlessMenu.getItemInfo(entry).selected ? 'true' : 'false'" @click="headlessMenu.clickItem(headlessMenu.getItemInfo(entry))">
+              <span class="min-w-0 flex-1 truncate">{{ headlessMenu.getItemInfo(entry).item.label }}</span>
+              <span v-if="headlessMenu.getItemInfo(entry).hasChildren" class="inline-flex size-4 shrink-0 items-center justify-center text-muted-foreground"><MinusIcon v-if="headlessMenu.getItemInfo(entry).expanded" class="size-4" /><PlusIcon v-else class="size-4" /></span>
+            </button>
+          </nav>
         </Card>
       </div>
     </div>

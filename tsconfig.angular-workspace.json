@@ -40,6 +40,12 @@
       "@fex/components-core/dialog/types": [
         "packages/components/core/src/dialog/types.ts"
       ],
+      "@fex/components-core/toast/create-toast-manager": [
+        "packages/components/core/src/toast/create-toast-manager.ts"
+      ],
+      "@fex/components-core/toast/types": [
+        "packages/components/core/src/toast/types.ts"
+      ],
       "@fex/components-core/dropzone/accept": [
         "packages/components/core/src/dropzone/accept.ts"
       ],
@@ -181,6 +187,9 @@
       "@fex/components-angular/primitive/table": [
         "packages/components/angular/src/primitive/table/table.ts"
       ],
+      "@fex/components-angular/primitive/toast": [
+        "packages/components/angular/src/primitive/toast/toast.ts"
+      ],
       "@fex/components-angular/primitive/textarea": [
         "packages/components/angular/src/primitive/textarea/textarea.ts"
       ],
@@ -214,6 +223,15 @@
       "@fex/components-angular/icon/chevron": [
         "packages/components/angular/src/icon/chevron.ts"
       ],
+      "@fex/components-angular/icon/close": [
+        "packages/components/angular/src/icon/close.ts"
+      ],
+      "@fex/components-angular/icon/error": [
+        "packages/components/angular/src/icon/error.ts"
+      ],
+      "@fex/components-angular/icon/info": [
+        "packages/components/angular/src/icon/info.ts"
+      ],
       "@fex/components-angular/icon/loading": [
         "packages/components/angular/src/icon/loading.ts"
       ],
@@ -222,6 +240,9 @@
       ],
       "@fex/components-angular/icon/more": [
         "packages/components/angular/src/icon/more.ts"
+      ],
+      "@fex/components-angular/icon/warning": [
+        "packages/components/angular/src/icon/warning.ts"
       ],
       "@fex/components-angular/directives/draggable": [
         "packages/components/angular/src/directives/draggable.ts"

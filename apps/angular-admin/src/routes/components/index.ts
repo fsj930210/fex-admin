@@ -81,6 +81,10 @@ export const componentRoutes: Routes = [
     loadComponent: () => import('../../pages/table/index.component').then((module) => module.TableComponent),
   },
   {
+    path: 'toast',
+    loadComponent: () => import('../../pages/toast/index.component').then((module) => module.ToastComponent),
+  },
+  {
     path: 'sortable',
     loadComponent: () =>
       import('../../pages/sortable/index.component').then((module) => module.SortableComponent),

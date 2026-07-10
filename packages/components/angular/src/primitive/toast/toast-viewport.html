@@ -1,0 +1,9 @@
+<div [class]="stackContainerClassName()">
+  @if (stacked()) {
+    <div aria-hidden="true" [class]="stackLayerClassName + ' top-2 opacity-70'"></div>
+    <div aria-hidden="true" [class]="stackLayerClassName + ' top-4 w-[calc(100%-32px)] opacity-40'"></div>
+  }
+  <div [class]="stackItemsClassName()">
+    <ng-content />
+  </div>
+</div>

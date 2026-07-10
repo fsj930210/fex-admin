@@ -24,6 +24,7 @@
     "./slider": "./src/slider.ts",
     "./switch": "./src/switch.ts",
     "./table": "./src/table.ts",
+    "./toast": "./src/toast.ts",
     "./textarea": "./src/textarea.ts"
   },
   "dependencies": {

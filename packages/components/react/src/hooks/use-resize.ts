@@ -2,10 +2,11 @@ import { createResizeController } from '@fex/components-core/interactions/create
 import { defaultRect as defaultCoreRect, rectToStyle } from '@fex/components-core/interactions/rect'
 import type { Rect, ResizeEdge, ResizeEdges } from '@fex/components-core/interactions/types'
 import { shallowEqualObject } from '@fex/utils'
-import { useMemo, useRef, useSyncExternalStore } from 'react'
+import { useRef, useSyncExternalStore } from 'react'
 import type { CSSProperties, HTMLAttributes, RefCallback } from 'react'
 import { useControllableState } from './use-controllable-state'
 import { useMemoizedFn } from './use-memoized-fn'
+import { useLazyRef } from './use-lazy-ref'
 
 type DataAttributes = {
   [key: `data-${string}`]: string | boolean | undefined
@@ -55,9 +56,7 @@ export function useResize({
     onResizeEnd,
   }
   const latestControllerOptionsRef = useRef(controllerOptions)
-  // controller 持有 DOM 引用和 resize 会话，必须保持稳定；上方浅比较负责同步最新输入。
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const controller = useMemo(() => createResizeController(controllerOptions), [])
+  const controller = useLazyRef(() => createResizeController(controllerOptions)).current
   const snapshot = useSyncExternalStore(
     controller.subscribe,
     controller.getSnapshot,

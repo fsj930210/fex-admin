@@ -27,44 +27,31 @@ function createSliderSnapshot(options: SliderOptions, fallbackValues?: readonly 
 export function createSliderController(options: SliderOptions = {}): SliderController {
   const isControlled = () => options.value !== undefined
   const store = createStore(createSliderSnapshot(options))
-  let controlledSnapshot = store.getSnapshot()
+  let derivedSnapshot = store.getSnapshot()
   let valuesBeforeSlideStart = store.getSnapshot().values
-  let hasSyncedUncontrolledOptions = false
 
   const getCurrentSnapshot = () => {
-    if (!isControlled()) {
-      return store.getSnapshot()
-    }
-
+    const storedSnapshot = store.getSnapshot()
+    const nextBaseSnapshot = createSliderSnapshot(options, isControlled() ? undefined : storedSnapshot.values)
     const nextSnapshot = {
-      ...createSliderSnapshot(options),
-      activeIndex: controlledSnapshot.activeIndex,
+      ...nextBaseSnapshot,
+      activeIndex: Math.min(nextBaseSnapshot.values.length - 1, storedSnapshot.activeIndex),
     }
     if (
-      controlledSnapshot.disabled === nextSnapshot.disabled &&
-      controlledSnapshot.min === nextSnapshot.min &&
-      controlledSnapshot.max === nextSnapshot.max &&
-      controlledSnapshot.step === nextSnapshot.step &&
-      controlledSnapshot.minStepsBetweenThumbs === nextSnapshot.minStepsBetweenThumbs &&
-      controlledSnapshot.activeIndex === nextSnapshot.activeIndex &&
-      controlledSnapshot.orientation === nextSnapshot.orientation &&
-      controlledSnapshot.values.length === nextSnapshot.values.length &&
-      controlledSnapshot.values.every((value, index) => value === nextSnapshot.values[index])
+      derivedSnapshot.disabled === nextSnapshot.disabled &&
+      derivedSnapshot.min === nextSnapshot.min &&
+      derivedSnapshot.max === nextSnapshot.max &&
+      derivedSnapshot.step === nextSnapshot.step &&
+      derivedSnapshot.minStepsBetweenThumbs === nextSnapshot.minStepsBetweenThumbs &&
+      derivedSnapshot.activeIndex === nextSnapshot.activeIndex &&
+      derivedSnapshot.orientation === nextSnapshot.orientation &&
+      derivedSnapshot.values.length === nextSnapshot.values.length &&
+      derivedSnapshot.values.every((value, index) => value === nextSnapshot.values[index])
     ) {
-      return controlledSnapshot
+      return derivedSnapshot
     }
-    controlledSnapshot = nextSnapshot
-    return controlledSnapshot
-  }
-
-  const syncUncontrolledSnapshot = () => {
-    const snapshot = store.getSnapshot()
-    const nextSnapshot = {
-      ...createSliderSnapshot(options, hasSyncedUncontrolledOptions ? snapshot.values : undefined),
-      activeIndex: Math.min(snapshot.values.length - 1, snapshot.activeIndex),
-    }
-    hasSyncedUncontrolledOptions = true
-    store.setSnapshot(nextSnapshot)
+    derivedSnapshot = nextSnapshot
+    return derivedSnapshot
   }
 
   function commitValues(values: number[], changedIndex: number, commit = false) {
@@ -80,7 +67,7 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
     if (!isControlled()) {
       store.setSnapshot({ ...previousSnapshot, values, activeIndex: changedIndex })
     } else {
-      controlledSnapshot = { ...previousSnapshot, activeIndex: changedIndex }
+      store.setSnapshot({ ...previousSnapshot, activeIndex: changedIndex })
     }
 
     options.onChange?.(values, meta)
@@ -105,20 +92,14 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
   return {
     getSnapshot: getCurrentSnapshot,
     subscribe: store.subscribe,
-    syncSnapshot: () => {
-      if (!isControlled()) {
-        syncUncontrolledSnapshot()
-        return
-      }
-      store.setSnapshot(getCurrentSnapshot())
-    },
+    syncSnapshot: () => store.setSnapshot(getCurrentSnapshot()),
     setActiveIndex: (index) => {
       const snapshot = getCurrentSnapshot()
       const nextIndex = Math.min(snapshot.values.length - 1, Math.max(0, index))
       if (!isControlled()) {
         store.setSnapshot({ ...snapshot, activeIndex: nextIndex })
       } else {
-        controlledSnapshot = { ...snapshot, activeIndex: nextIndex }
+        store.setSnapshot({ ...snapshot, activeIndex: nextIndex })
       }
     },
     setValueAt,

@@ -1,19 +1,11 @@
 import { sortableClassName, sortableItemClassName } from '@fex/components-styles/sortable'
 import { cn } from '@fex/utils'
 import type { SortableAxis, SortableId, SortableItems } from '@fex/components-core/sortable/types'
-import { createContext, useContext } from 'solid-js'
 import type { JSX, ParentProps } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createSortable, type CreateSortableOptions } from '../../primitives/create-sortable'
 
-type AnySortable = ReturnType<typeof createSortable<SortableItems>>
-type SortableContextValue = Omit<AnySortable, 'previewItems' | 'update'> & {
-  previewItems: () => SortableItems
-  update: (next: CreateSortableOptions<SortableItems>) => void
-  syncOptions: () => void
-}
-
-const SortableContext = createContext<SortableContextValue>()
+import { SortableContext, useSortableContext, type SortableContextValue } from './sortable-context'
 
 export interface SortableRootProps<TItems extends SortableItems> {
   items: TItems
@@ -126,20 +118,4 @@ export function SortableOverlay(props: SortableOverlayProps) {
       )}
     </>
   )
-}
-
-function useSortableContext() {
-  const context = useContext(SortableContext)
-  if (!context) {
-    throw new Error('Sortable components must be used inside SortableRoot.')
-  }
-
-  return context
-}
-
-export const Sortable = {
-  Root: SortableRoot,
-  Item: SortableItem,
-  Handle: SortableHandle,
-  Overlay: SortableOverlay,
 }

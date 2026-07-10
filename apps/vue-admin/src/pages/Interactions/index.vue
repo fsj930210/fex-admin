@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import Card from '@fex/components-vue/ui/card'
-import { useDraggable } from '@fex/components-vue/composables/use-draggable'
-import { useDroppable } from '@fex/components-vue/composables/use-droppable'
 import { useDropzone } from '@fex/components-vue/composables/use-dropzone'
 import { useMove } from '@fex/components-vue/composables/use-move'
 import { useResize } from '@fex/components-vue/composables/use-resize'
-import { Teleport, defineComponent, h, ref } from 'vue'
+import { ref } from 'vue'
+import DraggableToken from './DraggableToken.vue'
+import DroppableZone from './DroppableZone.vue'
 
 const draggableItems = {
   'status-card': { id: 'status-card', label: 'Status card', type: 'card' },
@@ -57,95 +57,6 @@ function itemById(itemId: string) {
   return draggableItems[itemId as keyof typeof draggableItems]
 }
 
-const DraggableToken = defineComponent({
-  props: {
-    id: { type: String, required: true },
-    label: { type: String, required: true },
-    type: { type: String, required: true },
-  },
-  setup(props) {
-    const draggable = useDraggable({ id: props.id, type: props.type, data: { label: props.label } })
-    return () => [
-      h(
-        'div',
-        {
-          ref: (element) => draggable.setTarget(element as HTMLElement | null),
-          class:
-            'flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[opacity,box-shadow] hover:shadow-md active:cursor-grabbing data-[dragging=true]:opacity-35',
-          'data-dragging': draggable.dragging.value || undefined,
-        },
-        [h('span', props.label), h('span', { class: 'text-muted-foreground' }, '::')],
-      ),
-      draggable.dragging.value
-        ? h(Teleport, { to: 'body' }, [
-            h(
-              'div',
-              {
-                class:
-                  'flex min-h-11 items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70',
-                style: draggable.overlayStyle.value,
-              },
-              [h('span', props.label), h('span', { class: 'text-muted-foreground' }, '::')],
-            ),
-          ])
-        : null,
-    ]
-  },
-})
-
-const DroppableZone = defineComponent({
-  props: {
-    id: { type: String, required: true },
-    title: { type: String, required: true },
-    accept: String,
-    items: { type: Array<string>, required: true },
-  },
-  emits: ['changed', 'dropped'],
-  setup(props, { emit }) {
-    const droppable = useDroppable({
-      id: props.id,
-      edges: ['top', 'bottom'],
-      onDragEnter: ({ source }) => emit('changed', `${String(source.id)} is over ${props.title}.`),
-      onDragLeave: () => emit('changed', 'Drop a draggable item into a zone.'),
-      onDrop: ({ source, edge }) => emit('dropped', source, edge),
-      ...(props.accept ? { accept: props.accept } : {}),
-    })
-    return () =>
-      h(
-        'div',
-        {
-          ref: (element) => droppable.setTarget(element as HTMLElement | null),
-          ...droppable.dataAttributes.value,
-          class:
-            'flex min-h-36 flex-col justify-between rounded-md border border-dashed border-border bg-background p-space-md text-sm transition-colors data-[can-drop=true]:border-ring data-[over=true]:bg-accent-background',
-        },
-        [
-          h('div', [
-            h('p', { class: 'font-medium text-foreground' }, props.title),
-            h(
-              'p',
-              { class: 'mt-space-sm text-muted-foreground' },
-              droppable.over.value
-                ? droppable.canDrop.value
-                  ? 'Release to drop.'
-                  : 'This item is not accepted.'
-                : 'Drop target',
-            ),
-            h(
-              'div',
-              { class: 'mt-space-md space-y-space-sm' },
-              props.items.map((itemId) => h(DraggableToken, { key: itemId, ...itemById(itemId) })),
-            ),
-          ]),
-          h(
-            'p',
-            { class: 'text-xs text-muted-foreground' },
-            droppable.edge.value ? `Closest edge: ${droppable.edge.value}` : props.accept ? `Accepts: ${props.accept}` : 'Accepts all',
-          ),
-        ],
-      )
-  },
-})
 </script>
 
 <script lang="ts">
@@ -180,14 +91,14 @@ export default { name: 'InteractionsPage' }
                 id="card-zone"
                 title="Cards only"
                 accept="card"
-                :items="dropDemoItems['card-zone']"
+                :items="dropDemoItems['card-zone'].map(itemById)"
                 @changed="dropResult = $event"
                 @dropped="(source, edge) => reportDrop('card-zone', 'Cards only', source, edge)"
               />
               <DroppableZone
                 id="any-zone"
                 title="Any item"
-                :items="dropDemoItems['any-zone']"
+                :items="dropDemoItems['any-zone'].map(itemById)"
                 @changed="dropResult = $event"
                 @dropped="(source, edge) => reportDrop('any-zone', 'Any item', source, edge)"
               />

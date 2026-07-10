@@ -1,4 +1,4 @@
-﻿<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
+<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
       <div class="mx-auto w-full max-w-5xl space-y-space-xl">
         <header class="space-y-space-xl">
           <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">Back home</a>
@@ -43,18 +43,7 @@
                   [attr.aria-label]="size.startsWith('icon') ? size : null"
                 >
                   @if (size.startsWith("icon")) {
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M12 5v14" />
-                      <path d="M5 12h14" />
-                    </svg>
+                    <fex-plus-icon />
                   } @else {
                     {{ size }}
                   }
@@ -73,36 +62,12 @@
           <fex-card title="Icon" description="Icons can be placed before or after the label.">
             <div class="flex min-w-0 flex-wrap items-center gap-space-md">
               <button fexButton>
-                <svg
-                  slot="start"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14" />
-                  <path d="M5 12h14" />
-                </svg>
+                <fex-plus-icon />
                 Icon start
               </button>
               <button fexButton iconPlacement="end">
                 Icon end
-                <svg
-                  slot="end"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14" />
-                  <path d="M5 12h14" />
-                </svg>
+                <fex-plus-icon />
               </button>
             </div>
           </fex-card>
@@ -113,19 +78,7 @@
                 <button fexButton [effect]="effect" iconPlacement="end">
                   {{ effect }}
                   @if (effect === "expand-icon") {
-                    <svg
-                      slot="end"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M12 5v14" />
-                      <path d="M5 12h14" />
-                    </svg>
+                    <fex-plus-icon />
                   }
                 </button>
               }
@@ -136,34 +89,10 @@
             <div class="flex min-w-0 flex-wrap items-center gap-space-md">
               <button fexButton effect="expand-icon" iconPlacement="end">
                 Icon right
-                <svg
-                  slot="end"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14" />
-                  <path d="M5 12h14" />
-                </svg>
+                <fex-plus-icon />
               </button>
               <button fexButton effect="expand-icon">
-                <svg
-                  slot="start"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14" />
-                  <path d="M5 12h14" />
-                </svg>
+                <fex-plus-icon />
                 Icon left
               </button>
               <button fexButton variant="secondary" effect="gooey-left">Secondary gooey left</button>

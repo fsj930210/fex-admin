@@ -12,16 +12,16 @@ import { useSortable } from '@fex/components-react/hooks/use-sortable'
 ## Basic Usage
 
 ```tsx
-<Sortable.Root items={items} axis="y" onChange={setItems}>
+<SortableRoot items={items} axis="y" onChange={setItems}>
   {items.map((item) => (
-    <Sortable.Item key={item.id} id={item.id}>
+    <SortableItem key={item.id} id={item.id}>
       {item.label}
-    </Sortable.Item>
+    </SortableItem>
   ))}
-  <Sortable.Overlay>
+  <SortableOverlay>
     {({ activeId }) => items.find((item) => item.id === activeId)?.label}
-  </Sortable.Overlay>
-</Sortable.Root>
+  </SortableOverlay>
+</SortableRoot>
 ```
 
 ## Props
@@ -35,12 +35,12 @@ import { useSortable } from '@fex/components-react/hooks/use-sortable'
 
 ## Overlay
 
-`Sortable.Overlay` renders the active item as a fixed floating layer while the original item stays in the list as a transparent placeholder. This avoids text overlap and gives the same interaction shape as sortable systems that separate the dragged preview from layout.
+`SortableOverlay` renders the active item as a fixed floating layer while the original item stays in the list as a transparent placeholder. This avoids text overlap and gives the same interaction shape as sortable systems that separate the dragged preview from layout.
 
 ```tsx
-<Sortable.Overlay className="shadow-xl">
+<SortableOverlay className="shadow-xl">
   {({ activeId }) => activeId}
-</Sortable.Overlay>
+</SortableOverlay>
 ```
 
 When using `useSortable` directly, render your own overlay with `getOverlayStyle()` and `activeId`.

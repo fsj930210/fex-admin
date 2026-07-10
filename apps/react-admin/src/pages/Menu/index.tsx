@@ -1,6 +1,8 @@
 import { useMenu, type MenuNodeEntry } from '@fex/components-react/primitive/menu'
 import { Card } from '@fex/components-react/ui/card'
 import { Menu, type MenuItem, type MenuKey } from '@fex/components-react/ui/menu'
+import { MinusIcon } from '@fex/components-react/icon/minus'
+import { PlusIcon } from '@fex/components-react/icon/plus'
 import { useState } from 'react'
 import { Link } from 'react-router'
 
@@ -216,45 +218,4 @@ function HeadlessMenu() {
   }
 
   return <nav {...menu.getRootProps({ className: 'space-y-1' })}>{renderItems(menuItems)}</nav>
-}
-
-function MinusIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="lucide lucide-minus-icon lucide-minus size-4"
-      aria-hidden="true"
-    >
-      <path d="M5 12h14" />
-    </svg>
-  )
-}
-
-function PlusIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="lucide lucide-plus-icon lucide-plus size-4"
-      aria-hidden="true"
-    >
-      <path d="M5 12h14" />
-      <path d="M12 5v14" />
-    </svg>
-  )
 }

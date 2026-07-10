@@ -1,6 +1,4 @@
 import {
-  createContext,
-  use,
   useId,
   useRef,
   useState,
@@ -29,31 +27,11 @@ import { useIsomorphicLayoutEffect } from '../../hooks/use-isomorphic-layout-eff
 import { useLazyRef } from '../../hooks/use-lazy-ref'
 import { useMemoizedFn } from '../../hooks/use-memoized-fn'
 import useUnmount from '../../hooks/use-unmount'
+import { DialogContext } from './dialog-context'
+import { useDialog } from './use-dialog'
+import { useDialogTrigger } from './use-dialog-trigger'
 
-type DialogContextValue = {
-  contentId: string
-  descriptionId: string
-  dialog: DialogController
-  titleId: string
-  triggerRef: React.RefObject<HTMLButtonElement | null>
-}
-
-const DialogContext = createContext<DialogContextValue | null>(null)
 const defaultDismiss = { escapeKey: true, overlayPointer: true }
-
-function useDialogContext(component: string) {
-  const context = use(DialogContext)
-  if (!context) {
-    throw new Error(`${component} must be used inside DialogRoot`)
-  }
-  return context
-}
-
-export function useDialog(component = 'useDialog') {
-  const context = useDialogContext(component)
-  const snapshot = useCoreStore(context.dialog)
-  return { ...context, snapshot }
-}
 
 function toEventInfo(event: { target: EventTarget | null; currentTarget: EventTarget | null; event?: Event }) {
   return {
@@ -124,34 +102,6 @@ export type DialogTriggerRenderProps = Omit<ComponentProps<'button'>, 'children'
 export interface DialogTriggerProps extends Omit<ComponentProps<'button'>, 'children'> {
   children: (props: DialogTriggerRenderProps) => ReactNode
   ref?: Ref<HTMLButtonElement>
-}
-
-export function useDialogTrigger({ ref, onClick, ...props }: Omit<DialogTriggerProps, 'children'>) {
-  const { contentId, dialog, snapshot, triggerRef } = useDialog('useDialogTrigger')
-  const setTrigger = useMemoizedFn((element: HTMLButtonElement | null) => {
-    triggerRef.current = element
-    if (typeof ref === 'function') ref(element)
-    else if (ref && 'current' in ref) ref.current = element
-  })
-
-  return {
-    snapshot,
-    props: {
-      ...props,
-      ref: setTrigger,
-      type: props.type ?? 'button',
-      'aria-haspopup': 'dialog' as const,
-      'aria-expanded': snapshot.open,
-      'aria-controls': snapshot.open ? contentId : undefined,
-      'data-state': snapshot.open ? 'open' as const : 'closed' as const,
-      onClick: (event: MouseEvent<HTMLButtonElement>) => {
-        onClick?.(event)
-        if (!event.defaultPrevented) {
-          dialog.toggle({ reason: 'trigger-click', event: event.nativeEvent })
-        }
-      },
-    },
-  }
 }
 
 export function DialogTrigger({ children, ...props }: DialogTriggerProps) {
@@ -290,32 +240,4 @@ export function DialogClose({ children, className, onClick, type = 'button', ...
   }
 
   return typeof children === 'function' ? children(closeProps) : <button {...closeProps}>{children ?? 'Close'}</button>
-}
-
-export const Dialog = Object.assign(DialogRoot, {
-  Root: DialogRoot,
-  Trigger: DialogTrigger,
-  Portal: DialogPortal,
-  Overlay: DialogOverlay,
-  Content: DialogContent,
-  Header: DialogHeader,
-  Title: DialogTitle,
-  Description: DialogDescription,
-  Body: DialogBody,
-  Footer: DialogFooter,
-  Close: DialogClose,
-})
-
-export {
-  DialogRoot as Root,
-  DialogTrigger as Trigger,
-  DialogPortal as Portal,
-  DialogOverlay as Overlay,
-  DialogContent as Content,
-  DialogHeader as Header,
-  DialogTitle as Title,
-  DialogDescription as Description,
-  DialogBody as Body,
-  DialogFooter as Footer,
-  DialogClose as Close,
 }

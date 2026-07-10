@@ -1,10 +1,11 @@
 import { createDropzoneController } from '@fex/components-core/dropzone/create-dropzone-controller'
 import { getFilesFromDataTransfer } from '@fex/components-core/dropzone/files'
 import { shallowEqualObject } from '@fex/utils'
-import { useMemo, useRef, useState, useSyncExternalStore } from 'react'
+import { useRef, useState, useSyncExternalStore } from 'react'
 import type { ChangeEvent, DragEvent, HTMLAttributes, InputHTMLAttributes, RefCallback } from 'react'
 import type { DropzoneFileRejection, DropzoneValidationOptions } from '@fex/components-core/dropzone/types'
 import { useMemoizedFn } from './use-memoized-fn'
+import { useLazyRef } from './use-lazy-ref'
 
 type DataAttributes = {
   [key: `data-${string}`]: string | boolean | undefined
@@ -20,9 +21,7 @@ export function useDropzone(options: UseDropzoneOptions = {}) {
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [rootElement, setRootElement] = useState<HTMLElement | null>(null)
   const latestOptionsRef = useRef(options)
-  // controller 是稳定 core 实例，后续只在 options 引用变化时同步输入。
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const controller = useMemo(() => createDropzoneController(options), [])
+  const controller = useLazyRef(() => createDropzoneController(options)).current
   const snapshot = useSyncExternalStore(
     controller.subscribe,
     controller.getSnapshot,

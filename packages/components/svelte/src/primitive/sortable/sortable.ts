@@ -4,10 +4,3 @@ import SortableHandle from './sortable-handle.svelte'
 import SortableOverlay from './sortable-overlay.svelte'
 
 export { SortableRoot, SortableItem, SortableHandle, SortableOverlay }
-
-export const Sortable = {
-  Root: SortableRoot,
-  Item: SortableItem,
-  Handle: SortableHandle,
-  Overlay: SortableOverlay,
-}

@@ -2,10 +2,8 @@ import { createSelectionController } from '@fex/components-core/selection/create
 import type { SelectionValue } from '@fex/components-core/selection/types'
 import { cn } from '@fex/utils'
 import {
-  createContext,
   type ComponentProps,
   type ReactNode,
-  use,
   useRef,
 } from 'react'
 import { useCoreStore } from '../../hooks/use-core-store'
@@ -20,23 +18,7 @@ export type ListboxChangeMeta<TItem> = {
   changedValues: SelectionValue[]
 }
 
-type ListboxContextValue = {
-  multiple: boolean
-  orientation: ListboxOrientation
-  isSelected: (value: SelectionValue) => boolean
-  isDisabled: (value: SelectionValue) => boolean
-  selectItem: (value: SelectionValue) => void
-}
-
-const ListboxContext = createContext<ListboxContextValue | null>(null)
-
-function useListboxContext(component: string) {
-  const context = use(ListboxContext)
-  if (!context) {
-    throw new Error(`${component} must be used inside ListboxRoot.`)
-  }
-  return context
-}
+import { ListboxContext, useListboxContext } from './listbox-context'
 
 type BaseListboxRootProps<TItem> = Omit<ComponentProps<'div'>, 'defaultValue' | 'onChange'> & {
   items?: readonly TItem[]

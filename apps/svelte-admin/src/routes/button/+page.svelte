@@ -2,6 +2,7 @@
   import PrimitiveButton from '@fex/components-svelte/primitive/button'
   import Button from '@fex/components-svelte/ui/button'
   import Card from '@fex/components-svelte/ui/card'
+  import PlusIcon from '@fex/components-svelte/icon/plus'
 
   const variants = ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link', 'dashed'] as const
   const sizes = ['xs', 'sm', 'default', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'] as const
@@ -17,18 +18,7 @@
 </script>
 
 {#snippet demoIcon()}
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M12 5v14" />
-    <path d="M5 12h14" />
-  </svg>
+  <PlusIcon />
 {/snippet}
 
 <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">

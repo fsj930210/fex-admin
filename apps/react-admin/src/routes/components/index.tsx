@@ -75,6 +75,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Table'), 'TablePage'),
   },
   {
+    path: '/toast',
+    element: createLazyRouteElement(() => import('../../pages/Toast'), 'ToastPage'),
+  },
+  {
     path: '/sortable',
     element: createLazyRouteElement(() => import('../../pages/Sortable'), 'SortablePage'),
   },

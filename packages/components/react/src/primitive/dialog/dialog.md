@@ -11,22 +11,22 @@ import { Dialog } from '@fex/components-react/primitive/dialog'
 ## Example
 
 ```tsx
-<Dialog.Root>
-  <Dialog.Trigger>{(props) => <button {...props}>Open</button>}</Dialog.Trigger>
-  <Dialog.Portal>
-    <Dialog.Overlay />
-    <Dialog.Content>
-      <Dialog.Header>
-        <Dialog.Title>Confirm action</Dialog.Title>
-        <Dialog.Description>This action needs a decision.</Dialog.Description>
-      </Dialog.Header>
-      <Dialog.Body>Dialog body</Dialog.Body>
-      <Dialog.Footer>
-        <Dialog.Close>Close</Dialog.Close>
-      </Dialog.Footer>
-    </Dialog.Content>
-  </Dialog.Portal>
-</Dialog.Root>
+<DialogRoot>
+  <DialogTrigger>{(props) => <button {...props}>Open</button>}</DialogTrigger>
+  <DialogPortal>
+    <DialogOverlay />
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Confirm action</DialogTitle>
+        <DialogDescription>This action needs a decision.</DialogDescription>
+      </DialogHeader>
+      <DialogBody>Dialog body</DialogBody>
+      <DialogFooter>
+        <DialogClose>Close</DialogClose>
+      </DialogFooter>
+    </DialogContent>
+  </DialogPortal>
+</DialogRoot>
 ```
 
 ## Props

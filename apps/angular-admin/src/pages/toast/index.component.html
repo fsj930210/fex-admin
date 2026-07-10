@@ -1,0 +1,100 @@
+<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
+  <div class="mx-auto w-full max-w-6xl space-y-space-lg">
+    <header class="space-y-space-md">
+      <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">Back home</a>
+      <h1 class="text-2xl font-semibold text-foreground">Toast</h1>
+      <p class="max-w-2xl text-sm leading-6 text-muted-foreground">Primitive global feedback with quick calls, custom content, position, max count, manual destroy, stable id updates, and stacked display.</p>
+    </header>
+
+    <fex-card title="Types" description="Built-in variants only provide default semantics. Content and icon can still be customized.">
+      <div class="flex flex-wrap gap-space-sm">
+        <button fexButton variant="outline" (click)="toast.show('Hello, Fex Design!')">Default</button>
+        <button fexButton variant="outline" (click)="toast.success('This is a success message')">Success</button>
+        <button fexButton variant="outline" (click)="toast.info('This is an info message')">Info</button>
+        <button fexButton variant="outline" (click)="toast.warning('This is a warning message')">Warning</button>
+        <button fexButton variant="outline" (click)="toast.error('This is an error message')">Error</button>
+        <button fexButton variant="outline" (click)="toast.loading({ title: 'Loading data', duration: 2500 })">Loading</button>
+      </div>
+    </fex-card>
+
+    <fex-card title="Position" description="The viewport controls placement. Service calls do not need to know where the toast appears.">
+      <div class="flex flex-wrap gap-space-sm">
+        @for (item of placements; track item) {
+          <button
+            fexButton
+            [variant]="placement() === item ? 'default' : 'outline'"
+            (click)="choosePlacement(item)"
+          >
+            {{ labelPlacement(item) }}
+          </button>
+        }
+      </div>
+    </fex-card>
+
+    <fex-card title="Custom Content" description="Primitive parts let callers replace icon, add description, and render an action without changing the manager.">
+      <div class="flex flex-wrap gap-space-sm">
+        <button fexButton variant="outline" (click)="toast.success({ title: 'Event has been created', description: 'Monday, January 3rd at 6:00pm', icon: 'custom' })">Rich content</button>
+        <button fexButton variant="outline" (click)="toast.show({ title: 'Event has been created', description: 'Sunday, December 03, 2023 at 9:00 AM', action: 'Undo', duration: 6000 })">With action</button>
+      </div>
+    </fex-card>
+
+    <fex-card title="Update And Destroy" description="A stable id updates one toast. Returned ids can be dismissed manually.">
+      <div class="flex flex-wrap gap-space-sm">
+        <button fexButton variant="outline" (click)="toast.loading({ id: 'save-user', title: 'Saving user', duration: -1 })">Open keyed loading</button>
+        <button fexButton variant="outline" (click)="toast.success({ id: 'save-user', title: 'Saved user', description: 'The same id updates the existing toast.', duration: 2500 })">Update keyed toast</button>
+        <button fexButton variant="outline" (click)="showManualToast()">Manual toast</button>
+        <button fexButton variant="outline" [disabled]="!manualId()" (click)="manualId() && toast.dismiss(manualId()!)">Destroy manual</button>
+        <button fexButton variant="outline" (click)="toast.clear()">Destroy all</button>
+      </div>
+    </fex-card>
+
+    <fex-card title="Multiple And Stacked" description="Max count limits the queue. Stack mode collapses older messages and leaves the latest visible.">
+      <div class="flex flex-wrap gap-space-sm">
+        <button fexButton variant="outline" (click)="showManyMessages()">Show many</button>
+        <button fexButton [variant]="stack() ? 'default' : 'outline'" (click)="toggleStack()">{{ stack() ? 'Stack on' : 'Stack off' }}</button>
+      </div>
+    </fex-card>
+  </div>
+
+  @for (currentPlacement of placements; track currentPlacement) {
+    @if (itemsByPlacement()[currentPlacement].length > 0) {
+      <fex-toast-viewport
+        [placement]="currentPlacement"
+        [offset]="72"
+        [stack]="stack()"
+        [stackThreshold]="3"
+        [items]="itemsByPlacement()[currentPlacement]"
+      >
+        @for (item of visibleItemsByPlacement()[currentPlacement]; track item.id) {
+          <fex-toast-root [item]="item">
+            @if (hasToastIcon(item)) {
+              <fex-toast-icon>
+                @if (item.icon !== undefined) {
+                  <fex-check-icon />
+                } @else if (item.variant === 'success') {
+                  <fex-check-icon />
+                } @else if (item.variant === 'loading') {
+                  <fex-loading-icon class="animate-spin" />
+                } @else if (item.variant === 'info') {
+                  <fex-info-icon />
+                } @else if (item.variant === 'warning') {
+                  <fex-warning-icon />
+                } @else if (item.variant === 'error') {
+                  <fex-error-icon />
+                }
+              </fex-toast-icon>
+            }
+            <fex-toast-title>{{ item.title }}</fex-toast-title>
+            <button fexToastClose [item]="item"><fex-close-icon /></button>
+            @if (item.description) {
+              <fex-toast-description>{{ item.description }}</fex-toast-description>
+            }
+            @if (item.action) {
+              <fex-toast-action><button fexButton size="sm">{{ item.action }}</button></fex-toast-action>
+            }
+          </fex-toast-root>
+        }
+      </fex-toast-viewport>
+    }
+  }
+</main>

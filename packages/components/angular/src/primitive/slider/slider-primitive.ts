@@ -12,7 +12,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   input,
   numberAttribute,
   output,
@@ -85,17 +84,10 @@ export class SliderRoot {
       onCommit: (value: number[]) => this.valueCommit.emit(value),
     };
     this.controller = createSliderController(this.options);
-    this.snapshot = createCoreStoreSignal(this.controller);
-    effect(() => {
-      this.value();
-      this.defaultValue();
-      this.min();
-      this.max();
-      this.step();
-      this.minStepsBetweenThumbs();
-      this.orientation();
-      this.disabled();
-      this.controller.syncSnapshot();
+    const storeSnapshot = createCoreStoreSignal(this.controller);
+    this.snapshot = computed(() => {
+      storeSnapshot();
+      return this.controller.getSnapshot();
     });
   }
 

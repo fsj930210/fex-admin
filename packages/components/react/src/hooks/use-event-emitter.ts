@@ -1,4 +1,5 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
+import useMount from "./use-mount";
 
 type Subscription<T> = (val: T) => void;
 
@@ -16,7 +17,7 @@ export class EventEmitter<T> {
     const callbackRef = useRef<Subscription<T>>(undefined);
     callbackRef.current = callback;
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
+    useMount(() => {
       function subscription(val: T) {
         if (callbackRef.current) {
           callbackRef.current(val);
@@ -26,7 +27,7 @@ export class EventEmitter<T> {
       return () => {
         this.subscriptions.delete(subscription);
       };
-    }, []);
+    });
   };
 }
 

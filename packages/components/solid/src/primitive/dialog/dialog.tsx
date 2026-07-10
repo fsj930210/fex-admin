@@ -13,37 +13,16 @@ import {
 import { cn } from '@fex/utils'
 import { Portal } from 'solid-js/web'
 import {
-  createContext,
   createSignal,
   onCleanup,
   Show,
   splitProps,
-  useContext,
-  type Accessor,
   type JSX,
   type ParentProps,
 } from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
-
-type DialogContextValue = {
-  contentId: string
-  descriptionId: string
-  dialog: ReturnType<typeof createDialogController>
-  snapshot: Accessor<ReturnType<ReturnType<typeof createDialogController>['getSnapshot']>>
-  titleId: string
-  triggerElement: { current: HTMLButtonElement | null }
-}
-
-const DialogContext = createContext<DialogContextValue>()
+import { DialogContext, useDialog } from './dialog-context'
 let nextDialogId = 1
-
-function useDialog(component: string) {
-  const context = useContext(DialogContext)
-  if (!context) {
-    throw new Error(`${component} must be used inside Dialog`)
-  }
-  return context
-}
 
 export interface DialogProps extends ParentProps, DialogOptions {}
 

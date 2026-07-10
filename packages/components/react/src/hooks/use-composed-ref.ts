@@ -1,4 +1,6 @@
-import { useMemo, type Ref } from 'react'
+import { type Ref } from 'react'
+import { useLatest } from './use-latest'
+import { useMemoizedFn } from './use-memoized-fn'
 
 function assignRef<T>(ref: Ref<T> | undefined, value: T | null) {
   if (typeof ref === 'function') {
@@ -11,14 +13,8 @@ function assignRef<T>(ref: Ref<T> | undefined, value: T | null) {
 }
 
 export function useComposedRef<T>(...refs: Array<Ref<T> | undefined>) {
-  return useMemo(
-    () => (value: T | null) => {
-      for (const ref of refs) {
-        assignRef(ref, value)
-      }
-    },
-    // Recompose only when the caller-provided ref list changes.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    refs,
-  )
+  const refsRef = useLatest(refs)
+  return useMemoizedFn((value: T | null) => {
+    for (const ref of refsRef.current) assignRef(ref, value)
+  })
 }

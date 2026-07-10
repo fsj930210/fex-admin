@@ -13,7 +13,6 @@ export function MinusIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
       stroke-linecap="round"
       stroke-linejoin="round"
       {...props}
-      class={['lucide lucide-minus-icon lucide-minus', props.class].filter(Boolean).join(' ')}
     >
       <path d="M5 12h14" />
     </svg>

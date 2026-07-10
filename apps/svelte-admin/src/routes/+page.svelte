@@ -18,6 +18,7 @@
     { href: '/slider', label: 'Slider' },
     { href: '/switch', label: 'Switch' },
     { href: '/table', label: 'Table' },
+    { href: '/toast', label: 'Toast' },
     { href: '/sortable', label: 'Sortable' },
     { href: '/interactions', label: 'Interactions' },
     { href: '/resizable', label: 'Resizable' },

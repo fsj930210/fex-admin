@@ -1,20 +1,10 @@
 import { sortableClassName, sortableItemClassName } from '@fex/components-styles/sortable'
 import { cn } from '@fex/utils'
-import { createContext, use } from 'react'
 import { createPortal } from 'react-dom'
 import type { ButtonHTMLAttributes, CSSProperties, HTMLAttributes, ReactNode } from 'react'
 import type { SortableAxis, SortableId, SortableItems } from '@fex/components-core/sortable/types'
 import { useSortable } from '../../hooks/use-sortable'
-
-interface SortableContextValue {
-  getContainerProps: ReturnType<typeof useSortable>['getContainerProps']
-  getItemProps: ReturnType<typeof useSortable>['getItemProps']
-  getHandleProps: ReturnType<typeof useSortable>['getHandleProps']
-  getOverlayStyle: ReturnType<typeof useSortable>['getOverlayStyle']
-  activeId: SortableId | null
-}
-
-const SortableContext = createContext<SortableContextValue | null>(null)
+import { SortableContext, useSortableContext } from './sortable-context'
 
 export interface SortableRootProps<TItems extends SortableItems>
   extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'onChange'> {
@@ -147,18 +137,3 @@ export function SortableOverlay({ className, children, style, ...props }: Sortab
   )
 }
 
-function useSortableContext() {
-  const context = use(SortableContext)
-  if (!context) {
-    throw new Error('Sortable components must be used inside SortableRoot.')
-  }
-
-  return context
-}
-
-export const Sortable = {
-  Root: SortableRoot,
-  Item: SortableItem,
-  Handle: SortableHandle,
-  Overlay: SortableOverlay,
-}

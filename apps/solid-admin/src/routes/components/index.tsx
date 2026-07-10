@@ -27,6 +27,7 @@ const SpinnerPage = lazy(() => import('../../pages/Spinner').then((module) => ({
 const SliderPage = lazy(() => import('../../pages/Slider').then((module) => ({ default: module.SliderPage })))
 const SwitchPage = lazy(() => import('../../pages/Switch').then((module) => ({ default: module.SwitchPage })))
 const TablePage = lazy(() => import('../../pages/Table').then((module) => ({ default: module.TablePage })))
+const ToastPage = lazy(() => import('../../pages/Toast').then((module) => ({ default: module.ToastPage })))
 const SortablePage = lazy(() => import('../../pages/Sortable').then((module) => ({ default: module.SortablePage })))
 const InteractionsPage = lazy(() =>
   import('../../pages/Interactions').then((module) => ({ default: module.InteractionsPage })),
@@ -110,6 +111,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/table',
     component: TablePage,
+  },
+  {
+    path: '/toast',
+    component: ToastPage,
   },
   {
     path: '/sortable',

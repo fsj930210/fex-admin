@@ -1,6 +1,7 @@
 import { Button as PrimitiveButton } from '@fex/components-react/primitive/button'
 import { Card } from '@fex/components-react/ui/card'
 import { Button } from '@fex/components-react/ui/button'
+import { PlusIcon } from '@fex/components-react/icon/plus'
 import type { ReactNode } from 'react'
 import { Link } from 'react-router'
 
@@ -15,23 +16,6 @@ const effects = [
   'gooey-right',
   'gradient-slide-show',
 ] as const
-
-function DemoIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M12 5v14" />
-      <path d="M5 12h14" />
-    </svg>
-  )
-}
 
 function DemoSection({
   title,
@@ -93,7 +77,7 @@ export function ButtonPage() {
           <DemoSection title="Sizes" description="文本按钮和 icon-only 按钮尺寸。">
             {sizes.map((size) => (
               <Button key={size} size={size} aria-label={size.startsWith('icon') ? size : undefined}>
-                {size.startsWith('icon') ? <DemoIcon /> : size}
+                {size.startsWith('icon') ? <PlusIcon /> : size}
               </Button>
             ))}
           </DemoSection>
@@ -106,8 +90,8 @@ export function ButtonPage() {
           </DemoSection>
 
           <DemoSection title="Icon" description="业务图标可放在文字前或文字后。">
-            <Button icon={<DemoIcon />}>Icon start</Button>
-            <Button icon={<DemoIcon />} iconPlacement="end">
+            <Button icon={<PlusIcon />}>Icon start</Button>
+            <Button icon={<PlusIcon />} iconPlacement="end">
               Icon end
             </Button>
           </DemoSection>
@@ -117,7 +101,7 @@ export function ButtonPage() {
               <Button
                 key={effect}
                 effect={effect}
-                icon={effect === 'expand-icon' ? <DemoIcon /> : undefined}
+                icon={effect === 'expand-icon' ? <PlusIcon /> : undefined}
                 iconPlacement="end"
               >
                 {effect}
@@ -126,10 +110,10 @@ export function ButtonPage() {
           </DemoSection>
 
           <DemoSection title="Mixed Usage" description="不同 variant、icon、loading 和 effect 的组合。">
-            <Button effect="expand-icon" icon={<DemoIcon />} iconPlacement="end">
+            <Button effect="expand-icon" icon={<PlusIcon />} iconPlacement="end">
               Icon right
             </Button>
-            <Button effect="expand-icon" icon={<DemoIcon />}>
+            <Button effect="expand-icon" icon={<PlusIcon />}>
               Icon left
             </Button>
             <Button variant="secondary" effect="gooey-left">

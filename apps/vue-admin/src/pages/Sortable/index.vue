@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import Card from '@fex/components-vue/ui/card'
 import { useSortable } from '@fex/components-vue/composables/use-sortable'
-import { Sortable } from '@fex/components-vue/primitive/sortable'
+import { SortableHandle, SortableItem, SortableOverlay, SortableRoot } from '@fex/components-vue/primitive/sortable'
 import { computed, ref } from 'vue'
+import type { SortableItems } from '@fex/components-core/sortable/types'
 
 const initialTasks = ['Backlog', 'Design', 'Build', 'Review']
 const initialPanels = {
@@ -31,6 +32,7 @@ const tableSortable = useSortable({ items: columns.value, axis: 'x', onChange: u
 function updateTasks(items: unknown) {
   tasks.value = items as string[]
 }
+function taskItems(items: SortableItems) { return items as string[] }
 
 function updatePanels(items: typeof initialPanels) {
   panels.value = items
@@ -61,23 +63,23 @@ const previewColumns = computed(() => tableSortable.previewItems.value as string
 
       <div class="space-y-space-xl">
         <Card title="Sortable Component" description="Use the primitive component for common one-container lists.">
-          <Sortable.Root :items="tasks" axis="y" @change="updateTasks" v-slot="{ items }">
-            <Sortable.Item
-              v-for="task in items"
+          <SortableRoot :items="tasks" axis="y" @change="updateTasks" v-slot="{ items }">
+            <SortableItem
+              v-for="task in taskItems(items)"
               :id="task"
               :key="task"
               class="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing data-[active]:shadow-lg"
             >
-              <Sortable.Handle class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</Sortable.Handle>
+              <SortableHandle class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</SortableHandle>
               {{ task }}
-            </Sortable.Item>
-            <Sortable.Overlay v-slot="{ activeId }">
+            </SortableItem>
+            <SortableOverlay v-slot="{ activeId }">
               <div class="flex min-h-12 items-center gap-space-sm">
                 <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
                 {{ activeId }}
               </div>
-            </Sortable.Overlay>
-          </Sortable.Root>
+            </SortableOverlay>
+          </SortableRoot>
         </Card>
 
         <Card title="Multiple Containers" description="The same sortable hook supports transfer panels.">

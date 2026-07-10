@@ -19,61 +19,16 @@ import type {
 import { cn } from '@fex/utils'
 import { Portal } from 'solid-js/web'
 import {
-  createContext,
   createSignal,
   onCleanup,
   Show,
   splitProps,
-  useContext,
-  type Accessor,
   type JSX,
   type ParentProps,
 } from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
-
-type PopoverContextValue = {
-  arrow: boolean
-  arrowElement: { current: HTMLElement | null }
-  contentElement: { current: HTMLElement | null }
-  overlay: FloatingOverlay
-  snapshot: Accessor<ReturnType<FloatingOverlay['getSnapshot']>>
-  triggerElement: { current: HTMLElement | null }
-}
-
-const PopoverContext = createContext<PopoverContextValue>()
+import { PopoverContext, dismissOpenPopovers, dismissRecords, usePopover } from './popover-context'
 const defaultTrigger: OverlayTrigger[] = ['click']
-const dismissRecords = new Set<{
-  arrowElement: { current: HTMLElement | null }
-  contentElement: { current: HTMLElement | null }
-  overlay: FloatingOverlay
-  triggerElement: { current: HTMLElement | null }
-}>()
-
-function dismissOpenPopovers(event: Event, except?: FloatingOverlay) {
-  const target = event.target
-  dismissRecords.forEach((record) => {
-    if (record.overlay === except || !record.overlay.getSnapshot().open) return
-    if (target instanceof Node) {
-      if (
-        record.triggerElement.current?.contains(target) ||
-        record.contentElement.current?.contains(target) ||
-        record.arrowElement.current?.contains(target)
-      ) {
-        return
-      }
-    }
-    record.overlay.close({ reason: 'outside-pointer', event })
-  })
-}
-
-function usePopover(component: string) {
-  const context = useContext(PopoverContext)
-  if (!context) {
-    throw new Error(`${component} must be used inside Popover`)
-  }
-  return context
-}
-
 function eventInfo(event: Event & Partial<PointerEvent>) {
   return {
     target: event.target,

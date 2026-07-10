@@ -1,34 +1,16 @@
 import { createSelectionController } from '@fex/components-core/selection/create-selection-controller'
 import type { SelectionValue } from '@fex/components-core/selection/types'
 import {
-  createContext,
   createMemo,
   type JSX,
   type ParentProps,
   splitProps,
-  useContext,
 } from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
 
-type ListboxOrientation = 'vertical' | 'horizontal'
+import type { ListboxOrientation } from './listbox-context'
 
-type ListboxContextValue = {
-  orientation: ListboxOrientation
-  selectedValues: () => readonly SelectionValue[]
-  isSelected: (value: SelectionValue) => boolean
-  isDisabled: (value: SelectionValue) => boolean
-  selectItem: (value: SelectionValue) => void
-}
-
-const ListboxContext = createContext<ListboxContextValue>()
-
-function useListboxContext(component: string) {
-  const context = useContext(ListboxContext)
-  if (!context) {
-    throw new Error(`${component} must be used inside ListboxRoot.`)
-  }
-  return context
-}
+import { ListboxContext, useListboxContext } from './listbox-context'
 
 type ListboxChangeMeta<TItem> = {
   selectedItem?: TItem | undefined

@@ -1,5 +1,5 @@
 import { useSortable } from '@fex/components-react/hooks/use-sortable'
-import { Sortable } from '@fex/components-react/primitive/sortable'
+import * as Sortable from '@fex/components-react/primitive/sortable'
 import { Card } from '@fex/components-react/ui/card'
 import { cn } from '@fex/utils'
 import { useState } from 'react'
@@ -55,22 +55,22 @@ export function SortablePage() {
 
         <div className="space-y-space-xl">
           <Card title="Sortable Component" description="Use the primitive component for common one-container lists.">
-            <Sortable.Root items={tasks} axis="y" onChange={setTasks}>
+            <Sortable.SortableRoot items={tasks} axis="y" onChange={setTasks}>
               {({ items }) => (
                 <>
                   {items.map((task) => (
-                    <Sortable.Item
+                    <Sortable.SortableItem
                       key={task}
                       id={task}
                       className="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing data-[active]:shadow-lg"
                     >
-                      <Sortable.Handle className="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">
+                      <Sortable.SortableHandle className="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">
                         ::
-                      </Sortable.Handle>
+                      </Sortable.SortableHandle>
                       {task}
-                    </Sortable.Item>
+                    </Sortable.SortableItem>
                   ))}
-                  <Sortable.Overlay>
+                  <Sortable.SortableOverlay>
                     {({ activeId }) => (
                       <div className="flex min-h-12 items-center gap-space-sm">
                         <span className="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">
@@ -79,10 +79,10 @@ export function SortablePage() {
                         {activeId}
                       </div>
                     )}
-                  </Sortable.Overlay>
+                  </Sortable.SortableOverlay>
                 </>
               )}
-            </Sortable.Root>
+            </Sortable.SortableRoot>
           </Card>
 
           <Card title="Multiple Containers" description="The same sortable hook supports transfer panels.">

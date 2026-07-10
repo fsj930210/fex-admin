@@ -1,10 +1,11 @@
 import { createMoveController } from '@fex/components-core/interactions/create-move-controller'
 import type { InteractionAxis, Point } from '@fex/components-core/interactions/types'
 import { shallowEqualObject } from '@fex/utils'
-import { useMemo, useRef, useSyncExternalStore } from 'react'
+import { useRef, useSyncExternalStore } from 'react'
 import type { CSSProperties, HTMLAttributes, PointerEvent, RefCallback } from 'react'
 import { useControllableState } from './use-controllable-state'
 import { useMemoizedFn } from './use-memoized-fn'
+import { useLazyRef } from './use-lazy-ref'
 
 type DataAttributes = {
   [key: `data-${string}`]: string | boolean | undefined
@@ -42,9 +43,7 @@ export function useMove({
     onMoveEnd,
   }
   const latestControllerOptionsRef = useRef(controllerOptions)
-  // controller 持有 DOM 引用和拖拽会话，必须保持稳定；上方浅比较负责同步最新输入。
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const controller = useMemo(() => createMoveController(controllerOptions), [])
+  const controller = useLazyRef(() => createMoveController(controllerOptions)).current
   const snapshot = useSyncExternalStore(
     controller.subscribe,
     controller.getSnapshot,

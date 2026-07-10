@@ -15,6 +15,8 @@ const tricks = [
 
 const selectedTrick = ref<string | number | undefined>('kickflip')
 const selectedTricks = ref<(string | number)[]>(['kickflip', 'heelflip'])
+function updateSelectedTrick(value: string | number | undefined) { selectedTrick.value = value }
+function updateSelectedTricks(values: (string | number)[]) { selectedTricks.value = values }
 </script>
 
 <template>
@@ -49,7 +51,7 @@ const selectedTricks = ref<(string | number)[]>(['kickflip', 'heelflip'])
             :items="tricks"
             :value="selectedTrick"
             class="max-w-xl"
-            @change="(value) => (selectedTrick = value)"
+            @change="updateSelectedTrick"
           >
             <ListboxItem
               v-for="trick in tricks.slice(0, 4)"
@@ -67,7 +69,7 @@ const selectedTricks = ref<(string | number)[]>(['kickflip', 'heelflip'])
             :items="tricks"
             :value="selectedTricks"
             class="max-w-xl"
-            @change="(values) => (selectedTricks = values)"
+            @change="updateSelectedTricks"
           >
             <ListboxItem
               v-for="trick in tricks.slice(0, 4)"

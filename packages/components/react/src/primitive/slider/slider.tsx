@@ -1,5 +1,5 @@
 import { createSliderController } from '@fex/components-core/slider/create-slider-controller'
-import type { SliderOrientation } from '@fex/components-core/slider/types'
+import type { SliderOptions, SliderOrientation } from '@fex/components-core/slider/types'
 import { convertValueToPercentage, getSliderValueFromPointer } from '@fex/components-core/slider/utils'
 import {
   sliderRangeClassName,
@@ -10,14 +10,11 @@ import {
 } from '@fex/components-styles/slider'
 import { cn } from '@fex/utils'
 import {
-  createContext,
-  use,
   useRef,
   type HTMLAttributes,
   type KeyboardEvent,
   type PointerEvent,
   type ReactNode,
-  type RefObject,
   type Ref,
   type MutableRefObject,
 } from 'react'
@@ -25,8 +22,8 @@ import { useCoreStore } from '../../hooks/use-core-store'
 import { useLazyRef } from '../../hooks/use-lazy-ref'
 
 export interface SliderRootProps extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>, SliderStyleProps {
-  value?: number[]
-  defaultValue?: number[]
+  value?: number[] | undefined
+  defaultValue?: number[] | undefined
   min?: number
   max?: number
   step?: number
@@ -38,21 +35,7 @@ export interface SliderRootProps extends Omit<HTMLAttributes<HTMLDivElement>, 'd
   onValueCommit?: (value: number[]) => void
 }
 
-interface SliderContextValue {
-  controller: ReturnType<typeof createSliderController>
-  snapshot: ReturnType<ReturnType<typeof createSliderController>['getSnapshot']>
-  rootRef: RefObject<HTMLDivElement | null>
-}
-
-const SliderContext = createContext<SliderContextValue | null>(null)
-
-function useSliderContext(componentName: string) {
-  const context = use(SliderContext)
-  if (!context) {
-    throw new Error(`${componentName} must be used inside SliderRoot.`)
-  }
-  return context
-}
+import { SliderContext, useSliderContext, type SliderContextValue } from './slider-context'
 
 function composeRefs<T>(...refs: Array<Ref<T> | undefined>) {
   return (node: T) => {
@@ -84,17 +67,17 @@ export function SliderRoot({
   ...props
 }: SliderRootProps) {
   const rootRef = useRef<HTMLDivElement | null>(null)
-  const optionsRef = useRef({
-    value,
-    defaultValue,
+  const optionsRef = useRef<SliderOptions>({
+    ...(value === undefined ? {} : { value }),
+    ...(defaultValue === undefined ? {} : { defaultValue }),
     min,
     max,
     step,
     minStepsBetweenThumbs,
     orientation,
     disabled,
-    onChange: onValueChange,
-    onCommit: onValueCommit,
+    onChange: (nextValue) => onValueChange?.(nextValue),
+    onCommit: (nextValue) => onValueCommit?.(nextValue),
   })
   Object.assign(optionsRef.current, {
     value,

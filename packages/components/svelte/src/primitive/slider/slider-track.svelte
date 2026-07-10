@@ -5,14 +5,15 @@
   import type { HTMLAttributes } from 'svelte/elements'
   import { sliderContextKey, type SliderContext } from './context'
 
-  interface SliderTrackProps extends HTMLAttributes<HTMLSpanElement> {
+  interface SliderTrackProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
     children?: Snippet | undefined
   }
 
   let { class: className, children, ...rest }: SliderTrackProps = $props()
   const { snapshot } = getContext<SliderContext>(sliderContextKey)
+  const currentSnapshot = $derived(snapshot())
 </script>
 
-<span {...rest} data-disabled={$snapshot.disabled ? 'true' : undefined} data-orientation={$snapshot.orientation} class={cn(sliderTrackClassName, className)}>
+<span {...rest} data-disabled={currentSnapshot.disabled ? 'true' : undefined} data-orientation={currentSnapshot.orientation} class={cn(sliderTrackClassName, className)}>
   {@render children?.()}
 </span>

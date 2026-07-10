@@ -45,24 +45,24 @@
 
   let rootElement: HTMLDivElement | undefined
   const options = {
-    value,
-    defaultValue,
-    min,
-    max,
-    step,
-    minStepsBetweenThumbs,
-    orientation,
-    disabled,
+    get value() { return value },
+    get defaultValue() { return defaultValue },
+    get min() { return min },
+    get max() { return max },
+    get step() { return step },
+    get minStepsBetweenThumbs() { return minStepsBetweenThumbs },
+    get orientation() { return orientation },
+    get disabled() { return disabled },
     onChange: (nextValue: number[]) => onValueChange?.(nextValue),
     onCommit: (nextValue: number[]) => onValueCommit?.(nextValue),
   }
   const controller = createSliderController(options)
-  const snapshot = readableCoreStore(controller)
-
-  $effect(() => {
-    Object.assign(options, { value, defaultValue, min, max, step, minStepsBetweenThumbs, orientation, disabled })
-    controller.syncSnapshot()
-  })
+  const storeSnapshot = readableCoreStore(controller)
+  const snapshot = () => {
+    $storeSnapshot
+    return controller.getSnapshot()
+  }
+  const currentSnapshot = $derived(snapshot())
 
   setContext(sliderContextKey, { controller, snapshot } satisfies SliderContext)
 </script>
@@ -70,19 +70,19 @@
 <div
   {...rest}
   bind:this={rootElement}
-  data-disabled={$snapshot.disabled ? 'true' : undefined}
-  data-orientation={$snapshot.orientation}
-  class={cn(sliderRootClassName({ size, orientation: $snapshot.orientation }), className)}
+  data-disabled={currentSnapshot.disabled ? 'true' : undefined}
+  data-orientation={currentSnapshot.orientation}
+  class={cn(sliderRootClassName({ size, orientation: currentSnapshot.orientation }), className)}
   onpointerdown={(event) => {
     onpointerdown?.(event)
-    if (event.defaultPrevented || $snapshot.disabled || !rootElement) return
+    if (event.defaultPrevented || currentSnapshot.disabled || !rootElement) return
     rootElement.setPointerCapture(event.pointerId)
-    controller.startSlide(getSliderValueFromPointer(event.clientX, event.clientY, rootElement.getBoundingClientRect(), $snapshot.min, $snapshot.max, $snapshot.orientation))
+    controller.startSlide(getSliderValueFromPointer(event.clientX, event.clientY, rootElement.getBoundingClientRect(), currentSnapshot.min, currentSnapshot.max, currentSnapshot.orientation))
   }}
   onpointermove={(event) => {
     onpointermove?.(event)
-    if (event.defaultPrevented || $snapshot.disabled || !rootElement?.hasPointerCapture(event.pointerId)) return
-    controller.moveSlide(getSliderValueFromPointer(event.clientX, event.clientY, rootElement.getBoundingClientRect(), $snapshot.min, $snapshot.max, $snapshot.orientation))
+    if (event.defaultPrevented || currentSnapshot.disabled || !rootElement?.hasPointerCapture(event.pointerId)) return
+    controller.moveSlide(getSliderValueFromPointer(event.clientX, event.clientY, rootElement.getBoundingClientRect(), currentSnapshot.min, currentSnapshot.max, currentSnapshot.orientation))
   }}
   onpointerup={(event) => {
     onpointerup?.(event)

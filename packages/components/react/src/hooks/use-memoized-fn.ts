@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useRef } from "react";
 import { isDev, isFunction } from "@fex/utils";
 
 type AnyFunction = (this: unknown, ...args: never[]) => unknown;
@@ -17,9 +17,7 @@ export const useMemoizedFn = <T extends AnyFunction>(fn: T) => {
 
   const fnRef = useRef<T>(fn);
 
-  // why not write `fnRef.current = fn`?
-  // https://github.com/alibaba/hooks/issues/728
-  fnRef.current = useMemo<T>(() => fn, [fn]);
+  fnRef.current = fn;
 
   const memoizedFn = useRef<PickFunction<T>>(undefined);
 

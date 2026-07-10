@@ -1,0 +1,2 @@
+<script setup lang="ts">import { listboxGroupClassName } from '@fex/components-styles/listbox'; import { cn } from '@fex/utils'; import { useAttrs } from 'vue'; import { ListboxGroup } from '../../primitive/listbox/listbox'; defineOptions({ inheritAttrs: false }); const attrs = useAttrs()</script>
+<template><ListboxGroup v-bind="attrs" :class="cn(listboxGroupClassName, attrs.class as string | undefined)"><slot /></ListboxGroup></template>

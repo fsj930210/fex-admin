@@ -1,4 +1,4 @@
-export { Dialog } from './dialog-root'
+export { default as DialogRoot } from './dialog-root.vue'
 export { default as DialogClose } from './dialog-close.vue'
 export { default as DialogContent } from './dialog-content.vue'
 export { DialogBody, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from './dialog-parts'

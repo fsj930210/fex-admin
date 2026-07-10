@@ -1,24 +1,10 @@
 import { switchClassName, switchThumbClassName, type SwitchStyleProps } from '@fex/components-styles/switch'
 import { cn } from '@fex/utils'
-import { createContext, createSignal, splitProps, useContext, type Accessor, type JSX } from 'solid-js'
+import { createSignal, splitProps, type JSX } from 'solid-js'
 
 export type SwitchState = 'checked' | 'unchecked'
 
-interface SwitchContextValue {
-  checked: Accessor<boolean>
-  state: Accessor<SwitchState>
-  size: Accessor<SwitchStyleProps['size']>
-}
-
-const SwitchContext = createContext<SwitchContextValue>()
-
-function useSwitchContext(componentName: string) {
-  const context = useContext(SwitchContext)
-  if (!context) {
-    throw new Error(`${componentName} must be used inside SwitchRoot.`)
-  }
-  return context
-}
+import { SwitchContext, useSwitchContext } from './switch-context'
 
 export interface SwitchRootProps
   extends Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'checked' | 'defaultChecked' | 'onChange' | 'role' | 'type'>,

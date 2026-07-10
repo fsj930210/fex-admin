@@ -1,27 +1,13 @@
 import { createToggleController } from '@fex/components-core/toggle/create-toggle-controller'
 import { switchClassName, switchThumbClassName, type SwitchStyleProps } from '@fex/components-styles/switch'
 import { cn } from '@fex/utils'
-import { createContext, use, useRef, type ButtonHTMLAttributes, type HTMLAttributes, type MouseEvent, type ReactNode, type Ref } from 'react'
+import { useRef, type ButtonHTMLAttributes, type HTMLAttributes, type MouseEvent, type ReactNode, type Ref } from 'react'
 import { useCoreStore } from '../../hooks/use-core-store'
 import { useLazyRef } from '../../hooks/use-lazy-ref'
 
 export type SwitchState = 'checked' | 'unchecked'
 
-interface SwitchContextValue {
-  checked: boolean
-  state: SwitchState
-  size: SwitchStyleProps['size']
-}
-
-const SwitchContext = createContext<SwitchContextValue | null>(null)
-
-function useSwitchContext(componentName: string) {
-  const context = use(SwitchContext)
-  if (!context) {
-    throw new Error(`${componentName} must be used inside SwitchRoot.`)
-  }
-  return context
-}
+import { SwitchContext, useSwitchContext } from './switch-context'
 
 export interface SwitchRootProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'checked' | 'defaultChecked' | 'onChange' | 'role' | 'type'>,

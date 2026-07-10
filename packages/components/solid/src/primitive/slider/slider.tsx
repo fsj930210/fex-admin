@@ -9,25 +9,10 @@ import {
   type SliderStyleProps,
 } from '@fex/components-styles/slider'
 import { cn } from '@fex/utils'
-import { createContext, createEffect, splitProps, useContext, type Accessor, type JSX } from 'solid-js'
+import { splitProps, type JSX } from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
 
-type SliderController = ReturnType<typeof createSliderController>
-type SliderSnapshot = ReturnType<SliderController['getSnapshot']>
-
-interface SliderContextValue {
-  controller: SliderController
-  snapshot: Accessor<SliderSnapshot>
-  rootElement: Accessor<HTMLDivElement | undefined>
-}
-
-const SliderContext = createContext<SliderContextValue>()
-
-function useSliderContext(componentName: string) {
-  const context = useContext(SliderContext)
-  if (!context) throw new Error(`${componentName} must be used inside SliderRoot.`)
-  return context
-}
+import { SliderContext, useSliderContext } from './slider-context'
 
 export interface SliderRootProps
   extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>,
@@ -77,19 +62,12 @@ export function SliderRoot(props: SliderRootProps) {
     onCommit: (value: number[]) => local.onValueCommit?.(value),
   }
   const controller = createSliderController(options)
-  const snapshot = createCoreStoreSignal(controller)
+  const storeSnapshot = createCoreStoreSignal(controller)
+  const snapshot = () => {
+    storeSnapshot()
+    return controller.getSnapshot()
+  }
   const size = () => local.size ?? 'default'
-  createEffect(() => {
-    void local.value
-    void local.defaultValue
-    void local.min
-    void local.max
-    void local.step
-    void local.minStepsBetweenThumbs
-    void local.orientation
-    void local.disabled
-    controller.syncSnapshot()
-  })
 
   return (
     <SliderContext.Provider value={{ controller, snapshot, rootElement: () => rootElement }}>
@@ -159,10 +137,11 @@ export function SliderThumb(props: SliderThumbProps) {
   const index = () => local.index ?? 0
   const value = () => context.snapshot().values[index()] ?? context.snapshot().min
   const percent = () => convertValueToPercentage(value(), context.snapshot().min, context.snapshot().max)
-  const thumbStyle = () =>
+  const customStyle = () => typeof local.style === 'object' ? local.style as JSX.CSSProperties : {}
+  const thumbStyle = (): JSX.CSSProperties =>
     context.snapshot().orientation === 'vertical'
-      ? { position: 'absolute', bottom: `${percent()}%`, left: '50%', transform: 'translate(-50%, 50%)', ...(typeof local.style === 'object' ? local.style : {}) }
-      : { position: 'absolute', top: '50%', left: `${percent()}%`, transform: 'translate(-50%, -50%)', ...(typeof local.style === 'object' ? local.style : {}) }
+      ? { position: 'absolute', bottom: `${percent()}%`, left: '50%', transform: 'translate(-50%, 50%)', ...customStyle() }
+      : { position: 'absolute', top: '50%', left: `${percent()}%`, transform: 'translate(-50%, -50%)', ...customStyle() }
 
   return (
     <span

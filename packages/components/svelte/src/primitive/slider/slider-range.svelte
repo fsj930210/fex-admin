@@ -10,12 +10,13 @@
 
   let { class: className, style, ...rest }: SliderRangeProps = $props()
   const { snapshot } = getContext<SliderContext>(sliderContextKey)
+  const currentSnapshot = $derived(snapshot())
   const rangeStyle = $derived.by(() => {
-    const percentages = $snapshot.values.map((value) => convertValueToPercentage(value, $snapshot.min, $snapshot.max))
-    const start = $snapshot.values.length > 1 ? Math.min(...percentages) : 0
+    const percentages = currentSnapshot.values.map((value) => convertValueToPercentage(value, currentSnapshot.min, currentSnapshot.max))
+    const start = currentSnapshot.values.length > 1 ? Math.min(...percentages) : 0
     const end = 100 - Math.max(...percentages)
-    return $snapshot.orientation === 'vertical' ? `bottom: ${start}%; top: ${end}%; ${style ?? ''}` : `left: ${start}%; right: ${end}%; ${style ?? ''}`
+    return currentSnapshot.orientation === 'vertical' ? `bottom: ${start}%; top: ${end}%; ${style ?? ''}` : `left: ${start}%; right: ${end}%; ${style ?? ''}`
   })
 </script>
 
-<span {...rest} data-disabled={$snapshot.disabled ? 'true' : undefined} data-orientation={$snapshot.orientation} class={cn(sliderRangeClassName, className)} style={rangeStyle}></span>
+<span {...rest} data-disabled={currentSnapshot.disabled ? 'true' : undefined} data-orientation={currentSnapshot.orientation} class={cn(sliderRangeClassName, className)} style={rangeStyle}></span>

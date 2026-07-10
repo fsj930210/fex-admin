@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {
-  Dialog,
+  DialogRoot,
   DialogBody,
   DialogClose,
   DialogContent,
@@ -37,7 +37,7 @@ const iconCloseClassName =
       <div class="space-y-space-xl">
         <Card title="Primitive" description="Trigger exposes slot props and content owns ARIA labels.">
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
-            <Dialog>
+            <DialogRoot>
               <DialogTrigger v-slot="{ props, ref }">
                 <Button v-bind="props" :ref="ref">Open dialog</Button>
               </DialogTrigger>
@@ -56,13 +56,13 @@ const iconCloseClassName =
                   </DialogFooter>
                 </DialogContent>
               </DialogPortal>
-            </Dialog>
+            </DialogRoot>
           </div>
         </Card>
 
         <Card title="Controlled" description="Controlled mode requests updates through open-change.">
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
-            <Dialog :open="open" @open-change="open = $event">
+            <DialogRoot :open="open" @open-change="open = $event">
               <DialogTrigger v-slot="{ props, ref }">
                 <Button v-bind="props" :ref="ref" variant="outline">{{ open ? 'Open' : 'Closed' }}</Button>
               </DialogTrigger>
@@ -78,13 +78,13 @@ const iconCloseClassName =
                   <DialogFooter><DialogClose v-slot="{ props }"><Button v-bind="props">Done</Button></DialogClose></DialogFooter>
                 </DialogContent>
               </DialogPortal>
-            </Dialog>
+            </DialogRoot>
           </div>
         </Card>
 
         <Card title="Sizes" description="Content size is a primitive style variant.">
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
-            <Dialog v-for="size in ['sm', 'md', 'lg']" :key="size">
+            <DialogRoot v-for="size in ['sm', 'md', 'lg']" :key="size">
               <DialogTrigger v-slot="{ props, ref }">
                 <Button v-bind="props" :ref="ref" variant="outline">{{ size }}</Button>
               </DialogTrigger>
@@ -100,13 +100,13 @@ const iconCloseClassName =
                   <DialogFooter><DialogClose v-slot="{ props }"><Button v-bind="props">Close</Button></DialogClose></DialogFooter>
                 </DialogContent>
               </DialogPortal>
-            </Dialog>
+            </DialogRoot>
           </div>
         </Card>
 
         <Card title="Dismiss" description="Overlay pointer dismissal can be disabled.">
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
-            <Dialog :close-on-overlay-pointer="false">
+            <DialogRoot :close-on-overlay-pointer="false">
               <DialogTrigger v-slot="{ props, ref }">
                 <Button v-bind="props" :ref="ref" variant="outline">No overlay close</Button>
               </DialogTrigger>
@@ -125,7 +125,7 @@ const iconCloseClassName =
                   </DialogFooter>
                 </DialogContent>
               </DialogPortal>
-            </Dialog>
+            </DialogRoot>
           </div>
         </Card>
       </div>

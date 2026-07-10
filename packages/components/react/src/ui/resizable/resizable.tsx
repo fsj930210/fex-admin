@@ -1,19 +1,11 @@
 import { resizePanelPair, normalizePanelLayout } from '@fex/components-core/resizable/layout'
 import { cn } from '@fex/utils'
-import { createContext, use, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import type { HTMLAttributes, KeyboardEvent, PointerEvent as ReactPointerEvent, ReactNode } from 'react'
 import type { ResizableDirection, ResizablePanelConfig } from '@fex/components-core/resizable/types'
 import { useControllableState } from '../../hooks/use-controllable-state'
 
-interface ResizableContextValue {
-  direction: ResizableDirection
-  groupElement: HTMLDivElement | null
-  layout: number[]
-  registerPanel: (config: ResizablePanelConfig) => number
-  resizeHandle: (handleIndex: number, deltaPercent: number) => void
-}
-
-const ResizableContext = createContext<ResizableContextValue | null>(null)
+import { ResizableContext, useResizableContext } from './resizable-context'
 
 export interface ResizablePanelGroupProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
@@ -208,17 +200,3 @@ export function ResizableHandle({ index, disabled, className, onKeyDown, ...prop
   )
 }
 
-function useResizableContext() {
-  const context = use(ResizableContext)
-  if (!context) {
-    throw new Error('Resizable components must be used inside ResizablePanelGroup.')
-  }
-
-  return context
-}
-
-export const Resizable = {
-  PanelGroup: ResizablePanelGroup,
-  Panel: ResizablePanel,
-  Handle: ResizableHandle,
-}

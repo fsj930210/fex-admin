@@ -15,20 +15,20 @@ import { Popover } from '@fex/components-react/primitive/popover'
 
 export function Demo() {
   return (
-    <Popover.Root placement="bottomLeft" sideOffset={8} arrow>
-      <Popover.Trigger>
+    <PopoverRoot placement="bottomLeft" sideOffset={8} arrow>
+      <PopoverTrigger>
         {(triggerProps) => <button {...triggerProps}>Open</button>}
-      </Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content>
-          <Popover.Arrow />
-          <Popover.Header>
-            <Popover.Title>Title</Popover.Title>
-            <Popover.Description>Content</Popover.Description>
-          </Popover.Header>
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover.Root>
+      </PopoverTrigger>
+      <PopoverPortal>
+        <PopoverContent>
+          <PopoverArrow />
+          <PopoverHeader>
+            <PopoverTitle>Title</PopoverTitle>
+            <PopoverDescription>Content</PopoverDescription>
+          </PopoverHeader>
+        </PopoverContent>
+      </PopoverPortal>
+    </PopoverRoot>
   )
 }
 ```
@@ -40,20 +40,20 @@ export function Demo() {
 `sideOffset` 控制主轴距离，`alignOffset` 控制交叉轴偏移。
 
 ```tsx
-<Popover.Root placement="bottomLeft" sideOffset={8} alignOffset={28} arrow>
-  <Popover.Trigger>
+<PopoverRoot placement="bottomLeft" sideOffset={8} alignOffset={28} arrow>
+  <PopoverTrigger>
     {(props) => <button {...props}>Offset</button>}
-  </Popover.Trigger>
-  <Popover.Portal>
-    <Popover.Content>
-      <Popover.Arrow />
-      <Popover.Header>
-        <Popover.Title>Offset</Popover.Title>
-        <Popover.Description>Content is shifted along the aligned edge.</Popover.Description>
-      </Popover.Header>
-    </Popover.Content>
-  </Popover.Portal>
-</Popover.Root>
+  </PopoverTrigger>
+  <PopoverPortal>
+    <PopoverContent>
+      <PopoverArrow />
+      <PopoverHeader>
+        <PopoverTitle>Offset</PopoverTitle>
+        <PopoverDescription>Content is shifted along the aligned edge.</PopoverDescription>
+      </PopoverHeader>
+    </PopoverContent>
+  </PopoverPortal>
+</PopoverRoot>
 ```
 
 ## 自定义 UI
@@ -82,12 +82,12 @@ function CustomContent() {
 
 export function Demo() {
   return (
-    <Popover.Root arrow>
+    <PopoverRoot arrow>
       <CustomTrigger />
-      <Popover.Portal>
+      <PopoverPortal>
         <CustomContent />
-      </Popover.Portal>
-    </Popover.Root>
+      </PopoverPortal>
+    </PopoverRoot>
   )
 }
 ```
@@ -156,4 +156,4 @@ export function Demo() {
 - Click Popover：`trigger={['click']}`。
 - Hover + Focus Popover：`trigger={['hover', 'focus']}`，可配合 `hoverCloseDelay`。
 - Context Menu：`trigger={['context-menu']}`，可配合 `placement="rightTop"`。
-- 自定义容器：传入 `getPopupContainer` 并使用 `Popover.Portal`。
+- 自定义容器：传入 `getPopupContainer` 并使用 `PopoverPortal`。

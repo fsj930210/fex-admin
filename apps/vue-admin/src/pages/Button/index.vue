@@ -2,6 +2,7 @@
 import PrimitiveButton from "@fex/components-vue/primitive/button";
 import Button from "@fex/components-vue/ui/button";
 import Card from "@fex/components-vue/ui/card";
+import { PlusIcon } from "@fex/components-vue/icon/plus";
 
 const variants = [
   "default",
@@ -66,19 +67,7 @@ const effects = [
               :size="size"
               :aria-label="size.startsWith('icon') ? size : undefined"
             >
-              <svg
-                v-if="size.startsWith('icon')"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M12 5v14" />
-                <path d="M5 12h14" />
-              </svg>
+              <PlusIcon />
               <template v-else>{{ size }}</template>
             </Button>
           </div>
@@ -95,35 +84,13 @@ const effects = [
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
             <Button>
               <template #icon>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14" />
-                  <path d="M5 12h14" />
-                </svg>
+                <PlusIcon />
               </template>
               Icon start
             </Button>
             <Button icon-placement="end">
               <template #icon>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14" />
-                  <path d="M5 12h14" />
-                </svg>
+                <PlusIcon />
               </template>
               Icon end
             </Button>
@@ -134,18 +101,7 @@ const effects = [
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
             <Button v-for="effect in effects" :key="effect" :effect="effect" icon-placement="end">
               <template v-if="effect === 'expand-icon'" #icon>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14" />
-                  <path d="M5 12h14" />
-                </svg>
+                <PlusIcon />
               </template>
               {{ effect }}
             </Button>
@@ -156,19 +112,13 @@ const effects = [
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
             <Button effect="expand-icon" icon-placement="end">
               <template #icon>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M12 5v14" />
-                  <path d="M5 12h14" />
-                </svg>
+                <PlusIcon />
               </template>
               Icon right
             </Button>
             <Button effect="expand-icon">
               <template #icon>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M12 5v14" />
-                  <path d="M5 12h14" />
-                </svg>
+                <PlusIcon />
               </template>
               Icon left
             </Button>

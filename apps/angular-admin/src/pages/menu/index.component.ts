@@ -13,10 +13,12 @@ import type {
   MenuNodeEntry,
   MenuRenderItemInfo,
 } from "@fex/components-angular/primitive/menu-types";
+import { MinusIcon } from "@fex/components-angular/icon/minus";
+import { PlusIcon } from "@fex/components-angular/icon/plus";
 
 @Component({
   selector: "fex-menu-page",
-  imports: [NgTemplateOutlet, RouterLink, Card, Menu],
+  imports: [NgTemplateOutlet, RouterLink, Card, Menu, MinusIcon, PlusIcon],
   host: { class: "block" },
   templateUrl: "./index.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,

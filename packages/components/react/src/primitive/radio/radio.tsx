@@ -11,8 +11,6 @@ import {
 } from '@fex/components-styles/radio'
 import { cn } from '@fex/utils'
 import {
-  createContext,
-  use,
   useRef,
   type ButtonHTMLAttributes,
   type HTMLAttributes,
@@ -53,13 +51,7 @@ export interface RadioButtonProps
   ref?: Ref<HTMLButtonElement>
 }
 
-interface RadioContextValue {
-  value: RadioValue | undefined
-  disabled: boolean
-  select: (value: RadioValue) => void
-}
-
-const RadioContext = createContext<RadioContextValue | null>(null)
+import { RadioContext, useRadioContext } from './radio-context'
 
 function toRadioChangeMeta(value: RadioValue, meta: SelectionChangeMeta): RadioChangeMeta {
   return {
@@ -67,14 +59,6 @@ function toRadioChangeMeta(value: RadioValue, meta: SelectionChangeMeta): RadioC
     value,
     changedValues: meta.changedValues,
   }
-}
-
-function useRadioContext(componentName: string) {
-  const context = use(RadioContext)
-  if (context === null) {
-    throw new Error(`${componentName} must be used inside RadioGroup.`)
-  }
-  return context
 }
 
 export function RadioGroup({

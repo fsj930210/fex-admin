@@ -1,6 +1,6 @@
 import { A } from '@solidjs/router'
 import { createSortable } from '@fex/components-solid/primitives/create-sortable'
-import { Sortable } from '@fex/components-solid/primitive/sortable'
+import * as Sortable from '@fex/components-solid/primitive/sortable'
 import { Card } from '@fex/components-solid/ui/card'
 import { For, Show, createSignal, type JSX } from 'solid-js'
 import { Portal } from 'solid-js/web'
@@ -44,22 +44,22 @@ export function SortablePage() {
         </header>
         <div class="space-y-space-xl">
           <Card title="Sortable Component" description="Use the primitive component for common one-container lists.">
-            <Sortable.Root items={tasks()} axis="y" onChange={setTasks}>
+            <Sortable.SortableRoot items={tasks()} axis="y" onChange={setTasks}>
               {({ items }) => (
                 <>
                   <For each={items}>
                     {(task) => (
-                      <Sortable.Item id={task} class="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing data-[active]:shadow-lg">
-                        <Sortable.Handle class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</Sortable.Handle>{task}
-                      </Sortable.Item>
+                      <Sortable.SortableItem id={task} class="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing data-[active]:shadow-lg">
+                        <Sortable.SortableHandle class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</Sortable.SortableHandle>{task}
+                      </Sortable.SortableItem>
                     )}
                   </For>
-                  <Sortable.Overlay>
+                  <Sortable.SortableOverlay>
                     {(activeId) => <div class="flex min-h-12 items-center gap-space-sm"><span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>{activeId}</div>}
-                  </Sortable.Overlay>
+                  </Sortable.SortableOverlay>
                 </>
               )}
-            </Sortable.Root>
+            </Sortable.SortableRoot>
           </Card>
           <Card title="Multiple Containers" description="The same sortable hook supports transfer panels.">
             <div class="grid gap-space-md md:grid-cols-2">

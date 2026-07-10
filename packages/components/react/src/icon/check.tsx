@@ -12,7 +12,7 @@ export function CheckIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={['lucide lucide-check-icon lucide-check', className].filter(Boolean).join(' ')}
+      className={className}
       {...props}
     >
       <path d="M20 6 9 17l-5-5" />
