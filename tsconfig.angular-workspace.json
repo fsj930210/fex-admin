@@ -4,6 +4,24 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
+      "@fex/components-core/calendar": [
+        "packages/components/core/src/calendar/index.ts"
+      ],
+      "@fex/components-core/calendar/grid": [
+        "packages/components/core/src/calendar/grid.ts"
+      ],
+      "@fex/components-core/calendar/range": [
+        "packages/components/core/src/calendar/range.ts"
+      ],
+      "@fex/components-core/calendar/temporal": [
+        "packages/components/core/src/calendar/temporal.ts"
+      ],
+      "@fex/components-core/calendar/types": [
+        "packages/components/core/src/calendar/types.ts"
+      ],
+      "@fex/components-core/calendar/value": [
+        "packages/components/core/src/calendar/value.ts"
+      ],
       "@fex/components-core/store/create-store": [
         "packages/components/core/src/store/create-store.ts"
       ],
@@ -142,6 +160,9 @@
       "@fex/components-angular/primitive/button": [
         "packages/components/angular/src/primitive/button/button.ts"
       ],
+      "@fex/components-angular/primitive/calendar": [
+        "packages/components/angular/src/primitive/calendar/calendar.ts"
+      ],
       "@fex/components-angular/primitive/card": [
         "packages/components/angular/src/primitive/card/card.ts"
       ],
@@ -241,6 +262,9 @@
       "@fex/components-angular/icon/more": [
         "packages/components/angular/src/icon/more.ts"
       ],
+      "@fex/components-angular/icon/plus": [
+        "packages/components/angular/src/icon/plus.ts"
+      ],
       "@fex/components-angular/icon/warning": [
         "packages/components/angular/src/icon/warning.ts"
       ],
@@ -267,6 +291,9 @@
       ],
       "@fex/components-angular/signals/host-class": [
         "packages/components/angular/src/signals/host-class.ts"
+      ],
+      "@fex/components-angular/services/toast": [
+        "packages/components/angular/src/services/toast.ts"
       ]
     }
   }

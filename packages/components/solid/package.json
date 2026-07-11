@@ -6,7 +6,8 @@
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.tsx",
     "./primitive/button": "./src/primitive/button/button.tsx",
-    "./primitive/card": "./src/primitive/card/card.tsx",
+    "./primitive/calendar": "./src/primitive/calendar/calendar.tsx",
+        "./primitive/card": "./src/primitive/card/card.tsx",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.tsx",
     "./primitive/dialog": "./src/primitive/dialog/dialog.tsx",
     "./primitive/empty": "./src/primitive/empty/empty.tsx",
@@ -41,6 +42,7 @@
     "./icon/plus": "./src/icon/plus.tsx",
     "./icon/warning": "./src/icon/warning.tsx",
     "./primitives/create-core-store-signal": "./src/primitives/create-core-store-signal.ts",
+    "./primitives/create-date-utils": "./src/primitives/create-date-utils.ts",
     "./primitives/create-draggable": "./src/primitives/create-draggable.ts",
     "./primitives/create-droppable": "./src/primitives/create-droppable.ts",
     "./primitives/create-dropzone": "./src/primitives/create-dropzone.ts",

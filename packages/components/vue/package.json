@@ -6,7 +6,8 @@
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.ts",
     "./primitive/button": "./src/primitive/button/button.vue",
-    "./primitive/card": "./src/primitive/card/card.ts",
+    "./primitive/calendar": "./src/primitive/calendar/calendar.ts",
+        "./primitive/card": "./src/primitive/card/card.ts",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.ts",
     "./primitive/dialog": "./src/primitive/dialog/dialog.ts",
     "./primitive/empty": "./src/primitive/empty/empty.ts",
@@ -41,6 +42,7 @@
     "./icon/plus": "./src/icon/plus.ts",
     "./icon/warning": "./src/icon/warning.ts",
     "./composables/use-core-store": "./src/composables/use-core-store.ts",
+    "./composables/use-date-utils": "./src/composables/use-date-utils.ts",
     "./composables/use-draggable": "./src/composables/use-draggable.ts",
     "./composables/use-droppable": "./src/composables/use-droppable.ts",
     "./composables/use-dropzone": "./src/composables/use-dropzone.ts",

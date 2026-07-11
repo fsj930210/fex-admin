@@ -7,6 +7,11 @@ export const componentRoutes: Routes = [
       import('../../pages/button/index.component').then((module) => module.ButtonComponent),
   },
   {
+    path: 'calendar',
+    loadComponent: () =>
+      import('../../pages/calendar/index.component').then((module) => module.CalendarComponent),
+  },
+  {
     path: 'card',
     loadComponent: () =>
       import('../../pages/card/index.component').then((module) => module.CardComponent),
@@ -18,27 +23,33 @@ export const componentRoutes: Routes = [
   },
   {
     path: 'dialog',
-    loadComponent: () => import('../../pages/dialog/index.component').then((module) => module.DialogComponent),
+    loadComponent: () =>
+      import('../../pages/dialog/index.component').then((module) => module.DialogComponent),
   },
   {
     path: 'alert',
-    loadComponent: () => import('../../pages/alert/index.component').then((module) => module.AlertComponent),
+    loadComponent: () =>
+      import('../../pages/alert/index.component').then((module) => module.AlertComponent),
   },
   {
     path: 'badge',
-    loadComponent: () => import('../../pages/badge/index.component').then((module) => module.BadgeComponent),
+    loadComponent: () =>
+      import('../../pages/badge/index.component').then((module) => module.BadgeComponent),
   },
   {
     path: 'empty',
-    loadComponent: () => import('../../pages/empty/index.component').then((module) => module.EmptyComponent),
+    loadComponent: () =>
+      import('../../pages/empty/index.component').then((module) => module.EmptyComponent),
   },
   {
     path: 'input',
-    loadComponent: () => import('../../pages/input/index.component').then((module) => module.InputComponent),
+    loadComponent: () =>
+      import('../../pages/input/index.component').then((module) => module.InputComponent),
   },
   {
     path: 'kbd',
-    loadComponent: () => import('../../pages/kbd/index.component').then((module) => module.KbdComponent),
+    loadComponent: () =>
+      import('../../pages/kbd/index.component').then((module) => module.KbdComponent),
   },
   {
     path: 'listbox',
@@ -47,7 +58,8 @@ export const componentRoutes: Routes = [
   },
   {
     path: 'menu',
-    loadComponent: () => import('../../pages/menu/index.component').then((module) => module.MenuComponent),
+    loadComponent: () =>
+      import('../../pages/menu/index.component').then((module) => module.MenuComponent),
   },
   {
     path: 'pagination',
@@ -61,7 +73,8 @@ export const componentRoutes: Routes = [
   },
   {
     path: 'radio',
-    loadComponent: () => import('../../pages/radio/index.component').then((module) => module.RadioComponent),
+    loadComponent: () =>
+      import('../../pages/radio/index.component').then((module) => module.RadioComponent),
   },
   {
     path: 'spinner',
@@ -70,19 +83,23 @@ export const componentRoutes: Routes = [
   },
   {
     path: 'slider',
-    loadComponent: () => import('../../pages/slider/index.component').then((module) => module.SliderComponent),
+    loadComponent: () =>
+      import('../../pages/slider/index.component').then((module) => module.SliderComponent),
   },
   {
     path: 'switch',
-    loadComponent: () => import('../../pages/switch/index.component').then((module) => module.SwitchComponent),
+    loadComponent: () =>
+      import('../../pages/switch/index.component').then((module) => module.SwitchComponent),
   },
   {
     path: 'table',
-    loadComponent: () => import('../../pages/table/index.component').then((module) => module.TableComponent),
+    loadComponent: () =>
+      import('../../pages/table/index.component').then((module) => module.TableComponent),
   },
   {
     path: 'toast',
-    loadComponent: () => import('../../pages/toast/index.component').then((module) => module.ToastComponent),
+    loadComponent: () =>
+      import('../../pages/toast/index.component').then((module) => module.ToastComponent),
   },
   {
     path: 'sortable',
@@ -92,7 +109,9 @@ export const componentRoutes: Routes = [
   {
     path: 'interactions',
     loadComponent: () =>
-      import('../../pages/interactions/index.component').then((module) => module.InteractionsComponent),
+      import('../../pages/interactions/index.component').then(
+        (module) => module.InteractionsComponent,
+      ),
   },
   {
     path: 'resizable',

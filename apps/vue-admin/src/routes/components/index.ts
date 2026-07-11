@@ -1,5 +1,6 @@
 export const componentRoutes = [
   { path: '/button', component: () => import('../../pages/Button/index.vue') },
+  { path: '/calendar', component: () => import('../../pages/Calendar/index.vue') },
   { path: '/card', component: () => import('../../pages/Card/index.vue') },
   { path: '/checkbox', component: () => import('../../pages/Checkbox/index.vue') },
   { path: '/dialog', component: () => import('../../pages/Dialog/index.vue') },

@@ -3,6 +3,7 @@ import { For } from 'solid-js'
 
 const componentLinks = [
   { href: '/button', label: 'Button' },
+  { href: '/calendar', label: 'Calendar' },
   { href: '/card', label: 'Card' },
   { href: '/checkbox', label: 'Checkbox' },
   { href: '/dialog', label: 'Dialog' },
@@ -44,13 +45,20 @@ export function Home() {
       <div class="mx-auto w-full max-w-5xl space-y-space-xl">
         <header class="space-y-space-sm">
           <h1 class="text-2xl font-semibold text-foreground">Solid Admin</h1>
-          <p class="text-sm leading-6 text-muted-foreground">临时导航入口，后续后台功能完整后再调整首页结构。</p>
+          <p class="text-sm leading-6 text-muted-foreground">
+            临时导航入口，后续后台功能完整后再调整首页结构。
+          </p>
         </header>
 
         <section class="space-y-space-md">
           <h2 class="text-base font-medium text-foreground">Components</h2>
-          <nav class="grid grid-cols-1 gap-space-sm sm:grid-cols-2 lg:grid-cols-3" aria-label="组件示例">
-            <For each={componentLinks}>{(link) => <NavLink href={link.href} label={link.label} />}</For>
+          <nav
+            class="grid grid-cols-1 gap-space-sm sm:grid-cols-2 lg:grid-cols-3"
+            aria-label="组件示例"
+          >
+            <For each={componentLinks}>
+              {(link) => <NavLink href={link.href} label={link.label} />}
+            </For>
           </nav>
         </section>
       </div>

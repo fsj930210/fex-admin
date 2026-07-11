@@ -5,6 +5,13 @@
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
+    "./calendar": "./src/calendar/index.ts",
+    "./calendar/grid": "./src/calendar/grid.ts",
+    "./calendar/range": "./src/calendar/range.ts",
+    "./calendar/temporal": "./src/calendar/temporal.ts",
+    "./calendar/types": "./src/calendar/types.ts",
+    "./date/utils": "./src/date/utils.ts",
+    "./calendar/value": "./src/calendar/value.ts",
     "./store/create-store": "./src/store/create-store.ts",
     "./toggle/create-toggle-controller": "./src/toggle/create-toggle-controller.ts",
     "./toggle/types": "./src/toggle/types.ts",

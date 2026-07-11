@@ -1,0 +1,10 @@
+@for (row of root.grid().rows; track rowKey(row)) {
+<div data-slot="calendar-row">
+  @for (cell of row; track cell.key) { @if (cellTemplate()) {
+  <ng-container
+    [ngTemplateOutlet]="cellTemplate()"
+    [ngTemplateOutletContext]="{ $implicit: cell, cell }"
+  />
+  } }
+</div>
+}

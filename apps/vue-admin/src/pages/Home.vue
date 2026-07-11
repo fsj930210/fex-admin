@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const componentLinks = [
   { to: '/button', label: 'Button' },
+  { to: '/calendar', label: 'Calendar' },
   { to: '/card', label: 'Card' },
   { to: '/checkbox', label: 'Checkbox' },
   { to: '/dialog', label: 'Dialog' },
@@ -38,7 +39,10 @@ const componentLinks = [
 
       <section class="space-y-space-md">
         <h2 class="text-base font-medium text-foreground">Components</h2>
-        <nav class="grid grid-cols-1 gap-space-sm sm:grid-cols-2 lg:grid-cols-3" aria-label="组件示例">
+        <nav
+          class="grid grid-cols-1 gap-space-sm sm:grid-cols-2 lg:grid-cols-3"
+          aria-label="组件示例"
+        >
           <RouterLink
             v-for="link in componentLinks"
             :key="link.to"

@@ -1,6 +1,7 @@
 <script lang="ts">
   const componentLinks = [
     { href: '/button', label: 'Button' },
+    { href: '/calendar', label: 'Calendar' },
     { href: '/card', label: 'Card' },
     { href: '/checkbox', label: 'Checkbox' },
     { href: '/dialog', label: 'Dialog' },

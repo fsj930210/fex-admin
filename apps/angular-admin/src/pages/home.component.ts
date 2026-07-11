@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router'
 export class HomeComponent {
   protected readonly componentLinks = [
     { to: '/button', label: 'Button' },
+    { to: '/calendar', label: 'Calendar' },
     { to: '/card', label: 'Card' },
     { to: '/checkbox', label: 'Checkbox' },
     { to: '/dialog', label: 'Dialog' },

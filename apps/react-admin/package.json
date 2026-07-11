@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@fex/components-core": "workspace:*",
     "@fex/components-react": "workspace:*",
     "@fex/styles": "workspace:*",
     "@fex/utils": "workspace:*",

@@ -11,6 +11,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Card'), 'CardPage'),
   },
   {
+    path: '/calendar',
+    element: createLazyRouteElement(() => import('../../pages/Calendar'), 'CalendarPage'),
+  },
+  {
     path: '/checkbox',
     element: createLazyRouteElement(() => import('../../pages/Checkbox'), 'CheckboxPage'),
   },
