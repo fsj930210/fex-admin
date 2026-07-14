@@ -1,4 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority'
+import { selectableItemSelectedClassName } from '@fex/components-styles/selectable-item'
 
 export const menuRootClassName = cva('min-w-0 text-sm text-foreground', {
   variants: {
@@ -29,7 +30,7 @@ export const menuItemClassName = cva(
   [
     'group/menu-item flex h-[var(--menu-item-height)] min-w-0 cursor-pointer select-none items-center gap-2 rounded-md border border-transparent bg-transparent px-[var(--menu-item-padding-x)] text-left outline-none transition-colors',
     'hover:bg-muted-background focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-focus/50',
-    'data-[selected=true]:bg-primary/10 data-[selected=true]:text-primary',
+    selectableItemSelectedClassName,
     'data-[disabled=true]:pointer-events-none data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50',
   ].join(' '),
   {

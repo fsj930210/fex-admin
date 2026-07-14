@@ -123,4 +123,9 @@ export const componentRoutes: Routes = [
     loadComponent: () =>
       import('../../pages/textarea/index.component').then((module) => module.TextareaComponent),
   },
+  {
+    path: 'tree',
+    loadComponent: () =>
+      import('../../pages/tree/index.component').then((module) => module.TreeComponent),
+  },
 ]

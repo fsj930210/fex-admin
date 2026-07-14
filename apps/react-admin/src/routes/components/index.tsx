@@ -3,6 +3,10 @@ import { ListboxPage } from '../../pages/Listbox'
 
 export const componentRoutes = [
   {
+    path: '/tree',
+    element: createLazyRouteElement(() => import('../../pages/Tree'), 'TreePage'),
+  },
+  {
     path: '/button',
     element: createLazyRouteElement(() => import('../../pages/Button'), 'ButtonPage'),
   },

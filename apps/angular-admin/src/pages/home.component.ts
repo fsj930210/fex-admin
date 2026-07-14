@@ -34,5 +34,6 @@ export class HomeComponent {
     { to: '/interactions', label: 'Interactions' },
     { to: '/resizable', label: 'Resizable' },
     { to: '/textarea', label: 'Textarea' },
+    { to: '/tree', label: 'Tree' },
   ] as const
 }

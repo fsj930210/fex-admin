@@ -1,0 +1,11 @@
+<div #scrollElement class="overflow-auto" [style.height.px]="height()">
+  <div class="relative w-full" [style.height.px]="virtualizer.getTotalSize()">
+    @for (virtualItem of virtualizer.getVirtualItems(); track virtualItem.key) {
+      @if (root.visibleItems()[virtualItem.index]; as item) {
+        <div class="absolute left-0 w-full" [style.height.px]="virtualItem.size" [style.transform]="'translateY(' + virtualItem.start + 'px)'">
+          <ng-container [ngTemplateOutlet]="template()" [ngTemplateOutletContext]="{ $implicit: item, tree: root.tree() }" />
+        </div>
+      }
+    }
+  </div>
+</div>

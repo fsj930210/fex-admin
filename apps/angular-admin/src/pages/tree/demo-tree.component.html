@@ -1,0 +1,7 @@
+<fex-tree [controller]="controller()" [options]="options()" [indent]="indent()" class="w-full">
+  @if (virtual()) {
+    <fex-tree-virtual-viewport [height]="height()" [overscan]="overscan()"><ng-template let-item let-tree="tree"><fex-demo-tree-row [tree]="tree" [item]="item" [checkable]="checkable()" [searchKeyword]="searchKeyword()" /></ng-template></fex-tree-virtual-viewport>
+  } @else {
+    <fex-tree-viewport><ng-template let-item let-tree="tree"><fex-demo-tree-row [tree]="tree" [item]="item" [checkable]="checkable()" [searchKeyword]="searchKeyword()" /></ng-template></fex-tree-viewport>
+  }
+</fex-tree>

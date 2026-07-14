@@ -21,6 +21,7 @@ export function HomePage() {
     { to: '/slider', label: 'Slider' },
     { to: '/switch', label: 'Switch' },
     { to: '/table', label: 'Table' },
+    { to: '/tree', label: 'Tree' },
     { to: '/toast', label: 'Toast' },
     { to: '/sortable', label: 'Sortable' },
     { to: '/interactions', label: 'Interactions' },

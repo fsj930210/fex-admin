@@ -73,6 +73,9 @@ const ResizablePage = lazy(() =>
 const TextareaPage = lazy(() =>
   import('../../pages/Textarea').then((module) => ({ default: module.TextareaPage })),
 )
+const TreePage = lazy(() =>
+  import('../../pages/Tree').then((module) => ({ default: module.TreePage })),
+)
 
 export const componentRoutes: AppRoute[] = [
   {
@@ -170,5 +173,9 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/textarea',
     component: TextareaPage,
+  },
+  {
+    path: '/tree',
+    component: TreePage,
   },
 ]

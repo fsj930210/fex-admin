@@ -85,6 +85,8 @@
     "./primitive/table-head": "./src/primitive/table/table-head.svelte",
     "./primitive/table-cell": "./src/primitive/table/table-cell.svelte",
     "./primitive/table-caption": "./src/primitive/table/table-caption.svelte",
+    "./primitive/tree": "./src/primitive/tree/tree.ts",
+    "./primitive/tree/tree-dnd-item": "./src/primitive/tree/tree-dnd-item.ts",
     "./primitive/toast": "./src/primitive/toast/toast.ts",
     "./primitive/toast-viewport": "./src/primitive/toast/toast-viewport.svelte",
     "./primitive/toast-root": "./src/primitive/toast/toast-root.svelte",
@@ -137,7 +139,8 @@
   "dependencies": {
     "@fex/components-core": "workspace:*",
     "@fex/components-styles": "workspace:*",
-    "@fex/utils": "workspace:*"
+    "@fex/utils": "workspace:*",
+    "@tanstack/svelte-virtual": "latest"
   },
   "devDependencies": {
     "svelte": "5.56.4"

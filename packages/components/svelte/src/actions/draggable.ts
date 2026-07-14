@@ -1,5 +1,11 @@
 import {
   clearCurrentDndSource,
+  DND_DRAG_START_X,
+  DND_DRAG_START_Y,
+  DND_DRAG_START_RECT_X,
+  DND_DRAG_START_RECT_Y,
+  DND_DRAG_START_RECT_WIDTH,
+  DND_DRAG_START_RECT_HEIGHT,
   dropCurrentDndSource,
   moveCurrentDndSource,
   setCurrentDndSource,
@@ -13,6 +19,7 @@ export interface DraggableActionOptions<TData extends Record<string, unknown> = 
   handle?: HTMLElement | null
   onDraggingChange?: (dragging: boolean) => void
   onOverlayStyleChange?: (style: Partial<CSSStyleDeclaration>) => void
+  dragPreview?: 'none' | 'clone'
 }
 
 export function draggableAction<TData extends Record<string, unknown> = Record<string, unknown>>(
@@ -21,6 +28,9 @@ export function draggableAction<TData extends Record<string, unknown> = Record<s
 ) {
   let currentOptions = options
   let cleanupWindow: (() => void) | undefined
+  let previewElement: HTMLElement | null = null
+  function clearPreview(){previewElement?.remove();previewElement=null}
+  function mountPreview(rect:DOMRect){clearPreview();if(currentOptions.dragPreview!=='clone')return;const preview=node.cloneNode(true)as HTMLElement;preview.removeAttribute('id');for(const child of preview.querySelectorAll('[id]'))child.removeAttribute('id');preview.setAttribute('aria-hidden','true');preview.setAttribute('data-drag-preview','true');Object.assign(preview.style,{position:'fixed',top:`${rect.top}px`,left:`${rect.left}px`,width:'max-content',maxWidth:'none',height:`${rect.height}px`,marginInlineStart:'0',overflow:'visible',opacity:'0.45',pointerEvents:'none',zIndex:'20',willChange:'left, top'});document.body.append(preview);previewElement=preview}
 
   function source() {
     return { id: currentOptions.id, type: currentOptions.type, ...currentOptions.data }
@@ -62,15 +72,17 @@ export function draggableAction<TData extends Record<string, unknown> = Record<s
     event.preventDefault()
     const start = { x: event.clientX, y: event.clientY }
     const rect = node.getBoundingClientRect()
-    setCurrentDndSource(source())
+    setCurrentDndSource({ ...source(), [DND_DRAG_START_X]: start.x, [DND_DRAG_START_Y]: start.y, [DND_DRAG_START_RECT_X]: rect.left, [DND_DRAG_START_RECT_Y]: rect.top, [DND_DRAG_START_RECT_WIDTH]: rect.width, [DND_DRAG_START_RECT_HEIGHT]: rect.height })
     moveCurrentDndSource(start)
     setDragging(true)
     setOverlayStyle(rect)
+    mountPreview(rect)
 
     function onPointerMove(pointerEvent: PointerEvent) {
       const point = { x: pointerEvent.clientX, y: pointerEvent.clientY }
       moveCurrentDndSource(point)
       setOverlayStyle(rect, { x: point.x - start.x, y: point.y - start.y })
+      if(previewElement){previewElement.style.left=`${rect.left+point.x-start.x}px`;previewElement.style.top=`${rect.top+point.y-start.y}px`}
     }
 
     function onPointerUp(pointerEvent: PointerEvent) {
@@ -79,6 +91,7 @@ export function draggableAction<TData extends Record<string, unknown> = Record<s
       dropCurrentDndSource({ x: pointerEvent.clientX, y: pointerEvent.clientY })
       setDragging(false)
       setOverlayStyle(null)
+      clearPreview()
     }
 
     cleanupWindow = () => {
@@ -101,6 +114,7 @@ export function draggableAction<TData extends Record<string, unknown> = Record<s
       node.removeEventListener('pointerdown', onPointerDown)
       cleanupWindow?.()
       clearCurrentDndSource()
+      clearPreview()
     },
   }
 }

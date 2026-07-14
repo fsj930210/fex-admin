@@ -21,6 +21,8 @@
     "./primitive/sortable": "./src/primitive/sortable/sortable.ts",
     "./primitive/switch": "./src/primitive/switch/switch.ts",
     "./primitive/table": "./src/primitive/table/table.ts",
+    "./primitive/tree": "./src/primitive/tree/tree.ts",
+    "./primitive/tree/use-tree-dnd-item": "./src/primitive/tree/use-tree-dnd-item.ts",
     "./primitive/toast": "./src/primitive/toast/toast.ts",
     "./primitive/textarea": "./src/primitive/textarea/textarea.ts",
     "./ui/badge": "./src/ui/badge/badge.ts",
@@ -55,7 +57,8 @@
   "dependencies": {
     "@fex/components-core": "workspace:*",
     "@fex/components-styles": "workspace:*",
-    "@fex/utils": "workspace:*"
+    "@fex/utils": "workspace:*",
+    "@tanstack/vue-virtual": "latest"
   },
   "devDependencies": {
     "vue": "3.5.38"

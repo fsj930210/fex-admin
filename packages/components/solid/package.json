@@ -21,6 +21,8 @@
     "./primitive/sortable": "./src/primitive/sortable/sortable.tsx",
     "./primitive/switch": "./src/primitive/switch/switch.tsx",
     "./primitive/table": "./src/primitive/table/table.tsx",
+    "./primitive/tree": "./src/primitive/tree/tree.tsx",
+    "./primitive/tree/create-tree-dnd-item": "./src/primitive/tree/create-tree-dnd-item.ts",
     "./primitive/toast": "./src/primitive/toast/toast.tsx",
     "./primitive/textarea": "./src/primitive/textarea/textarea.tsx",
     "./ui/badge": "./src/ui/badge/badge.tsx",
@@ -54,7 +56,8 @@
   "dependencies": {
     "@fex/components-core": "workspace:*",
     "@fex/components-styles": "workspace:*",
-    "@fex/utils": "workspace:*"
+    "@fex/utils": "workspace:*",
+    "@tanstack/solid-virtual": "latest"
   },
   "devDependencies": {
     "solid-js": "1.9.13"

@@ -7,7 +7,7 @@
     "./primitive/alert": "./src/primitive/alert/alert.tsx",
     "./primitive/button": "./src/primitive/button/button.tsx",
     "./primitive/calendar": "./src/primitive/calendar/calendar.tsx",
-        "./primitive/card": "./src/primitive/card/card.tsx",
+    "./primitive/card": "./src/primitive/card/card.tsx",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.tsx",
     "./primitive/dialog": "./src/primitive/dialog/dialog.tsx",
     "./primitive/empty": "./src/primitive/empty/empty.tsx",
@@ -21,6 +21,8 @@
     "./primitive/sortable": "./src/primitive/sortable/sortable.tsx",
     "./primitive/switch": "./src/primitive/switch/switch.tsx",
     "./primitive/table": "./src/primitive/table/table.tsx",
+    "./primitive/tree": "./src/primitive/tree/tree.tsx",
+    "./primitive/tree/use-tree-dnd-item": "./src/primitive/tree/use-tree-dnd-item.ts",
     "./primitive/toast": "./src/primitive/toast/toast.tsx",
     "./primitive/textarea": "./src/primitive/textarea/textarea.tsx",
     "./ui/badge": "./src/ui/badge/badge.tsx",
@@ -49,6 +51,7 @@
     "./hooks/use-dialog": "./src/primitive/dialog/use-dialog.ts",
     "./hooks/use-dialog-trigger": "./src/primitive/dialog/use-dialog-trigger.ts",
     "./hooks/use-core-store": "./src/hooks/use-core-store.ts",
+    "./hooks/use-lazy-ref": "./src/hooks/use-lazy-ref.ts",
     "./hooks/use-draggable": "./src/hooks/use-draggable.ts",
     "./hooks/use-droppable": "./src/hooks/use-droppable.ts",
     "./hooks/use-dropzone": "./src/hooks/use-dropzone.ts",
@@ -59,6 +62,7 @@
     "./hooks/use-toasts": "./src/hooks/use-toasts.ts"
   },
   "dependencies": {
+    "@tanstack/react-virtual": "latest",
     "@atlaskit/pragmatic-drag-and-drop": "^2.0.1",
     "@atlaskit/pragmatic-drag-and-drop-hitbox": "^2.0.0",
     "@fex/components-core": "workspace:*",

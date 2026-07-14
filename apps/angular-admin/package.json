@@ -16,6 +16,7 @@
     "@fex/styles": "workspace:*",
     "@fex/utils": "workspace:*",
     "@floating-ui/dom": "^1.7.6",
+    "@tanstack/angular-virtual": "latest",
     "rxjs": "latest",
     "tslib": "latest",
     "zone.js": "latest"

@@ -19,11 +19,53 @@
       "@fex/components-core/calendar/types": [
         "packages/components/core/src/calendar/types.ts"
       ],
+      "@fex/components-core/date/utils": [
+        "packages/components/core/src/date/utils.ts"
+      ],
       "@fex/components-core/calendar/value": [
         "packages/components/core/src/calendar/value.ts"
       ],
       "@fex/components-core/store/create-store": [
         "packages/components/core/src/store/create-store.ts"
+      ],
+      "@fex/components-core/tree/create-tree-controller": [
+        "packages/components/core/src/tree/create-tree-controller.ts"
+      ],
+      "@fex/components-core/tree/create-feature-runtime": [
+        "packages/components/core/src/tree/create-feature-runtime.ts"
+      ],
+      "@fex/components-core/tree/feature-types": [
+        "packages/components/core/src/tree/feature-types.ts"
+      ],
+      "@fex/components-core/tree/features/expansion": [
+        "packages/components/core/src/tree/features/expansion.ts"
+      ],
+      "@fex/components-core/tree/features/selection": [
+        "packages/components/core/src/tree/features/selection.ts"
+      ],
+      "@fex/components-core/tree/features/check": [
+        "packages/components/core/src/tree/features/check.ts"
+      ],
+      "@fex/components-core/tree/features/async-load": [
+        "packages/components/core/src/tree/features/async-load.ts"
+      ],
+      "@fex/components-core/tree/features/focus": [
+        "packages/components/core/src/tree/features/focus.ts"
+      ],
+      "@fex/components-core/tree/features/search": [
+        "packages/components/core/src/tree/features/search.ts"
+      ],
+      "@fex/components-core/tree/features/dnd": [
+        "packages/components/core/src/tree/features/dnd.ts"
+      ],
+      "@fex/components-core/tree/features/keyboard": [
+        "packages/components/core/src/tree/features/keyboard.ts"
+      ],
+      "@fex/components-core/tree/get-search-subtree": [
+        "packages/components/core/src/tree/get-search-subtree.ts"
+      ],
+      "@fex/components-core/tree/types": [
+        "packages/components/core/src/tree/types.ts"
       ],
       "@fex/components-core/toggle/create-toggle-controller": [
         "packages/components/core/src/toggle/create-toggle-controller.ts"
@@ -208,6 +250,12 @@
       "@fex/components-angular/primitive/table": [
         "packages/components/angular/src/primitive/table/table.ts"
       ],
+      "@fex/components-angular/primitive/tree": [
+        "packages/components/angular/src/primitive/tree/tree.ts"
+      ],
+      "@fex/components-angular/primitive/tree/tree-dnd-item": [
+        "packages/components/angular/src/primitive/tree/tree-dnd-item.ts"
+      ],
       "@fex/components-angular/primitive/toast": [
         "packages/components/angular/src/primitive/toast/toast.ts"
       ],
@@ -288,6 +336,9 @@
       ],
       "@fex/components-angular/signals/core-store-signal": [
         "packages/components/angular/src/signals/core-store-signal.ts"
+      ],
+      "@fex/components-angular/signals/date-utils": [
+        "packages/components/angular/src/signals/date-utils.ts"
       ],
       "@fex/components-angular/signals/host-class": [
         "packages/components/angular/src/signals/host-class.ts"

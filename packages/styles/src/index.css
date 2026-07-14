@@ -10,3 +10,4 @@
 
 @source "../../../apps";
 @source "../../components";
+@source inline("data-[selected=true]:bg-primary/15 data-[selected=true]:text-foreground data-[selected=true]:ring-1 data-[selected=true]:ring-primary/30");

@@ -21,6 +21,7 @@ const componentLinks = [
   { href: '/slider', label: 'Slider' },
   { href: '/switch', label: 'Switch' },
   { href: '/table', label: 'Table' },
+  { href: '/tree', label: 'Tree' },
   { href: '/toast', label: 'Toast' },
   { href: '/sortable', label: 'Sortable' },
   { href: '/interactions', label: 'Interactions' },

@@ -1,11 +1,17 @@
 import { draggable } from '@atlaskit/pragmatic-drag-and-drop/element/adapter'
 import {
   clearCurrentDndSource,
+  DND_DRAG_START_X,
+  DND_DRAG_START_Y,
+  DND_DRAG_START_RECT_X,
+  DND_DRAG_START_RECT_Y,
+  DND_DRAG_START_RECT_WIDTH,
+  DND_DRAG_START_RECT_HEIGHT,
   dropCurrentDndSource,
   moveCurrentDndSource,
   setCurrentDndSource,
 } from '@fex/components-core/interactions/dnd-store'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import type { CSSProperties, HTMLAttributes, RefCallback } from 'react'
 import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect'
 import { useMemoizedFn } from './use-memoized-fn'
@@ -19,6 +25,7 @@ export interface UseDraggableOptions<TData extends Record<string, unknown> = Rec
   type?: string
   data?: TData
   disabled?: boolean
+  dragPreview?: 'none' | 'clone'
 }
 
 interface DraggableRect {
@@ -33,12 +40,46 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
   type,
   data,
   disabled,
+  dragPreview = 'none',
 }: UseDraggableOptions<TData>) {
   const [element, setElement] = useState<HTMLElement | null>(null)
   const [handle, setHandle] = useState<Element | null>(null)
   const [dragging, setDragging] = useState(false)
   const [activeRect, setActiveRect] = useState<DraggableRect | null>(null)
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
+  const previewElementRef = useRef<HTMLElement | null>(null)
+
+  const clearDragPreview = useMemoizedFn(() => {
+    previewElementRef.current?.remove()
+    previewElementRef.current = null
+  })
+
+  const mountDragPreview = useMemoizedFn((rect: DraggableRect) => {
+    clearDragPreview()
+    if (dragPreview !== 'clone' || !element) return
+
+    const previewElement = element.cloneNode(true) as HTMLElement
+    previewElement.removeAttribute('id')
+    for (const descendant of previewElement.querySelectorAll('[id]')) descendant.removeAttribute('id')
+    previewElement.setAttribute('aria-hidden', 'true')
+    previewElement.setAttribute('data-drag-preview', 'true')
+    Object.assign(previewElement.style, {
+      position: 'fixed',
+      top: `${rect.top}px`,
+      left: `${rect.left}px`,
+      width: 'max-content',
+      maxWidth: 'none',
+      height: `${rect.height}px`,
+      marginInlineStart: '0',
+      overflow: 'visible',
+      opacity: '0.45',
+      pointerEvents: 'none',
+      zIndex: '20',
+      willChange: 'left, top',
+    })
+    document.body.append(previewElement)
+    previewElementRef.current = previewElement
+  })
 
   const getInitialData = useMemoizedFn(() => ({
     id,
@@ -52,8 +93,16 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
     }
 
     event.preventDefault()
-    const source = getInitialData()
     const rect = element.getBoundingClientRect()
+    const source = {
+      ...getInitialData(),
+      [DND_DRAG_START_X]: event.clientX,
+      [DND_DRAG_START_Y]: event.clientY,
+      [DND_DRAG_START_RECT_X]: rect.left,
+      [DND_DRAG_START_RECT_Y]: rect.top,
+      [DND_DRAG_START_RECT_WIDTH]: rect.width,
+      [DND_DRAG_START_RECT_HEIGHT]: rect.height,
+    }
     const startPoint = { x: event.clientX, y: event.clientY }
 
     setCurrentDndSource(source)
@@ -66,10 +115,20 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
     })
     setDragOffset({ x: 0, y: 0 })
     setDragging(true)
+    mountDragPreview({
+      top: rect.top,
+      left: rect.left,
+      width: rect.width,
+      height: rect.height,
+    })
 
     function onPointerMove(pointerEvent: globalThis.PointerEvent) {
       const nextPoint = { x: pointerEvent.clientX, y: pointerEvent.clientY }
       setDragOffset({ x: nextPoint.x - startPoint.x, y: nextPoint.y - startPoint.y })
+      if (previewElementRef.current) {
+        previewElementRef.current.style.left = `${rect.left + nextPoint.x - startPoint.x}px`
+        previewElementRef.current.style.top = `${rect.top + nextPoint.y - startPoint.y}px`
+      }
       moveCurrentDndSource(nextPoint)
     }
 
@@ -94,6 +153,7 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
     setDragging(false)
     setActiveRect(null)
     setDragOffset({ x: 0, y: 0 })
+    clearDragPreview()
   })
 
   useIsomorphicLayoutEffect(() => {
@@ -110,7 +170,7 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
     }
 
     function onDragStart(event: DragEvent) {
-      const source = getInitialData()
+      const source = { ...getInitialData(), [DND_DRAG_START_X]: event.clientX }
       setCurrentDndSource(source)
       event.dataTransfer?.setData('application/x-fex-dnd', JSON.stringify(source))
       if (event.dataTransfer) {
@@ -144,8 +204,9 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
       element.removeEventListener('dragstart', onDragStart)
       element.removeEventListener('dragend', onDragEnd)
       cleanupPragmatic()
+      clearDragPreview()
     }
-  }, [disabled, element, getInitialData, handle, startFallbackDrag])
+  }, [clearDragPreview, disabled, element, getInitialData, handle, startFallbackDrag])
 
   const getDragProps = useMemoizedFn(
     (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => ({

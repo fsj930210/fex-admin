@@ -13,6 +13,7 @@ export interface Rect {
 export type InteractionAxis = 'x' | 'y'
 
 export type DropEdge = 'top' | 'right' | 'bottom' | 'left'
+export type DropPosition = DropEdge | 'inside'
 
 export type ResizeEdge =
   | 'top'
