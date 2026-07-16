@@ -4,6 +4,7 @@ import { getClosestValueIndex, getNextSortedValues, hasMinStepsBetweenValues, sn
 
 function normalizeValue(values: readonly number[] | undefined, min: number, max: number, step: number) {
   const source = values && values.length > 0 ? values : [min]
+  // oxlint-disable-next-line unicorn/no-array-sort -- map returns a fresh array and the workspace targets ES2022.
   return source.map((value) => snapValueToStep(value, min, max, step)).sort((a, b) => a - b)
 }
 

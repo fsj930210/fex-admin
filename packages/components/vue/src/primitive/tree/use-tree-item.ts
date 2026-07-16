@@ -1,10 +1,6 @@
 import type { AsyncLoadFeatureApi } from '@fex/components-core/tree/features/async-load'
 import type { CheckFeatureApi } from '@fex/components-core/tree/features/check'
-import type {
-  TreeController,
-  TreeKey,
-  TreeNodeData,
-} from '@fex/components-core/tree/types'
+import type { TreeController, TreeKey, TreeNodeData } from '@fex/components-core/tree/types'
 import { computed } from 'vue'
 import { useCoreStore } from '../../composables/use-core-store'
 

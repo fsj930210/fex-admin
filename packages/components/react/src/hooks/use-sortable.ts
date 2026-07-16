@@ -32,16 +32,17 @@ export function useSortable<TItems extends SortableItems>({
   const controllerOptions = { items, axis, animation, onChange }
   const latestOptionsRef = useRef(controllerOptions)
   const controller = useLazyRef(() => createSortableController(controllerOptions)).current
-  const snapshot = useSyncExternalStore(
-    controller.subscribe,
-    controller.getSnapshot,
-    controller.getSnapshot,
-  )
 
   if (!shallowEqualObject(latestOptionsRef.current, controllerOptions)) {
     latestOptionsRef.current = controllerOptions
     controller.updateOptions(controllerOptions)
   }
+
+  const snapshot = useSyncExternalStore(
+    controller.subscribe,
+    controller.getSnapshot,
+    controller.getSnapshot,
+  )
 
   const getContainerProps = useMemoizedFn(
     (containerId = DEFAULT_SORTABLE_CONTAINER_ID): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => {

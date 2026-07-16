@@ -70,6 +70,7 @@ export function createSortableController<TItems extends SortableItems>({
   let pointerStart = { x: 0, y: 0 }
 
   const listeners = new Set<Listener>()
+  let listenersQueued = false
   const itemElements = new Map<string, HTMLElement>()
   const containerElements = new Map<string, HTMLElement>()
   const motion = new SortableMotionRegistry()
@@ -83,18 +84,25 @@ export function createSortableController<TItems extends SortableItems>({
     return () => listeners.delete(listener)
   }
 
+  function scheduleListeners() {
+    if (listenersQueued) return
+    listenersQueued = true
+    queueMicrotask(() => {
+      listenersQueued = false
+      for (const listener of listeners) {
+        listener()
+      }
+    })
+  }
+
   function notify() {
     snapshot = { ...snapshot, motionVersion: snapshot.motionVersion + 1 }
-    for (const listener of listeners) {
-      listener()
-    }
+    scheduleListeners()
   }
 
   function setSnapshot(next: Partial<SortableControllerSnapshot>) {
     snapshot = { ...snapshot, ...next }
-    for (const listener of listeners) {
-      listener()
-    }
+    scheduleListeners()
   }
 
   function updateOptions(next: SortableControllerOptions<TItems>) {
@@ -106,7 +114,10 @@ export function createSortableController<TItems extends SortableItems>({
     // 拖拽中保留 previewItems，避免受控 props 回流把当前手势中的预览顺序冲掉。
     if (!snapshot.dragging) {
       previewItems = normalizeSortableItems(next.items)
-      setSnapshot({ items: previewItems })
+      // React adapters synchronize options during their existing props render.
+      // Update the readable snapshot without notifying subscribers during render;
+      // pointer-driven changes still use setSnapshot/notify normally.
+      snapshot = { ...snapshot, items: previewItems }
     }
   }
 

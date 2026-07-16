@@ -1,6 +1,6 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import { router } from "./routes";
-import "@fex/styles";
+import { createApp } from 'vue'
+import App from './App.vue'
+import { router } from './routes'
+import '@fex/styles'
 
-createApp(App).use(router).mount("#root");
+createApp(App).use(router).mount('#root')

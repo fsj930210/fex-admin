@@ -27,10 +27,14 @@ export function useMenuState(options: () => MenuStateOptions) {
   const nodeEntries = $derived(getMenuNodeEntries(options().items))
   const entryMap = $derived(new Map(nodeEntries.map((entry) => [entry.key, entry])))
   const currentExpandKeys = $derived(
-    options().expandKeys ?? uncontrolledExpandKeys ?? normalizeMenuKeys(options().defaultExpandKeys, options().expandMultiple),
+    options().expandKeys ??
+      uncontrolledExpandKeys ??
+      normalizeMenuKeys(options().defaultExpandKeys, options().expandMultiple),
   )
   const currentSelectedKeys = $derived(
-    options().selectedKeys ?? uncontrolledSelectedKeys ?? normalizeMenuKeys(options().defaultSelectedKeys, options().selectMultiple),
+    options().selectedKeys ??
+      uncontrolledSelectedKeys ??
+      normalizeMenuKeys(options().defaultSelectedKeys, options().selectMultiple),
   )
 
   function getItemInfo(entry: MenuNodeEntry): MenuRenderItemInfo {
@@ -51,7 +55,9 @@ export function useMenuState(options: () => MenuStateOptions) {
     if (info.disabled) return
     if (info.hasChildren) {
       const nextKeys = normalizeMenuKeys(
-        info.expanded ? currentExpandKeys.filter((key) => key !== info.key) : [...currentExpandKeys, info.key],
+        info.expanded
+          ? currentExpandKeys.filter((key) => key !== info.key)
+          : [...currentExpandKeys, info.key],
         currentOptions.expandMultiple,
       )
       if (currentOptions.expandKeys === undefined) uncontrolledExpandKeys = nextKeys

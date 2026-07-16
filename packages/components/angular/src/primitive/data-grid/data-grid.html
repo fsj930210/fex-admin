@@ -1,0 +1,29 @@
+<div #viewport data-slot="data-grid-viewport" [class]="viewportClassName()" [style.height.px]="virtual()?.height">
+  <table [class]="tableClassName()" [style.width]="tableWidth() === undefined ? '100%' : tableWidth() + 'px'">
+    @if (tableWidth() !== undefined) { <colgroup>@for (column of columns(); track column.id) { <col [style.width.px]="column.getSize?.()" /> }</colgroup> }
+    <thead [class]="headerClassName()">
+      @for (headerGroup of headerGroups(); track headerGroup.id) {
+        <tr [class]="headerRowClass()">
+          @for (header of headerGroup.headers; track header.id; let index = $index) {
+            <th [fexDataGridPartAction]="headerAction()" [fexDataGridPartItem]="header" [attr.colspan]="header.colSpan" [class]="headerClass(header, index, headerGroup.headers)" [ngStyle]="headerStyle(header)">
+              @if (!header.isPlaceholder) { <div data-slot="data-grid-header-content" [class]="headerContentClassName">@if (headerTemplate(); as custom) { <ng-container [ngTemplateOutlet]="custom.template" [ngTemplateOutletContext]="{ $implicit: header }" /> } @else { {{ render(header.column.columnDef.header, header.getContext()) }} }</div> }
+              @if (header.colSpan === 1 && canResize(header)) { <span role="separator" tabindex="0" [attr.aria-label]="'Resize ' + header.column.id" [attr.data-resizing]="isResizing(header) || null" [class]="resizeHandleClassName" (dblclick)="resetSize(header)" (mousedown)="resize(header, $event)" (touchstart)="resize(header, $event)"></span> }
+            </th>
+          }
+        </tr>
+      }
+    </thead>
+    <tbody [class]="bodyClassName()">
+      @if (virtual() && virtualTop() > 0) { <tr aria-hidden="true"><td [attr.colspan]="visibleCount()" [class]="virtualSpacerClassName" [style.height.px]="virtualTop()"></td></tr> }
+      @for (row of rows(); track row.id) {
+        <tr [fexDataGridPartAction]="rowAction()" [fexDataGridPartItem]="row" [attr.data-pinned]="rowPinned(row) || null" [attr.data-grouped]="isGrouped(row) || null" [class]="rowClass(row)" [ngStyle]="rowStyle(row)">
+          @if (isGrouped(row) && groupRowTemplate(); as customGroup) { <td [attr.colspan]="visibleCount()"><ng-container [ngTemplateOutlet]="customGroup.template" [ngTemplateOutletContext]="{ $implicit: row }" /></td> }
+          @else { @for (cell of cells(row); track cell.id) { <td [fexDataGridPartAction]="cellAction()" [fexDataGridPartItem]="cell" [class]="cellClass(cell)" [ngStyle]="cellStyle(cell)"><div [class]="cellContentClassName">@if (cellTemplate(); as customCell) { <ng-container [ngTemplateOutlet]="customCell.template" [ngTemplateOutletContext]="{ $implicit: cell }" /> } @else { {{ render(cell.column.columnDef.cell, cell.getContext()) || cell.getValue() }} }</div></td> } }
+        </tr>
+        @if (isExpanded(row) && subComponentTemplate(); as sub) { <tr><td [attr.colspan]="visibleCount()"><ng-container [ngTemplateOutlet]="sub.template" [ngTemplateOutletContext]="{ $implicit: row }" /></td></tr> }
+      } @empty { <tr><td [attr.colspan]="visibleCount()" [class]="emptyClassName()">{{ emptyContent() }}</td></tr> }
+      @if (virtual() && virtualBottom() > 0) { <tr aria-hidden="true"><td [attr.colspan]="visibleCount()" [class]="virtualSpacerClassName" [style.height.px]="virtualBottom()"></td></tr> }
+    </tbody>
+  </table>
+</div>
+@if (loading()) { <div [class]="loadingClassName()">{{ loadingContent() }}</div> }

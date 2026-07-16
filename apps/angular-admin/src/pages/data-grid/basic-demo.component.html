@@ -1,0 +1,13 @@
+<fex-card
+  title="Core rendering and stable inline columns"
+  description="The caller passes a TanStack v9 table definition. DataGrid stabilizes the structural column tree, so this inline columns array does not require useMemo; getRowId remains mandatory."
+  ><div class="space-y-space-lg">
+    <section class="space-y-space-sm">
+      <h3 class="text-sm font-medium">Default density</h3>
+      <fex-data-grid [table]="defaultTable" />
+    </section>
+    <section class="space-y-space-sm">
+      <h3 class="text-sm font-medium">Compact + striped</h3>
+      <fex-data-grid [table]="compactTable" density="compact" [striped]="true" />
+    </section></div
+></fex-card>

@@ -22,7 +22,6 @@ import { createHostClassName } from "../../signals/host-class";
 type SliderSize = "sm" | "default" | "lg";
 type SliderOrientation = "horizontal" | "vertical";
 type SliderController = ReturnType<typeof createSliderController>;
-type SliderSnapshot = ReturnType<SliderController["getSnapshot"]>;
 
 function parseNumberArray(value: number[] | readonly number[] | string | number | undefined): number[] | undefined {
   if (Array.isArray(value)) return [...value];
@@ -70,18 +69,25 @@ export class SliderRoot {
   protected readonly hostClassName = createHostClassName(() => cn(sliderRootClassName({ size: this.size(), orientation: this.snapshot().orientation })));
 
   constructor() {
-    const root = this;
+    const value = this.value;
+    const defaultValue = this.defaultValue;
+    const min = this.min;
+    const max = this.max;
+    const step = this.step;
+    const minStepsBetweenThumbs = this.minStepsBetweenThumbs;
+    const orientation = this.orientation;
+    const disabled = this.disabled;
     this.options = {
-      get value() { return parseNumberArray(root.value()); },
-      get defaultValue() { return parseNumberArray(root.defaultValue()); },
-      get min() { return root.min(); },
-      get max() { return root.max(); },
-      get step() { return root.step(); },
-      get minStepsBetweenThumbs() { return root.minStepsBetweenThumbs(); },
-      get orientation() { return root.orientation(); },
-      get disabled() { return root.disabled(); },
-      onChange: (value: number[]) => this.valueChange.emit(value),
-      onCommit: (value: number[]) => this.valueCommit.emit(value),
+      get value() { return parseNumberArray(value()); },
+      get defaultValue() { return parseNumberArray(defaultValue()); },
+      get min() { return min(); },
+      get max() { return max(); },
+      get step() { return step(); },
+      get minStepsBetweenThumbs() { return minStepsBetweenThumbs(); },
+      get orientation() { return orientation(); },
+      get disabled() { return disabled(); },
+      onChange: (nextValue: number[]) => this.valueChange.emit(nextValue),
+      onCommit: (nextValue: number[]) => this.valueCommit.emit(nextValue),
     };
     this.controller = createSliderController(this.options);
     const storeSnapshot = createCoreStoreSignal(this.controller);

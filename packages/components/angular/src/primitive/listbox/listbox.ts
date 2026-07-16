@@ -47,23 +47,27 @@ export class ListboxRoot {
   readonly snapshot;
 
   constructor() {
-    const root = this;
+    const value = this.value;
+    const defaultValue = this.defaultValue;
+    const multiple = this.multiple;
+    const disabledValues = this.disabledValues;
+    const change = this.change;
     this.controller = createSelectionController({
       get value() {
-        return root.value();
+        return value();
       },
       get defaultValue() {
-        return root.defaultValue();
+        return defaultValue();
       },
       get multiple() {
-        return root.multiple();
+        return multiple();
       },
       get disabledValues() {
-        return root.disabledValues();
+        return disabledValues();
       },
       onChange(values, meta) {
-        root.change.emit([
-          root.multiple() ? values : values[0],
+        change.emit([
+          multiple() ? values : values[0],
           {
             selectedValues: values,
             previousSelectedValues: meta.previousValues,
@@ -129,9 +133,9 @@ export class ListboxItem {
   disabled = input(false, { transform: booleanAttribute });
 
   protected readonly selected = computed(() => {
-    this.root.value();
-    this.root.multiple();
-    this.root.snapshot().values;
+    void this.root.value();
+    void this.root.multiple();
+    void this.root.snapshot().values;
     return this.root.controller.getSnapshot().values.includes(this.value());
   });
   protected readonly disabledState = computed(() => this.disabled() || this.root.controller.isDisabled(this.value()));

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { TreeController, TreeItem, TreeKey, TreeOptions } from '@fex/components-core/tree/types'
+  import type { TreeController, TreeItem, TreeKey, TreeOptions, TreeVisibleItem } from '@fex/components-core/tree/types'
   import { TreeRoot, TreeViewport, TreeVirtualViewport } from '@fex/components-svelte/primitive/tree'
   import { cn } from '@fex/utils'
   import type { Snippet } from 'svelte'
@@ -82,9 +82,19 @@
     ...(onTreeDataChange === undefined ? {} : { onTreeDataChange }),
   }))
 
-  let viewport:
+  const rootProps = $derived({
+    options,
+    ...(controller === undefined ? {} : { controller }),
+    ...(indent === undefined ? {} : { indent }),
+  })
+  const virtualProps = $derived({
+    height,
+    ...(overscan === undefined ? {} : { overscan }),
+  })
+
+  let viewport = $state<
     | { scrollToKey(key: TreeKey, settings?: { align?: 'auto' | 'start' | 'center' | 'end'; reveal?: boolean }): boolean }
-    | undefined
+    | undefined>()
 
   export function scrollToKey(
     key: TreeKey,
@@ -92,20 +102,31 @@
   ) {
     return viewport?.scrollToKey(key, settings) ?? false
   }
+
+  function getRowProps(tree: TreeController<DepartmentNode>, item: TreeVisibleItem<DepartmentNode>) {
+    return {
+      tree,
+      item,
+      checkable,
+      searchKeyword,
+      ...(itemClass === undefined ? {} : { itemClass }),
+      ...(title === undefined ? {} : { title }),
+    }
+  }
 </script>
 
-<TreeRoot {controller} {options} {indent} class={cn('w-full', className)}>
+<TreeRoot {...rootProps} class={cn('w-full', className)}>
   {#snippet children(tree)}
     {#if virtual}
-      <TreeVirtualViewport bind:this={viewport} {height} {overscan}>
+      <TreeVirtualViewport bind:this={viewport} {...virtualProps} controller={tree}>
         {#snippet children(item)}
-          <DemoTreeRow {tree} {item} {checkable} {searchKeyword} {itemClass} {title} />
+          <DemoTreeRow {...getRowProps(tree, item)} />
         {/snippet}
       </TreeVirtualViewport>
     {:else}
-      <TreeViewport>
+      <TreeViewport controller={tree}>
         {#snippet children(item)}
-          <DemoTreeRow {tree} {item} {checkable} {searchKeyword} {itemClass} {title} />
+          <DemoTreeRow {...getRowProps(tree, item)} />
         {/snippet}
       </TreeViewport>
     {/if}

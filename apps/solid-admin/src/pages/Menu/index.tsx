@@ -1,6 +1,10 @@
 import { A } from '@solidjs/router'
 import { Card } from '@fex/components-solid/ui/card'
-import { createMenu, type MenuNodeEntry, type MenuNodeItem } from '@fex/components-solid/primitive/menu'
+import {
+  createMenu,
+  type MenuNodeEntry,
+  type MenuNodeItem,
+} from '@fex/components-solid/primitive/menu'
 import { Menu, type MenuItem, type MenuKey } from '@fex/components-solid/ui/menu'
 import { MinusIcon } from '@fex/components-solid/icon/minus'
 import { PlusIcon } from '@fex/components-solid/icon/plus'
@@ -28,7 +32,14 @@ const menuItems: MenuItem[] = [
     ],
   },
   { type: 'divider' },
-  { type: 'group', label: 'Workspace', children: [{ key: 'settings', label: 'Settings' }, { key: 'billing', label: 'Billing' }] },
+  {
+    type: 'group',
+    label: 'Workspace',
+    children: [
+      { key: 'settings', label: 'Settings' },
+      { key: 'billing', label: 'Billing' },
+    ],
+  },
 ]
 
 const horizontalItems: MenuItem[] = [
@@ -50,7 +61,9 @@ export function MenuPage() {
     <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
       <div class="mx-auto w-full max-w-5xl space-y-space-xl">
         <header class="space-y-space-md">
-          <A class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</A>
+          <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
+            Back home
+          </A>
           <div>
             <h1 class="text-2xl font-semibold text-foreground">Menu</h1>
             <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
@@ -60,24 +73,60 @@ export function MenuPage() {
         </header>
 
         <div class="grid gap-space-xl lg:grid-cols-2">
-          <Card title="Basic" description="Items, nested children, group, divider and disabled state.">
-            <Menu items={menuItems} defaultExpandKeys={['system']} defaultSelectedKeys={['dashboard']} />
+          <Card
+            title="Basic"
+            description="Items, nested children, group, divider and disabled state."
+          >
+            <Menu
+              items={menuItems}
+              defaultExpandKeys={['system']}
+              defaultSelectedKeys={['dashboard']}
+            />
           </Card>
-          <Card title="Horizontal" description="Horizontal displays top-level items; nested popup menus belong to Dropdown or Popover composition.">
-            <Menu items={horizontalItems} orientation="horizontal" defaultSelectedKeys={['analytics']} />
+          <Card
+            title="Horizontal"
+            description="Horizontal displays top-level items; nested popup menus belong to Dropdown or Popover composition."
+          >
+            <Menu
+              items={horizontalItems}
+              orientation="horizontal"
+              defaultSelectedKeys={['analytics']}
+            />
           </Card>
           <Card title="Controlled" description="Controlled expanded and selected key arrays.">
-            <Menu items={menuItems} expandKeys={expandKeys()} selectedKeys={selectedKeys()} expandMultiple={false} onExpandChange={setExpandKeys} onSelect={setSelectedKeys} />
+            <Menu
+              items={menuItems}
+              expandKeys={expandKeys()}
+              selectedKeys={selectedKeys()}
+              expandMultiple={false}
+              onExpandChange={setExpandKeys}
+              onSelect={setSelectedKeys}
+            />
           </Card>
-          <Card title="Multiple Selection" description="Leaf item selection can opt into multiple keys.">
-            <Menu items={menuItems} defaultExpandKeys={['system', 'content']} defaultSelectedKeys={['users', 'articles']} selectMultiple />
+          <Card
+            title="Multiple Selection"
+            description="Leaf item selection can opt into multiple keys."
+          >
+            <Menu
+              items={menuItems}
+              defaultExpandKeys={['system', 'content']}
+              defaultSelectedKeys={['users', 'articles']}
+              selectMultiple
+            />
           </Card>
-          <Card title="Suffix" description="Right-side content can be provided by data or renderSuffix.">
+          <Card
+            title="Suffix"
+            description="Right-side content can be provided by data or renderSuffix."
+          >
             <Menu
               items={menuItems}
               defaultExpandKeys={['system', 'content']}
               defaultSelectedKeys={['comments']}
-              renderSuffix={(info) => info.item.key === 'settings' ? <span class="rounded-md bg-primary/10 px-1.5 py-0.5 text-primary">new</span> : undefined}
+              renderSuffix={(info) =>
+                info.item.key === 'settings' ? (
+                  <span class="rounded-md bg-primary/10 px-1.5 py-0.5 text-primary">new</span>
+                ) : undefined
+              }
             />
           </Card>
           <Card title="Custom Item" description="renderItem replaces the whole item content area.">
@@ -93,12 +142,19 @@ export function MenuPage() {
                     {item.label}
                     {selected ? <span class="ml-2 text-xs text-primary">selected</span> : null}
                   </span>
-                  {hasChildren ? <span class="text-xs text-muted-foreground">{expanded ? 'open' : 'closed'}</span> : null}
+                  {hasChildren ? (
+                    <span class="text-xs text-muted-foreground">
+                      {expanded ? 'open' : 'closed'}
+                    </span>
+                  ) : null}
                 </>
               )}
             />
           </Card>
-          <Card title="Headless Primitive" description="createMenu exposes state and events for custom DOM.">
+          <Card
+            title="Headless Primitive"
+            description="createMenu exposes state and events for custom DOM."
+          >
             <HeadlessMenu />
           </Card>
         </div>
@@ -137,7 +193,10 @@ function HeadlessMenu() {
         {info().hasChildren ? (
           <div
             class="grid overflow-hidden transition-[grid-template-rows,opacity] duration-150 ease-out"
-            style={{ 'grid-template-rows': info().expanded ? '1fr' : '0fr', opacity: info().expanded ? 1 : 0 }}
+            style={{
+              'grid-template-rows': info().expanded ? '1fr' : '0fr',
+              opacity: info().expanded ? 1 : 0,
+            }}
           >
             <div class="min-h-0 overflow-hidden">
               <For each={info().item.children?.filter(isMenuNodeItem) ?? []}>

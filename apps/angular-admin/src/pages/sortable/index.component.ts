@@ -11,7 +11,15 @@ import Card from '@fex/components-angular/ui/card'
 
 @Component({
   selector: 'fex-sortable-page',
-  imports: [RouterLink, NgStyle, Card, FexSortable, FexSortableContainerDirective, FexSortableRegionDirective, FexSortableItemDirective],
+  imports: [
+    RouterLink,
+    NgStyle,
+    Card,
+    FexSortable,
+    FexSortableContainerDirective,
+    FexSortableRegionDirective,
+    FexSortableItemDirective,
+  ],
   host: { class: 'block' },
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

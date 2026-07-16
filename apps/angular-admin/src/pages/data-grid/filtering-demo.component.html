@@ -1,0 +1,20 @@
+<fex-card
+  title="Column filtering"
+  description="meta.filterFn opts a column into local filtering. Missing filterFn means remote, while onColumnFiltersChange still receives the complete filter list."
+  ><div class="grid gap-space-lg xl:grid-cols-3">
+    @for (grid of grids; track grid.title) {
+      <section class="space-y-space-sm">
+        <h3 class="text-sm font-medium">{{ grid.title }}</h3>
+        <div class="flex gap-space-sm">
+          @for (id of ['name', 'department', 'status']; track id) {
+            <input fexInput [placeholder]="'Filter ' + id" (input)="filter(grid, id, $event)" />
+          }
+        </div>
+        <fex-data-grid [table]="grid.table" />
+        <p class="text-xs text-muted-foreground">
+          Remote request filter terms: {{ remote(grid).length }}
+        </p>
+      </section>
+    }
+  </div></fex-card
+>

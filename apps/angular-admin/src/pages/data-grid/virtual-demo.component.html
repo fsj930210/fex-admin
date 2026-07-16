@@ -1,0 +1,7 @@
+<fex-card
+  title="Virtual scrolling"
+  description="This table has 10,000 rows, while the DOM mounts only the viewport rows plus overscan. The primitive keeps TanStack Table's row model and uses @tanstack/react-virtual only for rendering."
+  ><section class="space-y-space-sm">
+    <h3 class="text-sm font-medium text-foreground">10,000 fixed-height rows</h3>
+    <fex-data-grid [table]="table" [virtual]="virtual" /></section
+></fex-card>

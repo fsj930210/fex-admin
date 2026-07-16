@@ -4,7 +4,7 @@ import type {
   TreeFeatureId,
   TreeFeatureRegistration,
 } from './feature-types'
-import type { TreeKey, TreeNodeData } from './types'
+import type { TreeNodeData } from './types'
 
 export interface TreeFeatureRuntime<TNode extends TreeNodeData> {
   install<TOptions, TApi>(feature: TreeFeature<TNode, TOptions, TApi>, options: TOptions): TApi

@@ -35,6 +35,7 @@
     "./primitive/card-description": "./src/primitive/card/card-description.svelte",
     "./primitive/card-content": "./src/primitive/card/card-content.svelte",
     "./primitive/card-footer": "./src/primitive/card/card-footer.svelte",
+    "./primitive/data-grid": "./src/primitive/data-grid/data-grid.ts",
     "./primitive/empty": "./src/primitive/empty/empty.svelte",
     "./primitive/empty-header": "./src/primitive/empty/empty-header.svelte",
     "./primitive/empty-media": "./src/primitive/empty/empty-media.svelte",
@@ -127,6 +128,7 @@
     "./icon/plus": "./src/icon/plus.svelte",
     "./icon/warning": "./src/icon/warning.svelte",
     "./stores/core-store": "./src/stores/core-store.ts",
+    "./stores/create-data-grid-table": "./src/stores/create-data-grid-table.ts",
     "./stores/date-utils": "./src/stores/date-utils.ts",
     "./stores/toast": "./src/stores/toast.ts",
     "./actions/draggable": "./src/actions/draggable.ts",
@@ -140,6 +142,7 @@
     "@fex/components-core": "workspace:*",
     "@fex/components-styles": "workspace:*",
     "@fex/utils": "workspace:*",
+    "@tanstack/table-core": "9.0.0-beta.47",
     "@tanstack/svelte-virtual": "latest"
   },
   "devDependencies": {

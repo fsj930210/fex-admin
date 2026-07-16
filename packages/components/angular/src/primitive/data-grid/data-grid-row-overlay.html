@@ -1,0 +1,22 @@
+<div data-slot="data-grid-row-overlay" [class]="rootClassName()" [ngStyle]="style()">
+  <table [class]="tableClassName" [style.width]="tableWidth()">
+    <colgroup>
+      @for (column of columns(); track column.id) { <col [style.width.px]="column.getSize?.() ?? 150" /> }
+    </colgroup>
+    <tbody [class]="bodyClassName">
+      <tr [class]="rowClassName">
+        @for (item of cells(); track item.id) {
+          <td [class]="cellClassName">
+            <div [class]="cellContentClassName">
+              @if (cellTemplate(); as template) {
+                <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: item }" />
+              } @else {
+                {{ text(item.getValue()) }}
+              }
+            </div>
+          </td>
+        }
+      </tr>
+    </tbody>
+  </table>
+</div>

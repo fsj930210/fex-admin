@@ -7,6 +7,20 @@ import type {
   SortableMotionOptions,
 } from '@fex/components-core/sortable/types'
 
+const sortableItemStyleProperties = [
+  'width',
+  'height',
+  'minWidth',
+  'minHeight',
+  'boxSizing',
+  'flexShrink',
+  'visibility',
+  'transition',
+  'transform',
+] as const
+type SortableItemStyleProperty = (typeof sortableItemStyleProperties)[number]
+type SortableItemStyle = Partial<Record<SortableItemStyleProperty, string | number | undefined>>
+
 export interface SortableActionOptions<TItems extends SortableItems> {
   items: TItems
   axis?: SortableAxis
@@ -40,11 +54,25 @@ export function createSortableAction<TItems extends SortableItems>(options: Sort
     cleanups.add(cleanup)
     node.dataset.sortableId = String(itemOptions.id)
     node.dataset.sortableContainerId = containerId
+    const previousTouchAction = node.style.touchAction
+    node.style.touchAction = 'none'
+    const applyStyle = () => {
+      const style = controller.getItemStyle(itemOptions.id) as SortableItemStyle
+      for (const property of sortableItemStyleProperties) {
+        const value = style[property]
+        node.style[property] = value === undefined ? '' : String(value)
+      }
+    }
+    const unsubscribeItemStyle = controller.subscribe(applyStyle)
+    let cleanupPointerSession: (() => void) | undefined
+    let draggingThisItem = false
 
     function onPointerDown(event: PointerEvent) {
       if (currentOptions.disabled || !controller.startPointerDrag(toInput(event), itemOptions.id, containerId)) {
         return
       }
+      draggingThisItem = true
+      node.setPointerCapture?.(event.pointerId)
 
       function onPointerMove(pointerEvent: PointerEvent) {
         controller.updatePointer({
@@ -55,21 +83,40 @@ export function createSortableAction<TItems extends SortableItems>(options: Sort
       }
 
       function onPointerUp() {
-        window.removeEventListener('pointermove', onPointerMove)
-        window.removeEventListener('pointerup', onPointerUp)
+        cleanupPointerSession?.()
+        if (node.hasPointerCapture?.(event.pointerId)) {
+          node.releasePointerCapture(event.pointerId)
+        }
         controller.endPointerDrag()
+        draggingThisItem = false
       }
 
+      cleanupPointerSession?.()
+      cleanupPointerSession = () => {
+        window.removeEventListener('pointermove', onPointerMove)
+        window.removeEventListener('pointerup', onPointerUp)
+        window.removeEventListener('pointercancel', onPointerUp)
+        cleanupPointerSession = undefined
+      }
       window.addEventListener('pointermove', onPointerMove)
       window.addEventListener('pointerup', onPointerUp, { once: true })
+      window.addEventListener('pointercancel', onPointerUp, { once: true })
     }
 
     node.addEventListener('pointerdown', onPointerDown)
+    applyStyle()
     return {
       destroy() {
+        // Preview reorders may replace this node before pointerup. Keep the
+        // window-level session alive so the controller can commit the drag.
+        if (!draggingThisItem) {
+          cleanupPointerSession?.()
+        }
         node.removeEventListener('pointerdown', onPointerDown)
+        node.style.touchAction = previousTouchAction
         cleanup()
         cleanups.delete(cleanup)
+        unsubscribeItemStyle()
       },
     }
   }

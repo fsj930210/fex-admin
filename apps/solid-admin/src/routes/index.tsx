@@ -6,5 +6,7 @@ import { componentRoutes } from './components'
 const routes = [...baseRoutes, ...componentRoutes]
 
 export function AppRoutes() {
-  return <For each={routes}>{(route) => <Route path={route.path} component={route.component} />}</For>
+  return (
+    <For each={routes}>{(route) => <Route path={route.path} component={route.component} />}</For>
+  )
 }

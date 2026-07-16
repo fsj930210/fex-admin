@@ -27,7 +27,7 @@
   const expanded = $derived($snapshot.expandedKeys.includes(itemKey))
   const expansion = () => tree.getFeature<ExpansionFeatureApi>('expansion')
 
-  function click(event: MouseEvent) {
+  function click(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
     event.stopPropagation()
     onclick?.(event)
     if (event.defaultPrevented) return

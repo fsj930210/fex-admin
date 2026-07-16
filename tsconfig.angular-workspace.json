@@ -22,6 +22,57 @@
       "@fex/components-core/date/utils": [
         "packages/components/core/src/date/utils.ts"
       ],
+      "@fex/components-core/data-grid/types": [
+        "packages/components/core/src/data-grid/types.ts"
+      ],
+      "@fex/components-core/data-grid/layout": [
+        "packages/components/core/src/data-grid/layout.ts"
+      ],
+      "@fex/components-core/data-grid/rendering": [
+        "packages/components/core/src/data-grid/layout.ts"
+      ],
+      "@fex/components-core/data-grid/create-data-grid-controller": [
+        "packages/components/core/src/data-grid/create-data-grid-controller.ts"
+      ],
+      "@fex/components-core/data-grid/prepare-columns": [
+        "packages/components/core/src/data-grid/prepare-columns.ts"
+      ],
+      "@fex/components-core/data-grid/features/column-filtering": [
+        "packages/components/core/src/data-grid/features/column-filtering.ts"
+      ],
+      "@fex/components-core/data-grid/features/row-sorting": [
+        "packages/components/core/src/data-grid/features/row-sorting.ts"
+      ],
+      "@fex/components-core/data-grid/features/client-pagination": [
+        "packages/components/core/src/data-grid/features/client-pagination.ts"
+      ],
+      "@fex/components-core/data-grid/features/server-pagination": [
+        "packages/components/core/src/data-grid/features/server-pagination.ts"
+      ],
+      "@fex/components-core/data-grid/features/row-selection": [
+        "packages/components/core/src/data-grid/features/row-selection.ts"
+      ],
+      "@fex/components-core/data-grid/features/row-expanding": [
+        "packages/components/core/src/data-grid/features/row-expanding.ts"
+      ],
+      "@fex/components-core/data-grid/features/column-visibility": [
+        "packages/components/core/src/data-grid/features/column-visibility.ts"
+      ],
+      "@fex/components-core/data-grid/features/column-ordering": [
+        "packages/components/core/src/data-grid/features/column-ordering.ts"
+      ],
+      "@fex/components-core/data-grid/features/column-pinning": [
+        "packages/components/core/src/data-grid/features/column-pinning.ts"
+      ],
+      "@fex/components-core/data-grid/features/row-pinning": [
+        "packages/components/core/src/data-grid/features/row-pinning.ts"
+      ],
+      "@fex/components-core/data-grid/features/column-sizing": [
+        "packages/components/core/src/data-grid/features/column-sizing.ts"
+      ],
+      "@fex/components-core/data-grid/features/column-grouping": [
+        "packages/components/core/src/data-grid/features/column-grouping.ts"
+      ],
       "@fex/components-core/calendar/value": [
         "packages/components/core/src/calendar/value.ts"
       ],
@@ -214,6 +265,9 @@
       "@fex/components-angular/primitive/dialog": [
         "packages/components/angular/src/primitive/dialog/dialog.ts"
       ],
+      "@fex/components-angular/primitive/data-grid": [
+        "packages/components/angular/src/primitive/data-grid/data-grid.ts"
+      ],
       "@fex/components-angular/primitive/empty": [
         "packages/components/angular/src/primitive/empty/empty.ts"
       ],
@@ -336,6 +390,9 @@
       ],
       "@fex/components-angular/signals/core-store-signal": [
         "packages/components/angular/src/signals/core-store-signal.ts"
+      ],
+      "@fex/components-angular/signals/create-data-grid-table": [
+        "packages/components/angular/src/signals/create-data-grid-table.ts"
       ],
       "@fex/components-angular/signals/date-utils": [
         "packages/components/angular/src/signals/date-utils.ts"

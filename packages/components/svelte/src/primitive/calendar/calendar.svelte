@@ -10,7 +10,7 @@
   } from '@fex/components-core/calendar'
   import type { Snippet } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
-  import { setContext } from 'svelte'
+  import { setContext, untrack } from 'svelte'
   import { calendarContextKey, type CalendarContextValue } from './context'
 
   interface CalendarRootProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
@@ -52,9 +52,9 @@
     ...rest
   }: CalendarRootProps = $props()
 
-  let internalValue: CalendarValue | null = $state(defaultValue)
-  let internalViewDate: CalendarDate = $state(defaultViewDate)
-  let internalPanel: CalendarPanel = $state(defaultPanel)
+  let internalValue: CalendarValue | null = $state(untrack(() => defaultValue))
+  let internalViewDate: CalendarDate = $state(untrack(() => defaultViewDate))
+  let internalPanel: CalendarPanel = $state(untrack(() => defaultPanel))
   const currentValue: CalendarValue | null = $derived(value ?? internalValue)
   const currentViewDate: CalendarDate = $derived(viewDate ?? internalViewDate)
   const currentPanel: CalendarPanel = $derived(panel ?? internalPanel)

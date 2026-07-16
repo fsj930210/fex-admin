@@ -24,13 +24,37 @@ import type { ToastPlacement } from '@fex/components-styles/toast'
 @Component({
   selector: 'fex-toast-page',
   standalone: true,
-  imports: [RouterLink, Button, Card, CheckIcon, CloseIcon, ErrorIcon, InfoIcon, LoadingIcon, WarningIcon, ToastAction, ToastClose, ToastDescription, ToastIcon, ToastRoot, ToastTitle, ToastViewport],
+  imports: [
+    RouterLink,
+    Button,
+    Card,
+    CheckIcon,
+    CloseIcon,
+    ErrorIcon,
+    InfoIcon,
+    LoadingIcon,
+    WarningIcon,
+    ToastAction,
+    ToastClose,
+    ToastDescription,
+    ToastIcon,
+    ToastRoot,
+    ToastTitle,
+    ToastViewport,
+  ],
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastComponent {
   readonly toast = inject(ToastService)
-  readonly placements: ToastPlacement[] = ['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right']
+  readonly placements: ToastPlacement[] = [
+    'top-left',
+    'top',
+    'top-right',
+    'bottom-left',
+    'bottom',
+    'bottom-right',
+  ]
   readonly placement = signal<ToastPlacement>('top')
   readonly stack = signal(false)
   readonly manualId = signal<string | null>(null)
@@ -38,11 +62,14 @@ export class ToastComponent {
   readonly visibleItemsByPlacement = computed(() => {
     const groups = this.itemsByPlacement()
     if (!this.stack()) return groups
-    return mapPlacementGroups(groups, (items) => items.length > 3 ? items.slice(-1) : items)
+    return mapPlacementGroups(groups, (items) => (items.length > 3 ? items.slice(-1) : items))
   })
 
   labelPlacement(value: ToastPlacement) {
-    return value.split('-').map((part) => `${part.charAt(0).toUpperCase()}${part.slice(1)}`).join(' ')
+    return value
+      .split('-')
+      .map((part) => `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
+      .join(' ')
   }
 
   choosePlacement(value: ToastPlacement) {
@@ -55,12 +82,20 @@ export class ToastComponent {
     })
   }
 
-  hasToastIcon(item: { icon?: unknown | null, variant: string }) {
-    return item.icon !== null && (item.icon !== undefined || this.isBuiltInIconVariant(item.variant))
+  hasToastIcon(item: { icon?: unknown | null; variant: string }) {
+    return (
+      item.icon !== null && (item.icon !== undefined || this.isBuiltInIconVariant(item.variant))
+    )
   }
 
   isBuiltInIconVariant(variant: string) {
-    return variant === 'success' || variant === 'info' || variant === 'warning' || variant === 'error' || variant === 'loading'
+    return (
+      variant === 'success' ||
+      variant === 'info' ||
+      variant === 'warning' ||
+      variant === 'error' ||
+      variant === 'loading'
+    )
   }
 
   showManyMessages() {
@@ -73,7 +108,13 @@ export class ToastComponent {
   }
 
   showManualToast() {
-    this.manualId.set(this.toast.loading({ title: 'Uploading report', description: 'This toast stays until it is dismissed manually.', duration: -1 }))
+    this.manualId.set(
+      this.toast.loading({
+        title: 'Uploading report',
+        description: 'This toast stays until it is dismissed manually.',
+        duration: -1,
+      }),
+    )
   }
 
   toggleStack() {
@@ -91,12 +132,23 @@ function groupItemsByPlacement(items: AngularToastItem[]): PlacementGroups {
   return groups
 }
 
-function mapPlacementGroups(groups: PlacementGroups, map: (items: AngularToastItem[]) => AngularToastItem[]): PlacementGroups {
+function mapPlacementGroups(
+  groups: PlacementGroups,
+  map: (items: AngularToastItem[]) => AngularToastItem[],
+): PlacementGroups {
   const next = createPlacementGroups()
-  for (const placement of Object.keys(next) as ToastPlacement[]) next[placement] = map(groups[placement])
+  for (const placement of Object.keys(next) as ToastPlacement[])
+    next[placement] = map(groups[placement])
   return next
 }
 
 function createPlacementGroups(): PlacementGroups {
-  return { top: [], 'top-left': [], 'top-right': [], bottom: [], 'bottom-left': [], 'bottom-right': [] }
+  return {
+    top: [],
+    'top-left': [],
+    'top-right': [],
+    bottom: [],
+    'bottom-left': [],
+    'bottom-right': [],
+  }
 }

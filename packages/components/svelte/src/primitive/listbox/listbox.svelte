@@ -94,9 +94,9 @@
     snapshot,
     orientation: () => orientation,
     selectedValues: () => {
-      value
-      multiple
-      $snapshot.values
+      void value
+      void multiple
+      void $snapshot.values
       return controller.getSnapshot().values
     },
     selectItem(itemValue: SelectionValue) {

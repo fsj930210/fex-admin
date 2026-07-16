@@ -1,0 +1,88 @@
+<fex-card
+  title="Column and row DnD with project Sortable"
+  description="Both axes reuse the existing useSortable controller, overlay and motion registry. DataGrid only exposes native part props so callers can attach the project interaction without binding a policy into the table primitive."
+>
+  <ng-template #overlayHeader let-header>
+    <span class="inline-flex min-w-0 items-center gap-2">
+      <fex-ellipsis-icon class="block size-4 rotate-90 text-muted-foreground" />
+      <span class="truncate">{{ label(header.column.id) }}</span>
+    </span>
+  </ng-template>
+  <ng-template #rowOverlayCell let-cell>
+    @if (cell.column.id === '__drag__') { <fex-ellipsis-icon class="block size-4 rotate-90 text-muted-foreground" /> }
+    @else { {{ cell.getValue() }} }
+  </ng-template>
+  <div class="space-y-space-lg">
+    @for (grid of grids; track grid.title) {
+      <section class="space-y-space-sm">
+        <h3 class="text-sm font-medium text-foreground">{{ grid.title }}</h3>
+        <fex-sortable
+          #sortable="fexSortable"
+          class="block"
+          [items]="grid.order"
+          axis="x"
+          (itemsChange)="columnsChanged(grid, $event)"
+          (snapshotChange)="columnsPreviewChanged(grid, $event)"
+        >
+          <fex-data-grid
+            [table]="grid.table"
+            [headerAction]="headerAction(sortable, grid)"
+            [cellAction]="cellAction(sortable)"
+          >
+            <ng-template fexDataGridHeader let-header>
+              @if (header.column.columns.length) {
+                {{ header.column.columnDef.header }}
+              } @else {
+                <span class="inline-flex min-w-0 items-center gap-2">
+                  <fex-ellipsis-icon class="block size-4 rotate-90 text-muted-foreground" />
+                  <span class="truncate">{{ label(header.column.id) }}</span>
+                </span>
+              }
+            </ng-template>
+          </fex-data-grid>
+          @if (sortable.activeId(); as activeId) {
+            @if (activeHeader(grid, activeId); as activeHeader) {
+              <fex-data-grid-column-overlay
+                [table]="grid.table"
+                [header]="activeHeader"
+                [headerTemplate]="overlayHeader"
+                [style]="sortable.getOverlayStyle()"
+              />
+            }
+          }
+        </fex-sortable>
+        <p class="text-xs text-muted-foreground">{{ grid.message }}</p>
+      </section>
+    }
+    <section class="space-y-space-sm">
+      <h3 class="text-sm font-medium text-foreground">Row reorder</h3>
+      <fex-sortable
+        #rowSort="fexSortable"
+        class="block"
+        [items]="rowOrder"
+        axis="y"
+        (itemsChange)="rowsChanged($event)"
+        (snapshotChange)="rowsPreviewChanged($event)"
+      >
+        <fex-data-grid [table]="rowTable" [rowAction]="rowAction(rowSort)">
+          <ng-template fexDataGridCell let-cell>
+            @if (cell.column.id === '__drag__') {
+              <fex-ellipsis-icon class="block size-4 rotate-90 cursor-grab text-muted-foreground" />
+            } @else {
+              {{ cell.getValue() }}
+            }
+          </ng-template>
+        </fex-data-grid>
+        @if (activeRow(rowSort.activeId()); as row) {
+          <fex-data-grid-row-overlay
+            [table]="rowTable"
+            [row]="row"
+            [cellTemplate]="rowOverlayCell"
+            [style]="rowSort.getOverlayStyle()"
+          />
+        }
+      </fex-sortable>
+      <p class="text-xs text-muted-foreground">Current row order: {{ rowOrder.join(' → ') }}</p>
+    </section>
+  </div>
+</fex-card>

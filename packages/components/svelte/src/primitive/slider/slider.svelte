@@ -59,7 +59,7 @@
   const controller = createSliderController(options)
   const storeSnapshot = readableCoreStore(controller)
   const snapshot = () => {
-    $storeSnapshot
+    void $storeSnapshot
     return controller.getSnapshot()
   }
   const currentSnapshot = $derived(snapshot())

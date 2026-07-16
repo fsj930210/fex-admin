@@ -1,39 +1,43 @@
-<script lang="ts">
+<script lang="ts" generics="TNode extends TreeNodeData">
   import type { FocusFeatureApi } from '@fex/components-core/tree/features/focus'
-  import type { TreeKey, TreeNodeData, TreeVisibleItem } from '@fex/components-core/tree/types'
+  import type { TreeController, TreeKey, TreeNodeData, TreeVisibleItem } from '@fex/components-core/tree/types'
   import { cn } from '@fex/utils'
   import { createVirtualizer } from '@tanstack/svelte-virtual'
-  import { getContext, onMount, type Snippet } from 'svelte'
+  import { getContext, onMount, type Snippet, untrack } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
   import { get } from 'svelte/store'
   import { readableCoreStore } from '../../stores/core-store'
   import { treeContextKey, type TreeContext } from './tree-context'
 
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+    controller?: TreeController<TNode>
     height: number
     overscan?: number
-    children?: Snippet<[TreeVisibleItem<TreeNodeData>]>
+    children?: Snippet<[TreeVisibleItem<TNode>]>
   }
 
   let {
     height,
+    controller,
     overscan = 6,
     children,
     class: className,
     style,
     ...rest
   }: Props = $props()
-  const { tree, rowHeight } = getContext<TreeContext>(treeContextKey)
+  const context = getContext<TreeContext<TNode>>(treeContextKey)
+  const tree = untrack(() => controller ?? context.tree)
+  const { rowHeight } = context
   const items = readableCoreStore({
     getSnapshot: tree.getVisibleItems,
     subscribe: tree.subscribeVisible,
   })
-  let element: HTMLDivElement
+  let element = $state<HTMLDivElement>()
   const virtualizer = createVirtualizer<HTMLDivElement, HTMLDivElement>({
     count: tree.getVisibleCount(),
     getScrollElement: () => element ?? null,
     estimateSize: rowHeight,
-    overscan,
+    overscan: untrack(() => overscan),
     getItemKey: (index) => tree.getVisibleItemAt(index)?.key ?? index,
   })
 

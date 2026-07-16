@@ -62,7 +62,11 @@ const outlineButtonClass =
 const secondaryButtonClass =
   'inline-flex h-9 items-center justify-center rounded-md border border-transparent bg-secondary-background px-4 text-sm font-medium text-secondary-foreground shadow-sm transition-colors hover:bg-muted-background disabled:pointer-events-none disabled:opacity-50'
 
-function TriggerButton(props: { slot: PopoverTriggerRenderProps; class?: string; children: JSX.Element }) {
+function TriggerButton(props: {
+  slot: PopoverTriggerRenderProps
+  class?: string
+  children: JSX.Element
+}) {
   const triggerProps = props.slot.props
 
   return (
@@ -84,11 +88,15 @@ export function PopoverPage(): JSX.Element {
     <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
       <div class="mx-auto w-full max-w-5xl space-y-space-xl">
         <header class="space-y-space-xl">
-          <A class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</A>
+          <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
+            Back home
+          </A>
           <div>
             <h1 class="text-2xl font-semibold text-foreground">Popover</h1>
             <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
-              鍩轰簬 core floating overlay 鐨?Solid 閫傞厤锛岃鐩栬Е鍙戞柟寮忋€佷綅缃€佸彈鎺х姸鎬佸拰鑷畾涔夋寕杞藉鍣ㄣ€?            </p>
+              鍩轰簬 core floating overlay 鐨?Solid
+              閫傞厤锛岃鐩栬Е鍙戞柟寮忋€佷綅缃€佸彈鎺х姸鎬佸拰鑷畾涔夋寕杞藉鍣ㄣ€?{' '}
+            </p>
           </div>
         </header>
 
@@ -115,7 +123,13 @@ export function PopoverPage(): JSX.Element {
 
           <DemoSection title="Ui" description="Demo.">
             <Popover placement="bottomLeft" sideOffset={8} arrow>
-              <PopoverTrigger>{(slot) => <TriggerButton slot={slot} class={outlineButtonClass}>Click</TriggerButton>}</PopoverTrigger>
+              <PopoverTrigger>
+                {(slot) => (
+                  <TriggerButton slot={slot} class={outlineButtonClass}>
+                    Click
+                  </TriggerButton>
+                )}
+              </PopoverTrigger>
               <PopoverPortal>
                 <PopoverContent>
                   <PopoverArrow />
@@ -129,23 +143,37 @@ export function PopoverPage(): JSX.Element {
 
           <DemoSection title="Triggers" description="Demo.">
             <Popover trigger={['hover', 'focus']} hoverCloseDelay={120} arrow>
-              <PopoverTrigger>{(slot) => <TriggerButton slot={slot} class={secondaryButtonClass}>Hover or focus</TriggerButton>}</PopoverTrigger>
+              <PopoverTrigger>
+                {(slot) => (
+                  <TriggerButton slot={slot} class={secondaryButtonClass}>
+                    Hover or focus
+                  </TriggerButton>
+                )}
+              </PopoverTrigger>
               <PopoverPortal>
                 <PopoverContent>
                   <PopoverArrow />
                   <PopoverPanel title="Combined trigger">
-                    Hover and focus share one trigger source model, so they do not close each other incorrectly.
+                    Hover and focus share one trigger source model, so they do not close each other
+                    incorrectly.
                   </PopoverPanel>
                 </PopoverContent>
               </PopoverPortal>
             </Popover>
 
             <Popover trigger={['context-menu']} placement="rightTop" sideOffset={8}>
-              <PopoverTrigger>{(slot) => <TriggerButton slot={slot} class={outlineButtonClass}>Right click</TriggerButton>}</PopoverTrigger>
+              <PopoverTrigger>
+                {(slot) => (
+                  <TriggerButton slot={slot} class={outlineButtonClass}>
+                    Right click
+                  </TriggerButton>
+                )}
+              </PopoverTrigger>
               <PopoverPortal>
                 <PopoverContent>
                   <PopoverPanel title="Context menu trigger">
-                    This is still Popover content; future ContextMenu will reuse the same trigger and floating core with Menu.
+                    This is still Popover content; future ContextMenu will reuse the same trigger
+                    and floating core with Menu.
                   </PopoverPanel>
                 </PopoverContent>
               </PopoverPortal>
@@ -168,7 +196,13 @@ export function PopoverPage(): JSX.Element {
                         </div>
                       </>
                     ) : (
-                      <For each={group}>{(item) => <div class="justify-self-center"><PlacementPopover item={item} /></div>}</For>
+                      <For each={group}>
+                        {(item) => (
+                          <div class="justify-self-center">
+                            <PlacementPopover item={item} />
+                          </div>
+                        )}
+                      </For>
                     )}
                   </div>
                 )}
@@ -176,9 +210,18 @@ export function PopoverPage(): JSX.Element {
             </div>
           </DemoSection>
 
-          <DemoSection title="Offsets" description="Tune main-axis sideOffset and cross-axis alignOffset.">
+          <DemoSection
+            title="Offsets"
+            description="Tune main-axis sideOffset and cross-axis alignOffset."
+          >
             <Popover placement="bottomLeft" sideOffset={18} arrow>
-              <PopoverTrigger>{(slot) => <TriggerButton slot={slot} class={outlineButtonClass}>sideOffset 18</TriggerButton>}</PopoverTrigger>
+              <PopoverTrigger>
+                {(slot) => (
+                  <TriggerButton slot={slot} class={outlineButtonClass}>
+                    sideOffset 18
+                  </TriggerButton>
+                )}
+              </PopoverTrigger>
               <PopoverPortal>
                 <PopoverContent>
                   <PopoverArrow />
@@ -190,7 +233,13 @@ export function PopoverPage(): JSX.Element {
             </Popover>
 
             <Popover placement="bottomLeft" sideOffset={8} alignOffset={28} arrow>
-              <PopoverTrigger>{(slot) => <TriggerButton slot={slot} class={outlineButtonClass}>alignOffset 28</TriggerButton>}</PopoverTrigger>
+              <PopoverTrigger>
+                {(slot) => (
+                  <TriggerButton slot={slot} class={outlineButtonClass}>
+                    alignOffset 28
+                  </TriggerButton>
+                )}
+              </PopoverTrigger>
               <PopoverPortal>
                 <PopoverContent>
                   <PopoverArrow />
@@ -206,7 +255,10 @@ export function PopoverPage(): JSX.Element {
             <Popover open={open()} onOpenChange={setOpen} placement="bottomLeft" arrow>
               <PopoverTrigger>
                 {(slot) => (
-                  <TriggerButton slot={slot} class={open() ? secondaryButtonClass : outlineButtonClass}>
+                  <TriggerButton
+                    slot={slot}
+                    class={open() ? secondaryButtonClass : outlineButtonClass}
+                  >
                     {open() ? 'Controlled open' : 'Controlled closed'}
                   </TriggerButton>
                 )}
@@ -223,9 +275,20 @@ export function PopoverPage(): JSX.Element {
           </DemoSection>
 
           <Card title="getPopupContainer" description="Demo.">
-            <div ref={(element) => { container = element }} class="relative min-h-40 rounded-md border border-dashed p-space-lg">
+            <div
+              ref={(element) => {
+                container = element
+              }}
+              class="relative min-h-40 rounded-md border border-dashed p-space-lg"
+            >
               <Popover getPopupContainer={() => container ?? document.body} placement="bottomLeft">
-                <PopoverTrigger>{(slot) => <TriggerButton slot={slot} class={outlineButtonClass}>Mount inside dashed box</TriggerButton>}</PopoverTrigger>
+                <PopoverTrigger>
+                  {(slot) => (
+                    <TriggerButton slot={slot} class={outlineButtonClass}>
+                      Mount inside dashed box
+                    </TriggerButton>
+                  )}
+                </PopoverTrigger>
                 <PopoverPortal>
                   <PopoverContent>
                     <PopoverPanel title="Custom container">
@@ -242,7 +305,10 @@ export function PopoverPage(): JSX.Element {
   )
 }
 
-function PlacementPopover(props: { item: (typeof placementGroups)[number][number]; edge?: boolean }) {
+function PlacementPopover(props: {
+  item: (typeof placementGroups)[number][number]
+  edge?: boolean
+}) {
   return (
     <Popover placement={props.item.placement} sideOffset={10} arrow>
       <PopoverTrigger>
@@ -256,7 +322,9 @@ function PlacementPopover(props: { item: (typeof placementGroups)[number][number
         <PopoverContent>
           <PopoverArrow />
           <PopoverPanel compact title={props.item.placement}>
-            {props.edge ? 'Edge placements flip instead of shifting across the trigger.' : 'Single-axis placements shift; edge placements only flip.'}
+            {props.edge
+              ? 'Edge placements flip instead of shifting across the trigger.'
+              : 'Single-axis placements shift; edge placements only flip.'}
           </PopoverPanel>
         </PopoverContent>
       </PopoverPortal>

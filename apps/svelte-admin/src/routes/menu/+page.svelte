@@ -169,9 +169,9 @@
         <Menu items={menuItems} defaultExpandKeys={['system']} renderItem={customItem} />
       </Card>
       <Card title="Headless Helper" description="Primitive tree helpers can drive custom DOM.">
-        <nav class="space-y-1" role="menu">
+        <div class="space-y-1" role="menu">
           {@render renderHeadlessItems(menuItems)}
-        </nav>
+        </div>
       </Card>
     </div>
   </div>

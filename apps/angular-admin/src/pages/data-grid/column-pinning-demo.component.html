@@ -1,0 +1,42 @@
+<fex-card
+  title="Column pinning"
+  description="TanStack v9 uses logical start/end regions. DataGrid only renders their sticky layout; callers can provide any pin controls and can keep DnD restrictions outside the component."
+>
+  <section class="space-y-space-sm">
+    <h3 class="text-sm font-medium text-foreground">Start, center and end regions</h3>
+    <fex-data-grid [table]="table">
+      <ng-template fexDataGridHeader let-header>
+        <span class="inline-flex items-center gap-1">
+          {{ header.column.id }}
+          <button
+            fexButton
+            size="icon-xs"
+            variant="ghost"
+            [attr.aria-label]="'Pin ' + header.column.id + ' to start'"
+            (click)="pin(header.column.id, 'start')"
+          >
+            <fex-chevron-left-icon class="block size-3.5" />
+          </button>
+          <button
+            fexButton
+            size="icon-xs"
+            variant="ghost"
+            [attr.aria-label]="'Unpin ' + header.column.id"
+            (click)="pin(header.column.id, false)"
+          >
+            <fex-minus-icon class="block size-3.5" />
+          </button>
+          <button
+            fexButton
+            size="icon-xs"
+            variant="ghost"
+            [attr.aria-label]="'Pin ' + header.column.id + ' to end'"
+            (click)="pin(header.column.id, 'end')"
+          >
+            <fex-chevron-right-icon class="block size-3.5" />
+          </button>
+        </span>
+      </ng-template>
+    </fex-data-grid>
+  </section>
+</fex-card>

@@ -1,7 +1,7 @@
-import { render } from "solid-js/web";
-import { Router } from "@solidjs/router";
-import { App } from "./App";
-import "@fex/styles";
+import { render } from 'solid-js/web'
+import { Router } from '@solidjs/router'
+import { App } from './App'
+import '@fex/styles'
 
 render(
   () => (
@@ -9,5 +9,5 @@ render(
       <App />
     </Router>
   ),
-  document.querySelector("#root")!,
-);
+  document.querySelector('#root')!,
+)

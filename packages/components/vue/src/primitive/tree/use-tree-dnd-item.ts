@@ -1,6 +1,13 @@
 import type { DndFeatureApi, TreeDropIntent } from '@fex/components-core/tree/features/dnd'
 import type { TreeController, TreeKey, TreeNodeData } from '@fex/components-core/tree/types'
-import { DND_DRAG_START_RECT_HEIGHT, DND_DRAG_START_RECT_WIDTH, DND_DRAG_START_RECT_X, DND_DRAG_START_RECT_Y, DND_DRAG_START_X, DND_DRAG_START_Y } from '@fex/components-core/interactions/dnd-store'
+import {
+  DND_DRAG_START_RECT_HEIGHT,
+  DND_DRAG_START_RECT_WIDTH,
+  DND_DRAG_START_RECT_X,
+  DND_DRAG_START_RECT_Y,
+  DND_DRAG_START_X,
+  DND_DRAG_START_Y,
+} from '@fex/components-core/interactions/dnd-store'
 import { computed } from 'vue'
 import { useCoreStore } from '../../composables/use-core-store'
 import { useDraggable } from '../../composables/use-draggable'
@@ -11,14 +18,18 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
   tree,
   itemKey,
   disabled = false,
-}: { tree: TreeController<TNode>; itemKey: TreeKey; disabled?: boolean }) {
+}: {
+  tree: TreeController<TNode>
+  itemKey: TreeKey
+  disabled?: boolean
+}) {
   const { indent } = useTreeContext<TNode>('useTreeDndItem')
   const feature = tree.getFeature<DndFeatureApi>('dnd')
   const activeIntentSnapshot = feature
     ? useCoreStore<TreeDropIntent | null>({
-      getSnapshot: feature.getActiveIntent,
-      subscribe: feature.subscribeActiveIntent,
-    })
+        getSnapshot: feature.getActiveIntent,
+        subscribe: feature.subscribeActiveIntent,
+      })
     : undefined
   const activeIntent = computed(() => {
     const intent = activeIntentSnapshot?.value ?? null
@@ -32,9 +43,22 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
   const resolveIntent = (args: Pick<DropArgs, 'source' | 'pointer' | 'targetRect'>) => {
     const sourceKey = getTreeKey(args.source.treeKey)
     if (sourceKey === undefined) return undefined
-    return feature?.resolve({ sourceKey, targetKey: itemKey, pointer: args.pointer, dragRect: getDragRect(args.source, args.pointer), targetRect: args.targetRect, indent: indent.value })
+    return feature?.resolve({
+      sourceKey,
+      targetKey: itemKey,
+      pointer: args.pointer,
+      dragRect: getDragRect(args.source, args.pointer),
+      targetRect: args.targetRect,
+      indent: indent.value,
+    })
   }
-  const drag = useDraggable({ id: `tree:${String(itemKey)}`, type: 'tree-item', data: { treeKey: itemKey }, disabled: dragDisabled, dragPreview: 'clone' })
+  const drag = useDraggable({
+    id: `tree:${String(itemKey)}`,
+    type: 'tree-item',
+    data: { treeKey: itemKey },
+    disabled: dragDisabled,
+    dragPreview: 'clone',
+  })
   const drop = useDroppable<{ treeKey: TreeKey }>({
     id: `tree:${String(itemKey)}`,
     accept: 'tree-item',
@@ -47,12 +71,26 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
     },
     canDrop: (source) => {
       const sourceKey = getTreeKey(source.treeKey)
-      return sourceKey !== undefined && sourceKey !== itemKey && !tree.getPath(itemKey).includes(sourceKey)
+      return (
+        sourceKey !== undefined &&
+        sourceKey !== itemKey &&
+        !tree.getPath(itemKey).includes(sourceKey)
+      )
     },
-    onDragEnter: (args) => { const intent = resolveIntent(args); feature?.setActiveIntent(intent?.valid ? intent : null) },
-    onDrag: (args) => { const intent = resolveIntent(args); feature?.setActiveIntent(intent?.valid ? intent : null) },
+    onDragEnter: (args) => {
+      const intent = resolveIntent(args)
+      feature?.setActiveIntent(intent?.valid ? intent : null)
+    },
+    onDrag: (args) => {
+      const intent = resolveIntent(args)
+      feature?.setActiveIntent(intent?.valid ? intent : null)
+    },
     onDragLeave: () => feature?.clearActiveIntent(itemKey),
-    onDrop: (args) => { const intent = resolveIntent(args); feature?.clearActiveIntent(itemKey); if (intent?.valid) feature?.drop(intent) },
+    onDrop: (args) => {
+      const intent = resolveIntent(args)
+      feature?.clearActiveIntent(itemKey)
+      if (intent?.valid) feature?.drop(intent)
+    },
   })
   const setItemRef = (element: Element | null) => {
     const htmlElement = element instanceof HTMLElement ? element : null
@@ -64,20 +102,45 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
     ...drop.dataAttributes.value,
     'data-dragging': drag.dragging.value || undefined,
     'data-dnd-enabled': !dragDisabled || undefined,
-    'data-drop-position': activeIntent.value ? (activeIntent.value.position === 'after' ? 'bottom' : 'inside') : undefined,
-    style: activeIntent.value ? getDropIndicatorStyle(itemElement, activeIntent.value.indicatorOffset) : undefined,
+    'data-drop-position': activeIntent.value
+      ? activeIntent.value.position === 'after'
+        ? 'bottom'
+        : 'inside'
+      : undefined,
+    style: activeIntent.value
+      ? getDropIndicatorStyle(itemElement, activeIntent.value.indicatorOffset)
+      : undefined,
   }))
-  return { dragging: drag.dragging, over: drop.over, edge: drop.edge, position: drop.position, intent: activeIntent, itemProps, setItemRef }
+  return {
+    dragging: drag.dragging,
+    over: drop.over,
+    edge: drop.edge,
+    position: drop.position,
+    intent: activeIntent,
+    itemProps,
+    setItemRef,
+  }
 }
 
 function getTreeKey(value: unknown): TreeKey | undefined {
   return typeof value === 'string' || typeof value === 'number' ? value : undefined
 }
 function getDragRect(source: Record<string, unknown>, pointer: { x: number; y: number }) {
-  const startX = source[DND_DRAG_START_X]; const startY = source[DND_DRAG_START_Y]
-  const x = source[DND_DRAG_START_RECT_X]; const y = source[DND_DRAG_START_RECT_Y]
-  const width = source[DND_DRAG_START_RECT_WIDTH]; const height = source[DND_DRAG_START_RECT_HEIGHT]
-  if (typeof startX !== 'number' || typeof startY !== 'number' || typeof x !== 'number' || typeof y !== 'number' || typeof width !== 'number' || typeof height !== 'number') return undefined
+  const startX = source[DND_DRAG_START_X]
+  const startY = source[DND_DRAG_START_Y]
+  const x = source[DND_DRAG_START_RECT_X]
+  const y = source[DND_DRAG_START_RECT_Y]
+  const width = source[DND_DRAG_START_RECT_WIDTH]
+  const height = source[DND_DRAG_START_RECT_HEIGHT]
+  if (
+    typeof startX !== 'number' ||
+    typeof startY !== 'number' ||
+    typeof x !== 'number' ||
+    typeof y !== 'number' ||
+    typeof width !== 'number' ||
+    typeof height !== 'number'
+  )
+    return undefined
   return { x: x + pointer.x - startX, y: y + pointer.y - startY, width, height }
 }
 function getElementRect(element: HTMLElement) {

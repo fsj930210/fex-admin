@@ -2,7 +2,6 @@ import type { ComponentProps, ReactNode } from 'react'
 import { MenuContext, useMenuContext } from './menu-context'
 import type {
   MenuListDomProps,
-  MenuRootDomProps,
   UseMenuOptions,
   UseMenuReturn,
 } from './menu-types'

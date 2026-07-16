@@ -1,3 +1,4 @@
+/* oxlint-disable react/no-unstable-nested-components -- Toast icons are render callbacks consumed by the toast primitive, not mounted component declarations. */
 import {
   ToastAction,
   ToastClose,

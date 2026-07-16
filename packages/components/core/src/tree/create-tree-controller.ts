@@ -37,6 +37,10 @@ function sameKeys(left: readonly TreeKey[], right: readonly TreeKey[]) {
   return left.length === right.length && left.every((key, index) => key === right[index])
 }
 
+function failMutation(type: TreeMutationResult['type'], reason: string): TreeMutationResult {
+  return { ok: false, type, changedKeys: [], reason }
+}
+
 /**
  * Owns the normalized tree index, snapshots, subscriptions, visible projection,
  * and framework-independent immutable tree-data mutations.
@@ -94,6 +98,7 @@ export function createTreeController<TNode extends TreeNodeData>(
     key: TreeKey,
     update: (node: TNode) => TNode,
   ): readonly TNode[] {
+    // oxlint-disable-next-line unicorn/no-array-reverse -- getAncestorKeys returns a fresh array and the workspace targets ES2022.
     const path = [...getAncestorKeys(key).reverse(), key]
     const updateAtDepth = (currentNodes: readonly TNode[], depth: number): readonly TNode[] => {
       const item = index.items.get(path[depth] as TreeKey)
@@ -321,10 +326,6 @@ export function createTreeController<TNode extends TreeNodeData>(
     setSnapshot({ ...current, treeData: nextTreeData, items: nextItems, visibleItems }, [key], false)
     options.onTreeDataChange?.(nextTreeData, mutation)
     return mutation
-  }
-
-  function failMutation(type: TreeMutationResult['type'], reason: string): TreeMutationResult {
-    return { ok: false, type, changedKeys: [], reason }
   }
 
   function updateNode(
@@ -576,6 +577,7 @@ export function createTreeController<TNode extends TreeNodeData>(
       ]), expandedChanged)
     },
     getItem: (key) => index.items.get(key),
+    // oxlint-disable-next-line unicorn/no-array-reverse -- getAncestorKeys returns a fresh array and the workspace targets ES2022.
     getPath: (key) => [...getAncestorKeys(key).reverse(), key],
     getVisibleItems: () => getSnapshot().visibleItems,
     getVisibleCount: () => getSnapshot().visibleItems.length,
@@ -589,6 +591,7 @@ export function createTreeController<TNode extends TreeNodeData>(
   featureRuntime = createTreeFeatureRuntime({
     getSnapshot,
     getItem: (key) => index.items.get(key),
+    // oxlint-disable-next-line unicorn/no-array-reverse -- getAncestorKeys returns a fresh array and the workspace targets ES2022.
     getPath: (key) => [...getAncestorKeys(key).reverse(), key],
     updateFeatureState: (changedKeys = []) => commitState({}, changedKeys),
     configure: (featureOptions) => { options = { ...options, ...featureOptions } },

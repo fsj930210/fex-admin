@@ -1,0 +1,35 @@
+<div data-slot="data-grid-column-overlay" [class]="rootClassName()" [ngStyle]="overlayStyle()">
+  <table [class]="tableClassName" style="width: 100%">
+    <colgroup><col [style.width]="columnWidth()" /></colgroup>
+    <thead [class]="headerClassName">
+      <tr [class]="headerRowClassName">
+        <th [class]="headerCellClassName">
+          <div data-slot="data-grid-header-content" [class]="headerContentClassName">
+            @if (headerTemplate(); as template) {
+              <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: renderHeader() }" />
+            } @else {
+              {{ text(renderHeader().column.columnDef.header) }}
+            }
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody [class]="bodyClassName">
+      @for (row of rows(); track row.id) {
+        @if (cell(row); as item) {
+          <tr [class]="rowClassName">
+            <td [class]="cellClassName">
+              <div [class]="cellContentClassName">
+                @if (cellTemplate(); as template) {
+                  <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: item }" />
+                } @else {
+                  {{ text(item.getValue()) }}
+                }
+              </div>
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</div>

@@ -308,12 +308,12 @@ export function TreeItem<TNode extends TreeNodeData>({
   return typeof children === 'function' ? children(renderState) : <div {...itemProps}>{children}</div>
 }
 
-export interface TreeTriggerProps<TNode extends TreeNodeData> extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface TreeTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   itemKey: TreeKey
 }
 
-export function TreeTrigger<TNode extends TreeNodeData>({ itemKey, className, onClick, children, ...props }: TreeTriggerProps<TNode>) {
-  const { tree } = useTreeContext<TNode>()
+export function TreeTrigger({ itemKey, className, onClick, children, ...props }: TreeTriggerProps) {
+  const { tree } = useTreeContext<TreeNodeData>()
   const state = useTreeItem(tree, itemKey)
   const expansion = tree.getFeature<ExpansionFeatureApi>('expansion')
   if (!state.item || state.item.isLeaf || !expansion) {

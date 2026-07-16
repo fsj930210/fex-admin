@@ -31,12 +31,15 @@ const controller = createSelectionController({
   },
 })
 const storeSnapshot = useCoreStore(controller)
-const selectedValues = computed(() => { props.value; props.multiple; storeSnapshot.value; return controller.getSnapshot().values })
+const selectedValues = computed(() => { void props.value; void props.multiple; void storeSnapshot.value; return controller.getSnapshot().values })
 provide(listboxContextKey, {
   orientation: () => props.orientation,
   selectedValues,
   isDisabled: controller.isDisabled,
-  selectItem(value) { controller.getSnapshot().multiple ? controller.toggle(value) : controller.replace(value) },
+  selectItem(value) {
+    if (controller.getSnapshot().multiple) controller.toggle(value)
+    else controller.replace(value)
+  },
 })
 </script>
 <template><div v-bind="$attrs" role="listbox" :aria-multiselectable="controller.getSnapshot().multiple || undefined" :aria-orientation="props.orientation" :data-orientation="props.orientation" data-slot="listbox"><slot /></div></template>

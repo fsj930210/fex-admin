@@ -1,7 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { checkFeature, type CheckFeatureApi } from '@fex/components-core/tree/features/check'
-import { expansionFeature, type ExpansionFeatureApi } from '@fex/components-core/tree/features/expansion'
-import { selectionFeature, type SelectionFeatureApi } from '@fex/components-core/tree/features/selection'
+import {
+  expansionFeature,
+  type ExpansionFeatureApi,
+} from '@fex/components-core/tree/features/expansion'
+import {
+  selectionFeature,
+  type SelectionFeatureApi,
+} from '@fex/components-core/tree/features/selection'
 import { createTreeController } from '@fex/components-core/tree/create-tree-controller'
 import type { TreeOptions } from '@fex/components-core/tree/types'
 import { Button } from '@fex/components-angular/ui/button'

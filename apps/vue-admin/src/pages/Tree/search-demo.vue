@@ -58,6 +58,7 @@ function parts(title: string) {
       @input="handleInput"
     />
     <div v-show="!showingSearchTree">
+      <!-- @vue-generic {DepartmentNode} -->
       <DemoTree
         :controller="searchController"
         :tree-data="departmentTreeData"
@@ -67,6 +68,7 @@ function parts(title: string) {
         class="max-w-xl rounded-md border border-border bg-background p-space-sm"
       />
     </div>
+    <!-- @vue-generic {DepartmentNode} -->
     <DemoTree
       v-if="showingSearchTree"
       :tree-data="subtree"
@@ -77,9 +79,9 @@ function parts(title: string) {
       class="max-w-xl rounded-md border border-border bg-background p-space-sm"
     >
       <template #title="{ item }">
-        {{ parts(item.node.name).before }}<mark
+        {{ parts(String(item.node.name)).before }}<mark
           class="rounded-sm bg-warning/20 px-0.5 text-inherit"
-        >{{ parts(item.node.name).match }}</mark>{{ parts(item.node.name).after }}
+        >{{ parts(String(item.node.name)).match }}</mark>{{ parts(String(item.node.name)).after }}
       </template>
     </DemoTree>
   </Card>

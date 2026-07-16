@@ -45,7 +45,7 @@ defineExpose<TreeVirtualViewportHandle>({ scrollToKey })
     <div class="relative w-full" :style="{ height: `${virtualizer.getTotalSize()}px` }">
       <div
         v-for="virtualItem in virtualizer.getVirtualItems()"
-        :key="virtualItem.key"
+        :key="String(virtualItem.key)"
         class="absolute left-0 w-full"
         :style="{ height: `${virtualItem.size}px`, transform: `translateY(${virtualItem.start}px)` }"
       >

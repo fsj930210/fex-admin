@@ -19,8 +19,10 @@ export interface TreeVisitInfo<TNode, TKey extends TreeKey = TreeKey> {
   hasChildren: boolean
 }
 
-export interface FlattenTreeNode<TNode, TKey extends TreeKey = TreeKey>
-  extends TreeVisitInfo<TNode, TKey> {}
+export interface FlattenTreeNode<TNode, TKey extends TreeKey = TreeKey> extends TreeVisitInfo<
+  TNode,
+  TKey
+> {}
 
 type QueueItem<TNode, TKey extends TreeKey> = {
   node: TNode
@@ -206,9 +208,13 @@ export function flattenTree<TNode, TKey extends TreeKey = TreeKey>(
   const result: FlattenTreeNode<TNode, TKey>[] = []
   const walker = options.order === 'bfs' ? walkTreeBfs : walkTreeDfs
 
-  walker(nodes, (info) => {
-    result.push(info)
-  }, options)
+  walker(
+    nodes,
+    (info) => {
+      result.push(info)
+    },
+    options,
+  )
 
   return result
 }
@@ -221,14 +227,18 @@ export function findTreeNode<TNode, TKey extends TreeKey = TreeKey>(
   let matched: TreeVisitInfo<TNode, TKey> | undefined
   const walker = options?.order === 'bfs' ? walkTreeBfs : walkTreeDfs
 
-  walker(nodes, (info) => {
-    if (!predicate(info)) {
-      return undefined
-    }
+  walker(
+    nodes,
+    (info) => {
+      if (!predicate(info)) {
+        return undefined
+      }
 
-    matched = info
-    return false
-  }, options)
+      matched = info
+      return false
+    },
+    options,
+  )
 
   return matched
 }
@@ -263,9 +273,13 @@ export function getTreeParentMap<TNode, TKey extends TreeKey = TreeKey>(
 ) {
   const parentMap = new Map<TKey, TKey | undefined>()
 
-  walkTreeDfs(nodes, (info) => {
-    parentMap.set(info.key, info.parentKey)
-  }, options)
+  walkTreeDfs(
+    nodes,
+    (info) => {
+      parentMap.set(info.key, info.parentKey)
+    },
+    options,
+  )
 
   return parentMap
 }

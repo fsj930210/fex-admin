@@ -1,0 +1,44 @@
+import { columnSizingFeature } from '@fex/components-core/data-grid/features/column-sizing'
+import type { DataGridColumnMeta } from '@fex/components-core/data-grid/types'
+import { DataGrid, tableFeatures, type ColumnDef } from '@fex/components-solid/primitive/data-grid'
+import { createDataGridTable } from '@fex/components-solid/primitives/create-data-grid-table'
+import { virtualPeople, type Person } from './data'
+import { DataGridDemoSection, DemoBranch } from './demo-section'
+
+type VirtualFeatures = {
+  columnSizingFeature: typeof columnSizingFeature
+  columnMeta: DataGridColumnMeta<VirtualFeatures, Person>
+}
+const virtualFeatures: VirtualFeatures = tableFeatures({ columnSizingFeature, columnMeta: {} })
+
+export function VirtualDataGridDemo() {
+  const columns: ColumnDef<VirtualFeatures, Person>[] = [
+    { accessorKey: 'name', header: 'Name', size: 280 },
+    { accessorKey: 'department', header: 'Department', size: 180 },
+    { accessorKey: 'status', header: 'Status', size: 150 },
+    { accessorKey: 'visits', header: 'Visits', size: 140, meta: { align: 'right' } },
+    {
+      accessorKey: 'progress',
+      header: 'Progress',
+      size: 140,
+      meta: { align: 'right' },
+      cell: ({ getValue }) => `${getValue()}%`,
+    },
+  ]
+  const table = createDataGridTable({
+    features: virtualFeatures,
+    data: virtualPeople,
+    columns,
+    getRowId: (row) => row.id,
+  })
+  return (
+    <DataGridDemoSection
+      title="Virtual scrolling"
+      description="This table has 10,000 rows, while the DOM mounts only the viewport rows plus overscan. The primitive keeps TanStack Table's row model and uses @tanstack/react-virtual only for rendering."
+    >
+      <DemoBranch title="10,000 fixed-height rows">
+        <DataGrid table={table} virtual={{ height: 320, estimateRowHeight: 40, overscan: 10 }} />
+      </DemoBranch>
+    </DataGridDemoSection>
+  )
+}

@@ -38,6 +38,7 @@ export function getSliderValueFromPointer(clientX: number, clientY: number, rect
 export function getNextSortedValues(prevValues: readonly number[], nextValue: number, atIndex: number) {
   const nextValues = [...prevValues]
   nextValues[atIndex] = nextValue
+  // oxlint-disable-next-line unicorn/no-array-sort -- nextValues is already a copy and the workspace targets ES2022.
   return nextValues.sort((a, b) => a - b)
 }
 

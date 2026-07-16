@@ -13,8 +13,6 @@ import {
   useRef,
   type HTMLAttributes,
   type KeyboardEvent,
-  type PointerEvent,
-  type ReactNode,
   type Ref,
   type MutableRefObject,
 } from 'react'

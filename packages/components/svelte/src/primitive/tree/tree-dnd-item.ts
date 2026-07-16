@@ -1,18 +1,15 @@
-import type {
-  DndFeatureApi,
-  TreeDropIntent,
-} from '@fex/components-core/tree/features/dnd'
-import type {
-  TreeController,
-  TreeKey,
-  TreeNodeData,
-} from '@fex/components-core/tree/types'
-import { DND_DRAG_START_RECT_HEIGHT, DND_DRAG_START_RECT_WIDTH, DND_DRAG_START_RECT_X, DND_DRAG_START_RECT_Y, DND_DRAG_START_X, DND_DRAG_START_Y } from '@fex/components-core/interactions/dnd-store'
-import { draggableAction } from '../../actions/draggable'
+import type { DndFeatureApi, TreeDropIntent } from '@fex/components-core/tree/features/dnd'
+import type { TreeController, TreeKey, TreeNodeData } from '@fex/components-core/tree/types'
 import {
-  droppableAction,
-  type DroppableEventArgs,
-} from '../../actions/droppable'
+  DND_DRAG_START_RECT_HEIGHT,
+  DND_DRAG_START_RECT_WIDTH,
+  DND_DRAG_START_RECT_X,
+  DND_DRAG_START_RECT_Y,
+  DND_DRAG_START_X,
+  DND_DRAG_START_Y,
+} from '@fex/components-core/interactions/dnd-store'
+import { draggableAction } from '../../actions/draggable'
+import { droppableAction, type DroppableActionOptions, type DroppableEventArgs } from '../../actions/droppable'
 
 export interface TreeDndItemOptions<TNode extends TreeNodeData> {
   tree: TreeController<TNode>
@@ -27,7 +24,7 @@ export function treeDndItemAction<TNode extends TreeNodeData>(
 ) {
   let current = options
   let drag: ReturnType<typeof draggableAction> | undefined
-  let drop: ReturnType<typeof droppableAction> | undefined
+  let drop: { update: (current: DroppableActionOptions<{ treeKey: TreeKey }>) => void; destroy(): void } | undefined
   let intent: TreeDropIntent | null = null
 
   const bind = (nextOptions: TreeDndItemOptions<TNode>) => {
@@ -125,10 +122,21 @@ function getKey(value: unknown): TreeKey | undefined {
 }
 
 function getDragRect(source: Record<string, unknown>, pointer: { x: number; y: number }) {
-  const startX = source[DND_DRAG_START_X]; const startY = source[DND_DRAG_START_Y]
-  const x = source[DND_DRAG_START_RECT_X]; const y = source[DND_DRAG_START_RECT_Y]
-  const width = source[DND_DRAG_START_RECT_WIDTH]; const height = source[DND_DRAG_START_RECT_HEIGHT]
-  if (typeof startX !== 'number' || typeof startY !== 'number' || typeof x !== 'number' || typeof y !== 'number' || typeof width !== 'number' || typeof height !== 'number') return undefined
+  const startX = source[DND_DRAG_START_X]
+  const startY = source[DND_DRAG_START_Y]
+  const x = source[DND_DRAG_START_RECT_X]
+  const y = source[DND_DRAG_START_RECT_Y]
+  const width = source[DND_DRAG_START_RECT_WIDTH]
+  const height = source[DND_DRAG_START_RECT_HEIGHT]
+  if (
+    typeof startX !== 'number' ||
+    typeof startY !== 'number' ||
+    typeof x !== 'number' ||
+    typeof y !== 'number' ||
+    typeof width !== 'number' ||
+    typeof height !== 'number'
+  )
+    return undefined
   return { x: x + pointer.x - startX, y: y + pointer.y - startY, width, height }
 }
 
@@ -150,5 +158,11 @@ function getTreeTitleOffset(element: HTMLElement) {
 function getDropIndicatorWidth(element: HTMLElement, indicatorOffset: number) {
   const itemRect = element.getBoundingClientRect()
   const treeRect = element.closest<HTMLElement>('[data-slot="tree"]')?.getBoundingClientRect()
-  return Math.max(0, (treeRect?.right ?? itemRect.right) - itemRect.left - getTreeTitleOffset(element) - indicatorOffset)
+  return Math.max(
+    0,
+    (treeRect?.right ?? itemRect.right) -
+      itemRect.left -
+      getTreeTitleOffset(element) -
+      indicatorOffset,
+  )
 }

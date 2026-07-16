@@ -16,8 +16,8 @@
   const variant = $derived(isKnownVariant(toast.variant) ? toast.variant : 'default')
   const classList = $derived(cn(toastRootClassName({ variant }), className))
 
-  function isKnownVariant(variant: SvelteToastItem['variant']): variant is NonNullable<ToastStyleProps['variant']> {
-    return variant === 'default' || variant === 'success' || variant === 'info' || variant === 'warning' || variant === 'error' || variant === 'loading'
+  function isKnownVariant(candidate: SvelteToastItem['variant']): candidate is NonNullable<ToastStyleProps['variant']> {
+    return candidate === 'default' || candidate === 'success' || candidate === 'info' || candidate === 'warning' || candidate === 'error' || candidate === 'loading'
   }
 </script>
 

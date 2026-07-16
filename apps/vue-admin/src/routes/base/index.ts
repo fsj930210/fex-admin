@@ -1,3 +1,1 @@
-export const baseRoutes = [
-  { path: '/', component: () => import('../../pages/Home.vue') },
-]
+export const baseRoutes = [{ path: '/', component: () => import('../../pages/Home.vue') }]

@@ -30,16 +30,13 @@ export class SearchTreeDemoComponent {
     treeData: departmentTreeData,
     fieldNames: departmentFieldNames,
     isLeaf: (node) => node.childCount === 0,
-    features: [
-      expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] }),
-    ],
+    features: [expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] })],
   }
   protected readonly subtree = computed(
     () =>
       this.controller.getFeature<SearchFeatureApi<DepartmentNode>>('search')?.getSubtree({
         keyword: this.keyword(),
-        filterTreeNode: (node, value) =>
-          node.name.toLowerCase().includes(value.toLowerCase()),
+        filterTreeNode: (node, value) => node.name.toLowerCase().includes(value.toLowerCase()),
       }) ?? [],
   )
   protected readonly searchOptions = computed<TreeOptions<DepartmentNode>>(() => ({

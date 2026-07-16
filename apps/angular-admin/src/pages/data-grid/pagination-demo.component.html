@@ -1,0 +1,106 @@
+<fex-card
+  title="Pagination"
+  description="Pagination is a core feature with two mutually exclusive registrations: client includes the paginated row model; server only owns pagination state/APIs and receives already-paged data."
+>
+  <div class="grid gap-space-lg xl:grid-cols-2">
+    <section class="space-y-space-sm">
+      <h3 class="text-sm font-medium text-foreground">Client pagination</h3>
+      <div>
+        <fex-data-grid [table]="client" />
+        <div [class]="paginationClassName">
+          <span [class]="paginationSummaryClassName"
+            >0 selected · {{ client.getRowCount() }} rows</span
+          >
+          <div [class]="controlsClassName">
+            <label
+              ><span [class]="srOnlyClassName">Rows per page</span
+              ><select
+                [class]="selectClassName"
+                [value]="client.store.get().pagination.pageSize"
+                (change)="clientPageSize($event)"
+              >
+                @for (size of pageSizes; track size) {
+                  <option [value]="size">{{ size }} / page</option>
+                }
+              </select></label
+            >
+            <span
+              >Page {{ client.store.get().pagination.pageIndex + 1 }} /
+              {{ client.getPageCount() }}</span
+            >
+            <button
+              fexButton
+              size="sm"
+              variant="outline"
+              [disabled]="!client.getCanPreviousPage()"
+              (click)="client.previousPage()"
+            >
+              Previous
+            </button>
+            <button
+              fexButton
+              size="sm"
+              variant="outline"
+              [disabled]="!client.getCanNextPage()"
+              (click)="client.nextPage()"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="space-y-space-sm">
+      <h3 class="text-sm font-medium text-foreground">Server pagination</h3>
+      <div>
+        <fex-data-grid [table]="server" />
+        <div [class]="paginationClassName">
+          <span [class]="paginationSummaryClassName"
+            >0 selected · {{ server.getRowCount() }} rows</span
+          >
+          <div [class]="controlsClassName">
+            <label
+              ><span [class]="srOnlyClassName">Rows per page</span
+              ><select
+                [class]="selectClassName"
+                [value]="server.store.get().pagination.pageSize"
+                (change)="serverPageSize($event)"
+              >
+                @for (size of pageSizes; track size) {
+                  <option [value]="size">{{ size }} / page</option>
+                }
+              </select></label
+            >
+            <span
+              >Page {{ server.store.get().pagination.pageIndex + 1 }} /
+              {{ server.getPageCount() }}</span
+            >
+            <button
+              fexButton
+              size="sm"
+              variant="outline"
+              [disabled]="!server.getCanPreviousPage()"
+              (click)="serverPrevious()"
+            >
+              Previous
+            </button>
+            <button
+              fexButton
+              size="sm"
+              variant="outline"
+              [disabled]="!server.getCanNextPage()"
+              (click)="serverNext()"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+        <p class="px-space-sm pb-space-sm text-xs text-muted-foreground">
+          Request: page={{ server.store.get().pagination.pageIndex + 1 }}&amp;pageSize={{
+            server.store.get().pagination.pageSize
+          }}
+        </p>
+      </div>
+    </section>
+  </div>
+</fex-card>

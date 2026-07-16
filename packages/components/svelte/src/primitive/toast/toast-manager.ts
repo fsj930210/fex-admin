@@ -1,4 +1,8 @@
-import { createToastManager, type ToastItem, type ToastManager } from '@fex/components-core/toast/create-toast-manager'
+import {
+  createToastManager,
+  type ToastItem,
+  type ToastManager,
+} from '@fex/components-core/toast/create-toast-manager'
 import type { Snippet } from 'svelte'
 
 export type SvelteToastContent = string | Snippet | undefined | null

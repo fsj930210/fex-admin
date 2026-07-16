@@ -1,0 +1,40 @@
+<fex-card
+  title="Row expansion"
+  description="The same expansion state supports hierarchical subRows and arbitrary detail panels. The expand control is an optional column factory, not a special DataGrid mode."
+>
+  <div class="grid gap-space-lg xl:grid-cols-2">
+    <section class="space-y-space-sm">
+      <h3 class="text-sm font-medium text-foreground">Hierarchical rows</h3>
+      <fex-data-grid [table]="tree"
+        ><ng-template fexDataGridCell let-cell>
+          @if (cell.column.id === '__expand__') {
+            <button fexButton size="icon-sm" variant="outline" [attr.aria-expanded]="expanded(cell)" [disabled]="!can(cell)" (click)="toggle(cell)">
+              @if (expanded(cell)) { <fex-minus-icon /> } @else { <fex-plus-icon /> }
+            </button>
+          } @else {
+            {{ value(cell) }}
+          }
+        </ng-template></fex-data-grid
+      >
+    </section>
+    <section class="space-y-space-sm">
+      <h3 class="text-sm font-medium text-foreground">Detail panel</h3>
+      <fex-data-grid [table]="detail"
+        ><ng-template fexDataGridCell let-cell>
+          @if (cell.column.id === '__expand__') {
+            <button fexButton size="icon-sm" variant="outline" [attr.aria-expanded]="expanded(cell)" (click)="toggle(cell)">
+              @if (expanded(cell)) { <fex-minus-icon /> } @else { <fex-plus-icon /> }
+            </button>
+          } @else {
+            {{ value(cell) }}
+          }</ng-template
+        ><ng-template fexDataGridSubComponent let-row
+          ><div class="bg-muted-background p-space-md text-sm">
+            {{ person(row).name }}: {{ person(row).visits }} visits, {{ person(row).progress }}%
+            progress.
+          </div></ng-template
+        ></fex-data-grid
+      >
+    </section>
+  </div>
+</fex-card>

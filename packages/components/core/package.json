@@ -11,6 +11,23 @@
     "./calendar/temporal": "./src/calendar/temporal.ts",
     "./calendar/types": "./src/calendar/types.ts",
     "./date/utils": "./src/date/utils.ts",
+    "./data-grid/types": "./src/data-grid/types.ts",
+    "./data-grid/layout": "./src/data-grid/layout.ts",
+    "./data-grid/rendering": "./src/data-grid/layout.ts",
+    "./data-grid/create-data-grid-controller": "./src/data-grid/create-data-grid-controller.ts",
+    "./data-grid/prepare-columns": "./src/data-grid/prepare-columns.ts",
+    "./data-grid/features/column-filtering": "./src/data-grid/features/column-filtering.ts",
+    "./data-grid/features/row-sorting": "./src/data-grid/features/row-sorting.ts",
+    "./data-grid/features/client-pagination": "./src/data-grid/features/client-pagination.ts",
+    "./data-grid/features/server-pagination": "./src/data-grid/features/server-pagination.ts",
+    "./data-grid/features/row-selection": "./src/data-grid/features/row-selection.ts",
+    "./data-grid/features/row-expanding": "./src/data-grid/features/row-expanding.ts",
+    "./data-grid/features/column-visibility": "./src/data-grid/features/column-visibility.ts",
+    "./data-grid/features/column-ordering": "./src/data-grid/features/column-ordering.ts",
+    "./data-grid/features/column-pinning": "./src/data-grid/features/column-pinning.ts",
+    "./data-grid/features/row-pinning": "./src/data-grid/features/row-pinning.ts",
+    "./data-grid/features/column-sizing": "./src/data-grid/features/column-sizing.ts",
+    "./data-grid/features/column-grouping": "./src/data-grid/features/column-grouping.ts",
     "./calendar/value": "./src/calendar/value.ts",
     "./store/create-store": "./src/store/create-store.ts",
     "./tree/create-tree-controller": "./src/tree/create-tree-controller.ts",
@@ -71,6 +88,7 @@
     "./sortable/types": "./src/sortable/types.ts"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.7.6"
+    "@floating-ui/dom": "^1.7.6",
+    "@tanstack/table-core": "9.0.0-beta.47"
   }
 }

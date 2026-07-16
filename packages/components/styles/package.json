@@ -10,6 +10,7 @@
     "./card": "./src/card.ts",
     "./checkbox": "./src/checkbox.ts",
     "./dialog": "./src/dialog.ts",
+    "./data-grid": "./src/data-grid.ts",
     "./empty": "./src/empty.ts",
     "./input": "./src/input.ts",
     "./kbd": "./src/kbd.ts",

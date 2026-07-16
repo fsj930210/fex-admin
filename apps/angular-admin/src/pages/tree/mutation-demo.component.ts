@@ -17,7 +17,6 @@ import { departmentFieldNames, departmentTreeData, type DepartmentNode } from '.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MutationTreeDemoComponent {
-
   protected readonly data = signal<readonly DepartmentNode[]>(departmentTreeData)
   protected readonly controller = createTreeController<DepartmentNode>({
     treeData: departmentTreeData,

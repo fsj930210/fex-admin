@@ -7,7 +7,7 @@ import type { TreeController, TreeNodeData, TreeOptions } from '@fex/components-
 import { treeRootClassName } from '@fex/components-styles/tree'
 import { cn } from '@fex/utils'
 import { computed, provide, useAttrs } from 'vue'
-import { treeContextKey } from './context'
+import { treeContextKey, type TreeContextValue } from './context'
 import { useTreeController } from './use-tree'
 
 defineOptions({ inheritAttrs: false })
@@ -21,7 +21,7 @@ const attrs = useAttrs()
 const tree = useTreeController(() => props.options ?? (props.controller ? undefined : { treeData: [] }), props.controller)
 const indent = computed(() => props.indent)
 const rowHeight = computed(() => props.rowHeight)
-provide(treeContextKey, { tree, indent, rowHeight })
+provide(treeContextKey, { tree, indent, rowHeight } as unknown as TreeContextValue<TreeNodeData>)
 
 const rootAttrs = computed(() => {
   const { class: _class, style: _style, onKeydown: _onKeydown, ...rest } = attrs

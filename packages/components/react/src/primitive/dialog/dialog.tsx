@@ -9,7 +9,7 @@ import {
   type Ref,
 } from 'react'
 import { createPortal } from 'react-dom'
-import { createDialogController, type DialogController, type DialogOptions } from '@fex/components-core/dialog/create-dialog-controller'
+import { createDialogController, type DialogOptions } from '@fex/components-core/dialog/create-dialog-controller'
 import {
   dialogBodyClassName,
   dialogCloseClassName,
@@ -22,7 +22,6 @@ import {
   type DialogStyleProps,
 } from '@fex/components-styles/dialog'
 import { cn, shallowEqualObject } from '@fex/utils'
-import { useCoreStore } from '../../hooks/use-core-store'
 import { useIsomorphicLayoutEffect } from '../../hooks/use-isomorphic-layout-effect'
 import { useLazyRef } from '../../hooks/use-lazy-ref'
 import { useMemoizedFn } from '../../hooks/use-memoized-fn'

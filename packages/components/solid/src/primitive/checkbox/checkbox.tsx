@@ -62,7 +62,7 @@ export function CheckboxRoot(props: CheckboxRootProps) {
               ? controller.toggle()
               : {
                   previousChecked: currentChecked(),
-                  checked: currentChecked() === true ? false : true,
+                  checked: currentChecked() !== true,
                 }
           if (meta === undefined) {
             return

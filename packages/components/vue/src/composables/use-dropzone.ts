@@ -1,6 +1,9 @@
 import { createDropzoneController } from '@fex/components-core/dropzone/create-dropzone-controller'
 import { getFilesFromDataTransfer } from '@fex/components-core/dropzone/files'
-import type { DropzoneFileRejection, DropzoneValidationOptions } from '@fex/components-core/dropzone/types'
+import type {
+  DropzoneFileRejection,
+  DropzoneValidationOptions,
+} from '@fex/components-core/dropzone/types'
 import { computed, onBeforeUnmount, shallowRef } from 'vue'
 
 export interface UseDropzoneOptions extends DropzoneValidationOptions {

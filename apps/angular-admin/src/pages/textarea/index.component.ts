@@ -10,5 +10,4 @@ import Card from '@fex/components-angular/ui/card'
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextareaComponent {
-}
+export class TextareaComponent {}

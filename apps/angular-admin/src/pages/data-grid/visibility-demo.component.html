@@ -1,0 +1,21 @@
+<fex-card
+  title="Column visibility"
+  description="Visibility state stays in TanStack. The toggle is a separate primitive and respects per-column enableHiding; Name cannot be hidden and Visits starts hidden."
+  ><section class="space-y-space-sm">
+    <h3 class="text-sm font-medium">Toggle visible leaf columns</h3>
+    <div class="flex gap-space-sm rounded-md border p-space-sm">
+      @for (column of table.getAllLeafColumns(); track column.id) {
+        @if (column.getCanHide()) {
+          <label class="inline-flex items-center gap-2"
+            ><button
+              fexCheckbox
+              [checked]="column.getIsVisible()"
+              (checkedChange)="toggle(column.id, $event.checked)"
+            ></button
+            >{{ column.id }}</label
+          >
+        }
+      }
+    </div>
+    <fex-data-grid [table]="table" /></section
+></fex-card>

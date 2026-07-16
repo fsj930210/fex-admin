@@ -109,7 +109,7 @@ function getDateCellContentClassName(cell: CalendarCellModel) {
   ].join(' ')
 }
 
-function getDateLabelClassName(cell: CalendarCellModel) {
+function getDateLabelClassName(_cell: CalendarCellModel) {
   return 'font-medium'
 }
 

@@ -1,4 +1,5 @@
 export const componentRoutes = [
+  { path: '/data-grid', component: () => import('../../pages/DataGrid/index.vue') },
   { path: '/button', component: () => import('../../pages/Button/index.vue') },
   { path: '/calendar', component: () => import('../../pages/Calendar/index.vue') },
   { path: '/card', component: () => import('../../pages/Card/index.vue') },

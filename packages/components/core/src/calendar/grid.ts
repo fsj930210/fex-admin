@@ -7,7 +7,6 @@ import {
 } from './temporal'
 import {
   getCalendarValueDate,
-  getCalendarValueKey,
   getCalendarValueLabel,
   isSameCalendarValue,
 } from './value'

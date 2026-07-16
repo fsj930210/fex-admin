@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="TNode extends TreeNodeData">
   import type { CheckFeatureApi } from '@fex/components-core/tree/features/check'
   import type { ExpansionFeatureApi } from '@fex/components-core/tree/features/expansion'
   import type { FocusFeatureApi } from '@fex/components-core/tree/features/focus'
@@ -11,7 +11,7 @@
   } from '@fex/components-core/tree/types'
   import { treeRootClassName } from '@fex/components-styles/tree'
   import { cn } from '@fex/utils'
-  import { setContext, type Snippet } from 'svelte'
+  import { setContext, type Snippet, untrack } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
   import { treeContextKey, type TreeContext } from './tree-context'
 
@@ -34,9 +34,9 @@
     style,
     onkeydown,
     ...rest
-  }: Props<TreeNodeData> = $props()
+  }: Props<TNode> = $props()
 
-  const tree = externalController ?? createTreeController(options ?? { treeData: [] })
+  const tree = untrack(() => externalController ?? createTreeController(options ?? { treeData: [] }))
 
   // This effect only synchronizes component inputs to the external core controller.
   // User interactions call controller actions directly instead of watching state changes.
@@ -44,7 +44,7 @@
     if (options) tree.updateOptions(options)
   })
 
-  setContext<TreeContext>(treeContextKey, {
+  setContext<TreeContext<TNode>>(treeContextKey, {
     tree,
     indent: () => indent,
     rowHeight: () => rowHeight,
@@ -52,7 +52,7 @@
 
   const selection = () => tree.getFeature<SelectionFeatureApi>('selection')
 
-  function keydown(event: KeyboardEvent) {
+  function keydown(event: KeyboardEvent & { currentTarget: EventTarget & HTMLDivElement }) {
     onkeydown?.(event)
     if (event.defaultPrevented || event.isComposing || !tree.hasFeature('keyboard')) return
     if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {

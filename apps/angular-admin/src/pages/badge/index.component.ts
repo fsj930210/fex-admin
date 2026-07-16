@@ -11,5 +11,12 @@ import Card from '@fex/components-angular/ui/card'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeComponent {
-  protected readonly variants = ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] as const
+  protected readonly variants = [
+    'default',
+    'secondary',
+    'destructive',
+    'outline',
+    'ghost',
+    'link',
+  ] as const
 }

@@ -1,0 +1,13 @@
+<fex-card
+  title="Column sizing and resizing"
+  description="Sizing and resizing remain separate v9 features. Drag a header separator; double-click resets the column. Status demonstrates per-column resize disablement."
+  ><div class="grid gap-space-lg xl:grid-cols-2">
+    <section class="space-y-space-sm">
+      <h3 class="text-sm font-medium text-foreground">Resize on change</h3>
+      <fex-data-grid [table]="change" />
+    </section>
+    <section class="space-y-space-sm">
+      <h3 class="text-sm font-medium text-foreground">Resize on end + bordered grid</h3>
+      <fex-data-grid [table]="end" [border]="true" />
+    </section></div
+></fex-card>

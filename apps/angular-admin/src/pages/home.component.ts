@@ -15,6 +15,7 @@ export class HomeComponent {
     { to: '/card', label: 'Card' },
     { to: '/checkbox', label: 'Checkbox' },
     { to: '/dialog', label: 'Dialog' },
+    { to: '/data-grid', label: 'Data Grid' },
     { to: '/alert', label: 'Alert' },
     { to: '/badge', label: 'Badge' },
     { to: '/empty', label: 'Empty' },

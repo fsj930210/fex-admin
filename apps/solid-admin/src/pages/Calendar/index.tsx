@@ -54,7 +54,7 @@ function getContentClassName(cell: CalendarCellModel) {
   ].join(' ')
 }
 
-function getDateLabelClassName(cell: CalendarCellModel) {
+function getDateLabelClassName(_cell: CalendarCellModel) {
   return 'font-medium'
 }
 
@@ -129,7 +129,9 @@ function DateCalendarDemo() {
             <span class={getContentClassName(cell)}>
               <span class={getDateLabelClassName(cell)}>{cell.label}</span>
               {getScheduleLabel(cell) ? (
-                <span class="mt-space-xs block h-4 text-xs leading-4 opacity-80">{getScheduleLabel(cell)}</span>
+                <span class="mt-space-xs block h-4 text-xs leading-4 opacity-80">
+                  {getScheduleLabel(cell)}
+                </span>
               ) : null}
             </span>
           </CalendarCell>

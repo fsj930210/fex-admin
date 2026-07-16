@@ -116,8 +116,8 @@ export function ListboxRoot<TItem = unknown>(props: ListboxRootProps<TItem>) {
       value={{
         orientation: orientation(),
         selectedValues: () => {
-          local.value
-          local.multiple
+          void local.value
+          void local.multiple
           snapshot()
           return controller.getSnapshot().values
         },

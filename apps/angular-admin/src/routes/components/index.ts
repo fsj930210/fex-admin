@@ -27,6 +27,11 @@ export const componentRoutes: Routes = [
       import('../../pages/dialog/index.component').then((module) => module.DialogComponent),
   },
   {
+    path: 'data-grid',
+    loadComponent: () =>
+      import('../../pages/data-grid/index.component').then((module) => module.DataGridComponent),
+  },
+  {
     path: 'alert',
     loadComponent: () =>
       import('../../pages/alert/index.component').then((module) => module.AlertComponent),

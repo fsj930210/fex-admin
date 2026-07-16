@@ -66,13 +66,15 @@ export class RadioGroup {
   );
 
   constructor() {
-    const group = this;
+    const value = this.value;
+    const defaultValue = this.defaultValue;
+    const valueChange = this.valueChange;
     this.controller = createSelectionController({
       get value() {
-        return group.value();
+        return value();
       },
       get defaultValue() {
-        return group.defaultValue();
+        return defaultValue();
       },
       get multiple() {
         return false;
@@ -80,7 +82,7 @@ export class RadioGroup {
       onChange(values, meta) {
         const nextValue = values[0];
         if (nextValue === undefined) return;
-        group.valueChange.emit({ value: nextValue, meta: toRadioChangeMeta(nextValue, meta) });
+        valueChange.emit({ value: nextValue, meta: toRadioChangeMeta(nextValue, meta) });
       },
     });
     this.snapshot = createCoreStoreSignal(this.controller);

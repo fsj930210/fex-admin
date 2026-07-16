@@ -13,7 +13,6 @@ import {
   CheckboxIndicator,
   CheckboxGroup as PrimitiveCheckboxGroup,
   CheckboxRoot,
-  type CheckboxCheckedState,
 } from '../../primitive/checkbox/checkbox'
 import { CheckIcon } from '../../icon/check'
 import { MinusIcon } from '../../icon/minus'

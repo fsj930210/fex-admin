@@ -50,7 +50,11 @@ export function dismissOpenPopovers(event: Event, except?: FloatingOverlay) {
       const triggerElement = record.triggerElement.value
       const contentElement = record.getContentElement()
       const arrowElement = record.getArrowElement()
-      if (triggerElement?.contains(target) || contentElement?.contains(target) || arrowElement?.contains(target)) {
+      if (
+        triggerElement?.contains(target) ||
+        contentElement?.contains(target) ||
+        arrowElement?.contains(target)
+      ) {
         return
       }
     }

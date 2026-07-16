@@ -4,7 +4,10 @@
   "sourceRoot": "apps/solid-admin/src",
   "projectType": "application",
   "targets": {
-    "dev": { "command": "vite --host 127.0.0.1 --port 4002 --strictPort", "options": { "cwd": "apps/solid-admin" } },
+    "dev": {
+      "command": "vite --host 127.0.0.1 --port 4002 --strictPort",
+      "options": { "cwd": "apps/solid-admin" }
+    },
     "build": {
       "command": "vite build",
       "options": { "cwd": "apps/solid-admin" },

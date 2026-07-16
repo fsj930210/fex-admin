@@ -1,0 +1,17 @@
+<fex-card
+  title="Loading, empty and customization states"
+  description="Presentation states are primitive props and structured part classes; they do not change table state or start requests."
+  ><div class="grid gap-space-lg xl:grid-cols-3">
+    <section class="space-y-space-sm">
+      <h3 class="text-sm font-medium text-foreground">Loading overlay</h3>
+      <fex-data-grid [table]="dataTable" [loading]="true" loadingContent="Refreshing rows…" />
+    </section>
+    <section class="space-y-space-sm">
+      <h3 class="text-sm font-medium text-foreground">Custom empty</h3>
+      <fex-data-grid [table]="emptyTable" emptyContent="No matching members" />
+    </section>
+    <section class="space-y-space-sm">
+      <h3 class="text-sm font-medium text-foreground">Part class customization</h3>
+      <fex-data-grid [table]="dataTable" [partClass]="customClass" />
+    </section></div
+></fex-card>

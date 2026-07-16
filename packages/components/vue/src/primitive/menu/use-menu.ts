@@ -1,13 +1,19 @@
 import { flattenTree } from '@fex/utils/tree'
 import { computed, ref } from 'vue'
-import type { MenuItem, MenuKey, MenuNodeEntry, MenuNodeItem, MenuRenderItemInfo } from './menu-types'
+import type {
+  MenuItem,
+  MenuKey,
+  MenuNodeEntry,
+  MenuNodeItem,
+  MenuRenderItemInfo,
+} from './menu-types'
 
 function isMenuNodeItem(item: MenuItem): item is MenuNodeItem {
   return !('type' in item)
 }
 
 function getMenuItemKey(item: MenuItem) {
-  return isMenuNodeItem(item) ? item.key : item.key ?? item.type
+  return isMenuNodeItem(item) ? item.key : (item.key ?? item.type)
 }
 
 function getMenuItemChildren(item: MenuItem) {
@@ -39,16 +45,24 @@ export function useMenu(options: {
   onExpandChange?: (keys: MenuKey[], info: MenuRenderItemInfo) => void
   onSelect?: (keys: MenuKey[], info: MenuRenderItemInfo) => void
 }) {
-  const uncontrolledExpandKeys = ref<MenuKey[]>(normalizeKeys(options.defaultExpandKeys, options.expandMultiple?.() ?? true))
-  const uncontrolledSelectedKeys = ref<MenuKey[]>(normalizeKeys(options.defaultSelectedKeys, options.selectMultiple?.() ?? false))
+  const uncontrolledExpandKeys = ref<MenuKey[]>(
+    normalizeKeys(options.defaultExpandKeys, options.expandMultiple?.() ?? true),
+  )
+  const uncontrolledSelectedKeys = ref<MenuKey[]>(
+    normalizeKeys(options.defaultSelectedKeys, options.selectMultiple?.() ?? false),
+  )
   const items = computed(() => options.items?.() ?? [])
   const nodeItems = computed(() =>
     flattenTree(items.value, { getKey: getMenuItemKey, getChildren: getMenuItemChildren }).filter(
       (entry): entry is MenuNodeEntry => isMenuNodeItem(entry.node),
     ),
   )
-  const currentExpandKeys = computed(() => [...(options.expandKeys?.() ?? uncontrolledExpandKeys.value)])
-  const currentSelectedKeys = computed(() => [...(options.selectedKeys?.() ?? uncontrolledSelectedKeys.value)])
+  const currentExpandKeys = computed(() => [
+    ...(options.expandKeys?.() ?? uncontrolledExpandKeys.value),
+  ])
+  const currentSelectedKeys = computed(() => [
+    ...(options.selectedKeys?.() ?? uncontrolledSelectedKeys.value),
+  ])
 
   function getItemInfo(entry: MenuNodeEntry): MenuRenderItemInfo {
     return {
@@ -85,11 +99,12 @@ export function useMenu(options: {
       return
     }
     if (options.selectable?.() === false) return
-    const nextKeys = options.selectMultiple?.() === true
-      ? info.selected
-        ? currentSelectedKeys.value.filter((key) => key !== info.key)
-        : [...currentSelectedKeys.value, info.key]
-      : [info.key]
+    const nextKeys =
+      options.selectMultiple?.() === true
+        ? info.selected
+          ? currentSelectedKeys.value.filter((key) => key !== info.key)
+          : [...currentSelectedKeys.value, info.key]
+        : [info.key]
     setSelectedKeys(nextKeys, info)
   }
 

@@ -1,6 +1,14 @@
-import { DEFAULT_SORTABLE_CONTAINER_ID, createSortableController } from '@fex/components-core/sortable/create-sortable-controller'
+import {
+  DEFAULT_SORTABLE_CONTAINER_ID,
+  createSortableController,
+} from '@fex/components-core/sortable/create-sortable-controller'
 import { restoreSortableItems } from '@fex/components-core/sortable/containers'
-import type { SortableAxis, SortableId, SortableItems, SortableMotionOptions } from '@fex/components-core/sortable/types'
+import type {
+  SortableAxis,
+  SortableId,
+  SortableItems,
+  SortableMotionOptions,
+} from '@fex/components-core/sortable/types'
 import { computed, onBeforeUnmount, shallowRef } from 'vue'
 
 export interface UseSortableOptions<TItems extends SortableItems> {
@@ -41,7 +49,11 @@ export function useSortable<TItems extends SortableItems>(options: UseSortableOp
     }
   }
 
-  function onItemPointerDown(event: PointerEvent, id: SortableId, containerId = DEFAULT_SORTABLE_CONTAINER_ID) {
+  function onItemPointerDown(
+    event: PointerEvent,
+    id: SortableId,
+    containerId = DEFAULT_SORTABLE_CONTAINER_ID,
+  ) {
     if (currentOptions.disabled || !controller.startPointerDrag(toInput(event), id, containerId)) {
       return
     }
@@ -78,10 +90,20 @@ export function useSortable<TItems extends SortableItems>(options: UseSortableOp
     setContainerRef,
     setItemRef,
     onItemPointerDown,
-    getItemStyle: (id: SortableId) => controller.getItemStyle(id) as Record<string, string | number | undefined>,
-    getMotionStyle: (id: SortableId) => controller.getMotionStyle(id) as Record<string, string | number | undefined>,
-    getOverlayStyle: () => controller.getOverlayStyle() as Record<string, string | number | undefined>,
-    registerMotionTarget: (id: SortableId, element: HTMLElement | null) => controller.registerMotionTarget(id, element),
+    getItemStyle: (id: SortableId) => {
+      void snapshot.value
+      return controller.getItemStyle(id) as Record<string, string | number | undefined>
+    },
+    getMotionStyle: (id: SortableId) => {
+      void snapshot.value
+      return controller.getMotionStyle(id) as Record<string, string | number | undefined>
+    },
+    getOverlayStyle: () => {
+      void snapshot.value
+      return controller.getOverlayStyle() as Record<string, string | number | undefined>
+    },
+    registerMotionTarget: (id: SortableId, element: HTMLElement | null) =>
+      controller.registerMotionTarget(id, element),
   }
 }
 

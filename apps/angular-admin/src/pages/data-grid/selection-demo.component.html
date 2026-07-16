@@ -1,0 +1,50 @@
+<fex-card
+  title="Row selection"
+  description="The selection feature is headless; the reusable selection-column factory only supplies the conventional control column. Stable getRowId keeps selection independent from sorting and pagination."
+>
+  <div class="grid gap-space-lg xl:grid-cols-3">
+    @for (grid of grids; track grid.title) {
+      <section class="space-y-space-sm">
+        <h3 class="text-sm font-medium text-foreground">{{ grid.title }}</h3>
+        <fex-data-grid [table]="grid.table">
+          <ng-template fexDataGridHeader let-header>
+            @if (header.column.id === '__select__' && grid.mode === 'multiple') {
+              <button
+                fexCheckbox
+                [checked]="headerChecked(grid)"
+                (checkedChange)="toggleAll(grid, $event.checked)"
+              ></button>
+            } @else if (header.column.id !== '__select__') {
+              {{ headerLabel(header) }}
+            }
+          </ng-template>
+          <ng-template fexDataGridCell let-cell>
+            @if (cell.column.id === '__select__') {
+              @if (grid.mode === 'single') {
+                <div
+                  fexRadioGroup
+                  [value]="selectedId(grid)"
+                  (valueChange)="selectSingle(grid, $event.value)"
+                >
+                  <button fexRadio [value]="cell.row.id" [disabled]="disabled(cell)"></button>
+                </div>
+              } @else {
+                <button
+                  fexCheckbox
+                  [checked]="selected(cell)"
+                  [disabled]="disabled(cell)"
+                  (checkedChange)="toggle(cell, $event.checked)"
+                ></button>
+              }
+            } @else {
+              {{ value(cell) }}
+            }
+          </ng-template>
+        </fex-data-grid>
+        <p class="text-xs text-muted-foreground">
+          Selected: {{ selectedText(grid) }}
+        </p>
+      </section>
+    }
+  </div>
+</fex-card>

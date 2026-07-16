@@ -76,7 +76,7 @@ export class Checkbox {
     if (event.defaultPrevented) return;
     if (this.disabled()) return;
     const previousChecked = this.currentChecked();
-    const nextChecked = previousChecked === true ? false : true;
+    const nextChecked = previousChecked !== true;
     const meta = { previousChecked, checked: nextChecked };
     if (this.checked() === undefined) {
       this.hasInteracted.set(true);

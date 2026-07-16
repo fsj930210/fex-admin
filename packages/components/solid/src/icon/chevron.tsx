@@ -11,3 +11,11 @@ export function ChevronRightIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
 export function ChevronLeftIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
   return <ChevronRightIcon {...props} class={`rotate-180 ${props.class ?? ''}`} />
 }
+
+export function ChevronUpIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
+  return <ChevronRightIcon {...props} class={`rotate-270 ${props.class ?? ''}`} />
+}
+
+export function ChevronDownIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
+  return <ChevronRightIcon {...props} class={`rotate-90 ${props.class ?? ''}`} />
+}

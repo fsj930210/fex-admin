@@ -1,6 +1,11 @@
 ﻿import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Alert, AlertAction, AlertDescription, AlertTitle } from '@fex/components-angular/primitive/alert'
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertTitle,
+} from '@fex/components-angular/primitive/alert'
 import { Badge } from '@fex/components-angular/ui/badge'
 import Card from '@fex/components-angular/ui/card'
 import { InfoIcon } from '@fex/components-angular/icon/info'

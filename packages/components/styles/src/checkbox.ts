@@ -4,7 +4,7 @@ export const checkboxRootClassName = [
   'peer inline-flex shrink-0 items-center justify-center rounded-[min(var(--radius-md),4px)] border border-border bg-background text-current shadow-xs',
   'outline-none transition-none',
   'focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-focus/50',
-  'disabled:cursor-not-allowed disabled:opacity-50',
+  'disabled:cursor-not-allowed disabled:border-border disabled:bg-disabled-background disabled:text-disabled-foreground disabled:opacity-100 disabled:shadow-none',
   'aria-invalid:border-danger aria-invalid:ring-3 aria-invalid:ring-danger/20',
   'data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
   'data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground',

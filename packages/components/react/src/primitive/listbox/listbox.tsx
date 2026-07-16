@@ -3,7 +3,6 @@ import type { SelectionValue } from '@fex/components-core/selection/types'
 import { cn } from '@fex/utils'
 import {
   type ComponentProps,
-  type ReactNode,
   useRef,
 } from 'react'
 import { useCoreStore } from '../../hooks/use-core-store'

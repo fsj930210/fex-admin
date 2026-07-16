@@ -81,7 +81,7 @@ function DemoTreeRow<TNode extends TreeNodeData>({
             {loadState === 'loading' ? (
               <Spinner size="sm" aria-label="Loading children" />
             ) : (
-              <TreeTrigger<TNode> itemKey={currentItem.key} />
+              <TreeTrigger itemKey={currentItem.key} />
             )}
             {checkable && tree.hasFeature('check') ? (
               <Checkbox

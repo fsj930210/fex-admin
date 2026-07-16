@@ -1,1 +1,25 @@
-<fex-card title="Search data and custom title rendering" description="The core returns filtered tree data; title rendering decides how a keyword is highlighted."><input fexInput [value]="keyword()" (input)="keyword.set($any($event.target).value)" placeholder="Search departments" class="mb-space-md max-w-sm" /><div [hidden]="showing()"><fex-demo-tree [controller]="controller" [options]="baseOptions" class="block max-w-xl rounded-md border border-border bg-background p-space-sm" /></div>@if (showing()) {<fex-demo-tree [options]="searchOptions()" [searchKeyword]="keyword()" class="block max-w-xl rounded-md border border-border bg-background p-space-sm" />}</fex-card>
+<fex-card
+  title="Search data and custom title rendering"
+  description="The core returns filtered tree data; title rendering decides how a keyword is highlighted."
+  ><input
+    fexInput
+    [value]="keyword()"
+    (input)="keyword.set($any($event.target).value)"
+    placeholder="Search departments"
+    class="mb-space-md max-w-sm"
+  />
+  <div [hidden]="showing()">
+    <fex-demo-tree
+      [controller]="controller"
+      [options]="baseOptions"
+      class="block max-w-xl rounded-md border border-border bg-background p-space-sm"
+    />
+  </div>
+  @if (showing()) {
+    <fex-demo-tree
+      [options]="searchOptions()"
+      [searchKeyword]="keyword()"
+      class="block max-w-xl rounded-md border border-border bg-background p-space-sm"
+    />
+  }
+</fex-card>

@@ -1,23 +1,24 @@
-<script lang="ts">
+<script lang="ts" generics="TNode extends TreeNodeData">
   import type { AsyncLoadFeatureApi } from '@fex/components-core/tree/features/async-load'
   import type { CheckFeatureApi } from '@fex/components-core/tree/features/check'
   import type { ExpansionFeatureApi } from '@fex/components-core/tree/features/expansion'
   import type { FocusFeatureApi } from '@fex/components-core/tree/features/focus'
   import type { SelectionFeatureApi } from '@fex/components-core/tree/features/selection'
   import type {
+    TreeController,
     TreeItem as CoreTreeItem,
     TreeKey,
     TreeNodeData,
   } from '@fex/components-core/tree/types'
   import { treeItemClassName } from '@fex/components-styles/tree'
   import { cn } from '@fex/utils'
-  import { getContext, type Snippet } from 'svelte'
+  import { getContext, type Snippet, untrack } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
   import { readableCoreStore } from '../../stores/core-store'
   import { styleToString, treeContextKey, type TreeContext } from './tree-context'
 
   interface TreeItemState {
-    item: CoreTreeItem<TreeNodeData>
+    item: CoreTreeItem<TNode>
     itemProps: HTMLAttributes<HTMLDivElement>
     expanded: boolean
     selected: boolean
@@ -37,12 +38,14 @@
 
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
     itemKey: TreeKey
+    controller?: TreeController<TNode>
     block?: boolean
     children?: Snippet<[TreeItemState]>
   }
 
   let {
     itemKey,
+    controller,
     block = false,
     children,
     class: className,
@@ -52,7 +55,9 @@
     ...rest
   }: Props = $props()
 
-  const { tree, indent, rowHeight } = getContext<TreeContext>(treeContextKey)
+  const context = getContext<TreeContext<TNode>>(treeContextKey)
+  const tree = untrack(() => controller ?? context.tree)
+  const { indent, rowHeight } = context
   const snapshot = readableCoreStore({
     getSnapshot: tree.getSnapshot,
     subscribe: (listener) => tree.subscribeNode(itemKey, listener),

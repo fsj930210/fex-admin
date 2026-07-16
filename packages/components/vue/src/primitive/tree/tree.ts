@@ -8,4 +8,10 @@ export { default as TreeTitle } from './tree-title.vue'
 export { useTree } from './use-tree'
 export { useTreeItem } from './use-tree-item'
 export { useTreeVisibleItems } from './use-tree-visible-items'
-export type { TreeController, TreeKey, TreeNodeData, TreeOptions, TreeVisibleItem } from '@fex/components-core/tree/types'
+export type {
+  TreeController,
+  TreeKey,
+  TreeNodeData,
+  TreeOptions,
+  TreeVisibleItem,
+} from '@fex/components-core/tree/types'

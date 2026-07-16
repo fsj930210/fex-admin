@@ -5,6 +5,7 @@
     { href: '/card', label: 'Card' },
     { href: '/checkbox', label: 'Checkbox' },
     { href: '/dialog', label: 'Dialog' },
+    { href: '/data-grid', label: 'Data Grid' },
     { href: '/alert', label: 'Alert' },
     { href: '/badge', label: 'Badge' },
     { href: '/empty', label: 'Empty' },

@@ -1,0 +1,26 @@
+<fex-card
+  title="Row editing"
+  description="Edit row creates one application-owned draft. Save replaces that row in the caller data; Cancel discards the draft without touching the table data."
+>
+  <section class="space-y-space-sm">
+    <h3 class="text-sm font-medium text-foreground">Draft, save and cancel</h3>
+    <fex-data-grid [table]="table">
+      <ng-template fexDataGridCell let-cell>
+        @if (cell.column.id === '__actions__') {
+          @if (draft()?.id === cell.row.id) {
+            <span class="inline-flex gap-space-sm"
+              ><button fexButton size="sm" (click)="save()">Save</button
+              ><button fexButton size="sm" variant="outline" (click)="draft.set(null)">Cancel</button></span
+            >
+          } @else {
+            <button fexButton size="sm" variant="outline" (click)="edit(cell)">Edit row</button>
+          }
+        } @else if (draft()?.id === cell.row.id) {
+          <input fexInput [value]="value(cell)" (input)="field(cell, $event)" />
+        } @else {
+          {{ value(cell) }}
+        }
+      </ng-template>
+    </fex-data-grid>
+  </section>
+</fex-card>

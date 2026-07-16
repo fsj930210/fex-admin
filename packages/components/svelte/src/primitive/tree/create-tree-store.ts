@@ -1,5 +1,10 @@
 import { createTreeController } from '@fex/components-core/tree/create-tree-controller'
-import type { TreeController, TreeKey, TreeNodeData, TreeOptions } from '@fex/components-core/tree/types'
+import type {
+  TreeController,
+  TreeKey,
+  TreeNodeData,
+  TreeOptions,
+} from '@fex/components-core/tree/types'
 import { readableCoreStore } from '../../stores/core-store'
 
 export function createTreeStore<TNode extends TreeNodeData>(

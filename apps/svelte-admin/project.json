@@ -4,7 +4,10 @@
   "sourceRoot": "apps/svelte-admin/src",
   "projectType": "application",
   "targets": {
-    "dev": { "command": "vite --host 127.0.0.1 --port 4003 --strictPort", "options": { "cwd": "apps/svelte-admin" } },
+    "dev": {
+      "command": "vite --host 127.0.0.1 --port 4003 --strictPort",
+      "options": { "cwd": "apps/svelte-admin" }
+    },
     "build": {
       "command": "vite build",
       "options": { "cwd": "apps/svelte-admin" },

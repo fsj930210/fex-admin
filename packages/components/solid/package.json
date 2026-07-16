@@ -10,6 +10,7 @@
         "./primitive/card": "./src/primitive/card/card.tsx",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.tsx",
     "./primitive/dialog": "./src/primitive/dialog/dialog.tsx",
+    "./primitive/data-grid": "./src/primitive/data-grid/data-grid.tsx",
     "./primitive/empty": "./src/primitive/empty/empty.tsx",
     "./primitive/input": "./src/primitive/input/input.tsx",
     "./primitive/listbox": "./src/primitive/listbox/listbox.tsx",
@@ -44,6 +45,7 @@
     "./icon/plus": "./src/icon/plus.tsx",
     "./icon/warning": "./src/icon/warning.tsx",
     "./primitives/create-core-store-signal": "./src/primitives/create-core-store-signal.ts",
+    "./primitives/create-data-grid-table": "./src/primitives/create-data-grid-table.ts",
     "./primitives/create-date-utils": "./src/primitives/create-date-utils.ts",
     "./primitives/create-draggable": "./src/primitives/create-draggable.ts",
     "./primitives/create-droppable": "./src/primitives/create-droppable.ts",
@@ -57,6 +59,7 @@
     "@fex/components-core": "workspace:*",
     "@fex/components-styles": "workspace:*",
     "@fex/utils": "workspace:*",
+    "@tanstack/table-core": "9.0.0-beta.47",
     "@tanstack/solid-virtual": "latest"
   },
   "devDependencies": {

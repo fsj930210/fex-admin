@@ -1,0 +1,24 @@
+<fex-card
+  title="Cell editing"
+  description="Editing belongs to application data, not a hidden table copy. Click a value, then press Enter or blur to commit; Escape cancels the current cell."
+>
+  <section class="space-y-space-sm">
+    <h3 class="text-sm font-medium text-foreground">Editable name, status and visits</h3>
+    <fex-data-grid [table]="table">
+      <ng-template fexDataGridCell let-cell>
+        @if (editing()?.rowId === cell.row.id && editing()?.field === cell.column.id) {
+          <input fexInput autofocus [value]="value(cell)" (blur)="commit(cell, $event)" />
+        } @else {
+          <button
+            fexButton
+            variant="ghost"
+            class="h-auto w-full justify-start px-0 text-inherit"
+            (click)="edit(cell)"
+          >
+            {{ value(cell) }}
+          </button>
+        }
+      </ng-template>
+    </fex-data-grid>
+  </section>
+</fex-card>

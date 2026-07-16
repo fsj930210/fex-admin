@@ -1,0 +1,58 @@
+<fex-card
+  title="Row grouping and aggregation"
+  description="Each group is a full-width summary row above its members. Department is the outer level; Status is nested inside it. The chevron expands only that group, and the right side displays the aggregated visits."
+>
+  <div class="grid gap-space-lg xl:grid-cols-2">
+    @for (grid of grids; track grid.title) {
+      <section class="space-y-space-sm">
+        <h3 class="text-sm font-medium text-foreground">{{ grid.title }}</h3>
+        <div class="flex flex-wrap gap-space-sm">
+          @for (id of groupingColumns; track id) {
+            <button
+              fexButton
+              size="sm"
+              [variant]="grid.table.getColumn(id)?.getIsGrouped() ? 'default' : 'outline'"
+              (click)="grid.table.getColumn(id)?.toggleGrouping()"
+            >
+              {{ grid.table.getColumn(id)?.getIsGrouped() ? 'Ungroup' : 'Group' }} {{ id }}
+            </button>
+          }
+        </div>
+        <fex-data-grid [table]="grid.table">
+          <ng-template fexDataGridGroupRow let-row>
+            <div
+              class="flex min-h-11 items-center gap-space-sm px-space-md"
+              [style.padding-inline-start.px]="row.depth * 20 + 12"
+            >
+              <button
+                fexButton
+                size="icon-xs"
+                variant="ghost"
+                [attr.aria-label]="
+                  (row.getIsExpanded() ? 'Collapse ' : 'Expand ') +
+                  groupLabel(grid.table, row) +
+                  ' ' +
+                  group(row).groupingValue
+                "
+                [attr.aria-expanded]="row.getIsExpanded()"
+                (click)="row.toggleExpanded()"
+              >
+                @if (row.getIsExpanded()) { <fex-chevron-down-icon class="block size-3.5" /> }
+                @else { <fex-chevron-right-icon class="block size-3.5" /> }
+              </button>
+              <span class="text-sm font-semibold">{{ groupLabel(grid.table, row) }}</span>
+              <span class="text-sm text-muted-foreground">=</span>
+              <span class="text-sm font-medium">{{ group(row).groupingValue }}</span>
+              <span class="rounded-full bg-foreground/10 px-2 py-0.5 text-xs text-muted-foreground"
+                >{{ row.getLeafRows().length }} rows</span
+              >
+              <span class="ml-auto text-xs text-muted-foreground"
+                >Total visits: {{ row.getValue('visits') }}</span
+              >
+            </div>
+          </ng-template>
+        </fex-data-grid>
+      </section>
+    }
+  </div>
+</fex-card>

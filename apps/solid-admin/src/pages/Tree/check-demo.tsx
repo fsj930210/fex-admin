@@ -1,1 +1,50 @@
-import{checkFeature,expansionFeature}from'@fex/components-core';import{Card}from'@fex/components-solid/ui/card';import{createSignal}from'solid-js';import{DemoTree}from'./demo-tree';import{departmentFieldNames,departmentTreeData}from'./data';export function CheckDemo(){const[cascade,setCascade]=createSignal<readonly(string|number)[]>([]);const[strict,setStrict]=createSignal<readonly(string|number)[]>([]);return<Card title="Check modes" description="Cascade links parent and children; strict keeps every node independent."><div class="grid gap-space-lg lg:grid-cols-2"><div class="space-y-space-sm"><p class="text-sm font-medium">Cascade</p><DemoTree treeData={departmentTreeData} fieldNames={departmentFieldNames} isLeaf={n=>n.childCount===0} features={[expansionFeature({defaultExpandedKeys:['company','engineering']}),checkFeature()]} checkable checkedKeys={cascade()} onCheckedKeysChange={setCascade} class="rounded-md border border-border bg-background p-space-sm"/></div><div class="space-y-space-sm"><p class="text-sm font-medium">Strict</p><DemoTree treeData={departmentTreeData} fieldNames={departmentFieldNames} isLeaf={n=>n.childCount===0} features={[expansionFeature({defaultExpandedKeys:['company','engineering']}),checkFeature({mode:'strict'})]} checkable checkedKeys={strict()} onCheckedKeysChange={setStrict} class="rounded-md border border-border bg-background p-space-sm"/></div></div></Card>}
+import { checkFeature, expansionFeature } from '@fex/components-core'
+import { Card } from '@fex/components-solid/ui/card'
+import { createSignal } from 'solid-js'
+import { DemoTree } from './demo-tree'
+import { departmentFieldNames, departmentTreeData } from './data'
+export function CheckDemo() {
+  const [cascade, setCascade] = createSignal<readonly (string | number)[]>([])
+  const [strict, setStrict] = createSignal<readonly (string | number)[]>([])
+  return (
+    <Card
+      title="Check modes"
+      description="Cascade links parent and children; strict keeps every node independent."
+    >
+      <div class="grid gap-space-lg lg:grid-cols-2">
+        <div class="space-y-space-sm">
+          <p class="text-sm font-medium">Cascade</p>
+          <DemoTree
+            treeData={departmentTreeData}
+            fieldNames={departmentFieldNames}
+            isLeaf={(n) => n.childCount === 0}
+            features={[
+              expansionFeature({ defaultExpandedKeys: ['company', 'engineering'] }),
+              checkFeature(),
+            ]}
+            checkable
+            checkedKeys={cascade()}
+            onCheckedKeysChange={setCascade}
+            class="rounded-md border border-border bg-background p-space-sm"
+          />
+        </div>
+        <div class="space-y-space-sm">
+          <p class="text-sm font-medium">Strict</p>
+          <DemoTree
+            treeData={departmentTreeData}
+            fieldNames={departmentFieldNames}
+            isLeaf={(n) => n.childCount === 0}
+            features={[
+              expansionFeature({ defaultExpandedKeys: ['company', 'engineering'] }),
+              checkFeature({ mode: 'strict' }),
+            ]}
+            checkable
+            checkedKeys={strict()}
+            onCheckedKeysChange={setStrict}
+            class="rounded-md border border-border bg-background p-space-sm"
+          />
+        </div>
+      </div>
+    </Card>
+  )
+}

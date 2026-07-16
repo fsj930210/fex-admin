@@ -115,7 +115,9 @@ export class ResizableComponent {
 
   protected gridStyle(direction: Direction, layout: number[]) {
     const template = `${layout[0]}% 12px ${layout[1]}%`
-    return direction === 'horizontal' ? { gridTemplateColumns: template } : { gridTemplateRows: template }
+    return direction === 'horizontal'
+      ? { gridTemplateColumns: template }
+      : { gridTemplateRows: template }
   }
 
   protected startResize(
@@ -139,10 +141,16 @@ export class ResizableComponent {
 
     const onPointerMove = (pointerEvent: PointerEvent) => {
       pointerEvent.preventDefault()
-      const currentPoint = options.direction === 'horizontal' ? pointerEvent.clientX : pointerEvent.clientY
+      const currentPoint =
+        options.direction === 'horizontal' ? pointerEvent.clientX : pointerEvent.clientY
       const delta = ((currentPoint - startPoint) / size) * 100
       options.setLayout(
-        resizePanelPair({ layout: startLayout, panelConfigs: options.panelConfigs, handleIndex: 0, delta }),
+        resizePanelPair({
+          layout: startLayout,
+          panelConfigs: options.panelConfigs,
+          handleIndex: 0,
+          delta,
+        }),
       )
     }
 
@@ -165,8 +173,10 @@ export class ResizableComponent {
     },
   ) {
     const step = event.shiftKey ? 10 : 5
-    const forward = options.direction === 'horizontal' ? event.key === 'ArrowRight' : event.key === 'ArrowDown'
-    const backward = options.direction === 'horizontal' ? event.key === 'ArrowLeft' : event.key === 'ArrowUp'
+    const forward =
+      options.direction === 'horizontal' ? event.key === 'ArrowRight' : event.key === 'ArrowDown'
+    const backward =
+      options.direction === 'horizontal' ? event.key === 'ArrowLeft' : event.key === 'ArrowUp'
     if (!forward && !backward) {
       return
     }

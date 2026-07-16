@@ -182,7 +182,7 @@ export function TreeVirtualViewport<TNode extends TreeNodeData>(
   ])
   const { tree, rowHeight } = useTreeContext<TNode>('TreeVirtualViewport')
   const items = createTreeVisibleItems(tree)
-  let scrollElement: HTMLDivElement | undefined
+  let scrollElement: HTMLDivElement | undefined = undefined
   const virtualizer = createVirtualizer<HTMLDivElement, HTMLDivElement>({
     get count() {
       return items().length
@@ -294,7 +294,7 @@ export function TreeItem<TNode extends TreeNodeData>(props: TreeItemProps<TNode>
   const renderState = createMemo<TreeItemState<TNode> | undefined>(() => {
     const item = state().item
     if (!item) return undefined
-    const itemProps: JSX.HTMLAttributes<HTMLDivElement> = {
+    const itemProps: JSX.HTMLAttributes<HTMLDivElement> & Record<`data-${string}`, string | boolean | undefined> = {
       ...attrs,
       role: 'treeitem',
       tabIndex: state().focused ? 0 : -1,
@@ -345,16 +345,16 @@ export function TreeItem<TNode extends TreeNodeData>(props: TreeItemProps<TNode>
   )
 }
 
-export interface TreeTriggerProps<TNode extends TreeNodeData>
+export interface TreeTriggerProps
   extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
   itemKey: TreeKey
 }
 
-export function TreeTrigger<TNode extends TreeNodeData>(
-  props: TreeTriggerProps<TNode>,
+export function TreeTrigger(
+  props: TreeTriggerProps,
 ) {
   const [local, attrs] = splitProps(props, ['itemKey', 'class', 'children', 'onClick'])
-  const { tree } = useTreeContext<TNode>('TreeTrigger')
+  const { tree } = useTreeContext<TreeNodeData>('TreeTrigger')
   const state = createTreeItem(tree, local.itemKey)
   const expansion = () => tree.getFeature<ExpansionFeatureApi>('expansion')
   const click: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (event) => {

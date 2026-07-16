@@ -52,7 +52,7 @@ const options = {
 const controller = createSliderController(options)
 const storeSnapshot = useCoreStore(controller)
 const snapshot = computed(() => {
-  storeSnapshot.value
+  void storeSnapshot.value
   return controller.getSnapshot()
 })
 

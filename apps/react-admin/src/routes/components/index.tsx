@@ -3,6 +3,10 @@ import { ListboxPage } from '../../pages/Listbox'
 
 export const componentRoutes = [
   {
+    path: '/data-grid',
+    element: createLazyRouteElement(() => import('../../pages/DataGrid'), 'DataGridPage'),
+  },
+  {
     path: '/tree',
     element: createLazyRouteElement(() => import('../../pages/Tree'), 'TreePage'),
   },

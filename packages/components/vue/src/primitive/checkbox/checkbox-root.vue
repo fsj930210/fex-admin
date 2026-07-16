@@ -21,7 +21,7 @@ function handleClick(event: MouseEvent) {
   if (event.defaultPrevented || currentDisabled.value) return
   const meta = props.checked === undefined
     ? controller.toggle()
-    : { previousChecked: currentChecked.value, checked: currentChecked.value === true ? false : true }
+    : { previousChecked: currentChecked.value, checked: currentChecked.value !== true }
   if (meta) emit('checkedChange', meta.checked, meta)
 }
 </script>

@@ -12,8 +12,7 @@ export function styleToString(style: Record<string, string | number | undefined>
   return Object.entries(style)
     .filter(([, value]) => value !== undefined)
     .map(
-      ([key, value]) =>
-        `${key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`)}:${value}`,
+      ([key, value]) => `${key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`)}:${value}`,
     )
     .join(';')
 }

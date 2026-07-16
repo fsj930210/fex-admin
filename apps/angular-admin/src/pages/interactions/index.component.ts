@@ -5,7 +5,10 @@ import { FexDraggableDirective } from '@fex/components-angular/directives/dragga
 import { FexDroppableDirective } from '@fex/components-angular/directives/droppable'
 import { FexDropzoneDirective } from '@fex/components-angular/directives/dropzone'
 import { FexMoveDirective } from '@fex/components-angular/directives/move'
-import { FexResizeDirective, FexResizeHandleDirective } from '@fex/components-angular/directives/resize'
+import {
+  FexResizeDirective,
+  FexResizeHandleDirective,
+} from '@fex/components-angular/directives/resize'
 import Card from '@fex/components-angular/ui/card'
 
 const draggableItems = {
@@ -57,15 +60,25 @@ export class InteractionsComponent {
     this.dragOverlay = null
   }
 
-  protected reportDrop(zoneId: 'card-zone' | 'any-zone', zone: string, event: { source: Record<string, unknown>; edge: string | null }) {
+  protected reportDrop(
+    zoneId: 'card-zone' | 'any-zone',
+    zone: string,
+    event: { source: Record<string, unknown>; edge: string | null },
+  ) {
     const itemId = String(event.source.id)
     if (!(itemId in draggableItems)) {
       return
     }
     this.dropDemoItems = {
       source: this.dropDemoItems.source.filter((id) => id !== itemId),
-      'card-zone': [...this.dropDemoItems['card-zone'].filter((id) => id !== itemId), ...(zoneId === 'card-zone' ? [itemId] : [])],
-      'any-zone': [...this.dropDemoItems['any-zone'].filter((id) => id !== itemId), ...(zoneId === 'any-zone' ? [itemId] : [])],
+      'card-zone': [
+        ...this.dropDemoItems['card-zone'].filter((id) => id !== itemId),
+        ...(zoneId === 'card-zone' ? [itemId] : []),
+      ],
+      'any-zone': [
+        ...this.dropDemoItems['any-zone'].filter((id) => id !== itemId),
+        ...(zoneId === 'any-zone' ? [itemId] : []),
+      ],
     }
     this.dropResult = `${String(event.source.id)} dropped on ${zone}${event.edge ? ` at ${event.edge}` : ''}.`
   }

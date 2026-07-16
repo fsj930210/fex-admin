@@ -1,0 +1,11 @@
+<fex-card
+  title="Column ordering"
+  description="The feature only owns columnOrder and actions. These buttons are one possible UI; DnD is demonstrated separately as caller-owned behavior."
+  ><section class="space-y-space-sm">
+    <h3 class="text-sm font-medium">Programmatic reorder</h3>
+    <div class="flex gap-space-sm">
+      <button fexButton size="sm" variant="outline" (click)="move()">Move Status first</button
+      ><button fexButton size="sm" variant="outline" (click)="table.resetColumnOrder()">Reset</button>
+    </div>
+    <fex-data-grid [table]="table" /></section
+></fex-card>

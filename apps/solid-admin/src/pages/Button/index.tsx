@@ -5,7 +5,15 @@ import { Card } from '@fex/components-solid/ui/card'
 import { PlusIcon } from '@fex/components-solid/icon/plus'
 import { For, type JSX, type ParentProps } from 'solid-js'
 
-const variants = ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link', 'dashed'] as const
+const variants = [
+  'default',
+  'outline',
+  'secondary',
+  'ghost',
+  'destructive',
+  'link',
+  'dashed',
+] as const
 const sizes = ['xs', 'sm', 'default', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'] as const
 const effects = [
   'expand-icon',
@@ -68,7 +76,10 @@ export function ButtonPage(): JSX.Element {
             </For>
           </DemoSection>
 
-          <DemoSection title="Loading" description="加载态会禁用按钮，loading icon 跟随 iconPlacement。">
+          <DemoSection
+            title="Loading"
+            description="加载态会禁用按钮，loading icon 跟随 iconPlacement。"
+          >
             <Button loading>Loading start</Button>
             <Button loading iconPlacement="end">
               Loading end
@@ -96,7 +107,10 @@ export function ButtonPage(): JSX.Element {
             </For>
           </DemoSection>
 
-          <DemoSection title="Mixed Usage" description="不同 variant、icon、loading 和 effect 的组合。">
+          <DemoSection
+            title="Mixed Usage"
+            description="不同 variant、icon、loading 和 effect 的组合。"
+          >
             <Button effect="expand-icon" icon={<PlusIcon />} iconPlacement="end">
               Icon right
             </Button>

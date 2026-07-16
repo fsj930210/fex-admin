@@ -87,7 +87,7 @@ export function CheckboxRoot({
               ? controllerRef.current.toggle()
               : {
                   previousChecked: currentChecked,
-                  checked: currentChecked === true ? false : true,
+                  checked: currentChecked !== true,
                 }
           if (meta === undefined) {
             return

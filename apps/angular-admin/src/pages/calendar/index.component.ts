@@ -83,7 +83,7 @@ export class CalendarComponent {
     ].join(' ')
   }
 
-  protected getDateLabelClassName(cell: CalendarCell) {
+  protected getDateLabelClassName(_cell: CalendarCell) {
     return 'font-medium'
   }
 

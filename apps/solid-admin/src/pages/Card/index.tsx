@@ -62,7 +62,9 @@ export function CardPage() {
           <Card title="Ui" description="面向业务的默认卡片封装。">
             <div class="flex min-w-0 flex-wrap items-center gap-space-md">
               <Card title="Basic" description="包含标题、描述和内容区域。">
-                <p class="text-sm leading-6 text-foreground">Card 默认使用系统边框、背景、圆角和 spacing token。</p>
+                <p class="text-sm leading-6 text-foreground">
+                  Card 默认使用系统边框、背景、圆角和 spacing token。
+                </p>
               </Card>
             </div>
           </Card>
@@ -73,7 +75,10 @@ export function CardPage() {
             </p>
           </Card>
 
-          <Card title="Spacing" description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。">
+          <Card
+            title="Spacing"
+            description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。"
+          >
             <div class="flex flex-wrap gap-space-sm">
               {spacingOptions.map((option) => (
                 <button

@@ -73,11 +73,18 @@ const ResizablePage = lazy(() =>
 const TextareaPage = lazy(() =>
   import('../../pages/Textarea').then((module) => ({ default: module.TextareaPage })),
 )
+const DataGridPage = lazy(() =>
+  import('../../pages/DataGrid').then((module) => ({ default: module.DataGridPage })),
+)
 const TreePage = lazy(() =>
   import('../../pages/Tree').then((module) => ({ default: module.TreePage })),
 )
 
 export const componentRoutes: AppRoute[] = [
+  {
+    path: '/data-grid',
+    component: DataGridPage,
+  },
   {
     path: '/button',
     component: ButtonPage,

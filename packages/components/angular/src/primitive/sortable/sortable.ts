@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, comput
 import type { OnChanges, OnDestroy, OnInit } from '@angular/core'
 import { DEFAULT_SORTABLE_CONTAINER_ID, createSortableController } from '@fex/components-core/sortable/create-sortable-controller'
 import { restoreSortableItems } from '@fex/components-core/sortable/containers'
-import type { SortableAxis, SortableId, SortableItems, SortableMotionOptions } from '@fex/components-core/sortable/types'
+import type { SortableAxis, SortableControllerSnapshot, SortableId, SortableItems, SortableMotionOptions } from '@fex/components-core/sortable/types'
 import { ElementRef } from '@angular/core'
 
 @Component({
@@ -11,7 +11,7 @@ import { ElementRef } from '@angular/core'
   exportAs: 'fexSortable',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'flex flex-col gap-space-sm',
+    class: 'block',
     '[attr.data-sortable-container]': 'containerId',
   },
   template: '<ng-content />',
@@ -30,10 +30,15 @@ export class FexSortable<TItems extends SortableItems = SortableItems> implement
   @Input() axis?: SortableAxis
   @Input() animation?: SortableMotionOptions
   @Output() itemsChange = new EventEmitter<TItems>()
+  @Output() snapshotChange = new EventEmitter<SortableControllerSnapshot>()
 
   ngOnInit() {
     this.updateController()
-    this.unsubscribe = this.controller.subscribe(() => this.snapshot.set(this.controller.getSnapshot()))
+    this.unsubscribe = this.controller.subscribe(() => {
+      const snapshot = this.controller.getSnapshot()
+      this.snapshot.set(snapshot)
+      this.snapshotChange.emit(snapshot)
+    })
     this.cleanup = this.controller.registerContainer(this.containerId, this.elementRef.nativeElement)
   }
 
@@ -76,6 +81,7 @@ export class FexSortable<TItems extends SortableItems = SortableItems> implement
 }
 
 export {
+  bindSortableItem,
   FexSortableContainerDirective,
   FexSortableItemDirective,
   FexSortableRegionDirective,
