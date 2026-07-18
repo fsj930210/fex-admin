@@ -2,7 +2,7 @@
 import type { DataGridColumnMeta } from '@fex/components-core/data-grid/types'
 import type { TableFeatures } from '@fex/components-react/primitive/data-grid'
 import { DataGrid, tableFeatures, useDataGridTable, type ColumnDef } from '@fex/components-react/primitive/data-grid'
-import { Input } from '@fex/components-react/primitive/input'
+import { InputControl, InputRoot } from '@fex/components-react/primitive/input'
 import { Button } from '@fex/components-react/ui/button'
 import { useState } from 'react'
 import { DataGridDemoSection, DemoBranch } from './demo-section'
@@ -29,17 +29,18 @@ export function CellEditingDataGridDemo() {
       const isEditing = editing?.rowId === row.id && editing.field === field
       if (isEditing) {
         return (
-          <Input
-            autoFocus
-            type="text"
-            defaultValue={String(getValue() ?? '')}
-            aria-label={`Edit ${field} for ${row.id}`}
-            onBlur={(event) => updateCell(row.id, field, event.currentTarget.value)}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') event.currentTarget.blur()
-              if (event.key === 'Escape') setEditing(null)
-            }}
-          />
+          <InputRoot defaultValue={String(getValue() ?? '')}>
+            <InputControl
+              autoFocus
+              type="text"
+              aria-label={`Edit ${field} for ${row.id}`}
+              onBlur={(event) => updateCell(row.id, field, event.currentTarget.value)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') event.currentTarget.blur()
+                if (event.key === 'Escape') setEditing(null)
+              }}
+            />
+          </InputRoot>
         )
       }
       return <Button size="sm" variant="ghost" className="h-auto w-full justify-start px-0 text-inherit" onClick={() => setEditing({ rowId: row.id, field })}>{String(getValue() ?? '')}</Button>

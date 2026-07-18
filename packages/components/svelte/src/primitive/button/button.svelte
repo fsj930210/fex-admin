@@ -23,6 +23,6 @@
   }
 </script>
 
-<button {...rest} class={classList} data-slot="button" {type} use:buttonAction>
+<button data-slot="button" {...rest} class={classList} {type} use:buttonAction>
   {@render children?.()}
 </button>

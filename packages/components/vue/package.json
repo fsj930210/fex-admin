@@ -13,6 +13,7 @@
     "./primitive/data-grid": "./src/primitive/data-grid/data-grid.ts",
     "./primitive/empty": "./src/primitive/empty/empty.ts",
     "./primitive/input": "./src/primitive/input/input.ts",
+    "./primitive/input/use-input": "./src/primitive/input/use-input.ts",
     "./primitive/listbox": "./src/primitive/listbox/listbox.ts",
     "./primitive/menu": "./src/primitive/menu/menu.ts",
     "./primitive/pagination": "./src/primitive/pagination/pagination.ts",

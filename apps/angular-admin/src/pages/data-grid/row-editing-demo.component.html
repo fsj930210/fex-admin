@@ -16,7 +16,7 @@
             <button fexButton size="sm" variant="outline" (click)="edit(cell)">Edit row</button>
           }
         } @else if (draft()?.id === cell.row.id) {
-          <input fexInput [value]="value(cell)" (input)="field(cell, $event)" />
+          <fex-input-root [value]="value(cell)"><input fexInputControl (input)="field(cell, $event)" /></fex-input-root>
         } @else {
           {{ value(cell) }}
         }

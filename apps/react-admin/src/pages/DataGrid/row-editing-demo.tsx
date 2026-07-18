@@ -3,7 +3,7 @@ import type { DataGridColumnMeta } from '@fex/components-core/data-grid/types'
 import { columnSizingFeature } from '@fex/components-core/data-grid/features/column-sizing'
 import type { TableFeatures } from '@fex/components-react/primitive/data-grid'
 import { DataGrid, tableFeatures, useDataGridTable, type ColumnDef } from '@fex/components-react/primitive/data-grid'
-import { Input } from '@fex/components-react/primitive/input'
+import { InputControl, InputRoot } from '@fex/components-react/primitive/input'
 import { Button } from '@fex/components-react/ui/button'
 import { useState } from 'react'
 import { DataGridDemoSection, DemoBranch } from './demo-section'
@@ -19,21 +19,42 @@ export function RowEditingDataGridDemo() {
       accessorKey: 'name',
       header: 'Name',
       cell: ({ row, getValue }) => draft?.id === row.id
-        ? <Input value={draft.name} aria-label={`Edit name for ${row.id}`} onChange={(event) => setDraft({ ...draft, name: event.currentTarget.value })} />
+        ? (
+            <InputRoot value={draft.name} className="w-full">
+              <InputControl
+                aria-label={`Edit name for ${row.id}`}
+                onChange={(event) => setDraft({ ...draft, name: event.currentTarget.value })}
+              />
+            </InputRoot>
+          )
         : String(getValue() ?? ''),
     },
     {
       accessorKey: 'department',
       header: 'Department',
       cell: ({ row, getValue }) => draft?.id === row.id
-        ? <Input value={draft.department} aria-label={`Edit department for ${row.id}`} onChange={(event) => setDraft({ ...draft, department: event.currentTarget.value as Person['department'] })} />
+        ? (
+            <InputRoot value={draft.department} className="w-full">
+              <InputControl
+                aria-label={`Edit department for ${row.id}`}
+                onChange={(event) => setDraft({ ...draft, department: event.currentTarget.value as Person['department'] })}
+              />
+            </InputRoot>
+          )
         : String(getValue() ?? ''),
     },
     {
       accessorKey: 'status',
       header: 'Status',
       cell: ({ row, getValue }) => draft?.id === row.id
-        ? <Input value={draft.status} aria-label={`Edit status for ${row.id}`} onChange={(event) => setDraft({ ...draft, status: event.currentTarget.value as Person['status'] })} />
+        ? (
+            <InputRoot value={draft.status} className="w-full">
+              <InputControl
+                aria-label={`Edit status for ${row.id}`}
+                onChange={(event) => setDraft({ ...draft, status: event.currentTarget.value as Person['status'] })}
+              />
+            </InputRoot>
+          )
         : String(getValue() ?? ''),
     },
     {

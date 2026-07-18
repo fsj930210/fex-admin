@@ -13,6 +13,7 @@
     "./primitive/data-grid": "./src/primitive/data-grid/data-grid.tsx",
     "./primitive/empty": "./src/primitive/empty/empty.tsx",
     "./primitive/input": "./src/primitive/input/input.tsx",
+    "./primitive/input/create-input": "./src/primitive/input/create-input.ts",
     "./primitive/listbox": "./src/primitive/listbox/listbox.tsx",
     "./primitive/menu": "./src/primitive/menu/menu.tsx",
     "./primitive/pagination": "./src/primitive/pagination/pagination.tsx",

@@ -1,7 +1,7 @@
 import { columnSizingFeature } from '@fex/components-core/data-grid/features/column-sizing'
 import type { DataGridColumnMeta } from '@fex/components-core/data-grid/types'
 import { DataGrid, tableFeatures, type ColumnDef } from '@fex/components-solid/primitive/data-grid'
-import { Input } from '@fex/components-solid/primitive/input'
+import { InputControl, InputRoot } from '@fex/components-solid/primitive/input'
 import { createDataGridTable } from '@fex/components-solid/primitives/create-data-grid-table'
 import { Button } from '@fex/components-solid/ui/button'
 import { createSignal, Show } from 'solid-js'
@@ -26,11 +26,11 @@ export function RowEditingDataGridDemo() {
       header: 'Name',
       cell: ({ row, getValue }) => (
         <Show when={draft()?.id === row.id} fallback={String(getValue() ?? '')}>
-          <Input
+          <InputRoot value={draft()?.name ?? ''}><InputControl
             value={draft()?.name ?? ''}
             aria-label={`Edit name for ${row.id}`}
             onInput={(event) => setDraft({ ...draft()!, name: event.currentTarget.value })}
-          />
+          /></InputRoot>
         </Show>
       ),
     },
@@ -39,7 +39,7 @@ export function RowEditingDataGridDemo() {
       header: 'Department',
       cell: ({ row, getValue }) => (
         <Show when={draft()?.id === row.id} fallback={String(getValue() ?? '')}>
-          <Input
+          <InputRoot value={draft()?.department ?? ''}><InputControl
             value={draft()?.department ?? ''}
             aria-label={`Edit department for ${row.id}`}
             onInput={(event) =>
@@ -48,7 +48,7 @@ export function RowEditingDataGridDemo() {
                 department: event.currentTarget.value as Person['department'],
               })
             }
-          />
+          /></InputRoot>
         </Show>
       ),
     },
@@ -57,13 +57,13 @@ export function RowEditingDataGridDemo() {
       header: 'Status',
       cell: ({ row, getValue }) => (
         <Show when={draft()?.id === row.id} fallback={String(getValue() ?? '')}>
-          <Input
+          <InputRoot value={draft()?.status ?? ''}><InputControl
             value={draft()?.status ?? ''}
             aria-label={`Edit status for ${row.id}`}
             onInput={(event) =>
               setDraft({ ...draft()!, status: event.currentTarget.value as Person['status'] })
             }
-          />
+          /></InputRoot>
         </Show>
       ),
     },

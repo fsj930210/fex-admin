@@ -1,6 +1,6 @@
 import type { DataGridColumnMeta } from '@fex/components-core/data-grid/types'
 import { DataGrid, tableFeatures, type ColumnDef } from '@fex/components-solid/primitive/data-grid'
-import { Input } from '@fex/components-solid/primitive/input'
+import { InputControl, InputRoot } from '@fex/components-solid/primitive/input'
 import { createDataGridTable } from '@fex/components-solid/primitives/create-data-grid-table'
 import { Button } from '@fex/components-solid/ui/button'
 import { createSignal } from 'solid-js'
@@ -21,7 +21,7 @@ export function CellEditingDataGridDemo() {
       ...(field === 'visits' ? { meta: { align: 'right' as const } } : {}),
       cell: ({ row, getValue }) =>
         editing()?.rowId === row.id && editing()?.field === field ? (
-          <Input
+          <InputRoot value={String(getValue() ?? '')}><InputControl
             autofocus
             type="text"
             value={String(getValue() ?? '')}
@@ -31,7 +31,7 @@ export function CellEditingDataGridDemo() {
               if (event.key === 'Enter') event.currentTarget.blur()
               if (event.key === 'Escape') setEditing(null)
             }}
-          />
+          /></InputRoot>
         ) : (
           <Button
             size="sm"

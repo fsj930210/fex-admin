@@ -76,6 +76,7 @@ export const dataGridButtonClassName =
 export const dataGridIconButtonClassName = `${dataGridButtonClassName} w-8 px-0`
 export const dataGridInputClassName =
   'h-8 w-auto min-w-0 flex-1 rounded-md border border-border bg-background px-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring'
+export const dataGridInputRootClassName = 'h-8 w-auto min-w-0 flex-1 text-sm'
 export const dataGridSelectClassName = dataGridInputClassName
 export const dataGridPaginationClassName =
   'flex flex-wrap items-center justify-between gap-space-sm border-t border-border p-space-sm text-sm'

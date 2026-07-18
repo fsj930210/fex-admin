@@ -1,7 +1,7 @@
 import { expansionFeature, searchFeature } from '@fex/components-core'
 import { createTreeController } from '@fex/components-core/tree/create-tree-controller'
 import type { SearchFeatureApi } from '@fex/components-core/tree/features/search'
-import { Input } from '@fex/components-solid/primitive/input'
+import { InputControl, InputRoot } from '@fex/components-solid/primitive/input'
 import { Card } from '@fex/components-solid/ui/card'
 import { createMemo, createSignal, Show } from 'solid-js'
 import { DemoTree } from './demo-tree'
@@ -45,12 +45,7 @@ export function SearchDemo() {
       title="Search data and custom title rendering"
       description="The core returns filtered tree data; title rendering decides how a keyword is highlighted."
     >
-      <Input
-        value={keyword()}
-        onInput={(e) => setKeyword(e.currentTarget.value)}
-        placeholder="Search departments"
-        class="mb-space-md max-w-sm"
-      />
+      <InputRoot value={keyword()} class="mb-space-md max-w-sm"><InputControl onInput={(e) => setKeyword(e.currentTarget.value)} placeholder="Search departments" /></InputRoot>
       <div hidden={Boolean(keyword().trim())}>
         <DemoTree<DepartmentNode>
           controller={controller}

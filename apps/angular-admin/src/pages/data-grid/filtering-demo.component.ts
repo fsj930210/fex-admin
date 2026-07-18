@@ -11,7 +11,7 @@ import {
   type ColumnDef,
 } from '@fex/components-angular/primitive/data-grid'
 import { createDataGridTable } from '@fex/components-angular/signals/create-data-grid-table'
-import { Input } from '@fex/components-angular/primitive/input'
+import { InputControl, InputRoot } from '@fex/components-angular/primitive/input'
 import Card from '@fex/components-angular/ui/card'
 import { people, type Person } from './data'
 const modules = { columnFilteringFeature, filteredRowModel: createFilteredRowModel() }
@@ -24,7 +24,7 @@ interface Grid {
 export
 @Component({
   selector: 'fex-data-grid-filtering-demo',
-  imports: [Card, DataGrid, Input],
+  imports: [Card, DataGrid, InputRoot, InputControl],
   templateUrl: './filtering-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

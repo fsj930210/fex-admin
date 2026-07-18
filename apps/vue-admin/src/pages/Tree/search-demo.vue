@@ -2,7 +2,7 @@
 import { expansionFeature, searchFeature } from '@fex/components-core'
 import { createTreeController } from '@fex/components-core/tree/create-tree-controller'
 import type { SearchFeatureApi } from '@fex/components-core/tree/features/search'
-import { Input } from '@fex/components-vue/primitive/input'
+import { InputControl, InputRoot } from '@fex/components-vue/primitive/input'
 import Card from '@fex/components-vue/ui/card'
 import { computed, ref } from 'vue'
 import DemoTree from './demo-tree.vue'
@@ -51,12 +51,7 @@ function parts(title: string) {
     title="Search data and custom title rendering"
     description="The core returns filtered tree data; title rendering decides how a keyword is highlighted."
   >
-    <Input
-      :value="keyword"
-      placeholder="Search departments"
-      class="mb-space-md max-w-sm"
-      @input="handleInput"
-    />
+    <InputRoot :value="keyword" class="mb-space-md max-w-sm"><InputControl placeholder="Search departments" @input="handleInput" /></InputRoot>
     <div v-show="!showingSearchTree">
       <!-- @vue-generic {DepartmentNode} -->
       <DemoTree

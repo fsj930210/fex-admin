@@ -8,7 +8,7 @@ import {
   type ColumnDef,
 } from '@fex/components-angular/primitive/data-grid'
 import { createDataGridTable } from '@fex/components-angular/signals/create-data-grid-table'
-import { Input } from '@fex/components-angular/primitive/input'
+import { InputControl, InputRoot } from '@fex/components-angular/primitive/input'
 import { Button } from '@fex/components-angular/ui/button'
 import Card from '@fex/components-angular/ui/card'
 import { people6, type Person } from './data'
@@ -17,7 +17,7 @@ type Field = 'name' | 'status' | 'visits'
 export
 @Component({
   selector: 'fex-data-grid-cell-editing-demo',
-  imports: [Card, DataGrid, DataGridCellTemplate, Input, Button],
+  imports: [Card, DataGrid, DataGridCellTemplate, InputRoot, InputControl, Button],
   templateUrl: './cell-editing-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -39,7 +39,7 @@ class CellEditingDemoComponent {
     getRowId: (r) => r.id,
   })
   protected value(cell: Cell<Features, Person>) {
-    return cell.getValue()
+    return String(cell.getValue() ?? '')
   }
   protected edit(cell: Cell<Features, Person>) {
     this.editing.set({ rowId: cell.row.id, field: cell.column.id as Field })

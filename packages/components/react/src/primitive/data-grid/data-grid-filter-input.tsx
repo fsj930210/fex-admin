@@ -1,8 +1,8 @@
-import { dataGridInputClassName } from '@fex/components-styles/data-grid'
+import { dataGridInputRootClassName } from '@fex/components-styles/data-grid'
 import { cn } from '@fex/utils'
 import type { Column, RowData, TableFeatures } from '@tanstack/react-table'
 import type { InputHTMLAttributes } from 'react'
-import { Input } from '../input/input'
+import { InputControl, InputRoot } from '../input/input'
 
 export interface DataGridFilterInputProps<
   TFeatures extends TableFeatures,
@@ -21,11 +21,11 @@ export function DataGridFilterInput<TFeatures extends TableFeatures, TData exten
     setFilterValue: (value: unknown) => void
   }
   return (
-    <Input
-      {...props}
+    <InputRoot
       value={String(filterColumn.getFilterValue() ?? '')}
-      className={cn(dataGridInputClassName, className)}
-      onChange={(event) => filterColumn.setFilterValue(event.currentTarget.value)}
-    />
+      className={cn(dataGridInputRootClassName, className)}
+    >
+      <InputControl {...props} onChange={(event) => filterColumn.setFilterValue(event.currentTarget.value)} />
+    </InputRoot>
   )
 }

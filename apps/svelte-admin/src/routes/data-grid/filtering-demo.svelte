@@ -2,7 +2,8 @@
   import { columnFilteringFeature, createFilteredRowModel, type FilterFn } from '@fex/components-core/data-grid/features/column-filtering'
   import type { DataGridColumnMeta } from '@fex/components-core/data-grid/types'
   import { DataGrid, tableFeatures, type ColumnDef } from '@fex/components-svelte/primitive/data-grid'
-  import Input from '@fex/components-svelte/primitive/input'
+  import InputRoot from '@fex/components-svelte/primitive/input'
+  import InputControl from '@fex/components-svelte/primitive/input-control'
   import { createDataGridTable } from '@fex/components-svelte/stores/create-data-grid-table'
   import { people, type Person } from './data'
   import DemoSection from './demo-section.svelte'
@@ -28,5 +29,5 @@
   }
 </script>
 <DemoSection title="Column filtering" description="meta.filterFn opts a column into local filtering. Missing filterFn means remote, while onColumnFiltersChange still receives the complete filter list.">
-  <div class="grid gap-space-lg xl:grid-cols-3">{#each grids as item (item.title)}<section class="space-y-space-sm"><h3 class="text-sm font-medium text-foreground">{item.title}</h3><div class="flex flex-wrap gap-space-sm">{#each item.table.getAllLeafColumns() as column (column.id)}<Input class="h-8 w-auto min-w-0 flex-1" placeholder={`Filter ${column.id}`} oninput={event => column.setFilterValue(event.currentTarget.value)} />{/each}</div><DataGrid table={item.table} /><ReactiveTableText snapshot={item.table.dataGridSnapshot} text={revision => remoteText(item, revision)} /></section>{/each}</div>
+  <div class="grid gap-space-lg xl:grid-cols-3">{#each grids as item (item.title)}<section class="space-y-space-sm"><h3 class="text-sm font-medium text-foreground">{item.title}</h3><div class="flex flex-wrap gap-space-sm">{#each item.table.getAllLeafColumns() as column (column.id)}<InputRoot class="h-8 w-auto min-w-0 flex-1"><InputControl placeholder={`Filter ${column.id}`} oninput={event => column.setFilterValue(event.currentTarget.value)} /></InputRoot>{/each}</div><DataGrid table={item.table} /><ReactiveTableText snapshot={item.table.dataGridSnapshot} text={revision => remoteText(item, revision)} /></section>{/each}</div>
 </DemoSection>

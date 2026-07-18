@@ -1,7 +1,7 @@
 import { createTreeController } from '@fex/components-core/tree/create-tree-controller'
 import { expansionFeature, searchFeature } from '@fex/components-core'
 import type { SearchFeatureApi } from '@fex/components-core/tree/features/search'
-import { Input } from '@fex/components-react/primitive/input'
+import { InputControl, InputRoot } from '@fex/components-react/primitive/input'
 import { useState } from 'react'
 import { departmentFieldNames, departmentTreeData, type DepartmentNode } from './data'
 import { DemoTree } from './demo-tree'
@@ -37,12 +37,12 @@ export function SearchTreeDemo() {
 
   return (
     <TreeDemoSection title="Search data and custom title rendering" description="The core returns filtered tree data; title rendering decides how a keyword is highlighted.">
-      <Input
-        value={keyword}
-        onChange={(event) => setKeyword(event.target.value)}
-        placeholder="Search departments"
-        className="mb-space-md max-w-sm"
-      />
+      <InputRoot value={keyword} className="mb-space-md max-w-sm">
+        <InputControl
+          onChange={(event) => setKeyword(event.target.value)}
+          placeholder="Search departments"
+        />
+      </InputRoot>
       <div hidden={showingSearchTree}>
         <DemoTree<DepartmentNode>
           controller={searchController}

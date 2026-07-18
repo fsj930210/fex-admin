@@ -1,1 +1,7 @@
-export { default as Input } from './input.vue'
+export { default as InputRoot } from './input-root.vue'
+export { default as InputControl } from './input-control.vue'
+export { default as InputPrefix } from './input-prefix.vue'
+export { default as InputSuffix } from './input-suffix.vue'
+export { default as InputAddonBefore } from './input-addon-before.vue'
+export { default as InputAddonAfter } from './input-addon-after.vue'
+export { default as InputClear } from './input-clear.vue'

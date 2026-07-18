@@ -2,7 +2,7 @@
 import type { DataGridColumnMeta } from '@fex/components-core/data-grid/types'
 import { DataGrid, tableFeatures, type ColumnDef } from '@fex/components-vue/primitive/data-grid'
 import { useDataGridTable } from '@fex/components-vue/composables/use-data-grid-table'
-import { Input } from '@fex/components-vue/primitive/input'
+import { InputControl, InputRoot } from '@fex/components-vue/primitive/input'
 import Button from '@fex/components-vue/ui/button'
 import { h, ref, type Component } from 'vue'
 import { people6, type Person } from './data'
@@ -12,7 +12,8 @@ const f: F = tableFeatures({ columnMeta: {} })
 type Field = 'name' | 'status' | 'visits'
 const rows = ref(people6)
 const editing = ref<{ rowId: string; field: Field } | null>(null)
-const I = Input as Component,
+const R = InputRoot as Component,
+  I = InputControl as Component,
   B = Button as Component
 const columns: ColumnDef<F, Person>[] = (['name', 'status', 'visits'] as const).map((field) => ({
   accessorKey: field,
@@ -20,17 +21,15 @@ const columns: ColumnDef<F, Person>[] = (['name', 'status', 'visits'] as const).
   ...(field === 'visits' ? { meta: { align: 'right' as const } } : {}),
   cell: ({ row, getValue }) =>
     editing.value?.rowId === row.id && editing.value.field === field
-      ? h(I, {
-          autofocus: true,
-          type: 'text',
-          value: String(getValue() ?? ''),
-          onBlur: (event: FocusEvent) =>
-            update(row.id, field, (event.target as HTMLInputElement).value),
-          onKeydown: (event: KeyboardEvent) => {
-            if (event.key === 'Enter') (event.target as HTMLInputElement).blur()
-            if (event.key === 'Escape') editing.value = null
-          },
-        })
+      ? h(R, { defaultValue: String(getValue() ?? '') }, () => h(I, {
+        autofocus: true,
+        type: 'text',
+        onBlur: (event: FocusEvent) => update(row.id, field, (event.target as HTMLInputElement).value),
+        onKeydown: (event: KeyboardEvent) => {
+          if (event.key === 'Enter') (event.target as HTMLInputElement).blur()
+          if (event.key === 'Escape') editing.value = null
+        },
+      }))
       : h(
           B,
           {

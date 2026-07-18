@@ -3,7 +3,7 @@ import { createTreeController } from '@fex/components-core/tree/create-tree-cont
 import { expansionFeature } from '@fex/components-core/tree/features/expansion'
 import { searchFeature, type SearchFeatureApi } from '@fex/components-core/tree/features/search'
 import type { TreeOptions } from '@fex/components-core/tree/types'
-import { Input } from '@fex/components-angular/primitive/input'
+import { InputControl, InputRoot } from '@fex/components-angular/primitive/input'
 import Card from '@fex/components-angular/ui/card'
 import { DemoTreeComponent } from './demo-tree.component'
 import { departmentFieldNames, departmentTreeData, type DepartmentNode } from './data'
@@ -11,7 +11,7 @@ import { departmentFieldNames, departmentTreeData, type DepartmentNode } from '.
 @Component({
   selector: 'fex-search-tree-demo',
   standalone: true,
-  imports: [Card, Input, DemoTreeComponent],
+  imports: [Card, InputRoot, InputControl, DemoTreeComponent],
   templateUrl: './search-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

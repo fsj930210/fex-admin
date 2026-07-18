@@ -7,7 +7,7 @@
     <fex-data-grid [table]="table">
       <ng-template fexDataGridCell let-cell>
         @if (editing()?.rowId === cell.row.id && editing()?.field === cell.column.id) {
-          <input fexInput autofocus [value]="value(cell)" (blur)="commit(cell, $event)" />
+          <fex-input-root [value]="value(cell)"><input fexInputControl autofocus (blur)="commit(cell, $event)" /></fex-input-root>
         } @else {
           <button
             fexButton

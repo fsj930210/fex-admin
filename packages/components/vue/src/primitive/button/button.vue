@@ -25,9 +25,9 @@ defineExpose({
 <template>
   <button
     ref="buttonElement"
+    data-slot="button"
     v-bind="{ ...attrs, class: undefined }"
     :class="className"
-    data-slot="button"
     :type="props.type"
   >
     <slot />

@@ -3,7 +3,7 @@ import { columnSizingFeature } from '@fex/components-core/data-grid/features/col
 import type { DataGridColumnMeta } from '@fex/components-core/data-grid/types'
 import { DataGrid, tableFeatures, type ColumnDef } from '@fex/components-vue/primitive/data-grid'
 import { useDataGridTable } from '@fex/components-vue/composables/use-data-grid-table'
-import { Input } from '@fex/components-vue/primitive/input'
+import { InputControl, InputRoot } from '@fex/components-vue/primitive/input'
 import Button from '@fex/components-vue/ui/button'
 import { h, ref, type Component } from 'vue'
 import { people6, type Person } from './data'
@@ -15,16 +15,16 @@ type F = {
 const f: F = tableFeatures({ columnSizingFeature, columnMeta: {} })
 const rows = ref(people6),
   draft = ref<Person | null>(null),
-  I = Input as Component,
+  R = InputRoot as Component,
+  I = InputControl as Component,
   B = Button as Component
 const edit = (field: 'name' | 'department' | 'status', row: Person, value: unknown) =>
   draft.value?.id === row.id
-    ? h(I, {
-        value: String(draft.value[field]),
-        onInput: (event: Event) => {
-          draft.value = { ...draft.value!, [field]: (event.target as HTMLInputElement).value }
-        },
-      })
+    ? h(R, { value: String(draft.value[field]) }, () => h(I, {
+      onInput: (event: Event) => {
+        draft.value = { ...draft.value!, [field]: (event.target as HTMLInputElement).value }
+      },
+    }))
     : String(value ?? '')
 const columns: ColumnDef<F, Person>[] = [
   {
