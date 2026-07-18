@@ -92,6 +92,11 @@ export const componentRoutes: Routes = [
       import('../../pages/slider/index.component').then((module) => module.SliderComponent),
   },
   {
+    path: 'scrollbar',
+    loadComponent: () =>
+      import('../../pages/scrollbar/index.component').then((module) => module.ScrollbarComponent),
+  },
+  {
     path: 'switch',
     loadComponent: () =>
       import('../../pages/switch/index.component').then((module) => module.SwitchComponent),

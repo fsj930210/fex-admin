@@ -17,6 +17,7 @@ export const componentRoutes = [
   { path: '/radio', component: () => import('../../pages/Radio/index.vue') },
   { path: '/spinner', component: () => import('../../pages/Spinner/index.vue') },
   { path: '/slider', component: () => import('../../pages/Slider/index.vue') },
+  { path: '/scrollbar', component: () => import('../../pages/Scrollbar/index.vue') },
   { path: '/switch', component: () => import('../../pages/Switch/index.vue') },
   { path: '/table', component: () => import('../../pages/Table/index.vue') },
   { path: '/tree', component: () => import('../../pages/Tree/index.vue') },

@@ -48,6 +48,8 @@
     "./slider/create-slider-controller": "./src/slider/create-slider-controller.ts",
     "./slider/types": "./src/slider/types.ts",
     "./slider/utils": "./src/slider/utils.ts",
+    "./scrollbar/create-scrollbar-controller": "./src/scrollbar/create-scrollbar-controller.ts",
+    "./scrollbar/types": "./src/scrollbar/types.ts",
     "./checkbox/create-checkbox-controller": "./src/checkbox/create-checkbox-controller.ts",
     "./checkbox/create-checkbox-group-controller": "./src/checkbox/create-checkbox-group-controller.ts",
     "./checkbox/types": "./src/checkbox/types.ts",

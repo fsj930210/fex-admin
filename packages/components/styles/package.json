@@ -24,6 +24,7 @@
     "./sortable": "./src/sortable.ts",
     "./spinner": "./src/spinner.ts",
     "./slider": "./src/slider.ts",
+    "./scrollbar": "./src/scrollbar.ts",
     "./switch": "./src/switch.ts",
     "./table": "./src/table.ts",
     "./tree": "./src/tree.ts",

@@ -79,6 +79,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Slider'), 'SliderPage'),
   },
   {
+    path: '/scrollbar',
+    element: createLazyRouteElement(() => import('../../pages/Scrollbar'), 'ScrollbarPage'),
+  },
+  {
     path: '/switch',
     element: createLazyRouteElement(() => import('../../pages/Switch'), 'SwitchPage'),
   },

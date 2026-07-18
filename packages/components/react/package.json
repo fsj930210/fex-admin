@@ -20,6 +20,7 @@
     "./primitive/popover": "./src/primitive/popover/popover.tsx",
     "./primitive/radio": "./src/primitive/radio/radio.tsx",
     "./primitive/slider": "./src/primitive/slider/slider.tsx",
+    "./primitive/scrollbar": "./src/primitive/scrollbar/scrollbar.tsx",
     "./primitive/sortable": "./src/primitive/sortable/sortable.tsx",
     "./primitive/switch": "./src/primitive/switch/switch.tsx",
     "./primitive/table": "./src/primitive/table/table.tsx",

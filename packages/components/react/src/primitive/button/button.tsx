@@ -3,6 +3,7 @@ import { cn } from '@fex/utils'
 import type { ButtonHTMLAttributes, Ref } from 'react'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  'data-slot'?: string | undefined
   ref?: Ref<HTMLButtonElement> | undefined
 }
 

@@ -133,6 +133,12 @@
       "@fex/components-core/slider/utils": [
         "packages/components/core/src/slider/utils.ts"
       ],
+      "@fex/components-core/scrollbar/create-scrollbar-controller": [
+        "packages/components/core/src/scrollbar/create-scrollbar-controller.ts"
+      ],
+      "@fex/components-core/scrollbar/types": [
+        "packages/components/core/src/scrollbar/types.ts"
+      ],
       "@fex/components-core/checkbox/create-checkbox-controller": [
         "packages/components/core/src/checkbox/create-checkbox-controller.ts"
       ],
@@ -294,6 +300,9 @@
       ],
       "@fex/components-angular/primitive/slider": [
         "packages/components/angular/src/primitive/slider/slider-primitive.ts"
+      ],
+      "@fex/components-angular/primitive/scrollbar": [
+        "packages/components/angular/src/primitive/scrollbar/scrollbar.ts"
       ],
       "@fex/components-angular/primitive/sortable": [
         "packages/components/angular/src/primitive/sortable/sortable.ts"

@@ -17,6 +17,7 @@ const componentLinks = [
   { to: '/radio', label: 'Radio' },
   { to: '/spinner', label: 'Spinner' },
   { to: '/slider', label: 'Slider' },
+  { to: '/scrollbar', label: 'Scrollbar' },
   { to: '/switch', label: 'Switch' },
   { to: '/table', label: 'Table' },
   { to: '/data-grid', label: 'Data Grid' },
