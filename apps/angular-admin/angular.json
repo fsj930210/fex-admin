@@ -31,7 +31,22 @@
             "development": { "buildTarget": "angular-admin:build:development" }
           },
           "defaultConfiguration": "development",
-          "options": { "port": 4000 }
+          "options": {
+            "port": 4000,
+            "prebundle": {
+              "exclude": [
+                "@fex/components-angular",
+                "@fex/components-core",
+                "@fex/components-styles",
+                "@fex/utils",
+                "class-variance-authority",
+                "clsx",
+                "embla-carousel",
+                "embla-carousel-autoplay",
+                "tailwind-merge"
+              ]
+            }
+          }
         }
       }
     }

@@ -10,12 +10,13 @@
     "./primitive/alert-action": "./src/primitive/alert/alert-action.svelte",
     "./primitive/button": "./src/primitive/button/button.svelte",
     "./primitive/calendar": "./src/primitive/calendar/calendar.svelte",
-        "./primitive/calendar-cell": "./src/primitive/calendar/calendar-cell.svelte",
+    "./primitive/calendar-cell": "./src/primitive/calendar/calendar-cell.svelte",
     "./primitive/calendar-grid": "./src/primitive/calendar/calendar-grid.svelte",
     "./primitive/calendar-header": "./src/primitive/calendar/calendar-header.svelte",
     "./primitive/calendar-navigation-button": "./src/primitive/calendar/calendar-navigation-button.svelte",
     "./primitive/calendar-week-header": "./src/primitive/calendar/calendar-week-header.svelte",
     "./primitive/card": "./src/primitive/card/card.svelte",
+    "./primitive/carousel": "./src/stores/carousel.ts",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.svelte",
     "./primitive/checkbox-indicator": "./src/primitive/checkbox/checkbox-indicator.svelte",
     "./primitive/checkbox-group": "./src/primitive/checkbox/checkbox-group.svelte",
@@ -140,6 +141,7 @@
     "./icon/plus": "./src/icon/plus.svelte",
     "./icon/warning": "./src/icon/warning.svelte",
     "./stores/core-store": "./src/stores/core-store.ts",
+    "./stores/carousel": "./src/stores/carousel.ts",
     "./stores/create-data-grid-table": "./src/stores/create-data-grid-table.ts",
     "./stores/date-utils": "./src/stores/date-utils.ts",
     "./stores/toast": "./src/stores/toast.ts",
@@ -154,8 +156,10 @@
     "@fex/components-core": "workspace:*",
     "@fex/components-styles": "workspace:*",
     "@fex/utils": "workspace:*",
+    "@tanstack/svelte-virtual": "latest",
     "@tanstack/table-core": "9.0.0-beta.47",
-    "@tanstack/svelte-virtual": "latest"
+    "embla-carousel": "8.6.0",
+    "embla-carousel-autoplay": "8.6.0"
   },
   "devDependencies": {
     "svelte": "5.56.4"

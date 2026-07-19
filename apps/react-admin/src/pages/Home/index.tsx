@@ -1,7 +1,8 @@
 import { Link } from 'react-router'
 
 export function HomePage() {
-  const componentLinks = [
+const componentLinks = [
+  { to: '/carousel', label: 'Carousel' },
     { to: '/button', label: 'Button' },
     { to: '/calendar', label: 'Calendar' },
     { to: '/card', label: 'Card' },
@@ -29,7 +30,7 @@ export function HomePage() {
     { to: '/interactions', label: 'Interactions' },
     { to: '/resizable', label: 'Resizable' },
     { to: '/textarea', label: 'Textarea' },
-  ] as const
+].sort((left, right) => left.label.localeCompare(right.label))
 
   return (
     <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">

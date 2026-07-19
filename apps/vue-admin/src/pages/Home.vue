@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const componentLinks = [
+  { to: '/carousel', label: 'Carousel' },
   { to: '/button', label: 'Button' },
   { to: '/calendar', label: 'Calendar' },
   { to: '/card', label: 'Card' },
@@ -27,7 +28,7 @@ const componentLinks = [
   { to: '/interactions', label: 'Interactions' },
   { to: '/resizable', label: 'Resizable' },
   { to: '/textarea', label: 'Textarea' },
-] as const
+].sort((left, right) => left.label.localeCompare(right.label))
 </script>
 
 <template>

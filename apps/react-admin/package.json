@@ -5,10 +5,12 @@
   "dependencies": {
     "@fex/components-core": "workspace:*",
     "@fex/components-react": "workspace:*",
+    "@fex/components-styles": "workspace:*",
     "@fex/styles": "workspace:*",
     "@fex/utils": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "@vitejs/plugin-react": "latest",
+    "embla-carousel-auto-height": "8.6.0",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "react-router": "7.13.1",

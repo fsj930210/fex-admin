@@ -10,6 +10,7 @@ import {
   size,
   type Boundary,
   type Middleware,
+  type MiddlewareState,
   type Padding,
   type Strategy,
   type VirtualElement,
@@ -175,7 +176,8 @@ export function createFloating(options: FloatingOptions = {}): Floating {
             limiter: limitShift({
               // 非居中对齐时限制 shift 的最大位移，避免浮层为了贴合视口被推得离触发器太远，
               // 否则箭头和触发器会出现明显错位，用户会误以为浮层不属于当前 trigger。
-              offset: ({ rects }) => Math.max(rects.reference.width, rects.reference.height) / 2,
+              offset: ({ rects }: MiddlewareState) =>
+                Math.max(rects.reference.width, rects.reference.height) / 2,
             }),
           }),
         )

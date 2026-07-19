@@ -82,8 +82,10 @@ const DataGridPage = lazy(() =>
 const TreePage = lazy(() =>
   import('../../pages/Tree').then((module) => ({ default: module.TreePage })),
 )
+const CarouselPage = lazy(() => import('../../pages/Carousel').then((module) => ({ default: module.CarouselPage })))
 
 export const componentRoutes: AppRoute[] = [
+  { path: '/carousel', component: CarouselPage },
   {
     path: '/data-grid',
     component: DataGridPage,
@@ -192,4 +194,4 @@ export const componentRoutes: AppRoute[] = [
     path: '/tree',
     component: TreePage,
   },
-]
+].sort((left, right) => left.path.localeCompare(right.path))

@@ -8,6 +8,7 @@
     "./primitive/button": "./src/primitive/button/button.vue",
     "./primitive/calendar": "./src/primitive/calendar/calendar.ts",
     "./primitive/card": "./src/primitive/card/card.ts",
+    "./primitive/carousel": "./src/primitive/carousel/carousel.ts",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.ts",
     "./primitive/dialog": "./src/primitive/dialog/dialog.ts",
     "./primitive/data-grid": "./src/primitive/data-grid/data-grid.ts",
@@ -47,6 +48,7 @@
     "./icon/plus": "./src/icon/plus.ts",
     "./icon/warning": "./src/icon/warning.ts",
     "./composables/use-core-store": "./src/composables/use-core-store.ts",
+    "./composables/use-carousel": "./src/composables/use-carousel.ts",
     "./composables/use-data-grid-table": "./src/composables/use-data-grid-table.ts",
     "./composables/use-date-utils": "./src/composables/use-date-utils.ts",
     "./composables/use-draggable": "./src/composables/use-draggable.ts",
@@ -63,7 +65,9 @@
     "@fex/components-styles": "workspace:*",
     "@fex/utils": "workspace:*",
     "@tanstack/table-core": "9.0.0-beta.47",
-    "@tanstack/vue-virtual": "latest"
+    "@tanstack/vue-virtual": "latest",
+    "embla-carousel": "8.6.0",
+    "embla-carousel-autoplay": "8.6.0"
   },
   "devDependencies": {
     "vue": "3.5.38"

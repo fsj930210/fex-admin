@@ -8,6 +8,7 @@
     "./primitive/button": "./src/primitive/button/button.tsx",
     "./primitive/calendar": "./src/primitive/calendar/calendar.tsx",
     "./primitive/card": "./src/primitive/card/card.tsx",
+    "./primitive/carousel": "./src/primitive/carousel/carousel.tsx",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.tsx",
     "./primitive/dialog": "./src/primitive/dialog/dialog.tsx",
     "./primitive/data-grid": "./src/primitive/data-grid/data-grid.tsx",
@@ -71,7 +72,9 @@
     "@fex/components-styles": "workspace:*",
     "@fex/utils": "workspace:*",
     "@tanstack/react-table": "9.0.0-beta.47",
-    "@tanstack/react-virtual": "latest"
+    "@tanstack/react-virtual": "latest",
+    "embla-carousel": "8.6.0",
+    "embla-carousel-autoplay": "8.6.0"
   },
   "devDependencies": {
     "@types/react": "latest",

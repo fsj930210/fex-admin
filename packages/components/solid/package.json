@@ -7,7 +7,8 @@
     "./primitive/alert": "./src/primitive/alert/alert.tsx",
     "./primitive/button": "./src/primitive/button/button.tsx",
     "./primitive/calendar": "./src/primitive/calendar/calendar.tsx",
-        "./primitive/card": "./src/primitive/card/card.tsx",
+    "./primitive/card": "./src/primitive/card/card.tsx",
+    "./primitive/carousel": "./src/primitives/create-carousel.ts",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.tsx",
     "./primitive/dialog": "./src/primitive/dialog/dialog.tsx",
     "./primitive/data-grid": "./src/primitive/data-grid/data-grid.tsx",
@@ -47,6 +48,7 @@
     "./icon/plus": "./src/icon/plus.tsx",
     "./icon/warning": "./src/icon/warning.tsx",
     "./primitives/create-core-store-signal": "./src/primitives/create-core-store-signal.ts",
+    "./primitives/create-carousel": "./src/primitives/create-carousel.ts",
     "./primitives/create-data-grid-table": "./src/primitives/create-data-grid-table.ts",
     "./primitives/create-date-utils": "./src/primitives/create-date-utils.ts",
     "./primitives/create-draggable": "./src/primitives/create-draggable.ts",
@@ -61,8 +63,10 @@
     "@fex/components-core": "workspace:*",
     "@fex/components-styles": "workspace:*",
     "@fex/utils": "workspace:*",
+    "@tanstack/solid-virtual": "latest",
     "@tanstack/table-core": "9.0.0-beta.47",
-    "@tanstack/solid-virtual": "latest"
+    "embla-carousel": "8.6.0",
+    "embla-carousel-autoplay": "8.6.0"
   },
   "devDependencies": {
     "solid-js": "1.9.13"

@@ -181,7 +181,7 @@ export class TreeVirtualViewport<TNode extends TreeNodeData = TreeNodeData> {
     count: this.root.visibleItems().length,
     estimateSize: () => this.root.rowHeight(),
     overscan: this.overscan(),
-    getItemKey: (index) => this.root.visibleItems()[index]?.key ?? index,
+    getItemKey: (index: number) => this.root.visibleItems()[index]?.key ?? index,
   }))
 
   scrollToKey(

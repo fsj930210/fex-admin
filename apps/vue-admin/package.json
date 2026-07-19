@@ -11,6 +11,7 @@
     "@floating-ui/dom": "^1.7.6",
     "@tailwindcss/vite": "catalog:",
     "@vitejs/plugin-vue": "latest",
+    "embla-carousel-auto-height": "8.6.0",
     "vite": "catalog:",
     "vue": "3.5.38",
     "vue-router": "latest"

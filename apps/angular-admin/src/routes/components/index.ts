@@ -1,6 +1,7 @@
 import type { Routes } from '@angular/router'
 
 export const componentRoutes: Routes = [
+  { path: 'carousel', loadComponent: () => import('../../pages/carousel/index.component').then((module) => module.CarouselComponent) },
   {
     path: 'button',
     loadComponent: () =>
@@ -138,4 +139,4 @@ export const componentRoutes: Routes = [
     loadComponent: () =>
       import('../../pages/tree/index.component').then((module) => module.TreeComponent),
   },
-]
+].sort((left, right) => left.path.localeCompare(right.path))

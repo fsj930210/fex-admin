@@ -50,6 +50,7 @@
 - 应用路由必须独立放在 `src/routes` 目录中，并按模块划分子目录，例如 `src/routes/base`、`src/routes/components`、`src/routes/system`；不要把路由表散落在 `App.tsx`、`main.tsx` 或页面文件里。应用入口只负责挂载 Router/Outlet/Routes，不承载具体业务路由清单。
 - 路由页面默认按路由懒加载，避免首屏全量加载所有页面模块：React 必须封装统一的 lazy route helper，内部使用 `lazy`、`Suspense`、加载 fallback 和错误兜底，路由表里不要每次手写 `lazy(...then...)`；Vue Router 使用 `component: () => import(...)`，Solid 使用统一 lazy helper 或 `lazy`，Angular 使用 `loadComponent`，SvelteKit 依赖文件路由自动分块。只有极小的基础首页或框架限制场景可以同步导入，并要保持理由清晰。
 - 新增页面后必须同步注册到该 app 的实际路由模块，例如 React/Solid/Vue/Angular 的 `src/routes/**`；SvelteKit 使用文件路由时也要按模块目录组织。不能只创建页面文件不接路由。
+- 所有 app 首页组件导航、组件路由表和组件文档目录索引必须按组件英文名称的字母顺序排列；新增组件时插入正确的字母位置，禁止仅追加到数组或列表末尾。
 - 文件命名要清晰、稳定、便于搜索。组件名表达业务含义，避免用 `Base`、`Common`、`Manager` 这类过宽泛的名字承载复杂职责。
 - 框架特有的通用逻辑要沉淀到对应框架组件包内，组件库和对应 app 都优先复用，不要在 app 里再写一套同类能力。
 - React 通用 hook 放在 `packages/components/react/src/hooks`。

@@ -19,6 +19,12 @@
       "@fex/components-core/calendar/types": [
         "packages/components/core/src/calendar/types.ts"
       ],
+      "@fex/components-core/carousel/types": [
+        "packages/components/core/src/carousel/types.ts"
+      ],
+      "@fex/components-core/carousel/create-carousel-controller": [
+        "packages/components/core/src/carousel/create-carousel-controller.ts"
+      ],
       "@fex/components-core/date/utils": [
         "packages/components/core/src/date/utils.ts"
       ],
@@ -265,6 +271,9 @@
       "@fex/components-angular/primitive/card": [
         "packages/components/angular/src/primitive/card/card.ts"
       ],
+      "@fex/components-angular/primitive/carousel": [
+        "packages/components/angular/src/primitive/carousel/carousel.ts"
+      ],
       "@fex/components-angular/primitive/checkbox": [
         "packages/components/angular/src/primitive/checkbox/checkbox.ts"
       ],
@@ -399,6 +408,9 @@
       ],
       "@fex/components-angular/signals/core-store-signal": [
         "packages/components/angular/src/signals/core-store-signal.ts"
+      ],
+      "@fex/components-angular/signals/create-carousel": [
+        "packages/components/angular/src/signals/create-carousel.ts"
       ],
       "@fex/components-angular/signals/create-data-grid-table": [
         "packages/components/angular/src/signals/create-data-grid-table.ts"

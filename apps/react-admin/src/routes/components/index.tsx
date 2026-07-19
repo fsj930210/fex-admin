@@ -2,6 +2,7 @@ import { createLazyRouteElement } from '../lazy'
 import { ListboxPage } from '../../pages/Listbox'
 
 export const componentRoutes = [
+  { path: '/carousel', element: createLazyRouteElement(() => import('../../pages/Carousel'), 'CarouselPage') },
   {
     path: '/data-grid',
     element: createLazyRouteElement(() => import('../../pages/DataGrid'), 'DataGridPage'),
@@ -110,4 +111,4 @@ export const componentRoutes = [
     path: '/textarea',
     element: createLazyRouteElement(() => import('../../pages/Textarea'), 'TextareaPage'),
   },
-]
+].sort((left, right) => left.path.localeCompare(right.path))

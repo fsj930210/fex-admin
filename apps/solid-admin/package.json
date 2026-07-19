@@ -5,10 +5,12 @@
   "dependencies": {
     "@fex/components-core": "workspace:*",
     "@fex/components-solid": "workspace:*",
+    "@fex/components-styles": "workspace:*",
     "@fex/styles": "workspace:*",
     "@fex/utils": "workspace:*",
     "@solidjs/router": "latest",
     "@tailwindcss/vite": "catalog:",
+    "embla-carousel-auto-height": "8.6.0",
     "solid-js": "1.9.13",
     "vite": "catalog:",
     "vite-plugin-solid": "latest"

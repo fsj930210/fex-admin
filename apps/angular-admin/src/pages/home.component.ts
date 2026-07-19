@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router'
 })
 export class HomeComponent {
   protected readonly componentLinks = [
+    { to: '/carousel', label: 'Carousel' },
     { to: '/button', label: 'Button' },
     { to: '/calendar', label: 'Calendar' },
     { to: '/card', label: 'Card' },
@@ -37,5 +38,5 @@ export class HomeComponent {
     { to: '/resizable', label: 'Resizable' },
     { to: '/textarea', label: 'Textarea' },
     { to: '/tree', label: 'Tree' },
-  ] as const
+  ].sort((left, right) => left.label.localeCompare(right.label))
 }

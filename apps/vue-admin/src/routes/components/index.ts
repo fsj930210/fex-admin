@@ -1,4 +1,5 @@
 export const componentRoutes = [
+  { path: '/carousel', component: () => import('../../pages/Carousel/index.vue') },
   { path: '/data-grid', component: () => import('../../pages/DataGrid/index.vue') },
   { path: '/button', component: () => import('../../pages/Button/index.vue') },
   { path: '/calendar', component: () => import('../../pages/Calendar/index.vue') },
@@ -26,4 +27,4 @@ export const componentRoutes = [
   { path: '/interactions', component: () => import('../../pages/Interactions/index.vue') },
   { path: '/resizable', component: () => import('../../pages/Resizable/index.vue') },
   { path: '/textarea', component: () => import('../../pages/Textarea/index.vue') },
-]
+].sort((left, right) => left.path.localeCompare(right.path))

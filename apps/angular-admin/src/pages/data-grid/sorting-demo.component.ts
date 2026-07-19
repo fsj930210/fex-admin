@@ -112,7 +112,7 @@ class SortingDemoComponent {
     return grid.table.store
       .get()
       .sorting.filter(
-        (term) =>
+        (term: SortingState[number]) =>
           !grid.columns.find(
             (column) => ('accessorKey' in column ? column.accessorKey : column.id) === term.id,
           )?.meta?.sortFn,

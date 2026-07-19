@@ -1,5 +1,6 @@
 <script lang="ts">
   const componentLinks = [
+    { href: '/carousel', label: 'Carousel' },
     { href: '/button', label: 'Button' },
     { href: '/calendar', label: 'Calendar' },
     { href: '/card', label: 'Card' },
@@ -27,7 +28,7 @@
     { href: '/interactions', label: 'Interactions' },
     { href: '/resizable', label: 'Resizable' },
     { href: '/textarea', label: 'Textarea' },
-  ] as const
+  ].sort((left, right) => left.label.localeCompare(right.label))
 </script>
 
 <svelte:head><title>Svelte Admin</title></svelte:head>

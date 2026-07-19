@@ -74,6 +74,7 @@ type GridData = RowData
 type GridCell = Cell<GridFeatures, GridData>
 type GridHeader = Header<GridFeatures, GridData>
 type GridRow = Row<GridFeatures, GridData>
+type VirtualRowItem = { readonly index: number }
 type DataGridPartCleanup = void | (() => void) | { destroy?: () => void }
 export type DataGridPartAction<TItem> = {
   bivarianceHack(element: HTMLElement, item: TItem): DataGridPartCleanup
@@ -206,8 +207,8 @@ export class DataGrid {
     this.virtual()
       ? this.virtualizer
           .getVirtualItems()
-          .map(item => this.virtualRows()[item.index])
-          .filter((row): row is GridRow => row !== undefined)
+          .map((item: VirtualRowItem) => this.virtualRows()[item.index])
+          .filter((row: GridRow | undefined): row is GridRow => row !== undefined)
       : this.renderedRows(),
   )
   protected readonly virtualTop = computed(() => this.virtualizer.getVirtualItems()[0]?.start ?? 0)

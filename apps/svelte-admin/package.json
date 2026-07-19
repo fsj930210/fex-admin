@@ -5,10 +5,12 @@
   "dependencies": {
     "@fex/components-core": "workspace:*",
     "@fex/components-svelte": "workspace:*",
+    "@fex/components-styles": "workspace:*",
     "@fex/styles": "workspace:*",
     "@fex/utils": "workspace:*",
     "@sveltejs/kit": "latest",
     "@tailwindcss/vite": "catalog:",
+    "embla-carousel-auto-height": "8.6.0",
     "svelte": "5.56.4",
     "vite": "catalog:"
   },

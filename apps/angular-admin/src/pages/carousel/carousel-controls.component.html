@@ -1,0 +1,9 @@
+<div class="mt-3 flex justify-between">
+  <button type="button" class="cursor-pointer p-2 disabled:cursor-not-allowed" aria-label="Previous slide" [disabled]="!snapshot().canScrollPrev" (click)="controller().scrollPrev()"><fex-chevron-left-icon /></button>
+  <button type="button" class="cursor-pointer p-2 disabled:cursor-not-allowed" aria-label="Next slide" [disabled]="!snapshot().canScrollNext" (click)="controller().scrollNext()"><fex-chevron-right-icon /></button>
+</div>
+<div [class]="indicatorsClassName">
+  @for (index of snapshot().scrollSnapIndexes; track index) {
+    <button type="button" [attr.aria-current]="snapshot().selectedIndex === index ? 'true' : null" [attr.aria-label]="'Go to slide ' + (index + 1)" [class]="indicatorClassName" (click)="controller().scrollTo(index)"></button>
+  }
+</div>

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
 import {
   columnFilteringFeature,
   createFilteredRowModel,
+  type ColumnFiltersState,
   type FilterFn,
 } from '@fex/components-core/data-grid/features/column-filtering'
 import type { DataGridColumnMeta } from '@fex/components-core/data-grid/types'
@@ -73,7 +74,7 @@ class FilteringDemoComponent {
     return grid.table.store
       .get()
       .columnFilters.filter(
-        (term) =>
+        (term: ColumnFiltersState[number]) =>
           !grid.columns.find(
             (column) => ('accessorKey' in column ? column.accessorKey : column.id) === term.id,
           )?.meta?.filterFn,

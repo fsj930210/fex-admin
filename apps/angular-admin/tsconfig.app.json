@@ -6,5 +6,9 @@
     "outDir": "./dist/out-tsc"
   },
   "files": [],
-  "include": ["src/**/*.ts"]
+  "include": [
+    "src/**/*.ts",
+    "../../packages/components/styles/src/**/*.ts",
+    "../../packages/utils/src/**/*.ts"
+  ]
 }

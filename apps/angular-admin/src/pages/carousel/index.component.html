@@ -1,0 +1,30 @@
+<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
+  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
+    <header class="space-y-space-md">
+      <a routerLink="/" class="text-sm text-muted-foreground hover:text-foreground">返回首页</a>
+      <h1 class="text-2xl font-semibold">Carousel</h1>
+      <p class="text-sm text-muted-foreground">仅提供 primitive；控制按钮与指示器由应用按需组合。</p>
+    </header>
+
+    <fex-card title="Primitive composition" description="通过 controller 自行实现 Previous、Next 与 Indicators。">
+      <div [class]="classNames.root">
+        <div #basicViewport role="region" aria-roledescription="carousel" [class]="classNames.viewport"><div [class]="classNames.track">@for (slide of slides; track slide) {<div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full"><div class="flex h-40 items-center justify-center rounded-md bg-primary text-lg font-semibold text-primary-foreground">{{ slide }}</div></div>}</div></div>
+        <fex-carousel-controls [controller]="basicCarousel.controller" [snapshot]="basicCarousel.snapshot()" />
+      </div>
+    </fex-card>
+
+    <fex-card title="Autoplay" description="Autoplay 是 primitive 的内置配置，controller.autoplay 返回官方实例。">
+      <div [class]="classNames.root">
+        <div #autoplayViewport role="region" aria-roledescription="carousel" [class]="classNames.viewport"><div [class]="classNames.track">@for (slide of slides; track slide) {<div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full"><div class="flex h-40 items-center justify-center rounded-md bg-primary text-lg font-semibold text-primary-foreground">{{ slide }}</div></div>}</div></div>
+        <fex-carousel-controls [controller]="autoplayCarousel.controller" [snapshot]="autoplayCarousel.snapshot()" />
+      </div>
+    </fex-card>
+
+    <fex-card title="Official plugin" description="AutoHeight 直接从 embla-carousel-auto-height 导入，不经过 FEX 封装。">
+      <div [class]="classNames.root">
+        <div #autoHeightViewport role="region" aria-roledescription="carousel" [class]="classNames.viewport"><div [class]="classNames.track">@for (slide of autoHeightSlides; track slide.title) {<article role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full rounded-md bg-muted-background p-6"><h3 class="text-base font-semibold">{{ slide.title }}</h3><ul class="mt-3 space-y-2 text-sm text-muted-foreground">@for (item of slide.items; track item) {<li>{{ item }}</li>}</ul></article>}</div></div>
+        <fex-carousel-controls [controller]="autoHeightCarousel.controller" [snapshot]="autoHeightCarousel.snapshot()" />
+      </div>
+    </fex-card>
+  </div>
+</main>

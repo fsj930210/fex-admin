@@ -8,6 +8,7 @@
     "./badge": "./src/badge.ts",
     "./button": "./src/button.ts",
     "./card": "./src/card.ts",
+    "./carousel": "./src/carousel.ts",
     "./checkbox": "./src/checkbox.ts",
     "./dialog": "./src/dialog.ts",
     "./data-grid": "./src/data-grid.ts",

@@ -2,6 +2,7 @@ import { A } from '@solidjs/router'
 import { For } from 'solid-js'
 
 const componentLinks = [
+  { href: '/carousel', label: 'Carousel' },
   { href: '/button', label: 'Button' },
   { href: '/calendar', label: 'Calendar' },
   { href: '/card', label: 'Card' },
@@ -29,7 +30,7 @@ const componentLinks = [
   { href: '/interactions', label: 'Interactions' },
   { href: '/resizable', label: 'Resizable' },
   { href: '/textarea', label: 'Textarea' },
-] as const
+].sort((left, right) => left.label.localeCompare(right.label))
 
 function NavLink(props: { href: string; label: string }) {
   return (
