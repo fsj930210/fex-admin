@@ -13,6 +13,7 @@
     "./dialog": "./src/dialog.ts",
     "./data-grid": "./src/data-grid.ts",
     "./empty": "./src/empty.ts",
+    "./field": "./src/field.ts",
     "./input": "./src/input.ts",
     "./kbd": "./src/kbd.ts",
     "./listbox": "./src/listbox.ts",

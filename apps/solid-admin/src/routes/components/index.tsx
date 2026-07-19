@@ -28,6 +28,7 @@ const EmptyPage = lazy(() =>
 const InputPage = lazy(() =>
   import('../../pages/Input').then((module) => ({ default: module.InputPage })),
 )
+const FormPage = lazy(() => import('../../pages/Form').then((module) => ({ default: module.FormPage })))
 const KbdPage = lazy(() =>
   import('../../pages/Kbd').then((module) => ({ default: module.KbdPage })),
 )
@@ -125,6 +126,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/input',
     component: InputPage,
+  },
+  {
+    path: '/form',
+    component: FormPage,
   },
   {
     path: '/kbd',

@@ -12,6 +12,7 @@ const componentLinks = [
     { to: '/alert', label: 'Alert' },
     { to: '/badge', label: 'Badge' },
     { to: '/empty', label: 'Empty' },
+    { to: '/form', label: 'Form' },
     { to: '/input', label: 'Input' },
     { to: '/kbd', label: 'Kbd' },
     { to: '/listbox', label: 'Listbox' },

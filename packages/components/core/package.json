@@ -65,6 +65,8 @@
     "./dropzone/files": "./src/dropzone/files.ts",
     "./dropzone/types": "./src/dropzone/types.ts",
     "./dropzone/validate": "./src/dropzone/validate.ts",
+    "./form/scroll-to-first-error": "./src/form/scroll-to-first-error.ts",
+    "./form/rules": "./src/form/rules.ts",
     "./disclosure/create-disclosure": "./src/disclosure/create-disclosure.ts",
     "./expansion/create-expansion-controller": "./src/expansion/create-expansion-controller.ts",
     "./expansion/types": "./src/expansion/types.ts",
@@ -93,6 +95,7 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.7.6",
+    "@tanstack/form-core": "1.33.2",
     "@tanstack/table-core": "9.0.0-beta.47",
     "embla-carousel": "8.6.0",
     "embla-carousel-autoplay": "8.6.0"

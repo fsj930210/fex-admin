@@ -286,6 +286,12 @@
       "@fex/components-angular/primitive/empty": [
         "packages/components/angular/src/primitive/empty/empty.ts"
       ],
+      "@fex/components-angular/primitive/field": [
+        "packages/components/angular/src/primitive/field/field.ts"
+      ],
+      "@fex/components-angular/primitive/form": [
+        "packages/components/angular/src/primitive/form/form.ts"
+      ],
       "@fex/components-angular/primitive/input": [
         "packages/components/angular/src/primitive/input/input.ts"
       ],

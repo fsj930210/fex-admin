@@ -1,0 +1,2 @@
+<script lang="ts">import { fieldTitleClassName } from '@fex/components-styles/field'; import { cn } from '@fex/utils'; import type { HTMLAttributes } from 'svelte/elements'; import type { Snippet } from 'svelte'; let { class: className, children, ...rest }: HTMLAttributes<HTMLDivElement> & { children?: Snippet } = $props()</script>
+<div {...rest} data-slot="field-title" class={cn(fieldTitleClassName, className)}>{@render children?.()}</div>

@@ -10,6 +10,7 @@
     { href: '/alert', label: 'Alert' },
     { href: '/badge', label: 'Badge' },
     { href: '/empty', label: 'Empty' },
+    { href: '/form', label: 'Form' },
     { href: '/input', label: 'Input' },
     { href: '/kbd', label: 'Kbd' },
     { href: '/listbox', label: 'Listbox' },

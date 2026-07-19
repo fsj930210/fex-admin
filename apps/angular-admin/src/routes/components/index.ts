@@ -53,6 +53,11 @@ export const componentRoutes: Routes = [
       import('../../pages/input/index.component').then((module) => module.InputComponent),
   },
   {
+    path: 'form',
+    loadComponent: () =>
+      import('../../pages/form/index.component').then((module) => module.FormComponent),
+  },
+  {
     path: 'kbd',
     loadComponent: () =>
       import('../../pages/kbd/index.component').then((module) => module.KbdComponent),

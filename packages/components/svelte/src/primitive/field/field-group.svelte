@@ -1,0 +1,2 @@
+<script lang="ts">import { fieldGroupClassName } from '@fex/components-styles/field'; import { cn } from '@fex/utils'; import type { HTMLAttributes } from 'svelte/elements'; import type { Snippet } from 'svelte'; let { class: className, children, ...rest }: HTMLAttributes<HTMLDivElement> & { children?: Snippet } = $props()</script>
+<div {...rest} role={rest.role ?? 'group'} data-slot="field-group" class={cn(fieldGroupClassName, className)}>{@render children?.()}</div>

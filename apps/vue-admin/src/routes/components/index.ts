@@ -9,6 +9,7 @@ export const componentRoutes = [
   { path: '/alert', component: () => import('../../pages/Alert/index.vue') },
   { path: '/badge', component: () => import('../../pages/Badge/index.vue') },
   { path: '/empty', component: () => import('../../pages/Empty/index.vue') },
+  { path: '/form', component: () => import('../../pages/Form/index.vue') },
   { path: '/input', component: () => import('../../pages/Input/index.vue') },
   { path: '/kbd', component: () => import('../../pages/Kbd/index.vue') },
   { path: '/listbox', component: () => import('../../pages/Listbox/index.vue') },

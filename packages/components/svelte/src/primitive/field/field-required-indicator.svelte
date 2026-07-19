@@ -1,0 +1,2 @@
+<script lang="ts">import { fieldRequiredIndicatorClassName } from '@fex/components-styles/field'; import { cn } from '@fex/utils'; import type { HTMLAttributes } from 'svelte/elements'; import type { Snippet } from 'svelte'; let { class: className, children, ...rest }: HTMLAttributes<HTMLSpanElement> & { children?: Snippet } = $props()</script>
+<span {...rest} aria-hidden="true" data-slot="field-required-indicator" class={cn(fieldRequiredIndicatorClassName, className)}>{#if children}{@render children()}{:else}*{/if}</span>
