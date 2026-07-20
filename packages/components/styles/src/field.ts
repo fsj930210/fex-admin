@@ -4,14 +4,23 @@ export const fieldRootClassName = cva('group/field min-w-0', {
   variants: {
     orientation: {
       vertical: 'grid gap-1.5',
-      horizontal: 'grid grid-cols-[minmax(0,0.35fr)_minmax(0,1fr)] items-start gap-x-4 gap-y-1.5',
-      responsive: 'grid gap-1.5 md:grid-cols-[minmax(0,0.35fr)_minmax(0,1fr)] md:items-start md:gap-x-4',
+      horizontal: 'grid grid-cols-[max-content_minmax(0,1fr)] items-start gap-x-4 gap-y-1.5',
+      responsive: 'grid gap-1.5 md:grid-cols-[max-content_minmax(0,1fr)] md:items-start md:gap-x-4',
+      inline: 'flex flex-wrap items-center gap-2',
     },
   },
   defaultVariants: { orientation: 'vertical' },
 })
 
-export const fieldGroupClassName = 'grid min-w-0 gap-4'
+export const fieldGroupClassName = cva('min-w-0', {
+  variants: {
+    orientation: {
+      vertical: 'grid gap-4',
+      inline: 'flex flex-wrap items-end gap-4',
+    },
+  },
+  defaultVariants: { orientation: 'vertical' },
+})
 export const fieldSetClassName = 'grid min-w-0 gap-4 border-0 p-0'
 export const fieldLegendClassName = 'text-sm font-semibold text-foreground'
 export const fieldContentClassName = 'grid min-w-0 gap-1.5'
@@ -23,3 +32,4 @@ export const fieldRequiredIndicatorClassName = 'text-danger'
 export const fieldSeparatorClassName = 'relative h-px w-full bg-border'
 
 export type FieldStyleProps = VariantProps<typeof fieldRootClassName>
+export type FieldGroupStyleProps = VariantProps<typeof fieldGroupClassName>

@@ -44,6 +44,7 @@
     "./primitive/empty-description": "./src/primitive/empty/empty-description.svelte",
     "./primitive/empty-content": "./src/primitive/empty/empty-content.svelte",
     "./primitive/field": "./src/primitive/field/field-root.svelte",
+    "./primitive/form-field": "./src/primitive/field/field.svelte",
     "./primitive/field-control": "./src/primitive/field/field-control.svelte",
     "./primitive/field-label": "./src/primitive/field/field-label.svelte",
     "./primitive/field-required-indicator": "./src/primitive/field/field-required-indicator.svelte",

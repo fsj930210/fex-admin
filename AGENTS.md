@@ -47,6 +47,7 @@
 - 应用内通用 UI 放在对应 app 的 `src/components`；跨应用、跨框架或可沉淀的能力放到 `packages/*`。
 - 页面级代码放在对应 app 的 `src/pages` 或该 app 既有路由目录中；服务请求放在 `src/service`；mock 数据放在 `src/mock`；布局放在 `src/layouts`。
 - 组件示例页面默认使用目录化组织，避免后续示例覆盖更多特性时把所有内容塞进单文件；例如 React 使用 `src/pages/Button/index.tsx`，Vue 使用 `src/pages/Button/index.vue`，Solid 使用 `src/pages/Button/index.tsx`，Angular 使用 `src/pages/button/index.component.ts`。SvelteKit 按自身约定使用 `src/routes/<route>/+page.svelte`。
+- 单个代码文件不得超过 300 行（空行与纯注释不计）。预计或已经超过时，必须按清晰职责拆分为多个文件；示例页按场景拆分 demo 组件，容器页只负责页面结构与组合，禁止把大量示例堆进 `index.tsx`。
 - 应用路由必须独立放在 `src/routes` 目录中，并按模块划分子目录，例如 `src/routes/base`、`src/routes/components`、`src/routes/system`；不要把路由表散落在 `App.tsx`、`main.tsx` 或页面文件里。应用入口只负责挂载 Router/Outlet/Routes，不承载具体业务路由清单。
 - 路由页面默认按路由懒加载，避免首屏全量加载所有页面模块：React 必须封装统一的 lazy route helper，内部使用 `lazy`、`Suspense`、加载 fallback 和错误兜底，路由表里不要每次手写 `lazy(...then...)`；Vue Router 使用 `component: () => import(...)`，Solid 使用统一 lazy helper 或 `lazy`，Angular 使用 `loadComponent`，SvelteKit 依赖文件路由自动分块。只有极小的基础首页或框架限制场景可以同步导入，并要保持理由清晰。
 - 新增页面后必须同步注册到该 app 的实际路由模块，例如 React/Solid/Vue/Angular 的 `src/routes/**`；SvelteKit 使用文件路由时也要按模块目录组织。不能只创建页面文件不接路由。

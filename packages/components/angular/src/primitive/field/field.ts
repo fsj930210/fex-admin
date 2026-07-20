@@ -10,6 +10,7 @@ import {
   fieldSeparatorClassName,
   fieldSetClassName,
   fieldTitleClassName,
+  type FieldGroupStyleProps,
   type FieldStyleProps,
 } from '@fex/components-styles/field'
 import { ChangeDetectionStrategy, Component, Directive, Input, inject } from '@angular/core'
@@ -37,7 +38,7 @@ export class FieldRoot {
   protected readonly hostClassName = createHostClassName(() => fieldRootClassName({ orientation: this.orientation }))
 }
 
-@Directive({ selector: '[fexFieldControl]', standalone: true, host: { '[id]': 'field.controlId', '[attr.required]': 'field.required || null', '[attr.disabled]': 'field.disabled || null', '[attr.readonly]': 'field.readOnly || null', '[attr.aria-required]': 'field.required || null', '[attr.aria-invalid]': 'field.invalid || null', '[attr.aria-describedby]': 'describedBy', '[attr.aria-errormessage]': 'field.invalid && field.hasError ? field.errorId : null', 'data-slot': 'field-control' } })
+@Directive({ selector: '[fexFieldControl]', standalone: true, host: { '[id]': 'field.controlId', '[attr.disabled]': 'field.disabled || null', '[attr.readonly]': 'field.readOnly || null', '[attr.aria-required]': 'field.required || null', '[attr.aria-invalid]': 'field.invalid || null', '[attr.aria-describedby]': 'describedBy', '[attr.aria-errormessage]': 'field.invalid && field.hasError ? field.errorId : null', 'data-slot': 'field-control' } })
 export class FieldControl { readonly field = inject(FieldRoot); get describedBy() { return [this.field.hasDescription ? this.field.descriptionId : '', this.field.hasError ? this.field.errorId : ''].filter(Boolean).join(' ') || null } }
 
 @Directive({ selector: 'label[fexFieldLabel]', standalone: true, host: { '[class]': 'hostClassName()', '[attr.for]': 'field.controlId', 'data-slot': 'field-label' } })
@@ -48,8 +49,8 @@ export class FieldRequiredIndicator { protected readonly hostClassName = createH
 export class FieldDescription { readonly field = inject(FieldRoot); protected readonly hostClassName = createHostClassName(fieldDescriptionClassName) }
 @Directive({ selector: '[fexFieldError]', standalone: true, host: { '[class]': 'hostClassName()', '[id]': 'field.errorId', 'role': 'alert', 'aria-live': 'polite', 'data-slot': 'field-error' } })
 export class FieldError { readonly field = inject(FieldRoot); protected readonly hostClassName = createHostClassName(fieldErrorClassName) }
-@Directive({ selector: '[fexFieldGroup]', standalone: true, host: { '[class]': 'hostClassName()', 'role': 'group', 'data-slot': 'field-group' } })
-export class FieldGroup { protected readonly hostClassName = createHostClassName(fieldGroupClassName) }
+@Directive({ selector: '[fexFieldGroup]', standalone: true, host: { '[class]': 'hostClassName()', 'role': 'group', 'data-slot': 'field-group', '[attr.data-orientation]': 'orientation' } })
+export class FieldGroup { @Input() orientation?: FieldGroupStyleProps['orientation']; protected readonly hostClassName = createHostClassName(() => fieldGroupClassName({ orientation: this.orientation })) }
 @Directive({ selector: 'fieldset[fexFieldSet]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'field-set' } })
 export class FieldSet { protected readonly hostClassName = createHostClassName(fieldSetClassName) }
 @Directive({ selector: 'legend[fexFieldLegend]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'field-legend' } })

@@ -13,6 +13,7 @@ allowBuilds:
   msgpackr-extract: true
   msw: true
   nx: true
+  vue-demi: false
 
 catalog:
   '@tailwindcss/postcss': 4.3.1

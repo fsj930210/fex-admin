@@ -1,43 +1,226 @@
-<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl"><div class="mx-auto w-full max-w-5xl space-y-space-xl">
-  <header class="space-y-space-md"><a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">返回首页</a><h1 class="text-2xl font-semibold text-foreground">Form and Field primitives</h1><p class="max-w-3xl text-sm leading-6 text-muted-foreground">TanStack Form 是唯一状态源；每个示例独立展示一个可直接复用的 Form 场景。</p></header>
+<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
+  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
+    <header class="space-y-space-md">
+      <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">返回首页</a>
+      <div>
+        <h1 class="text-2xl font-semibold text-foreground">Form and Field primitives</h1>
+        <p class="max-w-3xl text-sm leading-6 text-muted-foreground">Form 提供提交边界和 form 实例上下文；Field 是唯一字段状态入口。FieldRoot、Label、Control、Description 和 Error 只负责 DOM 语义、可访问性与结构。</p>
+      </div>
+    </header>
 
-  <fex-card title="Basic form" description="必填、原生 TanStack validators、自定义 Checkbox、异步提交、重置和提交状态。"><form [fexForm]="form" novalidate class="grid max-w-xl gap-space-lg">
-    <ng-container [fexField]="form" name="account" [rules]="accountRules" #account="field"><fex-field-root [required]="true" [invalid]="account.api.state.meta.isTouched && !account.api.state.meta.isValid" [hasDescription]="true" [hasError]="account.api.state.meta.isTouched && !account.api.state.meta.isValid"><label fexFieldLabel>账号 <span fexFieldRequiredIndicator>*</span></label><fex-input-root [value]="account.api.state.value" (valueChange)="account.api.handleChange($event)" [invalid]="account.api.state.meta.isTouched && !account.api.state.meta.isValid"><input fexInputControl fexFieldControl autocomplete="username" placeholder="admin" (blur)="account.api.handleBlur()" /></fex-input-root><p fexFieldDescription>失焦时校验必填。</p>@if (account.api.state.meta.isTouched && !account.api.state.meta.isValid) {<div fexFieldError>@for (error of account.api.state.meta.errors; track error) {<div>{{ error }}</div>}</div>}</fex-field-root></ng-container>
-    <ng-container [tanstackField]="form" name="password" [validators]="passwordValidators" #password="field"><fex-field-root [required]="true" [invalid]="password.api.state.meta.isTouched && !password.api.state.meta.isValid" [hasError]="password.api.state.meta.isTouched && !password.api.state.meta.isValid"><label fexFieldLabel>密码 <span fexFieldRequiredIndicator>*</span></label><fex-input-root [value]="password.api.state.value" (valueChange)="password.api.handleChange($event)" [invalid]="password.api.state.meta.isTouched && !password.api.state.meta.isValid"><input fexInputControl fexFieldControl type="password" autocomplete="current-password" (blur)="password.api.handleBlur()" /></fex-input-root>@if (password.api.state.meta.isTouched && !password.api.state.meta.isValid) {<div fexFieldError>@for (error of password.api.state.meta.errors; track error) {<div>{{ error }}</div>}</div>}</fex-field-root></ng-container>
-    <ng-container [tanstackField]="form" name="remember" #remember="field"><fex-field-root orientation="horizontal"><button fexCheckbox fexFieldControl [checked]="remember.api.state.value" (checkedChange)="remember.api.handleChange($event.checked === true)"></button><div fexFieldContent><label fexFieldLabel>记住登录状态</label><p fexFieldDescription>自定义控件只需显式绑定值和变更事件。</p></div></fex-field-root></ng-container>
-    <div class="flex flex-wrap gap-space-sm"><button fexButton type="submit">登录</button><button fexButton type="button" variant="outline" (click)="form.reset()">重置</button></div>
-  </form></fex-card>
+    <fex-card title="Basic form" description="Field 是唯一字段入口；直接使用 TanStack validators 管理校验。">
+      <form [fexForm]="loginForm" class="grid max-w-xl gap-space-lg">
+        <ng-container [fexField]="loginForm" name="account" [validators]="accountValidators" #account="field">
+          <fex-field-root [required]="true" [invalid]="invalid(account.api)" [hasDescription]="true" [hasError]="invalid(account.api)">
+            <label fexFieldLabel>账号 <span fexFieldRequiredIndicator>*</span></label>
+            <fex-input-root [value]="account.api.state.value" (valueChange)="account.api.handleChange($event)" [invalid]="invalid(account.api)">
+              <input fexInputControl fexFieldControl autocomplete="username" placeholder="admin" (blur)="account.api.handleBlur()" />
+            </fex-input-root>
+            <p fexFieldDescription>使用 validators.onBlur 校验必填。</p>
+            @if (invalid(account.api)) { <div fexFieldError>@for (error of errors(account.api); track error) { <div>{{ error }}</div> }</div> }
+          </fex-field-root>
+        </ng-container>
+        <ng-container [fexField]="loginForm" name="password" [validators]="loginPasswordValidators" #password="field">
+          <fex-field-root [required]="true" [invalid]="invalid(password.api)" [hasError]="invalid(password.api)">
+            <label fexFieldLabel>密码 <span fexFieldRequiredIndicator>*</span></label>
+            <fex-input-root [value]="password.api.state.value" (valueChange)="password.api.handleChange($event)" [invalid]="invalid(password.api)">
+              <input fexInputControl fexFieldControl type="password" autocomplete="current-password" (blur)="password.api.handleBlur()" />
+            </fex-input-root>
+            @if (invalid(password.api)) { <div fexFieldError>@for (error of errors(password.api); track error) { <div>{{ error }}</div> }</div> }
+          </fex-field-root>
+        </ng-container>
+        <ng-container [fexField]="loginForm" name="remember" #remember="field">
+          <fex-field-root orientation="horizontal">
+            <button fexCheckbox fexFieldControl [checked]="remember.api.state.value" (checkedChange)="remember.api.handleChange($event.checked === true)"></button>
+            <div fexFieldContent>
+              <label fexFieldLabel>记住登录状态</label>
+              <p fexFieldDescription>自定义控件显式绑定值与事件。</p>
+            </div>
+          </fex-field-root>
+        </ng-container>
+        <div class="flex gap-space-sm">
+          <button fexButton type="submit" [disabled]="!loginForm.state.canSubmit || loginForm.state.isSubmitting">{{ loginForm.state.isSubmitting ? '提交中…' : '登录' }}</button>
+          <button fexButton type="button" variant="outline" (click)="loginForm.reset()">重置</button>
+        </div>
+      </form>
+    </fex-card>
 
-  <fex-card title="Validation timing and dependencies" description="校验时机、防抖异步校验、自定义 validator，以及密码确认依赖。"><form [fexForm]="validationForm" class="grid max-w-xl gap-space-lg">
-    <ng-container [fexField]="validationForm" name="username" [rules]="usernameRules" [validateTrigger]="['blur', 'change']" [validateDebounce]="400" #username="field"><fex-field-root [required]="true" [invalid]="username.api.state.meta.isTouched && !username.api.state.meta.isValid" [hasDescription]="true" [hasError]="username.api.state.meta.isTouched && !username.api.state.meta.isValid"><label fexFieldLabel>用户名 <span fexFieldRequiredIndicator>*</span></label><fex-input-root [value]="username.api.state.value" (valueChange)="username.api.handleChange($event)" [invalid]="username.api.state.meta.isTouched && !username.api.state.meta.isValid"><input fexInputControl fexFieldControl (blur)="username.api.handleBlur()" /></fex-input-root><p fexFieldDescription>失焦校验必填；输入 admin 触发 400ms 防抖异步校验。</p>@if (username.api.state.meta.isTouched && !username.api.state.meta.isValid) {<div fexFieldError>@for (error of username.api.state.meta.errors; track error) {<div>{{ error }}</div>}</div>}</fex-field-root></ng-container>
-    <ng-container [fexField]="validationForm" name="password" [rules]="passwordRules" #newPassword="field"><fex-field-root [required]="true" [invalid]="newPassword.api.state.meta.isTouched && !newPassword.api.state.meta.isValid" [hasError]="newPassword.api.state.meta.isTouched && !newPassword.api.state.meta.isValid"><label fexFieldLabel>新密码 <span fexFieldRequiredIndicator>*</span></label><fex-input-root [value]="newPassword.api.state.value" (valueChange)="newPassword.api.handleChange($event)" [invalid]="newPassword.api.state.meta.isTouched && !newPassword.api.state.meta.isValid"><input fexInputControl fexFieldControl type="password" (blur)="newPassword.api.handleBlur()" /></fex-input-root>@if (newPassword.api.state.meta.isTouched && !newPassword.api.state.meta.isValid) {<div fexFieldError>@for (error of newPassword.api.state.meta.errors; track error) {<div>{{ error }}</div>}</div>}</fex-field-root></ng-container>
-    <ng-container [fexField]="validationForm" name="confirmPassword" [dependencies]="['password']" [rules]="confirmPasswordRules" #confirmPassword="field"><fex-field-root [required]="true" [invalid]="confirmPassword.api.state.meta.isTouched && !confirmPassword.api.state.meta.isValid" [hasDescription]="true" [hasError]="confirmPassword.api.state.meta.isTouched && !confirmPassword.api.state.meta.isValid"><label fexFieldLabel>确认密码 <span fexFieldRequiredIndicator>*</span></label><fex-input-root [value]="confirmPassword.api.state.value" (valueChange)="confirmPassword.api.handleChange($event)" [invalid]="confirmPassword.api.state.meta.isTouched && !confirmPassword.api.state.meta.isValid"><input fexInputControl fexFieldControl type="password" (blur)="confirmPassword.api.handleBlur()" /></fex-input-root><p fexFieldDescription>密码更新后，dependencies 会自动重新校验确认密码。</p>@if (confirmPassword.api.state.meta.isTouched && !confirmPassword.api.state.meta.isValid) {<div fexFieldError>@for (error of confirmPassword.api.state.meta.errors; track error) {<div>{{ error }}</div>}</div>}</fex-field-root></ng-container>
-    <button fexButton class="w-fit" type="submit">验证</button>
-  </form></fex-card>
+    <fex-card title="Validation timing, async validation and dependencies" description="展示 onBlur、onChangeAsync、防抖与 onChangeListenTo。">
+      <form [fexForm]="validationForm" class="grid max-w-xl gap-space-lg">
+        <ng-container [fexField]="validationForm" name="username" [validators]="usernameValidators" #username="field">
+          <fex-field-root [required]="true" [invalid]="invalid(username.api)" [hasDescription]="true" [hasError]="invalid(username.api)">
+            <label fexFieldLabel>用户名 <span fexFieldRequiredIndicator>*</span></label>
+            <fex-input-root [value]="username.api.state.value" (valueChange)="username.api.handleChange($event)" [invalid]="invalid(username.api)">
+              <input fexInputControl fexFieldControl (blur)="username.api.handleBlur()" />
+            </fex-input-root>
+            <p fexFieldDescription>onBlur 校验必填；onChangeAsync 经 400ms 防抖校验占用。</p>
+            @if (invalid(username.api)) { <div fexFieldError>@for (error of errors(username.api); track error) { <div>{{ error }}</div> }</div> }
+          </fex-field-root>
+        </ng-container>
+        <ng-container [fexField]="validationForm" name="password" [validators]="newPasswordValidators" #newPassword="field">
+          <fex-field-root [required]="true" [invalid]="invalid(newPassword.api)" [hasError]="invalid(newPassword.api)">
+            <label fexFieldLabel>新密码 <span fexFieldRequiredIndicator>*</span></label>
+            <fex-input-root [value]="newPassword.api.state.value" (valueChange)="newPassword.api.handleChange($event)" [invalid]="invalid(newPassword.api)">
+              <input fexInputControl fexFieldControl type="password" (blur)="newPassword.api.handleBlur()" />
+            </fex-input-root>
+            @if (invalid(newPassword.api)) { <div fexFieldError>@for (error of errors(newPassword.api); track error) { <div>{{ error }}</div> }</div> }
+          </fex-field-root>
+        </ng-container>
+        <ng-container [fexField]="validationForm" name="confirmPassword" [validators]="confirmValidators" #confirm="field">
+          <fex-field-root [required]="true" [invalid]="invalid(confirm.api)" [hasDescription]="true" [hasError]="invalid(confirm.api)">
+            <label fexFieldLabel>确认密码 <span fexFieldRequiredIndicator>*</span></label>
+            <fex-input-root [value]="confirm.api.state.value" (valueChange)="confirm.api.handleChange($event)" [invalid]="invalid(confirm.api)">
+              <input fexInputControl fexFieldControl type="password" (blur)="confirm.api.handleBlur()" />
+            </fex-input-root>
+            <p fexFieldDescription>password 变化时，onChangeListenTo 会重跑当前字段校验。</p>
+            @if (invalid(confirm.api)) { <div fexFieldError>@for (error of errors(confirm.api); track error) { <div>{{ error }}</div> }</div> }
+          </fex-field-root>
+        </ng-container>
+        <button fexButton class="w-fit" type="submit">验证</button>
+      </form>
+    </fex-card>
 
-  <fex-card title="Dynamic validation rules" description="规则工厂读取当前表单值，根据开关动态决定字段是否必填。"><form [fexForm]="dynamicForm" class="grid max-w-xl gap-space-lg">
-    <ng-container [tanstackField]="dynamicForm" name="nicknameRequired" #nicknameRequired="field"><fex-field-root orientation="horizontal"><button fexCheckbox fexFieldControl [checked]="nicknameRequired.api.state.value" (checkedChange)="nicknameRequired.api.handleChange($event.checked === true)"></button><div fexFieldContent><label fexFieldLabel>昵称必填</label><p fexFieldDescription>切换后立即改变下方字段的校验规则。</p></div></fex-field-root></ng-container>
-    <ng-container [fexField]="dynamicForm" name="nickname" [dependencies]="['nicknameRequired']" [rules]="nicknameRules" #dynamicNickname="field"><fex-field-root [required]="dynamicForm.state.values.nicknameRequired" [invalid]="dynamicNickname.api.state.meta.isTouched && !dynamicNickname.api.state.meta.isValid" [hasError]="dynamicNickname.api.state.meta.isTouched && !dynamicNickname.api.state.meta.isValid"><label fexFieldLabel>昵称 @if (dynamicForm.state.values.nicknameRequired) {<span fexFieldRequiredIndicator>*</span>}</label><fex-input-root [value]="dynamicNickname.api.state.value" (valueChange)="dynamicNickname.api.handleChange($event)" [invalid]="dynamicNickname.api.state.meta.isTouched && !dynamicNickname.api.state.meta.isValid"><input fexInputControl fexFieldControl (blur)="dynamicNickname.api.handleBlur()" /></fex-input-root>@if (dynamicNickname.api.state.meta.isTouched && !dynamicNickname.api.state.meta.isValid) {<div fexFieldError>@for (error of dynamicNickname.api.state.meta.errors; track error) {<div>{{ error }}</div>}</div>}</fex-field-root></ng-container>
-    <button fexButton class="w-fit" type="submit">检查动态规则</button>
-  </form></fex-card>
+    <fex-card title="Dynamic validation and cascading updates" description="业务联动在用户事件中完成；校验依赖使用 TanStack validators.onChangeListenTo。">
+      <div class="grid gap-space-xl lg:grid-cols-2">
+        <form [fexForm]="dynamicForm" class="grid gap-space-lg">
+          <ng-container [fexField]="dynamicForm" name="nicknameRequired" #required="field">
+            <fex-field-root orientation="horizontal">
+              <button fexCheckbox fexFieldControl [checked]="required.api.state.value" (checkedChange)="required.api.handleChange($event.checked === true)"></button>
+              <div fexFieldContent>
+                <label fexFieldLabel>昵称必填</label>
+                <p fexFieldDescription>开关改变后，昵称字段的 onChange 校验会自动重跑。</p>
+              </div>
+            </fex-field-root>
+          </ng-container>
+          <ng-container [fexField]="dynamicForm" name="nickname" [validators]="nicknameValidators" #nickname="field">
+            <fex-field-root [required]="dynamicForm.state.values.nicknameRequired" [invalid]="invalid(nickname.api)" [hasError]="invalid(nickname.api)">
+              <label fexFieldLabel>昵称</label>
+              <fex-input-root [value]="nickname.api.state.value" (valueChange)="nickname.api.handleChange($event)" [invalid]="invalid(nickname.api)">
+                <input fexInputControl fexFieldControl (blur)="nickname.api.handleBlur()" />
+              </fex-input-root>
+            </fex-field-root>
+          </ng-container>
+          <button fexButton class="w-fit" type="submit">检查规则</button>
+        </form>
+        <form [fexForm]="cascadeForm" class="grid gap-space-lg">
+          <ng-container [fexField]="cascadeForm" name="province" #province="field">
+            <fex-field-root>
+              <label fexFieldLabel>省份</label>
+              <select fexFieldControl [class]="selectClass" [value]="province.api.state.value" (change)="changeProvince(province.api, $event)">
+                @for (item of provinceNames; track item) { <option [value]="item">{{ item }}</option> }
+              </select>
+            </fex-field-root>
+          </ng-container>
+          <ng-container [fexField]="cascadeForm" name="city" #city="field">
+            <fex-field-root [hasDescription]="true">
+              <label fexFieldLabel>城市</label>
+              <select fexFieldControl [class]="selectClass" [value]="city.api.state.value" (change)="city.api.handleChange($any($event.target).value)">
+                @for (item of cities(cascadeForm.state.values.province); track item) { <option [value]="item">{{ item }}</option> }
+              </select>
+              <p fexFieldDescription>省份 change 事件中同步重设城市。</p>
+            </fex-field-root>
+          </ng-container>
+          <button fexButton class="w-fit" type="submit">保存地区</button>
+        </form>
+      </div>
+    </fex-card>
 
-  <fex-card title="Cascading fields" description="省份变化时在同一个 change 事件中更新城市，不依赖 effect。"><form [fexForm]="cascadeForm" class="grid max-w-xl gap-space-lg">
-    <ng-container [tanstackField]="cascadeForm" name="province" #province="field"><fex-field-root><label fexFieldLabel>省份</label><select fexFieldControl [class]="selectClass" [value]="province.api.state.value" (blur)="province.api.handleBlur()" (change)="changeProvince(province.api, $event)">@for (item of provinceNames; track item) {<option [value]="item">{{ item }}</option>}</select></fex-field-root></ng-container>
-    <ng-container [tanstackField]="cascadeForm" name="city" #city="field"><fex-field-root [hasDescription]="true"><label fexFieldLabel>城市</label><select fexFieldControl [class]="selectClass" [value]="city.api.state.value" (blur)="city.api.handleBlur()" (change)="city.api.handleChange($any($event.target).value)">@for (item of cities(cascadeForm.state.values.province); track item) {<option [value]="item">{{ item }}</option>}</select><p fexFieldDescription>城市选项由当前省份派生。</p></fex-field-root></ng-container>
-    <button fexButton class="w-fit" type="submit">提交地区</button>
-  </form></fex-card>
+    <fex-card title="Field structure and primitive layouts" description="布局属于 Field 的 DOM 结构能力，不是 Form 的 labelCol/wrapperCol 配置；UI 层以后只组合这些 primitive。">
+      <div fexFieldGroup>
+        <fex-field-root orientation="vertical"><label fexFieldLabel>Vertical</label><fex-input-root value=""><input fexInputControl placeholder="标签在上方" /></fex-input-root></fex-field-root>
+        <fex-field-root orientation="horizontal"><label fexFieldLabel>Horizontal</label><fex-input-root value=""><input fexInputControl placeholder="标签按内容宽度排列" /></fex-input-root></fex-field-root>
+        <fex-field-root orientation="responsive"><label fexFieldLabel>Responsive</label><fex-input-root value=""><input fexInputControl placeholder="窄屏纵向，变宽后横向" /></fex-input-root></fex-field-root>
+      </div>
+      <div fexFieldGroup orientation="inline" class="mt-space-lg">
+        <fex-field-root orientation="inline"><label fexFieldLabel>关键字</label><fex-input-root value=""><input fexInputControl class="w-48" placeholder="内联筛选" /></fex-input-root></fex-field-root>
+        <fex-field-root orientation="inline"><label fexFieldLabel>状态</label><select [class]="selectClass + ' w-32'"><option>全部</option><option>启用</option></select></fex-field-root>
+        <button fexButton type="button" variant="outline">查询</button>
+      </div>
+    </fex-card>
 
-  <fex-card title="Form instance and initialValue" description="字段 initialValue，以及 getFieldValue、setFieldValue、reset 实例方法。"><form [fexForm]="instanceForm" class="grid max-w-xl gap-space-lg">
-    <ng-container [tanstackField]="instanceForm" name="source" #source="field"><fex-field-root [hasDescription]="true"><label fexFieldLabel>Form 初始值</label><fex-input-root [value]="source.api.state.value" (valueChange)="source.api.handleChange($event)"><input fexInputControl fexFieldControl (blur)="source.api.handleBlur()" /></fex-input-root><p fexFieldDescription>来自 injectForm.defaultValues。</p></fex-field-root></ng-container>
-    <ng-container [fexField]="instanceForm" name="nickname" initialValue="来自 Field initialValue" #instanceNickname="field"><fex-field-root [hasDescription]="true"><label fexFieldLabel>字段初始值</label><fex-input-root [value]="instanceNickname.api.state.value" (valueChange)="instanceNickname.api.handleChange($event)"><input fexInputControl fexFieldControl (blur)="instanceNickname.api.handleBlur()" /></fex-input-root><p fexFieldDescription>initialValue 是 TanStack Field defaultValue 的语义别名。</p></fex-field-root></ng-container>
-    <div class="flex flex-wrap gap-space-sm"><button fexButton type="button" (click)="setNickname()">设置昵称</button><button fexButton type="button" variant="outline" (click)="getNickname()">读取昵称</button><button fexButton type="button" variant="outline" (click)="instanceForm.reset()">重置</button></div><p class="rounded-md bg-muted px-3 py-2 text-sm text-muted-foreground" aria-live="polite">{{ instanceResult() }}</p>
-  </form></fex-card>
+    <fex-card title="Form instance and defaultValue" description="字段默认值，以及 getFieldValue、setFieldValue、reset 等 TanStack Form 实例方法。">
+      <form [fexForm]="instanceForm" class="grid max-w-xl gap-space-lg">
+        <ng-container [fexField]="instanceForm" name="source" #source="field">
+          <fex-field-root [hasDescription]="true"><label fexFieldLabel>Form 初始值</label><fex-input-root [value]="source.api.state.value" (valueChange)="source.api.handleChange($event)"><input fexInputControl fexFieldControl (blur)="source.api.handleBlur()" /></fex-input-root><p fexFieldDescription>来自 useForm.defaultValues。</p></fex-field-root>
+        </ng-container>
+        <ng-container [fexField]="instanceForm" name="nickname" defaultValue="来自 Field defaultValue" #instanceNickname="field">
+          <fex-field-root [hasDescription]="true"><label fexFieldLabel>字段初始值</label><fex-input-root [value]="instanceNickname.api.state.value" (valueChange)="instanceNickname.api.handleChange($event)"><input fexInputControl fexFieldControl (blur)="instanceNickname.api.handleBlur()" /></fex-input-root><p fexFieldDescription>使用 TanStack 原生 defaultValue。</p></fex-field-root>
+        </ng-container>
+        <div class="flex flex-wrap gap-space-sm"><button fexButton type="button" (click)="setNickname()">设置昵称</button><button fexButton type="button" variant="outline" (click)="getNickname()">读取昵称</button><button fexButton type="button" variant="outline" (click)="instanceForm.reset()">重置</button></div>
+        <p class="rounded-md bg-muted px-3 py-2 text-sm text-muted-foreground" aria-live="polite">{{ instanceResult() }}</p>
+      </form>
+    </fex-card>
 
-  <fex-card title="Scroll to first error" description="点击顶部按钮提交长表单；校验失败后自动滚动并聚焦底部第一个错误字段。"><form [fexForm]="scrollForm" [scrollToFirstError]="scrollOptions" class="grid max-w-xl gap-space-lg"><button fexButton class="w-fit" type="submit">校验并滚动到错误字段</button><ng-container [tanstackField]="scrollForm" name="note" #note="field"><fex-field-root><label fexFieldLabel>备注（选填）</label><fex-input-root [value]="note.api.state.value" (valueChange)="note.api.handleChange($event)"><input fexInputControl fexFieldControl (blur)="note.api.handleBlur()" /></fex-input-root></fex-field-root></ng-container><div class="flex min-h-[28rem] items-center justify-center rounded-md border border-dashed border-border text-sm text-muted-foreground">模拟较长的表单内容</div><ng-container [fexField]="scrollForm" name="deliveryAddress" validateTrigger="submit" [rules]="deliveryRules" #deliveryAddress="field"><fex-field-root [required]="true" [invalid]="deliveryAddress.api.state.meta.isTouched && !deliveryAddress.api.state.meta.isValid" [hasDescription]="true" [hasError]="deliveryAddress.api.state.meta.isTouched && !deliveryAddress.api.state.meta.isValid"><label fexFieldLabel>收货地址 <span fexFieldRequiredIndicator>*</span></label><fex-input-root [value]="deliveryAddress.api.state.value" (valueChange)="deliveryAddress.api.handleChange($event)" [invalid]="deliveryAddress.api.state.meta.isTouched && !deliveryAddress.api.state.meta.isValid"><input fexInputControl fexFieldControl placeholder="此字段位于长表单底部" (blur)="deliveryAddress.api.handleBlur()" /></fex-input-root><p fexFieldDescription>这是提交失败后的定位目标。</p>@if (deliveryAddress.api.state.meta.isTouched && !deliveryAddress.api.state.meta.isValid) {<div fexFieldError>@for (error of deliveryAddress.api.state.meta.errors; track error) {<div>{{ error }}</div>}</div>}</fex-field-root></ng-container></form></fex-card>
+    <fex-card title="Dynamic nested fields" description="数组本身也是 Field；在用户事件中调用 pushValue、insertValue、removeValue。嵌套字段使用完整路径，数组项使用稳定业务 id 作为 Angular track。">
+      <form [fexForm]="contactsForm" class="grid gap-space-lg">
+        <ng-container [fexField]="contactsForm" name="contacts" [validators]="contactsValidators" #contacts="field">
+          <fieldset fexFieldSet>
+            <legend fexFieldLegend>联系人</legend>
+            <p class="text-sm text-muted-foreground">每位联系人的姓名、邮箱和通知偏好都是独立的嵌套字段。</p>
+            <div fexFieldGroup>
+              @for (contact of contacts.api.state.value; track contact.id; let index = $index) {
+                <div class="rounded-md border border-border p-4">
+                  <div fexFieldTitle>联系人 {{ index + 1 }}</div>
+                  <div fexFieldGroup class="mt-space-md">
+                    <ng-container [fexField]="contactsForm" [name]="'contacts[' + index + '].name'" [validators]="contactNameValidators" #contactName="field">
+                      <fex-field-root [required]="true" [invalid]="invalid(contactName.api)" [hasError]="invalid(contactName.api)"><label fexFieldLabel>姓名 <span fexFieldRequiredIndicator>*</span></label><fex-input-root [value]="contactName.api.state.value" (valueChange)="contactName.api.handleChange($event)" [invalid]="invalid(contactName.api)"><input fexInputControl fexFieldControl (blur)="contactName.api.handleBlur()" /></fex-input-root>@if (invalid(contactName.api)) { <div fexFieldError>@for (error of errors(contactName.api); track error) { <div>{{ error }}</div> }</div> }</fex-field-root>
+                    </ng-container>
+                    <ng-container [fexField]="contactsForm" [name]="'contacts[' + index + '].email'" [validators]="contactEmailValidators" #contactEmail="field">
+                      <fex-field-root [required]="true" [invalid]="invalid(contactEmail.api)" [hasError]="invalid(contactEmail.api)"><label fexFieldLabel>邮箱 <span fexFieldRequiredIndicator>*</span></label><fex-input-root [value]="contactEmail.api.state.value" (valueChange)="contactEmail.api.handleChange($event)" [invalid]="invalid(contactEmail.api)"><input fexInputControl fexFieldControl type="email" (blur)="contactEmail.api.handleBlur()" /></fex-input-root>@if (invalid(contactEmail.api)) { <div fexFieldError>@for (error of errors(contactEmail.api); track error) { <div>{{ error }}</div> }</div> }</fex-field-root>
+                    </ng-container>
+                    <ng-container [fexField]="contactsForm" [name]="'contacts[' + index + '].notifications'" #notifications="field">
+                      <fex-field-root orientation="horizontal"><button fexCheckbox fexFieldControl [checked]="notifications.api.state.value" (checkedChange)="notifications.api.handleChange($event.checked === true)"></button><div fexFieldContent><label fexFieldLabel>接收通知</label><p fexFieldDescription>嵌套布尔字段。</p></div></fex-field-root>
+                    </ng-container>
+                  </div>
+                  <div class="mt-space-md flex gap-space-sm"><button fexButton type="button" variant="outline" (click)="contacts.api.insertValue(index + 1, createContact())">在后面插入</button><button fexButton type="button" variant="outline" [disabled]="contacts.api.state.value.length === 1" (click)="contacts.api.removeValue(index)">删除</button></div>
+                </div>
+              }
+            </div>
+          </fieldset>
+          <button fexButton class="w-fit" type="button" variant="outline" (click)="contacts.api.pushValue(createContact())">新增联系人</button>
+        </ng-container>
+        <button fexButton class="w-fit" type="submit">校验并保存联系人</button>
+      </form>
+    </fex-card>
 
-  <fex-card title="Form layouts" description="vertical、horizontal、responsive 三种字段布局；responsive 在窄屏自动回到纵向。"><ng-container [fexForm]="layoutForm"><div fexFieldGroup><ng-container [tanstackField]="layoutForm" name="vertical" #vertical="field"><fex-field-root orientation="vertical" [hasDescription]="true"><label fexFieldLabel>Vertical</label><fex-input-root [value]="vertical.api.state.value" (valueChange)="vertical.api.handleChange($event)"><input fexInputControl fexFieldControl placeholder="标签在控件上方" /></fex-input-root><p fexFieldDescription>默认布局。</p></fex-field-root></ng-container><ng-container [tanstackField]="layoutForm" name="horizontal" #horizontal="field"><fex-field-root orientation="horizontal" [hasDescription]="true"><label fexFieldLabel>Horizontal</label><fex-input-root [value]="horizontal.api.state.value" (valueChange)="horizontal.api.handleChange($event)"><input fexInputControl fexFieldControl placeholder="标签与控件同一行" /></fex-input-root><p fexFieldDescription>适合桌面端紧凑表单。</p></fex-field-root></ng-container><ng-container [tanstackField]="layoutForm" name="responsive" #responsive="field"><fex-field-root orientation="responsive" [hasDescription]="true"><label fexFieldLabel>Responsive</label><fex-input-root [value]="responsive.api.state.value" (valueChange)="responsive.api.handleChange($event)"><input fexInputControl fexFieldControl placeholder="调整窗口宽度查看变化" /></fex-input-root><p fexFieldDescription>窄屏纵向，md 以上横向。</p></fex-field-root></ng-container></div></ng-container></fex-card>
+    <fex-card title="Path prefix and multiple forms" description="primitive 不隐藏路径来源，也不注册全局 Form.Provider；跨表单更新由明确的用户事件完成。">
+      <div class="grid gap-space-xl lg:grid-cols-2">
+        <form [fexForm]="prefixedForm" class="grid gap-space-lg">
+          <fieldset fexFieldSet>
+            <legend fexFieldLegend>profile</legend>
+            <div fexFieldGroup>
+              <ng-container [fexField]="prefixedForm" name="profile.displayName" [validators]="displayNameValidators" #displayName="field"><fex-field-root [required]="true" [invalid]="invalid(displayName.api)" [hasError]="invalid(displayName.api)"><label fexFieldLabel>显示名称 <span fexFieldRequiredIndicator>*</span></label><fex-input-root [value]="displayName.api.state.value" (valueChange)="displayName.api.handleChange($event)" [invalid]="invalid(displayName.api)"><input fexInputControl fexFieldControl (blur)="displayName.api.handleBlur()" /></fex-input-root>@if (invalid(displayName.api)) { <div fexFieldError>@for (error of errors(displayName.api); track error) { <div>{{ error }}</div> }</div> }</fex-field-root></ng-container>
+              <ng-container [fexField]="prefixedForm" name="profile.email" [validators]="profileEmailValidators" #profileEmail="field"><fex-field-root [invalid]="invalid(profileEmail.api)" [hasError]="invalid(profileEmail.api)"><label fexFieldLabel>联系邮箱</label><fex-input-root [value]="profileEmail.api.state.value" (valueChange)="profileEmail.api.handleChange($event)" [invalid]="invalid(profileEmail.api)"><input fexInputControl fexFieldControl type="email" (blur)="profileEmail.api.handleBlur()" /></fex-input-root>@if (invalid(profileEmail.api)) { <div fexFieldError>@for (error of errors(profileEmail.api); track error) { <div>{{ error }}</div> }</div> }</fex-field-root></ng-container>
+            </div>
+          </fieldset>
+          <button fexButton class="w-fit" type="submit">提交 profile</button>
+        </form>
+        <div class="grid gap-space-md">
+          <form [fexForm]="profileForm" class="grid gap-space-md rounded-md border border-border p-4">
+            <div fexFieldTitle>资料表单</div>
+            <ng-container [fexField]="profileForm" name="name" #profileName="field"><fex-field-root><label fexFieldLabel>姓名</label><fex-input-root [value]="profileName.api.state.value" (valueChange)="profileName.api.handleChange($event)"><input fexInputControl fexFieldControl (blur)="profileName.api.handleBlur()" /></fex-input-root></fex-field-root></ng-container>
+            <ng-container [fexField]="profileForm" name="email" [validators]="requiredEmailValidators" #profileFormEmail="field"><fex-field-root [required]="true" [invalid]="invalid(profileFormEmail.api)" [hasError]="invalid(profileFormEmail.api)"><label fexFieldLabel>资料邮箱 <span fexFieldRequiredIndicator>*</span></label><fex-input-root [value]="profileFormEmail.api.state.value" (valueChange)="profileFormEmail.api.handleChange($event)" [invalid]="invalid(profileFormEmail.api)"><input fexInputControl fexFieldControl type="email" (blur)="profileFormEmail.api.handleBlur()" /></fex-input-root>@if (invalid(profileFormEmail.api)) { <div fexFieldError>@for (error of errors(profileFormEmail.api); track error) { <div>{{ error }}</div> }</div> }</fex-field-root></ng-container>
+            <button fexButton class="w-fit" type="submit">保存资料</button>
+          </form>
+          <form [fexForm]="securityForm" class="grid gap-space-md rounded-md border border-border p-4">
+            <div fexFieldTitle>安全表单</div>
+            <ng-container [fexField]="securityForm" name="notificationEmail" [validators]="requiredEmailValidators" #notificationEmail="field"><fex-field-root [required]="true" [invalid]="invalid(notificationEmail.api)" [hasError]="invalid(notificationEmail.api)"><label fexFieldLabel>通知邮箱 <span fexFieldRequiredIndicator>*</span></label><fex-input-root [value]="notificationEmail.api.state.value" (valueChange)="notificationEmail.api.handleChange($event)" [invalid]="invalid(notificationEmail.api)"><input fexInputControl fexFieldControl type="email" (blur)="notificationEmail.api.handleBlur()" /></fex-input-root>@if (invalid(notificationEmail.api)) { <div fexFieldError>@for (error of errors(notificationEmail.api); track error) { <div>{{ error }}</div> }</div> }</fex-field-root></ng-container>
+            <ng-container [fexField]="securityForm" name="twoFactor" #twoFactor="field"><fex-field-root orientation="horizontal"><button fexCheckbox fexFieldControl [checked]="twoFactor.api.state.value" (checkedChange)="twoFactor.api.handleChange($event.checked === true)"></button><label fexFieldLabel>开启双因素认证</label></fex-field-root></ng-container>
+            <div class="flex gap-space-sm"><button fexButton type="button" variant="outline" (click)="useProfileEmail()">使用资料邮箱</button><button fexButton type="submit">保存安全设置</button></div>
+          </form>
+        </div>
+      </div>
+    </fex-card>
 
-  <fex-card title="Grouped fields" description="FieldSet、Legend、Group、Content、Title、Separator 组合相关字段。"><form [fexForm]="preferencesForm" class="grid max-w-xl gap-space-lg"><fieldset fexFieldSet><legend fexFieldLegend>通知偏好</legend><div fexFieldGroup><ng-container [tanstackField]="preferencesForm" name="productUpdates" #productUpdates="field"><fex-field-root orientation="horizontal"><button fexCheckbox fexFieldControl [checked]="productUpdates.api.state.value" (checkedChange)="productUpdates.api.handleChange($event.checked === true)"></button><div fexFieldContent><div fexFieldTitle>产品更新</div><p fexFieldDescription>接收版本与维护通知。</p></div></fex-field-root></ng-container><div fexFieldSeparator></div><ng-container [tanstackField]="preferencesForm" name="securityAlerts" #securityAlerts="field"><fex-field-root orientation="horizontal"><button fexCheckbox fexFieldControl [checked]="securityAlerts.api.state.value" (checkedChange)="securityAlerts.api.handleChange($event.checked === true)"></button><div fexFieldContent><div fexFieldTitle>安全提醒</div><p fexFieldDescription>异常登录和敏感操作提醒。</p></div></fex-field-root></ng-container></div></fieldset><button fexButton class="w-fit" type="submit">保存通知偏好</button></form></fex-card>
-  <fex-card title="component=false" description="Angular 使用 ng-container 承载 Form directive，不输出第二个 form DOM。"><ng-container [fexForm]="nestedForm"><ng-container [tanstackField]="nestedForm" name="nickname" #nickname="field"><fex-field-root class="max-w-md"><label fexFieldLabel>昵称</label><fex-input-root [value]="nickname.api.state.value" (valueChange)="nickname.api.handleChange($event)"><input fexInputControl fexFieldControl (blur)="nickname.api.handleBlur()" /></fex-input-root></fex-field-root></ng-container><button fexButton class="mt-space-md" type="button" (click)="nestedForm.handleSubmit()">提交无 DOM 表单</button></ng-container></fex-card>
-  <fex-card title="Latest result" description="所有可提交示例共用的结果输出。"><pre class="overflow-auto rounded-md bg-muted p-3 text-sm text-muted-foreground">{{ result() }}</pre></fex-card>
-</div></main>
+    <fex-card title="Scroll to a specific field" description="scrollToField 是独立方法，可以定位任意字段；Form 提交失败时才自动定位第一个无效 FieldControl。">
+      <form [fexForm]="scrollForm" class="grid max-w-xl gap-space-lg">
+        <div class="flex flex-wrap gap-space-sm"><button fexButton type="button" variant="outline" (click)="scrollToAddress()">定位收货地址</button><button fexButton type="submit">提交并定位首个错误</button></div>
+        <ng-container [fexField]="scrollForm" name="note" #note="field"><fex-field-root><label fexFieldLabel>备注（选填）</label><fex-input-root [value]="note.api.state.value" (valueChange)="note.api.handleChange($event)"><input fexInputControl fexFieldControl (blur)="note.api.handleBlur()" /></fex-input-root></fex-field-root></ng-container>
+        <div class="flex min-h-[24rem] items-center justify-center rounded-md border border-dashed border-border text-sm text-muted-foreground">模拟长表单内容</div>
+        <ng-container [fexField]="scrollForm" name="deliveryAddress" [validators]="deliveryAddressValidators" #deliveryAddress="field"><fex-field-root [required]="true" [invalid]="invalid(deliveryAddress.api)" [hasError]="invalid(deliveryAddress.api)"><label fexFieldLabel>收货地址 <span fexFieldRequiredIndicator>*</span></label><fex-input-root [value]="deliveryAddress.api.state.value" (valueChange)="deliveryAddress.api.handleChange($event)" [invalid]="invalid(deliveryAddress.api)"><input fexInputControl fexFieldControl placeholder="位于长表单底部" (blur)="deliveryAddress.api.handleBlur()" /></fex-input-root>@if (invalid(deliveryAddress.api)) { <div fexFieldError>@for (error of errors(deliveryAddress.api); track error) { <div>{{ error }}</div> }</div> }</fex-field-root></ng-container>
+      </form>
+    </fex-card>
+
+    <fex-card title="Latest result"><pre class="overflow-auto rounded-md bg-muted p-3 text-sm text-muted-foreground">{{ result() }}</pre></fex-card>
+  </div>
+</main>

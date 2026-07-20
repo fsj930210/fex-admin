@@ -184,6 +184,9 @@
       "@fex/components-core/dropzone/validate": [
         "packages/components/core/src/dropzone/validate.ts"
       ],
+      "@fex/components-core/form/scroll-to-first-error": [
+        "packages/components/core/src/form/scroll-to-first-error.ts"
+      ],
       "@fex/components-core/disclosure/create-disclosure": [
         "packages/components/core/src/disclosure/create-disclosure.ts"
       ],

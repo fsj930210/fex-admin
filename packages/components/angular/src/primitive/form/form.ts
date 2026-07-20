@@ -1,5 +1,6 @@
-import { compileFieldRuleProps, scrollToFirstError, type FieldRule, type ScrollToFirstError, type ValidateTrigger } from '@fex/components-core'
-import { ChangeDetectorRef, Directive, HostListener, Input, type OnChanges, type OnDestroy, type OnInit } from '@angular/core'
+import { scrollToFirstError, type ScrollToFirstError } from '@fex/components-core'
+export { scrollToField } from '@fex/components-core'
+import { ChangeDetectorRef, Directive, HostBinding, HostListener, Input, type OnChanges, type OnDestroy, type OnInit } from '@angular/core'
 import { FieldApi, type AnyFieldApi } from '@tanstack/angular-form'
 
 export interface FormApiLike { handleSubmit: () => unknown }
@@ -8,6 +9,7 @@ export interface FormApiLike { handleSubmit: () => unknown }
 export class Form {
   @Input({ required: true, alias: 'fexForm' }) form!: FormApiLike
   @Input() scrollToFirstError: ScrollToFirstError = true
+  @HostBinding('attr.novalidate') readonly noValidate = ''
   @HostListener('submit', ['$event']) async submit(event: Event) {
     if (event.defaultPrevented) return
     event.preventDefault()
@@ -21,12 +23,10 @@ export class Form {
 export class FormField implements OnInit, OnChanges, OnDestroy {
   @Input({ required: true, alias: 'fexField' }) form!: FormApiLike
   @Input({ required: true }) name!: string
-  @Input() dependencies?: readonly string[]
-  @Input() initialValue?: unknown
-  @Input() rules?: readonly FieldRule<Record<string, unknown>, unknown>[]
-  @Input() validateDebounce = 0
-  @Input() validateFirst = false
-  @Input() validateTrigger?: ValidateTrigger | readonly ValidateTrigger[]
+  /** Native TanStack FieldApi options. */
+  @Input() defaultValue?: unknown
+  @Input() listeners?: Record<string, unknown>
+  @Input() validators?: Record<string, unknown>
 
   api!: AnyFieldApi
   private cleanup?: () => void
@@ -50,15 +50,13 @@ export class FormField implements OnInit, OnChanges, OnDestroy {
   }
 
   private options() {
-    const compiled = compileFieldRuleProps({
-      ...(this.dependencies === undefined ? {} : { dependencies: this.dependencies }),
-      ...(this.initialValue === undefined ? {} : { initialValue: this.initialValue }),
-      ...(this.rules === undefined ? {} : { rules: this.rules }),
-      validateDebounce: this.validateDebounce,
-      validateFirst: this.validateFirst,
-      ...(this.validateTrigger === undefined ? {} : { validateTrigger: this.validateTrigger }),
-    }, this.form as never)
-    return { ...compiled, form: this.form, name: this.name }
+    return {
+      ...(this.defaultValue === undefined ? {} : { defaultValue: this.defaultValue }),
+      ...(this.listeners === undefined ? {} : { listeners: this.listeners }),
+      ...(this.validators === undefined ? {} : { validators: this.validators }),
+      form: this.form,
+      name: this.name,
+    }
   }
 }
 

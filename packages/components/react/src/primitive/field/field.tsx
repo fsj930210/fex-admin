@@ -10,6 +10,7 @@ import {
   fieldSeparatorClassName,
   fieldSetClassName,
   fieldTitleClassName,
+  type FieldGroupStyleProps,
   type FieldStyleProps,
 } from '@fex/components-styles/field'
 import { cn } from '@fex/utils'
@@ -22,6 +23,8 @@ import {
   use,
   useId,
 } from 'react'
+import { type AnyFieldApi, useForm as useTanStackForm } from '@tanstack/react-form'
+import { useFormContext } from '../form/form'
 
 export interface FieldState {
   disabled: boolean
@@ -33,13 +36,13 @@ export interface FieldState {
 export interface FieldControlBinding {
   props: {
     id: string
-    required?: true | undefined
     disabled?: true | undefined
     readOnly?: true | undefined
     'aria-invalid'?: true | undefined
     'aria-required'?: true | undefined
     'aria-describedby'?: string | undefined
     'aria-errormessage'?: string | undefined
+    'data-field-name'?: string | undefined
   }
   state: FieldState
 }
@@ -53,6 +56,7 @@ interface FieldContextValue extends FieldState {
 }
 
 const FieldContext = createContext<FieldContextValue | null>(null)
+const FormFieldNameContext = createContext<string | null>(null)
 
 function useFieldContext(component: string) {
   const context = use(FieldContext)
@@ -87,7 +91,8 @@ export function FieldRoot({
   ...props
 }: FieldRootProps) {
   const generatedId = useId()
-  const baseId = id ?? generatedId
+  const fieldName = use(FormFieldNameContext)
+  const baseId = id ?? fieldName ?? generatedId
   const context: FieldContextValue = {
     controlId: `${baseId}-control`,
     descriptionId: `${baseId}-description`,
@@ -106,6 +111,7 @@ export function FieldRoot({
         {...props}
         ref={ref}
         data-slot="field-root"
+        data-field-name={fieldName ?? undefined}
         data-orientation={orientation}
         data-disabled={disabled ? 'true' : undefined}
         data-readonly={readOnly ? 'true' : undefined}
@@ -119,21 +125,35 @@ export function FieldRoot({
   )
 }
 
+export type FieldProps = Parameters<ReturnType<typeof useTanStackForm>['Field']>[0]
+
+/**
+ * The only public field-state entry point. It binds a field to the nearest Form
+ * and forwards native TanStack Field options without changing their semantics.
+ */
+export function Field({ children, ...props }: FieldProps) {
+  const form = useFormContext()
+  const TanStackField = form.Field as unknown as (fieldProps: FieldProps) => ReactNode
+
+  return <TanStackField {...props}>{(field: AnyFieldApi) => <FormFieldNameContext value={String(field.name)}>{children(field)}</FormFieldNameContext>}</TanStackField>
+}
+
 export function FieldControl({ children }: { children: (binding: FieldControlBinding) => ReactNode }) {
   const context = useFieldContext('FieldControl')
+  const fieldName = use(FormFieldNameContext)
   const describedBy = [context.hasDescription ? context.descriptionId : null, context.hasError ? context.errorId : null]
     .filter(Boolean)
     .join(' ') || undefined
   return children({
     props: {
       id: context.controlId,
-      required: context.required || undefined,
       disabled: context.disabled || undefined,
       readOnly: context.readOnly || undefined,
       'aria-required': context.required || undefined,
       'aria-invalid': context.invalid || undefined,
       'aria-describedby': describedBy,
       'aria-errormessage': context.invalid && context.hasError ? context.errorId : undefined,
+      'data-field-name': fieldName ?? undefined,
     },
     state: context,
   })
@@ -156,12 +176,14 @@ export function FieldDescription({ className, ...props }: ComponentProps<'p'>) {
 export interface FieldErrorProps extends ComponentProps<'div'> { errors?: readonly ReactNode[] | undefined }
 export function FieldError({ errors, className, children, ...props }: FieldErrorProps) {
   const context = useFieldContext('FieldError')
-  const content = children ?? errors?.map((error, index) => <div key={typeof error === 'string' ? error : index}>{error}</div>)
+  const uniqueErrors = errors?.filter((error, index, values) => values.findIndex((value) => String(value) === String(error)) === index)
+  const content = children ?? uniqueErrors?.map((error, index) => <div key={typeof error === 'string' ? error : index}>{error}</div>)
   if (!content) return null
   return <div {...props} id={props.id ?? context.errorId} role="alert" aria-live="polite" data-slot="field-error" className={cn(fieldErrorClassName, className)}>{content}</div>
 }
 
-export function FieldGroup({ className, ...props }: ComponentProps<'div'>) { return <div {...props} role={props.role ?? 'group'} data-slot="field-group" className={cn(fieldGroupClassName, className)} /> }
+export interface FieldGroupProps extends ComponentProps<'div'>, FieldGroupStyleProps {}
+export function FieldGroup({ orientation, className, ...props }: FieldGroupProps) { return <div {...props} role={props.role ?? 'group'} data-slot="field-group" data-orientation={orientation} className={cn(fieldGroupClassName({ orientation }), className)} /> }
 export function FieldSet({ className, ...props }: ComponentProps<'fieldset'>) { return <fieldset {...props} data-slot="field-set" className={cn(fieldSetClassName, className)} /> }
 export function FieldLegend({ className, ...props }: ComponentProps<'legend'>) { return <legend {...props} data-slot="field-legend" className={cn(fieldLegendClassName, className)} /> }
 export function FieldContent({ className, ...props }: ComponentProps<'div'>) { return <div {...props} data-slot="field-content" className={cn(fieldContentClassName, className)} /> }
