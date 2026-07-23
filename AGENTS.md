@@ -64,6 +64,7 @@
 - 框架组件包的 `package.json` exports 必须按类别分组保持清晰，组件相关入口集中在一起：先集中列出 `./primitive/*`，再集中列出 `./ui/*`，再集中列出 `./pro/*`，再集中列出 `./icon/*`。组件入口不要再提供无层级的 `./button`、`./card` 这类根级快捷路径。非组件逻辑能力放在组件入口之后，再按类别集中列出 `./hooks/*` / `./composables/*` / `./primitives/*` / `./stores/*` / `./actions/*` 等。不要按单个组件把 `./primitive/button`、`./ui/button`、`./pro/button`、`./icon/loading`、`./primitive/card`、`./ui/card` 交错排列。
 - 每个框架组件包都要沉淀本框架的通用能力，不允许只有 React 有 hooks，Vue/Solid/Svelte/Angular 在各组件里重复写同类逻辑。凡是两个以上组件需要的能力，例如 class 合并、受控/非受控状态、订阅 core store、合并 ref/element、读取最新值、挂载/卸载清理、portal/container 解析、外部点击关闭、键盘关闭等，都必须抽到对应框架公共目录并通过 exports 暴露。
 - 只有跨组件、跨业务、可被用户直接复用的能力才能放到框架级 `hooks`、`composables`、`primitives`、`stores` 等公共目录。只服务某个组件族内部的 context、provider、use-xxx-context、slot props adapter、dismiss registry 等私有能力，必须放在该组件目录内，例如 `src/primitive/popover/context.ts` 或同目录私有 helper，不要放到全局 `src/composables` / `src/hooks` 造成“看似公共、实际私有”的 API。
+- 组件级逻辑层即使需要对用户公开，也必须放在所属组件目录内并从该组件的公开入口导出，例如 `src/primitive/tabs/use-tabs.ts`；只有能脱离具体组件、被多个不同组件或业务直接复用的能力，才能放入框架级 `src/hooks` / `src/composables` / `src/primitives` / `src/stores`。不得因为名称是 `useXxx` 就把组件专属逻辑放进全局公共目录。
 - 多组件组合时区分容器组件和逻辑组件：
   - 容器组件只负责组装、布局、转发 props、协调兄弟组件。
   - 逻辑组件负责具体交互和 UI。

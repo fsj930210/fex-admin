@@ -25,6 +25,7 @@ const componentLinks = [
     { to: '/scrollbar', label: 'Scrollbar' },
     { to: '/switch', label: 'Switch' },
     { to: '/table', label: 'Table' },
+    { to: '/tabs', label: 'Tabs' },
     { to: '/tree', label: 'Tree' },
     { to: '/toast', label: 'Toast' },
     { to: '/sortable', label: 'Sortable' },

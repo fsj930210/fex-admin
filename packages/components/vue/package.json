@@ -27,6 +27,7 @@
     "./primitive/sortable": "./src/primitive/sortable/sortable.ts",
     "./primitive/switch": "./src/primitive/switch/switch.ts",
     "./primitive/table": "./src/primitive/table/table.ts",
+    "./primitive/tabs": "./src/primitive/tabs/tabs.ts",
     "./primitive/tree": "./src/primitive/tree/tree.ts",
     "./primitive/tree/use-tree-dnd-item": "./src/primitive/tree/use-tree-dnd-item.ts",
     "./primitive/toast": "./src/primitive/toast/toast.ts",

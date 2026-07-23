@@ -130,6 +130,12 @@
       "@fex/components-core/toggle/types": [
         "packages/components/core/src/toggle/types.ts"
       ],
+      "@fex/components-core/tabs/create-tabs-controller": [
+        "packages/components/core/src/tabs/create-tabs-controller.ts"
+      ],
+      "@fex/components-core/tabs/types": [
+        "packages/components/core/src/tabs/types.ts"
+      ],
       "@fex/components-core/slider/create-slider-controller": [
         "packages/components/core/src/slider/create-slider-controller.ts"
       ],
@@ -330,6 +336,9 @@
       ],
       "@fex/components-angular/primitive/table": [
         "packages/components/angular/src/primitive/table/table.ts"
+      ],
+      "@fex/components-angular/primitive/tabs": [
+        "packages/components/angular/src/primitive/tabs/tabs.ts"
       ],
       "@fex/components-angular/primitive/tree": [
         "packages/components/angular/src/primitive/tree/tree.ts"

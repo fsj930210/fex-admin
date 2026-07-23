@@ -72,7 +72,6 @@ export function createSortableAction<TItems extends SortableItems>(options: Sort
         return
       }
       draggingThisItem = true
-      node.setPointerCapture?.(event.pointerId)
 
       function onPointerMove(pointerEvent: PointerEvent) {
         controller.updatePointer({
@@ -84,9 +83,6 @@ export function createSortableAction<TItems extends SortableItems>(options: Sort
 
       function onPointerUp() {
         cleanupPointerSession?.()
-        if (node.hasPointerCapture?.(event.pointerId)) {
-          node.releasePointerCapture(event.pointerId)
-        }
         controller.endPointerDrag()
         draggingThisItem = false
       }

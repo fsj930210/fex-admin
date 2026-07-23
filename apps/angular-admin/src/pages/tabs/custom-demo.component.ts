@@ -1,0 +1,2 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core'; import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex/components-angular/primitive/tabs'; import Card from '@fex/components-angular/ui/card'
+@Component({ selector: 'fex-custom-tabs-demo', standalone: true, imports: [Card, TabsRoot, TabsList, TabsItem, TabsContent], templateUrl: './custom-demo.component.html', changeDetection: ChangeDetectionStrategy.OnPush }) export class CustomTabsDemoComponent {}

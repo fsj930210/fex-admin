@@ -33,6 +33,7 @@ export class HomeComponent {
     { to: '/scrollbar', label: 'Scrollbar' },
     { to: '/switch', label: 'Switch' },
     { to: '/table', label: 'Table' },
+    { to: '/tabs', label: 'Tabs' },
     { to: '/toast', label: 'Toast' },
     { to: '/sortable', label: 'Sortable' },
     { to: '/interactions', label: 'Interactions' },

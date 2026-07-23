@@ -1,0 +1,7 @@
+<script setup lang="ts">
+import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex/components-vue/primitive/tabs'; import Card from '@fex/components-vue/ui/card'; import { ref } from 'vue'; import { createTab, initialTabs } from './data'
+const items = ref([...initialTabs]); const value = ref('overview'); const nextIndex = ref(4)
+function add() { const item = createTab(nextIndex.value++); items.value.push(item); value.value = item.value }
+function remove(target: string) { const index = items.value.findIndex((item) => item.value === target); items.value = items.value.filter((item) => item.value !== target); if (value.value === target) value.value = items.value[Math.min(index, items.value.length - 1)]?.value ?? '' }
+</script>
+<template><Card title="Add, remove and extra" description="Application data drives primitive Items and Contents."><TabsRoot v-model="value" @close="remove($event.value)"><div class="flex min-w-0 items-center gap-space-sm"><span class="text-xs text-muted-foreground">Workspace</span><TabsList class="min-w-0 flex-1"><TabsItem v-for="item in items" :key="item.value" :value="item.value" v-bind="item.closable === undefined ? {} : { closable: item.closable }">{{ item.label }}</TabsItem></TabsList><button class="rounded-md border border-border px-2 py-1 text-xs" type="button" @click="add">Add</button></div><TabsContent v-for="item in items" :key="item.value" :value="item.value">{{ item.content }}</TabsContent></TabsRoot></Card></template>

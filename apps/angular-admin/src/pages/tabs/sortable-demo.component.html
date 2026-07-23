@@ -1,0 +1,31 @@
+<fex-card title="Sortable composition" description="Overview stays fixed while the remaining tabs can be dragged horizontally.">
+  <fex-sortable #sortable="fexSortable" [items]="ids()" axis="x" (itemsChange)="reorder($event)">
+    <div fexTabsRoot defaultValue="overview">
+      <div fexTabsList>
+        <div fexTabsItem [value]="fixed.value">{{ fixed.label }}</div>
+        @for (value of sortable.previewItems(); track value) {
+          <div
+            fexTabsItem
+            fexSortableItem
+            [sortable]="sortable"
+            [sortableId]="value"
+            [attr.data-sortable-id]="value"
+            [value]="value"
+            class="cursor-grab touch-none active:cursor-grabbing"
+          >
+            <fex-ellipsis-icon class="size-3 rotate-90 text-muted-foreground" />
+            {{ label(value) }}
+          </div>
+        }
+      </div>
+      <div *fexTabsContent="fixed.value">{{ fixed.content }}</div>
+      @for (item of items(); track item.value) { <div *fexTabsContent="item.value">{{ item.content }}</div> }
+    </div>
+    @if (sortable.activeId(); as activeId) {
+      <div data-sortable-overlay class="flex !h-7 items-center gap-1.5 rounded-md !bg-muted-background px-2.5 text-sm text-muted-foreground !shadow-sm !outline-none" [ngStyle]="sortable.getOverlayStyle()">
+        <fex-ellipsis-icon class="size-3 rotate-90" />
+        {{ label(activeId) }}
+      </div>
+    }
+  </fex-sortable>
+</fex-card>

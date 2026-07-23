@@ -23,6 +23,7 @@
     { href: '/scrollbar', label: 'Scrollbar' },
     { href: '/switch', label: 'Switch' },
     { href: '/table', label: 'Table' },
+    { href: '/tabs', label: 'Tabs' },
     { href: '/tree', label: 'Tree' },
     { href: '/toast', label: 'Toast' },
     { href: '/sortable', label: 'Sortable' },

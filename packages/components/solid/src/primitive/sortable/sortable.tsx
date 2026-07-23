@@ -1,7 +1,7 @@
 import { sortableClassName, sortableItemClassName } from '@fex/components-styles/sortable'
 import { cn } from '@fex/utils'
 import type { SortableAxis, SortableId, SortableItems } from '@fex/components-core/sortable/types'
-import type { JSX, ParentProps } from 'solid-js'
+import { createMemo, onCleanup, type JSX, type ParentProps } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createSortable, type CreateSortableOptions } from '../../primitives/create-sortable'
 
@@ -14,6 +14,18 @@ export interface SortableRootProps<TItems extends SortableItems> {
   class?: string
   onChange?: (items: TItems) => void
   children?: JSX.Element | ((state: { items: TItems }) => JSX.Element)
+}
+
+interface SortableRootContentProps<TItems extends SortableItems> {
+  items: TItems
+  render: JSX.Element | ((state: { items: TItems }) => JSX.Element)
+}
+
+function SortableRootContent<TItems extends SortableItems>(props: SortableRootContentProps<TItems>) {
+  const rendered = createMemo(() => typeof props.render === 'function'
+    ? (props.render as (state: { items: TItems }) => JSX.Element)({ items: props.items })
+    : props.render)
+  return <>{rendered()}</>
 }
 
 export function SortableRoot<TItems extends SortableItems>(props: SortableRootProps<TItems>) {
@@ -29,13 +41,6 @@ export function SortableRoot<TItems extends SortableItems>(props: SortableRootPr
     update: (next) => sortable.update(next as unknown as CreateSortableOptions<TItems>),
     syncOptions: () => sortable.update(createOptions()),
   }
-  const currentItems = () => {
-    if (sortable.snapshot().dragging) {
-      return sortable.previewItems() as TItems
-    }
-    return props.items
-  }
-
   return (
     <SortableContext.Provider value={context}>
       <div
@@ -43,9 +48,7 @@ export function SortableRoot<TItems extends SortableItems>(props: SortableRootPr
         data-sortable-container={props.containerId ?? 'default'}
         class={cn(sortableClassName, props.class)}
       >
-        {typeof props.children === 'function'
-          ? (props.children as (state: { items: TItems }) => JSX.Element)({ items: currentItems() })
-          : props.children}
+        <SortableRootContent items={props.items} render={props.children} />
       </div>
     </SortableContext.Provider>
   )
@@ -63,14 +66,18 @@ export function SortableItem(props: SortableItemProps) {
     sortable.syncOptions()
     sortable.onPointerDown(event, props.id, containerId())
   }
+  function setItemRef(element: HTMLDivElement) {
+    sortable.setItem(props.id, containerId())(element)
+    element.addEventListener('pointerdown', handlePointerDown)
+    onCleanup(() => element.removeEventListener('pointerdown', handlePointerDown))
+  }
 
   return (
     <div
-      ref={sortable.setItem(props.id, containerId())}
+      ref={setItemRef}
       data-active={sortable.snapshot().activeId === props.id || undefined}
       data-sortable-id={props.id}
       data-sortable-container-id={containerId()}
-      onPointerDown={handlePointerDown}
       style={sortable.getItemStyle(props.id)}
       class={cn(sortableItemClassName, props.class)}
     >

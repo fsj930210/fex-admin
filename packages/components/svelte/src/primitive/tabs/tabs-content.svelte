@@ -1,0 +1,6 @@
+<script lang="ts">
+  import { tabsContentClassName } from '@fex/components-styles/tabs'; import { cn } from '@fex/utils'; import { getContext, type Snippet } from 'svelte'; import type { HTMLAttributes } from 'svelte/elements'; import { tabsContextKey, type TabsContextValue } from './context'
+  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> { value: string, children?: Snippet, render?: Snippet<[{ props: HTMLAttributes<HTMLElement>, state: { active: boolean } }]> }
+  let { value, children, render, class: className, ...rest }: Props = $props(); const tabs = getContext<TabsContextValue>(tabsContextKey); if (!tabs) throw new Error('TabsContent must be used inside TabsRoot.'); const { snapshot } = tabs; const mounted = $derived.by(() => { $snapshot; return tabs.isContentMounted(value) }); const active = $derived($snapshot.value === value); const renderProps = $derived.by(() => { $snapshot; return { ...rest, ...tabs.getContentProps(value), class: cn(tabsContentClassName({ variant: tabs.variant() }), className) } })
+</script>
+{#if mounted}{#if render}{@render render({ props: renderProps, state: { active } })}{:else}<div {...renderProps}>{@render children?.()}</div>{/if}{/if}

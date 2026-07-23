@@ -113,6 +113,10 @@ export const componentRoutes: Routes = [
       import('../../pages/table/index.component').then((module) => module.TableComponent),
   },
   {
+    path: 'tabs',
+    loadComponent: () => import('../../pages/tabs/index.component').then((module) => module.TabsComponent),
+  },
+  {
     path: 'toast',
     loadComponent: () =>
       import('../../pages/toast/index.component').then((module) => module.ToastComponent),

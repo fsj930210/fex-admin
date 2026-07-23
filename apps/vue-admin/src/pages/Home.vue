@@ -22,6 +22,7 @@ const componentLinks = [
   { to: '/scrollbar', label: 'Scrollbar' },
   { to: '/switch', label: 'Switch' },
   { to: '/table', label: 'Table' },
+  { to: '/tabs', label: 'Tabs' },
   { to: '/data-grid', label: 'Data Grid' },
   { to: '/tree', label: 'Tree' },
   { to: '/toast', label: 'Toast' },

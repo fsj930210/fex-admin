@@ -1,0 +1,5 @@
+export { default as TabsRoot } from './tabs-root.vue'
+export { default as TabsList } from './tabs-list.vue'
+export { default as TabsItem } from './tabs-item.vue'
+export { default as TabsContent } from './tabs-content.vue'
+export { useTabs } from './use-tabs'

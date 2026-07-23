@@ -22,6 +22,7 @@ export const componentRoutes = [
   { path: '/scrollbar', component: () => import('../../pages/Scrollbar/index.vue') },
   { path: '/switch', component: () => import('../../pages/Switch/index.vue') },
   { path: '/table', component: () => import('../../pages/Table/index.vue') },
+  { path: '/tabs', component: () => import('../../pages/Tabs/index.vue') },
   { path: '/tree', component: () => import('../../pages/Tree/index.vue') },
   { path: '/toast', component: () => import('../../pages/Toast/index.vue') },
   { path: '/sortable', component: () => import('../../pages/Sortable/index.vue') },

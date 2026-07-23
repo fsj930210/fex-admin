@@ -62,6 +62,9 @@ const SwitchPage = lazy(() =>
 const TablePage = lazy(() =>
   import('../../pages/Table').then((module) => ({ default: module.TablePage })),
 )
+const TabsPage = lazy(() =>
+  import('../../pages/Tabs').then((module) => ({ default: module.TabsPage })),
+)
 const ToastPage = lazy(() =>
   import('../../pages/Toast').then((module) => ({ default: module.ToastPage })),
 )
@@ -174,6 +177,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/table',
     component: TablePage,
+  },
+  {
+    path: '/tabs',
+    component: TabsPage,
   },
   {
     path: '/toast',

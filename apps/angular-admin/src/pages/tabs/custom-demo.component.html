@@ -1,0 +1,16 @@
+<fex-card title="Custom render" description="Children functions replace List, Item and Content root nodes without losing behavior.">
+  <div fexTabsRoot defaultValue="files">
+    <ul fexTabsList class="rounded-md border border-border bg-secondary-background p-2">
+      <li fexTabsItem value="files" class="group justify-start data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+        Files
+        <span aria-hidden="true" class="hidden size-1.5 rounded-full bg-current group-data-[state=active]:block"></span>
+      </li>
+      <li fexTabsItem value="search" class="group justify-start data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+        Search
+        <span aria-hidden="true" class="hidden size-1.5 rounded-full bg-current group-data-[state=active]:block"></span>
+      </li>
+    </ul>
+    <section *fexTabsContent="'files'" class="!mt-space-md !rounded-none !border-0 !border-l-2 !border-primary !bg-transparent !p-0 !pl-space-md">Fully custom files panel.</section>
+    <section *fexTabsContent="'search'" class="!mt-space-md !rounded-none !border-0 !border-l-2 !border-primary !bg-transparent !p-0 !pl-space-md">Custom search panel.</section>
+  </div>
+</fex-card>

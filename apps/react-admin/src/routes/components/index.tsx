@@ -96,6 +96,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Table'), 'TablePage'),
   },
   {
+    path: '/tabs',
+    element: createLazyRouteElement(() => import('../../pages/Tabs'), 'TabsPage'),
+  },
+  {
     path: '/toast',
     element: createLazyRouteElement(() => import('../../pages/Toast'), 'ToastPage'),
   },

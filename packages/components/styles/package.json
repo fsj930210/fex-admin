@@ -29,6 +29,7 @@
     "./scrollbar": "./src/scrollbar.ts",
     "./switch": "./src/switch.ts",
     "./table": "./src/table.ts",
+    "./tabs": "./src/tabs.ts",
     "./tree": "./src/tree.ts",
     "./toast": "./src/toast.ts",
     "./textarea": "./src/textarea.ts"

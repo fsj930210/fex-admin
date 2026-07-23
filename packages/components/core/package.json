@@ -47,6 +47,8 @@
     "./tree/types": "./src/tree/types.ts",
     "./toggle/create-toggle-controller": "./src/toggle/create-toggle-controller.ts",
     "./toggle/types": "./src/toggle/types.ts",
+    "./tabs/create-tabs-controller": "./src/tabs/create-tabs-controller.ts",
+    "./tabs/types": "./src/tabs/types.ts",
     "./slider/create-slider-controller": "./src/slider/create-slider-controller.ts",
     "./slider/types": "./src/slider/types.ts",
     "./slider/utils": "./src/slider/utils.ts",

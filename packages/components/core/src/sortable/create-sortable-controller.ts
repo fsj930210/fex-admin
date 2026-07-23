@@ -17,6 +17,7 @@ import type {
 
 // 相邻换位使用重叠阈值，而不是指针刚过中心点就换位，避免拖动时来回抖动。
 const SORTABLE_SWAP_OVERLAP_RATIO = 0.35
+const POINTER_ACTIVATION_DISTANCE = 4
 
 export interface SortableControllerOptions<TItems extends SortableItems> {
   items: TItems
@@ -159,22 +160,10 @@ export function createSortableController<TItems extends SortableItems>({
       return false
     }
 
-    input.preventDefault?.()
     const rect = input.currentTarget.getBoundingClientRect()
     const activeRect = toOverlayRect(rect)
     pointerDrag = { id, containerId, activeRect }
     pointerStart = { x: input.clientX, y: input.clientY }
-    motion.measureFirst()
-    setSnapshot({
-      activeId: id,
-      activeContainerId: containerId,
-      overId: null,
-      overContainerId: null,
-      dragging: true,
-      activeRect,
-      dragOffset: { x: 0, y: 0 },
-      items: previewItems,
-    })
 
     return true
   }
@@ -185,11 +174,30 @@ export function createSortableController<TItems extends SortableItems>({
       return
     }
 
-    input.preventDefault?.()
     const dragOffset = {
       x: axis === 'y' ? 0 : input.clientX - pointerStart.x,
       y: axis === 'x' ? 0 : input.clientY - pointerStart.y,
     }
+    if (!snapshot.dragging) {
+      const activationDistance = axis === 'x'
+        ? Math.abs(dragOffset.x)
+        : axis === 'y'
+          ? Math.abs(dragOffset.y)
+          : Math.hypot(dragOffset.x, dragOffset.y)
+      if (activationDistance < POINTER_ACTIVATION_DISTANCE) return
+      motion.measureFirst()
+      setSnapshot({
+        activeId: active.id,
+        activeContainerId: active.containerId,
+        overId: null,
+        overContainerId: null,
+        dragging: true,
+        activeRect: active.activeRect,
+        dragOffset: { x: 0, y: 0 },
+        items: previewItems,
+      })
+    }
+    input.preventDefault?.()
     const containerId = getContainerIdAtPoint(input.clientX, input.clientY) ?? active.containerId
     const nextItems = getNextItemsFromPointer(active, containerId, dragOffset)
 
@@ -208,8 +216,11 @@ export function createSortableController<TItems extends SortableItems>({
   }
 
   function endPointerDrag() {
+    const wasDragging = snapshot.dragging
+    if (!pointerDrag) return false
     const nextItems = previewItems
     pointerDrag = null
+    if (!wasDragging) return false
     setSnapshot({
       activeId: null,
       activeContainerId: null,
@@ -222,6 +233,7 @@ export function createSortableController<TItems extends SortableItems>({
     motion.clear()
     notify()
     onChange?.(restoreSortableItems(originalItems, nextItems))
+    return true
   }
 
   function getItemStyle(id: SortableId) {
