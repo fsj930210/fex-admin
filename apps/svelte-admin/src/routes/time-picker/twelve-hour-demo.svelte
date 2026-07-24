@@ -1,0 +1,1 @@
+<script>import Card from '@fex/components-svelte/ui/card'; import DemoTimePicker from './demo-time-picker.svelte'</script><Card title="12 小时制"><DemoTimePicker use12Hours defaultValue={{hour:14,minute:25,second:36}}/></Card>

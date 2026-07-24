@@ -1,0 +1,2 @@
+<script lang="ts">import type { Snippet } from 'svelte'; import PopoverPortal from '../popover/popover-portal.svelte'; import PopoverContent from '../popover/popover-content.svelte'; let { children }: { children?: Snippet } = $props()</script>
+<PopoverPortal><PopoverContent class="overflow-hidden p-0" style="width:var(--floating-reference-width);max-width:var(--floating-available-width);max-height:var(--floating-available-height)">{@render children?.()}</PopoverContent></PopoverPortal>

@@ -28,6 +28,18 @@
       "@fex/components-core/date/utils": [
         "packages/components/core/src/date/utils.ts"
       ],
+      "@fex/components-core/time-picker/types": [
+        "packages/components/core/src/time-picker/types.ts"
+      ],
+      "@fex/components-core/time-picker/value": [
+        "packages/components/core/src/time-picker/value.ts"
+      ],
+      "@fex/components-core/time-picker/options": [
+        "packages/components/core/src/time-picker/options.ts"
+      ],
+      "@fex/components-core/time-picker/create-time-picker-controller": [
+        "packages/components/core/src/time-picker/create-time-picker-controller.ts"
+      ],
       "@fex/components-core/data-grid/types": [
         "packages/components/core/src/data-grid/types.ts"
       ],
@@ -367,6 +379,9 @@
       "@fex/components-angular/primitive/textarea": [
         "packages/components/angular/src/primitive/textarea/textarea.ts"
       ],
+      "@fex/components-angular/primitive/time-picker": [
+        "packages/components/angular/src/primitive/time-picker/time-picker.ts"
+      ],
       "@fex/components-angular/ui/badge": [
         "packages/components/angular/src/ui/badge/badge.ts"
       ],
@@ -394,6 +409,12 @@
       "@fex/components-angular/icon/check": [
         "packages/components/angular/src/icon/check.ts"
       ],
+      "@fex/components-angular/icon/calendar": [
+        "packages/components/angular/src/icon/calendar.ts"
+      ],
+      "@fex/components-angular/icon/clock": [
+        "packages/components/angular/src/icon/clock.ts"
+      ],
       "@fex/components-angular/icon/chevron": [
         "packages/components/angular/src/icon/chevron.ts"
       ],
@@ -405,6 +426,9 @@
       ],
       "@fex/components-angular/icon/info": [
         "packages/components/angular/src/icon/info.ts"
+      ],
+      "@fex/components-angular/icon/grip-vertical": [
+        "packages/components/angular/src/icon/grip-vertical.ts"
       ],
       "@fex/components-angular/icon/loading": [
         "packages/components/angular/src/icon/loading.ts"

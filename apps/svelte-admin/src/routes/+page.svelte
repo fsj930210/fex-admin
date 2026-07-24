@@ -31,6 +31,7 @@
     { href: '/interactions', label: 'Interactions' },
     { href: '/resizable', label: 'Resizable' },
     { href: '/textarea', label: 'Textarea' },
+    { href: '/time-picker', label: 'TimePicker' },
   ].sort((left, right) => left.label.localeCompare(right.label))
 </script>
 

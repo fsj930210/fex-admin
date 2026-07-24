@@ -1,0 +1,3 @@
+import { Card } from '@fex/components-react/ui/card'
+import { DemoTimePicker } from './demo-time-picker'
+export function DisabledTimeDemo() { return <Card title="禁用时间" description="disabledHours、disabledMinutes、disabledSeconds 根据当前选择逐级计算。"><DemoTimePicker disabledTime={() => ({ disabledHours: () => [0, 1, 2, 3, 4, 5, 23], disabledMinutes: hour => hour === 12 ? [0, 5, 10, 15] : [], disabledSeconds: (_hour, minute) => minute === 30 ? [0, 10, 20] : [] })} /></Card> }

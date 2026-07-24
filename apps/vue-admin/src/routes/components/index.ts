@@ -30,4 +30,5 @@ export const componentRoutes = [
   { path: '/interactions', component: () => import('../../pages/Interactions/index.vue') },
   { path: '/resizable', component: () => import('../../pages/Resizable/index.vue') },
   { path: '/textarea', component: () => import('../../pages/Textarea/index.vue') },
+  { path: '/time-picker', component: () => import('../../pages/TimePicker/index.vue') },
 ].sort((left, right) => left.path.localeCompare(right.path))

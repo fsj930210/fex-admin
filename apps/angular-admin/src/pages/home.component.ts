@@ -40,6 +40,7 @@ export class HomeComponent {
     { to: '/interactions', label: 'Interactions' },
     { to: '/resizable', label: 'Resizable' },
     { to: '/textarea', label: 'Textarea' },
+    { to: '/time-picker', label: 'TimePicker' },
     { to: '/tree', label: 'Tree' },
   ].sort((left, right) => left.label.localeCompare(right.label))
 }

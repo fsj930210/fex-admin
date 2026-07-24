@@ -1,0 +1,1 @@
+<script setup lang="ts">import Card from '@fex/components-vue/ui/card'; import DemoTimePicker from './demo-time-picker.vue'</script><template><Card title="面板附加内容"><DemoTimePicker><template #panelExtra><button type="button" class="text-primary">选择当前时间</button></template></DemoTimePicker></Card></template>

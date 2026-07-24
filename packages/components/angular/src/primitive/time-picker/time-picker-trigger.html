@@ -1,0 +1,6 @@
+<fex-input-root fexPopoverTrigger [value]="text()" [disabled]="root.disabled()" [readOnly]="root.readOnly()" [invalid]="invalid()" (valueChange)="inputText($event)" (clear)="clear()">
+  @if (prefix()) { <span fexInputPrefix><ng-container *ngTemplateOutlet="prefix()!.template" /></span> }
+  <input fexInputControl aria-label="Time" [placeholder]="placeholder() ?? root.resolvedFormat()" />
+  @if (allowClear()) { <button fexInputClear type="button"></button> }
+  @if (!allowClear() || !text()) { <span fexInputSuffix>@if (suffix()) { <ng-container *ngTemplateOutlet="suffix()!.template" /> } @else { <fex-clock-icon class="size-4" /> }</span> }
+</fex-input-root>

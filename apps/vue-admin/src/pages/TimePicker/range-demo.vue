@@ -1,0 +1,1 @@
+<script setup lang="ts">import Card from '@fex/components-vue/ui/card'; import DemoTimePicker from './demo-time-picker.vue'</script><template><Card title="范围选择"><div class="flex items-center gap-space-sm"><DemoTimePicker format="HH:mm" /><span>至</span><DemoTimePicker format="HH:mm" /></div></Card></template>

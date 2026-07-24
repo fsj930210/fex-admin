@@ -1,0 +1,1 @@
+<script>import Card from '@fex/components-svelte/ui/card'; import DemoTimePicker from './demo-time-picker.svelte'</script><Card title="禁用与校验样式"><div class="flex gap-space-lg"><DemoTimePicker disabled defaultValue={{hour:8,minute:0,second:0}}/><DemoTimePicker invalid/></div></Card>

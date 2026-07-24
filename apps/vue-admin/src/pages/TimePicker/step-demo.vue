@@ -1,0 +1,1 @@
+<script setup lang="ts">import Card from '@fex/components-vue/ui/card'; import DemoTimePicker from './demo-time-picker.vue'</script><template><Card title="步长"><DemoTimePicker :step="{ hour: 2, minute: 5, second: 10 }" /></Card></template>

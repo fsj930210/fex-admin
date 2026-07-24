@@ -81,6 +81,7 @@ const ResizablePage = lazy(() =>
 const TextareaPage = lazy(() =>
   import('../../pages/Textarea').then((module) => ({ default: module.TextareaPage })),
 )
+const TimePickerPage = lazy(() => import('../../pages/TimePicker').then((module) => ({ default: module.TimePickerPage })))
 const DataGridPage = lazy(() =>
   import('../../pages/DataGrid').then((module) => ({ default: module.DataGridPage })),
 )
@@ -207,6 +208,7 @@ export const componentRoutes: AppRoute[] = [
     path: '/textarea',
     component: TextareaPage,
   },
+  { path: '/time-picker', component: TimePickerPage },
   {
     path: '/tree',
     component: TreePage,

@@ -31,6 +31,7 @@ const componentLinks = [
   { to: '/interactions', label: 'Interactions' },
   { to: '/resizable', label: 'Resizable' },
   { to: '/textarea', label: 'Textarea' },
+  { to: '/time-picker', label: 'TimePicker' },
 ].sort((left, right) => left.label.localeCompare(right.label))
 </script>
 

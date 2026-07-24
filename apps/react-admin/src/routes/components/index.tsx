@@ -108,6 +108,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Toast'), 'ToastPage'),
   },
   {
+    path: '/time-picker',
+    element: createLazyRouteElement(() => import('../../pages/TimePicker'), 'TimePickerPage'),
+  },
+  {
     path: '/sortable',
     element: createLazyRouteElement(() => import('../../pages/Sortable'), 'SortablePage'),
   },

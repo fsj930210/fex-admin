@@ -148,6 +148,7 @@ export const componentRoutes: Routes = [
     loadComponent: () =>
       import('../../pages/textarea/index.component').then((module) => module.TextareaComponent),
   },
+  { path: 'time-picker', loadComponent: () => import('../../pages/time-picker/index.component').then((module) => module.TimePickerComponent) },
   {
     path: 'tree',
     loadComponent: () =>

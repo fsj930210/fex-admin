@@ -1,0 +1,1 @@
+import { Card } from '@fex/components-solid/ui/card'; import { DemoTimePicker } from './demo-time-picker'; export function PanelExtraDemo(){return <Card title="面板附加内容"><DemoTimePicker panelExtra={<button type="button" class="text-primary">选择当前时间</button>}/></Card>}

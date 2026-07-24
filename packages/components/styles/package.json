@@ -33,7 +33,8 @@
     "./tabs": "./src/tabs.ts",
     "./tree": "./src/tree.ts",
     "./toast": "./src/toast.ts",
-    "./textarea": "./src/textarea.ts"
+    "./textarea": "./src/textarea.ts",
+    "./time-picker": "./src/time-picker.ts"
   },
   "dependencies": {
     "class-variance-authority": "latest"

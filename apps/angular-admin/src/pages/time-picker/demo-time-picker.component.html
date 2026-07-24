@@ -1,0 +1,11 @@
+<fex-time-picker [value]="value()" [defaultValue]="defaultValue()" [format]="pattern()" [use12Hours]="use12Hours()" [disabled]="disabled()" [disabledTime]="disabledTime()" [open]="open()" placement="bottomLeft" (change)="change.emit($event.value)" (openChange)="open.set($event)">
+  <fex-time-picker-trigger class="w-56" [invalid]="invalid()">
+    @if (prefix()) { <ng-template fexTimePickerPrefix>{{ prefix() }}</ng-template> }
+    @if (calendarSuffix()) { <ng-template fexTimePickerSuffix><fex-calendar-icon class="size-4" /></ng-template> }
+  </fex-time-picker-trigger>
+  <fex-time-picker-content>
+    <div fexTimePickerPanel>@for (column of columns(); track column.unit) {@switch (column.unit) {@case ('hour') {<div fexTimePickerHourColumn [step]="step()?.hour ?? 1"></div>} @case ('minute') {<div fexTimePickerMinuteColumn [step]="step()?.minute ?? 1"></div>} @case ('second') {<div fexTimePickerSecondColumn [step]="step()?.second ?? 1"></div>} @case ('period') {<div fexTimePickerPeriodColumn></div>}}}</div>
+    @if (panelExtra()) {<div class="border-t border-border p-space-sm text-sm"><button type="button" class="text-primary">选择当前时间</button></div>}
+    <div class="flex justify-end border-t border-border p-space-sm"><button fexButton type="button" size="sm" variant="ghost" (click)="open.set(false)">确定</button></div>
+  </fex-time-picker-content>
+</fex-time-picker>

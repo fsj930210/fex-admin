@@ -1,0 +1,22 @@
+<div fexScrollbarRoot class="size-full">
+<div #scrollViewport fexScrollbarViewport overflowX="hidden" [class]="viewportClassName">
+@for (item of options(); track item.value) {
+  <button
+    #itemElement
+    type="button"
+    role="option"
+    tabindex="-1"
+    [disabled]="resolvedDisabled() || item.disabled"
+    [attr.aria-selected]="item.value === selectedValue()"
+    [attr.data-selected]="item.value === selectedValue() ? 'true' : null"
+    [attr.data-active]="item.value === activeValue() ? 'true' : null"
+    [attr.data-disabled]="item.disabled ? 'true' : null"
+    [class]="itemClassName"
+    (focus)="activeValue.set(item.value)"
+    (click)="select(item, itemElement)"
+  >{{ item.label }}</button>
+}
+<div aria-hidden="true" [class]="spacerClassName"></div>
+</div>
+<div fexScrollbarBar axis="y"><div fexScrollbarTrack><div fexScrollbarThumb axis="y"></div></div></div>
+</div>

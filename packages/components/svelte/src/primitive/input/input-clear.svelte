@@ -2,12 +2,12 @@
   import { inputClearClassName } from '@fex/components-styles/input'
   import { cn } from '@fex/utils'
   import type { Snippet } from 'svelte'
-  import type { ButtonHTMLAttributes } from 'svelte/elements'
+  import type { HTMLButtonAttributes } from 'svelte/elements'
   import CloseIcon from '../../icon/close.svelte'
   import PrimitiveButton from '../button/button.svelte'
   import { getInputContext } from './context'
 
-  interface Props extends Omit<ButtonHTMLAttributes, 'class'> {
+  interface Props extends Omit<HTMLButtonAttributes, 'class'> {
     class?: string
     forceMount?: boolean
     children?: Snippet

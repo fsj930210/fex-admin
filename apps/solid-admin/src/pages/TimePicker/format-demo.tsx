@@ -1,0 +1,1 @@
+import { Card } from '@fex/components-solid/ui/card'; import { DemoTimePicker } from './demo-time-picker'; export function FormatDemo(){return <Card title="Format 决定列"><div class="flex gap-space-lg"><DemoTimePicker format="HH:mm"/><DemoTimePicker format="HH:mm:ss"/></div></Card>}

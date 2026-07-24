@@ -1,0 +1,1 @@
+<script setup lang="ts">import Card from '@fex/components-vue/ui/card'; import DemoTimePicker from './demo-time-picker.vue'</script><template><Card title="12 小时制"><DemoTimePicker use-12-hours :default-value="{ hour: 14, minute: 25, second: 36 }" /></Card></template>
