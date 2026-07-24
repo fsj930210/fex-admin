@@ -88,6 +88,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Scrollbar'), 'ScrollbarPage'),
   },
   {
+    path: '/select',
+    element: createLazyRouteElement(() => import('../../pages/Select'), 'SelectPage'),
+  },
+  {
     path: '/switch',
     element: createLazyRouteElement(() => import('../../pages/Switch'), 'SwitchPage'),
   },

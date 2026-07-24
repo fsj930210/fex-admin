@@ -23,6 +23,7 @@ const componentLinks = [
   { href: '/spinner', label: 'Spinner' },
   { href: '/slider', label: 'Slider' },
   { href: '/scrollbar', label: 'Scrollbar' },
+  { href: '/select', label: 'Select' },
   { href: '/switch', label: 'Switch' },
     { href: '/table', label: 'Table' },
     { href: '/tabs', label: 'Tabs' },

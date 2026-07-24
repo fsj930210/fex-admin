@@ -12,6 +12,7 @@ import {
   type Middleware,
   type MiddlewareState,
   type Padding,
+  type Placement,
   type Strategy,
   type VirtualElement,
 } from '@floating-ui/dom'
@@ -194,14 +195,31 @@ export function createFloating(options: FloatingOptions = {}): Floating {
           if (elements.floating !== floatingElement) {
             return
           }
-          elements.floating.style.setProperty(
-            '--floating-available-width',
-            `${Math.max(0, Math.round(availableWidth))}px`,
+          const referenceRect = elements.reference.getBoundingClientRect()
+          const viewportHeight = elements.floating.ownerDocument.documentElement.clientHeight
+          const verticalPadding =
+            typeof currentOptions.collisionPadding === 'number'
+              ? currentOptions.collisionPadding
+              : defaultCollisionPadding
+          const availableOnEitherSide = Math.max(
+            0,
+            referenceRect.top - verticalPadding,
+            viewportHeight - referenceRect.bottom - verticalPadding,
           )
-          elements.floating.style.setProperty(
-            '--floating-available-height',
-            `${Math.max(0, Math.round(availableHeight))}px`,
-          )
+          const nextAvailableWidth = `${Math.max(0, Math.round(availableWidth))}px`
+          const nextAvailableHeight = `${Math.max(
+            0,
+            Math.round(availableHeight),
+            Math.round(availableOnEitherSide),
+          )}px`
+          const sizeChanged =
+            elements.floating.style.getPropertyValue('--floating-available-width') !==
+              nextAvailableWidth ||
+            elements.floating.style.getPropertyValue('--floating-available-height') !==
+              nextAvailableHeight
+          elements.floating.style.setProperty('--floating-available-width', nextAvailableWidth)
+          elements.floating.style.setProperty('--floating-available-height', nextAvailableHeight)
+          if (sizeChanged) scheduleUpdate()
           elements.floating.style.setProperty(
             '--floating-reference-width',
             `${Math.round(rects.reference.width)}px`,
@@ -253,8 +271,48 @@ export function createFloating(options: FloatingOptions = {}): Floating {
     // computePosition 是 @floating-ui/dom 的核心 API：输入 reference/floating DOM，
     // 输出最终坐标、最终 placement 和各 middleware 数据。core 选择 DOM 版本是为了跨框架复用，
     // 避免 React/Vue/Solid/Svelte/Angular 各自绑定不同的定位实现。
+    // Do not let constraints from the previous placement shrink the rect measured by flip.
+    const referenceRectBeforePosition = reference.getBoundingClientRect()
+    const viewportHeight = floating.ownerDocument.documentElement.clientHeight
+    const verticalPadding =
+      typeof currentOptions.collisionPadding === 'number'
+        ? currentOptions.collisionPadding
+        : defaultCollisionPadding
+    floating.style.setProperty(
+      '--floating-available-height',
+      `${Math.max(
+        0,
+        Math.round(referenceRectBeforePosition.top - verticalPadding),
+        Math.round(viewportHeight - referenceRectBeforePosition.bottom - verticalPadding),
+      )}px`,
+    )
+    void floating.offsetHeight
+    const preferredPlacement = getPlacement(currentOptions)
+    const preferredParts = partsFromPlacement(preferredPlacement)
+    const floatingRect = floating.getBoundingClientRect()
+    const viewportWidth = floating.ownerDocument.documentElement.clientWidth
+    const space = {
+      top: referenceRectBeforePosition.top - verticalPadding,
+      right: viewportWidth - referenceRectBeforePosition.right - verticalPadding,
+      bottom: viewportHeight - referenceRectBeforePosition.bottom - verticalPadding,
+      left: referenceRectBeforePosition.left - verticalPadding,
+    }
+    const required =
+      preferredParts.side === 'top' || preferredParts.side === 'bottom'
+        ? floatingRect.height
+        : floatingRect.width
+    const opposite = { top: 'bottom', right: 'left', bottom: 'top', left: 'right' } as const
+    const oppositeSide = opposite[preferredParts.side]
+    const resolvedSide =
+      space[preferredParts.side] < required && space[oppositeSide] > space[preferredParts.side]
+        ? oppositeSide
+        : preferredParts.side
+    const resolvedPlacement: Placement =
+      preferredParts.align === 'center'
+        ? resolvedSide
+        : `${resolvedSide}-${preferredParts.align}`
     const result = await computePosition(reference, floating, {
-      placement: getPlacement(currentOptions),
+      placement: resolvedPlacement,
       strategy: currentOptions.strategy ?? 'absolute',
       middleware: getMiddleware(),
     })

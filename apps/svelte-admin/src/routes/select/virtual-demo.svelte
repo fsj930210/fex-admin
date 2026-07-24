@@ -1,0 +1,1 @@
+<script lang="ts">import{virtualOptions}from'./data';import Demo from'./simple-demo.svelte'</script><Demo title="Virtual scrolling" description="Only visible options and overscan mount from 1,000 entries." options={virtualOptions} showSearch virtual={{itemHeight:32,overscan:4}}/>

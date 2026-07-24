@@ -20,6 +20,7 @@ const componentLinks = [
   { to: '/spinner', label: 'Spinner' },
   { to: '/slider', label: 'Slider' },
   { to: '/scrollbar', label: 'Scrollbar' },
+  { to: '/select', label: 'Select' },
   { to: '/switch', label: 'Switch' },
   { to: '/table', label: 'Table' },
   { to: '/tabs', label: 'Tabs' },

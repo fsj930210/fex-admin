@@ -21,6 +21,7 @@
     "./pagination": "./src/pagination.ts",
     "./popover": "./src/popover.ts",
     "./radio": "./src/radio.ts",
+    "./select": "./src/select.ts",
     "./selectable-item": "./src/selectable-item.ts",
     "./dropzone": "./src/dropzone.ts",
     "./sortable": "./src/sortable.ts",

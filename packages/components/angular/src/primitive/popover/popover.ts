@@ -22,6 +22,8 @@ import {
   Output,
   inject,
 } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
+import { DestroyRef } from "@angular/core";
 import type { AfterViewInit, OnChanges, OnDestroy } from "@angular/core";
 import { createCoreStoreSignal } from "../../signals/core-store-signal";
 import { createHostClassName } from "../../signals/host-class";
@@ -45,6 +47,15 @@ function eventInfo(event: Event & Partial<PointerEvent>) {
 @Injectable({ providedIn: "root" })
 export class PopoverRegistry {
   private readonly popovers = new Set<Popover>();
+  private readonly document = inject(DOCUMENT);
+
+  constructor() {
+    const listener = (event: PointerEvent) => this.closeOutsidePopovers(event);
+    this.document.addEventListener("pointerdown", listener, true);
+    inject(DestroyRef).onDestroy(() =>
+      this.document.removeEventListener("pointerdown", listener, true),
+    );
+  }
 
   register(popover: Popover) {
     this.popovers.add(popover);
@@ -65,7 +76,8 @@ export class PopoverRegistry {
     const target = event.target;
     this.popovers.forEach((popover) => {
       if (!popover.snapshot().open) return;
-      if (target instanceof Node) {
+      const NodeConstructor = this.document.defaultView?.Node;
+      if (NodeConstructor && target instanceof NodeConstructor) {
         // content 会被移动到 popup container，必须用真实 DOM 边界判断内外部。
         if (
           popover.referenceElement?.contains(target) ||
@@ -167,7 +179,7 @@ export class Popover implements OnChanges, OnDestroy {
 }
 
 @Directive({
-  selector: "button[fexPopoverTrigger]",
+  selector: "[fexPopoverTrigger]",
   standalone: true,
   host: {
     type: "button",
@@ -177,7 +189,7 @@ export class Popover implements OnChanges, OnDestroy {
 export class PopoverTrigger implements AfterViewInit {
   protected readonly popover = inject(Popover);
   private readonly registry = inject(PopoverRegistry);
-  private readonly elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
+  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   ngAfterViewInit() {
     // View 初始化后才能拿到真实 button DOM，并注册给 floating 作为 reference。

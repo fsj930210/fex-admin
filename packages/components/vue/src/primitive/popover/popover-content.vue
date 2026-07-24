@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { popoverContentClassName } from '@fex/components-styles/popover'
 import { cn } from '@fex/utils'
-import type { ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, StyleValue } from 'vue'
 import { computed, onBeforeUnmount, shallowRef } from 'vue'
 import { eventInfo } from './context'
 import { usePopoverContext } from './context'
 
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<{ class?: string }>()
+const props = defineProps<{ class?: string; style?: StyleValue }>()
 const { overlay, snapshot } = usePopoverContext('PopoverContent')
 const contentElement = shallowRef<HTMLDivElement | null>(null)
 
@@ -51,7 +51,7 @@ onBeforeUnmount(() => {
     :data-align="snapshot.align"
     :data-placement="snapshot.placement"
     :class="contentClass"
-    :style="contentStyle"
+    :style="[contentStyle, props.style]"
     @pointerenter="handlePointerEnter"
     @pointerleave="handlePointerLeave"
   >

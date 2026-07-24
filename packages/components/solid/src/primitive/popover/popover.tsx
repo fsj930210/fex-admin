@@ -19,6 +19,7 @@ import type {
 import { cn } from '@fex/utils'
 import { Portal } from 'solid-js/web'
 import {
+  createEffect,
   createSignal,
   onCleanup,
   Show,
@@ -103,7 +104,7 @@ export function Popover(props: PopoverProps) {
       },
     }
   }
-  function syncOptions() {
+  function updateOptions() {
     // Solid props 是访问器语义；渲染时同步到稳定的 core 实例，不重建 DOM 引用和 autoUpdate。
     overlay.setOptions(makeOptions(local.open ?? open()))
     return null
@@ -111,6 +112,7 @@ export function Popover(props: PopoverProps) {
   const overlay = createFloatingOverlay({
     ...makeOptions(open()),
   })
+  createEffect(updateOptions)
   const snapshot = createCoreStoreSignal(overlay)
   const dismissRecord = { arrowElement, overlay, triggerElement, contentElement }
   dismissRecords.add(dismissRecord)
@@ -122,8 +124,16 @@ export function Popover(props: PopoverProps) {
 
   return (
     <>
-      {syncOptions()}
-      <PopoverContext.Provider value={{ arrow: Boolean(local.arrow), arrowElement, contentElement, overlay, snapshot, triggerElement }}>
+      <PopoverContext.Provider
+        value={{
+          arrow: Boolean(local.arrow),
+          arrowElement,
+          contentElement,
+          overlay,
+          snapshot,
+          triggerElement,
+        }}
+      >
         {local.children}
       </PopoverContext.Provider>
     </>
@@ -158,6 +168,7 @@ export function PopoverTrigger(props: PopoverTriggerProps) {
   const { overlay, snapshot, triggerElement } = usePopover('PopoverTrigger')
 
   function setReference(element: HTMLButtonElement) {
+    if (!(element instanceof HTMLElement)) return
     // ref 回调把真实 trigger DOM 注册给 core floating。
     triggerElement.current = element
     overlay.setReferenceElement(element)
@@ -205,18 +216,24 @@ export function PopoverPortal(props: ParentProps) {
 
 export interface PopoverContentProps extends ParentProps {
   class?: string
+  style?: string
 }
 
 export function PopoverContent(props: PopoverContentProps) {
-  const [local] = splitProps(props, ['children', 'class'])
+  const [local] = splitProps(props, ['children', 'class', 'style'])
   const { contentElement, overlay, snapshot } = usePopover('PopoverContent')
 
   function setContentElement(element: HTMLDivElement) {
+    if (!(element instanceof HTMLDivElement)) return
     // content DOM 同时是 overlay layer 和 floating element。
     contentElement.current = element
-    overlay.setFloatingElement(element)
+    // Solid invokes refs before a Portal node is connected. Floating UI needs a connected owner document.
+    queueMicrotask(() => {
+      if (contentElement.current === element && element.isConnected) {
+        overlay.setFloatingElement(element)
+      }
+    })
   }
-
 
   onCleanup(() => {
     contentElement.current = null
@@ -237,7 +254,7 @@ export function PopoverContent(props: PopoverContentProps) {
         data-align={snapshot().align}
         data-placement={snapshot().placement}
         class={cn(popoverContentClassName(), local.class)}
-        style="position: var(--floating-strategy, absolute); left: var(--floating-x, 0px); top: var(--floating-y, 0px); transform-origin: var(--floating-transform-origin);"
+        style={`position: var(--floating-strategy, absolute); left: var(--floating-x, 0px); top: var(--floating-y, 0px); transform-origin: var(--floating-transform-origin); ${local.style ?? ''}`}
       >
         {local.children}
       </div>

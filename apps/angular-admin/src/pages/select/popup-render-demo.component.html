@@ -1,0 +1,19 @@
+<fex-card title="Custom popup rendering" description="Custom content extends the default menu."
+  ><div class="max-w-md">
+    <fex-select [options]="options"
+      ><fex-select-trigger placeholder="自定义下拉面板" /><fex-select-content
+        ><fex-select-list />
+        <div
+          class="flex items-center gap-2 border-t border-border p-2"
+          (pointerdown)="$event.stopPropagation()"
+        >
+          <fex-input-root class="flex-1" [value]="name" (valueChange)="name = $event"
+            ><input fexInputControl placeholder="请输入新选项" /></fex-input-root
+          ><button fexButton size="sm" variant="ghost" (click)="add()">
+            <fex-plus-icon />添加
+          </button>
+        </div></fex-select-content
+      ></fex-select
+    >
+  </div></fex-card
+>

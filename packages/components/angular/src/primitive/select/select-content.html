@@ -1,0 +1,9 @@
+<fex-popover-content
+  [class]="contentClass"
+  [style.width]="'var(--select-content-width, var(--floating-reference-width))'"
+  [style.max-width]="'min(var(--floating-available-width), var(--select-content-max-width, var(--floating-reference-width)))'"
+  [style.max-height]="'min(var(--floating-available-height, calc(100vh - 16px)), var(--select-content-max-height, 320px))'"
+  [style.overflow]="'hidden'"
+  [style.padding]="'0px'"
+  ><ng-content><fex-select-list /></ng-content
+></fex-popover-content>

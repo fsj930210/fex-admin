@@ -18,6 +18,7 @@ import {
   popoverTitleClassName,
 } from '@fex/components-styles/popover'
 import { useLazyRef } from '../../hooks/use-lazy-ref'
+import { useIsomorphicLayoutEffect } from '../../hooks/use-isomorphic-layout-effect'
 import { useMemoizedFn } from '../../hooks/use-memoized-fn'
 import useUnmount from '../../hooks/use-unmount'
 import { PopoverContext } from './popover-context'
@@ -75,11 +76,12 @@ export function PopoverRoot({
   const overlay = overlayRef.current
   const latestOverlayOptionsRef = useRef<FloatingOverlayOptions>(overlayOptions)
 
-  if (!shallowEqualObject(latestOverlayOptionsRef.current, overlayOptions)) {
-    // 同步稳定 core controller 的输入，避免每次 render 后再用 effect 补同步。
+  useIsomorphicLayoutEffect(() => {
+    if (shallowEqualObject(latestOverlayOptionsRef.current, overlayOptions)) return
+    // Overlay 是 React 外部系统；提交 DOM 后再同步，避免 render 阶段通知已挂载的订阅者。
     latestOverlayOptionsRef.current = overlayOptions
     overlay.setOptions(overlayOptions)
-  }
+  })
 
   useUnmount(() => overlay.destroy())
 
@@ -125,7 +127,7 @@ export function PopoverPortal({ children, container, forceMount }: PopoverPortal
 }
 
 export interface PopoverContentProps extends ComponentProps<'div'> {
-  ref?: Ref<HTMLDivElement>
+  ref?: Ref<HTMLDivElement> | undefined
 }
 
 export function PopoverContent({ children, ...props }: PopoverContentProps) {

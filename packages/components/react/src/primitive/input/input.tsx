@@ -173,6 +173,39 @@ export interface InputClearProps extends Omit<ComponentProps<'button'>, 'type'> 
   children?: ReactNode
 }
 
+export interface InputClearButtonProps extends Omit<ComponentProps<'button'>, 'type'> {
+  ref?: Ref<HTMLButtonElement> | undefined
+  children?: ReactNode
+  'data-slot'?: string | undefined
+}
+
+export function InputClearButton({
+  className,
+  children,
+  'aria-label': ariaLabel = 'Clear input',
+  'data-slot': dataSlot = 'input-clear',
+  onPointerDown,
+  ref,
+  ...props
+}: InputClearButtonProps) {
+  return (
+    <Button
+      {...props}
+      ref={ref}
+      type="button"
+      aria-label={ariaLabel}
+      data-slot={dataSlot}
+      className={cn(inputClearClassName, className)}
+      onPointerDown={(event: PointerEvent<HTMLButtonElement>) => {
+        onPointerDown?.(event)
+        if (!event.defaultPrevented) event.preventDefault()
+      }}
+    >
+      {children ?? <CloseIcon />}
+    </Button>
+  )
+}
+
 export function InputClear({
   forceMount = false,
   className,
@@ -187,25 +220,20 @@ export function InputClear({
   if (!forceMount && !input.canClear) return null
 
   return (
-    <Button
+    <InputClearButton
       {...props}
       ref={ref}
-      type="button"
       aria-label={ariaLabel}
-      data-slot="input-clear"
       data-visible={input.canClear ? 'true' : 'false'}
       disabled={!input.canClear}
-      className={cn(inputClearClassName, className)}
-      onPointerDown={(event: PointerEvent<HTMLButtonElement>) => {
-        onPointerDown?.(event)
-        if (!event.defaultPrevented) event.preventDefault()
-      }}
+      className={className}
+      onPointerDown={onPointerDown}
       onClick={(event: MouseEvent<HTMLButtonElement>) => {
         onClick?.(event)
         if (!event.defaultPrevented) input.clear()
       }}
     >
-      {children ?? <CloseIcon />}
-    </Button>
+      {children}
+    </InputClearButton>
   )
 }

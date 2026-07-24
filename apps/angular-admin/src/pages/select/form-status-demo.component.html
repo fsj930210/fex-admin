@@ -1,0 +1,27 @@
+<fex-card
+  title="Form validation"
+  description="Submit the real form without a value to produce Select error state."
+  ><form [fexForm]="form" class="max-w-md space-y-space-md">
+    <ng-container [fexField]="form" name="framework" [validators]="validators" #framework="field"
+      ><fex-field-root [invalid]="invalid(framework.api)" [hasError]="invalid(framework.api)"
+        ><label fexFieldLabel>Framework</label
+        ><fex-select
+          fexFieldControl
+          [value]="framework.api.state.value"
+          [status]="invalid(framework.api) ? 'error' : undefined"
+          [options]="options"
+          (change)="framework.api.handleChange($event.value)"
+          ><fex-select-trigger placeholder="请选择" /><fex-select-content
+            ><fex-select-list /></fex-select-content
+        ></fex-select>
+        @if (invalid(framework.api)) {
+          <div fexFieldError>
+            @for (error of errors(framework.api); track error) {
+              <div>{{ error }}</div>
+            }
+          </div>
+        }
+      </fex-field-root></ng-container
+    ><button fexButton type="submit">Validate</button>
+  </form></fex-card
+>

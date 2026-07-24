@@ -1,0 +1,76 @@
+<div
+  fexPopoverTrigger
+  role="presentation"
+  data-slot="select-trigger"
+  [attr.data-disabled]="select.disabled || null"
+  [attr.data-status]="select.status"
+  [attr.aria-invalid]="select.status === 'error' || null"
+  [attr.aria-expanded]="select.snapshot().open"
+  [class]="triggerClass"
+  (keydown)="keydown($event)"
+>
+  <ng-container *ngTemplateOutlet="prefix ?? null" />
+  <div [class]="valueContainerClass">
+    @if (select.selectedOptions.length) { @if (select.isMultiple) {
+    <div [class]="valueClass">
+      @for (item of visibleSelected; track item.value) { @if (tag) {
+      <ng-container
+        *ngTemplateOutlet="tag; context: { $implicit: item, remove: remove(item.value) }"
+      />
+      } @else {
+      <span [class]="tagClass"
+        >{{ item.label }}<button
+          type="button"
+          [class]="tagRemoveClass"
+          (pointerdown)="$event.preventDefault()"
+          (click)="$event.stopPropagation(); select.removeValue(item.value)"
+        >
+          <fex-close-icon /></button
+      ></span>
+      } } @if (overflow > 0) {
+      <span [class]="tagOverflowClass"
+        >+{{ overflow }}</span
+      >
+      }
+    </div>
+    } @else {
+    <div [class]="valueClass">{{ select.selectedOptions[0]?.label }}</div>
+    } } @else if (!select.snapshot().searchValue && !select.canSearch) {
+    <span class="truncate text-muted-foreground">{{ placeholder }}</span> }
+    <input
+      role="combobox"
+      [attr.aria-expanded]="select.snapshot().open"
+      [attr.aria-controls]="select.listId"
+      [disabled]="select.disabled"
+      [readOnly]="!select.canSearch"
+      [attr.placeholder]="select.canSearch && !select.selectedOptions.length ? placeholder : null"
+      [value]="select.snapshot().searchValue"
+      [class]="inputClass"
+      (focus)="select.controller.open()"
+      (pointerdown)="inputPointerdown($event)"
+      (click)="$event.stopPropagation()"
+      (input)="input($event)"
+    />
+  </div>
+  <span data-slot="select-suffix" [class]="suffixClass">
+    @if (select.loading) { <fex-loading-icon class="animate-spin" /> } @else if (select.clearable &&
+    select.selectedOptions.length) {
+    <button
+      fexButtonPrimitive
+      type="button"
+      aria-label="Clear selection"
+      [class]="clearClass"
+      (pointerdown)="$event.preventDefault()"
+      (click)="$event.stopPropagation(); select.controller.clear()"
+    >
+      <fex-close-icon class="size-4" />
+    </button>
+    } @else if (suffix) {
+    <ng-container *ngTemplateOutlet="suffix" />
+    } @else {
+    <span [attr.data-state]="select.snapshot().open ? 'open' : 'closed'" [class]="indicatorClass"
+      ><fex-chevron-down-icon
+    /></span>
+    }
+  </span>
+</div>

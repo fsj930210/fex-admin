@@ -21,6 +21,7 @@
     "./primitive/menu-types": "./src/primitive/menu/menu-types.ts",
     "./primitive/pagination": "./src/primitive/pagination/pagination.ts",
     "./primitive/popover": "./src/primitive/popover/popover.ts",
+    "./primitive/select": "./src/primitive/select/select.ts",
     "./primitive/radio": "./src/primitive/radio/radio.ts",
     "./primitive/slider": "./src/primitive/slider/slider-primitive.ts",
     "./primitive/scrollbar": "./src/primitive/scrollbar/scrollbar.ts",

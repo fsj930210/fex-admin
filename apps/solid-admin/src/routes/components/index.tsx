@@ -56,6 +56,7 @@ const SliderPage = lazy(() =>
 const ScrollbarPage = lazy(() =>
   import('../../pages/Scrollbar').then((module) => ({ default: module.ScrollbarPage })),
 )
+const SelectPage = lazy(() => import('../../pages/Select').then((module) => ({ default: module.SelectPage })))
 const SwitchPage = lazy(() =>
   import('../../pages/Switch').then((module) => ({ default: module.SwitchPage })),
 )
@@ -169,6 +170,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/scrollbar',
     component: ScrollbarPage,
+  },
+  {
+    path: '/select',
+    component: SelectPage,
   },
   {
     path: '/switch',

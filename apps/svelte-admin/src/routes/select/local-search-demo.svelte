@@ -1,0 +1,1 @@
+<script lang="ts">import{defaultSelectFilterOption}from'@fex/components-core/select/filter-options';import{frameworkOptions}from'./data';import Demo from'./simple-demo.svelte'</script><Demo title="Local search" description="filterOption filters locally and search receives every keyword." options={frameworkOptions} showSearch filterOption={defaultSelectFilterOption}/>

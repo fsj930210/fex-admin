@@ -15,7 +15,11 @@ const localOpen = ref(props.defaultOpen)
 const triggerElement = shallowRef<HTMLElement | null>(null)
 const arrowElement = shallowRef<HTMLElement | null>(null)
 const arrow = shallowRef(Boolean(props.arrow))
-function createOptions(): FloatingOverlayOptions { return { ...props, open: controlled.value ? Boolean(props.open) : localOpen.value, onOpenChange(nextOpen, info) { if (!controlled.value) localOpen.value = nextOpen; emit('openChange', nextOpen, info) } } }
+function handleOpenChange(nextOpen: boolean, info: Parameters<NonNullable<FloatingOverlayOptions['onOpenChange']>>[1]) {
+  if (!controlled.value) localOpen.value = nextOpen
+  emit('openChange', nextOpen, info)
+}
+function createOptions(): FloatingOverlayOptions { return { ...props, open: controlled.value ? Boolean(props.open) : localOpen.value, onOpenChange: handleOpenChange } }
 let latestOptions = createOptions()
 const overlay = createFloatingOverlay(latestOptions)
 const snapshot = useCoreStore(overlay)

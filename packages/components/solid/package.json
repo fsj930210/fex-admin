@@ -21,6 +21,7 @@
     "./primitive/menu": "./src/primitive/menu/menu.tsx",
     "./primitive/pagination": "./src/primitive/pagination/pagination.tsx",
     "./primitive/popover": "./src/primitive/popover/popover.tsx",
+    "./primitive/select": "./src/primitive/select/select.tsx",
     "./primitive/radio": "./src/primitive/radio/radio.tsx",
     "./primitive/slider": "./src/primitive/slider/slider.tsx",
     "./primitive/scrollbar": "./src/primitive/scrollbar/scrollbar.tsx",

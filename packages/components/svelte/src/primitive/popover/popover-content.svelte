@@ -42,6 +42,7 @@
     data-align={$snapshot.align}
     data-placement={$snapshot.placement}
     class={classList}
+    {style}
     style:position="var(--floating-strategy, absolute)"
     style:left="var(--floating-x, 0px)"
     style:top="var(--floating-y, 0px)"

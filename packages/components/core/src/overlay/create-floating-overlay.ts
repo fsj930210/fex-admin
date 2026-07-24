@@ -164,7 +164,7 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
 
   function syncAutoUpdate(nextSnapshot = store.getSnapshot()) {
     // Floating UI 的 autoUpdate 需要真实 DOM 已经挂载，所以必须同时满足 open 和 mounted。
-    if (nextSnapshot.open && nextSnapshot.mounted) {
+    if (nextSnapshot.open && nextSnapshot.mounted && floatingElement) {
       void floating.update()
       floating.startAutoUpdate()
       return
@@ -213,6 +213,7 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
     setReferenceElement: (element) => {
       referenceElement = element
       floating.setReferenceElement(element)
+      syncAutoUpdate()
       syncDocumentDismiss()
     },
     setFloatingElement: (element) => {
@@ -220,6 +221,7 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
       // floatingElement 同时是 overlay layer 边界和 floating 定位元素。
       overlay.setLayerElement(element)
       floating.setFloatingElement(element)
+      syncAutoUpdate()
       syncDocumentDismiss()
     },
     setArrowElement: (element) => {
@@ -227,7 +229,10 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
       floating.setArrowElement(element)
       syncDocumentDismiss()
     },
-    setVirtualReference: floating.setVirtualReference,
+    setVirtualReference: (reference) => {
+      floating.setVirtualReference(reference)
+      syncAutoUpdate()
+    },
     updatePosition: floating.update,
     resolvePopupContainer: () => {
       if (currentOptions.getPopupContainer) {

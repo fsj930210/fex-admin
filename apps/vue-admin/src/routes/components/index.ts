@@ -20,6 +20,7 @@ export const componentRoutes = [
   { path: '/spinner', component: () => import('../../pages/Spinner/index.vue') },
   { path: '/slider', component: () => import('../../pages/Slider/index.vue') },
   { path: '/scrollbar', component: () => import('../../pages/Scrollbar/index.vue') },
+  { path: '/select', component: () => import('../../pages/Select/index.vue') },
   { path: '/switch', component: () => import('../../pages/Switch/index.vue') },
   { path: '/table', component: () => import('../../pages/Table/index.vue') },
   { path: '/tabs', component: () => import('../../pages/Tabs/index.vue') },

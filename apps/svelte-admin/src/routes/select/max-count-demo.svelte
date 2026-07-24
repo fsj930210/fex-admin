@@ -1,0 +1,1 @@
+<script lang="ts">import{frameworkOptions}from'./data';import Demo from'./simple-demo.svelte'</script><Demo title="Maximum selection count" description="maxCount limits selection; maxTagCount controls presentation." options={frameworkOptions} multiple defaultValue={['react']} maxCount={3} maxTagCount={2}/>

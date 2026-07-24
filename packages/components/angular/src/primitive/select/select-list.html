@@ -1,0 +1,38 @@
+@if (select.loading) {
+<div class="px-3 py-6 text-center text-sm text-muted-foreground">{{ loadingText }}</div>
+} @else if (!select.visibleOptions.length) {
+<div class="px-3 py-6 text-center text-sm text-muted-foreground">{{ emptyText }}</div>
+} @else if (range; as current) {
+<div [style.height.px]="current.totalSize" class="relative">
+  <div class="absolute inset-x-0" [style.top.px]="current.offset">
+    @for (item of virtualItems; track item.value) {
+    <ng-container *ngTemplateOutlet="row; context: { $implicit: item }" /> }
+  </div>
+</div>
+} @else { @for (group of groups; track group.label ?? '') { @if (group.label) {
+<div class="px-2 py-1.5 text-xs font-medium text-muted-foreground">{{ group.label }}</div>
+} @for (item of group.options; track item.value) {
+<ng-container *ngTemplateOutlet="row; context: { $implicit: item }" /> } } }
+<ng-template #row let-item
+  ><div
+    role="option"
+    [id]="select.listId + '-' + item.value"
+    [attr.aria-selected]="selected(item)"
+    [attr.aria-disabled]="disabled(item) || null"
+    [attr.data-selected]="selected(item) || null"
+    [attr.data-active]="select.snapshot().activeValue === item.value || null"
+    [attr.data-disabled]="disabled(item) || null"
+    class="group/select-option relative flex min-h-[32px] cursor-default items-center gap-2 rounded-md px-2 py-1.5 text-sm data-[active=true]:bg-muted-background data-[selected=true]:bg-muted-background"
+    (pointermove)="select.controller.setActiveValue(item.value, 'pointer')"
+    (pointerdown)="$event.preventDefault()"
+    (click)="choose(item)"
+  >
+    <span class="min-w-0 flex-1 truncate"
+      >@if (option) {
+      <ng-container *ngTemplateOutlet="option; context: { $implicit: item, state: state(item) }" />
+      } @else { {{ item.label }} }</span
+    ><span
+      class="inline-flex size-4 items-center justify-center text-primary opacity-0 group-data-[selected=true]/select-option:opacity-100"
+      ><fex-check-icon
+    /></span></div
+></ng-template>

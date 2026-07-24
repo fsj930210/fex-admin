@@ -18,6 +18,8 @@
     "./primitive/input": "./src/primitive/input/input.tsx",
     "./primitive/input/use-input": "./src/primitive/input/use-input.ts",
     "./primitive/listbox": "./src/primitive/listbox/listbox.tsx",
+    "./primitive/select": "./src/primitive/select/select.tsx",
+    "./primitive/select/use-select": "./src/primitive/select/use-select.ts",
     "./primitive/menu": "./src/primitive/menu/menu.tsx",
     "./primitive/pagination": "./src/primitive/pagination/pagination.tsx",
     "./primitive/popover": "./src/primitive/popover/popover.tsx",
@@ -66,7 +68,8 @@
     "./hooks/use-popover": "./src/primitive/popover/use-popover.ts",
     "./hooks/use-resize": "./src/hooks/use-resize.ts",
     "./hooks/use-sortable": "./src/hooks/use-sortable.ts",
-    "./hooks/use-toasts": "./src/hooks/use-toasts.ts"
+    "./hooks/use-toasts": "./src/hooks/use-toasts.ts",
+    "./hooks/use-unmount": "./src/hooks/use-unmount.ts"
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^2.0.1",

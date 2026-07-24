@@ -244,6 +244,18 @@
       "@fex/components-core/resizable/types": [
         "packages/components/core/src/resizable/types.ts"
       ],
+      "@fex/components-core/select/create-select-controller": [
+        "packages/components/core/src/select/create-select-controller.ts"
+      ],
+      "@fex/components-core/select/filter-options": [
+        "packages/components/core/src/select/filter-options.ts"
+      ],
+      "@fex/components-core/select/types": [
+        "packages/components/core/src/select/types.ts"
+      ],
+      "@fex/components-core/select/virtual": [
+        "packages/components/core/src/select/virtual.ts"
+      ],
       "@fex/components-core/selection/create-selection-controller": [
         "packages/components/core/src/selection/create-selection-controller.ts"
       ],
@@ -318,6 +330,9 @@
       ],
       "@fex/components-angular/primitive/popover": [
         "packages/components/angular/src/primitive/popover/popover.ts"
+      ],
+      "@fex/components-angular/primitive/select": [
+        "packages/components/angular/src/primitive/select/select.ts"
       ],
       "@fex/components-angular/primitive/radio": [
         "packages/components/angular/src/primitive/radio/radio.ts"

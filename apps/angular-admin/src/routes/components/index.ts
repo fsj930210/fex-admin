@@ -103,6 +103,11 @@ export const componentRoutes: Routes = [
       import('../../pages/scrollbar/index.component').then((module) => module.ScrollbarComponent),
   },
   {
+    path: 'select',
+    loadComponent: () =>
+      import('../../pages/select/index.component').then((module) => module.SelectComponent),
+  },
+  {
     path: 'switch',
     loadComponent: () =>
       import('../../pages/switch/index.component').then((module) => module.SwitchComponent),

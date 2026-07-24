@@ -40,20 +40,20 @@
         if (open === undefined) {
           // 非受控模式先写本地 rune state；受控模式等待外部 open prop 回流。
           localOpen = nextOpen
-          syncOptions()
         }
         onOpenChange?.(nextOpen, info)
       },
     }
   }
 
-  function syncOptions() {
-    overlay.setOptions(createOptions())
-    return true
-  }
-
   const overlay = createFloatingOverlay(createOptions())
   const snapshot = readableCoreStore(overlay)
+
+  // The core overlay is an external state machine. Keep its options in sync
+  // after Svelte has committed prop or local-open changes, never during render.
+  $effect(() => {
+    overlay.setOptions(createOptions())
+  })
 
   const unregisterDismissRecord = registerPopoverDismissRecord({ arrowElement, overlay, triggerElement, contentElement })
 
@@ -64,6 +64,4 @@
   })
 </script>
 
-{#if syncOptions()}
-  {@render children?.()}
-{/if}
+{@render children?.()}

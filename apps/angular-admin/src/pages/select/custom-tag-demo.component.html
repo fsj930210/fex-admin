@@ -1,0 +1,15 @@
+<fex-card title="Custom selected tags" description="The tag template controls each selected value."
+  ><div class="max-w-md">
+    <fex-select [multiple]="true" [options]="options" [defaultValue]="values"
+      ><fex-select-trigger placeholder="请选择"
+        ><ng-template #tag let-item let-remove="remove"
+          ><span
+            [class]="
+              'inline-flex h-6 items-center gap-1 rounded-md px-2 text-xs ' + color(item.value)
+            "
+            >{{ item.label
+            }}<button type="button" class="size-4" (click)="remove()">
+              <fex-close-icon /></button></span></ng-template></fex-select-trigger
+      ><fex-select-content><fex-select-list /></fex-select-content
+    ></fex-select></div
+></fex-card>

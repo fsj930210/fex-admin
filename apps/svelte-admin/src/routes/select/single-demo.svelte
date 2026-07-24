@@ -1,0 +1,1 @@
+<script lang="ts">import{frameworkOptions}from'./data';import Demo from'./simple-demo.svelte'</script><Demo title="Single" description="Single selection closes the panel after choosing an option." options={frameworkOptions} defaultValue="react"/>

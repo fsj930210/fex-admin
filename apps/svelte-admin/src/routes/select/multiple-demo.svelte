@@ -1,0 +1,1 @@
+<script lang="ts">import{frameworkOptions}from'./data';import Demo from'./simple-demo.svelte'</script><Demo title="Multiple" description="Multiple selection keeps the panel open and renders selected values together." options={frameworkOptions} multiple defaultValue={['react','vue']} maxTagCount={3}/>

@@ -1,0 +1,17 @@
+<fex-card
+  title="Remote search"
+  description="The mock request waits two seconds, cancels stale keywords and returns matches."
+  ><div class="max-w-md">
+    <fex-select
+      [showSearch]="true"
+      [loading]="loading"
+      [open]="open"
+      [options]="options"
+      (openChange)="open = $event"
+      (search)="search($event)"
+      ><fex-select-trigger placeholder="请输入关键词远程搜索" /><fex-select-content
+        ><fex-select-list
+          loadingText="Searching remote options..."
+          emptyText="No remote results" /></fex-select-content
+    ></fex-select></div
+></fex-card>

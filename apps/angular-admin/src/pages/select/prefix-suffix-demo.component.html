@@ -1,0 +1,14 @@
+<fex-card
+  title="Prefix and suffix"
+  description="prefix decorates the input; suffix replaces the chevron."
+  ><div class="max-w-md space-y-space-md">
+    <fex-select [options]="options"
+      ><fex-select-trigger placeholder="带前缀"
+        ><ng-template #prefix><fex-info-icon class="size-4" /></ng-template></fex-select-trigger
+      ><fex-select-content><fex-select-list /></fex-select-content></fex-select
+    ><fex-select [options]="options"
+      ><fex-select-trigger placeholder="自定义后缀"
+        ><ng-template #suffix><fex-check-icon /></ng-template></fex-select-trigger
+      ><fex-select-content><fex-select-list /></fex-select-content
+    ></fex-select></div
+></fex-card>
