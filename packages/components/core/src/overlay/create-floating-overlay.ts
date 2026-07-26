@@ -202,6 +202,12 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
     getSnapshot: store.getSnapshot,
     subscribe: store.subscribe,
     setOptions: (nextOptions) => {
+      const externallyClosing = overlay.getSnapshot().open && nextOptions.open === false
+      // 受控调用方可以直接把 open 设为 false。此时没有经过 overlay.close，必须同步
+      // 清理 click/focus 来源，否则下次第一次触发只会移除残留 source 而无法重新打开。
+      if (externallyClosing) {
+        trigger.clear({ reason: 'manual' }, false)
+      }
       currentOptions = nextOptions
       overlay.setOptions(nextOptions)
       floating.setOptions(nextOptions)

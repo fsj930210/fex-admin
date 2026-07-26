@@ -5,6 +5,7 @@
     type CalendarDate,
     type CalendarGranularity,
     type CalendarPanel,
+    type CalendarRange,
     type CalendarValue,
     type CalendarWeekday,
   } from '@fex/components-core/calendar'
@@ -15,6 +16,8 @@
 
   interface CalendarRootProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
     value?: CalendarValue | null | undefined
+    values?: readonly CalendarValue[] | undefined
+    range?: CalendarRange | undefined
     defaultValue?: CalendarValue | null | undefined
     viewDate?: CalendarDate | undefined
     defaultViewDate?: CalendarDate | undefined
@@ -28,12 +31,15 @@
     disabledDate?: ((date: CalendarDate) => boolean) | undefined
     children?: Snippet | undefined
     onValueChange?: ((value: CalendarValue) => void) | undefined
+    onCellSelect?: ((cell: import('@fex/components-core/calendar').CalendarCell) => void) | undefined
     onViewDateChange?: ((viewDate: CalendarDate) => void) | undefined
     onPanelChange?: ((panel: CalendarPanel) => void) | undefined
   }
 
   let {
     value,
+    values,
+    range,
     defaultValue = null,
     viewDate,
     defaultViewDate = getCalendarToday(),
@@ -47,6 +53,7 @@
     disabledDate,
     children,
     onValueChange,
+    onCellSelect,
     onViewDateChange,
     onPanelChange,
     ...rest
@@ -69,6 +76,8 @@
       ...(max ? { max } : {}),
       ...(disabledDate ? { disabledDate } : {}),
       ...(currentValue ? { value: currentValue } : {}),
+      ...(values ? { values } : {}),
+      ...(range ? { range } : {}),
     }),
   )
 
@@ -93,6 +102,7 @@
     setPanel,
     selectCell: (cell) => {
       if (cell.state.disabled) return
+      onCellSelect?.(cell)
       if (value === undefined) internalValue = cell.value
       onValueChange?.(cell.value)
     },

@@ -1,0 +1,38 @@
+<fex-popover [open]="open ?? localOpen()" [trigger]="disabled ? [] : ['focus', 'click']" (openChange)="setOpen($event)">
+  <div fexPopoverTrigger>
+    <fex-input-root [value]="multiple ? '' : inputValue()" [disabled]="disabled" [readOnly]="readOnly" (valueChange)="inputValueChange($event)" (clear)="clear()">
+      @if (multiple && calendarValues()?.length) {
+        <div data-slot="date-picker-tags" class="flex min-w-0 flex-1 items-center gap-1 overflow-hidden px-2">
+          <span data-slot="date-picker-tag" class="inline-flex shrink-0 items-center rounded bg-muted-background px-1.5 py-0.5 text-xs">{{ display().split(', ')[0] }}@if (firstSelectedValue(); as firstValue) { <button fexButton type="button" variant="ghost" size="icon-xs" class="ml-1 text-muted-foreground" (click)="$event.stopPropagation(); removeValue(firstValue)"><fex-close-icon /></button> }</span>
+          @if ((calendarValues()?.length ?? 0) > 1) { <span data-slot="date-picker-tag-overflow" [title]="display()" class="inline-flex shrink-0 cursor-default items-center rounded bg-muted-background px-1.5 py-0.5 text-xs text-muted-foreground">+{{ (calendarValues()?.length ?? 0) - 1 }}</span> }
+        </div>
+      }
+      <input fexInputControl [class]="multiple && calendarValues()?.length ? 'w-8 min-w-8 flex-none px-1' : ''" [placeholder]="multiple && calendarValues()?.length ? '' : placeholder ?? format ?? '请选择日期'" />
+      @if (allowClear) { <button fexInputClear type="button"></button> }
+      @if (!allowClear || !inputValue()) { <span fexInputSuffix><fex-calendar-icon /></span> }
+    </fex-input-root>
+  </div>
+  <fex-popover-content [class]="contentClassName">
+    <fex-calendar-root [value]="calendarValue()" [values]="calendarValues()" [viewDate]="viewDate()" [panel]="panel()" [granularity]="getGranularityByPicker(picker)" [weekStartsOn]="weekStartsOn" [disabledDate]="calendarDisabledDate()" (cellSelect)="selectCell($event)" (viewDateChange)="viewDate.set($event)" (panelChange)="panel.set($event)" [class]="panelClassName">
+      <fex-calendar-header>
+        <div [class]="headerClassName" data-slot="date-picker-header">
+          <div class="flex items-center gap-1">
+            <button fexButton variant="ghost" size="icon-sm" [class]="headerNavigationClassName" (click)="viewDate.set(viewDate().subtract({ years: panel() === 'year' || panel() === 'decade' ? 10 : 1 }))"><fex-chevron-left-icon /><fex-chevron-left-icon class="-ml-2" /></button>
+            @if (panel() === 'date') { <button fexButton variant="ghost" size="icon-sm" [class]="headerNavigationClassName" (click)="viewDate.set(viewDate().subtract({ months: 1 }))"><fex-chevron-left-icon /></button> }
+          </div>
+          <div class="flex items-center gap-2 text-base font-semibold">
+            <button fexButton variant="ghost" size="sm" [class]="headerLabelClassName" (click)="panel.set('year')">{{ panel() === 'decade' ? (viewDate().year - viewDate().year % 10) + '-' + (viewDate().year - viewDate().year % 10 + 9) + '年' : viewDate().year + '年' }}</button>
+            @if (picker !== 'year' && panel() === 'date') { <button fexButton variant="ghost" size="sm" [class]="headerLabelClassName" (click)="panel.set('month')">{{ viewDate().month }}月</button> }
+          </div>
+          <div class="flex items-center gap-1">
+            @if (panel() === 'date') { <button fexButton variant="ghost" size="icon-sm" [class]="headerNavigationClassName" (click)="viewDate.set(viewDate().add({ months: 1 }))"><fex-chevron-right-icon /></button> }
+            <button fexButton variant="ghost" size="icon-sm" [class]="headerNavigationClassName" (click)="viewDate.set(viewDate().add({ years: panel() === 'year' || panel() === 'decade' ? 10 : 1 }))"><fex-chevron-right-icon /><fex-chevron-right-icon class="-ml-2" /></button>
+          </div>
+        </div>
+      </fex-calendar-header>
+      @if (panel() === 'date') { <fex-calendar-week-header [class]="weekHeaderClassName" /> }
+      <fex-calendar-grid [class]="gridClassName" [attr.data-panel]="panel()"><ng-template let-cell><button fexCalendarCell [cell]="cell" [class]="cellClassName">{{ cell.label }}</button></ng-template></fex-calendar-grid>
+    </fex-calendar-root>
+    @if (needsConfirm()) { <div [class]="footerClassName"><button fexButton variant="outline" (click)="cancel()">取消</button><button fexButton (click)="confirm()">确认</button></div> }
+  </fex-popover-content>
+</fex-popover>

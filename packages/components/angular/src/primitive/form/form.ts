@@ -1,5 +1,5 @@
-import { scrollToFirstError, type ScrollToFirstError } from '@fex/components-core'
-export { scrollToField } from '@fex/components-core'
+import { scrollToFirstError, type ScrollToFirstError } from '@fex/components-core/form/scroll-to-first-error'
+export { scrollToField } from '@fex/components-core/form/scroll-to-first-error'
 import { ChangeDetectorRef, Directive, HostBinding, HostListener, Input, type OnChanges, type OnDestroy, type OnInit } from '@angular/core'
 import { FieldApi, type AnyFieldApi } from '@tanstack/angular-form'
 

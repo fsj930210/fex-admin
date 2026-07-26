@@ -25,6 +25,7 @@ const componentLinks = [
   { to: '/table', label: 'Table' },
   { to: '/tabs', label: 'Tabs' },
   { to: '/data-grid', label: 'Data Grid' },
+  { to: '/date-picker', label: 'DatePicker' },
   { to: '/tree', label: 'Tree' },
   { to: '/toast', label: 'Toast' },
   { to: '/sortable', label: 'Sortable' },

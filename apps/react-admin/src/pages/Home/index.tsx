@@ -1,19 +1,21 @@
 import { Link } from 'react-router'
 
 export function HomePage() {
-const componentLinks = [
-  { to: '/carousel', label: 'Carousel' },
+  const componentLinks = [
+    { to: '/alert', label: 'Alert' },
+    { to: '/badge', label: 'Badge' },
     { to: '/button', label: 'Button' },
     { to: '/calendar', label: 'Calendar' },
     { to: '/card', label: 'Card' },
     { to: '/checkbox', label: 'Checkbox' },
-    { to: '/dialog', label: 'Dialog' },
+    { to: '/carousel', label: 'Carousel' },
     { to: '/data-grid', label: 'Data Grid' },
-    { to: '/alert', label: 'Alert' },
-    { to: '/badge', label: 'Badge' },
+    { to: '/date-picker', label: 'DatePicker' },
+    { to: '/dialog', label: 'Dialog' },
     { to: '/empty', label: 'Empty' },
     { to: '/form', label: 'Form' },
     { to: '/input', label: 'Input' },
+    { to: '/interactions', label: 'Interactions' },
     { to: '/kbd', label: 'Kbd' },
     { to: '/listbox', label: 'Listbox' },
     { to: '/menu', label: 'Menu' },
@@ -29,12 +31,11 @@ const componentLinks = [
     { to: '/tree', label: 'Tree' },
     { to: '/toast', label: 'Toast' },
     { to: '/sortable', label: 'Sortable' },
-    { to: '/interactions', label: 'Interactions' },
     { to: '/resizable', label: 'Resizable' },
     { to: '/select', label: 'Select' },
     { to: '/textarea', label: 'Textarea' },
     { to: '/time-picker', label: 'TimePicker' },
-].sort((left, right) => left.label.localeCompare(right.label))
+  ].sort((left, right) => left.label.localeCompare(right.label))
 
   return (
     <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">

@@ -8,6 +8,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/DataGrid'), 'DataGridPage'),
   },
   {
+    path: '/date-picker',
+    element: createLazyRouteElement(() => import('../../pages/DatePicker'), 'DatePickerPage'),
+  },
+  {
     path: '/tree',
     element: createLazyRouteElement(() => import('../../pages/Tree'), 'TreePage'),
   },

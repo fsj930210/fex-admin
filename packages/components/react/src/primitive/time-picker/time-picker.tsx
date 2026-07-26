@@ -15,6 +15,7 @@ export {
   type TimePickerColumnItemRenderState,
 } from './time-picker-column'
 export { useTimePicker } from './use-time-picker'
+export { TimePickerContext } from './time-picker-context'
 export type {
   DisabledTime,
   TimePeriod,

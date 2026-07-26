@@ -37,6 +37,7 @@
     "./primitive/card-content": "./src/primitive/card/card-content.svelte",
     "./primitive/card-footer": "./src/primitive/card/card-footer.svelte",
     "./primitive/data-grid": "./src/primitive/data-grid/data-grid.ts",
+    "./primitive/date-picker": "./src/primitive/date-picker/date-picker.ts",
     "./primitive/empty": "./src/primitive/empty/empty.svelte",
     "./primitive/empty-header": "./src/primitive/empty/empty-header.svelte",
     "./primitive/empty-media": "./src/primitive/empty/empty-media.svelte",

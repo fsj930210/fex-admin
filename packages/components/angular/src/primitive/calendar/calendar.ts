@@ -7,6 +7,7 @@ import {
   type CalendarDate,
   type CalendarGranularity,
   type CalendarPanel,
+  type CalendarRange,
   type CalendarValue,
   type CalendarWeekday,
 } from '@fex/components-core/calendar'
@@ -44,6 +45,8 @@ export type CalendarNavigationAction =
 })
 export class CalendarRoot {
   value = input<CalendarValue | null | undefined>()
+  values = input<readonly CalendarValue[] | undefined>()
+  range = input<CalendarRange | undefined>()
   defaultValue = input<CalendarValue | null>(null)
   viewDate = input<CalendarDate | undefined>()
   defaultViewDate = input<CalendarDate>(getCalendarToday())
@@ -57,6 +60,7 @@ export class CalendarRoot {
   disabledDate = input<((date: CalendarDate) => boolean) | undefined>()
 
   valueChange = output<CalendarValue>()
+  cellSelect = output<CalendarCell>()
   viewDateChange = output<CalendarDate>()
   panelChange = output<CalendarPanel>()
 
@@ -75,6 +79,8 @@ export class CalendarRoot {
     const max = this.max()
     const disabledDate = this.disabledDate()
     const value = this.currentValue()
+    const values = this.values()
+    const range = this.range()
 
     return createCalendarGrid({
       viewDate: this.currentViewDate(),
@@ -86,6 +92,8 @@ export class CalendarRoot {
       ...(max ? { max } : {}),
       ...(disabledDate ? { disabledDate } : {}),
       ...(value ? { value } : {}),
+      ...(values ? { values } : {}),
+      ...(range ? { range } : {}),
     })
   })
 
@@ -101,6 +109,7 @@ export class CalendarRoot {
 
   selectCell(cell: CalendarCell) {
     if (cell.state.disabled) return
+    this.cellSelect.emit(cell)
     if (this.value() === undefined) this.internalValue.set(cell.value)
     this.valueChange.emit(cell.value)
   }

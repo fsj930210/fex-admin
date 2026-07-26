@@ -1,6 +1,7 @@
 export const componentRoutes = [
   { path: '/carousel', component: () => import('../../pages/Carousel/index.vue') },
   { path: '/data-grid', component: () => import('../../pages/DataGrid/index.vue') },
+  { path: '/date-picker', component: () => import('../../pages/DatePicker/index.vue') },
   { path: '/button', component: () => import('../../pages/Button/index.vue') },
   { path: '/calendar', component: () => import('../../pages/Calendar/index.vue') },
   { path: '/card', component: () => import('../../pages/Card/index.vue') },

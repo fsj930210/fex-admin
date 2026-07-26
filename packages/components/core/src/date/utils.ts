@@ -281,7 +281,17 @@ function toDateTimeFields(value: DateTimeInput): DateTimeFields {
       millisecond: value.getMilliseconds(),
     }
   }
-  return { hour: 0, minute: 0, second: 0, ...value }
+  // Temporal.PlainDate exposes year/month/day through prototype getters, so object spread
+  // drops them and previously formatted a valid date as 0000-00-00.
+  return {
+    year: value.year,
+    month: value.month,
+    day: value.day,
+    hour: value.hour ?? 0,
+    minute: value.minute ?? 0,
+    second: value.second ?? 0,
+    ...(value.millisecond === undefined ? {} : { millisecond: value.millisecond }),
+  }
 }
 
 function formatToken(value: DateTimeFields, token: DateFormatToken): string {

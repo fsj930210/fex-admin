@@ -19,6 +19,24 @@
       "@fex/components-core/calendar/types": [
         "packages/components/core/src/calendar/types.ts"
       ],
+      "@fex/components-core/date-picker/constraints": [
+        "packages/components/core/src/date-picker/constraints.ts"
+      ],
+      "@fex/components-core/date-picker/input": [
+        "packages/components/core/src/date-picker/input.ts"
+      ],
+      "@fex/components-core/date-picker/panel": [
+        "packages/components/core/src/date-picker/panel.ts"
+      ],
+      "@fex/components-core/date-picker/range": [
+        "packages/components/core/src/date-picker/range.ts"
+      ],
+      "@fex/components-core/date-picker/types": [
+        "packages/components/core/src/date-picker/types.ts"
+      ],
+      "@fex/components-core/date-picker/value": [
+        "packages/components/core/src/date-picker/value.ts"
+      ],
       "@fex/components-core/carousel/types": [
         "packages/components/core/src/carousel/types.ts"
       ],
@@ -315,6 +333,9 @@
       ],
       "@fex/components-angular/primitive/data-grid": [
         "packages/components/angular/src/primitive/data-grid/data-grid.ts"
+      ],
+      "@fex/components-angular/primitive/date-picker": [
+        "packages/components/angular/src/primitive/date-picker/date-picker.ts"
       ],
       "@fex/components-angular/primitive/empty": [
         "packages/components/angular/src/primitive/empty/empty.ts"

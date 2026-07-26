@@ -88,6 +88,7 @@ export interface CalendarGridOptions<TValue extends CalendarValue = CalendarValu
   granularity: CalendarGranularity
   today?: CalendarDate
   value?: TValue | null
+  values?: readonly TValue[]
   range?: CalendarRange<TValue>
   weekStartsOn?: CalendarWeekday
   min?: CalendarDate

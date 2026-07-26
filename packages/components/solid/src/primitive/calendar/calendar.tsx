@@ -7,6 +7,7 @@ import {
   type CalendarDate,
   type CalendarGranularity,
   type CalendarPanel,
+  type CalendarRange,
   type CalendarValue,
   type CalendarWeekday,
 } from '@fex/components-core/calendar'
@@ -22,6 +23,8 @@ export interface CalendarRootProps<TValue extends CalendarValue = CalendarValue>
   'onChange'
 > {
   value?: TValue | null
+  values?: readonly TValue[]
+  range?: CalendarRange<TValue>
   defaultValue?: TValue | null
   viewDate?: CalendarDate
   defaultViewDate?: CalendarDate
@@ -34,6 +37,7 @@ export interface CalendarRootProps<TValue extends CalendarValue = CalendarValue>
   max?: CalendarDate
   disabledDate?: (date: CalendarDate) => boolean
   onValueChange?: (value: TValue) => void
+  onCellSelect?: (cell: CoreCalendarCell<TValue>) => void
   onViewDateChange?: (viewDate: CalendarDate) => void
   onPanelChange?: (panel: CalendarPanel) => void
 }
@@ -43,6 +47,8 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>(
 ) {
   const [local, rest] = splitProps(props, [
     'value',
+    'values',
+    'range',
     'defaultValue',
     'viewDate',
     'defaultViewDate',
@@ -55,6 +61,7 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>(
     'max',
     'disabledDate',
     'onValueChange',
+    'onCellSelect',
     'onViewDateChange',
     'onPanelChange',
     'children',
@@ -82,6 +89,8 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>(
       ...(local.max ? { max: local.max } : {}),
       ...(local.disabledDate ? { disabledDate: local.disabledDate } : {}),
       ...(currentValue() ? { value: currentValue() } : {}),
+      ...(local.values ? { values: local.values } : {}),
+      ...(local.range ? { range: local.range } : {}),
     }),
   )
 
@@ -108,6 +117,7 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>(
         setPanel,
         selectCell: (cell) => {
           if (cell.state.disabled) return
+          local.onCellSelect?.(cell as CoreCalendarCell<TValue>)
           if (local.value === undefined) setInternalValue(() => cell.value as TValue)
           local.onValueChange?.(cell.value as TValue)
         },

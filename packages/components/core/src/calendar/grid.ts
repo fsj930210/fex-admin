@@ -8,6 +8,7 @@ import {
 import {
   getCalendarValueDate,
   getCalendarValueLabel,
+  isCalendarWeek,
   isSameCalendarValue,
 } from './value'
 import { isCalendarValueInRange } from './range'
@@ -58,7 +59,10 @@ function createDatePanelGrid<TValue extends CalendarValue>(
       granularity: options.granularity,
       rowIndex: Math.floor(index / dateColumnCount),
       columnIndex: index % dateColumnCount,
-      outside: date.month !== options.viewDate.month,
+      outside:
+        options.granularity === 'week' && isCalendarWeek(value)
+          ? value.start.month !== options.viewDate.month
+          : date.month !== options.viewDate.month,
       options,
     })
   })
@@ -135,7 +139,9 @@ function createCalendarCell<TValue extends CalendarValue>({
       today: getCalendarDateKey(date) === getCalendarDateKey(options.today),
       outside,
       disabled,
-      selected: isSameCalendarValue(value, options.value),
+      selected:
+        isSameCalendarValue(value, options.value) ||
+        Boolean(options.values?.some((item) => isSameCalendarValue(value, item))),
       rangeStart: isSameCalendarValue(value, options.range?.start),
       rangeEnd: isSameCalendarValue(value, options.range?.end),
       inRange: isCalendarValueInRange(value, options.range),

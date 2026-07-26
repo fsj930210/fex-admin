@@ -5,6 +5,7 @@ import {
   type CalendarDate,
   type CalendarGranularity,
   type CalendarPanel,
+  type CalendarRange,
   type CalendarValue,
   type CalendarWeekday,
 } from '@fex/components-core/calendar'
@@ -14,6 +15,8 @@ import { calendarContextKey } from './context'
 const props = withDefaults(
   defineProps<{
     value?: CalendarValue | null
+    values?: readonly CalendarValue[]
+    range?: CalendarRange
     defaultValue?: CalendarValue | null
     viewDate?: CalendarDate
     defaultViewDate?: CalendarDate
@@ -36,6 +39,7 @@ const props = withDefaults(
 
 const emit = defineEmits<{
   valueChange: [value: CalendarValue]
+  cellSelect: [cell: import('@fex/components-core/calendar').CalendarCell]
   viewDateChange: [viewDate: CalendarDate]
   panelChange: [panel: CalendarPanel]
 }>()
@@ -68,6 +72,8 @@ const grid = computed(() =>
     ...(props.max ? { max: props.max } : {}),
     ...(props.disabledDate ? { disabledDate: props.disabledDate } : {}),
     ...(currentValue.value ? { value: currentValue.value } : {}),
+    ...(props.values ? { values: props.values } : {}),
+    ...(props.range ? { range: props.range } : {}),
   }),
 )
 
@@ -92,6 +98,7 @@ provide(calendarContextKey, {
   setPanel,
   selectCell: (cell) => {
     if (cell.state.disabled) return
+    emit('cellSelect', cell)
     if (props.value === undefined) internalValue.value = cell.value
     emit('valueChange', cell.value)
   },

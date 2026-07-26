@@ -17,6 +17,7 @@ export class HomeComponent {
     { to: '/checkbox', label: 'Checkbox' },
     { to: '/dialog', label: 'Dialog' },
     { to: '/data-grid', label: 'Data Grid' },
+    { to: '/date-picker', label: 'DatePicker' },
     { to: '/alert', label: 'Alert' },
     { to: '/badge', label: 'Badge' },
     { to: '/empty', label: 'Empty' },

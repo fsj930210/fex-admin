@@ -85,6 +85,9 @@ const TimePickerPage = lazy(() => import('../../pages/TimePicker').then((module)
 const DataGridPage = lazy(() =>
   import('../../pages/DataGrid').then((module) => ({ default: module.DataGridPage })),
 )
+const DatePickerPage = lazy(() =>
+  import('../../pages/DatePicker').then((module) => ({ default: module.DatePickerPage })),
+)
 const TreePage = lazy(() =>
   import('../../pages/Tree').then((module) => ({ default: module.TreePage })),
 )
@@ -95,6 +98,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/data-grid',
     component: DataGridPage,
+  },
+  {
+    path: '/date-picker',
+    component: DatePickerPage,
   },
   {
     path: '/button',

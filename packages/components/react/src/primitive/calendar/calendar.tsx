@@ -7,11 +7,13 @@ import {
   type CalendarDate,
   type CalendarGranularity,
   type CalendarPanel,
+  type CalendarRange,
   type CalendarValue,
   type CalendarWeekday,
 } from '@fex/components-core/calendar'
+import { calendarCellClassName, calendarWeekRangeCellClassName } from '@fex/components-styles/calendar'
 import { cn } from '@fex/utils'
-import { Fragment, type ComponentProps, type ReactNode } from 'react'
+import { Fragment, type ComponentProps, type ReactNode, useState } from 'react'
 import { useControllableState } from '../../hooks/use-controllable-state'
 import { CalendarContext, useCalendarContext } from './calendar-context'
 
@@ -22,6 +24,8 @@ export interface CalendarRootProps<TValue extends CalendarValue = CalendarValue>
   'defaultValue' | 'onChange'
 > {
   value?: TValue | null
+  values?: readonly TValue[]
+  range?: CalendarRange<TValue>
   defaultValue?: TValue | null
   viewDate?: CalendarDate
   defaultViewDate?: CalendarDate
@@ -34,12 +38,16 @@ export interface CalendarRootProps<TValue extends CalendarValue = CalendarValue>
   max?: CalendarDate
   disabledDate?: (date: CalendarDate) => boolean
   onValueChange?: (value: TValue) => void
+  onCellSelect?: (cell: CoreCalendarCell<TValue>) => void
+  onCellHover?: (cell: CoreCalendarCell<TValue>) => void
   onViewDateChange?: (viewDate: CalendarDate) => void
   onPanelChange?: (panel: CalendarPanel) => void
 }
 
 export function CalendarRoot<TValue extends CalendarValue = CalendarValue>({
   value,
+  values,
+  range,
   defaultValue = null,
   viewDate,
   defaultViewDate,
@@ -52,12 +60,15 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>({
   max,
   disabledDate,
   onValueChange,
+  onCellSelect,
+  onCellHover,
   onViewDateChange,
   onPanelChange,
   className,
   children,
   ...props
 }: CalendarRootProps<TValue>) {
+  const [hoveredRowIndex, setHoveredRowIndex] = useState<number | null>(null)
   const fallbackViewDate = defaultViewDate ?? getCalendarToday()
   const valueChangeProps = onValueChange
     ? {
@@ -92,6 +103,8 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>({
     ...(max ? { max } : {}),
     ...(disabledDate ? { disabledDate } : {}),
     ...(currentValue ? { value: currentValue } : {}),
+    ...(values ? { values } : {}),
+    ...(range ? { range } : {}),
   })
 
   return (
@@ -103,12 +116,24 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>({
         panel: currentPanel,
         granularity,
         weekStartsOn,
+        hoveredRowIndex,
+        hasRange: Boolean(range),
         setViewDate: setCurrentViewDate,
         setPanel: setCurrentPanel,
         selectCell: (cell) => {
           if (cell.state.disabled) return
+          if (onCellSelect) {
+            onCellSelect(cell as CoreCalendarCell<TValue>)
+            return
+          }
           setCurrentValue(cell.value as TValue)
         },
+        hoverCell: (cell) => {
+          if (cell.state.disabled) return
+          setHoveredRowIndex(cell.rowIndex)
+          onCellHover?.(cell as CoreCalendarCell<TValue>)
+        },
+        clearHoveredRow: () => setHoveredRowIndex(null),
       }}
     >
       <div
@@ -117,6 +142,10 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>({
         data-panel={currentPanel}
         data-granularity={granularity}
         className={className}
+        onMouseLeave={(event) => {
+          props.onMouseLeave?.(event)
+          if (!event.defaultPrevented) setHoveredRowIndex(null)
+        }}
       >
         {children}
       </div>
@@ -283,12 +312,21 @@ export interface CalendarGridProps<TValue extends CalendarValue = CalendarValue>
 export function CalendarGrid<TValue extends CalendarValue = CalendarValue>({
   children,
   className,
+  onMouseLeave,
   ...props
 }: CalendarGridProps<TValue>) {
   const context = useCalendarContext('CalendarGrid')
 
   return (
-    <div {...props} data-slot="calendar-grid" className={className}>
+    <div
+      {...props}
+      data-slot="calendar-grid"
+      className={className}
+      onMouseLeave={(event) => {
+        onMouseLeave?.(event)
+        if (!event.defaultPrevented) context.clearHoveredRow()
+      }}
+    >
       {context.grid.rows.map((row) => (
         <div key={row.map((cell) => cell.key).join('|')} data-slot="calendar-row">
           {row.map((cell) =>
@@ -317,6 +355,7 @@ export function CalendarCell<TValue extends CalendarValue = CalendarValue>({
   children,
   className,
   onClick,
+  onMouseEnter,
   ...props
 }: CalendarCellProps<TValue>) {
   const context = useCalendarContext('CalendarCell')
@@ -330,13 +369,44 @@ export function CalendarCell<TValue extends CalendarValue = CalendarValue>({
       data-today={cell.state.today ? 'true' : undefined}
       data-outside={cell.state.outside ? 'true' : undefined}
       data-selected={cell.state.selected ? 'true' : undefined}
+      data-range-picker={context.hasRange ? 'true' : undefined}
+      data-range-start={cell.granularity !== 'week' && cell.state.rangeStart ? 'true' : undefined}
+      data-range-end={cell.granularity !== 'week' && cell.state.rangeEnd ? 'true' : undefined}
+      data-in-range={cell.granularity !== 'week' && cell.state.inRange ? 'true' : undefined}
+      data-week-selected={cell.granularity === 'week' && cell.state.selected ? 'true' : undefined}
+      data-week-hover={
+        cell.granularity === 'week' && context.hoveredRowIndex === cell.rowIndex ? 'true' : undefined
+      }
+      data-week-row-start={cell.granularity === 'week' && cell.columnIndex === 0 ? 'true' : undefined}
+      data-week-row-end={cell.granularity === 'week' && cell.columnIndex === 6 ? 'true' : undefined}
+      data-week-start={cell.granularity === 'week' && cell.state.selected && cell.columnIndex === 0 ? 'true' : undefined}
+      data-week-end={cell.granularity === 'week' && cell.state.selected && cell.columnIndex === 6 ? 'true' : undefined}
+      data-week-range-start={
+        cell.granularity === 'week' && cell.state.rangeStart && !cell.state.rangeEnd ? 'true' : undefined
+      }
+      data-week-range-end={
+        cell.granularity === 'week' && cell.state.rangeEnd && !cell.state.rangeStart ? 'true' : undefined
+      }
+      data-week-range-single={
+        cell.granularity === 'week' && cell.state.rangeStart && cell.state.rangeEnd ? 'true' : undefined
+      }
+      data-week-in-range={cell.granularity === 'week' && cell.state.inRange ? 'true' : undefined}
+      data-week-range={
+        cell.granularity === 'week' && (cell.state.rangeStart || cell.state.rangeEnd || cell.state.inRange)
+          ? 'true'
+          : undefined
+      }
       data-disabled={cell.state.disabled ? 'true' : undefined}
       disabled={cell.state.disabled}
-      className={cn(className)}
+      className={cn(calendarCellClassName, cell.granularity === 'week' && calendarWeekRangeCellClassName, className)}
       onClick={(event) => {
         onClick?.(event)
         if (event.defaultPrevented) return
         context.selectCell(cell)
+      }}
+      onMouseEnter={(event) => {
+        onMouseEnter?.(event)
+        if (!event.defaultPrevented) context.hoverCell(cell)
       }}
     >
       {content}

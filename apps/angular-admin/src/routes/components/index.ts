@@ -33,6 +33,11 @@ export const componentRoutes: Routes = [
       import('../../pages/data-grid/index.component').then((module) => module.DataGridComponent),
   },
   {
+    path: 'date-picker',
+    loadComponent: () =>
+      import('../../pages/date-picker/index.component').then((module) => module.DatePickerComponent),
+  },
+  {
     path: 'alert',
     loadComponent: () =>
       import('../../pages/alert/index.component').then((module) => module.AlertComponent),

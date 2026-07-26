@@ -19,6 +19,16 @@ function nextMonth() {
 function nextYear() {
   context.setViewDate(addDate(context.viewDate.value, { years: 1 }))
 }
+
+function previous() {
+  const panel = context.panel.value
+  context.setViewDate(subtractDate(context.viewDate.value, panel === 'date' ? { months: 1 } : panel === 'year' || panel === 'decade' ? { years: 10 } : { years: 1 }))
+}
+
+function next() {
+  const panel = context.panel.value
+  context.setViewDate(addDate(context.viewDate.value, panel === 'date' ? { months: 1 } : panel === 'year' || panel === 'decade' ? { years: 10 } : { years: 1 }))
+}
 </script>
 
 <template>
@@ -31,6 +41,8 @@ function nextYear() {
       :previous-month="previousMonth"
       :next-month="nextMonth"
       :next-year="nextYear"
+      :previous="previous"
+      :next="next"
       :set-panel="context.setPanel"
     />
   </div>
