@@ -27,6 +27,7 @@ export interface RangePickerTriggerProps
 export function RangePickerTrigger(props: RangePickerTriggerProps) {
   const [local, rest] = splitProps(props, [
     'class',
+    'status',
     'startPlaceholder',
     'endPlaceholder',
     'separator',
@@ -99,6 +100,7 @@ export function RangePickerTrigger(props: RangePickerTriggerProps) {
             value=""
             disabled={context.disabled}
             readOnly={context.readOnly}
+            status={local.status ?? context.status}
             onValueChange={() => undefined}
             onClick={(event) => {
               if (context.disabled) {

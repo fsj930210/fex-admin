@@ -12,6 +12,7 @@ export function DatePickerRoot<TValue extends CalendarValue = CalendarValue>(pro
   const [local, rest] = splitProps(props, [
     'children',
     'picker',
+    'status',
     'value',
     'defaultValue',
     'open',

@@ -6,6 +6,7 @@
   import DemoDatePicker from './demo-date-picker.svelte'
   import CustomDemos from './custom-demos.svelte'
   import IntegrationDemos from './integration-demos.svelte'
+  import StatusDemos from './status-demos.svelte'
 
   const today = createCalendarDate(2026, 7, 26)
   const lastDays = (days: number): CalendarRange<CalendarValue> => ({ start: today.subtract({ days: days - 1 }), end: today })
@@ -61,6 +62,7 @@
       <Card title="Picker 面板" description="picker 覆盖 date/week/month/quarter/year 五种日期粒度。" class={{ content: demoContentClass }}><DemoDatePicker picker="date" placeholder="请选择日期" /><DemoDatePicker picker="week" placeholder="请选择周" /><DemoDatePicker picker="month" placeholder="请选择月份" /><DemoDatePicker picker="quarter" placeholder="请选择季度" /><DemoDatePicker picker="year" placeholder="请选择年份" /></Card>
       <Card title="格式化" description="format 只影响输入与展示；value/onChange 仍然保持 Temporal CalendarValue。" class={{ content: demoContentClass }}><DemoDatePicker format="YYYY/MM/DD" placeholder="YYYY/MM/DD" /><DemoDatePicker picker="month" format="YYYY/MM" placeholder="YYYY/MM" /></Card>
       <Card title="Range Picker 类型" description="范围选择同样支持 year/month/date/week/quarter。" class={{ content: demoContentClass }}><DemoDatePicker range /><DemoDatePicker range picker="week" /><DemoDatePicker range picker="month" /><DemoDatePicker range picker="quarter" /><DemoDatePicker range picker="year" /></Card>
+      <StatusDemos />
       <CustomDemos />
       <Card title="切换日期和面板" description="受控 open 展示 Popover；Header 的单箭头切月、双箭头切年，年/月标签可切换面板。" class={{ content: demoContentClass }}><div class="space-y-space-sm"><div class="flex gap-space-sm"><Button size="sm" variant="outline" onclick={() => open = true}>打开面板</Button><Button size="sm" variant="outline" onclick={() => open = false}>关闭面板</Button></div><DemoDatePicker {open} value={panelValue} onOpenChange={(next) => open = next} onChange={(next) => setDate(next, 'panel')} /></div></Card>
       <Card title="允许留空" description="RangePicker 可允许清空某一端，适合“至今”等场景。" class={{ content: demoContentClass }}><DemoDatePicker range allowEmpty={{ end: true }} /></Card>

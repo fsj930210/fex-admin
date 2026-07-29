@@ -14,6 +14,7 @@
     open?: boolean
     defaultOpen?: boolean
     picker?: DatePickerPicker
+    status?: 'error' | 'warning'
     multiple?: boolean
     needConfirm?: boolean
     disabled?: boolean

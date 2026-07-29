@@ -31,3 +31,9 @@ export class ChevronDownIcon {}
   templateUrl: "./chevron-up.html",
 })
 export class ChevronUpIcon {}
+
+@Component({ selector: "fex-chevrons-right-icon", standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: "./chevrons-right.html" })
+export class ChevronsRightIcon {}
+
+@Component({ selector: "fex-chevrons-left-icon", standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: "./chevrons-left.html" })
+export class ChevronsLeftIcon {}

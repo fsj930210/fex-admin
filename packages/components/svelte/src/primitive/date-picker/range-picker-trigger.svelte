@@ -11,7 +11,7 @@
   import PopoverTrigger from '../popover/popover-trigger.svelte'
   import { useRangePickerContext } from './context'
 
-  let { class: className, startPlaceholder = '开始日期', endPlaceholder = '结束日期', separator = '→' }: { class?: string; startPlaceholder?: string; endPlaceholder?: string; separator?: string } = $props()
+  let { class: className, startPlaceholder = '开始日期', endPlaceholder = '结束日期', separator = '→', status }: { class?: string; startPlaceholder?: string; endPlaceholder?: string; separator?: string; status?: 'error' | 'warning' } = $props()
   const context = useRangePickerContext('RangePickerTrigger')
   const startValue = $derived(formatDatePickerValue(context.getRangeValue().start ?? null, context))
   const endValue = $derived(formatDatePickerValue(context.getRangeValue().end ?? null, context))
@@ -47,6 +47,7 @@
     value=""
     disabled={context.disabled}
     readOnly={context.readOnly}
+    status={status ?? context.status}
     class={cn(datePickerRangeTriggerClassName, className)}
     onValueChange={() => undefined}
     onclick={open}

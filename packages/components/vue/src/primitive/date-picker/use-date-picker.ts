@@ -9,6 +9,7 @@ import type { DatePickerContextValue, DatePickerSelectionValue } from './context
 
 export interface UseDatePickerOptions<TValue extends CalendarValue = CalendarValue> {
   picker?: DatePickerPicker
+  status?: 'error' | 'warning'
   value?: DatePickerSelectionValue<TValue>
   defaultValue?: DatePickerSelectionValue<TValue>
   open?: boolean
@@ -84,6 +85,7 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(opti
 
   return {
     picker,
+    get status() { return options.status },
     multiple,
     needConfirm,
     disabled: options.disabled ?? false,

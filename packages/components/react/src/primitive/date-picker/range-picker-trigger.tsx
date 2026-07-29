@@ -37,6 +37,7 @@ export function RangePickerTrigger({
   startInputProps,
   endInputProps,
   className,
+  status,
   ...props
 }: RangePickerTriggerProps) {
   const context = useRangePickerContext('RangePickerTrigger')
@@ -83,6 +84,7 @@ export function RangePickerTrigger({
             value=""
             disabled={context.disabled}
             readOnly={context.readOnly}
+            status={status ?? context.status}
             onValueChange={() => undefined}
             onClick={(event) => {
               if (context.disabled) {

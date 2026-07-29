@@ -8,11 +8,11 @@ import { createInput, type InputChangeReason } from './create-input'
 type InputContextValue = ReturnType<typeof createInput>
 const InputContext = createContext<InputContextValue>()
 
-export interface InputRootProps extends ParentProps<JSX.HTMLAttributes<HTMLDivElement>> { value?: string | undefined; defaultValue?: string | undefined; disabled?: boolean | undefined; readOnly?: boolean | undefined; invalid?: boolean | undefined; onValueChange?: ((value: string, meta: { reason: InputChangeReason; event?: InputEvent }) => void) | undefined; onClear?: (() => void) | undefined }
+export interface InputRootProps extends ParentProps<JSX.HTMLAttributes<HTMLDivElement>> { value?: string | undefined; defaultValue?: string | undefined; disabled?: boolean | undefined; readOnly?: boolean | undefined; invalid?: boolean | undefined; status?: 'error' | 'warning' | undefined; onValueChange?: ((value: string, meta: { reason: InputChangeReason; event?: InputEvent }) => void) | undefined; onClear?: (() => void) | undefined }
 export function InputRoot(props: InputRootProps) {
-  const [local, rest] = splitProps(props, ['children', 'class', 'value', 'defaultValue', 'disabled', 'readOnly', 'invalid', 'onValueChange', 'onClear'])
-  const input = createInput({ value: () => props.value, defaultValue: props.defaultValue, disabled: () => props.disabled, readOnly: () => props.readOnly, invalid: () => props.invalid, onValueChange: (value, meta) => props.onValueChange?.(value, meta), onClear: () => props.onClear?.() })
-  return <InputContext.Provider value={input}><div {...rest} data-slot="input-root" data-disabled={input.disabled() || undefined} data-readonly={input.readOnly() || undefined} data-invalid={input.invalid() || undefined} class={cn(inputRootClassName, local.class)}>{local.children}</div></InputContext.Provider>
+  const [local, rest] = splitProps(props, ['children', 'class', 'value', 'defaultValue', 'disabled', 'readOnly', 'invalid', 'status', 'onValueChange', 'onClear'])
+  const input = createInput({ value: () => props.value, defaultValue: props.defaultValue, disabled: () => props.disabled, readOnly: () => props.readOnly, invalid: () => props.invalid || props.status === 'error', onValueChange: (value, meta) => props.onValueChange?.(value, meta), onClear: () => props.onClear?.() })
+  return <InputContext.Provider value={input}><div {...rest} data-slot="input-root" data-disabled={input.disabled() || undefined} data-readonly={input.readOnly() || undefined} data-invalid={input.invalid() || undefined} data-status={local.status} class={cn(inputRootClassName, local.class)}>{local.children}</div></InputContext.Provider>
 }
 
 function useInputContext(name: string) { const context = useContext(InputContext); if (!context) throw new Error(`${name} must be used inside InputRoot.`); return context }

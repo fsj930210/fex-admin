@@ -9,7 +9,7 @@ import PopoverTrigger from '../popover/popover-trigger.vue'
 import { useDatePickerContext } from './context'
 import DatePickerTags from './date-picker-tags.vue'
 
-const props = defineProps<{ class?: string; displayValue?: string; placeholder?: string; prefix?: unknown; suffix?: unknown }>()
+const props = defineProps<{ class?: string; displayValue?: string; placeholder?: string; prefix?: unknown; suffix?: unknown; status?: 'error' | 'warning' }>()
 const context = useDatePickerContext('DatePickerTrigger')
 const inputRef = ref<HTMLInputElement | null>(null)
 const pickerDisplayValue = computed(() => Array.isArray(context.value.value)
@@ -60,6 +60,7 @@ function getPickerTriggerProps(triggerProps: Record<string, unknown>) {
       :value="context.multiple ? '' : text"
       :disabled="context.disabled"
       :read-only="context.readOnly"
+      :status="props.status ?? context.status"
       @value-change="input"
       @clear="canClear() && context.clear()"
       @click="(event) => clickTrigger(event, triggerProps.onClick as ((event: MouseEvent) => void) | undefined)"

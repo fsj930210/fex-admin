@@ -3,6 +3,8 @@ export const inputRootClassName = [
   'transition-colors focus-within:border-focus focus-within:ring-3 focus-within:ring-focus/50',
   'data-[disabled=true]:cursor-not-allowed data-[disabled=true]:bg-disabled-background data-[disabled=true]:text-disabled-foreground data-[disabled=true]:opacity-70',
   'data-[invalid=true]:border-danger data-[invalid=true]:ring-3 data-[invalid=true]:ring-danger/20',
+  'data-[status=error]:border-danger data-[status=error]:ring-3 data-[status=error]:ring-danger/20',
+  'data-[status=warning]:border-warning data-[status=warning]:ring-3 data-[status=warning]:ring-warning/20',
 ].join(' ')
 
 export const inputControlClassName = [

@@ -26,6 +26,7 @@
     { href: '/switch', label: 'Switch' },
     { href: '/table', label: 'Table' },
     { href: '/tabs', label: 'Tabs' },
+    { href: '/transfer', label: 'Transfer' },
     { href: '/tree', label: 'Tree' },
     { href: '/toast', label: 'Toast' },
     { href: '/sortable', label: 'Sortable' },

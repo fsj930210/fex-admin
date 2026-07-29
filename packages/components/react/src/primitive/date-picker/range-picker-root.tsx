@@ -15,6 +15,7 @@ export function RangePickerRoot<TValue extends CalendarValue = CalendarValue>({
   placement = 'bottom',
   sideOffset = 6,
   picker,
+  status,
   value,
   defaultValue,
   open,
@@ -36,6 +37,7 @@ export function RangePickerRoot<TValue extends CalendarValue = CalendarValue>({
 }: RangePickerRootProps<TValue>) {
   const rangePicker = useRangePicker<TValue>({
     ...(picker ? { picker } : {}),
+    ...(status ? { status } : {}),
     ...(value !== undefined ? { value } : {}),
     ...(defaultValue !== undefined ? { defaultValue } : {}),
     ...(open !== undefined ? { open } : {}),

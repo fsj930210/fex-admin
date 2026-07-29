@@ -35,6 +35,7 @@ export class RangePickerTrigger implements AfterViewInit {
   @Input() endPlaceholder = '结束日期'
   @Input() separator = '→'
   @Input() suffix: string | undefined = undefined
+  @Input() status: 'error' | 'warning' | undefined = undefined
   @Input('class') className: string | undefined = undefined
   protected readonly focusedPart = signal<'start' | 'end' | null>(null)
   protected readonly triggerClassName = datePickerRangeTriggerClassName

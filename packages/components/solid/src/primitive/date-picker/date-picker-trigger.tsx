@@ -21,7 +21,7 @@ function isValueArray(value: unknown): value is readonly unknown[] {
 }
 
 export function DatePickerTrigger(props: DatePickerTriggerProps) {
-  const [local, rest] = splitProps(props, ['class', 'displayValue', 'placeholder', 'prefix', 'suffix', 'inputProps'])
+  const [local, rest] = splitProps(props, ['class', 'displayValue', 'placeholder', 'prefix', 'suffix', 'status', 'inputProps'])
   const context = useDatePickerContext('DatePickerTrigger')
   let inputElement: HTMLInputElement | undefined
   const pickerDisplayValue = () => isValueArray(context.value())
@@ -52,6 +52,7 @@ export function DatePickerTrigger(props: DatePickerTriggerProps) {
             value={context.multiple ? '' : text()}
             disabled={context.disabled}
             readOnly={context.readOnly}
+            status={local.status ?? context.status}
             onValueChange={input}
             onClear={context.allowClear ? context.clear : undefined}
             onClick={(event) => {

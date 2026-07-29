@@ -9,6 +9,7 @@ import type { DatePickerContextValue, DatePickerSelectionValue, RangePickerConte
 
 export interface UseDatePickerOptions<TValue extends CalendarValue = CalendarValue> {
   picker?: DatePickerPicker
+  status?: 'error' | 'warning'
   value?: DatePickerSelectionValue<TValue>
   defaultValue?: DatePickerSelectionValue<TValue>
   open?: boolean
@@ -29,6 +30,7 @@ export interface UseDatePickerOptions<TValue extends CalendarValue = CalendarVal
 
 export interface UseRangePickerOptions<TValue extends CalendarValue = CalendarValue> {
   picker?: DatePickerPicker
+  status?: 'error' | 'warning'
   value?: CalendarRange<TValue>
   defaultValue?: CalendarRange<TValue>
   open?: boolean
@@ -82,7 +84,7 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(opti
     if (needConfirm) pendingValue = next
     else { commit(next); close() }
   }
-  return { picker, multiple, needConfirm, disabled: options.disabled ?? false, readOnly: options.readOnly ?? false, allowClear: options.allowClear ?? true, format: options.format ?? getDefaultDatePickerFormat(picker), weekStartsOn: options.weekStartsOn ?? 0, getOpen: open, getPanel: () => panel, getViewDate: () => viewDate, getValue: activeValue, getCalendarValue: () => isValueArray(activeValue()) ? null : activeValue() as TValue | null, getCalendarValues: () => isValueArray(activeValue()) ? activeValue() as readonly TValue[] : [], minDate: options.minDate, maxDate: options.maxDate, disabledDate: options.disabledDate ? (date) => createDatePickerDisabledDate({ picker, panel, minDate: options.minDate, maxDate: options.maxDate, disabledDate: options.disabledDate })(date) : undefined, setPanel: (next) => { panel = next }, setViewDate: (next) => { viewDate = next }, setOpen, openPanel: () => setOpen(true), close, clear, confirm, cancel, select }
+  return { picker, get status() { return options.status }, multiple, needConfirm, disabled: options.disabled ?? false, readOnly: options.readOnly ?? false, allowClear: options.allowClear ?? true, format: options.format ?? getDefaultDatePickerFormat(picker), weekStartsOn: options.weekStartsOn ?? 0, getOpen: open, getPanel: () => panel, getViewDate: () => viewDate, getValue: activeValue, getCalendarValue: () => isValueArray(activeValue()) ? null : activeValue() as TValue | null, getCalendarValues: () => isValueArray(activeValue()) ? activeValue() as readonly TValue[] : [], minDate: options.minDate, maxDate: options.maxDate, disabledDate: options.disabledDate ? (date) => createDatePickerDisabledDate({ picker, panel, minDate: options.minDate, maxDate: options.maxDate, disabledDate: options.disabledDate })(date) : undefined, setPanel: (next) => { panel = next }, setViewDate: (next) => { viewDate = next }, setOpen, openPanel: () => setOpen(true), close, clear, confirm, cancel, select }
 }
 
 export function useRangePicker<TValue extends CalendarValue = CalendarValue>(options: UseRangePickerOptions<TValue>): RangePickerContextValue<TValue> {
@@ -107,5 +109,5 @@ export function useRangePicker<TValue extends CalendarValue = CalendarValue>(opt
   function confirm() { commit(pendingValue); close() }
   function cancel() { pendingValue = value(); close() }
   function disabledDate(date: CalendarDate, part: 'start' | 'end') { return createDatePickerDisabledDate({ picker, panel, minDate: options.minDate, maxDate: options.maxDate, disabledDate: options.disabledDate ? (current, info) => Boolean(options.disabledDate?.(current, info.activePart ?? part)) : undefined })(date, { activePart: part, from: getRangeFromValue(rangeValue(), part), rangeValue: rangeValue() }) }
-  return { picker, needConfirm, disabled: options.disabled ?? false, readOnly: options.readOnly ?? false, allowClear: options.allowClear ?? true, allowEmpty: normalizeAllowEmpty(options.allowEmpty), format: options.format ?? getDefaultDatePickerFormat(picker), weekStartsOn: options.weekStartsOn ?? 0, getOpen: open, getPanel: () => panel, getViewDate: () => viewDate, getRangeValue: rangeValue, getActivePart: () => activePart, getHoverValue: () => hoverValue, minDate: options.minDate, maxDate: options.maxDate, disabledDate, setPanel: (next) => { panel = next }, setViewDate: (next) => { viewDate = next }, setOpen: (next) => setOpen(next), setActivePart: (next) => { activePart = next }, setHoverValue: (next) => { hoverValue = next }, openPanel: (part) => setOpen(true, part), close, clear, confirm, cancel, select }
+  return { picker, get status() { return options.status }, needConfirm, disabled: options.disabled ?? false, readOnly: options.readOnly ?? false, allowClear: options.allowClear ?? true, allowEmpty: normalizeAllowEmpty(options.allowEmpty), format: options.format ?? getDefaultDatePickerFormat(picker), weekStartsOn: options.weekStartsOn ?? 0, getOpen: open, getPanel: () => panel, getViewDate: () => viewDate, getRangeValue: rangeValue, getActivePart: () => activePart, getHoverValue: () => hoverValue, minDate: options.minDate, maxDate: options.maxDate, disabledDate, setPanel: (next) => { panel = next }, setViewDate: (next) => { viewDate = next }, setOpen: (next) => setOpen(next), setActivePart: (next) => { activePart = next }, setHoverValue: (next) => { hoverValue = next }, openPanel: (part) => setOpen(true, part), close, clear, confirm, cancel, select }
 }

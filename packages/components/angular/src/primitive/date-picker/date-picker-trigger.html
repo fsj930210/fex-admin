@@ -3,6 +3,7 @@
   [value]="inputValue()"
   [disabled]="state.context().disabled"
   [readOnly]="state.context().readOnly"
+  [status]="status ?? state.context().status"
   (click)="open(datePickerInputControl, $event)"
   (valueChange)="input($event)"
   (clear)="clear()"

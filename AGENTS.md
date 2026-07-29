@@ -197,9 +197,10 @@
 - 组件默认圆角统一使用 `rounded-md` / `var(--radius-md)`，当前为 8px。Button、Input、Select、Textarea、Card、Dialog、Popover、Dropdown、Sheet 等基础控件和容器组件默认都用 md；只有明确的组件设计规格或特殊场景需要更大/更小圆角时，才允许局部覆盖，并要保持同类组件一致。
 - padding、margin、gap 等 spacing class 要优先使用最简表达；四边相同写 `p-space-*`，横纵不同才写 `px-space-* py-space-*`，单边不同才写具体方向，避免无意义重复。
 - 每个 UI 库都必须显式分层为 `primitive` 和 `ui`，其中 `primitive` 只承载底层结构、基础行为和最小样式协议，`ui` 承载面向业务的推荐封装和默认组合；少数真正复杂且高复用的工作流型组件可以额外有 `pro` 层，但 `pro` 只用于数据表、复杂表单、远程选择器这类明确的工作流封装。
+- 实现新组件或扩展组件时，如果用户没有明确指定层级，默认只实现 `primitive`；禁止自行推断并新增 `ui`、`pro` 或其它更高层封装。只有用户明确要求对应层级时才能实现，并且不得以“默认组合更方便”“顺手补齐分层”作为擅自扩大范围的理由。
 - 当前约定不把同一框架内的 `primitive`、`ui`、`hooks`、`icon` 拆成多个 package；按框架一个 package 管理，包内按类别目录分层。边界以该框架 package 的公开 `exports` 为准，业务侧和示例侧都只能通过公开子路径导入。
 - 跨框架 primitive 中凡是需要把行为挂到调用方元素上的能力，例如 Trigger、Close、Item、Anchor 等，统一使用 render prop / slot props / template context 传出 `props`、`ref` 或框架等价绑定能力、`state`；禁止把 `asChild` 作为公共 API，也不要用 clone child、隐式增强子节点或要求用户组件转发 ref 作为基础范式。
-- 组件的 demo 和文档必须同时覆盖 `primitive`、`ui`，如果某个组件存在 `pro` 层也必须一并覆盖；demo 页面要用统一的 `Card` 容器承载各段示例，不能再手写散落的 section 容器。
+- 组件的 demo 和文档必须覆盖本次实际实现且已公开的层级；如果用户明确要求并实际实现了 `ui` 或 `pro`，对应 demo 和文档也必须一并覆盖。不能为了满足 demo 覆盖而擅自新增用户未要求的 `ui` / `pro` 层；demo 页面要用统一的 `Card` 容器承载各段示例，不能再手写散落的 section 容器。
 - `ui` 层的结构化 API 要优先采用显式对象形态来承载部件级样式与状态，例如 `partClassName`、`partStyle`、`slotProps` 之类的清晰结构，不要把 header/content/footer 等部件的样式塞进扁平 props，也不要让调用方依赖 DOM 深层 class。
 - `ui` 组件如果暴露多个部件的 class/style，必须使用结构化对象 API，不要新增 `headerClassName`、`contentClassName`、`footerClassName`、`headerStyle`、`contentStyle` 这类扁平 props。统一优先使用类似 `className={{ header, content, footer }}` / `class={{ header, content, footer }}`、`style={{ header, content, footer }}`、`partClassName`、`partStyle` 的对象形态；具体命名按框架习惯保持一致。primitive 层优先只承载宿主元素 class/style 合并，复杂部件定制主要放在 ui 层。
 - 新增组件样式前必须先参考 `packages/components/styles/src/button.ts` 的组织方式：基础 class 用数组拼接，variant/size/effect 等用 `cva` 表达，组件包实现只消费样式函数，不把默认样式散落在 React/Vue/Solid/Svelte/Angular 文件里。

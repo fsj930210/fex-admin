@@ -15,6 +15,7 @@ export function DatePickerRoot<TValue extends CalendarValue = CalendarValue>({
   placement = 'bottom',
   sideOffset = 6,
   picker,
+  status,
   value,
   defaultValue,
   open,
@@ -35,6 +36,7 @@ export function DatePickerRoot<TValue extends CalendarValue = CalendarValue>({
 }: DatePickerRootProps<TValue>) {
   const datePicker = useDatePicker<TValue>({
     ...(picker ? { picker } : {}),
+    ...(status ? { status } : {}),
     ...(value !== undefined ? { value } : {}),
     ...(defaultValue !== undefined ? { defaultValue } : {}),
     ...(open !== undefined ? { open } : {}),

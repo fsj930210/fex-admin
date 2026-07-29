@@ -9,7 +9,7 @@ import { InputClear, InputControl, InputRoot, InputSuffix } from '../input/input
 import PopoverTrigger from '../popover/popover-trigger.vue'
 import { useRangePickerContext } from './context'
 
-const props = withDefaults(defineProps<{ class?: string; startPlaceholder?: string; endPlaceholder?: string; separator?: string }>(), { startPlaceholder: '开始日期', endPlaceholder: '结束日期', separator: '→' })
+const props = withDefaults(defineProps<{ class?: string; startPlaceholder?: string; endPlaceholder?: string; separator?: string; status?: 'error' | 'warning' }>(), { startPlaceholder: '开始日期', endPlaceholder: '结束日期', separator: '→' })
 const context = useRangePickerContext('RangePickerTrigger')
 const startValue = computed(() => formatDatePickerValue(context.rangeValue.value.start ?? null, context))
 const endValue = computed(() => formatDatePickerValue(context.rangeValue.value.end ?? null, context))
@@ -74,6 +74,7 @@ function getPickerTriggerProps(triggerProps: Record<string, unknown>) {
       value=""
       :disabled="context.disabled"
       :read-only="context.readOnly"
+      :status="props.status ?? context.status"
       @value-change="() => undefined"
       @click="(event) => clickTrigger(event, triggerProps.onClick as ((event: MouseEvent) => void) | undefined)"
     >

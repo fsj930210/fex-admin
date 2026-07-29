@@ -7,11 +7,12 @@ import { Button } from '@fex/components-angular/ui/button'
 import { DemoDatePicker, DemoRangePicker } from './demo-date-picker.component'
 import { CustomDemos } from './custom-demos.component'
 import { IntegrationDemos } from './integration-demos.component'
+import { StatusDemos } from './status-demos.component'
 
 @Component({
   selector: 'fex-date-picker-page',
   standalone: true,
-  imports: [RouterLink, Card, Button, DemoDatePicker, DemoRangePicker, CustomDemos, IntegrationDemos],
+  imports: [RouterLink, Card, Button, DemoDatePicker, DemoRangePicker, CustomDemos, IntegrationDemos, StatusDemos],
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

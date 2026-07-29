@@ -1,0 +1,55 @@
+<fex-card
+  title="One-way composition"
+  description="A custom action area only moves records to the target; target rows remove themselves through the same Transfer controller."
+>
+  <div class="space-y-space-md">
+    <fex-transfer
+      [items]="members"
+      [fieldNames]="fieldNames"
+      [defaultTargetKeys]="['susan', 'katherine']"
+      [disabled]="disabled()"
+      [title]="{ source: 'Source', target: 'Target' }"
+    >
+      <ng-template fexTransferActions let-api>
+        <button
+          fexButton
+          size="icon"
+          variant="outline"
+          aria-label="Move selected to target"
+          [disabled]="!api.canMoveToTarget"
+          (click)="api.controller.moveToTarget()"
+        ><fex-chevron-right-icon /></button>
+      </ng-template>
+      <ng-template fexTransferPanel="target" region="header" let-api>
+        <span class="font-medium">Target</span>
+        <span class="ml-auto text-muted-foreground">{{ api.items.length }} items</span>
+      </ng-template>
+      <ng-template fexTransferPanel="target" region="body" let-api>
+        <div class="space-y-1">
+          @for (item of api.items; track item.id) {
+            <div class="flex min-h-8 items-center gap-2 px-2 text-sm">
+              <span class="min-w-0 flex-1 truncate">{{ item.name }}</span>
+              <button
+                fexButton
+                variant="ghost"
+                size="icon-xs"
+                [attr.aria-label]="'Remove ' + item.name"
+                [disabled]="disabled() || item.disabled === true"
+                (click)="api.setCheckedKeys([item.id]); api.controller.moveToSource()"
+              ><fex-trash-icon /></button>
+            </div>
+          }
+        </div>
+      </ng-template>
+    </fex-transfer>
+    <label class="flex w-fit items-center gap-2 text-sm text-muted-foreground">
+      <button
+        fexSwitchPrimitive
+        aria-label="Disable one-way Transfer"
+        [checked]="disabled()"
+        (checkedChange)="disabled.set($event.checked)"
+      ><span fexSwitchThumb></span></button>
+      Disabled
+    </label>
+  </div>
+</fex-card>

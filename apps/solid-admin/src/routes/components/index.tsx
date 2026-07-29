@@ -29,6 +29,7 @@ const InputPage = lazy(() =>
   import('../../pages/Input').then((module) => ({ default: module.InputPage })),
 )
 const FormPage = lazy(() => import('../../pages/Form').then((module) => ({ default: module.FormPage })))
+const TransferPage = lazy(() => import('../../pages/Transfer').then((module) => ({ default: module.TransferPage })))
 const KbdPage = lazy(() =>
   import('../../pages/Kbd').then((module) => ({ default: module.KbdPage })),
 )
@@ -220,4 +221,5 @@ export const componentRoutes: AppRoute[] = [
     path: '/tree',
     component: TreePage,
   },
+  { path: '/transfer', component: TransferPage },
 ].sort((left, right) => left.path.localeCompare(right.path))

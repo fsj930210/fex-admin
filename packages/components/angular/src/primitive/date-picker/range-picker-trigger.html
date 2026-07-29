@@ -3,6 +3,7 @@
   [value]="rootValue()"
   [disabled]="state.context().disabled"
   [readOnly]="state.context().readOnly"
+  [status]="status ?? state.context().status"
   (click)="openFromTrigger($event)"
   (blur)="blur($event)"
   (clear)="clear()"

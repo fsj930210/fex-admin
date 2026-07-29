@@ -25,7 +25,7 @@ export interface DatePickerTriggerProps
   inputProps?: Omit<ComponentProps<typeof InputControl>, 'value' | 'defaultValue'> | undefined
 }
 
-export function DatePickerTrigger({ placeholder, prefix, suffix, inputProps, className, ...props }: DatePickerTriggerProps) {
+export function DatePickerTrigger({ placeholder, prefix, suffix, inputProps, className, status, ...props }: DatePickerTriggerProps) {
   const context = useDatePickerContext('DatePickerTrigger')
   const inputRef = useRef<HTMLInputElement>(null)
   const displayValue = isCalendarValueArray(context.value)
@@ -55,6 +55,7 @@ export function DatePickerTrigger({ placeholder, prefix, suffix, inputProps, cla
           value={context.multiple ? '' : text}
           disabled={context.disabled}
           readOnly={context.readOnly}
+          status={status ?? context.status}
           onValueChange={input}
           onClear={context.allowClear ? context.clear : undefined}
           onClick={(event) => {

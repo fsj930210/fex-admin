@@ -154,6 +154,7 @@ export const componentRoutes: Routes = [
       import('../../pages/textarea/index.component').then((module) => module.TextareaComponent),
   },
   { path: 'time-picker', loadComponent: () => import('../../pages/time-picker/index.component').then((module) => module.TimePickerComponent) },
+  { path: 'transfer', loadComponent: () => import('../../pages/transfer/index.component').then((module) => module.TransferComponent) },
   {
     path: 'tree',
     loadComponent: () =>

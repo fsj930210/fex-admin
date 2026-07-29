@@ -1,0 +1,25 @@
+<fex-data-grid [table]="table">
+  <ng-template fexDataGridHeader let-header>
+    @if (header.column.id === '__select__') {
+      <button
+        fexCheckbox
+        [checked]="headerChecked()"
+        (checkedChange)="table.toggleAllRowsSelected($event.checked === true)"
+      ></button>
+    } @else {
+      {{ headerLabel(header) }}
+    }
+  </ng-template>
+  <ng-template fexDataGridCell let-cell>
+    @if (cell.column.id === '__select__') {
+      <button
+        fexCheckbox
+        [checked]="selected(cell)"
+        [disabled]="disabled(cell)"
+        (checkedChange)="toggle(cell, $event.checked)"
+      ></button>
+    } @else {
+      {{ value(cell) }}
+    }
+  </ng-template>
+</fex-data-grid>

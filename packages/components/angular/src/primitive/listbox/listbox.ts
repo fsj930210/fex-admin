@@ -80,7 +80,7 @@ export class ListboxRoot {
   }
 
   selectItem(value: SelectionValue) {
-    if (this.snapshot().multiple) {
+    if (this.multiple()) {
       this.controller.toggle(value);
       return;
     }

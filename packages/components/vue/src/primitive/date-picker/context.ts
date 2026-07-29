@@ -6,6 +6,7 @@ export type DatePickerSelectionValue<TValue extends CalendarValue = CalendarValu
 
 export interface DatePickerContextValue<TValue extends CalendarValue = CalendarValue> {
   picker: DatePickerPicker
+  status?: 'error' | 'warning'
   multiple: boolean
   needConfirm: boolean
   disabled: boolean
@@ -35,6 +36,7 @@ export interface DatePickerContextValue<TValue extends CalendarValue = CalendarV
 
 export interface RangePickerContextValue<TValue extends CalendarValue = CalendarValue> {
   picker: DatePickerPicker
+  status?: 'error' | 'warning'
   needConfirm: boolean
   disabled: boolean
   readOnly: boolean

@@ -19,3 +19,11 @@ export function ChevronUpIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
 export function ChevronDownIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
   return <ChevronRightIcon {...props} class={`rotate-90 ${props.class ?? ''}`} />
 }
+
+export function ChevronsRightIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
+  return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" {...props}><path d="m7 18 6-6-6-6"/><path d="m13 18 6-6-6-6"/></svg>
+}
+
+export function ChevronsLeftIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
+  return <ChevronsRightIcon {...props} class={`rotate-180 ${props.class ?? ''}`} />
+}

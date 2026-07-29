@@ -43,5 +43,6 @@ export class HomeComponent {
     { to: '/textarea', label: 'Textarea' },
     { to: '/time-picker', label: 'TimePicker' },
     { to: '/tree', label: 'Tree' },
+    { to: '/transfer', label: 'Transfer' },
   ].sort((left, right) => left.label.localeCompare(right.label))
 }

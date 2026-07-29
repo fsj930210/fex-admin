@@ -1,0 +1,13 @@
+<fex-card
+  title="Custom Tree body"
+  description="The Tree only binds checkedKeys and setCheckedKeys; all four move operations remain owned by Transfer."
+>
+  <fex-transfer [items]="members" [fieldNames]="fieldNames" [defaultTargetKeys]="['susan']">
+    <ng-template fexTransferPanel="source" region="body" let-api>
+      <fex-transfer-tree-panel [panel]="api" />
+    </ng-template>
+    <ng-template fexTransferPanel="target" region="body" let-api>
+      <fex-transfer-tree-panel [panel]="api" />
+    </ng-template>
+  </fex-transfer>
+</fex-card>

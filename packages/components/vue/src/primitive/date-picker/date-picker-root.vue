@@ -12,6 +12,7 @@ const props = withDefaults(defineProps<{
   open?: boolean
   defaultOpen?: boolean
   picker?: DatePickerPicker
+  status?: 'error' | 'warning'
   multiple?: boolean
   needConfirm?: boolean
   disabled?: boolean
@@ -39,6 +40,7 @@ const datePicker = useDatePicker<CalendarValue>({
   get open() { return hasProp('open') ? props.open : undefined },
   get defaultOpen() { return props.defaultOpen },
   get picker() { return props.picker },
+  get status() { return props.status },
   get multiple() { return props.multiple },
   get needConfirm() { return props.needConfirm },
   get disabled() { return props.disabled },

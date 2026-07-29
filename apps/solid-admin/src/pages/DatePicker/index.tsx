@@ -3,6 +3,7 @@ import { BasicDemos } from './basic-demos'
 import { CustomDemos } from './custom-demos'
 import { IntegrationDemos } from './integration-demos'
 import { PickerDemos } from './picker-demos'
+import { StatusDemos } from './status-demos'
 
 export function DatePickerPage() {
   return (
@@ -19,6 +20,7 @@ export function DatePickerPage() {
         </header>
         <div class="space-y-space-xl">
           <BasicDemos />
+          <StatusDemos />
           <PickerDemos />
           <CustomDemos />
           <IntegrationDemos />
@@ -27,4 +29,3 @@ export function DatePickerPage() {
     </main>
   )
 }
-

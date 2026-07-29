@@ -19,6 +19,7 @@ import type { RangePickerContextValue } from './context'
 
 export interface UseRangePickerOptions<TValue extends CalendarValue = CalendarValue> {
   picker?: DatePickerPicker | undefined
+  status?: 'error' | 'warning' | undefined
   value?: CalendarRange<TValue> | undefined
   defaultValue?: CalendarRange<TValue> | undefined
   open?: boolean | undefined
@@ -125,6 +126,7 @@ export function useRangePicker<TValue extends CalendarValue = CalendarValue>(
 
   return {
     picker,
+    status: options.status,
     needConfirm,
     disabled: options.disabled ?? false,
     readOnly: options.readOnly ?? false,

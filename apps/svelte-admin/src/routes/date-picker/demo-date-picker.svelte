@@ -22,6 +22,7 @@
     open?: boolean
     defaultOpen?: boolean
     picker?: DatePickerPicker
+    status?: 'error' | 'warning'
     multiple?: boolean
     needConfirm?: boolean
     disabled?: boolean
@@ -63,6 +64,7 @@
     open={props.open}
     defaultOpen={props.defaultOpen}
     picker={props.picker}
+    status={props.status}
     needConfirm={props.needConfirm}
     disabled={props.disabled}
     readOnly={props.readOnly}
@@ -95,6 +97,7 @@
     open={props.open}
     defaultOpen={props.defaultOpen}
     picker={props.picker}
+    status={props.status}
     multiple={props.multiple}
     needConfirm={props.needConfirm}
     disabled={props.disabled}

@@ -15,6 +15,7 @@ export function RangePickerRoot<TValue extends CalendarValue = CalendarValue>(
   const [local, rest] = splitProps(props, [
     'children',
     'picker',
+    'status',
     'value',
     'defaultValue',
     'open',

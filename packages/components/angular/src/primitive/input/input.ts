@@ -6,7 +6,7 @@ import { CloseIcon } from '../../icon/close'
 import { createHostClassName } from '../../signals/host-class'
 import { Button, buttonPrimitiveClassName } from '../button/button'
 
-@Component({ selector: 'fex-input-root', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { '[class]': 'hostClassName()', '[attr.data-disabled]': 'disabled || null', '[attr.data-readonly]': 'readOnly || null', '[attr.data-invalid]': 'invalid || null', 'data-slot': 'input-root' }, template: '<ng-content />' })
+@Component({ selector: 'fex-input-root', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { '[class]': 'hostClassName()', '[attr.data-disabled]': 'disabled || null', '[attr.data-readonly]': 'readOnly || null', '[attr.data-invalid]': 'resolvedInvalid || null', '[attr.data-status]': 'status || null', 'data-slot': 'input-root' }, template: '<ng-content />' })
 export class InputRoot implements OnChanges {
   private readonly classInput = signal('')
   @Input('class') set className(value: string | null | undefined) { this.classInput.set(value ?? '') }
@@ -15,12 +15,14 @@ export class InputRoot implements OnChanges {
   @Input() disabled = false
   @Input() readOnly = false
   @Input() invalid = false
+  @Input() status: 'error' | 'warning' | undefined = undefined
   @Output() readonly valueChange = new EventEmitter<string>()
   @Output() readonly clear = new EventEmitter<void>()
   protected readonly hostClassName = createHostClassName(() => cn(inputRootClassName, this.classInput()))
   private readonly uncontrolledValue = signal(this.defaultValue)
   private focusElement?: HTMLElement
   get currentValue() { return this.value ?? this.uncontrolledValue() }
+  get resolvedInvalid() { return this.invalid || this.status === 'error' }
   get canClear() { return this.currentValue !== '' && !this.disabled && !this.readOnly }
   ngOnChanges(changes: SimpleChanges) { if (changes['defaultValue'] && this.value === undefined) this.uncontrolledValue.set(this.defaultValue) }
   setFocusElement(element: HTMLElement) { this.focusElement = element }
@@ -28,7 +30,7 @@ export class InputRoot implements OnChanges {
   clearValue() { if (!this.canClear) return; this.setValue(''); this.clear.emit(); this.focusElement?.focus() }
 }
 
-@Directive({ selector: 'input[fexInputControl]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'input-control', '[value]': 'root.currentValue', '[disabled]': 'root.disabled', '[readOnly]': 'root.readOnly', '[attr.aria-invalid]': 'root.invalid || null' } })
+@Directive({ selector: 'input[fexInputControl]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'input-control', '[value]': 'root.currentValue', '[disabled]': 'root.disabled', '[readOnly]': 'root.readOnly', '[attr.aria-invalid]': 'root.resolvedInvalid || null' } })
 export class InputControl {
   readonly root = inject(InputRoot)
   private readonly classInput = signal('')

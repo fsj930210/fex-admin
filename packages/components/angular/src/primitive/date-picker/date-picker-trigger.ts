@@ -32,6 +32,7 @@ export class DatePickerTrigger implements AfterViewInit {
   @Input('displayValue') displayValueInput: string | undefined = undefined
   @Input() prefix: string | undefined = undefined
   @Input() suffix: string | undefined = undefined
+  @Input() status: 'error' | 'warning' | undefined = undefined
   @Input('class') className: string | undefined = undefined
   protected readonly text = signal('')
 

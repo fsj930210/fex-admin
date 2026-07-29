@@ -26,6 +26,7 @@ import { useInput, type UseInputOptions } from './use-input'
 export interface InputRootProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>, UseInputOptions {
   invalid?: boolean
+  status?: 'error' | 'warning' | undefined
   ref?: Ref<HTMLDivElement> | undefined
 }
 
@@ -35,6 +36,7 @@ export function InputRoot({
   disabled,
   readOnly,
   invalid = false,
+  status,
   'aria-invalid': ariaInvalid,
   onValueChange,
   onClear,
@@ -43,7 +45,7 @@ export function InputRoot({
   children,
   ...props
 }: InputRootProps) {
-  const resolvedInvalid = invalid || ariaInvalid === true || ariaInvalid === 'true'
+  const resolvedInvalid = invalid || status === 'error' || ariaInvalid === true || ariaInvalid === 'true'
   const input = useInput({
     value,
     defaultValue,
@@ -63,6 +65,7 @@ export function InputRoot({
         data-disabled={input.disabled ? 'true' : undefined}
         data-readonly={input.readOnly ? 'true' : undefined}
         data-invalid={input.invalid ? 'true' : undefined}
+        data-status={status}
         className={cn(inputRootClassName, className)}
       >
         {children}

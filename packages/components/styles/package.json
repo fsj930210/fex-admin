@@ -35,6 +35,7 @@
     "./tabs": "./src/tabs.ts",
     "./tree": "./src/tree.ts",
     "./toast": "./src/toast.ts",
+    "./transfer": "./src/transfer.ts",
     "./textarea": "./src/textarea.ts",
     "./time-picker": "./src/time-picker.ts"
   },

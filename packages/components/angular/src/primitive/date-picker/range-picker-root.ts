@@ -32,6 +32,7 @@ import { RangePickerState, type UseRangePickerOptions } from './use-range-picker
 })
 export class RangePickerRoot<TValue extends CalendarValue = CalendarValue> implements AfterViewInit, OnChanges {
   @Input() picker: DatePickerPicker | undefined = undefined
+  @Input() status: 'error' | 'warning' | undefined = undefined
   @Input() value: CalendarRange<TValue> | undefined = undefined
   @Input() defaultValue: CalendarRange<TValue> | undefined = undefined
   @Input() open: boolean | undefined = undefined
@@ -90,6 +91,7 @@ export class RangePickerRoot<TValue extends CalendarValue = CalendarValue> imple
   private options(): UseRangePickerOptions<TValue> {
     return {
       picker: this.picker,
+      status: this.status,
       value: this.value,
       defaultValue: this.defaultValue,
       open: this.open,

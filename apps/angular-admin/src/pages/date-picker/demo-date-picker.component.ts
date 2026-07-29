@@ -35,6 +35,7 @@ import {
 })
 export class DemoDatePicker {
   @Input() picker: DatePickerPicker | undefined = undefined
+  @Input() status: 'error' | 'warning' | undefined = undefined
   @Input() value: DatePickerSelectionValue | undefined = undefined
   @Input() defaultValue: DatePickerSelectionValue | undefined = undefined
   @Input() open: boolean | undefined = undefined
@@ -71,6 +72,7 @@ export class DemoDatePicker {
 })
 export class DemoRangePicker {
   @Input() picker: DatePickerPicker | undefined = undefined
+  @Input() status: 'error' | 'warning' | undefined = undefined
   @Input() value: CalendarRange<CalendarValue> | undefined = undefined
   @Input() defaultValue: CalendarRange<CalendarValue> | undefined = undefined
   @Input() open: boolean | undefined = undefined

@@ -154,6 +154,15 @@
       "@fex/components-core/tree/types": [
         "packages/components/core/src/tree/types.ts"
       ],
+      "@fex/components-core/transfer/create-transfer-controller": [
+        "packages/components/core/src/transfer/create-transfer-controller.ts"
+      ],
+      "@fex/components-core/transfer/types": [
+        "packages/components/core/src/transfer/types.ts"
+      ],
+      "@fex/components-core/transfer/utils": [
+        "packages/components/core/src/transfer/utils.ts"
+      ],
       "@fex/components-core/toggle/create-toggle-controller": [
         "packages/components/core/src/toggle/create-toggle-controller.ts"
       ],
@@ -388,6 +397,9 @@
       "@fex/components-angular/primitive/tabs": [
         "packages/components/angular/src/primitive/tabs/tabs.ts"
       ],
+      "@fex/components-angular/primitive/transfer": [
+        "packages/components/angular/src/primitive/transfer/transfer.ts"
+      ],
       "@fex/components-angular/primitive/tree": [
         "packages/components/angular/src/primitive/tree/tree.ts"
       ],
@@ -453,6 +465,9 @@
       ],
       "@fex/components-angular/icon/loading": [
         "packages/components/angular/src/icon/loading.ts"
+      ],
+      "@fex/components-angular/icon/trash": [
+        "packages/components/angular/src/icon/trash.ts"
       ],
       "@fex/components-angular/icon/minus": [
         "packages/components/angular/src/icon/minus.ts"

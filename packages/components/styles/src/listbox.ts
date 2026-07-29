@@ -10,6 +10,7 @@ export const listboxRootClassName = cva(
       variant: {
         default: '',
         grid: 'grid data-[orientation=horizontal]:grid-cols-[repeat(auto-fit,minmax(180px,1fr))]',
+        transfer: 'h-full gap-0 overflow-auto',
       },
     },
     defaultVariants: {
@@ -32,6 +33,8 @@ export const listboxItemClassName = cva(
     'hover:bg-muted-background focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-focus/50',
     'data-[selected=true]:border-primary/40 data-[selected=true]:bg-primary/5',
     'data-[disabled=true]:pointer-events-none data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50',
+    'in-data-[variant=transfer]:min-h-0 in-data-[variant=transfer]:rounded-none in-data-[variant=transfer]:border-0 in-data-[variant=transfer]:px-2 in-data-[variant=transfer]:py-1.5',
+    'in-data-[variant=transfer]:data-[selected=true]:bg-muted-background',
   ].join(' '),
   {
     variants: {

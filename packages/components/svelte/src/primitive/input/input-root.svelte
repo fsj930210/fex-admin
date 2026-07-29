@@ -4,8 +4,8 @@
   import type { Snippet } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
   import { setInputContext, type InputChangeReason } from './context'
-  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'class'> { class?: string; value?: string; defaultValue?: string; disabled?: boolean; readOnly?: boolean; invalid?: boolean; action?: (element: HTMLElement) => { destroy?: () => void } | void; onValueChange?: (value: string, meta: { reason: InputChangeReason; event?: Event }) => void; onClear?: () => void; children?: Snippet }
-  let { class: className, value, defaultValue = '', disabled = false, readOnly = false, invalid = false, action, onValueChange, onClear, children, ...rest }: Props = $props()
+  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'class'> { class?: string; value?: string; defaultValue?: string; disabled?: boolean; readOnly?: boolean; invalid?: boolean; status?: 'error' | 'warning'; action?: (element: HTMLElement) => { destroy?: () => void } | void; onValueChange?: (value: string, meta: { reason: InputChangeReason; event?: Event }) => void; onClear?: () => void; children?: Snippet }
+  let { class: className, value, defaultValue = '', disabled = false, readOnly = false, invalid = false, status, action, onValueChange, onClear, children, ...rest }: Props = $props()
   let internalValue = $state(defaultValue)
   let element = $state<HTMLElement | null>(null)
   const currentValue = $derived(value ?? internalValue)
@@ -13,6 +13,6 @@
   function runAction(node: HTMLElement) {
     return action?.(node)
   }
-  setInputContext({ value: () => currentValue, disabled: () => disabled, readOnly: () => readOnly, invalid: () => invalid, canClear: () => canClear, setFocusElement: (next) => { element = next }, setValue: (next, reason, event) => { if (disabled || readOnly) return; if (value === undefined) internalValue = next; onValueChange?.(next, { reason, ...(event === undefined ? {} : { event }) }) }, clear: () => { if (!canClear) return; if (value === undefined) internalValue = ''; onValueChange?.('', { reason: 'clear' }); onClear?.(); element?.focus() } })
+  setInputContext({ value: () => currentValue, disabled: () => disabled, readOnly: () => readOnly, invalid: () => invalid || status === 'error', canClear: () => canClear, setFocusElement: (next) => { element = next }, setValue: (next, reason, event) => { if (disabled || readOnly) return; if (value === undefined) internalValue = next; onValueChange?.(next, { reason, ...(event === undefined ? {} : { event }) }) }, clear: () => { if (!canClear) return; if (value === undefined) internalValue = ''; onValueChange?.('', { reason: 'clear' }); onClear?.(); element?.focus() } })
 </script>
-<div use:runAction {...rest} data-slot="input-root" data-disabled={disabled || undefined} data-readonly={readOnly || undefined} data-invalid={invalid || undefined} class={cn(inputRootClassName, className)}>{@render children?.()}</div>
+<div use:runAction {...rest} data-slot="input-root" data-disabled={disabled || undefined} data-readonly={readOnly || undefined} data-invalid={(invalid || status === 'error') || undefined} data-status={status} class={cn(inputRootClassName, className)}>{@render children?.()}</div>

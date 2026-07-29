@@ -24,6 +24,7 @@ const componentLinks = [
   { to: '/switch', label: 'Switch' },
   { to: '/table', label: 'Table' },
   { to: '/tabs', label: 'Tabs' },
+  { to: '/transfer', label: 'Transfer' },
   { to: '/data-grid', label: 'Data Grid' },
   { to: '/date-picker', label: 'DatePicker' },
   { to: '/tree', label: 'Tree' },

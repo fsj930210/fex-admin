@@ -1,0 +1,22 @@
+<fex-card
+  title="Form validation states"
+  description="Submit the real Form empty to see the error state; selecting exactly one member shows the warning style."
+>
+  <form [fexForm]="form" class="space-y-space-lg">
+    <ng-container [fexField]="form" name="members" [validators]="validators" #memberField="field">
+      <fex-field-root [invalid]="invalid(memberField.api)" [hasError]="invalid(memberField.api)">
+        <label fexFieldLabel>Project members</label>
+        <div fexFieldControl>
+          <fex-transfer
+            [items]="members"
+            [fieldNames]="fieldNames"
+            [targetKeys]="memberField.api.state.value"
+            [validation]="validation(memberField.api)"
+            (targetKeysChange)="memberField.api.handleChange($event)"
+          />
+        </div>
+      </fex-field-root>
+    </ng-container>
+    <button fexButton type="submit">Validate assignment</button>
+  </form>
+</fex-card>

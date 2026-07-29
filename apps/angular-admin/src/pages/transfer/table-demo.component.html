@@ -1,0 +1,13 @@
+<fex-card
+  title="Custom DataGrid body"
+  description="Each side can use row selection without reimplementing target-key updates or move-all filtering."
+>
+  <fex-transfer [items]="members" [fieldNames]="fieldNames" [defaultTargetKeys]="['ada', 'susan']">
+    <ng-template fexTransferPanel="source" region="body" let-api>
+      <fex-transfer-table-panel [panel]="api" />
+    </ng-template>
+    <ng-template fexTransferPanel="target" region="body" let-api>
+      <fex-transfer-table-panel [panel]="api" />
+    </ng-template>
+  </fex-transfer>
+</fex-card>

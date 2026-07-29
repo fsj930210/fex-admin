@@ -23,6 +23,7 @@ const props = defineProps<{
   open?: boolean
   defaultOpen?: boolean
   picker?: DatePickerPicker
+  status?: 'error' | 'warning'
   multiple?: boolean
   needConfirm?: boolean
   disabled?: boolean
@@ -68,6 +69,7 @@ const rangePlaceholder = computed(() => {
     v-bind="openProps"
     :default-open="props.defaultOpen"
     :picker="props.picker"
+    :status="props.status"
     :need-confirm="props.needConfirm"
     :disabled="props.disabled"
     :read-only="props.readOnly"
@@ -98,6 +100,7 @@ const rangePlaceholder = computed(() => {
     v-bind="openProps"
     :default-open="props.defaultOpen"
     :picker="props.picker"
+    :status="props.status"
     :multiple="props.multiple"
     :need-confirm="props.needConfirm"
     :disabled="props.disabled"
