@@ -321,6 +321,7 @@ export function CalendarGrid<TValue extends CalendarValue = CalendarValue>({
     <div
       {...props}
       data-slot="calendar-grid"
+      data-panel={context.panel}
       className={className}
       onMouseLeave={(event) => {
         onMouseLeave?.(event)

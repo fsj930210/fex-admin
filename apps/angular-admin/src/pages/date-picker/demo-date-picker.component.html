@@ -1,0 +1,31 @@
+<fex-date-picker-root
+  [picker]="picker"
+  [value]="value"
+  [defaultValue]="defaultValue"
+  [open]="open"
+  [defaultOpen]="defaultOpen"
+  [multiple]="multiple"
+  [needConfirm]="needConfirm"
+  [disabled]="disabled"
+  [readOnly]="readOnly"
+  [allowClear]="allowClear"
+  [format]="format"
+  [weekStartsOn]="weekStartsOn"
+  [minDate]="minDate"
+  [maxDate]="maxDate"
+  [disabledDate]="disabledDate"
+  (change)="change.emit($event)"
+  (openChange)="openChange.emit($event)"
+>
+  <fex-date-picker-trigger class="w-56" [placeholder]="placeholder" />
+  <fex-date-picker-content>
+    <fex-date-picker-panel />
+    @if (needConfirm || multiple) {
+      <fex-date-picker-footer>
+        <button fexDatePickerToday></button>
+        <button fexDatePickerCancel></button>
+        <button fexDatePickerConfirm></button>
+      </fex-date-picker-footer>
+    }
+  </fex-date-picker-content>
+</fex-date-picker-root>

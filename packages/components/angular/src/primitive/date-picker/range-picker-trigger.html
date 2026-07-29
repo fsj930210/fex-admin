@@ -1,0 +1,59 @@
+<fex-input-root
+  [class]="triggerClassName + (className ? ' ' + className : '')"
+  [value]="rootValue()"
+  [disabled]="state.context().disabled"
+  [readOnly]="state.context().readOnly"
+  (click)="openFromTrigger($event)"
+  (blur)="blur($event)"
+  (clear)="clear()"
+>
+  <fex-input-root
+    data-range-part="start"
+    [attr.data-active]="state.context().open && state.context().activePart === 'start' ? 'true' : null"
+    [class]="rangeInputClassName"
+    [value]="startText()"
+    [readOnly]="state.context().readOnly"
+    (valueChange)="input('start', $event)"
+  >
+    <input
+      #startInput
+      fexInputControl
+      [class]="inputClassName('start')"
+      [value]="startText()"
+      [placeholder]="startPlaceholder"
+      (focus)="openPart('start', startInput, $event)"
+      (click)="$event.stopPropagation(); openPart('start', startInput, $event)"
+    />
+  </fex-input-root>
+  <span aria-hidden="true" [class]="rangeSeparatorClassName">{{ separator }}</span>
+  <fex-input-root
+    data-range-part="end"
+    [attr.data-active]="state.context().open && state.context().activePart === 'end' ? 'true' : null"
+    [class]="rangeInputClassName"
+    [value]="endText()"
+    [readOnly]="state.context().readOnly"
+    (valueChange)="input('end', $event)"
+  >
+    <input
+      #endInput
+      fexInputControl
+      [class]="inputClassName('end')"
+      [value]="endText()"
+      [placeholder]="endPlaceholder"
+      (focus)="openPart('end', endInput, $event)"
+      (click)="$event.stopPropagation(); openPart('end', endInput, $event)"
+    />
+  </fex-input-root>
+  @if (state.context().allowClear && hasValue()) {
+    <button fexInputClear type="button" (pointerdown)="$event.stopPropagation()" (click)="clear($event)"></button>
+  }
+  @if (!state.context().allowClear || !hasValue()) {
+    <span fexInputSuffix>
+      @if (suffix) {
+        <span>{{ suffix }}</span>
+      } @else {
+        <fex-calendar-icon />
+      }
+    </span>
+  }
+</fex-input-root>

@@ -1,0 +1,42 @@
+<fex-calendar-root
+  [range]="displayRange()"
+  [viewDate]="viewDate()"
+  [panel]="state.context().panel"
+  [granularity]="getGranularityByPicker(state.context().picker)"
+  [weekStartsOn]="state.context().weekStartsOn"
+  [min]="state.context().minDate"
+  [max]="state.context().maxDate"
+  [disabledDate]="disabledDate.bind(this)"
+  (cellSelect)="selectCell($event)"
+  (cellHover)="hoverCell($event)"
+  (viewDateChange)="state.setViewDate($event)"
+  (panelChange)="state.setPanel($event)"
+  [class]="panelClassName"
+>
+  <fex-date-picker-header>
+    <div [class]="headerSideClassName">
+      <button fexDatePickerHeaderButton [action]="primaryPreviousAction()"></button>
+      @if (state.context().panel === 'date') {
+        <button fexDatePickerHeaderButton action="previous-month"></button>
+      }
+    </div>
+    <fex-date-picker-header-title>
+      <button fexDatePickerHeaderLabel part="year"></button>
+      <button fexDatePickerHeaderLabel part="month"></button>
+    </fex-date-picker-header-title>
+    <div [class]="headerSideClassName">
+      @if (state.context().panel === 'date') {
+        <button fexDatePickerHeaderButton action="next-month"></button>
+      }
+      <button fexDatePickerHeaderButton [action]="primaryNextAction()"></button>
+    </div>
+  </fex-date-picker-header>
+  @if (state.context().panel === 'date') {
+    <fex-calendar-week-header [class]="weekHeaderClassName" />
+  }
+  <fex-calendar-grid [class]="gridClassName">
+    <ng-template let-cell>
+      <button fexCalendarCell [cell]="cell" [class]="cellClassName">{{ cell.label }}</button>
+    </ng-template>
+  </fex-calendar-grid>
+</fex-calendar-root>

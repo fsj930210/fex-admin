@@ -6,7 +6,12 @@ import { inputContextKey } from './input-context'
 
 defineOptions({ inheritAttrs: false })
 const attrs = useAttrs()
-const emit = defineEmits<{ input: [event: Event] }>()
+const emit = defineEmits<{
+  blur: [event: FocusEvent]
+  click: [event: MouseEvent]
+  focus: [event: FocusEvent]
+  input: [event: Event]
+}>()
 const input = inject(inputContextKey)
 if (!input) throw new Error('InputControl must be used inside InputRoot.')
 const element = ref<HTMLInputElement | null>(null)
@@ -15,4 +20,4 @@ function onInput(event: Event) { emit('input', event); if (!event.defaultPrevent
 function setElement(value: Element | null) { element.value = value as HTMLInputElement | null; input.setFocusElement(element.value) }
 defineExpose({ focus: () => element.value?.focus(), blur: () => element.value?.blur() })
 </script>
-<template><input v-bind="attrs" :ref="setElement" :value="input.value.value" :disabled="input.disabled.value" :readonly="input.readOnly.value" :aria-invalid="input.invalid.value || undefined" data-slot="input-control" :class="className" @input="onInput"></template>
+<template><input v-bind="attrs" :ref="setElement" :value="input.value.value" :disabled="input.disabled.value" :readonly="input.readOnly.value" :aria-invalid="input.invalid.value || undefined" data-slot="input-control" :class="className" @blur="emit('blur', $event)" @click="emit('click', $event)" @focus="emit('focus', $event)" @input="onInput"></template>

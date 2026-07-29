@@ -36,6 +36,34 @@ export function createNextRangeValue<TValue extends CalendarValue>(
   return order ? normalizeCalendarRange(nextRange) : nextRange
 }
 
+export function getNextRangeActivePart<TValue extends CalendarValue>(
+  range: CalendarRange<TValue>,
+): DatePickerInputPart | null {
+  if (!range.start) return 'start'
+  if (!range.end) return 'end'
+  return null
+}
+
+export function createRangePreviewValue<TValue extends CalendarValue>(
+  range: CalendarRange<TValue> | undefined,
+  hoverValue: TValue | null | undefined,
+  activePart: DatePickerInputPart,
+  order = true,
+): CalendarRange<TValue> {
+  if (!hoverValue || !getRangeFromValue(range, activePart)) return range ?? {}
+  return createNextRangeValue(range, hoverValue, activePart, order)
+}
+
+export function getRangeInputPreviewValue<TValue extends CalendarValue>(
+  range: CalendarRange<TValue> | undefined,
+  hoverValue: TValue | null | undefined,
+  activePart: DatePickerInputPart,
+  inputPart: DatePickerInputPart,
+): TValue | null {
+  if (hoverValue && activePart === inputPart) return hoverValue
+  return (inputPart === 'start' ? range?.start : range?.end) ?? null
+}
+
 export function isDatePickerValueInHoverRange<TValue extends CalendarValue>(
   value: TValue,
   range: CalendarRange<TValue> | undefined,

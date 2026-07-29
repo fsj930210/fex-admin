@@ -1,6 +1,6 @@
 # DatePicker
 
-Vue DatePicker primitive exposes the same composition surface as the React implementation: Root/Trigger/Content come from Popover, Panel/Grid/Cell come from Calendar, and date value helpers come from `@fex/components-core/date-picker/*`.
+Vue DatePicker is a primitive-only composition surface aligned with React. It does not export a monolithic `DatePicker` or `RangePicker` component.
 
 ## Import
 
@@ -10,12 +10,24 @@ import {
   DatePickerTrigger,
   DatePickerContent,
   DatePickerPanel,
-  DatePickerGrid,
-  DatePickerCell,
+  DatePickerHeader,
+  DatePickerHeaderButton,
+  DatePickerHeaderTitle,
+  DatePickerHeaderLabel,
+  DatePickerFooter,
+  DatePickerConfirm,
+  DatePickerCancel,
+  DatePickerToday,
+  DatePickerPreset,
+  DatePickerTags,
   RangePickerRoot,
+  RangePickerTrigger,
+  RangePickerContent,
+  RangePickerPanel,
+  RangePickerPanelGroup,
+  useDatePicker,
+  useRangePicker,
 } from '@fex/components-vue/primitive/date-picker'
 ```
 
-## Notes
-
-`value` should stay as `CalendarValue`; input text is only display state. Use `formatDatePickerValue` and `parseDatePickerValue` to convert between text and semantic calendar values.
+Use Root for state and Popover ownership, Trigger for input display, Content for the floating panel, Header/Panel/PanelGroup for Calendar rendering, and Footer actions for confirmation flows.

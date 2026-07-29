@@ -12,7 +12,7 @@ export interface RangePickerRootProps<TValue extends CalendarValue = CalendarVal
 
 export function RangePickerRoot<TValue extends CalendarValue = CalendarValue>({
   children,
-  placement = 'bottomLeft',
+  placement = 'bottom',
   sideOffset = 6,
   picker,
   value,

@@ -1,6 +1,7 @@
 import { getRangePickerDisplayTexts } from '@fex/components-core/date-picker/input'
+import { getRangeInputPreviewValue } from '@fex/components-core/date-picker/range'
 import { formatDatePickerValue, parseDatePickerValue } from '@fex/components-core/date-picker/value'
-import { datePickerRangeInputClassName } from '@fex/components-styles/date-picker'
+import { datePickerRangeInputClassName, datePickerRangeInputControlClassName, datePickerRangeSeparatorClassName, datePickerRangeTriggerClassName } from '@fex/components-styles/date-picker'
 import { CalendarIcon } from '../../icon/calendar'
 import { cn } from '@fex/utils'
 import useUpdateEffect from '../../hooks/use-update-effect'
@@ -43,8 +44,13 @@ export function RangePickerTrigger({
   const [startText, setStartText] = useState(startValue)
   const [endText, setEndText] = useState(endValue)
   const [focusedPart, setFocusedPart] = useState<'start' | 'end' | null>(null)
-  const previewEndText = context.activePart === 'end' && context.rangeValue.start && context.hoverValue
-    ? formatDatePickerValue(context.hoverValue, context)
+  const previewStartValue = getRangeInputPreviewValue(context.rangeValue, context.hoverValue, context.activePart, 'start')
+  const previewEndValue = getRangeInputPreviewValue(context.rangeValue, context.hoverValue, context.activePart, 'end')
+  const previewStartText = context.activePart === 'start' && previewStartValue
+    ? formatDatePickerValue(previewStartValue, context)
+    : startText
+  const previewEndText = context.activePart === 'end' && previewEndValue
+    ? formatDatePickerValue(previewEndValue, context)
     : endText
   const hasValue = Boolean(startValue || endValue)
 
@@ -73,7 +79,7 @@ export function RangePickerTrigger({
           <InputRoot
             {...props}
             {...(popoverProps as ComponentProps<typeof InputRoot>)}
-            className={cn('cursor-pointer gap-0', className)}
+            className={cn(datePickerRangeTriggerClassName, className)}
             value=""
             disabled={context.disabled}
             readOnly={context.readOnly}
@@ -96,9 +102,9 @@ export function RangePickerTrigger({
           >
             <RangeInput
               part="start"
-              value={startText}
+              value={previewStartText}
               placeholder={startPlaceholder}
-              active={focusedPart === 'start'}
+              active={context.open ? context.activePart === 'start' : focusedPart === 'start'}
               inputProps={startInputProps ?? inputProps}
               onFocus={() => {
                 context.setActivePart('start')
@@ -106,13 +112,14 @@ export function RangePickerTrigger({
                 context.openPanel('start')
               }}
               onValueChange={(value) => input('start', value)}
+              preview={previewStartText !== startText}
             />
-            <span aria-hidden="true" className="inline-flex shrink-0 items-center justify-center px-1 text-muted-foreground">{separator}</span>
+            <span aria-hidden="true" className={datePickerRangeSeparatorClassName}>{separator}</span>
             <RangeInput
               part="end"
               value={previewEndText}
               placeholder={endPlaceholder}
-              active={focusedPart === 'end'}
+              active={context.open ? context.activePart === 'end' : focusedPart === 'end'}
               inputProps={endInputProps ?? inputProps}
               onFocus={() => {
                 context.setActivePart('end')
@@ -123,7 +130,14 @@ export function RangePickerTrigger({
               preview={previewEndText !== endText}
             />
             {context.allowClear && hasValue ? (
-              <InputClearButton aria-label="清除日期范围" onClick={context.clear} />
+              <InputClearButton
+                aria-label="清除日期范围"
+                onPointerDown={(event) => event.stopPropagation()}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  context.clear()
+                }}
+              />
             ) : (
               <InputSuffix>{suffix ?? <CalendarIcon className="size-4" />}</InputSuffix>
             )}
@@ -165,7 +179,7 @@ function RangeInput({
     >
       <InputControl
         {...inputProps}
-        className={cn('min-w-0 px-2 text-center', preview && 'text-muted-foreground', inputProps?.className)}
+        className={cn(datePickerRangeInputControlClassName, preview && 'text-muted-foreground', inputProps?.className)}
         placeholder={placeholder}
         onFocus={(event) => {
           inputProps?.onFocus?.(event)

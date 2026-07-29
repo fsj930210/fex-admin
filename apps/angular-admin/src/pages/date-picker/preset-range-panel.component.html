@@ -1,0 +1,8 @@
+<div class="flex">
+  <div class="flex w-32 shrink-0 flex-col gap-1 border-r border-border p-2">
+    @for (preset of presets; track preset[0]) {
+      <button fexDatePickerPreset class="justify-start" [attr.data-selected]="isSelected(preset[1]) ? 'true' : null" (click)="select(preset[1])">{{ preset[0] }}</button>
+    }
+  </div>
+  <fex-range-picker-panel-group />
+</div>

@@ -1,6 +1,6 @@
 # DatePicker
 
-Angular DatePicker primitive exposes Popover and Calendar composition aliases. Use `DatePickerRoot`/`DatePickerTrigger`/`DatePickerContent` for the floating layer and `DatePickerPanel`/`DatePickerGrid`/`DatePickerCell` for the calendar panel.
+Angular DatePicker is a primitive-only composition surface aligned with React. It does not export a monolithic `DatePicker` or `RangePicker` component.
 
 ## Import
 
@@ -10,9 +10,24 @@ import {
   DatePickerTrigger,
   DatePickerContent,
   DatePickerPanel,
-  DatePickerGrid,
-  DatePickerCell,
+  DatePickerHeader,
+  DatePickerHeaderButton,
+  DatePickerHeaderTitle,
+  DatePickerHeaderLabel,
+  DatePickerFooter,
+  DatePickerConfirm,
+  DatePickerCancel,
+  DatePickerToday,
+  DatePickerPreset,
+  DatePickerTags,
+  RangePickerRoot,
+  RangePickerTrigger,
+  RangePickerContent,
+  RangePickerPanel,
+  RangePickerPanelGroup,
+  DatePickerState,
+  RangePickerState,
 } from '@fex/components-angular/primitive/date-picker'
 ```
 
-Shared value, panel, range and disabled-date helpers are exported from the same entry.
+Use Root for state and Popover ownership, Trigger for input display, Content for the floating panel, Header/Panel/PanelGroup for Calendar rendering, and Footer actions for confirmation flows.

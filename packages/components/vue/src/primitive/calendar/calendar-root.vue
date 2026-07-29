@@ -40,6 +40,7 @@ const props = withDefaults(
 const emit = defineEmits<{
   valueChange: [value: CalendarValue]
   cellSelect: [cell: import('@fex/components-core/calendar').CalendarCell]
+  cellHover: [cell: import('@fex/components-core/calendar').CalendarCell]
   viewDateChange: [viewDate: CalendarDate]
   panelChange: [panel: CalendarPanel]
 }>()
@@ -47,6 +48,7 @@ const emit = defineEmits<{
 const internalValue = ref<CalendarValue | null>(props.defaultValue)
 const internalViewDate = ref(props.defaultViewDate ?? getCalendarToday())
 const internalPanel = ref<CalendarPanel>(props.defaultPanel)
+const hoveredRowIndex = ref<number | null>(null)
 
 watch(
   () => props.defaultValue,
@@ -94,6 +96,7 @@ provide(calendarContextKey, {
   panel: currentPanel,
   granularity: currentGranularity,
   weekStartsOn: currentWeekStartsOn,
+  hoveredRowIndex,
   setViewDate,
   setPanel,
   selectCell: (cell) => {
@@ -102,11 +105,19 @@ provide(calendarContextKey, {
     if (props.value === undefined) internalValue.value = cell.value
     emit('valueChange', cell.value)
   },
+  hoverCell: (cell) => {
+    if (cell.state.disabled) return
+    hoveredRowIndex.value = cell.rowIndex
+    emit('cellHover', cell)
+  },
+  clearHoveredRow: () => {
+    hoveredRowIndex.value = null
+  },
 })
 </script>
 
 <template>
-  <div data-slot="calendar-root" :data-panel="currentPanel" :data-granularity="currentGranularity">
+  <div data-slot="calendar-root" :data-panel="currentPanel" :data-granularity="currentGranularity" @mouseleave="hoveredRowIndex = null">
     <slot />
   </div>
 </template>

@@ -1,0 +1,35 @@
+<fex-input-root
+  [class]="rootClassName()"
+  [value]="inputValue()"
+  [disabled]="state.context().disabled"
+  [readOnly]="state.context().readOnly"
+  (click)="open(datePickerInputControl, $event)"
+  (valueChange)="input($event)"
+  (clear)="clear()"
+>
+  @if (prefix) {
+    <span fexInputPrefix>{{ prefix }}</span>
+  }
+  @if (state.context().multiple && state.calendarValues().length) {
+    <fex-date-picker-tags />
+  }
+  <input
+    #datePickerInputControl
+    fexInputControl
+    [class]="inputClassName()"
+    [placeholder]="state.context().multiple && state.calendarValues().length ? '' : placeholder ?? state.context().format"
+    (focus)="open(datePickerInputControl, $event)"
+  />
+  @if (state.context().allowClear) {
+    <button fexInputClear type="button" (pointerdown)="$event.stopPropagation()" (click)="clear($event)"></button>
+  }
+  @if (showSuffix()) {
+    <span fexInputSuffix>
+      @if (suffix) {
+        <span>{{ suffix }}</span>
+      } @else {
+        <fex-calendar-icon />
+      }
+    </span>
+  }
+</fex-input-root>

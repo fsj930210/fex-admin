@@ -32,6 +32,7 @@
     children?: Snippet | undefined
     onValueChange?: ((value: CalendarValue) => void) | undefined
     onCellSelect?: ((cell: import('@fex/components-core/calendar').CalendarCell) => void) | undefined
+    onCellHover?: ((cell: import('@fex/components-core/calendar').CalendarCell) => void) | undefined
     onViewDateChange?: ((viewDate: CalendarDate) => void) | undefined
     onPanelChange?: ((panel: CalendarPanel) => void) | undefined
   }
@@ -54,6 +55,7 @@
     children,
     onValueChange,
     onCellSelect,
+    onCellHover,
     onViewDateChange,
     onPanelChange,
     ...rest
@@ -62,6 +64,7 @@
   let internalValue: CalendarValue | null = $state(untrack(() => defaultValue))
   let internalViewDate: CalendarDate = $state(untrack(() => defaultViewDate))
   let internalPanel: CalendarPanel = $state(untrack(() => defaultPanel))
+  let hoveredRowIndex: number | null = $state(null)
   const currentValue: CalendarValue | null = $derived(value ?? internalValue)
   const currentViewDate: CalendarDate = $derived(viewDate ?? internalViewDate)
   const currentPanel: CalendarPanel = $derived(panel ?? internalPanel)
@@ -98,6 +101,7 @@
     getPanel: () => currentPanel,
     getGranularity: () => granularity,
     getWeekStartsOn: () => weekStartsOn,
+    getHoveredRowIndex: () => hoveredRowIndex,
     setViewDate,
     setPanel,
     selectCell: (cell) => {
@@ -106,11 +110,19 @@
       if (value === undefined) internalValue = cell.value
       onValueChange?.(cell.value)
     },
+    hoverCell: (cell) => {
+      if (cell.state.disabled) return
+      hoveredRowIndex = cell.rowIndex
+      onCellHover?.(cell)
+    },
+    clearHoveredRow: () => {
+      hoveredRowIndex = null
+    },
   }
 
   setContext(calendarContextKey, context)
 </script>
 
-<div {...rest} data-slot="calendar-root" data-panel={currentPanel} data-granularity={granularity}>
+<div {...rest} data-slot="calendar-root" data-panel={currentPanel} data-granularity={granularity} onmouseleave={() => hoveredRowIndex = null}>
   {@render children?.()}
 </div>

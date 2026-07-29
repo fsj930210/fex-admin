@@ -11,6 +11,7 @@ const maxDate = createCalendarDate(2026, 8, 20)
 export function BasicDemos() {
   const [controlled, setControlled] = useState<CalendarValue | null>(today)
   const [range, setRange] = useState<CalendarRange>({})
+  const [dynamicRange, setDynamicRange] = useState<CalendarRange>(lastDays(7))
   const [multiple, setMultiple] = useState<CalendarValue | readonly CalendarValue[] | null>([])
 
   return (
@@ -48,16 +49,23 @@ export function BasicDemos() {
       </DemoSection>
 
       <DemoSection title="动态范围禁用" description="选择一端后通过 disabledDate 限制另一端，只允许 7 天窗口。">
-        <DemoRangePicker
-          disabledDate={(date, part) => {
-            const from = part === 'end' ? range.start : range.end
-            if (!from) return false
-            const fromDate = getCalendarValueDate(from)
-            return isBeforeDate(date, fromDate.subtract({ days: 6 })) || isAfterDate(date, fromDate.add({ days: 6 }))
-          }}
-          value={range}
-          onChange={setRange}
-        />
+        <div>
+          <DemoRangePicker
+            disabledDate={(date, part) => {
+              if (part === 'start') {
+                if (!dynamicRange.end) return false
+                const endDate = getCalendarValueDate(dynamicRange.end)
+                return isBeforeDate(date, endDate.subtract({ days: 6 })) || isAfterDate(date, endDate)
+              }
+              if (!dynamicRange.start) return false
+              const startDate = getCalendarValueDate(dynamicRange.start)
+              return isBeforeDate(date, startDate) || isAfterDate(date, startDate.add({ days: 6 }))
+            }}
+            value={dynamicRange}
+            onChange={setDynamicRange}
+          />
+          <RangePreview value={dynamicRange} />
+        </div>
       </DemoSection>
 
       <DemoSection title="Prefix / Suffix" description="输入框复用 Input 能力，clear 和 suffix 互斥显示。">
@@ -75,4 +83,8 @@ export function BasicDemos() {
 
 function isValueArray(value: unknown): value is readonly CalendarValue[] {
   return Array.isArray(value)
+}
+
+function lastDays(days: number): CalendarRange<CalendarValue> {
+  return { start: today.subtract({ days: days - 1 }), end: today }
 }

@@ -31,7 +31,7 @@ function click(event: MouseEvent) {
     type="button"
     data-slot="input-clear"
     :data-visible="input.canClear.value"
-    :disabled="!input.canClear.value"
+    :disabled="!props.forceMount && !input.canClear.value"
     :class="className"
     @pointerdown="pointerdown"
     @click="click"

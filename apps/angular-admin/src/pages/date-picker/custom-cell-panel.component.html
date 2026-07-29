@@ -1,0 +1,30 @@
+<fex-calendar-root
+  [value]="state.context().calendarValue"
+  [values]="state.context().calendarValues"
+  [viewDate]="state.context().viewDate"
+  [panel]="state.context().panel"
+  [granularity]="getGranularityByPicker(state.context().picker)"
+  [weekStartsOn]="state.context().weekStartsOn"
+  [min]="state.context().minDate"
+  [max]="state.context().maxDate"
+  [disabledDate]="state.context().disabledDate"
+  (cellSelect)="selectCell($event)"
+  (viewDateChange)="state.setViewDate($event)"
+  (panelChange)="state.setPanel($event)"
+  [class]="panelClassName"
+>
+  <fex-calendar-week-header [class]="weekHeaderClassName" />
+  <fex-calendar-grid [class]="gridClassName">
+    <ng-template let-cell>
+      <button fexCalendarCell [cell]="cell" [class]="cellClassName">
+        <span class="flex flex-col items-center">
+          <span>{{ cell.label }}</span>
+          @if (getCalendarValueKey(cell.value) === getCalendarValueKey(releaseDate)) {
+            <span class="text-[10px]">发布</span>
+          }
+        </span>
+      </button>
+    </ng-template>
+  </fex-calendar-grid>
+</fex-calendar-root>
+

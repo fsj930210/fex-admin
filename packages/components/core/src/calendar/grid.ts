@@ -125,6 +125,16 @@ function createCalendarCell<TValue extends CalendarValue>({
   const isBeforeMin = options.min ? compareCalendarDate(date, options.min) < 0 : false
   const isAfterMax = options.max ? compareCalendarDate(date, options.max) > 0 : false
   const disabled = isBeforeMin || isAfterMax || Boolean(options.disabledDate?.(date))
+  const singleRangeValue = Boolean(
+    (options.range?.start && !options.range.end) ||
+    (!options.range?.start && options.range?.end),
+  )
+  const rangeStart = singleRangeValue
+    ? isSameCalendarValue(value, options.range?.start ?? options.range?.end)
+    : isSameCalendarValue(value, options.range?.start)
+  const rangeEnd = singleRangeValue
+    ? isSameCalendarValue(value, options.range?.start ?? options.range?.end)
+    : isSameCalendarValue(value, options.range?.end)
 
   return {
     key: `${panel}:${granularity}:${getCalendarDateKey(date)}:${rowIndex}:${columnIndex}`,
@@ -142,8 +152,8 @@ function createCalendarCell<TValue extends CalendarValue>({
       selected:
         isSameCalendarValue(value, options.value) ||
         Boolean(options.values?.some((item) => isSameCalendarValue(value, item))),
-      rangeStart: isSameCalendarValue(value, options.range?.start),
-      rangeEnd: isSameCalendarValue(value, options.range?.end),
+      rangeStart,
+      rangeEnd,
       inRange: isCalendarValueInRange(value, options.range),
     },
   }

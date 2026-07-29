@@ -1,6 +1,6 @@
 # DatePicker
 
-Svelte DatePicker primitive exposes Popover and Calendar composition aliases plus shared core date-picker helpers. Root/Trigger/Content control the floating layer, while Panel/Grid/Cell render calendar values.
+Svelte DatePicker is a primitive-only composition surface aligned with React. It does not export a monolithic `DatePicker` or `RangePicker` component.
 
 ## Import
 
@@ -11,10 +11,25 @@ Svelte DatePicker primitive exposes Popover and Calendar composition aliases plu
     DatePickerTrigger,
     DatePickerContent,
     DatePickerPanel,
-    DatePickerGrid,
-    DatePickerCell,
+    DatePickerHeader,
+    DatePickerHeaderButton,
+    DatePickerHeaderTitle,
+    DatePickerHeaderLabel,
+    DatePickerFooter,
+    DatePickerConfirm,
+    DatePickerCancel,
+    DatePickerToday,
+    DatePickerPreset,
+    DatePickerTags,
+    RangePickerRoot,
+    RangePickerTrigger,
+    RangePickerContent,
+    RangePickerPanel,
+    RangePickerPanelGroup,
+    useDatePicker,
+    useRangePicker,
   } from '@fex/components-svelte/primitive/date-picker'
 </script>
 ```
 
-Keep submitted values as `CalendarValue`; format for backend payloads at the boundary.
+Use Root for state and Popover ownership, Trigger for input display, Content for the floating panel, Header/Panel/PanelGroup for Calendar rendering, and Footer actions for confirmation flows.

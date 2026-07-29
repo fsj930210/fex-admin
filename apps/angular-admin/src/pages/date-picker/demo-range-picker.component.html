@@ -1,0 +1,31 @@
+<fex-range-picker-root
+  [picker]="picker"
+  [value]="value"
+  [defaultValue]="defaultValue"
+  [open]="open"
+  [defaultOpen]="defaultOpen"
+  [needConfirm]="needConfirm"
+  [disabled]="disabled"
+  [readOnly]="readOnly"
+  [allowClear]="allowClear"
+  [allowEmpty]="allowEmpty"
+  [order]="order"
+  [format]="format"
+  [weekStartsOn]="weekStartsOn"
+  [minDate]="minDate"
+  [maxDate]="maxDate"
+  [disabledDate]="disabledDate"
+  (change)="change.emit($event)"
+  (openChange)="openChange.emit($event)"
+>
+  <fex-range-picker-trigger class="w-80" [startPlaceholder]="startPlaceholder()" [endPlaceholder]="endPlaceholder()" />
+  <fex-range-picker-content>
+    <fex-range-picker-panel-group [panelCount]="panelCount" />
+    @if (needConfirm) {
+      <fex-date-picker-footer>
+        <button fexDatePickerCancel></button>
+        <button fexDatePickerConfirm></button>
+      </fex-date-picker-footer>
+    }
+  </fex-range-picker-content>
+</fex-range-picker-root>

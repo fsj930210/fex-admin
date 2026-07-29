@@ -1,6 +1,13 @@
 import { cn } from '@fex/utils'
 import { getCalendarToday } from '@fex/components-core/calendar'
 import { getDefaultPanelByPicker } from '@fex/components-core/date-picker/panel'
+import {
+  datePickerCancelClassName,
+  datePickerConfirmClassName,
+  datePickerFooterClassName,
+  datePickerPresetClassName,
+  datePickerTodayClassName,
+} from '@fex/components-styles/date-picker'
 import { use, type ComponentProps, type ReactNode } from 'react'
 import { DatePickerContext, RangePickerContext } from './context'
 import { Button } from '../button/button'
@@ -21,7 +28,7 @@ export function DatePickerFooter({ className, children, ...props }: DatePickerFo
   const context = useFooterOwner()
   const actions = { close: context.close, clear: context.clear, confirm: context.confirm, cancel: context.cancel }
   return (
-    <div {...props} data-slot="date-picker-footer" className={cn('flex items-center justify-end gap-2 border-t border-border p-2', className)}>
+    <div {...props} data-slot="date-picker-footer" className={cn(datePickerFooterClassName, className)}>
       {typeof children === 'function' ? children(actions) : children}
     </div>
   )
@@ -36,7 +43,7 @@ export function DatePickerConfirm({ className, children = '确定', onClick, ...
       {...props}
       type="button"
       data-slot="date-picker-confirm"
-      className={cn('rounded-md bg-primary px-3 py-1 text-sm text-primary-foreground', className)}
+      className={cn(datePickerConfirmClassName, className)}
       onClick={(event) => {
         onClick?.(event)
         if (!event.defaultPrevented) context.confirm()
@@ -54,7 +61,7 @@ export function DatePickerCancel({ className, children = '取消', onClick, ...p
       {...props}
       type="button"
       data-slot="date-picker-cancel"
-      className={cn('rounded-md border border-border px-3 py-1 text-sm', className)}
+      className={cn(datePickerCancelClassName, className)}
       onClick={(event) => {
         onClick?.(event)
         if (!event.defaultPrevented) context.cancel()
@@ -71,7 +78,7 @@ export function DatePickerPreset({ className, children, onClick, ...props }: Dat
       {...props}
       type="button"
       data-slot="date-picker-preset"
-      className={cn('rounded-md px-2 py-1 text-sm text-primary hover:bg-muted-background', className)}
+      className={cn(datePickerPresetClassName, className)}
       onClick={(event) => {
         onClick?.(event)
       }}
@@ -90,7 +97,7 @@ export function DatePickerToday({ className, children = '今天', onClick, ...pr
       {...props}
       type="button"
       data-slot="date-picker-today"
-      className={cn('rounded-md px-2 py-1 text-sm text-primary hover:bg-muted-background', className)}
+      className={cn(datePickerTodayClassName, className)}
       onClick={(event) => {
         onClick?.(event)
         if (event.defaultPrevented) return

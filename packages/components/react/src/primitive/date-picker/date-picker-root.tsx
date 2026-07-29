@@ -12,7 +12,7 @@ export interface DatePickerRootProps<TValue extends CalendarValue = CalendarValu
 
 export function DatePickerRoot<TValue extends CalendarValue = CalendarValue>({
   children,
-  placement = 'bottomLeft',
+  placement = 'bottom',
   sideOffset = 6,
   picker,
   value,

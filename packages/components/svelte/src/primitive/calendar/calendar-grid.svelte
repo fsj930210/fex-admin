@@ -13,7 +13,7 @@
   const context = getContext<CalendarContextValue>(calendarContextKey)
 </script>
 
-<div {...rest} data-slot="calendar-grid">
+<div {...rest} data-slot="calendar-grid" data-panel={context.getPanel()} onmouseleave={() => context.clearHoveredRow()}>
   {#each context.getGrid().rows as row (row.map((cell) => cell.key).join('|'))}
     <div data-slot="calendar-row">
       {#each row as cell (cell.key)}

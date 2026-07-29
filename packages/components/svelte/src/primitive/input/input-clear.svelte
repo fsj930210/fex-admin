@@ -30,7 +30,7 @@
     aria-label="Clear input"
     {...rest}
     data-slot="input-clear"
-    disabled={!input.canClear()}
+    disabled={!forceMount && !input.canClear()}
     class={cn(inputClearClassName, className)}
     onpointerdown={(event) => {
       onpointerdown?.(event)

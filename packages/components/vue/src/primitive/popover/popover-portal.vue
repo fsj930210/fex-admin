@@ -8,12 +8,12 @@ const props = defineProps<{
 }>()
 
 const { overlay, snapshot } = usePopoverContext('PopoverPortal')
-const popupContainer = computed(() => props.container ?? overlay.resolvePopupContainer())
-const shouldRender = computed(() => Boolean(popupContainer.value) && (snapshot.value.mounted || props.forceMount))
+const popupContainer = computed(() => props.container ?? overlay.resolvePopupContainer() ?? 'body')
+const shouldRender = computed(() => snapshot.value.mounted || props.forceMount)
 </script>
 
 <template>
-  <Teleport v-if="shouldRender" :to="popupContainer!">
+  <Teleport v-if="shouldRender" :to="popupContainer">
     <slot />
   </Teleport>
 </template>

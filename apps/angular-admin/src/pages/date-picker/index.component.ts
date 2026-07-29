@@ -4,16 +4,14 @@ import { createCalendarDate, getCalendarValueDate, getCalendarValueKey, type Cal
 import { isAfterDate, isBeforeDate } from '@fex/components-core/date/utils'
 import { Card } from '@fex/components-angular/ui/card'
 import { Button } from '@fex/components-angular/ui/button'
-import {
-  DatePicker,
-  RangePicker,
-} from '@fex/components-angular/primitive/date-picker'
-import { TimePickerRoot, TimePickerTrigger } from '@fex/components-angular/primitive/time-picker'
+import { DemoDatePicker, DemoRangePicker } from './demo-date-picker.component'
+import { CustomDemos } from './custom-demos.component'
+import { IntegrationDemos } from './integration-demos.component'
 
 @Component({
   selector: 'fex-date-picker-page',
   standalone: true,
-  imports: [RouterLink, Card, Button, DatePicker, RangePicker, TimePickerRoot, TimePickerTrigger],
+  imports: [RouterLink, Card, Button, DemoDatePicker, DemoRangePicker, CustomDemos, IntegrationDemos],
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -23,6 +21,7 @@ export class DatePickerComponent {
   protected readonly multiple = signal<CalendarValue[]>([])
   protected readonly controlled = signal<CalendarValue | null>(this.today)
   protected readonly range = signal<CalendarRange<CalendarValue>>({})
+  protected readonly dynamicRange = signal<CalendarRange<CalendarValue>>(this.lastDays(7))
   protected readonly submitted = signal<CalendarRange<CalendarValue>>({})
   protected readonly panelValue = signal<CalendarValue | null>(null)
   protected readonly open = signal(false)
@@ -55,10 +54,16 @@ export class DatePickerComponent {
   }
 
   protected readonly dynamicDisabled = (date: CalendarDate, part: 'start' | 'end') => {
-    const from = part === 'end' ? this.range().start : this.range().end
-    if (!from) return false
-    const fromDate = getCalendarValueDate(from)
-    return isBeforeDate(date, fromDate.subtract({ days: 6 })) || isAfterDate(date, fromDate.add({ days: 6 }))
+    if (part === 'start') {
+      const end = this.dynamicRange().end
+      if (!end) return false
+      const endDate = getCalendarValueDate(end)
+      return isBeforeDate(date, endDate.subtract({ days: 6 })) || isAfterDate(date, endDate)
+    }
+    const start = this.dynamicRange().start
+    if (!start) return false
+    const startDate = getCalendarValueDate(start)
+    return isBeforeDate(date, startDate) || isAfterDate(date, startDate.add({ days: 6 }))
   }
 
   protected lastDays(days: number): CalendarRange<CalendarValue> {

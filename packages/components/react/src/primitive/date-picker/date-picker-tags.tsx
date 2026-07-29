@@ -1,7 +1,8 @@
 import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
+import { datePickerTagClassName, datePickerTagOverflowClassName, datePickerTagRemoveClassName } from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
 import type { ComponentProps, MouseEvent } from 'react'
-import { Button } from '../button/button'
+import { CloseIcon } from '../../icon/close'
 import { useDatePickerContext } from './context'
 
 export interface DatePickerTagsProps extends ComponentProps<'div'> {
@@ -25,7 +26,7 @@ export function DatePickerTags({ className, maxVisible = 1, ...props }: DatePick
         <span
           data-slot="date-picker-tag-overflow"
           title={labels.join(', ')}
-          className="inline-flex shrink-0 cursor-default items-center rounded bg-muted-background px-1.5 py-0.5 text-xs text-muted-foreground"
+          className={datePickerTagOverflowClassName}
         >
           +{hiddenCount}
         </span>
@@ -41,20 +42,21 @@ export interface DatePickerTagProps extends ComponentProps<'span'> {
 
 export function DatePickerTag({ value, className, onRemove, ...props }: DatePickerTagProps) {
   return (
-    <span {...props} data-slot="date-picker-tag" className={cn('inline-flex shrink-0 items-center rounded bg-muted-background px-1.5 py-0.5 text-xs', className)}>
+    <span {...props} data-slot="date-picker-tag" className={cn(datePickerTagClassName, className)}>
       {value}
       {onRemove ? (
-        <Button
+        <button
           type="button"
           aria-label={`移除 ${value}`}
-          className="ml-1 size-3 p-0 text-muted-foreground"
+          className={datePickerTagRemoveClassName}
+          onPointerDown={(event) => event.stopPropagation()}
           onClick={(event: MouseEvent<HTMLButtonElement>) => {
             event.stopPropagation()
             onRemove()
           }}
         >
-          ×
-        </Button>
+          <CloseIcon />
+        </button>
       ) : null}
     </span>
   )

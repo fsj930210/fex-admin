@@ -1,4 +1,5 @@
 import { inputAddonAfterClassName, inputAddonBeforeClassName, inputClearClassName, inputControlClassName, inputPrefixClassName, inputRootClassName, inputSuffixClassName } from '@fex/components-styles/input'
+import { cn } from '@fex/utils'
 import { ChangeDetectionStrategy, Component, Directive, ElementRef, EventEmitter, HostListener, Input, Output, inject, signal } from '@angular/core'
 import type { OnChanges, SimpleChanges } from '@angular/core'
 import { CloseIcon } from '../../icon/close'
@@ -7,6 +8,8 @@ import { Button, buttonPrimitiveClassName } from '../button/button'
 
 @Component({ selector: 'fex-input-root', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { '[class]': 'hostClassName()', '[attr.data-disabled]': 'disabled || null', '[attr.data-readonly]': 'readOnly || null', '[attr.data-invalid]': 'invalid || null', 'data-slot': 'input-root' }, template: '<ng-content />' })
 export class InputRoot implements OnChanges {
+  private readonly classInput = signal('')
+  @Input('class') set className(value: string | null | undefined) { this.classInput.set(value ?? '') }
   @Input() value?: string
   @Input() defaultValue = ''
   @Input() disabled = false
@@ -14,7 +17,7 @@ export class InputRoot implements OnChanges {
   @Input() invalid = false
   @Output() readonly valueChange = new EventEmitter<string>()
   @Output() readonly clear = new EventEmitter<void>()
-  protected readonly hostClassName = createHostClassName(inputRootClassName)
+  protected readonly hostClassName = createHostClassName(() => cn(inputRootClassName, this.classInput()))
   private readonly uncontrolledValue = signal(this.defaultValue)
   private focusElement?: HTMLElement
   get currentValue() { return this.value ?? this.uncontrolledValue() }
@@ -28,7 +31,9 @@ export class InputRoot implements OnChanges {
 @Directive({ selector: 'input[fexInputControl]', standalone: true, host: { '[class]': 'hostClassName()', 'data-slot': 'input-control', '[value]': 'root.currentValue', '[disabled]': 'root.disabled', '[readOnly]': 'root.readOnly', '[attr.aria-invalid]': 'root.invalid || null' } })
 export class InputControl {
   readonly root = inject(InputRoot)
-  protected readonly hostClassName = createHostClassName(inputControlClassName)
+  private readonly classInput = signal('')
+  @Input('class') set className(value: string | null | undefined) { this.classInput.set(value ?? '') }
+  protected readonly hostClassName = createHostClassName(() => cn(inputControlClassName, this.classInput()))
   private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef)
   constructor() { this.root.setFocusElement(this.element.nativeElement) }
   @HostListener('input', ['$event']) onInput(event: Event) { this.root.setValue((event.currentTarget as HTMLInputElement).value) }

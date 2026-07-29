@@ -17,7 +17,10 @@ export interface CalendarContextValue<TValue extends CalendarValue = CalendarVal
   getPanel: () => CalendarPanel
   getGranularity: () => CalendarGranularity
   getWeekStartsOn: () => CalendarWeekday
+  getHoveredRowIndex: () => number | null
   setViewDate: (viewDate: CalendarDate) => void
   setPanel: (panel: CalendarPanel) => void
   selectCell: (cell: CalendarCell<TValue>) => void
+  hoverCell: (cell: CalendarCell<TValue>) => void
+  clearHoveredRow: () => void
 }

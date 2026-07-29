@@ -61,12 +61,14 @@ export class CalendarRoot {
 
   valueChange = output<CalendarValue>()
   cellSelect = output<CalendarCell>()
+  cellHover = output<CalendarCell>()
   viewDateChange = output<CalendarDate>()
   panelChange = output<CalendarPanel>()
 
   private readonly internalValue = signal<CalendarValue | null | undefined>(undefined)
   private readonly internalViewDate = signal<CalendarDate | undefined>(undefined)
   private readonly internalPanel = signal<CalendarPanel | undefined>(undefined)
+  readonly hoveredRowIndex = signal<number | null>(null)
 
   readonly currentValue = computed(() => this.value() ?? this.internalValue() ?? this.defaultValue())
   readonly currentViewDate = computed(
@@ -112,6 +114,16 @@ export class CalendarRoot {
     this.cellSelect.emit(cell)
     if (this.value() === undefined) this.internalValue.set(cell.value)
     this.valueChange.emit(cell.value)
+  }
+
+  hoverCell(cell: CalendarCell) {
+    if (cell.state.disabled) return
+    this.hoveredRowIndex.set(cell.rowIndex)
+    this.cellHover.emit(cell)
+  }
+
+  clearHoveredRow() {
+    this.hoveredRowIndex.set(null)
   }
 }
 
@@ -207,7 +219,11 @@ export class CalendarWeekHeader {
   standalone: true,
   imports: [NgTemplateOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'data-slot': 'calendar-grid' },
+  host: {
+    'data-slot': 'calendar-grid',
+    '[attr.data-panel]': 'root.currentPanel()',
+    '(mouseleave)': 'root.clearHoveredRow()',
+  },
   templateUrl: './calendar-grid.html',
 })
 export class CalendarGrid {
@@ -231,8 +247,24 @@ export class CalendarGrid {
     '[attr.data-today]': "cell().state.today ? 'true' : null",
     '[attr.data-outside]': "cell().state.outside ? 'true' : null",
     '[attr.data-selected]': "cell().state.selected ? 'true' : null",
+    '[attr.data-range-start]': "cell().granularity !== 'week' && cell().state.rangeStart ? 'true' : null",
+    '[attr.data-range-end]': "cell().granularity !== 'week' && cell().state.rangeEnd ? 'true' : null",
+    '[attr.data-in-range]': "cell().granularity !== 'week' && cell().state.inRange ? 'true' : null",
+    '[attr.data-week-selected]': "cell().granularity === 'week' && cell().state.selected ? 'true' : null",
+    '[attr.data-week-hover]': "cell().granularity === 'week' && root.hoveredRowIndex() === cell().rowIndex ? 'true' : null",
+    '[attr.data-week-row-start]': "cell().granularity === 'week' && cell().columnIndex === 0 ? 'true' : null",
+    '[attr.data-week-row-end]': "cell().granularity === 'week' && cell().columnIndex === 6 ? 'true' : null",
+    '[attr.data-week-start]': "cell().granularity === 'week' && cell().state.selected && cell().columnIndex === 0 ? 'true' : null",
+    '[attr.data-week-end]': "cell().granularity === 'week' && cell().state.selected && cell().columnIndex === 6 ? 'true' : null",
+    '[attr.data-week-range-start]': "cell().granularity === 'week' && cell().state.rangeStart && !cell().state.rangeEnd ? 'true' : null",
+    '[attr.data-week-range-end]': "cell().granularity === 'week' && cell().state.rangeEnd && !cell().state.rangeStart ? 'true' : null",
+    '[attr.data-week-range-single]': "cell().granularity === 'week' && cell().state.rangeStart && cell().state.rangeEnd ? 'true' : null",
+    '[attr.data-week-in-range]': "cell().granularity === 'week' && cell().state.inRange ? 'true' : null",
+    '[attr.data-week-range]': "cell().granularity === 'week' && (cell().state.rangeStart || cell().state.rangeEnd || cell().state.inRange) ? 'true' : null",
     '[attr.data-disabled]': "cell().state.disabled ? 'true' : null",
     '[disabled]': 'cell().state.disabled',
+    '(mouseenter)': 'root.hoverCell(cell())',
+    '(mouseover)': 'root.hoverCell(cell())',
     '(click)': 'root.selectCell(cell())',
   },
   template: '<ng-content />',

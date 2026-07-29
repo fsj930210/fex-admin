@@ -1,0 +1,35 @@
+<div class="space-y-space-xl">
+  <fex-card title="自定义单元格" description="DatePickerPanel 透传 Calendar，可以直接自定义 CalendarGrid / CalendarCell。">
+    <div class="flex min-w-0 flex-wrap items-start gap-space-md">
+      <fex-date-picker-root>
+        <fex-date-picker-trigger class="w-56" placeholder="YYYY-MM-DD" />
+        <fex-date-picker-content>
+          <demo-custom-cell-panel />
+        </fex-date-picker-content>
+      </fex-date-picker-root>
+    </div>
+  </fex-card>
+
+  <fex-card title="自定义 Footer" description="Footer 通过 context 获取 close / confirm / cancel / clear。">
+    <div class="flex min-w-0 flex-wrap items-start gap-space-md">
+      <fex-date-picker-root [needConfirm]="true">
+        <fex-date-picker-trigger class="w-56" placeholder="YYYY-MM-DD" />
+        <fex-date-picker-content>
+          <fex-date-picker-panel />
+          <demo-custom-footer />
+        </fex-date-picker-content>
+      </fex-date-picker-root>
+    </div>
+  </fex-card>
+
+  <fex-card title="自定义面板" description="自定义面板可以调用 primitive 暴露的 close，并按业务自由组合内容。">
+    <div class="flex min-w-0 flex-wrap items-start gap-space-md">
+      <fex-date-picker-root>
+        <fex-date-picker-trigger class="w-56" placeholder="YYYY-MM-DD" />
+        <fex-date-picker-content>
+          <demo-custom-panel />
+        </fex-date-picker-content>
+      </fex-date-picker-root>
+    </div>
+  </fex-card>
+</div>

@@ -8,7 +8,7 @@ import {
 } from '@fex/components-core/calendar'
 import { createDatePickerDisabledDate } from '@fex/components-core/date-picker/constraints'
 import { getDefaultPanelByPicker } from '@fex/components-core/date-picker/panel'
-import { createNextRangeValue, getRangeFromValue } from '@fex/components-core/date-picker/range'
+import { createNextRangeValue, getNextRangeActivePart, getRangeFromValue } from '@fex/components-core/date-picker/range'
 import { getCalendarValueDate } from '@fex/components-core/calendar/value'
 import { getDefaultDatePickerFormat } from '@fex/components-core/date-picker/value'
 import type { DatePickerPicker } from '@fex/components-core/date-picker/types'
@@ -91,13 +91,15 @@ export function useRangePicker<TValue extends CalendarValue = CalendarValue>(
   })
   const select = useMemoizedFn((nextValue: TValue) => {
     const nextRange = createNextRangeValue(activeRangeValue, nextValue, activePart, options.order ?? true)
+    setHoverValue(null)
     if (needConfirm) setPendingValue(nextRange)
     else setRangeValue(nextRange)
-    if (activePart === 'start') {
-      setActivePart('end')
+    const nextActivePart = getNextRangeActivePart(nextRange)
+    if (nextActivePart) {
+      setActivePart(nextActivePart)
       return
     }
-    if (nextRange.start && nextRange.end && !needConfirm) close()
+    if (!needConfirm) close()
   })
   const confirm = useMemoizedFn(() => {
     setRangeValue(pendingValue)
@@ -109,10 +111,9 @@ export function useRangePicker<TValue extends CalendarValue = CalendarValue>(
   })
   const clear = useMemoizedFn(() => {
     const next: CalendarRange<TValue> = {}
-    if (!allowEmpty.start && activeRangeValue.start) next.start = activeRangeValue.start
-    if (!allowEmpty.end && activeRangeValue.end) next.end = activeRangeValue.end
     setPendingValue(next)
     setRangeValue(next)
+    setHoverValue(null)
   })
   const disabledDate = useMemoizedFn((date: CalendarDate, part: 'start' | 'end') => createDatePickerDisabledDate({
     picker,

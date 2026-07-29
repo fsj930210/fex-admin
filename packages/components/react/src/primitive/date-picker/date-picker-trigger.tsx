@@ -1,4 +1,5 @@
 import { formatDatePickerValue, parseDatePickerValue } from '@fex/components-core/date-picker/value'
+import { datePickerMultipleInputClassName, datePickerMultipleTagsClassName, datePickerTriggerClassName } from '@fex/components-styles/date-picker'
 import type { CalendarValue } from '@fex/components-core/calendar'
 import { CalendarIcon } from '../../icon/calendar'
 import { cn } from '@fex/utils'
@@ -12,7 +13,7 @@ import {
   type InputRootProps,
 } from '../input/input'
 import { PopoverTrigger } from '../popover/popover'
-import { useState, type ComponentProps, type ReactNode } from 'react'
+import { useRef, useState, type ComponentProps, type ReactNode } from 'react'
 import { useDatePickerContext } from './context'
 import { DatePickerTags } from './date-picker-tags'
 
@@ -26,6 +27,7 @@ export interface DatePickerTriggerProps
 
 export function DatePickerTrigger({ placeholder, prefix, suffix, inputProps, className, ...props }: DatePickerTriggerProps) {
   const context = useDatePickerContext('DatePickerTrigger')
+  const inputRef = useRef<HTMLInputElement>(null)
   const displayValue = isCalendarValueArray(context.value)
     ? context.value.map((item) => formatDatePickerValue(item, context)).join(', ')
     : formatDatePickerValue(context.value ?? null, context)
@@ -48,7 +50,7 @@ export function DatePickerTrigger({ placeholder, prefix, suffix, inputProps, cla
           <InputRoot
           {...props}
           {...(popoverProps as ComponentProps<typeof InputRoot>)}
-          className={cn('cursor-pointer', className)}
+          className={cn(datePickerTriggerClassName, className)}
           role={undefined}
           value={context.multiple ? '' : text}
           disabled={context.disabled}
@@ -61,6 +63,7 @@ export function DatePickerTrigger({ placeholder, prefix, suffix, inputProps, cla
               event.stopPropagation()
               return
             }
+            inputRef.current?.focus()
             onClick?.(event as never)
           }}
           onFocus={(event) => {
@@ -72,13 +75,19 @@ export function DatePickerTrigger({ placeholder, prefix, suffix, inputProps, cla
           }}
         >
           {prefix ? <InputPrefix>{prefix}</InputPrefix> : null}
-          {context.multiple ? <DatePickerTags className="min-w-0 flex-1 flex-nowrap overflow-hidden px-2" /> : null}
+          {context.multiple ? <DatePickerTags className={datePickerMultipleTagsClassName} /> : null}
           <InputControl
             {...inputProps}
-            className={cn(context.multiple && displayValue && 'w-8 min-w-8 flex-none px-1', inputProps?.className)}
+            ref={inputRef}
+            className={cn(context.multiple && displayValue && datePickerMultipleInputClassName, inputProps?.className)}
             placeholder={context.multiple && displayValue ? '' : placeholder ?? context.format}
           />
-          {context.allowClear ? <InputClear /> : null}
+          {context.allowClear ? (
+            <InputClear
+              onPointerDown={(event) => event.stopPropagation()}
+              onClick={(event) => event.stopPropagation()}
+            />
+          ) : null}
           {!context.allowClear || !displayValue ? <InputSuffix>{suffix ?? <CalendarIcon className="size-4" />}</InputSuffix> : null}
         </InputRoot>
         )

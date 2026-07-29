@@ -12,7 +12,7 @@ import {
   type CalendarWeekday,
 } from '@fex/components-core/calendar'
 import { cn } from '@fex/utils'
-import { createMemo, createSignal, For, splitProps, type JSX, type ParentProps } from 'solid-js'
+import { createMemo, createSignal, For, Index, splitProps, type Accessor, type JSX, type ParentProps } from 'solid-js'
 import { CalendarContext, useCalendarContext } from './calendar-context'
 
 export type CalendarCellModel<TValue extends CalendarValue = CalendarValue> =
@@ -38,6 +38,7 @@ export interface CalendarRootProps<TValue extends CalendarValue = CalendarValue>
   disabledDate?: (date: CalendarDate) => boolean
   onValueChange?: (value: TValue) => void
   onCellSelect?: (cell: CoreCalendarCell<TValue>) => void
+  onCellHover?: (cell: CoreCalendarCell<TValue>) => void
   onViewDateChange?: (viewDate: CalendarDate) => void
   onPanelChange?: (panel: CalendarPanel) => void
 }
@@ -62,6 +63,7 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>(
     'disabledDate',
     'onValueChange',
     'onCellSelect',
+    'onCellHover',
     'onViewDateChange',
     'onPanelChange',
     'children',
@@ -73,6 +75,7 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>(
   const [internalPanel, setInternalPanel] = createSignal<CalendarPanel>(
     local.defaultPanel ?? 'date',
   )
+  const [hoveredRowIndex, setHoveredRowIndex] = createSignal<number | null>(null)
   const currentValue = () => local.value ?? internalValue()
   const currentViewDate = () => local.viewDate ?? internalViewDate()
   const currentPanel = () => local.panel ?? internalPanel()
@@ -113,6 +116,7 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>(
         panel: currentPanel,
         granularity,
         weekStartsOn,
+        hoveredRowIndex,
         setViewDate,
         setPanel,
         selectCell: (cell) => {
@@ -121,6 +125,12 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>(
           if (local.value === undefined) setInternalValue(() => cell.value as TValue)
           local.onValueChange?.(cell.value as TValue)
         },
+        hoverCell: (cell) => {
+          if (cell.state.disabled) return
+          setHoveredRowIndex(cell.rowIndex)
+          local.onCellHover?.(cell as CoreCalendarCell<TValue>)
+        },
+        clearHoveredRow: () => setHoveredRowIndex(null),
       }}
     >
       <div
@@ -128,6 +138,10 @@ export function CalendarRoot<TValue extends CalendarValue = CalendarValue>(
         data-slot="calendar-root"
         data-panel={currentPanel()}
         data-granularity={granularity()}
+        onMouseLeave={(event) => {
+          if (typeof rest.onMouseLeave === 'function') rest.onMouseLeave(event)
+          if (!event.defaultPrevented) setHoveredRowIndex(null)
+        }}
       >
         {local.children}
       </div>
@@ -158,10 +172,8 @@ export function CalendarHeader(props: CalendarHeaderProps) {
         viewDate: context.viewDate(),
         panel: context.panel(),
         granularity: context.granularity(),
-        previousYear: () =>
-          context.setViewDate(subtractDate(context.viewDate(), { years: 1 })),
-        previousMonth: () =>
-          context.setViewDate(subtractDate(context.viewDate(), { months: 1 })),
+        previousYear: () => context.setViewDate(subtractDate(context.viewDate(), { years: 1 })),
+        previousMonth: () => context.setViewDate(subtractDate(context.viewDate(), { months: 1 })),
         nextMonth: () => context.setViewDate(addDate(context.viewDate(), { months: 1 })),
         nextYear: () => context.setViewDate(addDate(context.viewDate(), { years: 1 })),
         setPanel: context.setPanel,
@@ -193,8 +205,7 @@ export function CalendarNavigationButton(props: ParentProps<CalendarNavigationBu
       context.setViewDate(subtractDate(context.viewDate(), { months: 1 }))
     if (local.action === 'next-month')
       context.setViewDate(addDate(context.viewDate(), { months: 1 }))
-    if (local.action === 'next-year')
-      context.setViewDate(addDate(context.viewDate(), { years: 1 }))
+    if (local.action === 'next-year') context.setViewDate(addDate(context.viewDate(), { years: 1 }))
     if (local.action === 'previous-panel')
       context.setViewDate(
         context.panel() === 'date'
@@ -248,32 +259,41 @@ export interface CalendarGridProps<TValue extends CalendarValue = CalendarValue>
   JSX.HTMLAttributes<HTMLDivElement>,
   'children'
 > {
+  cellClass?: string
   children?: (cell: CalendarCellModel<TValue>) => JSX.Element
 }
 
 export function CalendarGrid<TValue extends CalendarValue = CalendarValue>(
   props: CalendarGridProps<TValue>,
 ) {
-  const [local, rest] = splitProps(props, ['children'])
+  const [local, rest] = splitProps(props, ['children', 'cellClass'])
   const context = useCalendarContext('CalendarGrid')
 
   return (
-    <div {...rest} data-slot="calendar-grid">
-      <For each={context.grid().rows}>
+    <div
+      {...rest}
+      data-slot="calendar-grid"
+      data-panel={context.panel()}
+      onMouseLeave={(event) => {
+        if (typeof rest.onMouseLeave === 'function') rest.onMouseLeave(event)
+        if (!event.defaultPrevented) context.clearHoveredRow()
+      }}
+    >
+      <Index each={context.grid().rows}>
         {(row) => (
           <div data-slot="calendar-row">
-            <For each={row}>
+            <Index each={row()}>
               {(cell) =>
                 local.children ? (
-                  local.children(cell as CalendarCellModel<TValue>)
+                  local.children(cell() as CalendarCellModel<TValue>)
                 ) : (
-                  <CalendarCell cell={cell} />
+                  <CalendarCell cell={cell as Accessor<CalendarCellModel<TValue>>} class={local.cellClass} />
                 )
               }
-            </For>
+            </Index>
           </div>
         )}
-      </For>
+      </Index>
     </div>
   )
 }
@@ -282,7 +302,7 @@ export interface CalendarCellProps<TValue extends CalendarValue = CalendarValue>
   JSX.ButtonHTMLAttributes<HTMLButtonElement>,
   'children' | 'value'
 > {
-  cell: CalendarCellModel<TValue>
+  cell: CalendarCellModel<TValue> | Accessor<CalendarCellModel<TValue>>
   children?: JSX.Element | ((cell: CalendarCellModel<TValue>) => JSX.Element)
 }
 
@@ -291,27 +311,102 @@ export function CalendarCell<TValue extends CalendarValue = CalendarValue>(
 ) {
   const [local, rest] = splitProps(props, ['cell', 'children', 'class', 'onClick'])
   const context = useCalendarContext('CalendarCell')
+  const cell = () =>
+    typeof local.cell === 'function'
+      ? (local.cell as Accessor<CalendarCellModel<TValue>>)()
+      : local.cell
 
   return (
     <button
       {...rest}
       type="button"
       data-slot="calendar-cell"
-      data-today={local.cell.state.today ? 'true' : undefined}
-      data-outside={local.cell.state.outside ? 'true' : undefined}
-      data-selected={local.cell.state.selected ? 'true' : undefined}
-      data-disabled={local.cell.state.disabled ? 'true' : undefined}
-      disabled={local.cell.state.disabled}
+      data-today={cell().state.today ? 'true' : undefined}
+      data-outside={cell().state.outside ? 'true' : undefined}
+      data-selected={cell().state.selected ? 'true' : undefined}
+      data-range-start={
+        cell().granularity !== 'week' && cell().state.rangeStart ? 'true' : undefined
+      }
+      data-range-end={
+        cell().granularity !== 'week' && cell().state.rangeEnd ? 'true' : undefined
+      }
+      data-in-range={
+        cell().granularity !== 'week' && cell().state.inRange ? 'true' : undefined
+      }
+      data-week-selected={
+        cell().granularity === 'week' && cell().state.selected ? 'true' : undefined
+      }
+      data-week-hover={
+        cell().granularity === 'week' && context.hoveredRowIndex() === cell().rowIndex
+          ? 'true'
+          : undefined
+      }
+      data-week-row-start={
+        cell().granularity === 'week' && cell().columnIndex === 0 ? 'true' : undefined
+      }
+      data-week-row-end={
+        cell().granularity === 'week' && cell().columnIndex === 6 ? 'true' : undefined
+      }
+      data-week-start={
+        cell().granularity === 'week' &&
+        cell().state.selected &&
+        cell().columnIndex === 0
+          ? 'true'
+          : undefined
+      }
+      data-week-end={
+        cell().granularity === 'week' &&
+        cell().state.selected &&
+        cell().columnIndex === 6
+          ? 'true'
+          : undefined
+      }
+      data-week-range-start={
+        cell().granularity === 'week' &&
+        cell().state.rangeStart &&
+        !cell().state.rangeEnd
+          ? 'true'
+          : undefined
+      }
+      data-week-range-end={
+        cell().granularity === 'week' &&
+        cell().state.rangeEnd &&
+        !cell().state.rangeStart
+          ? 'true'
+          : undefined
+      }
+      data-week-range-single={
+        cell().granularity === 'week' &&
+        cell().state.rangeStart &&
+        cell().state.rangeEnd
+          ? 'true'
+          : undefined
+      }
+      data-week-in-range={
+        cell().granularity === 'week' && cell().state.inRange ? 'true' : undefined
+      }
+      data-week-range={
+        cell().granularity === 'week' &&
+        (cell().state.rangeStart || cell().state.rangeEnd || cell().state.inRange)
+          ? 'true'
+          : undefined
+      }
+      data-disabled={cell().state.disabled ? 'true' : undefined}
+      disabled={cell().state.disabled}
       class={cn(local.class)}
-      onClick={(event) => {
+      on:click={(event) => {
         if (typeof local.onClick === 'function') local.onClick(event)
         if (event.defaultPrevented) return
-        context.selectCell(local.cell)
+        context.selectCell(cell())
+      }}
+      onMouseEnter={(event) => {
+        if (typeof rest.onMouseEnter === 'function') rest.onMouseEnter(event)
+        if (!event.defaultPrevented) context.hoverCell(cell())
       }}
     >
       {typeof local.children === 'function'
-        ? local.children(local.cell)
-        : (local.children ?? local.cell.label)}
+        ? local.children(cell())
+        : (local.children ?? cell().label)}
     </button>
   )
 }

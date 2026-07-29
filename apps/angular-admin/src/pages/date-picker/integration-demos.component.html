@@ -1,0 +1,59 @@
+<div class="space-y-space-xl">
+  <fex-card title="预设范围" description="预设会直接写入受控范围并保持面板打开，可用于报表、审计和运营筛选。">
+    <div>
+      <fex-range-picker-root [value]="presetRange()" (change)="presetRange.set($event)">
+        <fex-range-picker-trigger class="w-80" />
+        <fex-range-picker-content>
+          <demo-preset-range-panel (selectRange)="presetRange.set($event)" />
+        </fex-range-picker-content>
+      </fex-range-picker-root>
+      <p class="mt-space-sm w-full text-xs text-muted-foreground">当前范围：{{ rangeText(presetRange()) }}</p>
+    </div>
+  </fex-card>
+
+  <fex-card title="确认后提交" description="选择过程只更新面板草稿；点击确认并提交后，才向外部提交范围。">
+    <div>
+      <fex-range-picker-root [needConfirm]="true" (change)="submitted.set($event)">
+        <fex-range-picker-trigger class="w-80" />
+        <fex-range-picker-content>
+          <fex-range-picker-panel-group />
+          <fex-date-picker-footer>
+            <button fexDatePickerConfirm (click)="submitCount.update(count => count + 1)">确认并提交</button>
+          </fex-date-picker-footer>
+        </fex-range-picker-content>
+      </fex-range-picker-root>
+      <p class="mt-space-sm w-full text-xs text-muted-foreground">当前范围：{{ rangeText(submitted()) }}</p>
+      <p class="mt-space-sm text-xs text-muted-foreground">已提交 {{ submitCount() }} 次</p>
+    </div>
+  </fex-card>
+
+  <fex-card title="日期与时间" description="一个触发器组合日期和时间，确认后一起关闭面板。">
+    <fex-date-picker-root
+      [needConfirm]="true"
+      [value]="dateTimeDate()"
+      (change)="setDateTimeDate($event)"
+      (openChange)="openDateTimePanel($event)"
+    >
+      <fex-date-picker-trigger class="w-64" [displayValue]="dateTimeDisplayValue()" placeholder="请选择日期和时间" />
+      <fex-date-picker-content class="w-[36rem] min-w-[36rem] overflow-hidden p-0">
+        <fex-time-picker [open]="true" [value]="draftTime()" format="HH:mm:ss" (change)="changeDraftTime($event.value)">
+          <div class="flex">
+            <fex-date-picker-panel [class]="dateTimePanelClassName" />
+            <div class="flex w-42 shrink-0 flex-col border-l border-border">
+              <div class="flex h-12 shrink-0 items-center justify-center border-b border-border text-sm font-semibold">{{ formatTime(draftTime()) }}</div>
+              <div fexTimePickerPanel class="h-[224px] min-h-0 overflow-hidden">
+                <div #dateTimeHourColumn fexTimePickerHourColumn class="h-[224px]"></div>
+                <div #dateTimeMinuteColumn fexTimePickerMinuteColumn class="h-[224px]"></div>
+                <div #dateTimeSecondColumn fexTimePickerSecondColumn class="h-[224px]"></div>
+              </div>
+            </div>
+          </div>
+        </fex-time-picker>
+        <fex-date-picker-footer>
+          <button fexDatePickerCancel (click)="draftTime.set(time())">取消</button>
+          <button fexDatePickerConfirm (click)="time.set(draftTime())">确定</button>
+        </fex-date-picker-footer>
+      </fex-date-picker-content>
+    </fex-date-picker-root>
+  </fex-card>
+</div>

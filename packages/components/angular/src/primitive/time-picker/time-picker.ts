@@ -30,6 +30,7 @@ import {
   Component,
   contentChild,
   computed,
+  DestroyRef,
   Directive,
   effect,
   ElementRef,
@@ -40,9 +41,11 @@ import {
   QueryList,
   signal,
   TemplateRef,
+  type AfterViewInit,
   ViewChild,
   ViewChildren,
 } from '@angular/core'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { NgTemplateOutlet } from '@angular/common'
 import { ClockIcon } from '../../icon/clock'
 import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix } from '../input/input'
@@ -83,6 +86,7 @@ export class TimePickerRoot {
     this.coreSnapshot()
     return this.controller.getSnapshot()
   })
+  readonly currentValue = computed(() => this.value() ?? this.snapshot().value)
   readonly resolvedFormat = computed(() => this.format() ?? (this.use12Hours() ? 'hh:mm:ss A' : 'HH:mm:ss'))
 
   constructor() {
@@ -139,10 +143,11 @@ export class TimePickerPanel { protected readonly hostClassName = createHostClas
 type ColumnValue = number | TimePeriod
 
 @Directive()
-abstract class TimePickerColumnBase<TValue extends ColumnValue> {
+abstract class TimePickerColumnBase<TValue extends ColumnValue> implements AfterViewInit {
   disabled = input(false, { transform: booleanAttribute })
   protected readonly root: TimePickerRoot
   protected readonly elementRef: ElementRef<HTMLElement>
+  private readonly destroyRef = inject(DestroyRef)
   @ViewChild('scrollViewport', { read: ElementRef }) scrollViewport?: ElementRef<HTMLElement>
   @ViewChildren('itemElement', { read: ElementRef }) itemElements?: QueryList<
     ElementRef<HTMLButtonElement>
@@ -163,10 +168,20 @@ abstract class TimePickerColumnBase<TValue extends ColumnValue> {
     effect(() => {
       const selected = this.selectedValue()
       const request = this.root.snapshot().scrollRequest
-      const open = this.root.popoverSnapshot().open
+      const open = this.root.open() ?? this.root.popoverSnapshot().open
       if (!open) return
-      queueMicrotask(() => this.scrollTo(selected, request?.behavior ?? 'auto'))
+      this.requestScrollTo(selected, request?.behavior ?? 'auto')
     })
+  }
+
+  ngAfterViewInit() {
+    this.itemElements?.changes
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        if (!(this.root.open() ?? this.root.popoverSnapshot().open)) return
+        this.requestScrollTo(this.selectedValue(), 'auto')
+      })
+    this.requestScrollTo(this.selectedValue(), 'auto')
   }
 
   select(item: TimePickerOption<TValue>, element: HTMLButtonElement) {
@@ -197,8 +212,13 @@ abstract class TimePickerColumnBase<TValue extends ColumnValue> {
   private scrollTo(value: TValue | undefined, behavior: ScrollBehavior) {
     if (value === undefined) return
     const index = this.options().findIndex((item) => item.value === value)
-    const item = this.itemElements?.get(index)?.nativeElement
-    if (item) this.scrollViewport?.nativeElement.scrollTo({ top: item.offsetTop, behavior })
+    if (index < 0) return
+    this.scrollViewport?.nativeElement.scrollTo({ top: index * 32, behavior })
+  }
+
+  private requestScrollTo(value: TValue | undefined, behavior: ScrollBehavior) {
+    queueMicrotask(() => this.scrollTo(value, behavior))
+    requestAnimationFrame(() => this.scrollTo(value, behavior))
   }
 }
 
@@ -226,16 +246,16 @@ export class TimePickerHourColumn extends TimePickerColumnBase<number> {
     createHourOptions({
       step: this.step(),
       use12Hours: this.root.use12Hours(),
-      period: this.root.snapshot().value ? getDisplayedPeriod(this.root.snapshot().value!) : 'am',
-      disabled: resolveDisabledTime(this.root.disabledTime(), this.root.snapshot().value).hours,
+      period: this.root.currentValue() ? getDisplayedPeriod(this.root.currentValue()!) : 'am',
+      disabled: resolveDisabledTime(this.root.disabledTime(), this.root.currentValue()).hours,
     }).map((item) => ({
       ...item,
       disabled: item.disabled || Boolean(this.isItemDisabled()?.(item.value)),
     })),
   )
   readonly selectedValue = computed(() =>
-    this.root.snapshot().value
-      ? getDisplayedHour(this.root.snapshot().value!, this.root.use12Hours())
+    this.root.currentValue()
+      ? getDisplayedHour(this.root.currentValue()!, this.root.use12Hours())
       : undefined,
   )
   constructor(root: TimePickerRoot, elementRef: ElementRef<HTMLElement>) {
@@ -260,13 +280,13 @@ export class TimePickerMinuteColumn extends TimePickerColumnBase<number> {
   readonly options = computed(() =>
     createMinuteOptions(
       this.step(),
-      resolveDisabledTime(this.root.disabledTime(), this.root.snapshot().value).minutes,
+      resolveDisabledTime(this.root.disabledTime(), this.root.currentValue()).minutes,
     ).map((item) => ({
       ...item,
       disabled: item.disabled || Boolean(this.isItemDisabled()?.(item.value)),
     })),
   )
-  readonly selectedValue = computed(() => this.root.snapshot().value?.minute)
+  readonly selectedValue = computed(() => this.root.currentValue()?.minute)
   constructor(root: TimePickerRoot, elementRef: ElementRef<HTMLElement>) {
     super(root, elementRef)
   }
@@ -289,13 +309,13 @@ export class TimePickerSecondColumn extends TimePickerColumnBase<number> {
   readonly options = computed(() =>
     createSecondOptions(
       this.step(),
-      resolveDisabledTime(this.root.disabledTime(), this.root.snapshot().value).seconds,
+      resolveDisabledTime(this.root.disabledTime(), this.root.currentValue()).seconds,
     ).map((item) => ({
       ...item,
       disabled: item.disabled || Boolean(this.isItemDisabled()?.(item.value)),
     })),
   )
-  readonly selectedValue = computed(() => this.root.snapshot().value?.second)
+  readonly selectedValue = computed(() => this.root.currentValue()?.second)
   constructor(root: TimePickerRoot, elementRef: ElementRef<HTMLElement>) {
     super(root, elementRef)
   }
@@ -322,7 +342,7 @@ export class TimePickerPeriodColumn extends TimePickerColumnBase<TimePeriod> {
     })),
   )
   readonly selectedValue = computed(() =>
-    this.root.snapshot().value ? getDisplayedPeriod(this.root.snapshot().value!) : undefined,
+    this.root.currentValue() ? getDisplayedPeriod(this.root.currentValue()!) : undefined,
   )
   constructor(root: TimePickerRoot, elementRef: ElementRef<HTMLElement>) {
     super(root, elementRef)

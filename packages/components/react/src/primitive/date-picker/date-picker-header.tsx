@@ -4,7 +4,7 @@ import {
   getNextViewDateByHeaderAction,
 } from '@fex/components-core/date-picker/panel'
 import type { DatePickerHeaderAction, DatePickerHeaderLabelPart } from '@fex/components-core/date-picker/types'
-import { datePickerHeaderClassName, datePickerHeaderLabelClassName } from '@fex/components-styles/date-picker'
+import { datePickerHeaderClassName, datePickerHeaderDoubleIconClassName, datePickerHeaderLabelClassName, datePickerHeaderNavigationClassName, datePickerHeaderTitleClassName } from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
 import { use, useState, type ComponentProps, type ReactNode } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../icon/chevron'
@@ -51,7 +51,7 @@ export function DatePickerHeaderButton({
       {action.includes('year') || action.includes('panel') ? (
         <>
           {isPrevious ? <ChevronLeftIcon className="size-4" /> : <ChevronRightIcon className="size-4" />}
-          {isPrevious ? <ChevronLeftIcon className="-ml-2 size-4" /> : <ChevronRightIcon className="-ml-2 size-4" />}
+          {isPrevious ? <ChevronLeftIcon className={cn(datePickerHeaderDoubleIconClassName, 'size-4')} /> : <ChevronRightIcon className={cn(datePickerHeaderDoubleIconClassName, 'size-4')} />}
         </>
       ) : isPrevious ? (
         <ChevronLeftIcon className="size-4" />
@@ -67,7 +67,7 @@ export function DatePickerHeaderButton({
       type="button"
       data-slot="date-picker-header-button"
       data-action={action}
-      className={cn('inline-flex size-7 items-center justify-center rounded-md text-muted-foreground hover:bg-muted-background hover:text-foreground', className)}
+      className={cn(datePickerHeaderNavigationClassName, className)}
       onClick={(event) => {
         onClick?.(event)
         if (event.defaultPrevented) return
@@ -86,7 +86,7 @@ export interface DatePickerHeaderTitleProps extends ComponentProps<'div'> {
 }
 
 export function DatePickerHeaderTitle({ className, ...props }: DatePickerHeaderTitleProps) {
-  return <div {...props} data-slot="date-picker-header-title" className={cn('flex items-center gap-2 text-base font-semibold', className)} />
+  return <div {...props} data-slot="date-picker-header-title" className={cn(datePickerHeaderTitleClassName, className)} />
 }
 
 export interface DatePickerHeaderLabelProps extends Omit<ComponentProps<'button'>, 'children'> {

@@ -1,0 +1,12 @@
+<fex-popover
+  [open]="context().open"
+  [trigger]="[]"
+  placement="bottom"
+  align="center"
+  (openChange)="setOpen($event)"
+>
+  <ng-content select="fex-range-picker-trigger" />
+  <fex-popover-content [class]="contentClassName()">
+    <ng-content select="fex-range-picker-content" />
+  </fex-popover-content>
+</fex-popover>

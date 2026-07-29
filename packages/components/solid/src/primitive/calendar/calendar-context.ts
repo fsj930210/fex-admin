@@ -16,9 +16,12 @@ export interface CalendarContextValue<TValue extends CalendarValue = CalendarVal
   panel: Accessor<CalendarPanel>
   granularity: Accessor<CalendarGranularity>
   weekStartsOn: Accessor<CalendarWeekday>
+  hoveredRowIndex: Accessor<number | null>
   setViewDate: (viewDate: CalendarDate) => void
   setPanel: (panel: CalendarPanel) => void
   selectCell: (cell: CalendarCell<TValue>) => void
+  hoverCell: (cell: CalendarCell<TValue>) => void
+  clearHoveredRow: () => void
 }
 
 export const CalendarContext = createContext<CalendarContextValue>()
