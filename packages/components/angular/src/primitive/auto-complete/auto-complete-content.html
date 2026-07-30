@@ -1,0 +1,8 @@
+<fex-popover-content
+  [class]="contentClass"
+  [style.width]="'var(--auto-complete-content-width,var(--floating-reference-width))'"
+  [style.max-width]="'var(--auto-complete-content-width,var(--floating-reference-width))'"
+  [style.max-height]="'min(var(--floating-available-height,calc(100vh - 16px)),var(--auto-complete-content-max-height,320px))'"
+  [style.overflow]="'hidden'"
+  [style.padding]="'0px'"
+><ng-content><fex-auto-complete-list /></ng-content></fex-popover-content>

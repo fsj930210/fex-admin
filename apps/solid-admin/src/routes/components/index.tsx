@@ -4,6 +4,7 @@ import type { AppRoute } from '../types'
 const ButtonPage = lazy(() =>
   import('../../pages/Button').then((module) => ({ default: module.ButtonPage })),
 )
+const AutoCompletePage = lazy(() => import('../../pages/AutoComplete').then((module) => ({ default: module.AutoCompletePage })))
 const CalendarPage = lazy(() =>
   import('../../pages/Calendar').then((module) => ({ default: module.CalendarPage })),
 )
@@ -95,6 +96,7 @@ const TreePage = lazy(() =>
 const CarouselPage = lazy(() => import('../../pages/Carousel').then((module) => ({ default: module.CarouselPage })))
 
 export const componentRoutes: AppRoute[] = [
+  { path: '/auto-complete', component: AutoCompletePage },
   { path: '/carousel', component: CarouselPage },
   {
     path: '/data-grid',

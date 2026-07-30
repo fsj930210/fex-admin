@@ -1,0 +1,12 @@
+<fex-card title="Remote search and replaceable states" description="The caller owns requests; Content replaces generic loading and empty presentations.">
+  <fex-auto-complete [items]="items()" [fieldNames]="fieldNames" [loading]="loading()" [filterOption]="false" (search)="search($event)">
+    <fex-auto-complete-trigger placeholder="Search remote users" [clearable]="true" />
+    <fex-auto-complete-content>
+      @if (loading()) {
+        <div class="p-6 text-center text-sm text-muted-foreground">Querying directory…</div>
+      } @else if (!items().length) {
+        <div class="p-6 text-center text-sm text-muted-foreground">No remote matches</div>
+      }
+    </fex-auto-complete-content>
+  </fex-auto-complete>
+</fex-card>

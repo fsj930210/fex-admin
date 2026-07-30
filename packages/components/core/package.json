@@ -5,6 +5,9 @@
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
+    "./auto-complete/create-auto-complete-controller": "./src/auto-complete/create-auto-complete-controller.ts",
+    "./auto-complete/items": "./src/auto-complete/items.ts",
+    "./auto-complete/types": "./src/auto-complete/types.ts",
     "./calendar": "./src/calendar/index.ts",
     "./calendar/grid": "./src/calendar/grid.ts",
     "./calendar/range": "./src/calendar/range.ts",

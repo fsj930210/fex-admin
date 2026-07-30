@@ -1,0 +1,22 @@
+<div class="grid gap-space-xl md:grid-cols-2">
+  <fex-card title="Custom items and disabled suggestion" description="Original backend items drive richer rows; Alex is disabled.">
+    <fex-auto-complete [items]="users" [fieldNames]="fieldNames">
+      <fex-auto-complete-trigger placeholder="Custom suggestion rows" [clearable]="true" status="warning" />
+      <fex-auto-complete-content>
+        <div class="border-b border-border px-3 py-2 text-xs text-muted-foreground">People directory</div>
+        <fex-auto-complete-list>
+          <ng-template #item let-user let-disabled="disabled">
+            <div><div class="font-medium">{{ user.name }}</div><div class="text-xs text-muted-foreground">{{ user.department }} · {{ user.email }}{{ disabled ? ' · unavailable' : '' }}</div></div>
+          </ng-template>
+        </fex-auto-complete-list>
+      </fex-auto-complete-content>
+    </fex-auto-complete>
+  </fex-card>
+  <fex-card title="Validation and native props" description="Input validation styles and native form attributes are preserved.">
+    <fex-auto-complete [items]="users" [fieldNames]="fieldNames">
+      <fex-auto-complete-trigger placeholder="Required reviewer" [clearable]="true" [invalid]="true" status="error" />
+      <fex-auto-complete-content><fex-auto-complete-list /></fex-auto-complete-content>
+    </fex-auto-complete>
+    <p class="mt-space-sm text-xs text-danger">Choose a reviewer or enter a new name.</p>
+  </fex-card>
+</div>

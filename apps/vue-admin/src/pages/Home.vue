@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const componentLinks = [
+  { to: '/auto-complete', label: 'AutoComplete' },
   { to: '/carousel', label: 'Carousel' },
   { to: '/button', label: 'Button' },
   { to: '/calendar', label: 'Calendar' },

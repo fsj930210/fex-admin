@@ -5,6 +5,7 @@
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.ts",
+    "./primitive/auto-complete": "./src/primitive/auto-complete/auto-complete.ts",
     "./primitive/button": "./src/primitive/button/button.vue",
     "./primitive/calendar": "./src/primitive/calendar/calendar.ts",
     "./primitive/card": "./src/primitive/card/card.ts",

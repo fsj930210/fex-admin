@@ -5,6 +5,11 @@
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.svelte",
+    "./primitive/auto-complete": "./src/primitive/auto-complete/auto-complete-root.svelte",
+    "./primitive/auto-complete-trigger": "./src/primitive/auto-complete/auto-complete-trigger.svelte",
+    "./primitive/auto-complete-content": "./src/primitive/auto-complete/auto-complete-content.svelte",
+    "./primitive/auto-complete-list": "./src/primitive/auto-complete/auto-complete-list.svelte",
+    "./primitive/auto-complete-option": "./src/primitive/auto-complete/auto-complete-option.svelte",
     "./primitive/alert-title": "./src/primitive/alert/alert-title.svelte",
     "./primitive/alert-description": "./src/primitive/alert/alert-description.svelte",
     "./primitive/alert-action": "./src/primitive/alert/alert-action.svelte",

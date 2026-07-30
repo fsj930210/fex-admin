@@ -4,6 +4,15 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
+      "@fex/components-core/auto-complete/create-auto-complete-controller": [
+        "packages/components/core/src/auto-complete/create-auto-complete-controller.ts"
+      ],
+      "@fex/components-core/auto-complete/items": [
+        "packages/components/core/src/auto-complete/items.ts"
+      ],
+      "@fex/components-core/auto-complete/types": [
+        "packages/components/core/src/auto-complete/types.ts"
+      ],
       "@fex/components-core/calendar": [
         "packages/components/core/src/calendar/index.ts"
       ],
@@ -154,15 +163,6 @@
       "@fex/components-core/tree/types": [
         "packages/components/core/src/tree/types.ts"
       ],
-      "@fex/components-core/transfer/create-transfer-controller": [
-        "packages/components/core/src/transfer/create-transfer-controller.ts"
-      ],
-      "@fex/components-core/transfer/types": [
-        "packages/components/core/src/transfer/types.ts"
-      ],
-      "@fex/components-core/transfer/utils": [
-        "packages/components/core/src/transfer/utils.ts"
-      ],
       "@fex/components-core/toggle/create-toggle-controller": [
         "packages/components/core/src/toggle/create-toggle-controller.ts"
       ],
@@ -304,6 +304,15 @@
       "@fex/components-core/selection/utils": [
         "packages/components/core/src/selection/utils.ts"
       ],
+      "@fex/components-core/transfer/create-transfer-controller": [
+        "packages/components/core/src/transfer/create-transfer-controller.ts"
+      ],
+      "@fex/components-core/transfer/types": [
+        "packages/components/core/src/transfer/types.ts"
+      ],
+      "@fex/components-core/transfer/utils": [
+        "packages/components/core/src/transfer/utils.ts"
+      ],
       "@fex/components-core/sortable/array-move": [
         "packages/components/core/src/sortable/array-move.ts"
       ],
@@ -321,6 +330,9 @@
       ],
       "@fex/components-angular/primitive/alert": [
         "packages/components/angular/src/primitive/alert/alert.ts"
+      ],
+      "@fex/components-angular/primitive/auto-complete": [
+        "packages/components/angular/src/primitive/auto-complete/auto-complete.ts"
       ],
       "@fex/components-angular/primitive/button": [
         "packages/components/angular/src/primitive/button/button.ts"

@@ -1,5 +1,6 @@
 <script lang="ts">
   const componentLinks = [
+    { href: '/auto-complete', label: 'AutoComplete' },
     { href: '/carousel', label: 'Carousel' },
     { href: '/button', label: 'Button' },
     { href: '/calendar', label: 'Calendar' },

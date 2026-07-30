@@ -4,6 +4,7 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    "./auto-complete": "./src/auto-complete.ts",
     "./alert": "./src/alert.ts",
     "./badge": "./src/badge.ts",
     "./button": "./src/button.ts",

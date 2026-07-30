@@ -1,0 +1,30 @@
+<fex-input-root
+  fexPopoverTrigger
+  [class]="className"
+  [value]="autoComplete.snapshot().value"
+  [disabled]="autoComplete.disabled"
+  [readOnly]="autoComplete.readOnly"
+  [invalid]="invalid"
+  [status]="status"
+  (valueChange)="input($event)"
+  (clear)="autoComplete.controller.clear()"
+>
+  <ng-content select="[prefix]" />
+  <input
+    fexInputControl
+    role="combobox"
+    [placeholder]="placeholder"
+    [attr.aria-expanded]="autoComplete.snapshot().open"
+    [attr.aria-controls]="autoComplete.listId"
+    [attr.aria-activedescendant]="autoComplete.snapshot().activeKey === undefined ? null : autoComplete.listId + '-' + autoComplete.snapshot().activeKey"
+    (focus)="autoComplete.controller.setOpen(true, 'focus')"
+    (blur)="autoComplete.controller.setOpen(false, 'blur')"
+    (keydown)="keydown($event)"
+  />
+  @if (clearable) { <button fexInputClear type="button"></button> }
+  @if (autoComplete.loading) {
+    <span fexInputSuffix><fex-loading-icon class="animate-spin" /></span>
+  } @else {
+    <ng-content select="[suffix]" />
+  }
+</fex-input-root>

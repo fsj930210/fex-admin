@@ -1,4 +1,5 @@
 export const componentRoutes = [
+  { path: '/auto-complete', component: () => import('../../pages/AutoComplete/index.vue') },
   { path: '/carousel', component: () => import('../../pages/Carousel/index.vue') },
   { path: '/data-grid', component: () => import('../../pages/DataGrid/index.vue') },
   { path: '/date-picker', component: () => import('../../pages/DatePicker/index.vue') },

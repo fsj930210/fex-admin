@@ -2,6 +2,7 @@ import { createLazyRouteElement } from '../lazy'
 import { ListboxPage } from '../../pages/Listbox'
 
 export const componentRoutes = [
+  { path: '/auto-complete', element: createLazyRouteElement(() => import('../../pages/AutoComplete'), 'AutoCompletePage') },
   { path: '/carousel', element: createLazyRouteElement(() => import('../../pages/Carousel'), 'CarouselPage') },
   {
     path: '/data-grid',

@@ -1,6 +1,7 @@
 import type { Routes } from '@angular/router'
 
 export const componentRoutes: Routes = [
+  { path: 'auto-complete', loadComponent: () => import('../../pages/auto-complete/index.component').then((module) => module.AutoCompleteComponent) },
   { path: 'carousel', loadComponent: () => import('../../pages/carousel/index.component').then((module) => module.CarouselComponent) },
   {
     path: 'button',

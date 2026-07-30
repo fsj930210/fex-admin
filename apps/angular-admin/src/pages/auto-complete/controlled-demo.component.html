@@ -1,0 +1,7 @@
+<fex-card title="Controlled value and panel" description="Both public states are controlled; active suggestion stays internal.">
+  <fex-auto-complete [items]="users" [fieldNames]="fieldNames" [value]="value()" [open]="open()" (change)="value.set($event.value)" (openChange)="open.set($event.open)">
+    <fex-auto-complete-trigger placeholder="Controlled input" [clearable]="true" />
+    <fex-auto-complete-content><fex-auto-complete-list /></fex-auto-complete-content>
+  </fex-auto-complete>
+  <p class="mt-space-sm text-xs text-muted-foreground">value: {{ value() || '(empty)' }} · open: {{ open() }}</p>
+</fex-card>

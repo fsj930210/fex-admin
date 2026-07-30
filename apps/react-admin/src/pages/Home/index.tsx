@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 
 export function HomePage() {
   const componentLinks = [
+    { to: '/auto-complete', label: 'AutoComplete' },
     { to: '/alert', label: 'Alert' },
     { to: '/badge', label: 'Badge' },
     { to: '/button', label: 'Button' },
