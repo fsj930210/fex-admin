@@ -1,0 +1,4 @@
+import { Rate } from '@fex/components-solid/primitive/rate'
+import Card from '@fex/components-solid/ui/card'
+import { createSignal } from 'solid-js'
+export function FractionDemo() { const [value, setValue] = createSignal(4.3); const [preview, setPreview] = createSignal<number | null>(null); return <Card title="Arbitrary fractions" description="step controls interaction precision, while read-only values preserve their exact fraction."><div class="grid gap-space-lg"><div class="grid gap-space-sm"><Rate value={value()} step={0.1} onValueChange={setValue} onValuePreviewChange={setPreview} getValueText={(next, count) => `${next} points out of ${count}`} aria-label="Decimal rating" /><p class="text-sm text-muted-foreground">Interactive value: {(preview() ?? value()).toFixed(1)}</p></div><div class="grid gap-space-sm"><Rate value={4.37} readOnly aria-label="Exact read-only rating" /><p class="text-sm text-muted-foreground">Read-only value: 4.37</p></div></div></Card> }

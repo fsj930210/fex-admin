@@ -85,6 +85,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Radio'), 'RadioPage'),
   },
   {
+    path: '/rate',
+    element: createLazyRouteElement(() => import('../../pages/Rate'), 'RatePage'),
+  },
+  {
     path: '/spinner',
     element: createLazyRouteElement(() => import('../../pages/Spinner'), 'SpinnerPage'),
   },

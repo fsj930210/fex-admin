@@ -19,6 +19,7 @@ export const componentRoutes = [
   { path: '/pagination', component: () => import('../../pages/Pagination/index.vue') },
   { path: '/popover', component: () => import('../../pages/Popover/index.vue') },
   { path: '/radio', component: () => import('../../pages/Radio/index.vue') },
+  { path: '/rate', component: () => import('../../pages/Rate/index.vue') },
   { path: '/spinner', component: () => import('../../pages/Spinner/index.vue') },
   { path: '/slider', component: () => import('../../pages/Slider/index.vue') },
   { path: '/scrollbar', component: () => import('../../pages/Scrollbar/index.vue') },

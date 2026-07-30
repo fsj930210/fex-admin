@@ -161,4 +161,8 @@ export const componentRoutes: Routes = [
     loadComponent: () =>
       import('../../pages/tree/index.component').then((module) => module.TreeComponent),
   },
+  {
+    path: 'rate',
+    loadComponent: () => import('../../pages/rate/index.component').then((module) => module.RateComponent),
+  },
 ].sort((left, right) => left.path.localeCompare(right.path))

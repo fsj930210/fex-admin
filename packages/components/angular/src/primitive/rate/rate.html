@@ -1,0 +1,10 @@
+@for (index of indices(); track index) {
+  <span [attr.data-rate-item]="index" [class]="rateItemClassName">
+    <span [class]="rateEmptyContentClassName">
+      @if (content(); as template) { <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: itemState(index, 'empty') }" /> } @else { <fex-star-icon aria-hidden="true" /> }
+    </span>
+    <span [class]="rateFilledContentClassName" [style.clip-path]="clipPath(index)">
+      @if (content(); as template) { <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: itemState(index, 'filled') }" /> } @else { <fex-star-icon aria-hidden="true" /> }
+    </span>
+  </span>
+}

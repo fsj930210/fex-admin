@@ -20,6 +20,7 @@
     { href: '/pagination', label: 'Pagination' },
     { href: '/popover', label: 'Popover' },
     { href: '/radio', label: 'Radio' },
+    { href: '/rate', label: 'Rate' },
     { href: '/spinner', label: 'Spinner' },
     { href: '/slider', label: 'Slider' },
     { href: '/scrollbar', label: 'Scrollbar' },

@@ -23,6 +23,7 @@ export function HomePage() {
     { to: '/pagination', label: 'Pagination' },
     { to: '/popover', label: 'Popover' },
     { to: '/radio', label: 'Radio' },
+    { to: '/rate', label: 'Rate' },
     { to: '/spinner', label: 'Spinner' },
     { to: '/slider', label: 'Slider' },
     { to: '/scrollbar', label: 'Scrollbar' },

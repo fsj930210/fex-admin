@@ -49,6 +49,9 @@ const PopoverPage = lazy(() =>
 const RadioPage = lazy(() =>
   import('../../pages/Radio').then((module) => ({ default: module.RadioPage })),
 )
+const RatePage = lazy(() =>
+  import('../../pages/Rate').then((module) => ({ default: module.RatePage })),
+)
 const SpinnerPage = lazy(() =>
   import('../../pages/Spinner').then((module) => ({ default: module.SpinnerPage })),
 )
@@ -169,6 +172,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/radio',
     component: RadioPage,
+  },
+  {
+    path: '/rate',
+    component: RatePage,
   },
   {
     path: '/spinner',
