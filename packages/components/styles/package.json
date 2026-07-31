@@ -36,6 +36,7 @@
     "./table": "./src/table.ts",
     "./tabs": "./src/tabs.ts",
     "./tree": "./src/tree.ts",
+    "./upload": "./src/upload.ts",
     "./toast": "./src/toast.ts",
     "./transfer": "./src/transfer.ts",
     "./textarea": "./src/textarea.ts",

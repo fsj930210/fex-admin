@@ -4,5 +4,5 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
-  server: { port: 4004, strictPort: true },
+  server: { port: 4004, strictPort: true, proxy: { '/upload-api': { target: 'http://127.0.0.1:4310', changeOrigin: true, rewrite: (path) => path.replace(/^\/upload-api/, '') } } },
 })

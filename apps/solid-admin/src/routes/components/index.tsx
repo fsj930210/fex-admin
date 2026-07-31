@@ -97,6 +97,7 @@ const TreePage = lazy(() =>
   import('../../pages/Tree').then((module) => ({ default: module.TreePage })),
 )
 const CarouselPage = lazy(() => import('../../pages/Carousel').then((module) => ({ default: module.CarouselPage })))
+const UploadPage = lazy(() => import('../../pages/Upload').then((module) => ({ default: module.UploadPage })))
 
 export const componentRoutes: AppRoute[] = [
   { path: '/auto-complete', component: AutoCompletePage },
@@ -231,4 +232,5 @@ export const componentRoutes: AppRoute[] = [
     component: TreePage,
   },
   { path: '/transfer', component: TransferPage },
+  { path: '/upload', component: UploadPage },
 ].sort((left, right) => left.path.localeCompare(right.path))

@@ -33,6 +33,7 @@
     "./primitive/table": "./src/primitive/table/table.tsx",
       "./primitive/tabs": "./src/primitive/tabs/tabs.tsx",
       "./primitive/transfer": "./src/primitive/transfer/transfer.tsx",
+      "./primitive/upload": "./src/primitive/upload/upload.tsx",
       "./primitive/tree": "./src/primitive/tree/tree.tsx",
     "./primitive/tree/create-tree-dnd-item": "./src/primitive/tree/create-tree-dnd-item.ts",
     "./primitive/toast": "./src/primitive/toast/toast.tsx",

@@ -28,6 +28,7 @@ export const componentRoutes = [
   { path: '/table', component: () => import('../../pages/Table/index.vue') },
   { path: '/tabs', component: () => import('../../pages/Tabs/index.vue') },
   { path: '/transfer', component: () => import('../../pages/Transfer/index.vue') },
+  { path: '/upload', component: () => import('../../pages/Upload/index.vue') },
   { path: '/tree', component: () => import('../../pages/Tree/index.vue') },
   { path: '/toast', component: () => import('../../pages/Toast/index.vue') },
   { path: '/sortable', component: () => import('../../pages/Sortable/index.vue') },

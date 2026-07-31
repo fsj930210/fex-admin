@@ -4,7 +4,10 @@
   "type": "module",
   "scripts": {
     "dev": "nx run-many -t dev --all --parallel=6",
-    "dev:docs": "nx dev docs",
+    "dev:docs": "pnpm --dir apps/docs dev",
+    "dev:server": "pnpm --dir server start:dev",
+    "build:server": "pnpm --dir server build",
+    "start:server": "pnpm --dir server start:prod",
     "build": "nx run-many -t build",
     "typecheck": "nx run-many -t typecheck",
     "lint": "nx run-many -t lint",

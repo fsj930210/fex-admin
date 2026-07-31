@@ -33,6 +33,7 @@
           "defaultConfiguration": "development",
           "options": {
             "port": 4000,
+            "proxyConfig": "proxy.conf.json",
             "prebundle": {
               "exclude": [
                 "@fex/components-angular",

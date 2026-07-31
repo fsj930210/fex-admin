@@ -156,6 +156,7 @@ export const componentRoutes: Routes = [
   },
   { path: 'time-picker', loadComponent: () => import('../../pages/time-picker/index.component').then((module) => module.TimePickerComponent) },
   { path: 'transfer', loadComponent: () => import('../../pages/transfer/index.component').then((module) => module.TransferComponent) },
+  { path: 'upload', loadComponent: () => import('../../pages/upload/index.component').then((module) => module.UploadComponent) },
   {
     path: 'tree',
     loadComponent: () =>

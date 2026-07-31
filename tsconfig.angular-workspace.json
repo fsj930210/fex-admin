@@ -163,6 +163,39 @@
       "@fex/components-core/tree/types": [
         "packages/components/core/src/tree/types.ts"
       ],
+      "@fex/components-core/upload/create-upload-controller": [
+        "packages/components/core/src/upload/create-upload-controller.ts"
+      ],
+      "@fex/components-core/upload/feature-types": [
+        "packages/components/core/src/upload/feature-types.ts"
+      ],
+      "@fex/components-core/upload/get-dropped-files": [
+        "packages/components/core/src/upload/get-dropped-files.ts"
+      ],
+      "@fex/components-core/upload/types": [
+        "packages/components/core/src/upload/types.ts"
+      ],
+      "@fex/components-core/upload/features/directory": [
+        "packages/components/core/src/upload/features/directory.ts"
+      ],
+      "@fex/components-core/upload/features/drop": [
+        "packages/components/core/src/upload/features/drop.ts"
+      ],
+      "@fex/components-core/upload/features/file-md5": [
+        "packages/components/core/src/upload/features/file-md5.ts"
+      ],
+      "@fex/components-core/upload/features/multipart": [
+        "packages/components/core/src/upload/features/multipart.ts"
+      ],
+      "@fex/components-core/upload/features/paste": [
+        "packages/components/core/src/upload/features/paste.ts"
+      ],
+      "@fex/components-core/upload/features/preview": [
+        "packages/components/core/src/upload/features/preview.ts"
+      ],
+      "@fex/components-core/upload/features/upload": [
+        "packages/components/core/src/upload/features/upload.ts"
+      ],
       "@fex/components-core/toggle/create-toggle-controller": [
         "packages/components/core/src/toggle/create-toggle-controller.ts"
       ],
@@ -183,6 +216,15 @@
       ],
       "@fex/components-core/slider/utils": [
         "packages/components/core/src/slider/utils.ts"
+      ],
+      "@fex/components-core/rate/create-rate-controller": [
+        "packages/components/core/src/rate/create-rate-controller.ts"
+      ],
+      "@fex/components-core/rate/types": [
+        "packages/components/core/src/rate/types.ts"
+      ],
+      "@fex/components-core/rate/utils": [
+        "packages/components/core/src/rate/utils.ts"
       ],
       "@fex/components-core/scrollbar/create-scrollbar-controller": [
         "packages/components/core/src/scrollbar/create-scrollbar-controller.ts"
@@ -391,6 +433,9 @@
       "@fex/components-angular/primitive/radio": [
         "packages/components/angular/src/primitive/radio/radio.ts"
       ],
+      "@fex/components-angular/primitive/rate": [
+        "packages/components/angular/src/primitive/rate/rate.ts"
+      ],
       "@fex/components-angular/primitive/slider": [
         "packages/components/angular/src/primitive/slider/slider-primitive.ts"
       ],
@@ -411,6 +456,9 @@
       ],
       "@fex/components-angular/primitive/transfer": [
         "packages/components/angular/src/primitive/transfer/transfer.ts"
+      ],
+      "@fex/components-angular/primitive/upload": [
+        "packages/components/angular/src/primitive/upload/upload.ts"
       ],
       "@fex/components-angular/primitive/tree": [
         "packages/components/angular/src/primitive/tree/tree.ts"
@@ -489,6 +537,9 @@
       ],
       "@fex/components-angular/icon/plus": [
         "packages/components/angular/src/icon/plus.ts"
+      ],
+      "@fex/components-angular/icon/star": [
+        "packages/components/angular/src/icon/star.ts"
       ],
       "@fex/components-angular/icon/warning": [
         "packages/components/angular/src/icon/warning.ts"

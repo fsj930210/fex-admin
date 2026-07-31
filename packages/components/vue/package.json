@@ -33,6 +33,7 @@
     "./primitive/table": "./src/primitive/table/table.ts",
       "./primitive/tabs": "./src/primitive/tabs/tabs.ts",
       "./primitive/transfer": "./src/primitive/transfer/transfer.ts",
+      "./primitive/upload": "./src/primitive/upload/upload.ts",
       "./primitive/tree": "./src/primitive/tree/tree.ts",
     "./primitive/tree/use-tree-dnd-item": "./src/primitive/tree/use-tree-dnd-item.ts",
     "./primitive/toast": "./src/primitive/toast/toast.ts",

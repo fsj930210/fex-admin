@@ -46,5 +46,6 @@ export class HomeComponent {
     { to: '/time-picker', label: 'TimePicker' },
     { to: '/tree', label: 'Tree' },
     { to: '/transfer', label: 'Transfer' },
+    { to: '/upload', label: 'Upload' },
   ].sort((left, right) => left.label.localeCompare(right.label))
 }

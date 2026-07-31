@@ -132,6 +132,7 @@
     "./primitive/table-caption": "./src/primitive/table/table-caption.svelte",
       "./primitive/tree": "./src/primitive/tree/tree.ts",
       "./primitive/transfer": "./src/primitive/transfer/transfer.svelte",
+      "./primitive/upload": "./src/primitive/upload/upload.ts",
     "./primitive/tree/tree-dnd-item": "./src/primitive/tree/tree-dnd-item.ts",
     "./primitive/toast": "./src/primitive/toast/toast.ts",
     "./primitive/toast-viewport": "./src/primitive/toast/toast-viewport.svelte",

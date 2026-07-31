@@ -1,0 +1,2 @@
+<ng-content />
+<input #inputElement class="sr-only" type="file" [name]="name()" [required]="required()" [disabled]="upload()?.getOptions()?.disabled" [accept]="upload()?.getOptions()?.accept" [multiple]="directory() || upload()?.getOptions()?.multiple" [attr.webkitdirectory]="directory() ? '' : null" (change)="selectFiles($event)" />

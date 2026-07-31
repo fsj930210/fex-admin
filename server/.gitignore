@@ -1,0 +1,6 @@
+.data/
+coverage/
+dist/
+node_modules/
+node_modules.incomplete/
+*.tsbuildinfo

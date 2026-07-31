@@ -58,6 +58,17 @@
     "./tree/features/keyboard": "./src/tree/features/keyboard.ts",
     "./tree/get-search-subtree": "./src/tree/get-search-subtree.ts",
     "./tree/types": "./src/tree/types.ts",
+    "./upload/create-upload-controller": "./src/upload/create-upload-controller.ts",
+    "./upload/feature-types": "./src/upload/feature-types.ts",
+    "./upload/get-dropped-files": "./src/upload/get-dropped-files.ts",
+    "./upload/types": "./src/upload/types.ts",
+    "./upload/features/directory": "./src/upload/features/directory.ts",
+    "./upload/features/drop": "./src/upload/features/drop.ts",
+    "./upload/features/file-md5": "./src/upload/features/file-md5.ts",
+    "./upload/features/multipart": "./src/upload/features/multipart.ts",
+    "./upload/features/paste": "./src/upload/features/paste.ts",
+    "./upload/features/preview": "./src/upload/features/preview.ts",
+    "./upload/features/upload": "./src/upload/features/upload.ts",
     "./toggle/create-toggle-controller": "./src/toggle/create-toggle-controller.ts",
     "./toggle/types": "./src/toggle/types.ts",
     "./tabs/create-tabs-controller": "./src/tabs/create-tabs-controller.ts",
@@ -122,6 +133,10 @@
     "@tanstack/form-core": "1.33.2",
     "@tanstack/table-core": "9.0.0-beta.47",
     "embla-carousel": "8.6.0",
-    "embla-carousel-autoplay": "8.6.0"
+    "embla-carousel-autoplay": "8.6.0",
+    "spark-md5": "3.0.2"
+  },
+  "devDependencies": {
+    "@types/spark-md5": "3.0.5"
   }
 }

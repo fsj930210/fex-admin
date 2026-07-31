@@ -32,6 +32,7 @@ export function HomePage() {
     { to: '/tabs', label: 'Tabs' },
     { to: '/tree', label: 'Tree' },
     { to: '/transfer', label: 'Transfer' },
+    { to: '/upload', label: 'Upload' },
     { to: '/toast', label: 'Toast' },
     { to: '/sortable', label: 'Sortable' },
     { to: '/resizable', label: 'Resizable' },
