@@ -7,9 +7,11 @@ import {
 } from '@fex/components-styles/popover'
 import {
   createFloatingOverlay,
+  type FloatingOverlay,
   type FloatingOverlayOptions,
 } from '@fex/components-core/overlay/create-floating-overlay'
 import type { OverlayTrigger } from '@fex/components-core/overlay/trigger/create-trigger'
+import type { DisclosureChangeInfo } from '@fex/components-core/disclosure/create-disclosure'
 import {
   ChangeDetectionStrategy,
   Component,
@@ -64,11 +66,36 @@ export class PopoverRegistry {
     }
   }
 
+  closeDescendantPopovers(current: Popover, info?: DisclosureChangeInfo) {
+    ;[...this.popovers]
+      .filter((popover) => popover.hoverAncestors.includes(current.overlay))
+      .sort((left, right) => right.hoverAncestors.length - left.hoverAncestors.length)
+      .forEach((popover) =>
+        popover.overlay.close({
+          reason: 'manual',
+          source: 'ancestor-close',
+          event: info?.event,
+        }),
+      )
+  }
+
   closeOtherPopovers(current: Popover, event: Event) {
+    const target = event.target
     this.popovers.forEach((popover) => {
-      if (popover !== current && popover.snapshot().open) {
-        popover.overlay.close({ reason: 'outside-pointer', event })
+      if (popover === current || !popover.snapshot().open) {
+        return
       }
+      const NodeConstructor = this.document.defaultView?.Node
+      if (
+        NodeConstructor &&
+        target instanceof NodeConstructor &&
+        (popover.referenceElement?.contains(target) ||
+          popover.contentElement?.contains(target) ||
+          popover.arrowElement?.contains(target))
+      ) {
+        return
+      }
+      popover.overlay.close({ reason: 'outside-pointer', event })
     })
   }
 
@@ -100,6 +127,7 @@ export class PopoverRegistry {
 })
 export class Popover implements OnChanges, OnDestroy {
   private readonly registry = inject(PopoverRegistry)
+  private readonly parentPopover = inject(Popover, { optional: true, skipSelf: true })
   @Input() open?: boolean
   @Input() defaultOpen = false
   @Input() trigger: OverlayTrigger[] = ['click']
@@ -131,18 +159,25 @@ export class Popover implements OnChanges, OnDestroy {
     getPopupContainer: this.getPopupContainer,
     hoverCloseDelay: this.hoverCloseDelay,
     hoverOpenDelay: this.hoverOpenDelay,
-    onOpenChange: (nextOpen) => {
-      if (this.open === undefined) {
-        // 非受控模式写本地状态；受控模式等待 @Input open 回流。
-        this.localOpen = nextOpen
-        this.syncOptions()
-      }
-      this.openChange.emit(nextOpen)
-    },
+    onOpenChange: (nextOpen, info) => this.handleOpenChange(nextOpen, info),
   })
   readonly snapshot = createCoreStoreSignal(this.overlay)
+  readonly hoverAncestors: FloatingOverlay[] = this.parentPopover
+    ? [...this.parentPopover.hoverAncestors, this.parentPopover.overlay]
+    : []
 
   private readonly unregister = this.registry.register(this)
+
+  private handleOpenChange(nextOpen: boolean, info: DisclosureChangeInfo) {
+    if (!nextOpen) {
+      this.registry.closeDescendantPopovers(this, info)
+    }
+    if (this.open === undefined) {
+      this.localOpen = nextOpen
+      this.syncOptions()
+    }
+    this.openChange.emit(nextOpen)
+  }
 
   syncOptions() {
     // overlay 是外部命令式实例；Angular input 变化时只同步 options，不重建实例。
@@ -158,13 +193,7 @@ export class Popover implements OnChanges, OnDestroy {
       getPopupContainer: this.getPopupContainer,
       hoverCloseDelay: this.hoverCloseDelay,
       hoverOpenDelay: this.hoverOpenDelay,
-      onOpenChange: (nextOpen) => {
-        if (this.open === undefined) {
-          this.localOpen = nextOpen
-          this.syncOptions()
-        }
-        this.openChange.emit(nextOpen)
-      },
+      onOpenChange: (nextOpen, info) => this.handleOpenChange(nextOpen, info),
     })
   }
 
@@ -233,6 +262,34 @@ export class PopoverTrigger implements AfterViewInit {
 }
 
 @Component({
+  selector: 'fex-popover-portal',
+  standalone: true,
+  providers: [PopoverDomService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { 'data-slot': 'popover-portal', style: 'display: contents' },
+  template: '<ng-content />',
+})
+export class PopoverPortal implements AfterViewInit, OnDestroy {
+  @Input() container?: HTMLElement | null
+  private readonly popover = inject(Popover)
+  private readonly domService = inject(PopoverDomService)
+  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
+  private portalMount?: PopoverPortalMount
+
+  ngAfterViewInit() {
+    const popupContainer = this.container ?? this.popover.overlay.resolvePopupContainer()
+    this.portalMount = this.domService.mountFloatingElement(
+      this.elementRef.nativeElement,
+      popupContainer,
+    )
+  }
+
+  ngOnDestroy() {
+    this.portalMount?.cleanup()
+  }
+}
+
+@Component({
   selector: 'fex-popover-content',
   standalone: true,
   providers: [PopoverDomService],
@@ -257,16 +314,34 @@ export class PopoverTrigger implements AfterViewInit {
 })
 export class PopoverContent implements AfterViewInit, OnDestroy {
   protected readonly popover = inject(Popover)
+  private readonly portal = inject(PopoverPortal, { optional: true })
   private readonly domService = inject(PopoverDomService)
   private readonly elementRef = inject<ElementRef<HTMLDivElement>>(ElementRef)
-  private portalMount?: PopoverPortalMount
+  private legacyPortalMount?: PopoverPortalMount
   protected readonly hostClassName = createHostClassName(popoverContentClassName())
+
+  @HostListener('pointerenter', ['$event'])
+  pointerEnter(event: PointerEvent) {
+    const info = eventInfo(event)
+    this.popover.hoverAncestors.forEach((ancestor) => ancestor.content.pointerEnter(info))
+    this.popover.overlay.content.pointerEnter(info)
+  }
+
+  @HostListener('pointerleave', ['$event'])
+  pointerLeave(event: PointerEvent) {
+    const info = eventInfo(event)
+    this.popover.hoverAncestors.forEach((ancestor) => ancestor.content.pointerLeave(info))
+    this.popover.overlay.content.pointerLeave(info)
+  }
 
   ngAfterViewInit() {
     const element = this.elementRef.nativeElement
-    const popupContainer = this.popover.overlay.resolvePopupContainer()
-    // Angular 通过 DOM service 把 content 移到容器，移动后仍然注册真实 element 给 core。
-    this.portalMount = this.domService.mountFloatingElement(element, popupContainer)
+    if (!this.portal) {
+      this.legacyPortalMount = this.domService.mountFloatingElement(
+        element,
+        this.popover.overlay.resolvePopupContainer(),
+      )
+    }
     this.popover.contentElement = element
     this.popover.overlay.setFloatingElement(element)
   }
@@ -276,7 +351,7 @@ export class PopoverContent implements AfterViewInit, OnDestroy {
       this.popover.contentElement = null
     }
     this.popover.overlay.setFloatingElement(null)
-    this.portalMount?.cleanup()
+    this.legacyPortalMount?.cleanup()
   }
 }
 

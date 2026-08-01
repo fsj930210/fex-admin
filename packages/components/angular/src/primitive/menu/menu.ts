@@ -1,26 +1,36 @@
-import type { MenuItem, MenuKey, MenuNodeEntry, MenuNodeItem } from './menu-types'
+import type { MenuItem as MenuDataItem, MenuKey, MenuNodeEntry, MenuNodeItem } from './menu-types'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 
-export function isMenuNodeItem(item: MenuItem): item is MenuNodeItem {
+@Component({ selector: 'fex-menu-root', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { role: 'menu', 'data-slot': 'menu' }, template: '<ng-content />' })
+export class MenuRoot {}
+
+@Component({ selector: 'fex-menu-list', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { role: 'group', 'data-slot': 'menu-list' }, template: '<ng-content />' })
+export class MenuList {}
+
+@Component({ selector: 'button[fexMenuItem]', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { type: 'button', role: 'menuitem', 'data-slot': 'menu-item' }, template: '<ng-content />' })
+export class MenuItem {}
+
+export function isMenuNodeItem(item: MenuDataItem): item is MenuNodeItem {
   return !('type' in item)
 }
 
-function getMenuItemKey(item: MenuItem): MenuKey {
+function getMenuItemKey(item: MenuDataItem): MenuKey {
   return isMenuNodeItem(item) ? item.key : (item.key ?? item.type)
 }
 
-function getMenuItemChildren(item: MenuItem): readonly MenuItem[] | undefined {
+function getMenuItemChildren(item: MenuDataItem): readonly MenuDataItem[] | undefined {
   return isMenuNodeItem(item) || item.type === 'group' ? item.children : undefined
 }
 
-export function getMenuNodeEntries(items: readonly MenuItem[]): MenuNodeEntry[] {
+export function getMenuNodeEntries(items: readonly MenuDataItem[]): MenuNodeEntry[] {
   const entries: MenuNodeEntry[] = []
 
   function visit(
-    nodes: readonly MenuItem[],
-    parent: MenuItem | undefined,
+    nodes: readonly MenuDataItem[],
+    parent: MenuDataItem | undefined,
     parentKey: MenuKey | undefined,
     level: number,
-    path: MenuItem[],
+    path: MenuDataItem[],
     keyPath: MenuKey[],
   ) {
     for (const [index, node] of nodes.entries()) {

@@ -8,6 +8,7 @@ export const componentRoutes = [
   { path: '/card', component: () => import('../../pages/Card/index.vue') },
   { path: '/checkbox', component: () => import('../../pages/Checkbox/index.vue') },
   { path: '/dialog', component: () => import('../../pages/Dialog/index.vue') },
+  { path: '/dropdown', component: () => import('../../pages/Dropdown/index.vue') },
   { path: '/alert', component: () => import('../../pages/Alert/index.vue') },
   { path: '/badge', component: () => import('../../pages/Badge/index.vue') },
   { path: '/empty', component: () => import('../../pages/Empty/index.vue') },

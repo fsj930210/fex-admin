@@ -2,14 +2,15 @@
 import { popoverContentClassName } from '@fex/components-styles/popover'
 import { cn } from '@fex/utils'
 import type { ComponentPublicInstance, StyleValue } from 'vue'
-import { computed, onBeforeUnmount, shallowRef } from 'vue'
+import { computed, onBeforeUnmount, shallowRef, useAttrs } from 'vue'
 import { eventInfo } from './context'
 import { usePopoverContext } from './context'
 
 defineOptions({ inheritAttrs: false })
 
 const props = defineProps<{ class?: string; style?: StyleValue }>()
-const { overlay, snapshot } = usePopoverContext('PopoverContent')
+const attrs = useAttrs()
+const { hoverAncestors, overlay, snapshot } = usePopoverContext('PopoverContent')
 const contentElement = shallowRef<HTMLDivElement | null>(null)
 
 const contentClass = computed(() => cn(popoverContentClassName(), props.class))
@@ -26,10 +27,12 @@ function setContentElement(element: Element | ComponentPublicInstance | null) {
 }
 
 function handlePointerEnter(event: PointerEvent) {
+  hoverAncestors.forEach((ancestor) => ancestor.content.pointerEnter(eventInfo(event)))
   overlay.content.pointerEnter(eventInfo(event))
 }
 
 function handlePointerLeave(event: PointerEvent) {
+  hoverAncestors.forEach((ancestor) => ancestor.content.pointerLeave(eventInfo(event)))
   overlay.content.pointerLeave(eventInfo(event))
 }
 
@@ -41,8 +44,9 @@ onBeforeUnmount(() => {
 <template>
   <div
     v-if="snapshot.mounted"
+    v-bind="attrs"
     :ref="setContentElement"
-    role="dialog"
+    :role="(attrs.role as string | undefined) ?? 'dialog'"
     tabindex="-1"
     data-slot="popover-content"
     :data-state="snapshot.open ? 'open' : 'closed'"

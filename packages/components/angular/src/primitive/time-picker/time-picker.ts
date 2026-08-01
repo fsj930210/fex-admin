@@ -48,7 +48,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { NgTemplateOutlet } from '@angular/common'
 import { ClockIcon } from '../../icon/clock'
 import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix } from '../input/input'
-import { Popover, PopoverContent, PopoverTrigger } from '../popover/popover'
+import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover/popover'
 import {
   ScrollbarBar,
   ScrollbarRoot,
@@ -185,10 +185,9 @@ export class TimePickerTrigger {
 @Component({
   selector: 'fex-time-picker-content',
   standalone: true,
-  imports: [PopoverContent],
+  imports: [PopoverPortal, PopoverContent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template:
-    '<fex-popover-content class="overflow-hidden p-0" style="width:var(--floating-reference-width);max-width:var(--floating-available-width);max-height:var(--floating-available-height)"><ng-content /></fex-popover-content>',
+  templateUrl: './time-picker-content.html',
 })
 export class TimePickerContent {}
 

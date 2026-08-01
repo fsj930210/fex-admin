@@ -14,12 +14,19 @@ import { MinusIcon } from '../../icon/minus'
 import { CheckboxIndicator, CheckboxRoot } from '../../primitive/checkbox/checkbox'
 
 defineOptions({ inheritAttrs: false })
-const props = defineProps<{
-  checked?: CheckboxCheckedState
-  defaultChecked?: CheckboxCheckedState
-  disabled?: boolean
-  size?: CheckboxStyleProps['size']
-}>()
+const props = withDefaults(
+  defineProps<{
+    checked?: CheckboxCheckedState
+    defaultChecked?: CheckboxCheckedState
+    disabled?: boolean
+    size?: CheckboxStyleProps['size']
+  }>(),
+  {
+    checked: undefined,
+    defaultChecked: undefined,
+    disabled: undefined,
+  },
+)
 const emit = defineEmits<{
   checkedChange: [checked: CheckboxCheckedState, meta: CheckboxChangeMeta]
 }>()

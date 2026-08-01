@@ -6,6 +6,7 @@ export interface PopoverContextValue {
   arrow: boolean
   arrowRef: RefObject<HTMLElement | null>
   overlay: FloatingOverlay
+  hoverAncestors: FloatingOverlay[]
   triggerRef: RefObject<HTMLElement | null>
 }
 

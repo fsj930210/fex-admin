@@ -66,7 +66,7 @@ export function usePopoverTrigger({
   const triggerProps: PopoverTriggerRenderProps = {
     ...props,
     ref: composedRef,
-    'aria-haspopup': 'dialog',
+    'aria-haspopup': props['aria-haspopup'] ?? 'dialog',
     'aria-expanded': snapshot.open,
     'data-state': snapshot.open ? 'open' : 'closed',
     onClick: (event) => {
@@ -150,7 +150,7 @@ export function usePopoverContent({
     props: {
       ...props,
       ref: composedRef,
-      role: 'dialog' as const,
+      role: props.role ?? 'dialog',
       tabIndex: -1,
       'data-slot': 'popover-content',
       'data-state': snapshot.open ? ('open' as const) : ('closed' as const),

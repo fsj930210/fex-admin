@@ -5,7 +5,7 @@ import {
 } from '@fex/components-core/overlay/create-floating-overlay'
 import type { OverlayTrigger } from '@fex/components-core/overlay/trigger/create-trigger'
 import { shallowEqualObject } from '@fex/utils'
-import { computed, onBeforeUnmount, provide, ref, shallowRef, watchEffect } from 'vue'
+import { computed, inject, onBeforeUnmount, provide, ref, shallowRef, watchEffect } from 'vue'
 import { useCoreStore } from '../../composables/use-core-store'
 import { popoverKey } from './context'
 
@@ -27,6 +27,7 @@ const props = withDefaults(
     trigger: () => ['click'],
   },
 )
+const parentPopover = inject(popoverKey, null)
 const emit = defineEmits<{
   openChange: [
     open: boolean,
@@ -63,7 +64,16 @@ function syncOptions() {
     overlay.setOptions(next)
   }
 }
-provide(popoverKey, { arrow, arrowElement, overlay, triggerElement, snapshot })
+provide(popoverKey, {
+  arrow,
+  arrowElement,
+  hoverAncestors: parentPopover
+    ? [...(parentPopover.hoverAncestors ?? []), parentPopover.overlay]
+    : [],
+  overlay,
+  triggerElement,
+  snapshot,
+})
 watchEffect(syncOptions)
 onBeforeUnmount(() => overlay.destroy())
 </script>

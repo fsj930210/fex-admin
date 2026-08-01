@@ -10,6 +10,7 @@ export interface PopoverContextValue {
   arrow: ShallowRef<boolean>
   arrowElement: ShallowRef<HTMLElement | null>
   overlay: FloatingOverlay
+  hoverAncestors: FloatingOverlay[]
   triggerElement: ShallowRef<HTMLElement | null>
   snapshot: ShallowRef<PopoverSnapshot>
 }

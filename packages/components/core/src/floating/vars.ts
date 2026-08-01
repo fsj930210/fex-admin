@@ -9,6 +9,7 @@ export interface FloatingVars {
   referenceY: number
   referenceWidth: number
   referenceHeight: number
+  sideOffset?: number
   arrowX?: number
   arrowY?: number
   arrowSize?: number
@@ -41,6 +42,7 @@ export function patchFloatingVars(element: HTMLElement, vars: FloatingVars) {
   element.style.setProperty('--floating-reference-y', `${Math.round(vars.referenceY)}px`)
   element.style.setProperty('--floating-reference-width', `${Math.round(vars.referenceWidth)}px`)
   element.style.setProperty('--floating-reference-height', `${Math.round(vars.referenceHeight)}px`)
+  element.style.setProperty('--floating-side-offset', `${Math.max(0, vars.sideOffset ?? 0)}px`)
 
   if (vars.arrowX !== undefined) {
     // arrowX/arrowY 可能只有一个方向存在，不能在缺失时写 0 覆盖旧值。

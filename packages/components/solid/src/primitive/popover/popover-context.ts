@@ -5,6 +5,7 @@ export interface PopoverContextValue {
   arrowElement: { current: HTMLElement | null }
   contentElement: { current: HTMLElement | null }
   overlay: FloatingOverlay
+  hoverAncestors: FloatingOverlay[]
   snapshot: Accessor<ReturnType<FloatingOverlay['getSnapshot']>>
   triggerElement: { current: HTMLElement | null }
 }

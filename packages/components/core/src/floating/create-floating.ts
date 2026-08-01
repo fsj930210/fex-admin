@@ -270,6 +270,15 @@ export function createFloating(options: FloatingOptions = {}): Floating {
       return
     }
 
+    // Presence adapter 可能用 display:none 保留已经关闭的浮层 DOM。
+    // 不可布局的元素会产生零尺寸结果，不能用它覆盖最后一次有效坐标。
+    if (floating.getClientRects().length === 0) {
+      return
+    }
+    if (reference instanceof Element && reference.getClientRects().length === 0) {
+      return
+    }
+
     // computePosition 是 @floating-ui/dom 的核心 API：输入 reference/floating DOM，
     // 输出最终坐标、最终 placement 和各 middleware 数据。core 选择 DOM 版本是为了跨框架复用，
     // 避免 React/Vue/Solid/Svelte/Angular 各自绑定不同的定位实现。
@@ -338,6 +347,7 @@ export function createFloating(options: FloatingOptions = {}): Floating {
       referenceY: referenceRect.y,
       referenceWidth: referenceRect.width,
       referenceHeight: referenceRect.height,
+      sideOffset: currentOptions.sideOffset ?? currentOptions.offset ?? 0,
       ...(arrowData?.x !== undefined ? { arrowX: arrowData.x } : {}),
       ...(arrowData?.y !== undefined ? { arrowY: arrowData.y } : {}),
       ...(currentArrow && arrowElement === currentArrow

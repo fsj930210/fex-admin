@@ -1,4 +1,4 @@
-import { useRef, useState, type ComponentProps, type ReactNode, type Ref } from 'react'
+import { use, useRef, useState, type ComponentProps, type ReactNode, type Ref } from 'react'
 import { createPortal } from 'react-dom'
 import {
   createFloatingOverlay,
@@ -35,11 +35,13 @@ export function PopoverRoot({
   trigger = defaultPopoverTrigger,
   allowedTriggers = popoverAllowedTriggers,
   sideOffset = 6,
+  hoverCloseDelay,
   arrow,
   closeDelay = 140,
   dismiss = popoverDismiss,
   ...overlayConfig
 }: PopoverRootProps) {
+  const parentPopover = use(PopoverContext)
   const isControlled = openProp !== undefined
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen ?? false)
   const open = isControlled ? openProp : uncontrolledOpen
@@ -60,6 +62,7 @@ export function PopoverRoot({
     trigger,
     allowedTriggers,
     sideOffset,
+    hoverCloseDelay,
     closeDelay,
     dismiss,
     arrow,
@@ -80,7 +83,17 @@ export function PopoverRoot({
   useUnmount(() => overlay.destroy())
 
   return (
-    <PopoverContext value={{ arrowRef, overlay, triggerRef, arrow: Boolean(arrow) }}>
+    <PopoverContext
+      value={{
+        arrowRef,
+        hoverAncestors: parentPopover
+          ? [...(parentPopover.hoverAncestors ?? []), parentPopover.overlay]
+          : [],
+        overlay,
+        triggerRef,
+        arrow: Boolean(arrow),
+      }}
+    >
       {children}
     </PopoverContext>
   )

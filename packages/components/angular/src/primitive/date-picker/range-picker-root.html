@@ -6,7 +6,7 @@
   (openChange)="setOpen($event)"
 >
   <ng-content select="fex-range-picker-trigger" />
-  <fex-popover-content [class]="contentClassName()">
+  <fex-popover-portal><fex-popover-content [class]="contentClassName()">
     <ng-content select="fex-range-picker-content" />
-  </fex-popover-content>
+  </fex-popover-content></fex-popover-portal>
 </fex-popover>

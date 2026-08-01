@@ -19,6 +19,7 @@
     "./primitive/form": "./src/primitive/form/form.ts",
     "./primitive/input": "./src/primitive/input/input.ts",
     "./primitive/listbox": "./src/primitive/listbox/listbox.ts",
+    "./primitive/dropdown": "./src/primitive/dropdown/dropdown.ts",
     "./primitive/menu": "./src/primitive/menu/menu.ts",
     "./primitive/menu-types": "./src/primitive/menu/menu-types.ts",
     "./primitive/pagination": "./src/primitive/pagination/pagination.ts",

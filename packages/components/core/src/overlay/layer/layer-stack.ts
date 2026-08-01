@@ -41,6 +41,15 @@ export function isTopLayer(layer: LayerRecord) {
   return getTopLayer() === layer
 }
 
+export function isTargetInsideHigherLayer(
+  layer: LayerRecord,
+  target: EventTarget | null | undefined,
+) {
+  const index = layers.indexOf(layer)
+  if (index < 0) return false
+  return layers.slice(index + 1).some((candidate) => isTargetInsideLayer(candidate, target))
+}
+
 export function isTargetInsideLayer(layer: LayerRecord, target: EventTarget | null | undefined) {
   // target 可能来自非 DOM 事件或已经被销毁；不是 Node 时无法调用 contains，直接按外部处理。
   if (!target || !layer.element || !(target instanceof Node)) {

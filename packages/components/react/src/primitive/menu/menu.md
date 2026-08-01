@@ -5,8 +5,23 @@ The primitive Menu API exposes `useMenu` and small structural parts for custom r
 ## Import
 
 ```tsx
-import { useMenu, MenuRoot, MenuList } from '@fex/components-react/primitive/menu'
+import { MenuItem, MenuList, MenuRoot, useMenu } from '@fex/components-react/primitive/menu'
 ```
+
+## Structural usage
+
+`MenuRoot`, `MenuList`, and `MenuItem` are children-based primitives and never accept `items`.
+
+```tsx
+<MenuRoot>
+  <MenuList>
+    <MenuItem>Rename</MenuItem>
+    <MenuItem disabled>Archive</MenuItem>
+  </MenuList>
+</MenuRoot>
+```
+
+Use the independent `useMenu({ items })` logic API only when building a data-driven renderer.
 
 ## Headless Usage
 

@@ -105,7 +105,9 @@ export function createTrigger(options: TriggerOptions): TriggerBehavior {
     // pointerInsideContent 为 true 时不关闭，保证鼠标从 trigger 移到 content 的过程中面板稳定。
     clearTimer(openTimer)
     clearTimer(closeTimer)
-    const delay = currentOptions.hoverCloseDelay ?? 0
+    // Trigger 与 Portal content 的 enter/leave 来自不同浏览器事件任务。
+    // 保留短暂 grace period，让 content enter 有机会取消关闭；真正离开整体区域后仍会按时关闭。
+    const delay = currentOptions.hoverCloseDelay ?? 80
     closeTimer = setTimeout(() => {
       if (!pointerInsideContent) {
         removeSource('hover', event)

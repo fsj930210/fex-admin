@@ -5,6 +5,7 @@ export const popoverContentClassName = cva(
     'z-[var(--floating-z-index,50)] min-w-32 max-h-[var(--floating-available-height,calc(100vh-16px))] max-w-[min(var(--floating-available-width,calc(100vw-16px)),var(--popover-content-max-width,360px))] overflow-visible',
     'rounded-md border border-border bg-popover-background p-[var(--popover-content-padding,12px)] text-sm text-popover-foreground shadow-lg outline-none',
     'origin-[var(--floating-transform-origin)] will-change-[opacity,transform]',
+    "before:absolute before:content-[''] data-[side=right]:before:right-full data-[side=right]:before:top-0 data-[side=right]:before:h-full data-[side=right]:before:w-[var(--floating-side-offset,0px)] data-[side=left]:before:left-full data-[side=left]:before:top-0 data-[side=left]:before:h-full data-[side=left]:before:w-[var(--floating-side-offset,0px)] data-[side=bottom]:before:bottom-full data-[side=bottom]:before:left-0 data-[side=bottom]:before:h-[var(--floating-side-offset,0px)] data-[side=bottom]:before:w-full data-[side=top]:before:top-full data-[side=top]:before:left-0 data-[side=top]:before:h-[var(--floating-side-offset,0px)] data-[side=top]:before:w-full",
     'transition-[opacity,transform] duration-[var(--popover-motion-duration,140ms)] ease-[var(--popover-motion-ease,cubic-bezier(0.2,0,0,1))]',
     'data-[state=open]:scale-100 data-[state=open]:opacity-100',
     'data-[phase=closing]:pointer-events-none data-[phase=closing]:scale-95 data-[phase=closing]:opacity-0',
@@ -35,6 +36,9 @@ export const popoverArrowClassName = [
   'data-[side=left]:-translate-y-1/2 data-[side=left]:rotate-45',
   'data-[side=right]:-translate-y-1/2 data-[side=right]:rotate-45',
 ].join(' ')
+
+export const popoverMenuContentClassName =
+  'min-w-32 [--popover-content-padding:4px] [--popover-content-max-width:320px]'
 
 export const popoverHeaderClassName = 'mb-2 grid gap-1'
 

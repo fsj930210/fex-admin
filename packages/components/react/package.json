@@ -22,6 +22,7 @@
     "./primitive/listbox": "./src/primitive/listbox/listbox.tsx",
     "./primitive/select": "./src/primitive/select/select.tsx",
     "./primitive/select/use-select": "./src/primitive/select/use-select.ts",
+    "./primitive/dropdown": "./src/primitive/dropdown/dropdown.tsx",
     "./primitive/menu": "./src/primitive/menu/menu.tsx",
     "./primitive/pagination": "./src/primitive/pagination/pagination.tsx",
     "./primitive/popover": "./src/primitive/popover/popover.tsx",

@@ -4,6 +4,7 @@ import {
   addLayerRecord,
   createLayerRecord,
   isTargetInsideLayer,
+  isTargetInsideHigherLayer,
   isTopLayer,
   removeLayerRecord,
 } from './layer/layer-stack'
@@ -139,7 +140,15 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
         if (isTargetInsideLayer(layer, event.target)) {
           return
         }
-        closeFromDismiss({ reason: 'outside-pointer', event: event.event })
+        // 非模态浮层点击页面空白时应整组关闭，不能因为另一个 Popover 暂居栈顶而残留。
+        // 点击嵌套子浮层内部时，更高层包含目标，保留当前祖先层。
+        if (
+          isTopLayer(layer) ||
+          (!layer.modal && !isTargetInsideHigherLayer(layer, event.target))
+        ) {
+          close({ reason: 'outside-pointer', event: event.event })
+          presence.finishClose()
+        }
       },
       overlayPointer: (event) => {
         if (currentOptions.dismiss?.overlayPointer !== true) {

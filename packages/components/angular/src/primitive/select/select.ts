@@ -48,7 +48,7 @@ import { CloseIcon } from '../../icon/close'
 import { LoadingIcon } from '../../icon/loading'
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
 import { Button } from '../button/button'
-import { Popover, PopoverContent, PopoverTrigger } from '../popover/popover'
+import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover/popover'
 
 export interface SelectChangeMeta {
   selectedItem?: SelectOption | undefined
@@ -289,7 +289,7 @@ export class SelectTrigger {
 @Component({
   selector: 'fex-select-content',
   standalone: true,
-  imports: [PopoverContent, forwardRef(() => SelectList)],
+  imports: [PopoverPortal, PopoverContent, forwardRef(() => SelectList)],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './select-content.html',
 })

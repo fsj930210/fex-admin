@@ -18,14 +18,14 @@ import type {
 import type { DatePickerPicker } from '@fex/components-core/date-picker/types'
 import { datePickerContentClassName } from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
-import { Popover, PopoverContent } from '../popover/popover'
+import { Popover, PopoverContent, PopoverPortal } from '../popover/popover'
 import { RangePickerContent } from './date-picker-content'
 import { RangePickerState, type UseRangePickerOptions } from './use-range-picker'
 
 @Component({
   selector: 'fex-range-picker-root',
   standalone: true,
-  imports: [Popover, PopoverContent],
+  imports: [Popover, PopoverPortal, PopoverContent],
   providers: [RangePickerState],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './range-picker-root.html',

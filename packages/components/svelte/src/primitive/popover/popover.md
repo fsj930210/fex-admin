@@ -53,7 +53,7 @@ Popover 是基于 `@fex/components-core` 的浮层 primitive。core 负责触发
 | `alignOffset`       | `number`                         | `0`             | 否   | 交叉轴偏移。                     |
 | `arrow`             | `boolean`                        | `false`         | 否   | 是否启用箭头。                   |
 | `hoverOpenDelay`    | `number`                         | `0`             | 否   | hover 打开延迟。                 |
-| `hoverCloseDelay`   | `number`                         | `0`             | 否   | hover 关闭延迟。                 |
+| `hoverCloseDelay`   | `number`                         | `80`            | 否   | core 的跨 Portal hover 宽限期。  |
 | `getPopupContainer` | `(reference) => HTMLElement`     | `document.body` | 否   | Portal 挂载容器。                |
 
 ## 事件 / 回调

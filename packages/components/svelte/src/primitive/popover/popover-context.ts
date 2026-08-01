@@ -7,6 +7,7 @@ export interface PopoverContext {
   arrow: () => boolean
   arrowElement: { current: HTMLElement | null }
   overlay: FloatingOverlay
+  hoverAncestors: FloatingOverlay[]
   snapshot: Readable<ReturnType<FloatingOverlay['getSnapshot']>>
   contentElement: { current: HTMLElement | null }
   triggerElement: { current: HTMLElement | null }

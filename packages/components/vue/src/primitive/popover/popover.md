@@ -52,7 +52,7 @@ import {
 | `alignOffset`       | `number`                                                                      | `0`                                         | 否   | 交叉轴偏移。                                                   |
 | `arrow`             | `boolean`                                                                     | `false`                                     | 否   | 是否启用箭头。                                                 |
 | `hoverOpenDelay`    | `number`                                                                      | `0`                                         | 否   | hover 打开延迟。                                               |
-| `hoverCloseDelay`   | `number`                                                                      | `0`                                         | 否   | hover 关闭延迟。                                               |
+| `hoverCloseDelay`   | `number`                                                                      | `80`                                        | 否   | core 的跨 Portal hover 宽限期，可显式覆盖。                    |
 | `getPopupContainer` | `(reference) => HTMLElement`                                                  | `document.body`                             | 否   | Portal 挂载容器。                                              |
 | `dismiss`           | `{ escapeKey?: boolean; outsidePointer?: boolean; overlayPointer?: boolean }` | `{ escapeKey: true, outsidePointer: true }` | 否   | 关闭行为配置。                                                 |
 

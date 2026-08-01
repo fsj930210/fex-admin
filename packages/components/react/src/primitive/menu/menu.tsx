@@ -1,27 +1,18 @@
-import type { ComponentProps, ReactNode } from 'react'
-import { MenuContext, useMenuContext } from './menu-context'
-import type { MenuListDomProps, UseMenuOptions, UseMenuReturn } from './menu-types'
+import type { ComponentProps } from 'react'
 import { useMenu } from './use-menu'
 
-export interface MenuRootProps
-  extends Omit<ComponentProps<'div'>, 'children' | 'onClick' | 'onSelect'>, UseMenuOptions {
-  children?: ReactNode | ((menu: UseMenuReturn) => ReactNode)
+export interface MenuRootProps extends ComponentProps<'div'> {}
+
+export function MenuRoot(props: MenuRootProps) {
+  return <div {...props} role={props.role ?? 'menu'} data-slot="menu" />
 }
 
-export function MenuRoot({ children, items, className, style, ...options }: MenuRootProps) {
-  const menu = useMenu({ ...options, items })
-  const rootProps = menu.getRootProps({ className, style })
-
-  return (
-    <MenuContext value={menu}>
-      <div {...rootProps}>{typeof children === 'function' ? children(menu) : children}</div>
-    </MenuContext>
-  )
+export function MenuList(props: ComponentProps<'div'>) {
+  return <div {...props} role={props.role ?? 'group'} data-slot="menu-list" />
 }
 
-export function MenuList(props: MenuListDomProps) {
-  const menu = useMenuContext('MenuList')
-  return <div {...menu.getListProps(props)} />
+export function MenuItem(props: ComponentProps<'button'>) {
+  return <button {...props} type={props.type ?? 'button'} role="menuitem" data-slot="menu-item" />
 }
 
 export function MenuGroup(props: ComponentProps<'div'>) {
@@ -36,7 +27,7 @@ export function MenuDivider(props: ComponentProps<'div'>) {
   return <div {...props} role="separator" data-slot="menu-divider" />
 }
 
-export { useMenu, useMenuContext }
+export { useMenu }
 export type {
   FlattenTreeNode,
   MenuClickInfo,

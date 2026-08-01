@@ -5,11 +5,18 @@ import { computed } from 'vue'
 import { useCoreStore } from '../../composables/use-core-store'
 
 defineOptions({ inheritAttrs: false })
-const props = defineProps<{
-  checked?: CheckboxCheckedState | undefined
-  defaultChecked?: CheckboxCheckedState | undefined
-  disabled?: boolean | undefined
-}>()
+const props = withDefaults(
+  defineProps<{
+    checked?: CheckboxCheckedState | undefined
+    defaultChecked?: CheckboxCheckedState | undefined
+    disabled?: boolean | undefined
+  }>(),
+  {
+    checked: undefined,
+    defaultChecked: undefined,
+    disabled: undefined,
+  },
+)
 const emit = defineEmits<{
   checkedChange: [checked: CheckboxCheckedState, meta: CheckboxChangeMeta]
 }>()

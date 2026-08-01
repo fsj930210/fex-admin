@@ -2,9 +2,9 @@
   import { createFloatingOverlay, type FloatingOverlayOptions } from '@fex/components-core/overlay/create-floating-overlay'
   import type { OverlayTrigger } from '@fex/components-core/overlay/trigger/create-trigger'
   import type { Snippet } from 'svelte'
-  import { onDestroy, setContext } from 'svelte'
+  import { getContext, onDestroy, setContext } from 'svelte'
   import { readableCoreStore } from '../../stores/core-store'
-  import { popoverContextKey, registerPopoverDismissRecord } from './popover-context'
+  import { popoverContextKey, registerPopoverDismissRecord, type PopoverContext } from './popover-context'
 
   interface PopoverProps extends FloatingOverlayOptions {
     children?: Snippet
@@ -17,10 +17,12 @@
     defaultOpen,
     trigger = ['click'],
     sideOffset = 6,
+    hoverCloseDelay,
     arrow = false,
     onOpenChange,
     ...rest
   }: PopoverProps = $props()
+  const parentPopover = getContext<PopoverContext | undefined>(popoverContextKey)
 
   // svelte-ignore state_referenced_locally -- defaultOpen is intentionally read once for uncontrolled initial state.
   // defaultOpen 只用于非受控初始值；后续 open 由 core onOpenChange 回写 localOpen。
@@ -35,6 +37,7 @@
       open: open ?? localOpen,
       trigger,
       sideOffset,
+      hoverCloseDelay,
       arrow,
       onOpenChange(nextOpen, info) {
         if (open === undefined) {
@@ -57,7 +60,17 @@
 
   const unregisterDismissRecord = registerPopoverDismissRecord({ arrowElement, overlay, triggerElement, contentElement })
 
-  setContext(popoverContextKey, { arrow: () => arrow, arrowElement, overlay, snapshot, triggerElement, contentElement })
+  setContext(popoverContextKey, {
+    arrow: () => arrow,
+    arrowElement,
+    contentElement,
+    hoverAncestors: parentPopover
+      ? [...(parentPopover.hoverAncestors ?? []), parentPopover.overlay]
+      : [],
+    overlay,
+    snapshot,
+    triggerElement,
+  })
   onDestroy(() => {
     unregisterDismissRecord()
     overlay.destroy()

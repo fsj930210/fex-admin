@@ -11,8 +11,8 @@
     children?: Snippet
   }
 
-  let { class: className, children, style, ...rest }: PopoverContentProps = $props()
-  const { contentElement, overlay, snapshot } = getContext<PopoverContext>(popoverContextKey)
+  let { class: className, children, role = 'dialog', style, ...rest }: PopoverContentProps = $props()
+  const { contentElement, hoverAncestors, overlay, snapshot } = getContext<PopoverContext>(popoverContextKey)
   const classList = $derived(cn(popoverContentClassName(), className))
 
   function contentAction(element: HTMLDivElement) {
@@ -27,13 +27,39 @@
       },
     }
   }
+
+  function handlePointerEnter(event: PointerEvent) {
+    const info = {
+      target: event.target,
+      currentTarget: event.currentTarget,
+      clientX: event.clientX,
+      clientY: event.clientY,
+      pointerType: event.pointerType,
+      event,
+    }
+    hoverAncestors.forEach((ancestor) => ancestor.content.pointerEnter(info))
+    overlay.content.pointerEnter(info)
+  }
+
+  function handlePointerLeave(event: PointerEvent) {
+    const info = {
+      target: event.target,
+      currentTarget: event.currentTarget,
+      clientX: event.clientX,
+      clientY: event.clientY,
+      pointerType: event.pointerType,
+      event,
+    }
+    hoverAncestors.forEach((ancestor) => ancestor.content.pointerLeave(info))
+    overlay.content.pointerLeave(info)
+  }
 </script>
 
 {#if $snapshot.mounted}
   <div
     {...rest}
     use:contentAction
-    role="dialog"
+    {role}
     tabindex="-1"
     data-slot="popover-content"
     data-state={$snapshot.open ? 'open' : 'closed'}
@@ -42,6 +68,8 @@
     data-align={$snapshot.align}
     data-placement={$snapshot.placement}
     class={classList}
+    onpointerenter={handlePointerEnter}
+    onpointerleave={handlePointerLeave}
     {style}
     style:position="var(--floating-strategy, absolute)"
     style:left="var(--floating-x, 0px)"

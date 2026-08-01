@@ -13,7 +13,7 @@ import type { CalendarDate, CalendarValue, CalendarWeekday } from '@fex/componen
 import type { DatePickerPicker } from '@fex/components-core/date-picker/types'
 import { datePickerContentClassName } from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
-import { Popover, PopoverContent } from '../popover/popover'
+import { Popover, PopoverContent, PopoverPortal } from '../popover/popover'
 import { DatePickerContent } from './date-picker-content'
 import { DatePickerState, type UseDatePickerOptions } from './use-date-picker'
 import type { DatePickerSelectionValue } from './context'
@@ -21,7 +21,7 @@ import type { DatePickerSelectionValue } from './context'
 @Component({
   selector: 'fex-date-picker-root',
   standalone: true,
-  imports: [Popover, PopoverContent],
+  imports: [Popover, PopoverPortal, PopoverContent],
   providers: [DatePickerState],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './date-picker-root.html',

@@ -19,6 +19,9 @@ const CheckboxPage = lazy(() =>
 const DialogPage = lazy(() =>
   import('../../pages/Dialog').then((module) => ({ default: module.DialogPage })),
 )
+const DropdownPage = lazy(() =>
+  import('../../pages/Dropdown').then((module) => ({ default: module.DropdownPage })),
+)
 const AlertPage = lazy(() =>
   import('../../pages/Alert').then((module) => ({ default: module.AlertPage })),
 )
@@ -143,6 +146,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/dialog',
     component: DialogPage,
+  },
+  {
+    path: '/dropdown',
+    component: DropdownPage,
   },
   {
     path: '/alert',

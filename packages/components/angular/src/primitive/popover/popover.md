@@ -8,6 +8,7 @@ Popover 是基于 `@fex/components-core` 的浮层 primitive。core 负责触发
 import {
   Popover,
   PopoverTrigger,
+  PopoverPortal,
   PopoverContent,
   PopoverArrow,
   PopoverHeader,
@@ -21,15 +22,24 @@ import {
 ```html
 <fex-popover placement="bottomLeft" [sideOffset]="8" [alignOffset]="28" [arrow]="true">
   <button fexPopoverTrigger>Open</button>
-  <fex-popover-content>
-    <fex-popover-arrow />
-    <fex-popover-header>
-      <fex-popover-title>Title</fex-popover-title>
-      <fex-popover-description>Content</fex-popover-description>
-    </fex-popover-header>
-  </fex-popover-content>
+  <fex-popover-portal>
+    <fex-popover-content>
+      <fex-popover-arrow />
+      <fex-popover-header>
+        <fex-popover-title>Title</fex-popover-title>
+        <fex-popover-description>Content</fex-popover-description>
+      </fex-popover-header>
+    </fex-popover-content>
+  </fex-popover-portal>
 </fex-popover>
 ```
+
+`fex-popover-portal` owns DOM mounting. Its `container` input overrides
+`getPopupContainer`; without either value the trigger document body is used. `PopoverContent` only
+registers and renders the floating element.
+
+Content without a Portal keeps the previous automatic-mount behavior for compatibility. New
+compositions should always use the explicit Portal so mounting ownership is visible and configurable.
 
 ## Props / Inputs
 
@@ -45,7 +55,7 @@ import {
 | `alignOffset`       | `number`                         | `0`             | 否   | 交叉轴偏移。                     |
 | `arrow`             | `boolean`                        | `false`         | 否   | 是否启用箭头。                   |
 | `hoverOpenDelay`    | `number`                         | `0`             | 否   | hover 打开延迟。                 |
-| `hoverCloseDelay`   | `number`                         | `0`             | 否   | hover 关闭延迟。                 |
+| `hoverCloseDelay`   | `number`                         | `80`            | 否   | core 的跨 Portal hover 宽限期。  |
 | `getPopupContainer` | `(reference) => HTMLElement`     | `document.body` | 否   | 浮层挂载容器。                   |
 
 ## 事件 / Outputs

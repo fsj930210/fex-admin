@@ -24,6 +24,7 @@ import {
   onCleanup,
   Show,
   splitProps,
+  useContext,
   type JSX,
   type ParentProps,
 } from 'solid-js'
@@ -61,6 +62,7 @@ export interface PopoverProps extends ParentProps {
 }
 
 export function Popover(props: PopoverProps) {
+  const parentPopover = useContext(PopoverContext)
   const [local] = splitProps(props, [
     'children',
     'open',
@@ -129,6 +131,9 @@ export function Popover(props: PopoverProps) {
           arrow: Boolean(local.arrow),
           arrowElement,
           contentElement,
+          hoverAncestors: parentPopover
+            ? [...(parentPopover.hoverAncestors ?? []), parentPopover.overlay]
+            : [],
           overlay,
           snapshot,
           triggerElement,
@@ -143,7 +148,7 @@ export function Popover(props: PopoverProps) {
 export type PopoverTriggerRenderProps = {
   props: {
     'aria-expanded': boolean
-    'aria-haspopup': 'dialog'
+    'aria-haspopup': 'dialog' | 'menu'
     'data-state': 'open' | 'closed'
     class: string | undefined
     onBlur: JSX.FocusEventHandlerUnion<HTMLButtonElement, FocusEvent>
@@ -216,12 +221,14 @@ export function PopoverPortal(props: ParentProps) {
 
 export interface PopoverContentProps extends ParentProps {
   class?: string
+  onClick?: JSX.EventHandler<HTMLDivElement, MouseEvent>
+  role?: JSX.HTMLAttributes<HTMLDivElement>['role']
   style?: string
 }
 
 export function PopoverContent(props: PopoverContentProps) {
-  const [local] = splitProps(props, ['children', 'class', 'style'])
-  const { contentElement, overlay, snapshot } = usePopover('PopoverContent')
+  const [local] = splitProps(props, ['children', 'class', 'onClick', 'role', 'style'])
+  const { contentElement, hoverAncestors, overlay, snapshot } = usePopover('PopoverContent')
 
   function setContentElement(element: HTMLDivElement) {
     if (!(element instanceof HTMLDivElement)) return
@@ -245,7 +252,7 @@ export function PopoverContent(props: PopoverContentProps) {
     <Show when={snapshot().mounted}>
       <div
         ref={setContentElement}
-        role="dialog"
+        role={local.role ?? 'dialog'}
         tabIndex={-1}
         data-slot="popover-content"
         data-state={snapshot().open ? 'open' : 'closed'}
@@ -253,6 +260,15 @@ export function PopoverContent(props: PopoverContentProps) {
         data-side={snapshot().side}
         data-align={snapshot().align}
         data-placement={snapshot().placement}
+        onClick={local.onClick}
+        onPointerEnter={(event) => {
+          hoverAncestors.forEach((ancestor) => ancestor.content.pointerEnter(eventInfo(event)))
+          overlay.content.pointerEnter(eventInfo(event))
+        }}
+        onPointerLeave={(event) => {
+          hoverAncestors.forEach((ancestor) => ancestor.content.pointerLeave(eventInfo(event)))
+          overlay.content.pointerLeave(eventInfo(event))
+        }}
         class={cn(popoverContentClassName(), local.class)}
         style={`position: var(--floating-strategy, absolute); left: var(--floating-x, 0px); top: var(--floating-y, 0px); transform-origin: var(--floating-transform-origin); ${local.style ?? ''}`}
       >

@@ -39,6 +39,11 @@ export const componentRoutes: Routes = [
       import('../../pages/dialog/index.component').then((module) => module.DialogComponent),
   },
   {
+    path: 'dropdown',
+    loadComponent: () =>
+      import('../../pages/dropdown/index.component').then((module) => module.DropdownComponent),
+  },
+  {
     path: 'data-grid',
     loadComponent: () =>
       import('../../pages/data-grid/index.component').then((module) => module.DataGridComponent),

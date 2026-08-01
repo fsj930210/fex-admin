@@ -1,6 +1,10 @@
 import { flattenTree, type FlattenTreeNode } from '@fex/utils/tree'
 import type { Snippet } from 'svelte'
 
+export { default as MenuRoot } from './menu-root.svelte'
+export { default as MenuList } from './menu-list.svelte'
+export { default as MenuItem } from './menu-item.svelte'
+
 export type MenuKey = string | number
 export type MenuItem = MenuNodeItem | MenuGroupItem | MenuDividerItem
 
