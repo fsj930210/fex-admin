@@ -40,6 +40,7 @@ export function HomePage() {
     { to: '/select', label: 'Select' },
     { to: '/textarea', label: 'Textarea' },
     { to: '/time-picker', label: 'TimePicker' },
+    { to: '/tooltip', label: 'Tooltip' },
   ].sort((left, right) => left.label.localeCompare(right.label))
 
   return (

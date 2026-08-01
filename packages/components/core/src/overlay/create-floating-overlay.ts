@@ -162,8 +162,12 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
 
     stopDocumentDismiss()
     dismissDocument = ownerDocument
-    ownerDocument.addEventListener('pointerdown', handleDocumentPointerDown, true)
-    ownerDocument.addEventListener('keydown', handleDocumentKeyDown, true)
+    if (dismiss?.outsidePointer !== false) {
+      ownerDocument.addEventListener('pointerdown', handleDocumentPointerDown, true)
+    }
+    if (dismiss?.escapeKey !== false) {
+      ownerDocument.addEventListener('keydown', handleDocumentKeyDown, true)
+    }
   }
 
   function syncAutoUpdate(nextSnapshot = store.getSnapshot()) {

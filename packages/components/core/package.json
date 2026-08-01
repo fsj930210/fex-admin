@@ -73,6 +73,7 @@
     "./toggle/types": "./src/toggle/types.ts",
     "./tabs/create-tabs-controller": "./src/tabs/create-tabs-controller.ts",
     "./tabs/types": "./src/tabs/types.ts",
+    "./tooltip/create-tooltip": "./src/tooltip/create-tooltip.ts",
     "./slider/create-slider-controller": "./src/slider/create-slider-controller.ts",
     "./slider/types": "./src/slider/types.ts",
     "./slider/utils": "./src/slider/utils.ts",

@@ -115,6 +115,9 @@ const CarouselPage = lazy(() =>
 const UploadPage = lazy(() =>
   import('../../pages/Upload').then((module) => ({ default: module.UploadPage })),
 )
+const TooltipPage = lazy(() =>
+  import('../../pages/Tooltip').then((module) => ({ default: module.TooltipPage })),
+)
 
 export const componentRoutes: AppRoute[] = [
   { path: '/auto-complete', component: AutoCompletePage },
@@ -248,6 +251,7 @@ export const componentRoutes: AppRoute[] = [
     component: TextareaPage,
   },
   { path: '/time-picker', component: TimePickerPage },
+  { path: '/tooltip', component: TooltipPage },
   {
     path: '/tree',
     component: TreePage,

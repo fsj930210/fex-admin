@@ -41,6 +41,7 @@
     "./primitive/transfer": "./src/primitive/transfer/transfer.tsx",
     "./primitive/textarea": "./src/primitive/textarea/textarea.tsx",
     "./primitive/time-picker": "./src/primitive/time-picker/time-picker.tsx",
+    "./primitive/tooltip": "./src/primitive/tooltip/tooltip.tsx",
     "./ui/badge": "./src/ui/badge/badge.tsx",
     "./ui/button": "./src/ui/button/button.tsx",
     "./ui/card": "./src/ui/card/card.tsx",
@@ -81,6 +82,7 @@
     "./hooks/use-resize": "./src/hooks/use-resize.ts",
     "./hooks/use-sortable": "./src/hooks/use-sortable.ts",
     "./hooks/use-toasts": "./src/hooks/use-toasts.ts",
+    "./hooks/use-tooltip": "./src/primitive/tooltip/use-tooltip.ts",
     "./hooks/use-unmount": "./src/hooks/use-unmount.ts"
   },
   "dependencies": {

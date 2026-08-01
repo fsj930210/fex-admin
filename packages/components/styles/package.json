@@ -23,6 +23,7 @@
     "./menu": "./src/menu.ts",
     "./pagination": "./src/pagination.ts",
     "./popover": "./src/popover.ts",
+    "./tooltip": "./src/tooltip.ts",
     "./radio": "./src/radio.ts",
     "./rate": "./src/rate.ts",
     "./select": "./src/select.ts",

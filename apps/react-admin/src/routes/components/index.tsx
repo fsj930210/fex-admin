@@ -23,6 +23,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Tree'), 'TreePage'),
   },
   {
+    path: '/tooltip',
+    element: createLazyRouteElement(() => import('../../pages/Tooltip'), 'TooltipPage'),
+  },
+  {
     path: '/transfer',
     element: createLazyRouteElement(() => import('../../pages/Transfer'), 'TransferPage'),
   },

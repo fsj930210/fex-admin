@@ -45,6 +45,7 @@ export class HomeComponent {
     { to: '/resizable', label: 'Resizable' },
     { to: '/textarea', label: 'Textarea' },
     { to: '/time-picker', label: 'TimePicker' },
+    { to: '/tooltip', label: 'Tooltip' },
     { to: '/tree', label: 'Tree' },
     { to: '/transfer', label: 'Transfer' },
     { to: '/upload', label: 'Upload' },

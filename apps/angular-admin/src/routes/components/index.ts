@@ -111,6 +111,11 @@ export const componentRoutes: Routes = [
       import('../../pages/radio/index.component').then((module) => module.RadioComponent),
   },
   {
+    path: 'tooltip',
+    loadComponent: () =>
+      import('../../pages/tooltip/index.component').then((module) => module.TooltipComponent),
+  },
+  {
     path: 'spinner',
     loadComponent: () =>
       import('../../pages/spinner/index.component').then((module) => module.SpinnerComponent),

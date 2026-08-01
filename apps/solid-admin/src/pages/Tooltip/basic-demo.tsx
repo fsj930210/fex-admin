@@ -1,0 +1,4 @@
+import * as Tooltip from '@fex/components-solid/primitive/tooltip'
+import { Button } from '@fex/components-solid/ui/button'
+import { Kbd } from '@fex/components-solid/ui/kbd'
+export function BasicDemo() { return <div class="flex gap-space-md"><Tooltip.TooltipRoot><Tooltip.TooltipTrigger>{(slot) => <Button ref={slot.ref} {...slot.props} variant="outline">Hover or focus</Button>}</Tooltip.TooltipTrigger><Tooltip.TooltipPortal><Tooltip.TooltipContent>Helpful information<Tooltip.TooltipArrow /></Tooltip.TooltipContent></Tooltip.TooltipPortal></Tooltip.TooltipRoot><Tooltip.TooltipRoot><Tooltip.TooltipTrigger>{(slot) => <Button ref={slot.ref} {...slot.props} variant="outline">Save</Button>}</Tooltip.TooltipTrigger><Tooltip.TooltipPortal><Tooltip.TooltipContent class="flex items-center gap-2">Save changes <Kbd>S</Kbd><Tooltip.TooltipArrow /></Tooltip.TooltipContent></Tooltip.TooltipPortal></Tooltip.TooltipRoot></div> }
