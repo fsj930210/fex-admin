@@ -25,15 +25,15 @@ TimePicker primitive 内置 Input Trigger、Popover Content、Panel 和四个可
 
 ## Root Props
 
-| 参数 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| value | TimeValue \| null | - | 否 | 受控时间值 |
-| defaultValue | TimeValue \| null | null | 否 | 非受控初始值 |
-| onChange/change | callback | - | 否 | 选择列项时返回完整时间及原因 |
-| use12Hours | boolean | false | 否 | 使用 12 小时列语义 |
-| disabled | boolean | false | 否 | 禁用全部列 |
-| readOnly | boolean | false | 否 | 允许查看但禁止修改 |
-| disabledTime | DisabledTime | - | 否 | 根据当前时分秒禁用具体选项 |
+| 参数            | 类型              | 默认值 | 必填 | 说明                         |
+| --------------- | ----------------- | ------ | ---- | ---------------------------- |
+| value           | TimeValue \| null | -      | 否   | 受控时间值                   |
+| defaultValue    | TimeValue \| null | null   | 否   | 非受控初始值                 |
+| onChange/change | callback          | -      | 否   | 选择列项时返回完整时间及原因 |
+| use12Hours      | boolean           | false  | 否   | 使用 12 小时列语义           |
+| disabled        | boolean           | false  | 否   | 禁用全部列                   |
+| readOnly        | boolean           | false  | 否   | 允许查看但禁止修改           |
+| disabledTime    | DisabledTime      | -      | 否   | 根据当前时分秒禁用具体选项   |
 
 ## Column Props
 

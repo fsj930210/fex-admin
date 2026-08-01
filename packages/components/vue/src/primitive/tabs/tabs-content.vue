@@ -18,9 +18,15 @@ const active = computed(() => context.snapshot.value.value === props.value)
 const contentProps = computed(() => {
   const { class: userClass, ...forwardedAttrs } = attrs
   return mergeProps(forwardedAttrs, context.getContentProps(props.value), {
-    class: cn(tabsContentClassName({ variant: context.variant() }), userClass as string | undefined),
+    class: cn(
+      tabsContentClassName({ variant: context.variant() }),
+      userClass as string | undefined,
+    ),
   })
 })
 </script>
 
-<template><slot v-if="mounted && $slots.render" name="render" :props="contentProps" :state="{ active }" /><div v-else-if="mounted" v-bind="contentProps"><slot /></div></template>
+<template>
+  <slot v-if="mounted && $slots.render" name="render" :props="contentProps" :state="{ active }" />
+  <div v-else-if="mounted" v-bind="contentProps"><slot /></div>
+</template>

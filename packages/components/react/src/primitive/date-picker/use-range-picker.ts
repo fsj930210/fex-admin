@@ -8,7 +8,11 @@ import {
 } from '@fex/components-core/calendar'
 import { createDatePickerDisabledDate } from '@fex/components-core/date-picker/constraints'
 import { getDefaultPanelByPicker } from '@fex/components-core/date-picker/panel'
-import { createNextRangeValue, getNextRangeActivePart, getRangeFromValue } from '@fex/components-core/date-picker/range'
+import {
+  createNextRangeValue,
+  getNextRangeActivePart,
+  getRangeFromValue,
+} from '@fex/components-core/date-picker/range'
 import { getCalendarValueDate } from '@fex/components-core/calendar/value'
 import { getDefaultDatePickerFormat } from '@fex/components-core/date-picker/value'
 import type { DatePickerPicker } from '@fex/components-core/date-picker/types'
@@ -41,7 +45,8 @@ export interface UseRangePickerOptions<TValue extends CalendarValue = CalendarVa
 
 function normalizeAllowEmpty(value: UseRangePickerOptions['allowEmpty']) {
   if (value === true) return { start: true, end: true }
-  if (value && typeof value === 'object') return { start: Boolean(value.start), end: Boolean(value.end) }
+  if (value && typeof value === 'object')
+    return { start: Boolean(value.start), end: Boolean(value.end) }
   return { start: false, end: false }
 }
 
@@ -91,7 +96,12 @@ export function useRangePicker<TValue extends CalendarValue = CalendarValue>(
     setPanelState(nextPanel)
   })
   const select = useMemoizedFn((nextValue: TValue) => {
-    const nextRange = createNextRangeValue(activeRangeValue, nextValue, activePart, options.order ?? true)
+    const nextRange = createNextRangeValue(
+      activeRangeValue,
+      nextValue,
+      activePart,
+      options.order ?? true,
+    )
     setHoverValue(null)
     if (needConfirm) setPendingValue(nextRange)
     else setRangeValue(nextRange)
@@ -116,13 +126,24 @@ export function useRangePicker<TValue extends CalendarValue = CalendarValue>(
     setRangeValue(next)
     setHoverValue(null)
   })
-  const disabledDate = useMemoizedFn((date: CalendarDate, part: 'start' | 'end') => createDatePickerDisabledDate({
-    picker,
-    panel,
-    ...(options.minDate ? { minDate: options.minDate } : {}),
-    ...(options.maxDate ? { maxDate: options.maxDate } : {}),
-    ...(options.disabledDate ? { disabledDate: (currentDate, info) => Boolean(options.disabledDate?.(currentDate, info.activePart ?? part)) } : {}),
-  })(date, { activePart: part, from: getRangeFromValue(activeRangeValue, part), rangeValue: activeRangeValue }))
+  const disabledDate = useMemoizedFn((date: CalendarDate, part: 'start' | 'end') =>
+    createDatePickerDisabledDate({
+      picker,
+      panel,
+      ...(options.minDate ? { minDate: options.minDate } : {}),
+      ...(options.maxDate ? { maxDate: options.maxDate } : {}),
+      ...(options.disabledDate
+        ? {
+            disabledDate: (currentDate, info) =>
+              Boolean(options.disabledDate?.(currentDate, info.activePart ?? part)),
+          }
+        : {}),
+    })(date, {
+      activePart: part,
+      from: getRangeFromValue(activeRangeValue, part),
+      rangeValue: activeRangeValue,
+    }),
+  )
 
   return {
     picker,

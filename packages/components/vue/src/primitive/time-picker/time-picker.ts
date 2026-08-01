@@ -8,4 +8,9 @@ export { default as TimePickerSecondColumn } from './time-picker-second-column.v
 export { default as TimePickerPeriodColumn } from './time-picker-period-column.vue'
 export { default as TimePickerColumn } from './time-picker-column.vue'
 export { useTimePicker } from './use-time-picker'
-export type { DisabledTime, TimePeriod, TimePickerChangeDetails, TimeValue } from '@fex/components-core/time-picker/types'
+export type {
+  DisabledTime,
+  TimePeriod,
+  TimePickerChangeDetails,
+  TimeValue,
+} from '@fex/components-core/time-picker/types'

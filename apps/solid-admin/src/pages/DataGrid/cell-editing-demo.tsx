@@ -21,17 +21,19 @@ export function CellEditingDataGridDemo() {
       ...(field === 'visits' ? { meta: { align: 'right' as const } } : {}),
       cell: ({ row, getValue }) =>
         editing()?.rowId === row.id && editing()?.field === field ? (
-          <InputRoot value={String(getValue() ?? '')}><InputControl
-            autofocus
-            type="text"
-            value={String(getValue() ?? '')}
-            aria-label={`Edit ${field} for ${row.id}`}
-            onBlur={(event) => updateCell(row.id, field, event.currentTarget.value)}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') event.currentTarget.blur()
-              if (event.key === 'Escape') setEditing(null)
-            }}
-          /></InputRoot>
+          <InputRoot value={String(getValue() ?? '')}>
+            <InputControl
+              autofocus
+              type="text"
+              value={String(getValue() ?? '')}
+              aria-label={`Edit ${field} for ${row.id}`}
+              onBlur={(event) => updateCell(row.id, field, event.currentTarget.value)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') event.currentTarget.blur()
+                if (event.key === 'Escape') setEditing(null)
+              }}
+            />
+          </InputRoot>
         ) : (
           <Button
             size="sm"

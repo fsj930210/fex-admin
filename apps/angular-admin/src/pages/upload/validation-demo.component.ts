@@ -1,6 +1,10 @@
 import { uploadFeature } from '@fex/components-core/upload/features/upload'
 import type { UploadItem } from '@fex/components-core/upload/types'
-import { UploadRoot, UploadTrigger, createUploadSignals } from '@fex/components-angular/primitive/upload'
+import {
+  UploadRoot,
+  UploadTrigger,
+  createUploadSignals,
+} from '@fex/components-angular/primitive/upload'
 import { Button } from '@fex/components-angular/ui/button'
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core'
 import { uploadBody, uploadServerUrl } from './api'
@@ -22,7 +26,19 @@ export class ValidationUploadDemoComponent {
     items: this.items(),
     onItemsChange: (items) => this.items.set(items),
     autoUpload: false,
-    features: [uploadFeature({ request: ({ file, signal, onProgress }) => uploadBody(`${uploadServerUrl}/upload`, file, { fileName: file.name, signal, onProgress }) })],
+    features: [
+      uploadFeature({
+        request: ({ file, signal: abortSignal, onProgress }) =>
+          uploadBody(`${uploadServerUrl}/upload`, file, {
+            fileName: file.name,
+            signal: abortSignal,
+            onProgress,
+          }),
+      }),
+    ],
   })).upload
-  protected submit(event: Event) { event.preventDefault(); this.submitted.set(true) }
+  protected submit(event: Event) {
+    event.preventDefault()
+    this.submitted.set(true)
+  }
 }

@@ -54,35 +54,55 @@ export class RangePickerTrigger implements AfterViewInit {
 
   previewStartValue() {
     const context = this.state.context()
-    return getRangeInputPreviewValue(context.rangeValue, context.hoverValue, context.activePart, 'start')
+    return getRangeInputPreviewValue(
+      context.rangeValue,
+      context.hoverValue,
+      context.activePart,
+      'start',
+    )
   }
 
   previewEndValue() {
     const context = this.state.context()
-    return getRangeInputPreviewValue(context.rangeValue, context.hoverValue, context.activePart, 'end')
+    return getRangeInputPreviewValue(
+      context.rangeValue,
+      context.hoverValue,
+      context.activePart,
+      'end',
+    )
   }
 
   startText() {
     const context = this.state.context()
-    const value = context.activePart === 'start' && this.previewStartValue() ? this.previewStartValue() : context.rangeValue.start
+    const value =
+      context.activePart === 'start' && this.previewStartValue()
+        ? this.previewStartValue()
+        : context.rangeValue.start
     return value ? formatDatePickerValue(value, context) : ''
   }
 
   endText() {
     const context = this.state.context()
-    const value = context.activePart === 'end' && this.previewEndValue() ? this.previewEndValue() : context.rangeValue.end
+    const value =
+      context.activePart === 'end' && this.previewEndValue()
+        ? this.previewEndValue()
+        : context.rangeValue.end
     return value ? formatDatePickerValue(value, context) : ''
   }
 
   startPreviewing() {
     const context = this.state.context()
-    const committed = context.rangeValue.start ? formatDatePickerValue(context.rangeValue.start, context) : ''
+    const committed = context.rangeValue.start
+      ? formatDatePickerValue(context.rangeValue.start, context)
+      : ''
     return this.startText() !== committed
   }
 
   endPreviewing() {
     const context = this.state.context()
-    const committed = context.rangeValue.end ? formatDatePickerValue(context.rangeValue.end, context) : ''
+    const committed = context.rangeValue.end
+      ? formatDatePickerValue(context.rangeValue.end, context)
+      : ''
     return this.endText() !== committed
   }
 
@@ -95,7 +115,9 @@ export class RangePickerTrigger implements AfterViewInit {
   }
 
   rootValue() {
-    return getRangePickerDisplayTexts(this.state.context().rangeValue, this.state.context()).join('')
+    return getRangePickerDisplayTexts(this.state.context().rangeValue, this.state.context()).join(
+      '',
+    )
   }
 
   hasValue() {
@@ -118,7 +140,9 @@ export class RangePickerTrigger implements AfterViewInit {
   }
 
   openFromTrigger(event: MouseEvent) {
-    const part = (event.target as HTMLElement | null)?.closest('[data-range-part]')?.getAttribute('data-range-part')
+    const part = (event.target as HTMLElement | null)
+      ?.closest('[data-range-part]')
+      ?.getAttribute('data-range-part')
     this.openPart(part === 'start' || part === 'end' ? part : this.state.context().activePart)
   }
 

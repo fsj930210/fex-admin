@@ -13,15 +13,15 @@ AutoComplete keeps input text as its value. Suggestions are optional and selecti
 
 ## Root props
 
-| Prop | Purpose |
-| --- | --- |
-| `items` / `fieldNames` | Original records and `key`, `value`, optional `label`, `disabled` mapping |
-| `value` / `defaultValue` | Controlled or initial input text |
-| `open` / `defaultOpen` | Controlled or initial panel state |
-| `filterOption` | Contains filter, predicate, or `false` |
-| `loading` | Replaceable loading state |
-| `disabled` / `readOnly` | Shared Input states |
-| `closeOnSelect` / `loop` | Closing and keyboard wrapping |
+| Prop                     | Purpose                                                                   |
+| ------------------------ | ------------------------------------------------------------------------- |
+| `items` / `fieldNames`   | Original records and `key`, `value`, optional `label`, `disabled` mapping |
+| `value` / `defaultValue` | Controlled or initial input text                                          |
+| `open` / `defaultOpen`   | Controlled or initial panel state                                         |
+| `filterOption`           | Contains filter, predicate, or `false`                                    |
+| `loading`                | Replaceable loading state                                                 |
+| `disabled` / `readOnly`  | Shared Input states                                                       |
+| `closeOnSelect` / `loop` | Closing and keyboard wrapping                                             |
 
 ## Events and controlled state
 

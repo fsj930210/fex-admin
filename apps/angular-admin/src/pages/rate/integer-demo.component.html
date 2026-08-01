@@ -1,1 +1,8 @@
-<fex-card title="Default integer" description="The default step is 1, so pointer and keyboard input select whole values."><div class="grid gap-space-sm"><fex-rate [value]="value()" (valueChange)="value.set($event)" aria-label="Integer rating" /><p class="text-sm text-muted-foreground">Current value: {{ value() }}</p></div></fex-card>
+<fex-card
+  title="Default integer"
+  description="The default step is 1, so pointer and keyboard input select whole values."
+  ><div class="grid gap-space-sm">
+    <fex-rate [value]="value()" (valueChange)="value.set($event)" aria-label="Integer rating" />
+    <p class="text-sm text-muted-foreground">Current value: {{ value() }}</p>
+  </div></fex-card
+>

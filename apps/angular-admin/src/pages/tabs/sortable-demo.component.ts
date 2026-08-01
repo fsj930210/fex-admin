@@ -9,7 +9,17 @@ import { initialTabs } from './data'
 @Component({
   selector: 'fex-sortable-tabs-demo',
   standalone: true,
-  imports: [Card, EllipsisIcon, FexSortable, FexSortableItemDirective, NgStyle, TabsRoot, TabsList, TabsItem, TabsContent],
+  imports: [
+    Card,
+    EllipsisIcon,
+    FexSortable,
+    FexSortableItemDirective,
+    NgStyle,
+    TabsRoot,
+    TabsList,
+    TabsItem,
+    TabsContent,
+  ],
   templateUrl: './sortable-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -20,7 +30,11 @@ export class SortableTabsDemoComponent {
 
   protected reorder(values: string[]) {
     const byValue = new Map(this.items().map((item) => [item.value, item]))
-    this.items.set(values.map((value) => byValue.get(value)).filter((item): item is NonNullable<typeof item> => Boolean(item)))
+    this.items.set(
+      values
+        .map((value) => byValue.get(value))
+        .filter((item): item is NonNullable<typeof item> => Boolean(item)),
+    )
   }
 
   protected label(value: string | number) {

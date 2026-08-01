@@ -9,7 +9,10 @@ export function CheckTreeDemo() {
   const [strictKeys, setStrictKeys] = useState<readonly (string | number)[]>([])
 
   return (
-    <TreeDemoSection title="Check modes" description="Cascade links parent and children; strict keeps every node independent.">
+    <TreeDemoSection
+      title="Check modes"
+      description="Cascade links parent and children; strict keeps every node independent."
+    >
       <div className="grid gap-space-lg lg:grid-cols-2">
         <div className="space-y-space-sm">
           <p className="text-sm font-medium">Cascade</p>
@@ -17,7 +20,10 @@ export function CheckTreeDemo() {
             treeData={departmentTreeData}
             fieldNames={departmentFieldNames}
             isLeaf={(node) => node.childCount === 0}
-            features={[expansionFeature({ defaultExpandedKeys: ['company', 'engineering'] }), checkFeature()]}
+            features={[
+              expansionFeature({ defaultExpandedKeys: ['company', 'engineering'] }),
+              checkFeature(),
+            ]}
             checkable
             checkedKeys={cascadeKeys}
             onCheckedKeysChange={setCascadeKeys}
@@ -30,7 +36,10 @@ export function CheckTreeDemo() {
             treeData={departmentTreeData}
             fieldNames={departmentFieldNames}
             isLeaf={(node) => node.childCount === 0}
-            features={[expansionFeature({ defaultExpandedKeys: ['company', 'engineering'] }), checkFeature({ mode: 'strict' })]}
+            features={[
+              expansionFeature({ defaultExpandedKeys: ['company', 'engineering'] }),
+              checkFeature({ mode: 'strict' }),
+            ]}
             checkable
             checkedKeys={strictKeys}
             onCheckedKeysChange={setStrictKeys}

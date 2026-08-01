@@ -23,22 +23,22 @@ Backend records remain intact:
 
 ## Root props and events
 
-| Prop | Purpose |
-| --- | --- |
-| `items` / `fieldNames` | Original records and `key`, `value`, optional `label`, `disabled` mapping |
-| `value` / `defaultValue` | Controlled or initial input text |
-| `open` / `defaultOpen` | Controlled or initial panel state |
-| `filterOption` | Contains filter, predicate, or `false` for remote data |
-| `loading` | Replaceable loading state |
-| `disabled` / `readOnly` | Shared Input states |
-| `closeOnSelect` / `loop` | Closing and keyboard wrapping |
+| Prop                     | Purpose                                                                   |
+| ------------------------ | ------------------------------------------------------------------------- |
+| `items` / `fieldNames`   | Original records and `key`, `value`, optional `label`, `disabled` mapping |
+| `value` / `defaultValue` | Controlled or initial input text                                          |
+| `open` / `defaultOpen`   | Controlled or initial panel state                                         |
+| `filterOption`           | Contains filter, predicate, or `false` for remote data                    |
+| `loading`                | Replaceable loading state                                                 |
+| `disabled` / `readOnly`  | Shared Input states                                                       |
+| `closeOnSelect` / `loop` | Closing and keyboard wrapping                                             |
 
-| Event | Payload |
-| --- | --- |
-| `change` / `search` | Text, reason, and previous value |
-| `select` | Value, complete original `selectedItem`, key, and previous value |
-| `clear` | Previous value |
-| `openChange` | Panel state and reason |
+| Event               | Payload                                                          |
+| ------------------- | ---------------------------------------------------------------- |
+| `change` / `search` | Text, reason, and previous value                                 |
+| `select`            | Value, complete original `selectedItem`, key, and previous value |
+| `clear`             | Previous value                                                   |
+| `openChange`        | Panel state and reason                                           |
 
 Only `value` and `open` support controlled/uncontrolled use. Active suggestion is internal and filtered items are derived.
 

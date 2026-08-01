@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useMemoizedFn } from "./use-memoized-fn";
+import { useState } from 'react'
+import { useMemoizedFn } from './use-memoized-fn'
 
 export const useUpdate = () => {
-  const [, setState] = useState({});
+  const [, setState] = useState({})
 
-  return useMemoizedFn(() => setState({}));
-};
+  return useMemoizedFn(() => setState({}))
+}

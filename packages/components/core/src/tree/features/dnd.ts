@@ -2,13 +2,7 @@ import type { Point, Rect } from '../../interactions/types'
 import { createStore } from '../../store/create-store'
 import type { StoreListener } from '../../store/create-store'
 import type { TreeFeatureRegistration } from '../feature-types'
-import type {
-  TreeItem,
-  TreeKey,
-  TreeMoveInput,
-  TreeMutationResult,
-  TreeNodeData,
-} from '../types'
+import type { TreeItem, TreeKey, TreeMoveInput, TreeMutationResult, TreeNodeData } from '../types'
 import type { ExpansionFeatureApi } from './expansion'
 
 export type TreeDropPosition = 'inside' | 'after'
@@ -93,24 +87,23 @@ export function dndFeature<TNode extends TreeNodeData>({
           if (!source || !target || input.indent <= 0) return undefined
 
           const dragRect = input.dragRect
-          const overlapsTarget = !dragRect || (
-            dragRect.x < input.targetRect.x + input.targetRect.width
-            && dragRect.x + dragRect.width > input.targetRect.x
-            && dragRect.y < input.targetRect.y + input.targetRect.height
-            && dragRect.y + dragRect.height > input.targetRect.y
-          )
+          const overlapsTarget =
+            !dragRect ||
+            (dragRect.x < input.targetRect.x + input.targetRect.width &&
+              dragRect.x + dragRect.width > input.targetRect.x &&
+              dragRect.y < input.targetRect.y + input.targetRect.height &&
+              dragRect.y + dragRect.height > input.targetRect.y)
           const horizontalOffset = (dragRect?.x ?? input.pointer.x) - input.targetRect.x
           // The store supplies the vertically intersected target. Horizontal offset alone chooses
           // whether the source is inserted after it or as its first child.
-          const canNest = overlapsTarget
-            && horizontalOffset >= input.indent
-            && (allowDropInsideLeaf || !target.isLeaf)
+          const canNest =
+            overlapsTarget &&
+            horizontalOffset >= input.indent &&
+            (allowDropInsideLeaf || !target.isLeaf)
           const position: TreeDropPosition = canNest ? 'inside' : 'after'
 
           const parentKey = position === 'inside' ? target.key : target.parentKey
-          let index = position === 'inside'
-            ? 0
-            : target.index + 1
+          let index = position === 'inside' ? 0 : target.index + 1
 
           if (source.parentKey === parentKey && source.index < index) index -= 1
 
@@ -119,20 +112,22 @@ export function dndFeature<TNode extends TreeNodeData>({
             position,
             parentKey,
             index,
-            indicatorOffset: position === 'inside'
-              ? input.indent
-              : 4,
+            indicatorOffset: position === 'inside' ? input.indent : 4,
             valid: true,
           }
-          const invalidate = (reason: string): TreeDropIntent => ({ ...intent, valid: false, reason })
+          const invalidate = (reason: string): TreeDropIntent => ({
+            ...intent,
+            valid: false,
+            reason,
+          })
 
           if (source.disabled || canDrag?.(source) === false) {
             return invalidate('This node cannot be dragged.')
           }
           if (source.key === target.key) return invalidate('Cannot drop onto itself.')
           if (
-            parentKey === source.key
-            || (parentKey !== null && context.getDescendantKeys(source.key).includes(parentKey))
+            parentKey === source.key ||
+            (parentKey !== null && context.getDescendantKeys(source.key).includes(parentKey))
           ) {
             return invalidate('Cannot drop into its own descendant.')
           }
@@ -140,9 +135,7 @@ export function dndFeature<TNode extends TreeNodeData>({
             return invalidate('Leaf nodes cannot accept children.')
           }
           if (maxDepth !== undefined) {
-            const nextDepth = parentKey === null
-              ? 0
-              : (context.getItem(parentKey)?.depth ?? -1) + 1
+            const nextDepth = parentKey === null ? 0 : (context.getItem(parentKey)?.depth ?? -1) + 1
             if (nextDepth + getSubtreeDepth(source.key, context.getChildrenKeys) > maxDepth) {
               return invalidate('Drop would exceed maxDepth.')
             }
@@ -167,12 +160,13 @@ export function dndFeature<TNode extends TreeNodeData>({
           setActiveIntent: (intent) => {
             const current = activeIntentStore.getSnapshot()
             if (
-              current?.sourceKey === intent?.sourceKey
-              && current?.targetKey === intent?.targetKey
-              && current?.parentKey === intent?.parentKey
-              && current?.index === intent?.index
-              && current?.position === intent?.position
-            ) return
+              current?.sourceKey === intent?.sourceKey &&
+              current?.targetKey === intent?.targetKey &&
+              current?.parentKey === intent?.parentKey &&
+              current?.index === intent?.index &&
+              current?.position === intent?.position
+            )
+              return
             activeIntentStore.setSnapshot(intent)
           },
           clearActiveIntent: (targetKey) => {

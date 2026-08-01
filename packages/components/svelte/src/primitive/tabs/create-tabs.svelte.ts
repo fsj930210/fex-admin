@@ -1,16 +1,21 @@
 import { createTabsController } from '@fex/components-core/tabs/create-tabs-controller'
-import type { TabsActivationMode, TabsChangeMeta, TabsItemRecord, TabsOrientation } from '@fex/components-core/tabs/types'
+import type {
+  TabsActivationMode,
+  TabsChangeMeta,
+  TabsItemRecord,
+  TabsOrientation,
+} from '@fex/components-core/tabs/types'
 import type { HTMLAttributes, HTMLButtonAttributes } from 'svelte/elements'
 import { readableCoreStore } from '../../stores/core-store'
 
 export interface CreateTabsOptions {
-  readonly value?: string
-  readonly defaultValue?: string
-  readonly orientation?: TabsOrientation
-  readonly activationMode?: TabsActivationMode
-  readonly loop?: boolean
-  readonly onChange?: (value: string | undefined, meta: TabsChangeMeta) => void
-  readonly onClose?: (item: TabsItemRecord) => void
+  readonly value?: string | undefined
+  readonly defaultValue?: string | undefined
+  readonly orientation?: TabsOrientation | undefined
+  readonly activationMode?: TabsActivationMode | undefined
+  readonly loop?: boolean | undefined
+  readonly onChange?: ((value: string | undefined, meta: TabsChangeMeta) => void) | undefined
+  readonly onClose?: ((item: TabsItemRecord) => void) | undefined
 }
 
 export function createTabs(options: CreateTabsOptions = {}) {
@@ -46,11 +51,11 @@ export function createTabs(options: CreateTabsOptions = {}) {
     }
   }
 
-  function getListProps(): HTMLAttributes<HTMLElement> {
+  function getListProps(): HTMLAttributes<HTMLDivElement> {
     return { role: 'tablist', 'aria-orientation': orientation(), 'data-orientation': orientation() }
   }
 
-  function getItemProps(item: TabsItemRecord): HTMLAttributes<HTMLElement> {
+  function getItemProps(item: TabsItemRecord): HTMLAttributes<HTMLDivElement> {
     const state = itemState(item)
     return {
       id: `${baseId}-tab-${item.value}`,
@@ -67,11 +72,16 @@ export function createTabs(options: CreateTabsOptions = {}) {
       },
       onkeydown: (event) => {
         const horizontal = orientation() === 'horizontal'
-        const direction = event.key === 'Home' ? 'first'
-          : event.key === 'End' ? 'last'
-            : event.key === (horizontal ? 'ArrowRight' : 'ArrowDown') ? 'next'
-              : event.key === (horizontal ? 'ArrowLeft' : 'ArrowUp') ? 'previous'
-                : undefined
+        const direction =
+          event.key === 'Home'
+            ? 'first'
+            : event.key === 'End'
+              ? 'last'
+              : event.key === (horizontal ? 'ArrowRight' : 'ArrowDown')
+                ? 'next'
+                : event.key === (horizontal ? 'ArrowLeft' : 'ArrowUp')
+                  ? 'previous'
+                  : undefined
         if (direction) {
           event.preventDefault()
           const value = controller.moveFocus(direction)
@@ -98,7 +108,7 @@ export function createTabs(options: CreateTabsOptions = {}) {
     }
   }
 
-  function getContentProps(value: string): HTMLAttributes<HTMLElement> {
+  function getContentProps(value: string): HTMLAttributes<HTMLDivElement> {
     const current = controller.getSnapshot()
     return {
       id: `${baseId}-panel-${value}`,

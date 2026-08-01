@@ -10,4 +10,6 @@ const titleAttrs = computed(() => {
   return rest
 })
 </script>
-<template><span v-bind="titleAttrs" data-slot="tree-title" :class="titleClass"><slot /></span></template>
+<template>
+  <span v-bind="titleAttrs" data-slot="tree-title" :class="titleClass"><slot /></span>
+</template>

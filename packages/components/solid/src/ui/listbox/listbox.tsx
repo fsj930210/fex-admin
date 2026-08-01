@@ -30,7 +30,12 @@ export type ListboxRootProps<TItem = unknown> = PrimitiveListboxRootProps<TItem>
 
 export function ListboxRoot<TItem = unknown>(props: ListboxRootProps<TItem>) {
   const [local, rest] = splitProps(props, ['class', 'variant'])
-  return <PrimitiveListboxRoot {...rest} class={cn(listboxRootClassName({ variant: local.variant }), local.class)} />
+  return (
+    <PrimitiveListboxRoot
+      {...rest}
+      class={cn(listboxRootClassName({ variant: local.variant }), local.class)}
+    />
+  )
 }
 
 export function ListboxGroup(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
@@ -40,11 +45,14 @@ export function ListboxGroup(props: ParentProps<JSX.HTMLAttributes<HTMLDivElemen
 
 export function ListboxGroupLabel(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
   const [local, rest] = splitProps(props, ['class'])
-  return <PrimitiveListboxGroupLabel {...rest} class={cn(listboxGroupLabelClassName, local.class)} />
+  return (
+    <PrimitiveListboxGroupLabel {...rest} class={cn(listboxGroupLabelClassName, local.class)} />
+  )
 }
 
 export interface ListboxItemProps
-  extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onSelect' | 'title'>>,
+  extends
+    ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onSelect' | 'title'>>,
     ListboxItemStyleProps {
   value: string | number
   disabled?: boolean
@@ -56,12 +64,17 @@ export interface ListboxItemProps
 export function ListboxItem(props: ListboxItemProps) {
   const [local, rest] = splitProps(props, ['class', 'size', 'title', 'description', 'children'])
   return (
-    <PrimitiveListboxItem {...rest} class={cn(listboxItemClassName({ size: local.size }), local.class)}>
+    <PrimitiveListboxItem
+      {...rest}
+      class={cn(listboxItemClassName({ size: local.size }), local.class)}
+    >
       {local.children ?? (
         <>
           <span class={listboxItemContentClassName}>
             <span class={listboxItemTitleClassName}>{local.title}</span>
-            {local.description ? <span class={listboxItemDescriptionClassName}>{local.description}</span> : null}
+            {local.description ? (
+              <span class={listboxItemDescriptionClassName}>{local.description}</span>
+            ) : null}
           </span>
           <PrimitiveListboxItemIndicator class={listboxItemIndicatorClassName}>
             <CheckIcon />

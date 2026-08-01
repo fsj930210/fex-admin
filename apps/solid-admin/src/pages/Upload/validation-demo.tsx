@@ -12,20 +12,52 @@ export function ValidationUploadDemo() {
   const [submitted, setSubmitted] = createSignal(false)
   const invalid = () => submitted() && items().length === 0
   const upload = createUpload({
-    get items() { return items() },
+    get items() {
+      return items()
+    },
     onItemsChange: setItems,
     autoUpload: false,
-    features: [uploadFeature({ request: ({ file, signal, onProgress }) => uploadBody(`${uploadServerUrl}/upload`, file, { fileName: file.name, signal, onProgress }) })],
+    features: [
+      uploadFeature({
+        request: ({ file, signal, onProgress }) =>
+          uploadBody(`${uploadServerUrl}/upload`, file, {
+            fileName: file.name,
+            signal,
+            onProgress,
+          }),
+      }),
+    ],
   })
   return (
-    <UploadDemoSection title="受控表单校验" description="父组件控制文件列表；必填字段为空时提交表单，选择文件按钮会公开 invalid 状态。">
-      <form noValidate onSubmit={(event) => { event.preventDefault(); setSubmitted(true) }}>
+    <UploadDemoSection
+      title="受控表单校验"
+      description="父组件控制文件列表；必填字段为空时提交表单，选择文件按钮会公开 invalid 状态。"
+    >
+      <form
+        noValidate
+        onSubmit={(event) => {
+          event.preventDefault()
+          setSubmitted(true)
+        }}
+      >
         <UploadRoot controller={upload} invalid={invalid()} required>
-          <UploadTrigger>{({ props }) => <Button {...props} variant="outline">选择必填文件</Button>}</UploadTrigger>
+          <UploadTrigger>
+            {({ props }) => (
+              <Button {...props} variant="outline">
+                选择必填文件
+              </Button>
+            )}
+          </UploadTrigger>
           <DemoUploadList />
         </UploadRoot>
-        <Show when={invalid()}><p class="mt-space-xs text-sm text-danger" role="alert">请至少选择一个文件。</p></Show>
-        <Button class="mt-space-md" type="submit">校验表单</Button>
+        <Show when={invalid()}>
+          <p class="mt-space-xs text-sm text-danger" role="alert">
+            请至少选择一个文件。
+          </p>
+        </Show>
+        <Button class="mt-space-md" type="submit">
+          校验表单
+        </Button>
       </form>
     </UploadDemoSection>
   )

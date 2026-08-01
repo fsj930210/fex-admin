@@ -8,8 +8,8 @@
   import InputSuffix from '../input/input-suffix.svelte'
   import PopoverTrigger from '../popover/popover-trigger.svelte'
   import { getAutoCompleteContext } from './context'
-  interface Props extends Omit<HTMLInputAttributes, 'value' | 'class'> {
-    class?: string
+  interface Props extends Omit<HTMLInputAttributes, 'value' | 'class' | 'prefix'> {
+    class?: string | undefined
     clearable?: boolean
     invalid?: boolean
     status?: 'error' | 'warning'
@@ -20,7 +20,7 @@
   const autoComplete = getAutoCompleteContext('AutoCompleteTrigger')
   const snapshot = autoComplete.snapshot
   function keydown(event: KeyboardEvent) {
-    onkeydown?.(event)
+    onkeydown?.(event as Parameters<NonNullable<typeof onkeydown>>[0])
     if (event.defaultPrevented) return
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault()

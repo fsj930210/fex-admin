@@ -9,4 +9,3 @@ export interface DropzoneValidationOptions {
   maxCount?: number
   multiple?: boolean
 }
-

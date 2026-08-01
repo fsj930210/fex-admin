@@ -12,7 +12,16 @@ import {
   type CalendarWeekday,
 } from '@fex/components-core/calendar'
 import { cn } from '@fex/utils'
-import { createMemo, createSignal, For, Index, splitProps, type Accessor, type JSX, type ParentProps } from 'solid-js'
+import {
+  createMemo,
+  createSignal,
+  For,
+  Index,
+  splitProps,
+  type Accessor,
+  type JSX,
+  type ParentProps,
+} from 'solid-js'
 import { CalendarContext, useCalendarContext } from './calendar-context'
 
 export type CalendarCellModel<TValue extends CalendarValue = CalendarValue> =
@@ -22,20 +31,20 @@ export interface CalendarRootProps<TValue extends CalendarValue = CalendarValue>
   JSX.HTMLAttributes<HTMLDivElement>,
   'onChange'
 > {
-  value?: TValue | null
-  values?: readonly TValue[]
-  range?: CalendarRange<TValue>
-  defaultValue?: TValue | null
-  viewDate?: CalendarDate
-  defaultViewDate?: CalendarDate
-  panel?: CalendarPanel
-  defaultPanel?: CalendarPanel
-  granularity?: CalendarGranularity
-  weekStartsOn?: CalendarWeekday
-  today?: CalendarDate
-  min?: CalendarDate
-  max?: CalendarDate
-  disabledDate?: (date: CalendarDate) => boolean
+  value?: TValue | null | undefined
+  values?: readonly TValue[] | undefined
+  range?: CalendarRange<TValue> | undefined
+  defaultValue?: TValue | null | undefined
+  viewDate?: CalendarDate | undefined
+  defaultViewDate?: CalendarDate | undefined
+  panel?: CalendarPanel | undefined
+  defaultPanel?: CalendarPanel | undefined
+  granularity?: CalendarGranularity | undefined
+  weekStartsOn?: CalendarWeekday | undefined
+  today?: CalendarDate | undefined
+  min?: CalendarDate | undefined
+  max?: CalendarDate | undefined
+  disabledDate?: ((date: CalendarDate) => boolean) | undefined
   onValueChange?: (value: TValue) => void
   onCellSelect?: (cell: CoreCalendarCell<TValue>) => void
   onCellHover?: (cell: CoreCalendarCell<TValue>) => void
@@ -287,7 +296,10 @@ export function CalendarGrid<TValue extends CalendarValue = CalendarValue>(
                 local.children ? (
                   local.children(cell() as CalendarCellModel<TValue>)
                 ) : (
-                  <CalendarCell cell={cell as Accessor<CalendarCellModel<TValue>>} class={local.cellClass} />
+                  <CalendarCell
+                    cell={cell as Accessor<CalendarCellModel<TValue>>}
+                    class={local.cellClass}
+                  />
                 )
               }
             </Index>
@@ -327,12 +339,8 @@ export function CalendarCell<TValue extends CalendarValue = CalendarValue>(
       data-range-start={
         cell().granularity !== 'week' && cell().state.rangeStart ? 'true' : undefined
       }
-      data-range-end={
-        cell().granularity !== 'week' && cell().state.rangeEnd ? 'true' : undefined
-      }
-      data-in-range={
-        cell().granularity !== 'week' && cell().state.inRange ? 'true' : undefined
-      }
+      data-range-end={cell().granularity !== 'week' && cell().state.rangeEnd ? 'true' : undefined}
+      data-in-range={cell().granularity !== 'week' && cell().state.inRange ? 'true' : undefined}
       data-week-selected={
         cell().granularity === 'week' && cell().state.selected ? 'true' : undefined
       }
@@ -348,37 +356,27 @@ export function CalendarCell<TValue extends CalendarValue = CalendarValue>(
         cell().granularity === 'week' && cell().columnIndex === 6 ? 'true' : undefined
       }
       data-week-start={
-        cell().granularity === 'week' &&
-        cell().state.selected &&
-        cell().columnIndex === 0
+        cell().granularity === 'week' && cell().state.selected && cell().columnIndex === 0
           ? 'true'
           : undefined
       }
       data-week-end={
-        cell().granularity === 'week' &&
-        cell().state.selected &&
-        cell().columnIndex === 6
+        cell().granularity === 'week' && cell().state.selected && cell().columnIndex === 6
           ? 'true'
           : undefined
       }
       data-week-range-start={
-        cell().granularity === 'week' &&
-        cell().state.rangeStart &&
-        !cell().state.rangeEnd
+        cell().granularity === 'week' && cell().state.rangeStart && !cell().state.rangeEnd
           ? 'true'
           : undefined
       }
       data-week-range-end={
-        cell().granularity === 'week' &&
-        cell().state.rangeEnd &&
-        !cell().state.rangeStart
+        cell().granularity === 'week' && cell().state.rangeEnd && !cell().state.rangeStart
           ? 'true'
           : undefined
       }
       data-week-range-single={
-        cell().granularity === 'week' &&
-        cell().state.rangeStart &&
-        cell().state.rangeEnd
+        cell().granularity === 'week' && cell().state.rangeStart && cell().state.rangeEnd
           ? 'true'
           : undefined
       }

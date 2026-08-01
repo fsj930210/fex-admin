@@ -1,4 +1,11 @@
-import { getCalendarToday, getCalendarValueDate, type CalendarDate, type CalendarPanel, type CalendarValue, type CalendarWeekday } from '@fex/components-core/calendar'
+import {
+  getCalendarToday,
+  getCalendarValueDate,
+  type CalendarDate,
+  type CalendarPanel,
+  type CalendarValue,
+  type CalendarWeekday,
+} from '@fex/components-core/calendar'
 import { isSameCalendarValue } from '@fex/components-core/calendar/value'
 import { createDatePickerDisabledDate } from '@fex/components-core/date-picker/constraints'
 import { getDefaultPanelByPicker } from '@fex/components-core/date-picker/panel'
@@ -28,7 +35,9 @@ export interface UseDatePickerOptions<TValue extends CalendarValue = CalendarVal
   onOpenChange?: (open: boolean) => void
 }
 
-function isValueArray<TValue extends CalendarValue>(value: DatePickerSelectionValue<TValue>): value is readonly TValue[] {
+function isValueArray<TValue extends CalendarValue>(
+  value: DatePickerSelectionValue<TValue>,
+): value is readonly TValue[] {
   return Array.isArray(value)
 }
 
@@ -42,19 +51,24 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(
     options.defaultValue ?? (multiple ? [] : null),
   )
   const [localOpen, setLocalOpen] = createSignal(options.defaultOpen ?? false)
-  const [pendingValue, setPendingValue] = createSignal<DatePickerSelectionValue<TValue>>(localValue())
+  const [pendingValue, setPendingValue] =
+    createSignal<DatePickerSelectionValue<TValue>>(localValue())
   const [panel, setPanel] = createSignal<CalendarPanel>(getDefaultPanelByPicker(picker))
   const [viewDate, setViewDate] = createSignal<CalendarDate>(getCalendarToday())
-  const value = () => options.value === undefined ? localValue() : options.value
+  const value = () => (options.value === undefined ? localValue() : options.value)
   const open = () => options.open ?? localOpen()
-  const activeValue = () => needConfirm ? pendingValue() : value()
-  const calendarValue = createMemo(() => isValueArray(activeValue()) ? null : activeValue() as TValue | null)
-  const calendarValues = createMemo(() => isValueArray(activeValue()) ? activeValue() as readonly TValue[] : [])
+  const activeValue = () => (needConfirm ? pendingValue() : value())
+  const calendarValue = createMemo(() =>
+    isValueArray(activeValue()) ? null : (activeValue() as TValue | null),
+  )
+  const calendarValues = createMemo(() =>
+    isValueArray(activeValue()) ? (activeValue() as readonly TValue[]) : [],
+  )
 
   function resetPanel() {
     const current = value()
     const selected = isValueArray(current) ? current[0] : current
-    setPendingValue(current)
+    setPendingValue(() => current)
     setPanel(getDefaultPanelByPicker(picker))
     setViewDate(selected ? getCalendarValueDate(selected) : getCalendarToday())
   }
@@ -69,7 +83,9 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(
     if (options.value === undefined) setLocalValue(() => next)
     options.onChange?.(next)
   }
-  function close() { setOpen(false) }
+  function close() {
+    setOpen(false)
+  }
   function clear() {
     const next = multiple ? [] : null
     setPendingValue(next)
@@ -80,7 +96,7 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(
     close()
   }
   function cancel() {
-    setPendingValue(value())
+    setPendingValue(() => value())
     close()
   }
   function select(next: TValue) {
@@ -88,12 +104,14 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(
       const current = activeValue()
       const values = isValueArray(current) ? current : []
       const exists = values.some((item) => isSameCalendarValue(item, next))
-      const result = exists ? values.filter((item) => !isSameCalendarValue(item, next)) : [...values, next]
-      if (needConfirm) setPendingValue(result)
+      const result = exists
+        ? values.filter((item) => !isSameCalendarValue(item, next))
+        : [...values, next]
+      if (needConfirm) setPendingValue(() => result)
       else commit(result)
       return
     }
-    if (needConfirm) setPendingValue(next)
+    if (needConfirm) setPendingValue(() => next)
     else {
       commit(next)
       close()
@@ -102,7 +120,9 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(
 
   return {
     picker,
-    get status() { return options.status },
+    get status() {
+      return options.status
+    },
     multiple,
     needConfirm,
     disabled: options.disabled ?? false,
@@ -118,13 +138,16 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(
     calendarValues,
     ...(options.minDate ? { minDate: options.minDate } : {}),
     ...(options.maxDate ? { maxDate: options.maxDate } : {}),
-    disabledDate: options.disabledDate ? (date) => createDatePickerDisabledDate({
-      picker,
-      panel: panel(),
-      ...(options.minDate ? { minDate: options.minDate } : {}),
-      ...(options.maxDate ? { maxDate: options.maxDate } : {}),
-      disabledDate: options.disabledDate,
-    })(date) : undefined,
+    disabledDate: options.disabledDate
+      ? (date) =>
+          createDatePickerDisabledDate({
+            picker,
+            panel: panel(),
+            ...(options.minDate ? { minDate: options.minDate } : {}),
+            ...(options.maxDate ? { maxDate: options.maxDate } : {}),
+            ...(options.disabledDate ? { disabledDate: options.disabledDate } : {}),
+          })(date)
+      : undefined,
     setPanel,
     setViewDate,
     setOpen,

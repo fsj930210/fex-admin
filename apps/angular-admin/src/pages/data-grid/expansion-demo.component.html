@@ -8,8 +8,19 @@
       <fex-data-grid [table]="tree"
         ><ng-template fexDataGridCell let-cell>
           @if (cell.column.id === '__expand__') {
-            <button fexButton size="icon-sm" variant="outline" [attr.aria-expanded]="expanded(cell)" [disabled]="!can(cell)" (click)="toggle(cell)">
-              @if (expanded(cell)) { <fex-minus-icon /> } @else { <fex-plus-icon /> }
+            <button
+              fexButton
+              size="icon-sm"
+              variant="outline"
+              [attr.aria-expanded]="expanded(cell)"
+              [disabled]="!can(cell)"
+              (click)="toggle(cell)"
+            >
+              @if (expanded(cell)) {
+                <fex-minus-icon />
+              } @else {
+                <fex-plus-icon />
+              }
             </button>
           } @else {
             {{ value(cell) }}
@@ -22,8 +33,18 @@
       <fex-data-grid [table]="detail"
         ><ng-template fexDataGridCell let-cell>
           @if (cell.column.id === '__expand__') {
-            <button fexButton size="icon-sm" variant="outline" [attr.aria-expanded]="expanded(cell)" (click)="toggle(cell)">
-              @if (expanded(cell)) { <fex-minus-icon /> } @else { <fex-plus-icon /> }
+            <button
+              fexButton
+              size="icon-sm"
+              variant="outline"
+              [attr.aria-expanded]="expanded(cell)"
+              (click)="toggle(cell)"
+            >
+              @if (expanded(cell)) {
+                <fex-minus-icon />
+              } @else {
+                <fex-plus-icon />
+              }
             </button>
           } @else {
             {{ value(cell) }}

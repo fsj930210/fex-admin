@@ -66,11 +66,7 @@ export function selectionFeature<TNode extends TreeNodeData>(
             const keys = getAllSelectableKeys(context.getItems())
             context.setStateKeys('selectedKeys', keys, keys)
           },
-          clear: () => context.setStateKeys(
-            'selectedKeys',
-            [],
-            context.getSnapshot().selectedKeys,
-          ),
+          clear: () => context.setStateKeys('selectedKeys', [], context.getSnapshot().selectedKeys),
         }
         let initialKeys = context.getSnapshot().selectedKeys
         for (const key of normalizedOptions.defaultSelectedKeys ?? []) {

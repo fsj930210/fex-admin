@@ -1,9 +1,4 @@
-import {
-  computed,
-  EventEmitter,
-  Injectable,
-  signal,
-} from '@angular/core'
+import { computed, EventEmitter, Injectable, signal } from '@angular/core'
 import {
   getCalendarToday,
   type CalendarDate,
@@ -70,7 +65,9 @@ export class DatePickerState<TValue extends CalendarValue = CalendarValue> {
   readonly panel = computed(() => this.panelState())
   readonly viewDate = computed(() => this.viewDateState())
   readonly currentValue = computed(() => this.optionsState().value ?? this.localValue())
-  readonly activeValue = computed(() => this.needConfirm() ? this.pendingValue() : this.currentValue())
+  readonly activeValue = computed(() =>
+    this.needConfirm() ? this.pendingValue() : this.currentValue(),
+  )
   readonly calendarValue = computed<TValue | null>(() => {
     const value = this.activeValue()
     return isSelectionArray(value) ? null : value
@@ -94,9 +91,11 @@ export class DatePickerState<TValue extends CalendarValue = CalendarValue> {
     const previousPicker = this.picker()
     this.optionsState.set(options)
     const fallbackValue = options.defaultValue ?? emptyValue(options.multiple ?? false)
-    if (options.value === undefined && this.localValue() === null) this.localValue.set(fallbackValue as DatePickerSelectionValue<TValue>)
+    if (options.value === undefined && this.localValue() === null)
+      this.localValue.set(fallbackValue as DatePickerSelectionValue<TValue>)
     if (options.open === undefined) this.localOpen.set(options.defaultOpen ?? this.localOpen())
-    if (previousPicker !== this.picker()) this.panelState.set(getDefaultPanelByPicker(this.picker()))
+    if (previousPicker !== this.picker())
+      this.panelState.set(getDefaultPanelByPicker(this.picker()))
     if (!this.open()) this.pendingValue.set(this.currentValue())
   }
 
@@ -173,7 +172,9 @@ export class DatePickerState<TValue extends CalendarValue = CalendarValue> {
 
   select(nextValue: TValue) {
     if (this.multiple()) {
-      const current = isSelectionArray(this.activeValue()) ? this.activeValue() as readonly TValue[] : []
+      const current = isSelectionArray(this.activeValue())
+        ? (this.activeValue() as readonly TValue[])
+        : []
       const selected = current.some((item) => isSameCalendarValue(item, nextValue))
       const next = selected
         ? current.filter((item) => !isSameCalendarValue(item, nextValue))

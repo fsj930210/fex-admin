@@ -1,6 +1,11 @@
 import { NgStyle, NgTemplateOutlet } from '@angular/common'
 import { ChangeDetectionStrategy, Component, TemplateRef, computed, input } from '@angular/core'
-import { getDataGridRenderedCells, getDataGridSizingLayout, getDataGridVisibleLeafColumns, type DataGridRenderingTableSource } from '@fex/components-core/data-grid/layout'
+import {
+  getDataGridRenderedCells,
+  getDataGridSizingLayout,
+  getDataGridVisibleLeafColumns,
+  type DataGridRenderingTableSource,
+} from '@fex/components-core/data-grid/layout'
 import {
   dataGridBodyClassName,
   dataGridCellClassName,
@@ -30,13 +35,17 @@ export class DataGridRowOverlay {
   readonly density = input<'compact' | 'default' | 'comfortable'>('default')
   readonly cellTemplate = input<TemplateRef<{ $implicit: GridCell }> | null>(null)
 
-  protected readonly rootClassName = computed(() => dataGridRootClassName({ density: this.density() }))
+  protected readonly rootClassName = computed(() =>
+    dataGridRootClassName({ density: this.density() }),
+  )
   protected readonly tableClassName = dataGridTableClassName
   protected readonly bodyClassName = dataGridBodyClassName
   protected readonly rowClassName = dataGridRowClassName
   protected readonly cellClassName = dataGridCellClassName
   protected readonly cellContentClassName = dataGridCellContentClassName
-  protected readonly renderTable = computed(() => this.table() as AngularDataGridTable<TableFeatures, RowData>)
+  protected readonly renderTable = computed(
+    () => this.table() as AngularDataGridTable<TableFeatures, RowData>,
+  )
   protected readonly renderRow = computed(() => this.row() as GridRow)
   protected readonly tableWidth = computed(() => {
     const width = getDataGridSizingLayout(this.renderTable()).tableWidth

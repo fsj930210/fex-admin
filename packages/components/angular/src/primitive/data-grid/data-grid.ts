@@ -82,7 +82,9 @@ export type DataGridPartAction<TItem> = {
 
 @Directive({ selector: '[fexDataGridPartAction]', standalone: true })
 export class DataGridPartActionDirective {
-  readonly action = input<DataGridPartAction<never> | undefined>(undefined, { alias: 'fexDataGridPartAction' })
+  readonly action = input<DataGridPartAction<never> | undefined>(undefined, {
+    alias: 'fexDataGridPartAction',
+  })
   readonly item = input<unknown>(undefined, { alias: 'fexDataGridPartItem' })
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef)
 
@@ -92,7 +94,7 @@ export class DataGridPartActionDirective {
       const item = this.item()
       if (!action || item === undefined) return
       const cleanup = action(this.element.nativeElement, item as never)
-      onCleanup(() => typeof cleanup === 'function' ? cleanup() : cleanup?.destroy?.())
+      onCleanup(() => (typeof cleanup === 'function' ? cleanup() : cleanup?.destroy?.()))
     })
   }
 }
@@ -263,7 +265,9 @@ export class DataGrid {
       layout.pinned === 'end' && dataGridPinnedEndClassName,
       layout.isStartEdge && dataGridPinnedStartEdgeClassName,
       layout.isEndEdge && dataGridPinnedEndEdgeClassName,
-      !this.border() && headers.slice(index + 1).some(item => !item.isPlaceholder) && dataGridHeaderSeparatorClassName,
+      !this.border() &&
+        headers.slice(index + 1).some((item) => !item.isPlaceholder) &&
+        dataGridHeaderSeparatorClassName,
       meta?.align && dataGridAlignClassName[meta.align],
       meta?.headerClassName,
       this.partClass().headerCell,
@@ -273,40 +277,118 @@ export class DataGrid {
     return this.layoutStyle(getDataGridHeaderLayout(header, this.pinningTable()).style)
   }
   protected rowClass(row: GridRow) {
-    const layout = getDataGridRowLayout(row as unknown as DataGridRowRenderingSource, this.pinningTable())
+    const layout = getDataGridRowLayout(
+      row as unknown as DataGridRowRenderingSource,
+      this.pinningTable(),
+    )
     const pinned = this.rowPinned(row)
-    return cn(dataGridRowClassName, pinned && dataGridPinnedRowClassName, pinned === 'top' && dataGridPinnedTopRowClassName, pinned === 'bottom' && dataGridPinnedBottomRowClassName, layout.edge === 'top' && dataGridPinnedTopEdgeClassName, layout.edge === 'bottom' && dataGridPinnedBottomEdgeClassName, this.isGrouped(row) && dataGridGroupedRowClassName, this.partClass().row)
+    return cn(
+      dataGridRowClassName,
+      pinned && dataGridPinnedRowClassName,
+      pinned === 'top' && dataGridPinnedTopRowClassName,
+      pinned === 'bottom' && dataGridPinnedBottomRowClassName,
+      layout.edge === 'top' && dataGridPinnedTopEdgeClassName,
+      layout.edge === 'bottom' && dataGridPinnedBottomEdgeClassName,
+      this.isGrouped(row) && dataGridGroupedRowClassName,
+      this.partClass().row,
+    )
   }
   protected rowStyle(row: GridRow) {
-    return this.layoutStyle(getDataGridRowLayout(row as unknown as DataGridRowRenderingSource, this.pinningTable()).style)
+    return this.layoutStyle(
+      getDataGridRowLayout(row as unknown as DataGridRowRenderingSource, this.pinningTable()).style,
+    )
   }
   protected cells(row: GridRow) {
     return getDataGridRenderedCells(row as unknown as DataGridRowRenderingSource) as GridCell[]
   }
   protected cellClass(cell: GridCell) {
-    const layout = getDataGridColumnLayout(cell.column as unknown as DataGridColumnLayoutSource, this.pinningTable())
+    const layout = getDataGridColumnLayout(
+      cell.column as unknown as DataGridColumnLayoutSource,
+      this.pinningTable(),
+    )
     const meta = this.meta(cell.column)
-    return cn(dataGridCellClassName, layout.pinned && dataGridPinnedCellClassName, layout.pinned === 'start' && dataGridPinnedStartClassName, layout.pinned === 'end' && dataGridPinnedEndClassName, layout.isStartEdge && dataGridPinnedStartEdgeClassName, layout.isEndEdge && dataGridPinnedEndEdgeClassName, meta?.align && dataGridAlignClassName[meta.align], meta?.cellClassName, this.partClass().cell)
+    return cn(
+      dataGridCellClassName,
+      layout.pinned && dataGridPinnedCellClassName,
+      layout.pinned === 'start' && dataGridPinnedStartClassName,
+      layout.pinned === 'end' && dataGridPinnedEndClassName,
+      layout.isStartEdge && dataGridPinnedStartEdgeClassName,
+      layout.isEndEdge && dataGridPinnedEndEdgeClassName,
+      meta?.align && dataGridAlignClassName[meta.align],
+      meta?.cellClassName,
+      this.partClass().cell,
+    )
   }
   protected cellStyle(cell: GridCell) {
-    return this.layoutStyle(getDataGridColumnLayout(cell.column as unknown as DataGridColumnLayoutSource, this.pinningTable()).style)
+    return this.layoutStyle(
+      getDataGridColumnLayout(
+        cell.column as unknown as DataGridColumnLayoutSource,
+        this.pinningTable(),
+      ).style,
+    )
   }
-  protected visibleCount() { return Math.max(1, getDataGridVisibleLeafColumnCount(this.renderTable())) }
-  protected render(template: unknown, context: unknown) { const value = typeof template === 'function' ? template(context) : template; return value === null || value === undefined ? '' : String(value) }
-  protected isGrouped(row: GridRow) { const source = row as GridRow & { getIsGrouped?: () => boolean }; return source.getIsGrouped?.() ?? false }
-  protected isExpanded(row: GridRow) { const source = row as GridRow & { getIsExpanded?: () => boolean }; return source.getIsExpanded?.() ?? false }
-  protected rowPinned(row: GridRow) { const source = row as GridRow & { getIsPinned?: () => false | 'top' | 'bottom' }; return source.getIsPinned?.() ?? false }
-  protected canResize(header: GridHeader) { return (header.column as GridHeader['column'] & { getCanResize?: () => boolean }).getCanResize?.() ?? false }
-  protected isResizing(header: GridHeader) { return (header.column as GridHeader['column'] & { getIsResizing?: () => boolean }).getIsResizing?.() ?? false }
-  protected resize(header: GridHeader, event: MouseEvent | TouchEvent) { (header as GridHeader & { getResizeHandler?: () => (value: MouseEvent | TouchEvent) => void }).getResizeHandler?.()(event) }
-  protected resetSize(header: GridHeader) { (header.column as GridHeader['column'] & { resetSize?: () => void }).resetSize?.() }
+  protected visibleCount() {
+    return Math.max(1, getDataGridVisibleLeafColumnCount(this.renderTable()))
+  }
+  protected render(template: unknown, context: unknown) {
+    const value = typeof template === 'function' ? template(context) : template
+    return value === null || value === undefined ? '' : String(value)
+  }
+  protected isGrouped(row: GridRow) {
+    const source = row as GridRow & { getIsGrouped?: () => boolean }
+    return source.getIsGrouped?.() ?? false
+  }
+  protected isExpanded(row: GridRow) {
+    const source = row as GridRow & { getIsExpanded?: () => boolean }
+    return source.getIsExpanded?.() ?? false
+  }
+  protected rowPinned(row: GridRow) {
+    const source = row as GridRow & { getIsPinned?: () => false | 'top' | 'bottom' }
+    return source.getIsPinned?.() ?? false
+  }
+  protected canResize(header: GridHeader) {
+    return (
+      (header.column as GridHeader['column'] & { getCanResize?: () => boolean }).getCanResize?.() ??
+      false
+    )
+  }
+  protected isResizing(header: GridHeader) {
+    return (
+      (
+        header.column as GridHeader['column'] & { getIsResizing?: () => boolean }
+      ).getIsResizing?.() ?? false
+    )
+  }
+  protected resize(header: GridHeader, event: MouseEvent | TouchEvent) {
+    ;(
+      header as GridHeader & { getResizeHandler?: () => (value: MouseEvent | TouchEvent) => void }
+    ).getResizeHandler?.()(event)
+  }
+  protected resetSize(header: GridHeader) {
+    ;(header.column as GridHeader['column'] & { resetSize?: () => void }).resetSize?.()
+  }
   protected readonly headerContentClassName = dataGridHeaderContentClassName
   protected readonly cellContentClassName = dataGridCellContentClassName
   protected readonly resizeHandleClassName = dataGridResizeHandleClassName
   protected readonly virtualSpacerClassName = dataGridVirtualSpacerClassName
 
-  private meta(column: { columnDef: { meta?: unknown } }) { return column.columnDef.meta as DataGridColumnMeta | undefined }
-  private layoutStyle(style: ReturnType<typeof getDataGridColumnLayout>['style']) { return { position: style.position, width: style.width === undefined ? undefined : `${style.width}px`, insetInlineStart: style.insetInlineStart === undefined ? undefined : `${style.insetInlineStart}px`, insetInlineEnd: style.insetInlineEnd === undefined ? undefined : `${style.insetInlineEnd}px`, top: style.top, bottom: style.bottom, zIndex: style.zIndex, backgroundColor: style.backgroundColor ? `var(--${style.backgroundColor})` : undefined, boxShadow: style.boxShadow } }
+  private meta(column: { columnDef: { meta?: unknown } }) {
+    return column.columnDef.meta as DataGridColumnMeta | undefined
+  }
+  private layoutStyle(style: ReturnType<typeof getDataGridColumnLayout>['style']) {
+    return {
+      position: style.position,
+      width: style.width === undefined ? undefined : `${style.width}px`,
+      insetInlineStart:
+        style.insetInlineStart === undefined ? undefined : `${style.insetInlineStart}px`,
+      insetInlineEnd: style.insetInlineEnd === undefined ? undefined : `${style.insetInlineEnd}px`,
+      top: style.top,
+      bottom: style.bottom,
+      zIndex: style.zIndex,
+      backgroundColor: style.backgroundColor ? `var(--${style.backgroundColor})` : undefined,
+      boxShadow: style.boxShadow,
+    }
+  }
 }
 
 export { tableFeatures } from '@tanstack/table-core'

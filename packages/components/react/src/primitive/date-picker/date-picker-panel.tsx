@@ -5,28 +5,47 @@ import {
   type CalendarPanel,
   type CalendarValue,
 } from '@fex/components-core/calendar'
-import { getDefaultPanelByPicker, getGranularityByPicker } from '@fex/components-core/date-picker/panel'
+import {
+  getDefaultPanelByPicker,
+  getGranularityByPicker,
+} from '@fex/components-core/date-picker/panel'
 import { createRangePreviewValue } from '@fex/components-core/date-picker/range'
 import { normalizeDatePickerValue } from '@fex/components-core/date-picker/value'
-import { datePickerCellClassName, datePickerGridClassName, datePickerHeaderSideClassName, datePickerPanelClassName, datePickerWeekHeaderClassName } from '@fex/components-styles/date-picker'
+import {
+  datePickerCellClassName,
+  datePickerGridClassName,
+  datePickerHeaderSideClassName,
+  datePickerPanelClassName,
+  datePickerWeekHeaderClassName,
+} from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
 import type { ComponentProps, ReactNode } from 'react'
 import { CalendarCell, CalendarGrid, CalendarRoot, CalendarWeekHeader } from '../calendar/calendar'
 import { useCalendarContext } from '../calendar/calendar-context'
-import { DatePickerHeader, DatePickerHeaderButton, DatePickerHeaderLabel, DatePickerHeaderTitle } from './date-picker-header'
+import {
+  DatePickerHeader,
+  DatePickerHeaderButton,
+  DatePickerHeaderLabel,
+  DatePickerHeaderTitle,
+} from './date-picker-header'
 import { useDatePickerContext, useRangePickerContext } from './context'
 
 function getNextPanelAfterCell(panel: CalendarPanel, picker: string): CalendarPanel | null {
   if (picker === 'year') return null
   if (panel === 'decade') return 'year'
-  if (panel === 'year') return picker === 'month' || picker === 'quarter' ? getDefaultPanelByPicker(picker as 'month' | 'quarter') : 'month'
+  if (panel === 'year')
+    return picker === 'month' || picker === 'quarter'
+      ? getDefaultPanelByPicker(picker as 'month' | 'quarter')
+      : 'month'
   if (panel === 'month') return picker === 'month' ? null : 'date'
   if (panel === 'quarter') return null
   return null
 }
 
-export interface DatePickerPanelProps<TValue extends CalendarValue = CalendarValue>
-  extends Omit<ComponentProps<typeof CalendarRoot<TValue>>, 'value' | 'values' | 'defaultValue' | 'onValueChange'> {
+export interface DatePickerPanelProps<TValue extends CalendarValue = CalendarValue> extends Omit<
+  ComponentProps<typeof CalendarRoot<TValue>>,
+  'value' | 'values' | 'defaultValue' | 'onValueChange'
+> {
   children?: ReactNode
 }
 
@@ -92,19 +111,16 @@ export function DefaultDatePickerPanelContent() {
       </DatePickerHeader>
       {datePanel ? <CalendarWeekHeader className={datePickerWeekHeaderClassName} /> : null}
       <CalendarGrid className={datePickerGridClassName}>
-        {(cell) => (
-          <CalendarCell
-            cell={cell}
-            className={datePickerCellClassName}
-          />
-        )}
+        {(cell) => <CalendarCell cell={cell} className={datePickerCellClassName} />}
       </CalendarGrid>
     </>
   )
 }
 
-export interface RangePickerPanelProps<TValue extends CalendarValue = CalendarValue>
-  extends Omit<ComponentProps<typeof CalendarRoot<TValue>>, 'value' | 'range' | 'defaultValue' | 'onValueChange'> {
+export interface RangePickerPanelProps<TValue extends CalendarValue = CalendarValue> extends Omit<
+  ComponentProps<typeof CalendarRoot<TValue>>,
+  'value' | 'range' | 'defaultValue' | 'onValueChange'
+> {
   children?: ReactNode
   panelViewDate?: CalendarDate | undefined
 }
@@ -117,7 +133,11 @@ export function RangePickerPanel<TValue extends CalendarValue = CalendarValue>({
 }: RangePickerPanelProps<TValue>) {
   const context = useRangePickerContext('RangePickerPanel')
   const viewDate = panelViewDate ?? context.viewDate
-  const displayRange = createRangePreviewValue(context.rangeValue, context.hoverValue, context.activePart)
+  const displayRange = createRangePreviewValue(
+    context.rangeValue,
+    context.hoverValue,
+    context.activePart,
+  )
 
   function selectCell(cell: CoreCalendarCell) {
     const nextPanel = getNextPanelAfterCell(cell.panel, context.picker)

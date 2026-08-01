@@ -1,4 +1,11 @@
-import { getCalendarToday, getCalendarValueDate, type CalendarDate, type CalendarPanel, type CalendarValue, type CalendarWeekday } from '@fex/components-core/calendar'
+import {
+  getCalendarToday,
+  getCalendarValueDate,
+  type CalendarDate,
+  type CalendarPanel,
+  type CalendarValue,
+  type CalendarWeekday,
+} from '@fex/components-core/calendar'
 import { isSameCalendarValue } from '@fex/components-core/calendar/value'
 import { createDatePickerDisabledDate } from '@fex/components-core/date-picker/constraints'
 import { getDefaultPanelByPicker } from '@fex/components-core/date-picker/panel'
@@ -8,44 +15,52 @@ import { computed, ref, type Ref } from 'vue'
 import type { DatePickerContextValue, DatePickerSelectionValue } from './context'
 
 export interface UseDatePickerOptions<TValue extends CalendarValue = CalendarValue> {
-  picker?: DatePickerPicker
-  status?: 'error' | 'warning'
-  value?: DatePickerSelectionValue<TValue>
-  defaultValue?: DatePickerSelectionValue<TValue>
-  open?: boolean
-  defaultOpen?: boolean
-  multiple?: boolean
-  needConfirm?: boolean
-  disabled?: boolean
-  readOnly?: boolean
-  allowClear?: boolean
-  format?: string
-  weekStartsOn?: CalendarWeekday
-  minDate?: CalendarDate
-  maxDate?: CalendarDate
-  disabledDate?: (date: CalendarDate) => boolean
+  picker?: DatePickerPicker | undefined
+  status?: 'error' | 'warning' | undefined
+  value?: DatePickerSelectionValue<TValue> | undefined
+  defaultValue?: DatePickerSelectionValue<TValue> | undefined
+  open?: boolean | undefined
+  defaultOpen?: boolean | undefined
+  multiple?: boolean | undefined
+  needConfirm?: boolean | undefined
+  disabled?: boolean | undefined
+  readOnly?: boolean | undefined
+  allowClear?: boolean | undefined
+  format?: string | undefined
+  weekStartsOn?: CalendarWeekday | undefined
+  minDate?: CalendarDate | undefined
+  maxDate?: CalendarDate | undefined
+  disabledDate?: ((date: CalendarDate) => boolean) | undefined
   onChange?: (value: DatePickerSelectionValue<TValue>) => void
   onOpenChange?: (open: boolean) => void
 }
 
-function isValueArray<TValue extends CalendarValue>(value: DatePickerSelectionValue<TValue>): value is readonly TValue[] {
+function isValueArray<TValue extends CalendarValue>(
+  value: DatePickerSelectionValue<TValue>,
+): value is readonly TValue[] {
   return Array.isArray(value)
 }
 
-export function useDatePicker<TValue extends CalendarValue = CalendarValue>(options: UseDatePickerOptions<TValue>): DatePickerContextValue<TValue> {
+export function useDatePicker<TValue extends CalendarValue = CalendarValue>(
+  options: UseDatePickerOptions<TValue>,
+): DatePickerContextValue<TValue> {
   const picker = options.picker ?? 'date'
   const multiple = options.multiple ?? false
   const needConfirm = options.needConfirm ?? multiple
-  const localValue = ref<DatePickerSelectionValue<TValue>>(options.defaultValue ?? (multiple ? [] : null)) as Ref<DatePickerSelectionValue<TValue>>
+  const localValue = ref<DatePickerSelectionValue<TValue>>(
+    options.defaultValue ?? (multiple ? [] : null),
+  ) as Ref<DatePickerSelectionValue<TValue>>
   const localOpen = ref(options.defaultOpen ?? false)
-  const pendingValue = ref<DatePickerSelectionValue<TValue>>(localValue.value) as Ref<DatePickerSelectionValue<TValue>>
+  const pendingValue = ref<DatePickerSelectionValue<TValue>>(localValue.value) as Ref<
+    DatePickerSelectionValue<TValue>
+  >
   const panel = ref<CalendarPanel>(getDefaultPanelByPicker(picker))
   const viewDate = ref(getCalendarToday())
-  const value = computed(() => options.value === undefined ? localValue.value : options.value)
+  const value = computed(() => (options.value === undefined ? localValue.value : options.value))
   const open = computed(() => options.open ?? localOpen.value)
-  const activeValue = computed(() => needConfirm ? pendingValue.value : value.value)
-  const calendarValue = computed(() => isValueArray(activeValue.value) ? null : activeValue.value)
-  const calendarValues = computed(() => isValueArray(activeValue.value) ? activeValue.value : [])
+  const activeValue = computed(() => (needConfirm ? pendingValue.value : value.value))
+  const calendarValue = computed(() => (isValueArray(activeValue.value) ? null : activeValue.value))
+  const calendarValues = computed(() => (isValueArray(activeValue.value) ? activeValue.value : []))
 
   function resetPanel() {
     const current = value.value
@@ -65,27 +80,46 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(opti
     if (options.value === undefined) localValue.value = next
     options.onChange?.(next)
   }
-  function close() { setOpen(false) }
-  function clear() { const next = multiple ? [] : null; pendingValue.value = next; commit(next) }
-  function confirm() { commit(pendingValue.value); close() }
-  function cancel() { pendingValue.value = value.value; close() }
+  function close() {
+    setOpen(false)
+  }
+  function clear() {
+    const next = multiple ? [] : null
+    pendingValue.value = next
+    commit(next)
+  }
+  function confirm() {
+    commit(pendingValue.value)
+    close()
+  }
+  function cancel() {
+    pendingValue.value = value.value
+    close()
+  }
   function select(next: TValue) {
     if (multiple) {
       const current = activeValue.value
       const values = isValueArray(current) ? current : []
       const exists = values.some((item) => isSameCalendarValue(item, next))
-      const result = exists ? values.filter((item) => !isSameCalendarValue(item, next)) : [...values, next]
+      const result = exists
+        ? values.filter((item) => !isSameCalendarValue(item, next))
+        : [...values, next]
       if (needConfirm) pendingValue.value = result
       else commit(result)
       return
     }
     if (needConfirm) pendingValue.value = next
-    else { commit(next); close() }
+    else {
+      commit(next)
+      close()
+    }
   }
 
   return {
     picker,
-    get status() { return options.status },
+    get status() {
+      return options.status
+    },
     multiple,
     needConfirm,
     disabled: options.disabled ?? false,
@@ -101,9 +135,22 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(opti
     calendarValues,
     minDate: options.minDate,
     maxDate: options.maxDate,
-    disabledDate: options.disabledDate ? (date) => createDatePickerDisabledDate({ picker, panel: panel.value, minDate: options.minDate, maxDate: options.maxDate, disabledDate: options.disabledDate })(date) : undefined,
-    setPanel: (next) => { panel.value = next },
-    setViewDate: (next) => { viewDate.value = next },
+    disabledDate: options.disabledDate
+      ? (date) =>
+          createDatePickerDisabledDate({
+            picker,
+            panel: panel.value,
+            ...(options.minDate ? { minDate: options.minDate } : {}),
+            ...(options.maxDate ? { maxDate: options.maxDate } : {}),
+            ...(options.disabledDate ? { disabledDate: options.disabledDate } : {}),
+          })(date)
+      : undefined,
+    setPanel: (next) => {
+      panel.value = next
+    },
+    setViewDate: (next) => {
+      viewDate.value = next
+    },
     setOpen,
     openPanel: () => setOpen(true),
     close,

@@ -1,5 +1,18 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Output, ViewChild, signal } from '@angular/core'
-import { getCalendarToday, getCalendarValueDate, type CalendarRange, type CalendarValue } from '@fex/components-core/calendar'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+  signal,
+} from '@angular/core'
+import {
+  getCalendarToday,
+  getCalendarValueDate,
+  type CalendarRange,
+  type CalendarValue,
+} from '@fex/components-core/calendar'
 import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
 import { endOfDate } from '@fex/components-core/date/utils'
 import { datePickerDateTimePanelClassName } from '@fex/components-styles/date-picker'
@@ -18,12 +31,21 @@ import {
   RangePickerState,
   RangePickerTrigger,
 } from '@fex/components-angular/primitive/date-picker'
-import { TimePickerHourColumn, TimePickerMinuteColumn, TimePickerPanel, TimePickerRoot, TimePickerSecondColumn, type TimeValue } from '@fex/components-angular/primitive/time-picker'
+import {
+  TimePickerHourColumn,
+  TimePickerMinuteColumn,
+  TimePickerPanel,
+  TimePickerRoot,
+  TimePickerSecondColumn,
+  type TimeValue,
+} from '@fex/components-angular/primitive/time-picker'
 import { Card } from '@fex/components-angular/ui/card'
 
 const today = getCalendarToday()
 
-function isValueArray(value: CalendarValue | readonly CalendarValue[] | null): value is readonly CalendarValue[] {
+function isValueArray(
+  value: CalendarValue | readonly CalendarValue[] | null,
+): value is readonly CalendarValue[] {
   return Array.isArray(value)
 }
 
@@ -90,9 +112,12 @@ export class IntegrationDemos {
   protected readonly time = signal({ hour: 9, minute: 30, second: 0 })
   protected readonly draftTime = signal(this.time())
   protected readonly dateTimePanelClassName = `min-w-0 flex-1 self-start ${datePickerDateTimePanelClassName}`
-  @ViewChild('dateTimeHourColumn', { read: ElementRef }) private readonly hourColumn?: ElementRef<HTMLElement>
-  @ViewChild('dateTimeMinuteColumn', { read: ElementRef }) private readonly minuteColumn?: ElementRef<HTMLElement>
-  @ViewChild('dateTimeSecondColumn', { read: ElementRef }) private readonly secondColumn?: ElementRef<HTMLElement>
+  @ViewChild('dateTimeHourColumn', { read: ElementRef })
+  private readonly hourColumn?: ElementRef<HTMLElement>
+  @ViewChild('dateTimeMinuteColumn', { read: ElementRef })
+  private readonly minuteColumn?: ElementRef<HTMLElement>
+  @ViewChild('dateTimeSecondColumn', { read: ElementRef })
+  private readonly secondColumn?: ElementRef<HTMLElement>
 
   protected rangeText(value: CalendarRange<CalendarValue>) {
     return `${value.start ? formatDatePickerValue(value.start, { picker: 'date' }) : '空'} ~ ${value.end ? formatDatePickerValue(value.end, { picker: 'date' }) : '空'}`
@@ -156,6 +181,8 @@ function formatTime(value: { hour: number; minute: number; second?: number }) {
 }
 
 function scrollTimeColumn(column: ElementRef<HTMLElement> | undefined, value: number) {
-  const viewport = column?.nativeElement.querySelector<HTMLElement>('[data-slot="scrollbar-viewport"]')
+  const viewport = column?.nativeElement.querySelector<HTMLElement>(
+    '[data-slot="scrollbar-viewport"]',
+  )
   viewport?.scrollTo({ top: value * 32, behavior: 'auto' })
 }

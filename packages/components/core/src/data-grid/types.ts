@@ -4,13 +4,15 @@ type BivariantCallback<TFunction> = TFunction extends (...args: infer TArguments
   ? { bivarianceHack(...args: TArguments): TResult }['bivarianceHack']
   : never
 
-type DataGridFilterFn<TFeatures extends TableFeatures, TData extends RowData> =
-  BivariantCallback<FilterFn<TFeatures, TData>>
-  & Pick<FilterFn<TFeatures, TData>, 'autoRemove' | 'resolveDataValue' | 'resolveFilterValue'>
+type DataGridFilterFn<TFeatures extends TableFeatures, TData extends RowData> = BivariantCallback<
+  FilterFn<TFeatures, TData>
+> &
+  Pick<FilterFn<TFeatures, TData>, 'autoRemove' | 'resolveDataValue' | 'resolveFilterValue'>
 
-type DataGridSortFn<TFeatures extends TableFeatures, TData extends RowData> =
-  BivariantCallback<SortFn<TFeatures, TData>>
-  & Pick<SortFn<TFeatures, TData>, 'resolveDataValue'>
+type DataGridSortFn<TFeatures extends TableFeatures, TData extends RowData> = BivariantCallback<
+  SortFn<TFeatures, TData>
+> &
+  Pick<SortFn<TFeatures, TData>, 'resolveDataValue'>
 
 export interface DataGridColumnMeta<
   TFeatures extends TableFeatures = TableFeatures,

@@ -1,14 +1,27 @@
 import { createStore } from '../store/create-store'
 import type { SliderChangeMeta, SliderController, SliderOptions, SliderSnapshot } from './types'
-import { getClosestValueIndex, getNextSortedValues, hasMinStepsBetweenValues, snapValueToStep } from './utils'
+import {
+  getClosestValueIndex,
+  getNextSortedValues,
+  hasMinStepsBetweenValues,
+  snapValueToStep,
+} from './utils'
 
-function normalizeValue(values: readonly number[] | undefined, min: number, max: number, step: number) {
+function normalizeValue(
+  values: readonly number[] | undefined,
+  min: number,
+  max: number,
+  step: number,
+) {
   const source = values && values.length > 0 ? values : [min]
   // oxlint-disable-next-line unicorn/no-array-sort -- map returns a fresh array and the workspace targets ES2022.
   return source.map((value) => snapValueToStep(value, min, max, step)).sort((a, b) => a - b)
 }
 
-function createSliderSnapshot(options: SliderOptions, fallbackValues?: readonly number[]): SliderSnapshot {
+function createSliderSnapshot(
+  options: SliderOptions,
+  fallbackValues?: readonly number[],
+): SliderSnapshot {
   const min = options.min ?? 0
   const max = options.max ?? 100
   const step = options.step ?? 1
@@ -33,7 +46,10 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
 
   const getCurrentSnapshot = () => {
     const storedSnapshot = store.getSnapshot()
-    const nextBaseSnapshot = createSliderSnapshot(options, isControlled() ? undefined : storedSnapshot.values)
+    const nextBaseSnapshot = createSliderSnapshot(
+      options,
+      isControlled() ? undefined : storedSnapshot.values,
+    )
     const nextSnapshot = {
       ...nextBaseSnapshot,
       activeIndex: Math.min(nextBaseSnapshot.values.length - 1, storedSnapshot.activeIndex),
@@ -84,7 +100,10 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
       return undefined
     }
     const changedIndex = nextValues.indexOf(nextValue)
-    if (snapshot.values.length === nextValues.length && snapshot.values.every((item, itemIndex) => item === nextValues[itemIndex])) {
+    if (
+      snapshot.values.length === nextValues.length &&
+      snapshot.values.every((item, itemIndex) => item === nextValues[itemIndex])
+    ) {
       return undefined
     }
     return commitValues(nextValues, changedIndex, actionOptions.commit)
@@ -127,7 +146,9 @@ export function createSliderController(options: SliderOptions = {}): SliderContr
     },
     stepThumb: (index, direction, multiplier = 1) => {
       const snapshot = getCurrentSnapshot()
-      return setValueAt(index, snapshot.values[index]! + snapshot.step * direction * multiplier, { commit: true })
+      return setValueAt(index, snapshot.values[index]! + snapshot.step * direction * multiplier, {
+        commit: true,
+      })
     },
   }
 }

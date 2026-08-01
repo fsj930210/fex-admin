@@ -35,18 +35,18 @@ Use `fieldNames` when backend fields differ from `key`, `value`, `label`, and `d
 
 ## Root props
 
-| Prop | Type | Description |
-| --- | --- | --- |
-| `items` | `readonly TItem[]` | Suggestion source |
-| `fieldNames` | `{ key, value, label?, disabled? }` | Backend field mapping |
-| `value` / `defaultValue` | `string` | Controlled or initial input text |
-| `onChange` | `(value, meta) => void` | Input, selection, and clear changes |
-| `onSearch` | `(keyword, meta) => void` | Input and clear search notification |
-| `onSelect` | `(value, meta) => void` | Accepted suggestion with original item |
-| `open` / `defaultOpen` | `boolean` | Controlled or initial panel state |
-| `onOpenChange` | `(open, meta) => void` | Panel state request |
-| `filterOption` | `boolean \| function` | Local filtering; `false` for remote data |
-| `loading` | `boolean` | External request state |
+| Prop                     | Type                                | Description                              |
+| ------------------------ | ----------------------------------- | ---------------------------------------- |
+| `items`                  | `readonly TItem[]`                  | Suggestion source                        |
+| `fieldNames`             | `{ key, value, label?, disabled? }` | Backend field mapping                    |
+| `value` / `defaultValue` | `string`                            | Controlled or initial input text         |
+| `onChange`               | `(value, meta) => void`             | Input, selection, and clear changes      |
+| `onSearch`               | `(keyword, meta) => void`           | Input and clear search notification      |
+| `onSelect`               | `(value, meta) => void`             | Accepted suggestion with original item   |
+| `open` / `defaultOpen`   | `boolean`                           | Controlled or initial panel state        |
+| `onOpenChange`           | `(open, meta) => void`              | Panel state request                      |
+| `filterOption`           | `boolean \| function`               | Local filtering; `false` for remote data |
+| `loading`                | `boolean`                           | External request state                   |
 
 `value` and `open` are the only controllable states. Active suggestion is internal; visible items are derived.
 

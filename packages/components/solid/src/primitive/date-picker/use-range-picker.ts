@@ -1,7 +1,19 @@
-import { getCalendarToday, getCalendarValueDate, type CalendarDate, type CalendarPanel, type CalendarRange, type CalendarValue, type CalendarWeekday } from '@fex/components-core/calendar'
+import {
+  getCalendarToday,
+  getCalendarValueDate,
+  type CalendarDate,
+  type CalendarPanel,
+  type CalendarRange,
+  type CalendarValue,
+  type CalendarWeekday,
+} from '@fex/components-core/calendar'
 import { createDatePickerDisabledDate } from '@fex/components-core/date-picker/constraints'
 import { getDefaultPanelByPicker } from '@fex/components-core/date-picker/panel'
-import { createNextRangeValue, getNextRangeActivePart, getRangeFromValue } from '@fex/components-core/date-picker/range'
+import {
+  createNextRangeValue,
+  getNextRangeActivePart,
+  getRangeFromValue,
+} from '@fex/components-core/date-picker/range'
 import { getDefaultDatePickerFormat } from '@fex/components-core/date-picker/value'
 import type { DatePickerPicker } from '@fex/components-core/date-picker/types'
 import { createSignal } from 'solid-js'
@@ -31,7 +43,8 @@ export interface UseRangePickerOptions<TValue extends CalendarValue = CalendarVa
 
 function normalizeAllowEmpty(value: UseRangePickerOptions['allowEmpty']) {
   if (value === true) return { start: true, end: true }
-  if (value && typeof value === 'object') return { start: Boolean(value.start), end: Boolean(value.end) }
+  if (value && typeof value === 'object')
+    return { start: Boolean(value.start), end: Boolean(value.end) }
   return { start: false, end: false }
 }
 
@@ -40,16 +53,21 @@ export function useRangePicker<TValue extends CalendarValue = CalendarValue>(
 ): RangePickerContextValue<TValue> {
   const picker = options.picker ?? 'date'
   const needConfirm = options.needConfirm ?? false
-  const [rangeValue, setRangeValue] = createSignal<CalendarRange<TValue>>(options.defaultValue ?? {}, { equals: false })
+  const [rangeValue, setRangeValue] = createSignal<CalendarRange<TValue>>(
+    options.defaultValue ?? {},
+    { equals: false },
+  )
   const [openValue, setOpenValue] = createSignal(options.defaultOpen ?? false)
-  const [pendingValue, setPendingValue] = createSignal<CalendarRange<TValue>>(rangeValue(), { equals: false })
+  const [pendingValue, setPendingValue] = createSignal<CalendarRange<TValue>>(rangeValue(), {
+    equals: false,
+  })
   const [activePart, setActivePart] = createSignal<'start' | 'end'>('start')
   const [hoverValue, setHoverValue] = createSignal<TValue | null>(null)
   const [panel, setPanel] = createSignal<CalendarPanel>(getDefaultPanelByPicker(picker))
   const [viewDate, setViewDate] = createSignal(getCalendarToday())
-  const value = () => options.value === undefined ? rangeValue() : options.value
+  const value = () => (options.value === undefined ? rangeValue() : options.value)
   const open = () => options.open ?? openValue()
-  const activeRangeValue = () => needConfirm ? pendingValue() : value()
+  const activeRangeValue = () => (needConfirm ? pendingValue() : value())
 
   function resetPanel(part?: 'start' | 'end') {
     const current = value()
@@ -67,7 +85,9 @@ export function useRangePicker<TValue extends CalendarValue = CalendarValue>(
     if (options.open === undefined) setOpenValue(next)
     if (wasOpen !== next) options.onOpenChange?.(next)
   }
-  function close() { setOpen(false) }
+  function close() {
+    setOpen(false)
+  }
   function commit(next: CalendarRange<TValue>) {
     if (options.value === undefined) setRangeValue(next)
     setPendingValue(next)
@@ -75,7 +95,12 @@ export function useRangePicker<TValue extends CalendarValue = CalendarValue>(
   }
   function select(nextValue: TValue) {
     const part = activePart()
-    const nextRange = createNextRangeValue(activeRangeValue(), nextValue, part, options.order ?? true)
+    const nextRange = createNextRangeValue(
+      activeRangeValue(),
+      nextValue,
+      part,
+      options.order ?? true,
+    )
     setHoverValue(null)
     if (needConfirm) setPendingValue(nextRange)
     else commit(nextRange)
@@ -106,13 +131,24 @@ export function useRangePicker<TValue extends CalendarValue = CalendarValue>(
       panel: panel(),
       ...(options.minDate ? { minDate: options.minDate } : {}),
       ...(options.maxDate ? { maxDate: options.maxDate } : {}),
-      ...(options.disabledDate ? { disabledDate: (current, info) => Boolean(options.disabledDate?.(current, info.activePart ?? part)) } : {}),
-    })(date, { activePart: part, from: getRangeFromValue(activeRangeValue(), part), rangeValue: activeRangeValue() })
+      ...(options.disabledDate
+        ? {
+            disabledDate: (current, info) =>
+              Boolean(options.disabledDate?.(current, info.activePart ?? part)),
+          }
+        : {}),
+    })(date, {
+      activePart: part,
+      from: getRangeFromValue(activeRangeValue(), part),
+      rangeValue: activeRangeValue(),
+    })
   }
 
   return {
     picker,
-    get status() { return options.status },
+    get status() {
+      return options.status
+    },
     needConfirm,
     disabled: options.disabled ?? false,
     readOnly: options.readOnly ?? false,

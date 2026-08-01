@@ -5,7 +5,9 @@ import { createMemo, For, splitProps, type JSX, type ParentProps } from 'solid-j
 import { useRangePickerContext } from './context'
 import { RangePickerPanel } from './date-picker-panel'
 
-export interface RangePickerPanelGroupProps extends ParentProps<JSX.HTMLAttributes<HTMLDivElement>> {
+export interface RangePickerPanelGroupProps extends ParentProps<
+  JSX.HTMLAttributes<HTMLDivElement>
+> {
   panelCount?: 1 | 2
 }
 
@@ -13,7 +15,7 @@ export function RangePickerPanelGroup(props: RangePickerPanelGroupProps) {
   const [local, rest] = splitProps(props, ['class', 'children', 'panelCount', 'onMouseLeave'])
   const context = useRangePickerContext('RangePickerPanelGroup')
   const dates = createMemo(() => getRangePanelViewDates(context.viewDate(), context.panel()))
-  const visibleDates = createMemo(() => local.panelCount === 1 ? [dates()[0]] : dates())
+  const visibleDates = createMemo(() => (local.panelCount === 1 ? [dates()[0]] : dates()))
   return (
     <div
       {...rest}
@@ -24,9 +26,7 @@ export function RangePickerPanelGroup(props: RangePickerPanelGroupProps) {
       }}
     >
       {local.children ?? (
-        <For each={visibleDates()}>
-          {(date) => <RangePickerPanel panelViewDate={date} />}
-        </For>
+        <For each={visibleDates()}>{(date) => <RangePickerPanel panelViewDate={date} />}</For>
       )}
     </div>
   )

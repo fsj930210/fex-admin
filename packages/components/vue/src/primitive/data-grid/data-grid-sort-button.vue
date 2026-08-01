@@ -29,10 +29,10 @@ const sortIndex = computed(() => {
 </script>
 
 <template>
-    <Button
-      type="button"
-      variant="ghost"
-      :disabled="!column.getCanSort()"
+  <Button
+    type="button"
+    variant="ghost"
+    :disabled="!column.getCanSort()"
     :aria-pressed="Boolean(direction)"
     :class="cn(dataGridSortButtonClassName, props.class)"
     @click="column.getToggleSortingHandler()?.($event)"
@@ -41,7 +41,10 @@ const sortIndex = computed(() => {
     <span class="inline-flex items-center" aria-hidden>
       <ChevronUpIcon v-if="direction === 'asc'" class="size-3.5" />
       <ChevronDownIcon v-else-if="direction === 'desc'" class="size-3.5" />
-      <span v-else class="relative inline-block size-3.5"><ChevronUpIcon class="absolute inset-x-0 top-0 size-3" /><ChevronDownIcon class="absolute inset-x-0 bottom-0 size-3" /></span>
+      <span v-else class="relative inline-block size-3.5"
+        ><ChevronUpIcon class="absolute inset-x-0 top-0 size-3" /><ChevronDownIcon
+          class="absolute inset-x-0 bottom-0 size-3"
+      /></span>
       <sup v-if="direction && sortIndex >= 0">{{ sortIndex + 1 }}</sup>
     </span>
   </Button>

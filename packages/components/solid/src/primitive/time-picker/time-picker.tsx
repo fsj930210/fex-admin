@@ -24,11 +24,33 @@ import {
   timePickerRootClassName,
 } from '@fex/components-styles/time-picker'
 import { cn } from '@fex/utils'
-import { createEffect, createMemo, createSignal, For, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
+import {
+  createEffect,
+  createMemo,
+  createSignal,
+  For,
+  Show,
+  splitProps,
+  type JSX,
+  type ParentProps,
+} from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
 import { ClockIcon } from '../../icon/clock'
-import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix, type InputRootProps } from '../input/input'
-import { Popover, PopoverContent, PopoverPortal, PopoverTrigger, type PopoverProps } from '../popover/popover'
+import {
+  InputClear,
+  InputControl,
+  InputPrefix,
+  InputRoot,
+  InputSuffix,
+  type InputRootProps,
+} from '../input/input'
+import {
+  Popover,
+  PopoverContent,
+  PopoverPortal,
+  PopoverTrigger,
+  type PopoverProps,
+} from '../popover/popover'
 import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport } from '../scrollbar/scrollbar'
 import { TimePickerContext, useTimePickerContext } from './time-picker-context'
 
@@ -67,20 +89,27 @@ export function TimePickerRoot(props: TimePickerRootProps) {
   })
   return (
     <Popover {...rest} trigger={['focus', 'click']}>
-      <TimePickerContext.Provider value={{
-        controller,
-        snapshot,
-        format: () => local.format ?? (local.use12Hours ? 'hh:mm:ss A' : 'HH:mm:ss'),
-        use12Hours: () => local.use12Hours ?? false,
-        disabled: () => local.disabled ?? false,
-        readOnly: () => local.readOnly ?? false,
-        disabledTime: () => local.disabledTime,
-      }}>{local.children}</TimePickerContext.Provider>
+      <TimePickerContext.Provider
+        value={{
+          controller,
+          snapshot,
+          format: () => local.format ?? (local.use12Hours ? 'hh:mm:ss A' : 'HH:mm:ss'),
+          use12Hours: () => local.use12Hours ?? false,
+          disabled: () => local.disabled ?? false,
+          readOnly: () => local.readOnly ?? false,
+          disabledTime: () => local.disabledTime,
+        }}
+      >
+        {local.children}
+      </TimePickerContext.Provider>
     </Popover>
   )
 }
 
-export interface TimePickerTriggerProps extends Omit<InputRootProps, 'value' | 'defaultValue' | 'onValueChange' | 'onClear' | 'children' | 'prefix'> {
+export interface TimePickerTriggerProps extends Omit<
+  InputRootProps,
+  'value' | 'defaultValue' | 'onValueChange' | 'onClear' | 'children' | 'prefix'
+> {
   allowClear?: boolean
   placeholder?: string
   prefix?: JSX.Element
@@ -90,21 +119,73 @@ export interface TimePickerTriggerProps extends Omit<InputRootProps, 'value' | '
 
 export function TimePickerTrigger(props: TimePickerTriggerProps) {
   const context = useTimePickerContext('TimePickerTrigger')
-  const [local, rest] = splitProps(props, ['allowClear', 'placeholder', 'prefix', 'suffix', 'inputProps'])
-  const formatted = () => context.snapshot().value ? formatDate(context.snapshot().value!, context.format()) : ''
+  const [local, rest] = splitProps(props, [
+    'allowClear',
+    'placeholder',
+    'prefix',
+    'suffix',
+    'inputProps',
+  ])
+  const formatted = () =>
+    context.snapshot().value ? formatDate(context.snapshot().value!, context.format()) : ''
   const [text, setText] = createSignal(formatted())
   createEffect(() => setText(formatted()))
-  function input(next: string) { setText(next); const result = parse(next, context.format()); if (result.valid) context.controller.change(result.value, 'input', 'smooth') }
-  function clear() { setText(''); context.controller.clear() }
-  return <PopoverTrigger>{trigger => <InputRoot {...rest} {...(trigger.props as unknown as JSX.HTMLAttributes<HTMLDivElement>)} ref={trigger.ref as unknown as (element: HTMLDivElement) => void} value={text()} disabled={context.disabled()} readOnly={context.readOnly()} onValueChange={input} {...(local.allowClear === false ? {} : { onClear: clear })}><Show when={local.prefix}><InputPrefix>{local.prefix}</InputPrefix></Show><InputControl {...local.inputProps} placeholder={local.placeholder ?? context.format()} /><Show when={local.allowClear !== false}><InputClear /></Show><Show when={local.allowClear === false || !text()}><InputSuffix>{local.suffix ?? <ClockIcon class="size-4" />}</InputSuffix></Show></InputRoot>}</PopoverTrigger>
+  function input(next: string) {
+    setText(next)
+    const result = parse(next, context.format())
+    if (result.valid) context.controller.change(result.value, 'input', 'smooth')
+  }
+  function clear() {
+    setText('')
+    context.controller.clear()
+  }
+  return (
+    <PopoverTrigger>
+      {(trigger) => (
+        <InputRoot
+          {...rest}
+          {...(trigger.props as unknown as JSX.HTMLAttributes<HTMLDivElement>)}
+          ref={trigger.ref as unknown as (element: HTMLDivElement) => void}
+          value={text()}
+          disabled={context.disabled()}
+          readOnly={context.readOnly()}
+          onValueChange={input}
+          {...(local.allowClear === false ? {} : { onClear: clear })}
+        >
+          <Show when={local.prefix}>
+            <InputPrefix>{local.prefix}</InputPrefix>
+          </Show>
+          <InputControl {...local.inputProps} placeholder={local.placeholder ?? context.format()} />
+          <Show when={local.allowClear !== false}>
+            <InputClear />
+          </Show>
+          <Show when={local.allowClear === false || !text()}>
+            <InputSuffix>{local.suffix ?? <ClockIcon class="size-4" />}</InputSuffix>
+          </Show>
+        </InputRoot>
+      )}
+    </PopoverTrigger>
+  )
 }
 
 export function TimePickerContent(props: ParentProps<{ class?: string; style?: string }>) {
-  return <PopoverPortal><PopoverContent {...props} class={cn('overflow-hidden p-0', props.class)} style={`width:var(--floating-reference-width);max-width:var(--floating-available-width);max-height:var(--floating-available-height);${props.style ?? ''}`} /></PopoverPortal>
+  return (
+    <PopoverPortal>
+      <PopoverContent
+        {...props}
+        class={cn('overflow-hidden p-0', props.class)}
+        style={`width:var(--floating-reference-width);max-width:var(--floating-available-width);max-height:var(--floating-available-height);${props.style ?? ''}`}
+      />
+    </PopoverPortal>
+  )
 }
 
 export function TimePickerPanel(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
-  return <div {...props} data-slot="time-picker-panel" class={cn(timePickerRootClassName, props.class)}>{props.children}</div>
+  return (
+    <div {...props} data-slot="time-picker-panel" class={cn(timePickerRootClassName, props.class)}>
+      {props.children}
+    </div>
+  )
 }
 
 type ColumnValue = number | TimePeriod
@@ -128,7 +209,7 @@ function TimePickerColumn<TValue extends ColumnValue>(props: InternalColumnProps
     'onKeyDown',
   ])
   const context = useTimePickerContext('TimePickerColumn')
-  let listElement: HTMLDivElement | undefined
+  let listElement: HTMLDivElement | undefined = undefined
   const itemElements = new Map<TValue, HTMLButtonElement>()
   let activeValue: TValue | undefined
   const isDisabled = () => context.disabled() || Boolean(local.disabled)
@@ -160,46 +241,57 @@ function TimePickerColumn<TValue extends ColumnValue>(props: InternalColumnProps
       class={cn(timePickerColumnClassName, local.class)}
       disabled={isDisabled()}
     >
-      <ScrollbarViewport {...rest} ref={listElement} role="listbox" tabIndex={isDisabled() ? -1 : 0} aria-disabled={isDisabled() || undefined} overflowX="hidden" class={timePickerColumnViewportClassName} onKeyDown={(event) => {
-        if (typeof local.onKeyDown === 'function') local.onKeyDown(event)
-        if (event.defaultPrevented || isDisabled() || context.readOnly()) return
-        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-          event.preventDefault()
-          move(event.key === 'ArrowDown' ? 1 : -1)
-        }
-      }}>
-      <For each={local.options}>
-        {(item) => {
-          const selected = () => Object.is(item.value, local.selectedValue)
-          return (
-            <button
-              ref={(element) => itemElements.set(item.value, element)}
-              type="button"
-              role="option"
-              tabIndex={-1}
-              disabled={isDisabled() || item.disabled}
-              aria-selected={selected()}
-              data-selected={selected() ? 'true' : undefined}
-              data-disabled={item.disabled ? 'true' : undefined}
-              class={timePickerColumnItemClassName}
-              onFocus={() => {
-                activeValue = item.value
-              }}
-              onClick={() => {
-                if (isDisabled() || context.readOnly() || item.disabled) return
-                activeValue = item.value
-                local.onSelect(item.value)
-                const itemElement = itemElements.get(item.value)
-                if (listElement && itemElement)
-                  listElement.scrollTo({ top: itemElement.offsetTop, behavior: 'smooth' })
-              }}
-            >
-              {item.label}
-            </button>
-          )
+      <ScrollbarViewport
+        {...rest}
+        ref={(element) => {
+          listElement = element
         }}
-      </For>
-      <div aria-hidden="true" class={timePickerColumnSpacerClassName} />
+        role="listbox"
+        tabIndex={isDisabled() ? -1 : 0}
+        aria-disabled={isDisabled() || undefined}
+        overflowX="hidden"
+        class={timePickerColumnViewportClassName}
+        onKeyDown={(event) => {
+          if (typeof local.onKeyDown === 'function') local.onKeyDown(event)
+          if (event.defaultPrevented || isDisabled() || context.readOnly()) return
+          if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+            event.preventDefault()
+            move(event.key === 'ArrowDown' ? 1 : -1)
+          }
+        }}
+      >
+        <For each={local.options}>
+          {(item) => {
+            const selected = () => Object.is(item.value, local.selectedValue)
+            return (
+              <button
+                ref={(element) => itemElements.set(item.value, element)}
+                type="button"
+                role="option"
+                tabIndex={-1}
+                disabled={isDisabled() || item.disabled}
+                aria-selected={selected()}
+                data-selected={selected() ? 'true' : undefined}
+                data-disabled={item.disabled ? 'true' : undefined}
+                class={timePickerColumnItemClassName}
+                onFocus={() => {
+                  activeValue = item.value
+                }}
+                onClick={() => {
+                  if (isDisabled() || context.readOnly() || item.disabled) return
+                  activeValue = item.value
+                  local.onSelect(item.value)
+                  const itemElement = itemElements.get(item.value)
+                  if (listElement && itemElement)
+                    listElement.scrollTo({ top: itemElement.offsetTop, behavior: 'smooth' })
+                }}
+              >
+                {item.label}
+              </button>
+            )
+          }}
+        </For>
+        <div aria-hidden="true" class={timePickerColumnSpacerClassName} />
       </ScrollbarViewport>
       <ScrollbarBar axis="y" />
     </ScrollbarRoot>

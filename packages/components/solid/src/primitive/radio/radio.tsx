@@ -22,7 +22,8 @@ export interface RadioChangeMeta {
 }
 
 export interface RadioGroupProps
-  extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>>,
+  extends
+    ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>>,
     RadioGroupStyleProps {
   value?: RadioValue
   defaultValue?: RadioValue
@@ -31,13 +32,25 @@ export interface RadioGroupProps
 }
 
 export interface RadioProps
-  extends ParentProps<Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'defaultValue' | 'onChange' | 'type' | 'value'>>,
+  extends
+    ParentProps<
+      Omit<
+        JSX.ButtonHTMLAttributes<HTMLButtonElement>,
+        'defaultValue' | 'onChange' | 'type' | 'value'
+      >
+    >,
     RadioStyleProps {
   value: RadioValue
 }
 
 export interface RadioButtonProps
-  extends ParentProps<Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'defaultValue' | 'onChange' | 'type' | 'value'>>,
+  extends
+    ParentProps<
+      Omit<
+        JSX.ButtonHTMLAttributes<HTMLButtonElement>,
+        'defaultValue' | 'onChange' | 'type' | 'value'
+      >
+    >,
     RadioButtonStyleProps {
   value: RadioValue
 }
@@ -105,7 +118,14 @@ export function RadioGroup(props: RadioGroupProps) {
 
 export function Radio(props: RadioProps) {
   const context = useRadioContext('Radio')
-  const [local, rest] = splitProps(props, ['value', 'disabled', 'size', 'class', 'children', 'onClick'])
+  const [local, rest] = splitProps(props, [
+    'value',
+    'disabled',
+    'size',
+    'class',
+    'children',
+    'onClick',
+  ])
   const checked = () => context.value() === local.value
   const currentDisabled = () => context.disabled() || local.disabled === true
   const size = () => local.size ?? 'default'
@@ -137,7 +157,14 @@ export function Radio(props: RadioProps) {
 
 export function RadioButton(props: RadioButtonProps) {
   const context = useRadioContext('RadioButton')
-  const [local, rest] = splitProps(props, ['value', 'disabled', 'size', 'class', 'children', 'onClick'])
+  const [local, rest] = splitProps(props, [
+    'value',
+    'disabled',
+    'size',
+    'class',
+    'children',
+    'onClick',
+  ])
   const checked = () => context.value() === local.value
   const currentDisabled = () => context.disabled() || local.disabled === true
   const size = () => local.size ?? 'default'

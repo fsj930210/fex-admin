@@ -69,7 +69,10 @@ export function PopoverPage() {
         </header>
 
         <div className="space-y-space-xl">
-          <DemoSection title="Primitive" description="Low-level composition API. Trigger exposes render props.">
+          <DemoSection
+            title="Primitive"
+            description="Low-level composition API. Trigger exposes render props."
+          >
             <PrimitivePopover.PopoverRoot side="bottom" align="start" sideOffset={8} arrow>
               <PrimitivePopover.PopoverTrigger>
                 {(triggerProps) => (
@@ -89,7 +92,10 @@ export function PopoverPage() {
             </PrimitivePopover.PopoverRoot>
           </DemoSection>
 
-          <DemoSection title="Ui" description="Business UI can compose Button without an extra wrapper protocol.">
+          <DemoSection
+            title="Ui"
+            description="Business UI can compose Button without an extra wrapper protocol."
+          >
             <PrimitivePopover.PopoverRoot placement="bottomLeft" sideOffset={8} arrow>
               <PrimitivePopover.PopoverTrigger>
                 {(triggerProps) => (
@@ -109,7 +115,10 @@ export function PopoverPage() {
             </PrimitivePopover.PopoverRoot>
           </DemoSection>
 
-          <DemoSection title="Triggers" description="Supports click, hover, focus and context-menu.">
+          <DemoSection
+            title="Triggers"
+            description="Supports click, hover, focus and context-menu."
+          >
             <PrimitivePopover.PopoverRoot trigger={['hover', 'focus']} hoverCloseDelay={120} arrow>
               <PrimitivePopover.PopoverTrigger>
                 {(triggerProps) => (
@@ -122,13 +131,18 @@ export function PopoverPage() {
                 <PrimitivePopover.PopoverContent>
                   <PrimitivePopover.PopoverArrow />
                   <PopoverPanel title="Combined trigger">
-                    Hover and focus share one trigger source model, so they do not close each other incorrectly.
+                    Hover and focus share one trigger source model, so they do not close each other
+                    incorrectly.
                   </PopoverPanel>
                 </PrimitivePopover.PopoverContent>
               </PrimitivePopover.PopoverPortal>
             </PrimitivePopover.PopoverRoot>
 
-            <PrimitivePopover.PopoverRoot trigger={['context-menu']} placement="rightTop" sideOffset={8}>
+            <PrimitivePopover.PopoverRoot
+              trigger={['context-menu']}
+              placement="rightTop"
+              sideOffset={8}
+            >
               <PrimitivePopover.PopoverTrigger>
                 {(triggerProps) => (
                   <Button {...triggerProps} variant="outline">
@@ -139,14 +153,18 @@ export function PopoverPage() {
               <PrimitivePopover.PopoverPortal>
                 <PrimitivePopover.PopoverContent>
                   <PopoverPanel title="Context menu trigger">
-                    This is still Popover content; future ContextMenu will reuse the same trigger and floating core with Menu.
+                    This is still Popover content; future ContextMenu will reuse the same trigger
+                    and floating core with Menu.
                   </PopoverPanel>
                 </PrimitivePopover.PopoverContent>
               </PrimitivePopover.PopoverPortal>
             </PrimitivePopover.PopoverRoot>
           </DemoSection>
 
-          <DemoSection title="Placement" description="Supports antd placement and Radix side/align options.">
+          <DemoSection
+            title="Placement"
+            description="Supports antd placement and Radix side/align options."
+          >
             <div className="flex w-full flex-col items-center gap-space-md py-space-lg">
               {placementGroups.map((group, rowIndex) => (
                 <div
@@ -175,7 +193,10 @@ export function PopoverPage() {
             </div>
           </DemoSection>
 
-          <DemoSection title="Offsets" description="Tune main-axis sideOffset and cross-axis alignOffset.">
+          <DemoSection
+            title="Offsets"
+            description="Tune main-axis sideOffset and cross-axis alignOffset."
+          >
             <PrimitivePopover.PopoverRoot placement="bottomLeft" sideOffset={18} arrow>
               <PrimitivePopover.PopoverTrigger>
                 {(triggerProps) => (
@@ -194,7 +215,12 @@ export function PopoverPage() {
               </PrimitivePopover.PopoverPortal>
             </PrimitivePopover.PopoverRoot>
 
-            <PrimitivePopover.PopoverRoot placement="bottomLeft" sideOffset={8} alignOffset={28} arrow>
+            <PrimitivePopover.PopoverRoot
+              placement="bottomLeft"
+              sideOffset={8}
+              alignOffset={28}
+              arrow
+            >
               <PrimitivePopover.PopoverTrigger>
                 {(triggerProps) => (
                   <Button {...triggerProps} variant="outline">
@@ -213,8 +239,16 @@ export function PopoverPage() {
             </PrimitivePopover.PopoverRoot>
           </DemoSection>
 
-          <DemoSection title="Controlled" description="Controlled mode only requests outside updates.">
-            <PrimitivePopover.PopoverRoot open={open} onOpenChange={setOpen} placement="bottomLeft" arrow>
+          <DemoSection
+            title="Controlled"
+            description="Controlled mode only requests outside updates."
+          >
+            <PrimitivePopover.PopoverRoot
+              open={open}
+              onOpenChange={setOpen}
+              placement="bottomLeft"
+              arrow
+            >
               <PrimitivePopover.PopoverTrigger>
                 {(triggerProps) => (
                   <Button {...triggerProps} variant={open ? 'secondary' : 'outline'}>
@@ -234,8 +268,14 @@ export function PopoverPage() {
           </DemoSection>
 
           <Card title="getPopupContainer" description="Portal can mount into a custom container.">
-            <div ref={setContainer} className="relative min-h-40 rounded-md border border-dashed p-space-lg">
-              <PrimitivePopover.PopoverRoot getPopupContainer={() => container ?? document.body} placement="bottomLeft">
+            <div
+              ref={setContainer}
+              className="relative min-h-40 rounded-md border border-dashed p-space-lg"
+            >
+              <PrimitivePopover.PopoverRoot
+                getPopupContainer={() => container ?? document.body}
+                placement="bottomLeft"
+              >
                 <PrimitivePopover.PopoverTrigger>
                   {(triggerProps) => (
                     <Button {...triggerProps} variant="outline">
@@ -259,7 +299,10 @@ export function PopoverPage() {
   )
 }
 
-function PlacementPopover(props: { item: (typeof placementGroups)[number][number]; edge?: boolean }) {
+function PlacementPopover(props: {
+  item: (typeof placementGroups)[number][number]
+  edge?: boolean
+}) {
   return (
     <PrimitivePopover.PopoverRoot placement={props.item.placement} sideOffset={10} arrow>
       <PrimitivePopover.PopoverTrigger>
@@ -273,7 +316,9 @@ function PlacementPopover(props: { item: (typeof placementGroups)[number][number
         <PrimitivePopover.PopoverContent>
           <PrimitivePopover.PopoverArrow />
           <PopoverPanel compact title={props.item.placement}>
-            {props.edge ? 'Edge placements flip instead of shifting across the trigger.' : 'Single-axis placements shift; edge placements only flip.'}
+            {props.edge
+              ? 'Edge placements flip instead of shifting across the trigger.'
+              : 'Single-axis placements shift; edge placements only flip.'}
           </PopoverPanel>
         </PrimitivePopover.PopoverContent>
       </PrimitivePopover.PopoverPortal>

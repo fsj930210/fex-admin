@@ -11,15 +11,17 @@ export function VirtualTreeDemo() {
   const viewportRef = useRef<TreeVirtualViewportHandle>(null)
 
   return (
-    <TreeDemoSection title="Virtualization and locate" description="Only viewport rows mount. scrollToKey resolves a visible index before asking TanStack Virtual to scroll.">
+    <TreeDemoSection
+      title="Virtualization and locate"
+      description="Only viewport rows mount. scrollToKey resolves a visible index before asking TanStack Virtual to scroll."
+    >
       <div className="mb-space-md flex gap-space-sm">
         <Button
           size="sm"
           variant="outline"
-          onClick={() => viewportRef.current?.scrollToKey(
-            'large-3200',
-            { reveal: true, align: 'start' },
-          )}
+          onClick={() =>
+            viewportRef.current?.scrollToKey('large-3200', { reveal: true, align: 'start' })
+          }
         >
           Locate row 3201
         </Button>

@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { getNextViewDateByHeaderAction } from '@fex/components-core/date-picker/panel'
 import type { DatePickerHeaderAction } from '@fex/components-core/date-picker/types'
-import { datePickerHeaderDoubleIconClassName, datePickerHeaderNavigationClassName } from '@fex/components-styles/date-picker'
+import {
+  datePickerHeaderDoubleIconClassName,
+  datePickerHeaderNavigationClassName,
+} from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
 import { computed } from 'vue'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../icon/chevron'
@@ -17,21 +20,36 @@ const isDouble = computed(() => props.action.includes('year') || props.action.in
 
 function runAction(event: Event) {
   if (event.defaultPrevented) return
-  const nextViewDate = getNextViewDateByHeaderAction(calendar.viewDate.value, props.action, calendar.panel.value)
+  const nextViewDate = getNextViewDateByHeaderAction(
+    calendar.viewDate.value,
+    props.action,
+    calendar.panel.value,
+  )
   calendar.setViewDate(nextViewDate)
   owner.setViewDate(nextViewDate)
 }
 </script>
 
 <template>
-  <Button data-slot="date-picker-header-button" :data-action="props.action" :class="cn(datePickerHeaderNavigationClassName, props.class)" @click="runAction">
+  <Button
+    data-slot="date-picker-header-button"
+    :data-action="props.action"
+    :class="cn(datePickerHeaderNavigationClassName, props.class)"
+    @click="runAction"
+  >
     <slot>
       <span class="flex items-center">
         <template v-if="isDouble">
           <ChevronLeftIcon v-if="isPrevious" class="size-4" />
-          <ChevronLeftIcon v-if="isPrevious" :class="cn(datePickerHeaderDoubleIconClassName, 'size-4')" />
+          <ChevronLeftIcon
+            v-if="isPrevious"
+            :class="cn(datePickerHeaderDoubleIconClassName, 'size-4')"
+          />
           <ChevronRightIcon v-if="!isPrevious" class="size-4" />
-          <ChevronRightIcon v-if="!isPrevious" :class="cn(datePickerHeaderDoubleIconClassName, 'size-4')" />
+          <ChevronRightIcon
+            v-if="!isPrevious"
+            :class="cn(datePickerHeaderDoubleIconClassName, 'size-4')"
+          />
         </template>
         <template v-else>
           <ChevronLeftIcon v-if="isPrevious" class="size-4" />

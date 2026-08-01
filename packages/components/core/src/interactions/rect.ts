@@ -35,4 +35,3 @@ export function rectToStyle(rect: Rect) {
     height: `${rect.height}px`,
   }
 }
-

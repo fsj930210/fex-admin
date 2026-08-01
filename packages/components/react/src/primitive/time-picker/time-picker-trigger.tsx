@@ -13,8 +13,10 @@ import { PopoverTrigger } from '../popover/popover'
 import { useState, type ComponentProps, type ReactNode } from 'react'
 import { useTimePickerContext } from './time-picker-context'
 
-export interface TimePickerTriggerProps
-  extends Omit<InputRootProps, 'value' | 'defaultValue' | 'onValueChange' | 'onClear' | 'children' | 'prefix'> {
+export interface TimePickerTriggerProps extends Omit<
+  InputRootProps,
+  'value' | 'defaultValue' | 'onValueChange' | 'onClear' | 'children' | 'prefix'
+> {
   allowClear?: boolean | undefined
   placeholder?: string | undefined
   prefix?: ReactNode
@@ -65,7 +67,9 @@ export function TimePickerTrigger({
           {prefix ? <InputPrefix>{prefix}</InputPrefix> : null}
           <InputControl {...inputProps} placeholder={placeholder ?? context.format} />
           {allowClear ? <InputClear /> : null}
-          {!allowClear || !text ? <InputSuffix>{suffix ?? <ClockIcon className="size-4" />}</InputSuffix> : null}
+          {!allowClear || !text ? (
+            <InputSuffix>{suffix ?? <ClockIcon className="size-4" />}</InputSuffix>
+          ) : null}
         </InputRoot>
       )}
     </PopoverTrigger>

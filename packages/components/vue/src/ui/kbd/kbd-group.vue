@@ -9,7 +9,11 @@ const attrs = useAttrs()
 </script>
 
 <template>
-  <div v-bind="attrs" data-slot="kbd-group" :class="cn(kbdGroupClassName, attrs.class as string | undefined)">
+  <div
+    v-bind="attrs"
+    data-slot="kbd-group"
+    :class="cn(kbdGroupClassName, attrs.class as string | undefined)"
+  >
     <slot />
   </div>
 </template>

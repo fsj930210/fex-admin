@@ -18,7 +18,9 @@
           aria-label="Move selected to target"
           [disabled]="!api.canMoveToTarget"
           (click)="api.controller.moveToTarget()"
-        ><fex-chevron-right-icon /></button>
+        >
+          <fex-chevron-right-icon />
+        </button>
       </ng-template>
       <ng-template fexTransferPanel="target" region="header" let-api>
         <span class="font-medium">Target</span>
@@ -36,7 +38,9 @@
                 [attr.aria-label]="'Remove ' + item.name"
                 [disabled]="disabled() || item.disabled === true"
                 (click)="api.setCheckedKeys([item.id]); api.controller.moveToSource()"
-              ><fex-trash-icon /></button>
+              >
+                <fex-trash-icon />
+              </button>
             </div>
           }
         </div>
@@ -48,7 +52,9 @@
         aria-label="Disable one-way Transfer"
         [checked]="disabled()"
         (checkedChange)="disabled.set($event.checked)"
-      ><span fexSwitchThumb></span></button>
+      >
+        <span fexSwitchThumb></span>
+      </button>
       Disabled
     </label>
   </div>

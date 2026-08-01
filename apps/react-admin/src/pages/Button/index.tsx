@@ -5,7 +5,15 @@ import { PlusIcon } from '@fex/components-react/icon/plus'
 import type { ReactNode } from 'react'
 import { Link } from 'react-router'
 
-const variants = ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link', 'dashed'] as const
+const variants = [
+  'default',
+  'outline',
+  'secondary',
+  'ghost',
+  'destructive',
+  'link',
+  'dashed',
+] as const
 const sizes = ['xs', 'sm', 'default', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'] as const
 const effects = [
   'expand-icon',
@@ -76,13 +84,20 @@ export function ButtonPage() {
 
           <DemoSection title="Sizes" description="文本按钮和 icon-only 按钮尺寸。">
             {sizes.map((size) => (
-              <Button key={size} size={size} aria-label={size.startsWith('icon') ? size : undefined}>
+              <Button
+                key={size}
+                size={size}
+                aria-label={size.startsWith('icon') ? size : undefined}
+              >
                 {size.startsWith('icon') ? <PlusIcon /> : size}
               </Button>
             ))}
           </DemoSection>
 
-          <DemoSection title="Loading" description="加载态会禁用按钮，loading icon 跟随 iconPlacement。">
+          <DemoSection
+            title="Loading"
+            description="加载态会禁用按钮，loading icon 跟随 iconPlacement。"
+          >
             <Button loading>Loading start</Button>
             <Button loading iconPlacement="end">
               Loading end
@@ -109,7 +124,10 @@ export function ButtonPage() {
             ))}
           </DemoSection>
 
-          <DemoSection title="Mixed Usage" description="不同 variant、icon、loading 和 effect 的组合。">
+          <DemoSection
+            title="Mixed Usage"
+            description="不同 variant、icon、loading 和 effect 的组合。"
+          >
             <Button effect="expand-icon" icon={<PlusIcon />} iconPlacement="end">
               Icon right
             </Button>

@@ -20,7 +20,8 @@ const actions = {
   collapse: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.collapse(props.itemKey),
   toggleExpanded: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.toggle(props.itemKey),
   toggleSelected: () => tree.getFeature<SelectionFeatureApi>('selection')?.toggle(props.itemKey),
-  toggleChecked: () => tree.getFeature<CheckFeatureApi>('check')?.check(props.itemKey, !state.value.checked),
+  toggleChecked: () =>
+    tree.getFeature<CheckFeatureApi>('check')?.check(props.itemKey, !state.value.checked),
 }
 const itemProps = computed(() => {
   const item = state.value.item
@@ -33,7 +34,8 @@ const itemProps = computed(() => {
     'aria-level': item.depth + 1,
     'aria-expanded': item.isLeaf ? undefined : state.value.expanded,
     'aria-selected': state.value.selected || undefined,
-    'aria-checked': state.value.checkedState === 'indeterminate' ? 'mixed' : state.value.checked || undefined,
+    'aria-checked':
+      state.value.checkedState === 'indeterminate' ? 'mixed' : state.value.checked || undefined,
     'aria-disabled': item.disabled || undefined,
     'aria-posinset': item.index + 1,
     'data-key': String(item.key),
@@ -44,12 +46,15 @@ const itemProps = computed(() => {
     'data-leaf': item.isLeaf || undefined,
     'data-block': props.block || undefined,
     class: cn(treeItemClassName(), className as string | undefined),
-    style: [style, {
-      height: `${rowHeight.value}px`,
-      marginInlineStart: `${item.depth * indent.value}px`,
-      paddingInlineStart: '4px',
-      '--tree-item-inline-start': '4px',
-    }],
+    style: [
+      style,
+      {
+        height: `${rowHeight.value}px`,
+        marginInlineStart: `${item.depth * indent.value}px`,
+        paddingInlineStart: '4px',
+        '--tree-item-inline-start': '4px',
+      },
+    ],
     onFocus: (event: FocusEvent) => {
       if (typeof onFocus === 'function') onFocus(event)
       tree.getFeature<FocusFeatureApi>('focus')?.focus(item.key)

@@ -9,9 +9,8 @@ const FIELD_CONTROL_SELECTOR = 'input, select, textarea, button, [tabindex]'
 
 function nextFrame(container: ParentNode) {
   return new Promise<void>((resolve) => {
-    const view = container instanceof Document
-      ? container.defaultView
-      : container.ownerDocument?.defaultView
+    const view =
+      container instanceof Document ? container.defaultView : container.ownerDocument?.defaultView
 
     if (!view) {
       resolve()
@@ -33,14 +32,19 @@ export async function scrollToField(
   for (let frame = 0; frame < 6; frame += 1) {
     // Framework adapters may commit touched/error state after handleSubmit resolves.
     await nextFrame(container)
-    const candidates = fieldName === undefined
-      ? Array.from(container.querySelectorAll<HTMLElement>(INVALID_CONTROL_SELECTOR))
-      : Array.from(container.querySelectorAll<HTMLElement>('[data-field-name]'))
-        .filter((element) => element.dataset.fieldName === fieldName)
+    const candidates =
+      fieldName === undefined
+        ? Array.from(container.querySelectorAll<HTMLElement>(INVALID_CONTROL_SELECTOR))
+        : Array.from(container.querySelectorAll<HTMLElement>('[data-field-name]')).filter(
+            (element) => element.dataset.fieldName === fieldName,
+          )
 
-    control = candidates.find((element) => element.matches(FIELD_CONTROL_SELECTOR) && !element.hasAttribute('disabled'))
-      ?? candidates.find((element) => !element.hasAttribute('disabled'))
-      ?? null
+    control =
+      candidates.find(
+        (element) => element.matches(FIELD_CONTROL_SELECTOR) && !element.hasAttribute('disabled'),
+      ) ??
+      candidates.find((element) => !element.hasAttribute('disabled')) ??
+      null
     if (control || fieldName !== undefined) break
   }
 
@@ -62,9 +66,6 @@ export async function scrollToField(
   return control
 }
 
-export function scrollToFirstError(
-  container: ParentNode,
-  option: ScrollToFirstError = true,
-) {
+export function scrollToFirstError(container: ParentNode, option: ScrollToFirstError = true) {
   return scrollToField(container, undefined, option)
 }

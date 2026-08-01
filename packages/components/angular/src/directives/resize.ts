@@ -1,4 +1,13 @@
-import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output, inject } from '@angular/core'
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  inject,
+} from '@angular/core'
 import type { OnDestroy, OnInit } from '@angular/core'
 import { createResizeController } from '@fex/components-core/interactions/create-resize-controller'
 import { defaultRect, rectToStyle } from '@fex/components-core/interactions/rect'

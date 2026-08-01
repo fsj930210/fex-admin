@@ -20,14 +20,14 @@ const form = createForm(() => ({ defaultValues: { name: '' } }))
 
 ## Props
 
-| 组件 | 参数名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- | --- |
-| `Form` | `form` | `AnyFormApi` | — | 是 | TanStack 实例。 |
-| `Form` | `component` | `'form' \| false` | `'form'` | 否 | 无 DOM 模式。 |
-| `Form` | `scrollToFirstError` | `boolean \| (ScrollIntoViewOptions & { focus?: boolean })` | `true` | 否 | 提交失败后定位并聚焦当前 form 的第一个无效控件。 |
-| `FieldRoot` | `orientation` | `vertical/horizontal/responsive` | `vertical` | 否 | 方向。 |
-| `FieldRoot` | 状态 props | `boolean` | `false` | 否 | required、disabled、readOnly、invalid、hasDescription、hasError。 |
-| `FieldControl` | children snippet | `{ props, state }` | — | 是 | 绑定任意 control。 |
+| 组件           | 参数名               | 类型                                                       | 默认值     | 必填 | 说明                                                              |
+| -------------- | -------------------- | ---------------------------------------------------------- | ---------- | ---- | ----------------------------------------------------------------- |
+| `Form`         | `form`               | `AnyFormApi`                                               | —          | 是   | TanStack 实例。                                                   |
+| `Form`         | `component`          | `'form' \| false`                                          | `'form'`   | 否   | 无 DOM 模式。                                                     |
+| `Form`         | `scrollToFirstError` | `boolean \| (ScrollIntoViewOptions & { focus?: boolean })` | `true`     | 否   | 提交失败后定位并聚焦当前 form 的第一个无效控件。                  |
+| `FieldRoot`    | `orientation`        | `vertical/horizontal/responsive`                           | `vertical` | 否   | 方向。                                                            |
+| `FieldRoot`    | 状态 props           | `boolean`                                                  | `false`    | 否   | required、disabled、readOnly、invalid、hasDescription、hasError。 |
+| `FieldControl` | children snippet     | `{ props, state }`                                         | —          | 是   | 绑定任意 control。                                                |
 
 其它子路径导出 Label、RequiredIndicator、Description、Error、Group、Set、Legend、Content、Title、Separator。
 

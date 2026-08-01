@@ -1,4 +1,11 @@
-import { Field, FieldContent, FieldControl, FieldDescription, FieldLabel, FieldRoot } from '@fex/components-react/primitive/field'
+import {
+  Field,
+  FieldContent,
+  FieldControl,
+  FieldDescription,
+  FieldLabel,
+  FieldRoot,
+} from '@fex/components-react/primitive/field'
 import { Form, useForm } from '@fex/components-react/primitive/form'
 import { Button } from '@fex/components-react/ui/button'
 import { Card } from '@fex/components-react/ui/card'
@@ -20,7 +27,10 @@ export function BasicValidationDemo({ setResult }: { setResult: SetDemoResult })
 
   return (
     <>
-      <Card title="Basic form" description="Field 是唯一字段入口；直接使用 TanStack validators 管理校验。">
+      <Card
+        title="Basic form"
+        description="Field 是唯一字段入口；直接使用 TanStack validators 管理校验。"
+      >
         <Form form={loginForm} className="grid max-w-xl gap-space-lg">
           <TextField
             name="account"
@@ -29,8 +39,8 @@ export function BasicValidationDemo({ setResult }: { setResult: SetDemoResult })
             placeholder="admin"
             description="使用 validators.onBlur 校验必填。"
             validators={{
-              onBlur: ({ value }) => String(value).trim() ? undefined : '请输入账号',
-              onSubmit: ({ value }) => String(value).trim() ? undefined : '请输入账号',
+              onBlur: ({ value }) => (String(value).trim() ? undefined : '请输入账号'),
+              onSubmit: ({ value }) => (String(value).trim() ? undefined : '请输入账号'),
             }}
           />
           <TextField
@@ -39,15 +49,21 @@ export function BasicValidationDemo({ setResult }: { setResult: SetDemoResult })
             required
             type="password"
             validators={{
-              onChange: ({ value }) => String(value).length >= 6 ? undefined : '密码至少 6 位',
-              onSubmit: ({ value }) => String(value).length >= 6 ? undefined : '密码至少 6 位',
+              onChange: ({ value }) => (String(value).length >= 6 ? undefined : '密码至少 6 位'),
+              onSubmit: ({ value }) => (String(value).length >= 6 ? undefined : '密码至少 6 位'),
             }}
           />
           <Field name="remember">
             {(field) => (
               <FieldRoot orientation="horizontal">
                 <FieldControl>
-                  {({ props }) => <Checkbox {...props} checked={field.state.value as boolean} onCheckedChange={(checked) => field.handleChange(checked === true)} />}
+                  {({ props }) => (
+                    <Checkbox
+                      {...props}
+                      checked={field.state.value as boolean}
+                      onCheckedChange={(checked) => field.handleChange(checked === true)}
+                    />
+                  )}
                 </FieldControl>
                 <FieldContent>
                   <FieldLabel>记住登录状态</FieldLabel>
@@ -59,15 +75,22 @@ export function BasicValidationDemo({ setResult }: { setResult: SetDemoResult })
           <loginForm.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting] as const}>
             {([canSubmit, isSubmitting]) => (
               <div className="flex gap-space-sm">
-                <Button type="submit" disabled={!canSubmit || isSubmitting}>{isSubmitting ? '提交中…' : '登录'}</Button>
-                <Button type="button" variant="outline" onClick={() => loginForm.reset()}>重置</Button>
+                <Button type="submit" disabled={!canSubmit || isSubmitting}>
+                  {isSubmitting ? '提交中…' : '登录'}
+                </Button>
+                <Button type="button" variant="outline" onClick={() => loginForm.reset()}>
+                  重置
+                </Button>
               </div>
             )}
           </loginForm.Subscribe>
         </Form>
       </Card>
 
-      <Card title="Validation timing, async validation and dependencies" description="展示 onBlur、onChangeAsync、防抖与 onChangeListenTo。">
+      <Card
+        title="Validation timing, async validation and dependencies"
+        description="展示 onBlur、onChangeAsync、防抖与 onChangeListenTo。"
+      >
         <Form form={validationForm} className="grid max-w-xl gap-space-lg">
           <TextField
             name="username"
@@ -75,7 +98,7 @@ export function BasicValidationDemo({ setResult }: { setResult: SetDemoResult })
             required
             description="onBlur 校验必填；onChangeAsync 经 400ms 防抖校验占用。"
             validators={{
-              onBlur: ({ value }) => String(value).trim() ? undefined : '请输入用户名',
+              onBlur: ({ value }) => (String(value).trim() ? undefined : '请输入用户名'),
               onChangeAsync: async ({ value }) => {
                 await new Promise((resolve) => setTimeout(resolve, 200))
                 return value === 'admin' ? '用户名已被占用' : undefined
@@ -83,7 +106,15 @@ export function BasicValidationDemo({ setResult }: { setResult: SetDemoResult })
               onChangeAsyncDebounceMs: 400,
             }}
           />
-          <TextField name="password" label="新密码" required type="password" validators={{ onChange: ({ value }) => String(value).length >= 8 ? undefined : '密码至少 8 位' }} />
+          <TextField
+            name="password"
+            label="新密码"
+            required
+            type="password"
+            validators={{
+              onChange: ({ value }) => (String(value).length >= 8 ? undefined : '密码至少 8 位'),
+            }}
+          />
           <TextField
             name="confirmPassword"
             label="确认密码"
@@ -91,11 +122,18 @@ export function BasicValidationDemo({ setResult }: { setResult: SetDemoResult })
             type="password"
             description="password 变化时，onChangeListenTo 会重跑当前字段校验。"
             validators={{
-              onChange: ({ value }) => !value ? '请再次输入密码' : value === validationForm.getFieldValue('password') ? undefined : '两次密码不一致',
+              onChange: ({ value }) =>
+                !value
+                  ? '请再次输入密码'
+                  : value === validationForm.getFieldValue('password')
+                    ? undefined
+                    : '两次密码不一致',
               onChangeListenTo: ['password'],
             }}
           />
-          <Button className="w-fit" type="submit">验证</Button>
+          <Button className="w-fit" type="submit">
+            验证
+          </Button>
         </Form>
       </Card>
     </>

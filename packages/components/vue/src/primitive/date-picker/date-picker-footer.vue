@@ -12,7 +12,8 @@ const datePicker = inject(datePickerContextKey, null)
 const rangePicker = inject(rangePickerContextKey, null)
 const owner = computed(() => {
   const context = datePicker ?? rangePicker
-  if (!context) throw new Error('DatePickerFooter must be used within DatePickerRoot or RangePickerRoot')
+  if (!context)
+    throw new Error('DatePickerFooter must be used within DatePickerRoot or RangePickerRoot')
   return context
 })
 defineExpose({ owner })
@@ -20,7 +21,12 @@ defineExpose({ owner })
 
 <template>
   <div data-slot="date-picker-footer" :class="cn(datePickerFooterClassName, props.class)">
-    <slot :close="owner.close" :clear="owner.clear" :confirm="owner.confirm" :cancel="owner.cancel" />
+    <slot
+      :close="owner.close"
+      :clear="owner.clear"
+      :confirm="owner.confirm"
+      :cancel="owner.cancel"
+    />
   </div>
 </template>
 
@@ -29,7 +35,10 @@ export function createDatePickerFooterActions() {
   const datePicker = inject(datePickerContextKey, null)
   const rangePicker = inject(rangePickerContextKey, null)
   const owner = datePicker ?? rangePicker
-  if (!owner) throw new Error('DatePicker footer action must be used within DatePickerRoot or RangePickerRoot')
+  if (!owner)
+    throw new Error(
+      'DatePicker footer action must be used within DatePickerRoot or RangePickerRoot',
+    )
   return owner
 }
 </script>

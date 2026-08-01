@@ -23,7 +23,7 @@
   const isDouble = $derived(action.includes('year') || action.includes('panel'))
 
   function runAction(event: MouseEvent) {
-    onclick?.(event)
+    onclick?.(event as Parameters<NonNullable<typeof onclick>>[0])
     if (event.defaultPrevented) return
     const nextViewDate = getNextViewDateByHeaderAction(calendar.getViewDate(), action, calendar.getPanel())
     calendar.setViewDate(nextViewDate)

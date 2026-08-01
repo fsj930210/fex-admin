@@ -24,7 +24,12 @@
 
       <fex-card title="Controlled" description="Controlled state uses value and valueChange.">
         <div class="grid min-w-0 gap-space-md">
-          <div fexRadioGroup [value]="controlled()" (valueChange)="controlled.set($event.value)" orientation="horizontal">
+          <div
+            fexRadioGroup
+            [value]="controlled()"
+            (valueChange)="controlled.set($event.value)"
+            orientation="horizontal"
+          >
             @for (option of options; track option.value) {
               <label class="inline-flex min-w-0 items-center gap-2 text-sm">
                 <button fexRadio [value]="option.value"></button>
@@ -50,7 +55,10 @@
         </div>
       </fex-card>
 
-      <fex-card title="RadioButton" description="Button-form radios share the same RadioGroup value.">
+      <fex-card
+        title="RadioButton"
+        description="Button-form radios share the same RadioGroup value."
+      >
         <div class="grid min-w-0 gap-space-md">
           <div
             fexRadioGroup
@@ -67,14 +75,29 @@
         </div>
       </fex-card>
 
-      <fex-card title="Disabled" description="Disabled state can live on the group or a single radio.">
+      <fex-card
+        title="Disabled"
+        description="Disabled state can live on the group or a single radio."
+      >
         <div class="grid min-w-0 gap-space-md">
           <div fexRadioGroup defaultValue="pear" orientation="horizontal">
-            <label class="inline-flex min-w-0 items-center gap-2 text-sm"><button fexRadio value="apple"></button><span>Apple</span></label>
-            <label class="inline-flex min-w-0 items-center gap-2 text-sm"><button fexRadio value="pear"></button><span>Pear</span></label>
-            <label class="inline-flex min-w-0 items-center gap-2 text-sm"><button fexRadio value="orange" disabled></button><span>Orange disabled</span></label>
+            <label class="inline-flex min-w-0 items-center gap-2 text-sm"
+              ><button fexRadio value="apple"></button><span>Apple</span></label
+            >
+            <label class="inline-flex min-w-0 items-center gap-2 text-sm"
+              ><button fexRadio value="pear"></button><span>Pear</span></label
+            >
+            <label class="inline-flex min-w-0 items-center gap-2 text-sm"
+              ><button fexRadio value="orange" disabled></button><span>Orange disabled</span></label
+            >
           </div>
-          <div fexRadioGroup defaultValue="apple" disabled orientation="horizontal" class="grid grid-cols-3 gap-0">
+          <div
+            fexRadioGroup
+            defaultValue="apple"
+            disabled
+            orientation="horizontal"
+            class="grid grid-cols-3 gap-0"
+          >
             @for (option of options; track option.value) {
               <button fexRadioButton [value]="option.value">{{ option.label }}</button>
             }

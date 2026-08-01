@@ -8,13 +8,7 @@ import {
   type RateStyleProps,
 } from '@fex/components-styles/rate'
 import { cn } from '@fex/utils'
-import {
-  useRef,
-  type HTMLAttributes,
-  type PointerEvent,
-  type ReactNode,
-  type Ref,
-} from 'react'
+import { useRef, type HTMLAttributes, type PointerEvent, type ReactNode, type Ref } from 'react'
 import { useComposedRef } from '../../hooks/use-composed-ref'
 import { StarIcon } from '../../icon/star'
 import { getRatePointerValue, handleRateKeyDown } from './rate-interactions'
@@ -34,7 +28,8 @@ export interface RateItemRenderState {
 }
 
 export interface RateProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'defaultValue' | 'dir' | 'onChange'>,
+  extends
+    Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'defaultValue' | 'dir' | 'onChange'>,
     RateStyleProps {
   value?: number
   defaultValue?: number
@@ -85,21 +80,27 @@ export function Rate({
   const rootRef = useRef<HTMLDivElement | null>(null)
   const composedRef = useComposedRef(rootRef, ref)
   const { controller, snapshot } = useRate({
-    value,
-    defaultValue,
+    ...(value === undefined ? {} : { value }),
+    ...(defaultValue === undefined ? {} : { defaultValue }),
     count,
     step,
     disabled,
     readOnly,
     allowClear,
     direction,
-    onPreviewChange: onValuePreviewChange,
+    ...(onValuePreviewChange === undefined ? {} : { onPreviewChange: onValuePreviewChange }),
     onChange: (nextValue) => onValueChange?.(nextValue),
     onCommit: (nextValue) => onValueCommit?.(nextValue),
   })
 
   function readPointerValue(event: PointerEvent<HTMLDivElement>) {
-    return getRatePointerValue(event.currentTarget, event.clientX, snapshot.step, snapshot.count, snapshot.direction)
+    return getRatePointerValue(
+      event.currentTarget,
+      event.clientX,
+      snapshot.step,
+      snapshot.count,
+      snapshot.direction,
+    )
   }
 
   return (
@@ -148,13 +149,23 @@ export function Rate({
       }}
       onPointerOut={(event) => {
         onPointerOut?.(event)
-        if (event.relatedTarget instanceof Node && event.currentTarget.contains(event.relatedTarget)) return
+        if (
+          event.relatedTarget instanceof Node &&
+          event.currentTarget.contains(event.relatedTarget)
+        )
+          return
         controller.clearPreview()
       }}
       onKeyDown={(event) => {
         onKeyDown?.(event)
         if (event.defaultPrevented || snapshot.disabled || snapshot.readOnly) return
-        handleRateKeyDown(event, snapshot.direction, controller.stepValue, (nextValue) => controller.setValue(nextValue, { commit: true }), snapshot.count)
+        handleRateKeyDown(
+          event,
+          snapshot.direction,
+          controller.stepValue,
+          (nextValue) => controller.setValue(nextValue, { commit: true }),
+          snapshot.count,
+        )
       }}
     >
       {Array.from({ length: snapshot.count }, (_, index) => {
@@ -171,9 +182,10 @@ export function Rate({
           readOnly: snapshot.readOnly,
         }
         const hiddenPercent = (1 - fill) * 100
-        const clipPath = snapshot.direction === 'rtl'
-          ? `inset(0 0 0 ${hiddenPercent}%)`
-          : `inset(0 ${hiddenPercent}% 0 0)`
+        const clipPath =
+          snapshot.direction === 'rtl'
+            ? `inset(0 0 0 ${hiddenPercent}%)`
+            : `inset(0 ${hiddenPercent}% 0 0)`
 
         return (
           <span key={index} data-rate-item={index} className={rateItemClassName}>

@@ -14,7 +14,17 @@ import { transferFieldNames, transferMembers } from './data'
 @Component({
   selector: 'fex-transfer-custom-demo',
   standalone: true,
-  imports: [Card, Transfer, TransferActionsTemplate, TransferItemTemplate, TransferPanelTemplate, Button, Badge, ChevronLeftIcon, ChevronRightIcon],
+  imports: [
+    Card,
+    Transfer,
+    TransferActionsTemplate,
+    TransferItemTemplate,
+    TransferPanelTemplate,
+    Button,
+    Badge,
+    ChevronLeftIcon,
+    ChevronRightIcon,
+  ],
   templateUrl: './custom-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

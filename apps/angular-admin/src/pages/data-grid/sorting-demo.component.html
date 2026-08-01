@@ -18,9 +18,17 @@
             >
               <span>{{ header.column.columnDef.header }}</span>
               <span class="inline-flex items-center" aria-hidden="true">
-                @if (direction(header) === 'asc') { <fex-chevron-up-icon class="block size-3.5" /> }
-                @else if (direction(header) === 'desc') { <fex-chevron-down-icon class="block size-3.5" /> }
-                @else { <span class="relative inline-block size-3.5"><fex-chevron-up-icon class="absolute inset-x-0 top-0 block size-3" /><fex-chevron-down-icon class="absolute inset-x-0 bottom-0 block size-3" /></span> }
+                @if (direction(header) === 'asc') {
+                  <fex-chevron-up-icon class="block size-3.5" />
+                } @else if (direction(header) === 'desc') {
+                  <fex-chevron-down-icon class="block size-3.5" />
+                } @else {
+                  <span class="relative inline-block size-3.5"
+                    ><fex-chevron-up-icon
+                      class="absolute inset-x-0 top-0 block size-3" /><fex-chevron-down-icon
+                      class="absolute inset-x-0 bottom-0 block size-3"
+                  /></span>
+                }
                 @if (direction(header) && sortIndex(header) >= 0) {
                   <sup>{{ sortIndex(header) + 1 }}</sup>
                 }

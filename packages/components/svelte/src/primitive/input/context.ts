@@ -12,5 +12,11 @@ export interface InputContextValue {
   setFocusElement: (element: HTMLElement | null) => void
 }
 const key = Symbol('FexInput')
-export function setInputContext(value: InputContextValue) { setContext(key, value) }
-export function getInputContext(component: string) { const value = getContext<InputContextValue>(key); if (!value) throw new Error(`${component} must be used inside InputRoot.`); return value }
+export function setInputContext(value: InputContextValue) {
+  setContext(key, value)
+}
+export function getInputContext(component: string) {
+  const value = getContext<InputContextValue>(key)
+  if (!value) throw new Error(`${component} must be used inside InputRoot.`)
+  return value
+}

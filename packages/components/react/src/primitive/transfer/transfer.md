@@ -38,32 +38,32 @@ import {
       />
     ),
   }}
-  actions={(
+  actions={
     <TransferActions>
       {(actions) => <button onClick={actions.moveToTarget}>Assign</button>}
     </TransferActions>
-  )}
+  }
 />
 ```
 
 ## Root props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `items` | `readonly TItem[]` | — | yes | Stable source data. |
-| `fieldNames` | `TransferFieldNames` | standard fields | no | Maps key, label and disabled fields. |
-| `source` | `TransferPanelConfig<TItem>` | — | yes | Source header, body and optional footer. |
-| `target` | `TransferPanelConfig<TItem>` | — | yes | Target header, body and optional footer. |
-| `actions` | `ReactNode` | — | yes | Content between the two panels. |
-| `controller` | `TransferController<TItem>` | owned controller | no | Supplies an external core controller. |
-| `targetKeys` | `readonly TransferKey[]` | — | no | Controlled target order. |
-| `defaultTargetKeys` | `readonly TransferKey[]` | `[]` | no | Initial target order. |
-| `checkedKeys` | `Partial<TransferCheckedKeys>` | — | no | Controlled panel checks. |
-| `defaultCheckedKeys` | `Partial<TransferCheckedKeys>` | `{}` | no | Initial panel checks. |
-| `onChange` | `(keys, meta) => void` | — | no | Reports formal value changes with complete items. |
-| `onCheckedChange` | `(keys, meta) => void` | — | no | Reports panel check changes with complete items. |
-| `invalid` | `boolean` | `false` | no | Adds `aria-invalid`; validation policy remains external. |
-| `message` | `ReactNode` | — | no | Optional status content. |
+| Name                 | Type                           | Default          | Required | Description                                              |
+| -------------------- | ------------------------------ | ---------------- | -------- | -------------------------------------------------------- |
+| `items`              | `readonly TItem[]`             | —                | yes      | Stable source data.                                      |
+| `fieldNames`         | `TransferFieldNames`           | standard fields  | no       | Maps key, label and disabled fields.                     |
+| `source`             | `TransferPanelConfig<TItem>`   | —                | yes      | Source header, body and optional footer.                 |
+| `target`             | `TransferPanelConfig<TItem>`   | —                | yes      | Target header, body and optional footer.                 |
+| `actions`            | `ReactNode`                    | —                | yes      | Content between the two panels.                          |
+| `controller`         | `TransferController<TItem>`    | owned controller | no       | Supplies an external core controller.                    |
+| `targetKeys`         | `readonly TransferKey[]`       | —                | no       | Controlled target order.                                 |
+| `defaultTargetKeys`  | `readonly TransferKey[]`       | `[]`             | no       | Initial target order.                                    |
+| `checkedKeys`        | `Partial<TransferCheckedKeys>` | —                | no       | Controlled panel checks.                                 |
+| `defaultCheckedKeys` | `Partial<TransferCheckedKeys>` | `{}`             | no       | Initial panel checks.                                    |
+| `onChange`           | `(keys, meta) => void`         | —                | no       | Reports formal value changes with complete items.        |
+| `onCheckedChange`    | `(keys, meta) => void`         | —                | no       | Reports panel check changes with complete items.         |
+| `invalid`            | `boolean`                      | `false`          | no       | Adds `aria-invalid`; validation policy remains external. |
+| `message`            | `ReactNode`                    | —                | no       | Optional status content.                                 |
 
 ## Panel render API
 

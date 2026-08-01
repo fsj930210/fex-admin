@@ -40,10 +40,14 @@
 
 @keyframes shine {
   from {
-    background-position: 200% 0, 0 0;
+    background-position:
+      200% 0,
+      0 0;
   }
   to {
-    background-position: -100% 0, 0 0;
+    background-position:
+      -100% 0,
+      0 0;
   }
 }
 

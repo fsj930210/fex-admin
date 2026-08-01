@@ -25,9 +25,15 @@ const columns: ColumnDef<F, Person>[] = fields.map((field) => ({
     const p = column as unknown as P
     return h('span', { class: 'inline-flex items-center gap-1' }, [
       field,
-      h(B, { size: 'icon-xs', variant: 'ghost', onClick: () => p.pin('start') }, () => h(ChevronLeftIcon, { class: 'size-3.5' })),
-      h(B, { size: 'icon-xs', variant: 'ghost', onClick: () => p.pin(false) }, () => h(MinusIcon, { class: 'size-3.5' })),
-      h(B, { size: 'icon-xs', variant: 'ghost', onClick: () => p.pin('end') }, () => h(ChevronRightIcon, { class: 'size-3.5' })),
+      h(B, { size: 'icon-xs', variant: 'ghost', onClick: () => p.pin('start') }, () =>
+        h(ChevronLeftIcon, { class: 'size-3.5' }),
+      ),
+      h(B, { size: 'icon-xs', variant: 'ghost', onClick: () => p.pin(false) }, () =>
+        h(MinusIcon, { class: 'size-3.5' }),
+      ),
+      h(B, { size: 'icon-xs', variant: 'ghost', onClick: () => p.pin('end') }, () =>
+        h(ChevronRightIcon, { class: 'size-3.5' }),
+      ),
     ])
   },
 }))

@@ -12,10 +12,13 @@ export const inputControlClassName = [
   'disabled:cursor-not-allowed file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground',
 ].join(' ')
 
-export const inputPrefixClassName = 'flex shrink-0 items-center pl-2.5 text-muted-foreground [&_svg]:size-4'
-export const inputSuffixClassName = 'flex shrink-0 items-center pr-2.5 text-muted-foreground [&_svg]:size-4'
+export const inputPrefixClassName =
+  'flex shrink-0 items-center pl-2.5 text-muted-foreground [&_svg]:size-4'
+export const inputSuffixClassName =
+  'flex shrink-0 items-center pr-2.5 text-muted-foreground [&_svg]:size-4'
 
-const inputAddonClassName = 'flex shrink-0 items-center bg-muted-background px-2.5 text-sm text-muted-foreground'
+const inputAddonClassName =
+  'flex shrink-0 items-center bg-muted-background px-2.5 text-sm text-muted-foreground'
 
 export const inputAddonBeforeClassName = `${inputAddonClassName} border-r border-border`
 export const inputAddonAfterClassName = `${inputAddonClassName} border-l border-border`

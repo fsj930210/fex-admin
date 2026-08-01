@@ -18,7 +18,12 @@ import {
 日期工具函数从框架包入口导入，业务侧不需要直接依赖 core：
 
 ```ts
-import { addDate, isBeforeDate, setMonth, startOfDate } from '@fex/components-react/hooks/use-date-utils'
+import {
+  addDate,
+  isBeforeDate,
+  setMonth,
+  startOfDate,
+} from '@fex/components-react/hooks/use-date-utils'
 
 import { useDateUtils } from '@fex/components-react/hooks/use-date-utils'
 ```
@@ -93,16 +98,16 @@ export function Demo() {
 
 Calendar core 暴露一组基于 Temporal 的常用工具，供 DatePicker、RangePicker、快捷禁用规则和自定义业务单元格复用：
 
-| 方法                                                                                  | 说明                                 |
-| ------------------------------------------------------------------------------------- | ------------------------------------ |
-| `setDate` / `setYear` / `setMonth` / `setDay`          | 设置某一天、某一月、某一年。         |
-| `addDate` / `subtractDate`                                             | 增减天、周、月、年。                 |
-| `startOfDate` / `endOfDate`                                            | 获取 day/week/month/quarter/year 边界。 |
-| `isBeforeDate` / `isAfterDate`                                         | 判断日期先后。                       |
-| `isSameOrBeforeDate` / `isSameOrAfterDate` / `isBetweenDate`   | 判断闭区间或开区间关系。             |
-| `minDate` / `maxDate` / `clampDate`                            | 日期取最小、最大或限制到区间内。     |
-| `getQuarter` / `setQuarter` / `getYear`                        | 日期和季度、年份值互转。             |
-| `getWeekStart` / `getWeekEnd`                                          | 按 `weekStartsOn` 计算周起止日期。    |
+| 方法                                                         | 说明                                    |
+| ------------------------------------------------------------ | --------------------------------------- |
+| `setDate` / `setYear` / `setMonth` / `setDay`                | 设置某一天、某一月、某一年。            |
+| `addDate` / `subtractDate`                                   | 增减天、周、月、年。                    |
+| `startOfDate` / `endOfDate`                                  | 获取 day/week/month/quarter/year 边界。 |
+| `isBeforeDate` / `isAfterDate`                               | 判断日期先后。                          |
+| `isSameOrBeforeDate` / `isSameOrAfterDate` / `isBetweenDate` | 判断闭区间或开区间关系。                |
+| `minDate` / `maxDate` / `clampDate`                          | 日期取最小、最大或限制到区间内。        |
+| `getQuarter` / `setQuarter` / `getYear`                      | 日期和季度、年份值互转。                |
+| `getWeekStart` / `getWeekEnd`                                | 按 `weekStartsOn` 计算周起止日期。      |
 
 ## 受控与非受控
 

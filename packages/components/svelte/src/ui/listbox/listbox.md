@@ -23,14 +23,14 @@ Svelte Listbox exposes separate component files for root, group, label, item, an
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `items` | `unknown[]` | `[]` | No | Items used for selected item metadata. |
-| `value` | `SelectionValue \| SelectionValue[]` | - | No | Controlled selected value. |
-| `defaultValue` | `SelectionValue \| SelectionValue[]` | - | No | Initial uncontrolled value. |
-| `multiple` | `boolean` | `false` | No | Enables multiple selection. |
-| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | No | Layout orientation. |
-| `onChange` | `(valueOrValues, meta) => void` | - | No | Selection change callback. |
+| Name           | Type                                 | Default      | Required | Description                            |
+| -------------- | ------------------------------------ | ------------ | -------- | -------------------------------------- |
+| `items`        | `unknown[]`                          | `[]`         | No       | Items used for selected item metadata. |
+| `value`        | `SelectionValue \| SelectionValue[]` | -            | No       | Controlled selected value.             |
+| `defaultValue` | `SelectionValue \| SelectionValue[]` | -            | No       | Initial uncontrolled value.            |
+| `multiple`     | `boolean`                            | `false`      | No       | Enables multiple selection.            |
+| `orientation`  | `'vertical' \| 'horizontal'`         | `'vertical'` | No       | Layout orientation.                    |
+| `onChange`     | `(valueOrValues, meta) => void`      | -            | No       | Selection change callback.             |
 
 ## Events
 

@@ -14,7 +14,11 @@ const attrs = useAttrs()
 </script>
 
 <template>
-  <span v-bind="attrs" data-slot="spinner" :class="cn(spinnerClassName({ size: props.size }), attrs.class as string | undefined)">
+  <span
+    v-bind="attrs"
+    data-slot="spinner"
+    :class="cn(spinnerClassName({ size: props.size }), attrs.class as string | undefined)"
+  >
     <LoadingIcon />
   </span>
 </template>

@@ -26,11 +26,13 @@ export function RowEditingDataGridDemo() {
       header: 'Name',
       cell: ({ row, getValue }) => (
         <Show when={draft()?.id === row.id} fallback={String(getValue() ?? '')}>
-          <InputRoot value={draft()?.name ?? ''}><InputControl
-            value={draft()?.name ?? ''}
-            aria-label={`Edit name for ${row.id}`}
-            onInput={(event) => setDraft({ ...draft()!, name: event.currentTarget.value })}
-          /></InputRoot>
+          <InputRoot value={draft()?.name ?? ''}>
+            <InputControl
+              value={draft()?.name ?? ''}
+              aria-label={`Edit name for ${row.id}`}
+              onInput={(event) => setDraft({ ...draft()!, name: event.currentTarget.value })}
+            />
+          </InputRoot>
         </Show>
       ),
     },
@@ -39,16 +41,18 @@ export function RowEditingDataGridDemo() {
       header: 'Department',
       cell: ({ row, getValue }) => (
         <Show when={draft()?.id === row.id} fallback={String(getValue() ?? '')}>
-          <InputRoot value={draft()?.department ?? ''}><InputControl
-            value={draft()?.department ?? ''}
-            aria-label={`Edit department for ${row.id}`}
-            onInput={(event) =>
-              setDraft({
-                ...draft()!,
-                department: event.currentTarget.value as Person['department'],
-              })
-            }
-          /></InputRoot>
+          <InputRoot value={draft()?.department ?? ''}>
+            <InputControl
+              value={draft()?.department ?? ''}
+              aria-label={`Edit department for ${row.id}`}
+              onInput={(event) =>
+                setDraft({
+                  ...draft()!,
+                  department: event.currentTarget.value as Person['department'],
+                })
+              }
+            />
+          </InputRoot>
         </Show>
       ),
     },
@@ -57,13 +61,15 @@ export function RowEditingDataGridDemo() {
       header: 'Status',
       cell: ({ row, getValue }) => (
         <Show when={draft()?.id === row.id} fallback={String(getValue() ?? '')}>
-          <InputRoot value={draft()?.status ?? ''}><InputControl
-            value={draft()?.status ?? ''}
-            aria-label={`Edit status for ${row.id}`}
-            onInput={(event) =>
-              setDraft({ ...draft()!, status: event.currentTarget.value as Person['status'] })
-            }
-          /></InputRoot>
+          <InputRoot value={draft()?.status ?? ''}>
+            <InputControl
+              value={draft()?.status ?? ''}
+              aria-label={`Edit status for ${row.id}`}
+              onInput={(event) =>
+                setDraft({ ...draft()!, status: event.currentTarget.value as Person['status'] })
+              }
+            />
+          </InputRoot>
         </Show>
       ),
     },
@@ -74,7 +80,11 @@ export function RowEditingDataGridDemo() {
       cell: ({ row }) => (
         <Show
           when={draft()?.id === row.id}
-          fallback={<Button size="sm" variant="outline" onClick={() => setDraft({ ...row.original })}>Edit row</Button>}
+          fallback={
+            <Button size="sm" variant="outline" onClick={() => setDraft({ ...row.original })}>
+              Edit row
+            </Button>
+          }
         >
           <span class="inline-flex gap-space-sm">
             <Button size="sm" onClick={save}>

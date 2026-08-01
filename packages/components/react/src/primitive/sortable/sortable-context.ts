@@ -10,4 +10,8 @@ export interface SortableContextValue {
   getOverlayStyle: ReturnType<typeof useSortable>['getOverlayStyle']
 }
 export const SortableContext = createContext<SortableContextValue | null>(null)
-export function useSortableContext() { const context = use(SortableContext); if (!context) throw new Error('Sortable components must be used inside SortableRoot.'); return context }
+export function useSortableContext() {
+  const context = use(SortableContext)
+  if (!context) throw new Error('Sortable components must be used inside SortableRoot.')
+  return context
+}

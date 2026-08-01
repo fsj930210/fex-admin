@@ -71,48 +71,57 @@ function move(direction: 1 | -1) {
     :data-disabled="context.disabled.value || disabled ? 'true' : undefined"
     :class="cn(timePickerColumnClassName, attrs.class as string | undefined)"
   >
-    <ScrollbarViewport ref="viewport" role="listbox" :tabindex="context.disabled.value || disabled ? -1 : 0" :aria-disabled="context.disabled.value || disabled || undefined" overflow-x="hidden" :class="timePickerColumnViewportClassName" @keydown.down.prevent="move(1)" @keydown.up.prevent="move(-1)">
-    <template v-for="item in options" :key="String(item.value)">
-      <slot
-        name="item"
-        :item="item"
-        :selected="item.value === selectedValue"
-        :active="item.value === activeValue"
-      >
-        <button
-          :ref="(element) => register(item.value, element)"
-          type="button"
-          role="option"
-          tabindex="-1"
-          :disabled="context.disabled.value || disabled || item.disabled"
-          :aria-selected="item.value === selectedValue"
-          :data-selected="item.value === selectedValue ? 'true' : undefined"
-          :data-active="item.value === activeValue ? 'true' : undefined"
-          :data-disabled="item.disabled ? 'true' : undefined"
-          :class="timePickerColumnItemClassName"
-          @focus="activeValue = item.value"
-          @click="
-            () => {
-              if (
-                !context.disabled.value &&
-                !context.readOnly.value &&
-                !disabled &&
-                !item.disabled
-              ) {
-                activeValue = item.value
-                emit('select', item.value)
-                const element = itemElements.get(item.value)
-                if (element && viewport?.element)
-                  viewport.element.scrollTo({ top: element.offsetTop, behavior: 'smooth' })
-              }
-            }
-          "
+    <ScrollbarViewport
+      ref="viewport"
+      role="listbox"
+      :tabindex="context.disabled.value || disabled ? -1 : 0"
+      :aria-disabled="context.disabled.value || disabled || undefined"
+      overflow-x="hidden"
+      :class="timePickerColumnViewportClassName"
+      @keydown.down.prevent="move(1)"
+      @keydown.up.prevent="move(-1)"
+    >
+      <template v-for="item in options" :key="String(item.value)">
+        <slot
+          name="item"
+          :item="item"
+          :selected="item.value === selectedValue"
+          :active="item.value === activeValue"
         >
-          {{ item.label }}
-        </button>
-      </slot>
-    </template>
-    <div aria-hidden="true" :class="timePickerColumnSpacerClassName" />
+          <button
+            :ref="(element) => register(item.value, element)"
+            type="button"
+            role="option"
+            tabindex="-1"
+            :disabled="context.disabled.value || disabled || item.disabled"
+            :aria-selected="item.value === selectedValue"
+            :data-selected="item.value === selectedValue ? 'true' : undefined"
+            :data-active="item.value === activeValue ? 'true' : undefined"
+            :data-disabled="item.disabled ? 'true' : undefined"
+            :class="timePickerColumnItemClassName"
+            @focus="activeValue = item.value"
+            @click="
+              () => {
+                if (
+                  !context.disabled.value &&
+                  !context.readOnly.value &&
+                  !disabled &&
+                  !item.disabled
+                ) {
+                  activeValue = item.value
+                  emit('select', item.value)
+                  const element = itemElements.get(item.value)
+                  if (element && viewport?.element)
+                    viewport.element.scrollTo({ top: element.offsetTop, behavior: 'smooth' })
+                }
+              }
+            "
+          >
+            {{ item.label }}
+          </button>
+        </slot>
+      </template>
+      <div aria-hidden="true" :class="timePickerColumnSpacerClassName" />
     </ScrollbarViewport>
     <ScrollbarBar axis="y" />
   </ScrollbarRoot>

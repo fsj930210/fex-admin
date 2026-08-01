@@ -23,7 +23,6 @@ import {
   timePickerColumnViewportClassName,
   timePickerRootClassName,
 } from '@fex/components-styles/time-picker'
-import { cn } from '@fex/utils'
 import {
   booleanAttribute,
   ChangeDetectionStrategy,
@@ -50,7 +49,13 @@ import { NgTemplateOutlet } from '@angular/common'
 import { ClockIcon } from '../../icon/clock'
 import { InputClear, InputControl, InputPrefix, InputRoot, InputSuffix } from '../input/input'
 import { Popover, PopoverContent, PopoverTrigger } from '../popover/popover'
-import { ScrollbarBar, ScrollbarRoot, ScrollbarThumb, ScrollbarTrack, ScrollbarViewport } from '../scrollbar/scrollbar'
+import {
+  ScrollbarBar,
+  ScrollbarRoot,
+  ScrollbarThumb,
+  ScrollbarTrack,
+  ScrollbarViewport,
+} from '../scrollbar/scrollbar'
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
 import { createHostClassName } from '../../signals/host-class'
 
@@ -67,7 +72,20 @@ export class TimePickerRoot {
   format = input<string | undefined>()
   open = input<boolean | undefined>()
   defaultOpen = input(false)
-  placement = input<'top' | 'topLeft' | 'topRight' | 'bottom' | 'bottomLeft' | 'bottomRight' | 'left' | 'leftTop' | 'leftBottom' | 'right' | 'rightTop' | 'rightBottom'>('bottomLeft')
+  placement = input<
+    | 'top'
+    | 'topLeft'
+    | 'topRight'
+    | 'bottom'
+    | 'bottomLeft'
+    | 'bottomRight'
+    | 'left'
+    | 'leftTop'
+    | 'leftBottom'
+    | 'right'
+    | 'rightTop'
+    | 'rightBottom'
+  >('bottomLeft')
   use12Hours = input(false, { transform: booleanAttribute })
   disabled = input(false, { transform: booleanAttribute })
   readOnly = input(false, { transform: booleanAttribute })
@@ -87,11 +105,13 @@ export class TimePickerRoot {
     return this.controller.getSnapshot()
   })
   readonly currentValue = computed(() => this.value() ?? this.snapshot().value)
-  readonly resolvedFormat = computed(() => this.format() ?? (this.use12Hours() ? 'hh:mm:ss A' : 'HH:mm:ss'))
+  readonly resolvedFormat = computed(
+    () => this.format() ?? (this.use12Hours() ? 'hh:mm:ss A' : 'HH:mm:ss'),
+  )
 
   constructor() {
     this.popover.trigger = ['focus', 'click']
-    this.popover.openChange.subscribe(value => this.openChange.emit(value))
+    this.popover.openChange.subscribe((value) => this.openChange.emit(value))
     effect(() => {
       const value = this.value()
       if (value !== undefined) this.controller.setControlledValue(value)
@@ -108,14 +128,27 @@ export class TimePickerRoot {
 }
 
 @Directive({ selector: 'ng-template[fexTimePickerPrefix]', standalone: true })
-export class TimePickerPrefixTemplate { readonly template = inject(TemplateRef<unknown>) }
+export class TimePickerPrefixTemplate {
+  readonly template = inject(TemplateRef<unknown>)
+}
 @Directive({ selector: 'ng-template[fexTimePickerSuffix]', standalone: true })
-export class TimePickerSuffixTemplate { readonly template = inject(TemplateRef<unknown>) }
+export class TimePickerSuffixTemplate {
+  readonly template = inject(TemplateRef<unknown>)
+}
 
 @Component({
   selector: 'fex-time-picker-trigger',
   standalone: true,
-  imports: [NgTemplateOutlet, InputRoot, InputControl, InputClear, InputPrefix, InputSuffix, ClockIcon, PopoverTrigger],
+  imports: [
+    NgTemplateOutlet,
+    InputRoot,
+    InputControl,
+    InputClear,
+    InputPrefix,
+    InputSuffix,
+    ClockIcon,
+    PopoverTrigger,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[class]': 'hostClassName()' },
   templateUrl: './time-picker-trigger.html',
@@ -129,16 +162,46 @@ export class TimePickerTrigger {
   prefix = contentChild(TimePickerPrefixTemplate)
   suffix = contentChild(TimePickerSuffixTemplate)
   readonly text = signal('')
-  constructor() { effect(() => this.text.set(this.root.snapshot().value ? formatDate(this.root.snapshot().value!, this.root.resolvedFormat()) : '')) }
-  inputText(value: string) { this.text.set(value); const result = parse(value, this.root.resolvedFormat()); if (result.valid) this.root.controller.change(result.value, 'input', 'smooth') }
-  clear() { this.text.set(''); this.root.controller.clear() }
+  constructor() {
+    effect(() =>
+      this.text.set(
+        this.root.snapshot().value
+          ? formatDate(this.root.snapshot().value!, this.root.resolvedFormat())
+          : '',
+      ),
+    )
+  }
+  inputText(value: string) {
+    this.text.set(value)
+    const result = parse(value, this.root.resolvedFormat())
+    if (result.valid) this.root.controller.change(result.value, 'input', 'smooth')
+  }
+  clear() {
+    this.text.set('')
+    this.root.controller.clear()
+  }
 }
 
-@Component({ selector: 'fex-time-picker-content', standalone: true, imports: [PopoverContent], changeDetection: ChangeDetectionStrategy.OnPush, template: '<fex-popover-content class="overflow-hidden p-0" style="width:var(--floating-reference-width);max-width:var(--floating-available-width);max-height:var(--floating-available-height)"><ng-content /></fex-popover-content>' })
+@Component({
+  selector: 'fex-time-picker-content',
+  standalone: true,
+  imports: [PopoverContent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template:
+    '<fex-popover-content class="overflow-hidden p-0" style="width:var(--floating-reference-width);max-width:var(--floating-available-width);max-height:var(--floating-available-height)"><ng-content /></fex-popover-content>',
+})
 export class TimePickerContent {}
 
-@Component({ selector: 'div[fexTimePickerPanel]', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { 'data-slot': 'time-picker-panel', '[class]': 'hostClassName()' }, template: '<ng-content />' })
-export class TimePickerPanel { protected readonly hostClassName = createHostClassName(timePickerRootClassName) }
+@Component({
+  selector: 'div[fexTimePickerPanel]',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { 'data-slot': 'time-picker-panel', '[class]': 'hostClassName()' },
+  template: '<ng-content />',
+})
+export class TimePickerPanel {
+  protected readonly hostClassName = createHostClassName(timePickerRootClassName)
+}
 
 type ColumnValue = number | TimePeriod
 
@@ -175,12 +238,10 @@ abstract class TimePickerColumnBase<TValue extends ColumnValue> implements After
   }
 
   ngAfterViewInit() {
-    this.itemElements?.changes
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        if (!(this.root.open() ?? this.root.popoverSnapshot().open)) return
-        this.requestScrollTo(this.selectedValue(), 'auto')
-      })
+    this.itemElements?.changes.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+      if (!(this.root.open() ?? this.root.popoverSnapshot().open)) return
+      this.requestScrollTo(this.selectedValue(), 'auto')
+    })
     this.requestScrollTo(this.selectedValue(), 'auto')
   }
 
@@ -258,9 +319,7 @@ export class TimePickerHourColumn extends TimePickerColumnBase<number> {
       ? getDisplayedHour(this.root.currentValue()!, this.root.use12Hours())
       : undefined,
   )
-  constructor(root: TimePickerRoot, elementRef: ElementRef<HTMLElement>) {
-    super(root, elementRef)
-  }
+
   commit(value: number) {
     this.root.controller.selectHour(value, this.root.use12Hours())
   }
@@ -287,9 +346,7 @@ export class TimePickerMinuteColumn extends TimePickerColumnBase<number> {
     })),
   )
   readonly selectedValue = computed(() => this.root.currentValue()?.minute)
-  constructor(root: TimePickerRoot, elementRef: ElementRef<HTMLElement>) {
-    super(root, elementRef)
-  }
+
   commit(value: number) {
     this.root.controller.selectMinute(value)
   }
@@ -316,9 +373,7 @@ export class TimePickerSecondColumn extends TimePickerColumnBase<number> {
     })),
   )
   readonly selectedValue = computed(() => this.root.currentValue()?.second)
-  constructor(root: TimePickerRoot, elementRef: ElementRef<HTMLElement>) {
-    super(root, elementRef)
-  }
+
   commit(value: number) {
     this.root.controller.selectSecond(value)
   }
@@ -344,9 +399,7 @@ export class TimePickerPeriodColumn extends TimePickerColumnBase<TimePeriod> {
   readonly selectedValue = computed(() =>
     this.root.currentValue() ? getDisplayedPeriod(this.root.currentValue()!) : undefined,
   )
-  constructor(root: TimePickerRoot, elementRef: ElementRef<HTMLElement>) {
-    super(root, elementRef)
-  }
+
   commit(value: TimePeriod) {
     this.root.controller.selectPeriod(value)
   }

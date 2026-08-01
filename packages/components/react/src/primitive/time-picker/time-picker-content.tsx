@@ -23,5 +23,11 @@ export function TimePickerContent({ className, style, ...props }: TimePickerCont
 }
 
 export function TimePickerPanel(props: ComponentProps<'div'>) {
-  return <div {...props} data-slot="time-picker-panel" className={cn(timePickerRootClassName, props.className)} />
+  return (
+    <div
+      {...props}
+      data-slot="time-picker-panel"
+      className={cn(timePickerRootClassName, props.className)}
+    />
+  )
 }

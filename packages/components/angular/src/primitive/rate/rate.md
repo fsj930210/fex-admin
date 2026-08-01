@@ -17,19 +17,19 @@ export class Example {}
 
 ## Inputs
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `value` | `number` | — | No | Controlled committed value. |
-| `defaultValue` | `number` | `0` | No | Initial uncontrolled value. |
-| `count` | `number` | `5` | No | Number of rating items. |
-| `step` | `number` | `1` | No | Pointer and keyboard increment. |
-| `disabled` | `boolean` | `false` | No | Disables focus and interaction. |
-| `readOnly` | `boolean` | `false` | No | Blocks value changes. |
-| `allowClear` | `boolean` | `true` | No | Clears when the current bucket is committed again. |
-| `direction` | `'ltr' \| 'rtl'` | `'ltr'` | No | Fill, pointer and keyboard direction. |
-| `size` | `'sm' \| 'default' \| 'lg'` | `'default'` | No | Item size. |
-| `content` | `TemplateRef` | Star | No | Renders empty and filled layers. |
-| `getValueText` | `(value, count) => string` | English text | No | Produces `aria-valuetext`. |
+| Name           | Type                        | Default      | Required | Description                                        |
+| -------------- | --------------------------- | ------------ | -------- | -------------------------------------------------- |
+| `value`        | `number`                    | —            | No       | Controlled committed value.                        |
+| `defaultValue` | `number`                    | `0`          | No       | Initial uncontrolled value.                        |
+| `count`        | `number`                    | `5`          | No       | Number of rating items.                            |
+| `step`         | `number`                    | `1`          | No       | Pointer and keyboard increment.                    |
+| `disabled`     | `boolean`                   | `false`      | No       | Disables focus and interaction.                    |
+| `readOnly`     | `boolean`                   | `false`      | No       | Blocks value changes.                              |
+| `allowClear`   | `boolean`                   | `true`       | No       | Clears when the current bucket is committed again. |
+| `direction`    | `'ltr' \| 'rtl'`            | `'ltr'`      | No       | Fill, pointer and keyboard direction.              |
+| `size`         | `'sm' \| 'default' \| 'lg'` | `'default'`  | No       | Item size.                                         |
+| `content`      | `TemplateRef`               | Star         | No       | Renders empty and filled layers.                   |
+| `getValueText` | `(value, count) => string`  | English text | No       | Produces `aria-valuetext`.                         |
 
 ## Outputs
 

@@ -63,17 +63,28 @@ export function MenuPage() {
           <div>
             <h1 className="text-2xl font-semibold text-foreground">Menu</h1>
             <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
-              Nested menu body built from shared expansion, shared selection and reusable tree traversal helpers.
+              Nested menu body built from shared expansion, shared selection and reusable tree
+              traversal helpers.
             </p>
           </div>
         </header>
 
         <div className="grid gap-space-xl lg:grid-cols-2">
-          <Card title="Basic" description="Items, nested children, group, divider and disabled state.">
-            <Menu items={menuItems} defaultExpandKeys={['system']} defaultSelectedKeys={['dashboard']} />
+          <Card
+            title="Basic"
+            description="Items, nested children, group, divider and disabled state."
+          >
+            <Menu
+              items={menuItems}
+              defaultExpandKeys={['system']}
+              defaultSelectedKeys={['dashboard']}
+            />
           </Card>
 
-          <Card title="Horizontal" description="Horizontal displays top-level items; nested popup menus belong to Dropdown or Popover composition.">
+          <Card
+            title="Horizontal"
+            description="Horizontal displays top-level items; nested popup menus belong to Dropdown or Popover composition."
+          >
             <Menu
               items={horizontalItems}
               orientation="horizontal"
@@ -92,7 +103,10 @@ export function MenuPage() {
             />
           </Card>
 
-          <Card title="Multiple Selection" description="Leaf item selection can opt into multiple keys.">
+          <Card
+            title="Multiple Selection"
+            description="Leaf item selection can opt into multiple keys."
+          >
             <Menu
               items={menuItems}
               defaultExpandKeys={['system', 'content']}
@@ -101,7 +115,10 @@ export function MenuPage() {
             />
           </Card>
 
-          <Card title="Suffix" description="Right-side content can be provided by data or renderSuffix.">
+          <Card
+            title="Suffix"
+            description="Right-side content can be provided by data or renderSuffix."
+          >
             <Menu
               items={menuItems}
               defaultExpandKeys={['system', 'content']}
@@ -128,14 +145,19 @@ export function MenuPage() {
                     {selected ? <span className="ml-2 text-xs text-primary">selected</span> : null}
                   </span>
                   {hasChildren ? (
-                    <span className="text-xs text-muted-foreground">{expanded ? 'open' : 'closed'}</span>
+                    <span className="text-xs text-muted-foreground">
+                      {expanded ? 'open' : 'closed'}
+                    </span>
                   ) : null}
                 </>
               )}
             />
           </Card>
 
-          <Card title="Headless Hook" description="useMenu exposes state and event props for custom DOM.">
+          <Card
+            title="Headless Hook"
+            description="useMenu exposes state and event props for custom DOM."
+          >
             <HeadlessMenu />
           </Card>
         </div>
@@ -162,7 +184,9 @@ function HeadlessMenu() {
         return (
           <div key={item.key ?? `group-${index}`} className="py-1">
             {item.label ? (
-              <div className="px-2 py-1 text-xs font-medium text-muted-foreground">{item.label}</div>
+              <div className="px-2 py-1 text-xs font-medium text-muted-foreground">
+                {item.label}
+              </div>
             ) : null}
             {renderItems(item.children, hidden)}
           </div>
@@ -205,7 +229,10 @@ function HeadlessMenu() {
         {info.hasChildren ? (
           <div
             className="grid overflow-hidden transition-[grid-template-rows,opacity] duration-150 ease-out"
-            style={{ gridTemplateRows: info.expanded ? '1fr' : '0fr', opacity: info.expanded ? 1 : 0 }}
+            style={{
+              gridTemplateRows: info.expanded ? '1fr' : '0fr',
+              opacity: info.expanded ? 1 : 0,
+            }}
             aria-hidden={info.expanded ? undefined : true}
           >
             <div className="min-h-0 overflow-hidden">

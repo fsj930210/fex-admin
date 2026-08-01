@@ -52,21 +52,18 @@ export function expansionFeature<TNode extends TreeNodeData>(
             const keys = getAllExpandableKeys(context.getItems())
             context.setStateKeys('expandedKeys', keys, keys)
           },
-          collapseAll: () => context.setStateKeys(
-            'expandedKeys',
-            [],
-            context.getSnapshot().expandedKeys,
-          ),
+          collapseAll: () =>
+            context.setStateKeys('expandedKeys', [], context.getSnapshot().expandedKeys),
         }
         const defaultKeys = (normalizedOptions.defaultExpandedKeys ?? []).filter((key) => {
           const item = context.getItem(key)
           return item && !item.isLeaf && !item.disabled
         })
         if (defaultKeys.length > 0) {
-          context.initializeStateKeys(
-            'expandedKeys',
-            [...context.getSnapshot().expandedKeys, ...defaultKeys],
-          )
+          context.initializeStateKeys('expandedKeys', [
+            ...context.getSnapshot().expandedKeys,
+            ...defaultKeys,
+          ])
         }
         return api
       },

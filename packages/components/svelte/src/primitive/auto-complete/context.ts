@@ -9,7 +9,7 @@ type Item = Record<string, unknown>
 export const autoCompleteContextKey = Symbol('AutoComplete')
 export interface AutoCompleteContext {
   controller: AutoCompleteController<Item>
-  snapshot: Readable<ReturnType<AutoCompleteController['getSnapshot']>>
+  snapshot: Readable<ReturnType<AutoCompleteController<Item>['getSnapshot']>>
   items: () => readonly ResolvedAutoCompleteItem<Item>[]
   loading: () => boolean
   disabled: () => boolean

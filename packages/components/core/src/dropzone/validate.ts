@@ -27,4 +27,3 @@ export function validateDropzoneFiles(files: File[], options: DropzoneValidation
 
   return { acceptedFiles, rejectedFiles }
 }
-

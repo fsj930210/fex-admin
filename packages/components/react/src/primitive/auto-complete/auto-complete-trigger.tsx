@@ -10,8 +10,10 @@ import {
 import { PopoverTrigger } from '../popover/popover'
 import { useAutoComplete } from './use-auto-complete'
 
-export interface AutoCompleteTriggerProps
-  extends Omit<ComponentProps<'input'>, 'children' | 'defaultValue' | 'disabled' | 'readOnly' | 'value'> {
+export interface AutoCompleteTriggerProps extends Omit<
+  ComponentProps<'input'>,
+  'children' | 'defaultValue' | 'disabled' | 'prefix' | 'readOnly' | 'value'
+> {
   children?: (bindings: ReturnType<typeof useAutoComplete>) => ReactNode
   className?: string
   clearable?: boolean
@@ -56,8 +58,8 @@ export function AutoCompleteTrigger({
           value={autoComplete.snapshot.value}
           disabled={autoComplete.disabled}
           readOnly={autoComplete.readOnly}
-          invalid={invalid}
-          status={status}
+          {...(invalid === undefined ? {} : { invalid })}
+          {...(status === undefined ? {} : { status })}
           onValueChange={(value) => {
             autoComplete.controller.setValue(value)
             autoComplete.controller.setOpen(true, 'input')
@@ -82,7 +84,9 @@ export function AutoCompleteTrigger({
             onKeyDown={keydown}
           />
           {clearable ? <InputClear /> : null}
-          <InputSuffix>{autoComplete.loading ? <LoadingIcon className="animate-spin" /> : suffix}</InputSuffix>
+          <InputSuffix>
+            {autoComplete.loading ? <LoadingIcon className="animate-spin" /> : suffix}
+          </InputSuffix>
         </InputRoot>
       )}
     </PopoverTrigger>

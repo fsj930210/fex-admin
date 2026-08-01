@@ -5,7 +5,14 @@ Solid Upload 使用共享 core controller，并通过 accessor 精确订阅列�
 ## 导入
 
 ```tsx
-import { UploadRoot, UploadTrigger, UploadList, UploadItem, UploadItemProgress, createUpload } from '@fex/components-solid/primitive/upload'
+import {
+  UploadRoot,
+  UploadTrigger,
+  UploadList,
+  UploadItem,
+  UploadItemProgress,
+  createUpload,
+} from '@fex/components-solid/primitive/upload'
 ```
 
 ## 基础组合
@@ -13,9 +20,22 @@ import { UploadRoot, UploadTrigger, UploadList, UploadItem, UploadItemProgress, 
 ```tsx
 <UploadRoot controller={upload}>
   <UploadTrigger>{({ props }) => <Button {...props}>选择文件</Button>}</UploadTrigger>
-  <UploadList>{items => <For each={items}>{item =>
-    <UploadItem id={item.id}>{state => <><span>{state.item()?.name}</span><UploadItemProgress /></>}</UploadItem>
-  }</For>}</UploadList>
+  <UploadList>
+    {(items) => (
+      <For each={items}>
+        {(item) => (
+          <UploadItem id={item.id}>
+            {(state) => (
+              <>
+                <span>{state.item()?.name}</span>
+                <UploadItemProgress />
+              </>
+            )}
+          </UploadItem>
+        )}
+      </For>
+    )}
+  </UploadList>
 </UploadRoot>
 ```
 

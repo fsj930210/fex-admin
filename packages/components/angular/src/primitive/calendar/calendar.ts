@@ -70,11 +70,15 @@ export class CalendarRoot {
   private readonly internalPanel = signal<CalendarPanel | undefined>(undefined)
   readonly hoveredRowIndex = signal<number | null>(null)
 
-  readonly currentValue = computed(() => this.value() ?? this.internalValue() ?? this.defaultValue())
+  readonly currentValue = computed(
+    () => this.value() ?? this.internalValue() ?? this.defaultValue(),
+  )
   readonly currentViewDate = computed(
     () => this.viewDate() ?? this.internalViewDate() ?? this.defaultViewDate(),
   )
-  readonly currentPanel = computed(() => this.panel() ?? this.internalPanel() ?? this.defaultPanel())
+  readonly currentPanel = computed(
+    () => this.panel() ?? this.internalPanel() ?? this.defaultPanel(),
+  )
   readonly grid = computed(() => {
     const today = this.today()
     const min = this.min()
@@ -247,20 +251,33 @@ export class CalendarGrid {
     '[attr.data-today]': "cell().state.today ? 'true' : null",
     '[attr.data-outside]': "cell().state.outside ? 'true' : null",
     '[attr.data-selected]': "cell().state.selected ? 'true' : null",
-    '[attr.data-range-start]': "cell().granularity !== 'week' && cell().state.rangeStart ? 'true' : null",
-    '[attr.data-range-end]': "cell().granularity !== 'week' && cell().state.rangeEnd ? 'true' : null",
+    '[attr.data-range-start]':
+      "cell().granularity !== 'week' && cell().state.rangeStart ? 'true' : null",
+    '[attr.data-range-end]':
+      "cell().granularity !== 'week' && cell().state.rangeEnd ? 'true' : null",
     '[attr.data-in-range]': "cell().granularity !== 'week' && cell().state.inRange ? 'true' : null",
-    '[attr.data-week-selected]': "cell().granularity === 'week' && cell().state.selected ? 'true' : null",
-    '[attr.data-week-hover]': "cell().granularity === 'week' && root.hoveredRowIndex() === cell().rowIndex ? 'true' : null",
-    '[attr.data-week-row-start]': "cell().granularity === 'week' && cell().columnIndex === 0 ? 'true' : null",
-    '[attr.data-week-row-end]': "cell().granularity === 'week' && cell().columnIndex === 6 ? 'true' : null",
-    '[attr.data-week-start]': "cell().granularity === 'week' && cell().state.selected && cell().columnIndex === 0 ? 'true' : null",
-    '[attr.data-week-end]': "cell().granularity === 'week' && cell().state.selected && cell().columnIndex === 6 ? 'true' : null",
-    '[attr.data-week-range-start]': "cell().granularity === 'week' && cell().state.rangeStart && !cell().state.rangeEnd ? 'true' : null",
-    '[attr.data-week-range-end]': "cell().granularity === 'week' && cell().state.rangeEnd && !cell().state.rangeStart ? 'true' : null",
-    '[attr.data-week-range-single]': "cell().granularity === 'week' && cell().state.rangeStart && cell().state.rangeEnd ? 'true' : null",
-    '[attr.data-week-in-range]': "cell().granularity === 'week' && cell().state.inRange ? 'true' : null",
-    '[attr.data-week-range]': "cell().granularity === 'week' && (cell().state.rangeStart || cell().state.rangeEnd || cell().state.inRange) ? 'true' : null",
+    '[attr.data-week-selected]':
+      "cell().granularity === 'week' && cell().state.selected ? 'true' : null",
+    '[attr.data-week-hover]':
+      "cell().granularity === 'week' && root.hoveredRowIndex() === cell().rowIndex ? 'true' : null",
+    '[attr.data-week-row-start]':
+      "cell().granularity === 'week' && cell().columnIndex === 0 ? 'true' : null",
+    '[attr.data-week-row-end]':
+      "cell().granularity === 'week' && cell().columnIndex === 6 ? 'true' : null",
+    '[attr.data-week-start]':
+      "cell().granularity === 'week' && cell().state.selected && cell().columnIndex === 0 ? 'true' : null",
+    '[attr.data-week-end]':
+      "cell().granularity === 'week' && cell().state.selected && cell().columnIndex === 6 ? 'true' : null",
+    '[attr.data-week-range-start]':
+      "cell().granularity === 'week' && cell().state.rangeStart && !cell().state.rangeEnd ? 'true' : null",
+    '[attr.data-week-range-end]':
+      "cell().granularity === 'week' && cell().state.rangeEnd && !cell().state.rangeStart ? 'true' : null",
+    '[attr.data-week-range-single]':
+      "cell().granularity === 'week' && cell().state.rangeStart && cell().state.rangeEnd ? 'true' : null",
+    '[attr.data-week-in-range]':
+      "cell().granularity === 'week' && cell().state.inRange ? 'true' : null",
+    '[attr.data-week-range]':
+      "cell().granularity === 'week' && (cell().state.rangeStart || cell().state.rangeEnd || cell().state.inRange) ? 'true' : null",
     '[attr.data-disabled]': "cell().state.disabled ? 'true' : null",
     '[disabled]': 'cell().state.disabled',
     '(mouseenter)': 'root.hoverCell(cell())',

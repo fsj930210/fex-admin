@@ -76,7 +76,9 @@ export interface MenuItemPropOptions {
   hidden?: boolean
 }
 
-export type MenuDataAttributes = Partial<Record<`data-${string}`, string | number | boolean | undefined>>
+export type MenuDataAttributes = Partial<
+  Record<`data-${string}`, string | number | boolean | undefined>
+>
 export type MenuRootDomProps = ComponentProps<'div'> & MenuDataAttributes
 export type MenuListDomProps = ComponentProps<'div'> & MenuDataAttributes
 export type MenuSubMenuContentDomProps = ComponentProps<'div'> & MenuDataAttributes

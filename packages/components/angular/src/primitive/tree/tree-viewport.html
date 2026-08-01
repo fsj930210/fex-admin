@@ -1,3 +1,6 @@
 @for (item of root.visibleItems(); track item.key) {
-  <ng-container [ngTemplateOutlet]="template()" [ngTemplateOutletContext]="{ $implicit: item, tree: root.tree() }" />
+<ng-container
+  [ngTemplateOutlet]="template()"
+  [ngTemplateOutletContext]="{ $implicit: item, tree: root.tree() }"
+/>
 }

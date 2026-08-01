@@ -1,6 +1,14 @@
 import type { ScrollbarAxis, ScrollbarController, ScrollbarOptions } from './types'
 
-export type { ScrollbarAxis, ScrollbarAutoHide, ScrollbarClickScroll, ScrollbarController, ScrollbarOptions, ScrollbarScrollDetail, ScrollbarVisibility } from './types'
+export type {
+  ScrollbarAxis,
+  ScrollbarAutoHide,
+  ScrollbarClickScroll,
+  ScrollbarController,
+  ScrollbarOptions,
+  ScrollbarScrollDetail,
+  ScrollbarVisibility,
+} from './types'
 
 type BarElements = { bar: HTMLElement; track: HTMLElement; thumb: HTMLElement }
 type ScrollbarResolvedOptions = {
@@ -73,11 +81,16 @@ export function createScrollbarController(input: ScrollbarOptions = {}): Scrollb
       if (!elements || !metrics) continue
       const trackSize = axis === 'x' ? elements.track.clientWidth : elements.track.clientHeight
       const canScroll = metrics.maxOffset > 0 && trackSize > 0
-      const visible = options.visibility === 'always' || (options.visibility === 'auto' && canScroll && (options.autoHide === 'never' || active))
+      const visible =
+        options.visibility === 'always' ||
+        (options.visibility === 'auto' && canScroll && (options.autoHide === 'never' || active))
       setBarVisible(axis, visible)
       if (!canScroll) continue
-      const thumbSize = Math.min(trackSize, Math.max(options.minThumbSize, trackSize * metrics.viewportSize / metrics.contentSize))
-      const thumbOffset = (trackSize - thumbSize) * metrics.offset / metrics.maxOffset
+      const thumbSize = Math.min(
+        trackSize,
+        Math.max(options.minThumbSize, (trackSize * metrics.viewportSize) / metrics.contentSize),
+      )
+      const thumbOffset = ((trackSize - thumbSize) * metrics.offset) / metrics.maxOffset
       if (axis === 'x') {
         elements.thumb.style.width = `${thumbSize}px`
         elements.thumb.style.transform = `translate3d(${thumbOffset}px, 0, 0)`
@@ -106,7 +119,11 @@ export function createScrollbarController(input: ScrollbarOptions = {}): Scrollb
     }
   }
 
-  const scrollFromPointer = (axis: ScrollbarAxis, event: PointerEvent, thumbPointerOffset?: number) => {
+  const scrollFromPointer = (
+    axis: ScrollbarAxis,
+    event: PointerEvent,
+    thumbPointerOffset?: number,
+  ) => {
     const elements = bars[axis]
     const metrics = axisMetrics(axis)
     if (!elements || !metrics || !viewport || metrics.maxOffset <= 0) return
@@ -118,7 +135,7 @@ export function createScrollbarController(input: ScrollbarOptions = {}): Scrollb
     // point where the user grabbed the Thumb, so its first move cannot jump.
     const grabOffset = thumbPointerOffset ?? thumbSize / 2
     const next = Math.max(0, Math.min(trackSize - thumbSize, pointerOffset - grabOffset))
-    const offset = next / Math.max(trackSize - thumbSize, 1) * metrics.maxOffset
+    const offset = (next / Math.max(trackSize - thumbSize, 1)) * metrics.maxOffset
     if (axis === 'x') viewport.scrollLeft = offset
     else viewport.scrollTop = offset
   }
@@ -132,10 +149,10 @@ export function createScrollbarController(input: ScrollbarOptions = {}): Scrollb
         elements.bar.setPointerCapture(event.pointerId)
         elements.thumb.dataset.dragging = 'true'
         const thumbRect = elements.thumb.getBoundingClientRect()
-        const thumbPointerOffset = axis === 'x'
-          ? event.clientX - thumbRect.left
-          : event.clientY - thumbRect.top
-        const onMove = (moveEvent: PointerEvent) => scrollFromPointer(axis, moveEvent, thumbPointerOffset)
+        const thumbPointerOffset =
+          axis === 'x' ? event.clientX - thumbRect.left : event.clientY - thumbRect.top
+        const onMove = (moveEvent: PointerEvent) =>
+          scrollFromPointer(axis, moveEvent, thumbPointerOffset)
         const onEnd = () => {
           elements.thumb.dataset.dragging = 'false'
           elements.bar.removeEventListener('pointermove', onMove)
@@ -155,7 +172,11 @@ export function createScrollbarController(input: ScrollbarOptions = {}): Scrollb
           const rect = elements.thumb.getBoundingClientRect()
           const pointer = axis === 'x' ? event.clientX : event.clientY
           const midpoint = axis === 'x' ? rect.left + rect.width / 2 : rect.top + rect.height / 2
-          viewport.scrollBy(axis === 'x' ? { left: pointer < midpoint ? -metrics.viewportSize : metrics.viewportSize } : { top: pointer < midpoint ? -metrics.viewportSize : metrics.viewportSize })
+          viewport.scrollBy(
+            axis === 'x'
+              ? { left: pointer < midpoint ? -metrics.viewportSize : metrics.viewportSize }
+              : { top: pointer < midpoint ? -metrics.viewportSize : metrics.viewportSize },
+          )
         }
       }
     }
@@ -201,7 +222,10 @@ export function createScrollbarController(input: ScrollbarOptions = {}): Scrollb
       }
       const onLeave = () => {
         pointerInside = false
-        if (options.autoHide !== 'never') { active = false; update() }
+        if (options.autoHide !== 'never') {
+          active = false
+          update()
+        }
       }
       const onViewportWheel = (event: WheelEvent) => {
         if (!viewport) return
@@ -225,12 +249,17 @@ export function createScrollbarController(input: ScrollbarOptions = {}): Scrollb
       root.addEventListener('mousemove', onMove, { passive: true })
       root.addEventListener('mouseenter', onEnter, { passive: true })
       root.addEventListener('mouseleave', onLeave)
-      const unbindBars = (Object.entries(bars) as Array<[ScrollbarAxis, BarElements]>).map(([axis, elements]) => bindBar(axis, elements))
+      const unbindBars = (Object.entries(bars) as Array<[ScrollbarAxis, BarElements]>).map(
+        ([axis, elements]) => bindBar(axis, elements),
+      )
       resizeObserver = new ResizeObserver(scheduleUpdate)
       resizeObserver.observe(root)
       resizeObserver.observe(viewport)
       for (const elements of Object.values(bars)) {
-        if (elements) { resizeObserver.observe(elements.bar); resizeObserver.observe(elements.track) }
+        if (elements) {
+          resizeObserver.observe(elements.bar)
+          resizeObserver.observe(elements.track)
+        }
       }
       update()
       if (root.matches(':hover')) onEnter()
@@ -252,8 +281,18 @@ export function createScrollbarController(input: ScrollbarOptions = {}): Scrollb
       return cleanup
     },
     update: scheduleUpdate,
-    scrollTo(options) { viewport?.scrollTo(options) },
-    scrollBy(options) { viewport?.scrollBy(options) },
-    destroy() { cleanup?.(); cleanup = undefined; root = undefined; viewport = undefined; bars = {} },
+    scrollTo(scrollOptions) {
+      viewport?.scrollTo(scrollOptions)
+    },
+    scrollBy(scrollOptions) {
+      viewport?.scrollBy(scrollOptions)
+    },
+    destroy() {
+      cleanup?.()
+      cleanup = undefined
+      root = undefined
+      viewport = undefined
+      bars = {}
+    },
   }
 }

@@ -12,8 +12,9 @@ type FieldNameByValue<TItem, TValue> = {
   [TKey in keyof TItem]-?: NonNullable<TItem[TKey]> extends TValue ? TKey : never
 }[keyof TItem]
 
-type CompatibleFieldName<TItem, TValue> =
-  unknown extends TItem[keyof TItem] ? keyof TItem : FieldNameByValue<TItem, TValue>
+type CompatibleFieldName<TItem, TValue> = unknown extends TItem[keyof TItem]
+  ? keyof TItem
+  : FieldNameByValue<TItem, TValue>
 
 export interface AutoCompleteFieldNames<TItem> {
   key: CompatibleFieldName<TItem, AutoCompleteKey>
@@ -30,10 +31,7 @@ export interface ResolvedAutoCompleteItem<TItem> {
   disabled: boolean
 }
 
-export type AutoCompleteFilterOption<TItem> = (
-  keyword: string,
-  item: TItem,
-) => boolean
+export type AutoCompleteFilterOption<TItem> = (keyword: string, item: TItem) => boolean
 
 export type AutoCompleteChangeMeta<TItem> =
   | { reason: 'input'; previousValue: string; selectedItem?: undefined; selectedKey?: undefined }
@@ -89,7 +87,10 @@ export interface AutoCompleteController<TItem> {
   getVisibleItems: () => readonly ResolvedAutoCompleteItem<TItem>[]
   setValue: (value: string, reason?: 'input' | 'clear') => void
   setOpen: (open: boolean, reason?: AutoCompleteOpenReason) => void
-  setActiveKey: (key: AutoCompleteKey | undefined, interaction?: Exclude<AutoCompleteInteraction, null>) => void
+  setActiveKey: (
+    key: AutoCompleteKey | undefined,
+    interaction?: Exclude<AutoCompleteInteraction, null>,
+  ) => void
   moveActive: (direction: 1 | -1) => void
   selectItem: (key: AutoCompleteKey) => boolean
   selectActive: () => boolean

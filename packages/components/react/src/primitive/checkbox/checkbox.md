@@ -22,13 +22,13 @@ import {
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `checked` | `boolean \| 'indeterminate'` | `undefined` | No | Controlled checked state. |
-| `defaultChecked` | `boolean \| 'indeterminate'` | `false` | No | Initial uncontrolled checked state. |
-| `disabled` | `boolean` | `false` | No | Disables the root button. |
-| `onCheckedChange` | `(checked, meta) => void` | `undefined` | No | Fires after checked state changes. |
-| button props | `ButtonHTMLAttributes<HTMLButtonElement>` | - | No | Root element attributes except conflicting checked props. |
+| Name              | Type                                      | Default     | Required | Description                                               |
+| ----------------- | ----------------------------------------- | ----------- | -------- | --------------------------------------------------------- |
+| `checked`         | `boolean \| 'indeterminate'`              | `undefined` | No       | Controlled checked state.                                 |
+| `defaultChecked`  | `boolean \| 'indeterminate'`              | `false`     | No       | Initial uncontrolled checked state.                       |
+| `disabled`        | `boolean`                                 | `false`     | No       | Disables the root button.                                 |
+| `onCheckedChange` | `(checked, meta) => void`                 | `undefined` | No       | Fires after checked state changes.                        |
+| button props      | `ButtonHTMLAttributes<HTMLButtonElement>` | -           | No       | Root element attributes except conflicting checked props. |
 
 ## Notes
 

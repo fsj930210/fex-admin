@@ -55,7 +55,10 @@ export function placementToParts(placement: FloatingPlacement = 'bottom'): {
   return map[placement]
 }
 
-export function partsFromPlacement(placement: Placement): { side: FloatingSide; align: FloatingAlign } {
+export function partsFromPlacement(placement: Placement): {
+  side: FloatingSide
+  align: FloatingAlign
+} {
   // Floating UI 会返回最终 placement，例如 flip 后从 bottom-start 变成 top-start。
   // adapter 必须消费这里拆出来的最终 side/align，而不是原始 props，否则箭头和动画原点会错。
   const [side, align = 'center'] = placement.split('-')

@@ -17,7 +17,7 @@
   {:else if !autoComplete.items().length}<Empty><EmptyDescription>No suggestions</EmptyDescription></Empty>
   {:else if children}{@render children()}{:else}
     {#each autoComplete.items() as entry (entry.key)}
-      <div id={`${autoComplete.listId}-${entry.key}`} role="option" aria-selected={$snapshot.activeKey === entry.key} aria-disabled={entry.disabled || undefined} data-active={$snapshot.activeKey === entry.key || undefined} data-disabled={entry.disabled || undefined} class={autoCompleteOptionClassName} onpointermove={() => autoComplete.controller.setActiveKey(entry.key, 'pointer')} onpointerdown={event => event.preventDefault()} onclick={() => autoComplete.controller.selectItem(entry.key)}>
+      <div id={`${autoComplete.listId}-${entry.key}`} role="option" tabindex="-1" aria-selected={$snapshot.activeKey === entry.key} aria-disabled={entry.disabled || undefined} data-active={$snapshot.activeKey === entry.key || undefined} data-disabled={entry.disabled || undefined} class={autoCompleteOptionClassName} onpointermove={() => autoComplete.controller.setActiveKey(entry.key, 'pointer')} onpointerdown={event => event.preventDefault()} onclick={() => autoComplete.controller.selectItem(entry.key)} onkeydown={(event) => { if (event.key === 'Enter' || event.key === ' ') autoComplete.controller.selectItem(entry.key) }}>
         {#if item}{@render item(entry.item, { active: $snapshot.activeKey === entry.key, disabled: entry.disabled })}{:else}{entry.label}{/if}
       </div>
     {/each}

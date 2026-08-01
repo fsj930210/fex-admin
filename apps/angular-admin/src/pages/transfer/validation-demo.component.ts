@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { FieldControl, FieldLabel, FieldRoot } from '@fex/components-angular/primitive/field'
-import { Form, FormField, injectForm, type AnyFieldApi } from '@fex/components-angular/primitive/form'
+import {
+  Form,
+  FormField,
+  injectForm,
+  type AnyFieldApi,
+} from '@fex/components-angular/primitive/form'
 import { Transfer } from '@fex/components-angular/primitive/transfer'
 import { Button } from '@fex/components-angular/ui/button'
 import Card from '@fex/components-angular/ui/card'
@@ -32,7 +37,10 @@ export class TransferValidationDemoComponent {
     const errors = field.state.meta.errors.map(String)
     if (errors.length > 0) return { status: 'error', message: errors[0]! } as const
     return field.state.value.length === 1
-      ? { status: 'warning', message: 'Only one member is assigned; consider adding a backup.' } as const
+      ? ({
+          status: 'warning',
+          message: 'Only one member is assigned; consider adding a backup.',
+        } as const)
       : undefined
   }
 }

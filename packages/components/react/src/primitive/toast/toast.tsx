@@ -59,14 +59,25 @@ export function ToastViewport({
             key={currentPlacement}
             data-slot="toast-viewport"
             className={cn(toastViewportClassName({ placement: currentPlacement }), className)}
-            style={{ '--toast-offset': typeof offset === 'number' ? `${offset}px` : offset, ...style } as CSSProperties}
+            style={
+              {
+                '--toast-offset': typeof offset === 'number' ? `${offset}px` : offset,
+                ...style,
+              } as CSSProperties
+            }
             {...props}
           >
             <div className={toastStackContainerClassName({ placement: currentPlacement })}>
               {stacked ? (
                 <>
-                  <div aria-hidden="true" className={cn(toastStackLayerClassName, 'top-2 opacity-70')} />
-                  <div aria-hidden="true" className={cn(toastStackLayerClassName, 'top-4 w-[calc(100%-32px)] opacity-40')} />
+                  <div
+                    aria-hidden="true"
+                    className={cn(toastStackLayerClassName, 'top-2 opacity-70')}
+                  />
+                  <div
+                    aria-hidden="true"
+                    className={cn(toastStackLayerClassName, 'top-4 w-[calc(100%-32px)] opacity-40')}
+                  />
                 </>
               ) : null}
               <div className={toastStackItemsClassName({ placement: currentPlacement })}>
@@ -88,7 +99,13 @@ export interface ToastRootProps extends ComponentProps<'div'> {
   toast: ReactToastItem
 }
 
-export function ToastRoot({ children, className, manager = toast, toast: item, ...props }: ToastRootProps) {
+export function ToastRoot({
+  children,
+  className,
+  manager = toast,
+  toast: item,
+  ...props
+}: ToastRootProps) {
   const knownVariant = isKnownVariant(item.variant) ? item.variant : 'default'
 
   return (
@@ -122,7 +139,13 @@ export function ToastTitle({ className, ...props }: ComponentProps<'div'>) {
 }
 
 export function ToastDescription({ className, ...props }: ComponentProps<'div'>) {
-  return <div data-slot="toast-description" className={cn(toastDescriptionClassName, className)} {...props} />
+  return (
+    <div
+      data-slot="toast-description"
+      className={cn(toastDescriptionClassName, className)}
+      {...props}
+    />
+  )
 }
 
 export function ToastAction({ className, ...props }: ComponentProps<'div'>) {
@@ -150,8 +173,24 @@ export function ToastClose({ className, manager = toast, toast: item, ...props }
   )
 }
 
-function isKnownVariant(variant: ReactToastItem['variant']): variant is NonNullable<ToastStyleProps['variant']> {
-  return variant === 'default' || variant === 'success' || variant === 'info' || variant === 'warning' || variant === 'error' || variant === 'loading'
+function isKnownVariant(
+  variant: ReactToastItem['variant'],
+): variant is NonNullable<ToastStyleProps['variant']> {
+  return (
+    variant === 'default' ||
+    variant === 'success' ||
+    variant === 'info' ||
+    variant === 'warning' ||
+    variant === 'error' ||
+    variant === 'loading'
+  )
 }
 
-const toastPlacements: ToastPlacement[] = ['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right']
+const toastPlacements: ToastPlacement[] = [
+  'top-left',
+  'top',
+  'top-right',
+  'bottom-left',
+  'bottom',
+  'bottom-right',
+]

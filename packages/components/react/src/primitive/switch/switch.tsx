@@ -1,7 +1,18 @@
 import { createToggleController } from '@fex/components-core/toggle/create-toggle-controller'
-import { switchClassName, switchThumbClassName, type SwitchStyleProps } from '@fex/components-styles/switch'
+import {
+  switchClassName,
+  switchThumbClassName,
+  type SwitchStyleProps,
+} from '@fex/components-styles/switch'
 import { cn } from '@fex/utils'
-import { useRef, type ButtonHTMLAttributes, type HTMLAttributes, type MouseEvent, type ReactNode, type Ref } from 'react'
+import {
+  useRef,
+  type ButtonHTMLAttributes,
+  type HTMLAttributes,
+  type MouseEvent,
+  type ReactNode,
+  type Ref,
+} from 'react'
 import { useCoreStore } from '../../hooks/use-core-store'
 import { useLazyRef } from '../../hooks/use-lazy-ref'
 
@@ -10,7 +21,11 @@ export type SwitchState = 'checked' | 'unchecked'
 import { SwitchContext, useSwitchContext } from './switch-context'
 
 export interface SwitchRootProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'checked' | 'defaultChecked' | 'onChange' | 'role' | 'type'>,
+  extends
+    Omit<
+      ButtonHTMLAttributes<HTMLButtonElement>,
+      'checked' | 'defaultChecked' | 'onChange' | 'role' | 'type'
+    >,
     SwitchStyleProps {
   checked?: boolean
   defaultChecked?: boolean
@@ -54,9 +69,10 @@ export function SwitchRoot({
         onClick={(event) => {
           onClick?.(event)
           if (event.defaultPrevented || currentDisabled) return
-          const meta = checked === undefined
-            ? controllerRef.current.toggle()
-            : { previousChecked: currentChecked, checked: !currentChecked }
+          const meta =
+            checked === undefined
+              ? controllerRef.current.toggle()
+              : { previousChecked: currentChecked, checked: !currentChecked }
           if (meta === undefined) return
           onCheckedChange?.(meta.checked, event)
         }}
@@ -76,5 +92,12 @@ export function SwitchThumb({ ref, size, className, ...props }: SwitchThumbProps
   const context = useSwitchContext('SwitchThumb')
   const resolvedSize = size ?? context.size
 
-  return <span {...props} ref={ref} data-state={context.state} className={cn(switchThumbClassName({ size: resolvedSize }), className)} />
+  return (
+    <span
+      {...props}
+      ref={ref}
+      data-state={context.state}
+      className={cn(switchThumbClassName({ size: resolvedSize }), className)}
+    />
+  )
 }

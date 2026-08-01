@@ -46,8 +46,9 @@ export function isMenuNodeItem(item: MenuItem): item is MenuNodeItem {
 
 export function getMenuNodeEntries(items: readonly MenuItem[]) {
   return flattenTree(items, {
-    getKey: (item) => (isMenuNodeItem(item) ? item.key : item.key ?? item.type),
-    getChildren: (item) => (isMenuNodeItem(item) || item.type === 'group' ? item.children : undefined),
+    getKey: (item) => (isMenuNodeItem(item) ? item.key : (item.key ?? item.type)),
+    getChildren: (item) =>
+      isMenuNodeItem(item) || item.type === 'group' ? item.children : undefined,
   }).filter((entry): entry is MenuNodeEntry => isMenuNodeItem(entry.node))
 }
 

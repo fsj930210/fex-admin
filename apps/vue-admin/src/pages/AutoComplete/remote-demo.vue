@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { AutoCompleteContent, AutoCompleteRoot, AutoCompleteTrigger } from '@fex/components-vue/primitive/auto-complete'
+import {
+  AutoCompleteContent,
+  AutoCompleteRoot,
+  AutoCompleteTrigger,
+} from '@fex/components-vue/primitive/auto-complete'
 import Card from '@fex/components-vue/ui/card'
 import { onUnmounted, ref } from 'vue'
 import { fieldNames, users, type UserSuggestion } from './data'
@@ -14,19 +18,35 @@ function search(keyword: string) {
   timer = setTimeout(() => {
     if (current !== request) return
     const normalized = keyword.trim().toLocaleLowerCase()
-    items.value = users.filter(item => item.name.toLocaleLowerCase().includes(normalized))
+    items.value = users.filter((item) => item.name.toLocaleLowerCase().includes(normalized))
     loading.value = false
   }, 600)
 }
-onUnmounted(() => { request++; if (timer) clearTimeout(timer) })
+onUnmounted(() => {
+  request++
+  if (timer) clearTimeout(timer)
+})
 </script>
 <template>
-  <Card title="Remote search and replaceable states" description="The caller owns requests; Content replaces generic loading and empty presentations.">
-    <AutoCompleteRoot :items="items" :field-names="fieldNames" :loading="loading" :filter-option="false" @search="search">
+  <Card
+    title="Remote search and replaceable states"
+    description="The caller owns requests; Content replaces generic loading and empty presentations."
+  >
+    <AutoCompleteRoot
+      :items="items"
+      :field-names="fieldNames"
+      :loading="loading"
+      :filter-option="false"
+      @search="search"
+    >
       <AutoCompleteTrigger placeholder="Search remote users" clearable />
       <AutoCompleteContent>
-        <div v-if="loading" class="p-6 text-center text-sm text-muted-foreground">Querying directory…</div>
-        <div v-else-if="!items.length" class="p-6 text-center text-sm text-muted-foreground">No remote matches</div>
+        <div v-if="loading" class="p-6 text-center text-sm text-muted-foreground">
+          Querying directory…
+        </div>
+        <div v-else-if="!items.length" class="p-6 text-center text-sm text-muted-foreground">
+          No remote matches
+        </div>
       </AutoCompleteContent>
     </AutoCompleteRoot>
   </Card>

@@ -11,7 +11,10 @@ const searchController = createTreeController<DepartmentNode>({
   treeData: departmentTreeData,
   fieldNames: departmentFieldNames,
   isLeaf: (node) => node.childCount === 0,
-  features: [expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] }), searchFeature()],
+  features: [
+    expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] }),
+    searchFeature(),
+  ],
 })
 
 function highlight(title: string, keyword: string) {
@@ -21,7 +24,9 @@ function highlight(title: string, keyword: string) {
   return (
     <>
       {title.slice(0, index)}
-      <mark className="rounded-sm bg-warning/20 px-0.5 text-inherit">{title.slice(index, index + keyword.length)}</mark>
+      <mark className="rounded-sm bg-warning/20 px-0.5 text-inherit">
+        {title.slice(index, index + keyword.length)}
+      </mark>
       {title.slice(index + keyword.length)}
     </>
   )
@@ -29,14 +34,18 @@ function highlight(title: string, keyword: string) {
 
 export function SearchTreeDemo() {
   const [keyword, setKeyword] = useState('')
-  const subtree: readonly DepartmentNode[] = searchController.getFeature<SearchFeatureApi<DepartmentNode>>('search')?.getSubtree({
-    keyword,
-    filterTreeNode: (node, value) => node.name.toLowerCase().includes(value.toLowerCase()),
-  }) ?? []
+  const subtree: readonly DepartmentNode[] =
+    searchController.getFeature<SearchFeatureApi<DepartmentNode>>('search')?.getSubtree({
+      keyword,
+      filterTreeNode: (node, value) => node.name.toLowerCase().includes(value.toLowerCase()),
+    }) ?? []
   const showingSearchTree = Boolean(keyword.trim())
 
   return (
-    <TreeDemoSection title="Search data and custom title rendering" description="The core returns filtered tree data; title rendering decides how a keyword is highlighted.">
+    <TreeDemoSection
+      title="Search data and custom title rendering"
+      description="The core returns filtered tree data; title rendering decides how a keyword is highlighted."
+    >
       <InputRoot value={keyword} className="mb-space-md max-w-sm">
         <InputControl
           onChange={(event) => setKeyword(event.target.value)}
@@ -49,7 +58,9 @@ export function SearchTreeDemo() {
           treeData={departmentTreeData}
           fieldNames={departmentFieldNames}
           isLeaf={(node) => node.childCount === 0}
-          features={[expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] })]}
+          features={[
+            expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] }),
+          ]}
           className="max-w-xl rounded-md border border-border bg-background p-space-sm"
         />
       </div>
@@ -58,7 +69,9 @@ export function SearchTreeDemo() {
           treeData={subtree}
           fieldNames={departmentFieldNames}
           isLeaf={(node) => node.childCount === 0}
-          features={[expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] })]}
+          features={[
+            expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] }),
+          ]}
           searchKeyword={keyword}
           titleRender={({ item, searchKeyword }) => highlight(item.node.name, searchKeyword)}
           className="max-w-xl rounded-md border border-border bg-background p-space-sm"

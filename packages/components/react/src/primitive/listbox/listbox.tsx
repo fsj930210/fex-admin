@@ -1,10 +1,7 @@
 import { createSelectionController } from '@fex/components-core/selection/create-selection-controller'
 import type { SelectionValue } from '@fex/components-core/selection/types'
 import { cn } from '@fex/utils'
-import {
-  type ComponentProps,
-  useRef,
-} from 'react'
+import { type ComponentProps, useRef } from 'react'
 import { useCoreStore } from '../../hooks/use-core-store'
 
 export type ListboxOrientation = 'vertical' | 'horizontal'
@@ -29,8 +26,8 @@ type BaseListboxRootProps<TItem> = Omit<ComponentProps<'div'>, 'defaultValue' | 
 
 export type ListboxRootProps<TItem = unknown> = BaseListboxRootProps<TItem> & {
   multiple?: boolean
-  value?: SelectionValue | SelectionValue[] | undefined
-  defaultValue?: SelectionValue | SelectionValue[] | undefined
+  value?: SelectionValue | readonly SelectionValue[] | undefined
+  defaultValue?: SelectionValue | readonly SelectionValue[] | undefined
   onChange?: (
     value: SelectionValue | SelectionValue[] | undefined,
     meta: ListboxChangeMeta<TItem>,
@@ -62,35 +59,40 @@ export function ListboxRoot<TItem = unknown>({
     }
   }
 
-  const handleChange = (values: SelectionValue[], meta: { previousValues: SelectionValue[]; changedValues: SelectionValue[] }) => {
-      const selectedItems = values
-        .map((itemValue) => optionMap.get(itemValue))
-        .filter((item): item is TItem => item !== undefined)
-      const changeMeta: ListboxChangeMeta<TItem> = {
-        selectedItem: selectedItems[0],
-        selectedItems,
-        selectedValues: values,
-        previousSelectedValues: meta.previousValues,
-        changedValues: meta.changedValues,
-      }
-
-      if (multiple) {
-        ;(onChange as ((values: SelectionValue[], meta: ListboxChangeMeta<TItem>) => void) | undefined)?.(
-          values,
-          changeMeta,
-        )
-        return
-      }
-
-      ;(onChange as ((value: SelectionValue | undefined, meta: ListboxChangeMeta<TItem>) => void) | undefined)?.(
-        values[0],
-        changeMeta,
-      )
+  const handleChange = (
+    values: SelectionValue[],
+    meta: { previousValues: SelectionValue[]; changedValues: SelectionValue[] },
+  ) => {
+    const selectedItems = values
+      .map((itemValue) => optionMap.get(itemValue))
+      .filter((item): item is TItem => item !== undefined)
+    const changeMeta: ListboxChangeMeta<TItem> = {
+      selectedItem: selectedItems[0],
+      selectedItems,
+      selectedValues: values,
+      previousSelectedValues: meta.previousValues,
+      changedValues: meta.changedValues,
     }
 
+    if (multiple) {
+      ;(
+        onChange as ((values: SelectionValue[], meta: ListboxChangeMeta<TItem>) => void) | undefined
+      )?.(values, changeMeta)
+      return
+    }
+
+    ;(
+      onChange as
+        | ((value: SelectionValue | undefined, meta: ListboxChangeMeta<TItem>) => void)
+        | undefined
+    )?.(values[0], changeMeta)
+  }
+
   const optionsRef = useRef({
-    value,
-    defaultValue,
+    value: Array.isArray(value) ? [...value] : (value as SelectionValue | undefined),
+    defaultValue: Array.isArray(defaultValue)
+      ? [...defaultValue]
+      : (defaultValue as SelectionValue | undefined),
     multiple,
     disabledValues,
     onChange: handleChange,
@@ -100,7 +102,9 @@ export function ListboxRoot<TItem = unknown>({
     value,
     defaultValue,
     multiple,
-    disabledValues: disabled ? [...disabledValues, ...Array.from(optionMap.keys())] : disabledValues,
+    disabledValues: disabled
+      ? [...disabledValues, ...Array.from(optionMap.keys())]
+      : disabledValues,
     onChange: handleChange,
   })
 
@@ -162,7 +166,15 @@ export interface ListboxItemProps extends Omit<ComponentProps<'div'>, 'onSelect'
   onSelect?: (value: SelectionValue) => void
 }
 
-export function ListboxItem({ value, disabled, onSelect, className, onClick, children, ...props }: ListboxItemProps) {
+export function ListboxItem({
+  value,
+  disabled,
+  onSelect,
+  className,
+  onClick,
+  children,
+  ...props
+}: ListboxItemProps) {
   const context = useListboxContext('ListboxItem')
   const selected = context.isSelected(value)
   const itemDisabled = disabled === true || context.isDisabled(value)

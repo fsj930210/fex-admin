@@ -20,7 +20,9 @@ export interface TransferPanelClassName {
   footer?: string | undefined
 }
 
-interface TransferPanelProps<TItem extends TransferDataItem> extends HTMLAttributes<HTMLDivElement> {
+interface TransferPanelProps<
+  TItem extends TransferDataItem,
+> extends HTMLAttributes<HTMLDivElement> {
   side: TransferSide
   config: TransferPanelConfig<TItem>
   partClassName?: TransferPanelClassName | undefined
@@ -43,7 +45,12 @@ export function TransferPanel<TItem extends TransferDataItem>({
 }: TransferPanelProps<TItem>) {
   return (
     <TransferPanelContext value={side}>
-      <section {...props} data-slot="transfer-panel" data-side={side} className={partClassName?.root}>
+      <section
+        {...props}
+        data-slot="transfer-panel"
+        data-side={side}
+        className={partClassName?.root}
+      >
         {config.header !== undefined ? (
           <header data-slot="transfer-panel-header" className={partClassName?.header}>
             <TransferPanelContentSlot content={config.header} />

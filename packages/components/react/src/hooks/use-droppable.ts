@@ -24,7 +24,9 @@ export interface UseDroppableEventArgs<TData extends Record<string, unknown>> {
   targetRect: Rect
 }
 
-export interface UseDroppableOptions<TData extends Record<string, unknown> = Record<string, unknown>> {
+export interface UseDroppableOptions<
+  TData extends Record<string, unknown> = Record<string, unknown>,
+> {
   id: string
   accept?: string | string[]
   data?: TData
@@ -70,12 +72,11 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
     return accepted && (canDrop?.(source) ?? true)
   })
 
-  const resolvePosition = useMemoizedFn((
-    targetElement: HTMLElement,
-    pointer: Point,
-    source: Record<string, unknown>,
-  ) => getPosition?.({ element: targetElement, pointer, source })
-    ?? getDropPositionAtPoint(targetElement, pointer, allowedPositions))
+  const resolvePosition = useMemoizedFn(
+    (targetElement: HTMLElement, pointer: Point, source: Record<string, unknown>) =>
+      getPosition?.({ element: targetElement, pointer, source }) ??
+      getDropPositionAtPoint(targetElement, pointer, allowedPositions),
+  )
 
   useIsomorphicLayoutEffect(() => {
     if (!element || disabled) {
@@ -89,8 +90,16 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
       data: data ?? {},
       canDrop: acceptsSource,
       ...(positions ? { positions } : edges ? { edges } : {}),
-      getPosition: ({ element: dropElement, pointer, source }) => resolvePosition(dropElement, pointer, source),
-      onDragEnter: ({ source, target, edge: nextEdge, position: nextPosition, pointer, targetRect }) => {
+      getPosition: ({ element: dropElement, pointer, source }) =>
+        resolvePosition(dropElement, pointer, source),
+      onDragEnter: ({
+        source,
+        target,
+        edge: nextEdge,
+        position: nextPosition,
+        pointer,
+        targetRect,
+      }) => {
         setOver(true)
         setDropAllowed(true)
         setPosition(nextPosition)
@@ -225,7 +234,20 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
       targetElement.removeEventListener('drop', onNativeDrop)
       cleanupFallback()
     }
-  }, [acceptsSource, allowedPositions, data, disabled, element, id, onDrag, onDragEnter, onDragLeave, onDrop, positions, resolvePosition])
+  }, [
+    acceptsSource,
+    allowedPositions,
+    data,
+    disabled,
+    element,
+    id,
+    onDrag,
+    onDragEnter,
+    onDragLeave,
+    onDrop,
+    positions,
+    resolvePosition,
+  ])
 
   const getDropProps = useMemoizedFn(
     (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => ({
@@ -233,8 +255,8 @@ export function useDroppable<TData extends Record<string, unknown> = Record<stri
       'data-droppable-id': id,
       'data-over': over || undefined,
       'data-can-drop': dropAllowed || undefined,
-      'data-drop-edge': dropAllowed ? toDropEdge(position) ?? undefined : undefined,
-      'data-drop-position': dropAllowed ? position ?? undefined : undefined,
+      'data-drop-edge': dropAllowed ? (toDropEdge(position) ?? undefined) : undefined,
+      'data-drop-position': dropAllowed ? (position ?? undefined) : undefined,
     }),
   )
 

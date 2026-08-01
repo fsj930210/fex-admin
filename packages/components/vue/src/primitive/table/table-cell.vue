@@ -11,4 +11,3 @@ const props = defineProps<{ class?: string | undefined }>()
     <slot />
   </td>
 </template>
-

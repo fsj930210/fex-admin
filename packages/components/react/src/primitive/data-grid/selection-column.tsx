@@ -36,32 +36,40 @@ export function createDataGridSelectionColumn<
     enableSorting: false,
     enableColumnFilter: false,
     enableHiding: false,
-    header: ({ table }: { table: SelectionTable }) => mode === 'multiple' ? (
-      <DataGridCheckbox
-        aria-label="Select all rows"
-        checked={table.getIsAllRowsSelected() ? true : table.getIsSomeRowsSelected() ? 'indeterminate' : false}
-        onCheckedChange={(checked) => table.toggleAllRowsSelected(checked === true)}
-      />
-    ) : null,
-    cell: ({ row }: { row: SelectionRow }) => mode === 'multiple' ? (
-      <DataGridCheckbox
-        aria-label={`${ariaLabel} ${row.id}`}
-        disabled={!row.getCanSelect()}
-        checked={row.getIsSelected() ? true : row.getIsSomeSelected() ? 'indeterminate' : false}
-        onCheckedChange={(checked) => row.toggleSelected(checked === true)}
-      />
-    ) : (
-      <RadioGroup
-        orientation="horizontal"
-        {...(row.getIsSelected() ? { value: row.id } : {})}
-        onValueChange={() => row.toggleSelected(true)}
-      >
-        <Radio
-          value={row.id}
+    header: ({ table }: { table: SelectionTable }) =>
+      mode === 'multiple' ? (
+        <DataGridCheckbox
+          aria-label="Select all rows"
+          checked={
+            table.getIsAllRowsSelected()
+              ? true
+              : table.getIsSomeRowsSelected()
+                ? 'indeterminate'
+                : false
+          }
+          onCheckedChange={(checked) => table.toggleAllRowsSelected(checked === true)}
+        />
+      ) : null,
+    cell: ({ row }: { row: SelectionRow }) =>
+      mode === 'multiple' ? (
+        <DataGridCheckbox
           aria-label={`${ariaLabel} ${row.id}`}
           disabled={!row.getCanSelect()}
+          checked={row.getIsSelected() ? true : row.getIsSomeSelected() ? 'indeterminate' : false}
+          onCheckedChange={(checked) => row.toggleSelected(checked === true)}
         />
-      </RadioGroup>
-    ),
+      ) : (
+        <RadioGroup
+          orientation="horizontal"
+          {...(row.getIsSelected() ? { value: row.id } : {})}
+          onValueChange={() => row.toggleSelected(true)}
+        >
+          <Radio
+            value={row.id}
+            aria-label={`${ariaLabel} ${row.id}`}
+            disabled={!row.getCanSelect()}
+          />
+        </RadioGroup>
+      ),
   } as unknown as ColumnDef<TFeatures, TData>
 }

@@ -11,15 +11,23 @@ interface CheckboxContextValue {
 
 const CheckboxContext = createContext<CheckboxContextValue>()
 
-export interface CheckboxRootProps
-  extends ParentProps<Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onChange'>> {
+export interface CheckboxRootProps extends ParentProps<
+  Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onChange'>
+> {
   checked?: CheckboxCheckedState
   defaultChecked?: CheckboxCheckedState
   onCheckedChange?: (checked: CheckboxCheckedState, meta: CheckboxChangeMeta) => void
 }
 
 export function CheckboxRoot(props: CheckboxRootProps) {
-  const [local, rest] = splitProps(props, ['checked', 'defaultChecked', 'disabled', 'children', 'onClick', 'onCheckedChange'])
+  const [local, rest] = splitProps(props, [
+    'checked',
+    'defaultChecked',
+    'disabled',
+    'children',
+    'onClick',
+    'onCheckedChange',
+  ])
   const options = {
     get checked() {
       return local.checked
@@ -35,7 +43,12 @@ export function CheckboxRoot(props: CheckboxRootProps) {
   const snapshot = createCoreStoreSignal(controller)
   const currentChecked = () => local.checked ?? snapshot().checked
   const currentDisabled = () => local.disabled === true || snapshot().disabled
-  const state = () => currentChecked() === 'indeterminate' ? 'indeterminate' : currentChecked() ? 'checked' : 'unchecked'
+  const state = () =>
+    currentChecked() === 'indeterminate'
+      ? 'indeterminate'
+      : currentChecked()
+        ? 'checked'
+        : 'unchecked'
   const ariaChecked = (): boolean | 'mixed' => {
     const checked = currentChecked()
     return checked === 'indeterminate' ? 'mixed' : checked
@@ -84,7 +97,8 @@ export function CheckboxIndicator(props: CheckboxIndicatorProps) {
   const context = useContext(CheckboxContext)
   const [local, rest] = splitProps(props, ['forceMount', 'children'])
   const checked = () => context?.checked() ?? false
-  const state = () => checked() === 'indeterminate' ? 'indeterminate' : checked() ? 'checked' : 'unchecked'
+  const state = () =>
+    checked() === 'indeterminate' ? 'indeterminate' : checked() ? 'checked' : 'unchecked'
 
   return (
     <>

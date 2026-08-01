@@ -34,10 +34,7 @@ import { useTreeDndItem } from '@fex/components-react/primitive/tree/use-tree-dn
   options={{
     treeData,
     fieldNames: { key: 'id', title: 'name', children: 'nodes' },
-    features: [
-      expansionFeature({ defaultExpandedKeys: ['root'] }),
-      selectionFeature(),
-    ],
+    features: [expansionFeature({ defaultExpandedKeys: ['root'] }), selectionFeature()],
   }}
 >
   {(tree) => (
@@ -59,15 +56,15 @@ import { useTreeDndItem } from '@fex/components-react/primitive/tree/use-tree-dn
 
 ## TreeRoot props
 
-| Prop | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `options` | `TreeOptions<TNode>` | — | When `controller` is absent | Creates and updates an owned controller. |
-| `controller` | `TreeController<TNode>` | — | No | Uses a controller that may live outside the rendered tree. |
-| `indent` | `number` | `16` | No | Horizontal depth step in pixels; DnD reads the same value from context. |
-| `rowHeight` | `number` | `32` | No | Row height and the default virtual size estimate. |
-| `children` | `ReactNode \| ((tree) => ReactNode)` | — | Yes | Tree content or controller render function. |
-| `className` | `string` | — | No | Merged onto the root tree element. |
-| `style` | `CSSProperties` | — | No | Merged with the internal `--tree-indent` variable. |
+| Prop         | Type                                 | Default | Required                    | Description                                                             |
+| ------------ | ------------------------------------ | ------- | --------------------------- | ----------------------------------------------------------------------- |
+| `options`    | `TreeOptions<TNode>`                 | —       | When `controller` is absent | Creates and updates an owned controller.                                |
+| `controller` | `TreeController<TNode>`              | —       | No                          | Uses a controller that may live outside the rendered tree.              |
+| `indent`     | `number`                             | `16`    | No                          | Horizontal depth step in pixels; DnD reads the same value from context. |
+| `rowHeight`  | `number`                             | `32`    | No                          | Row height and the default virtual size estimate.                       |
+| `children`   | `ReactNode \| ((tree) => ReactNode)` | —       | Yes                         | Tree content or controller render function.                             |
+| `className`  | `string`                             | —       | No                          | Merged onto the root tree element.                                      |
+| `style`      | `CSSProperties`                      | —       | No                          | Merged with the internal `--tree-indent` variable.                      |
 
 `TreeRoot` also forwards native `div` props. When both `controller` and `options` are supplied,
 React synchronizes the options to the supplied external controller through
@@ -75,13 +72,13 @@ React synchronizes the options to the supplied external controller through
 
 ## Primitive parts
 
-| Part | Important props | Description |
-| --- | --- | --- |
-| `TreeViewport` | `children(item)` | Renders the controller's library-independent visible item list. |
-| `TreeVirtualViewport` | `height`, `overscan`, `ref`, `children(item)` | Adapts visible items to `@tanstack/react-virtual`. |
-| `TreeItem` | `itemKey`, `block`, `children(state)` | Subscribes only to its node and exposes `itemProps`, state, and actions. `block` fills the selectable title after leading tree controls. |
-| `TreeTrigger` | `itemKey` | Loads children when necessary, then explicitly expands or collapses the node. |
-| `TreeTitle` | native `span` props | Minimal title slot with shared Tree styles. |
+| Part                  | Important props                               | Description                                                                                                                              |
+| --------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `TreeViewport`        | `children(item)`                              | Renders the controller's library-independent visible item list.                                                                          |
+| `TreeVirtualViewport` | `height`, `overscan`, `ref`, `children(item)` | Adapts visible items to `@tanstack/react-virtual`.                                                                                       |
+| `TreeItem`            | `itemKey`, `block`, `children(state)`         | Subscribes only to its node and exposes `itemProps`, state, and actions. `block` fills the selectable title after leading tree controls. |
+| `TreeTrigger`         | `itemKey`                                     | Loads children when necessary, then explicitly expands or collapses the node.                                                            |
+| `TreeTitle`           | native `span` props                           | Minimal title slot with shared Tree styles.                                                                                              |
 
 `TreeVirtualViewportHandle.scrollToKey(key, { align, reveal })` resolves a core visible index and
 then asks TanStack Virtual to scroll. `reveal: true` expands the ancestor path through the focus
@@ -95,12 +92,12 @@ empty or missing children array does not prove that a node is a leaf.
 
 The controlled pairs are:
 
-| Value | Default value | Change callback |
-| --- | --- | --- |
+| Value          | Default value         | Change callback        |
+| -------------- | --------------------- | ---------------------- |
 | `expandedKeys` | `defaultExpandedKeys` | `onExpandedKeysChange` |
 | `selectedKeys` | `defaultSelectedKeys` | `onSelectedKeysChange` |
-| `checkedKeys` | `defaultCheckedKeys` | `onCheckedKeysChange` |
-| `focusedKey` | `defaultFocusedKey` | `onFocusedKeyChange` |
+| `checkedKeys`  | `defaultCheckedKeys`  | `onCheckedKeysChange`  |
+| `focusedKey`   | `defaultFocusedKey`   | `onFocusedKeyChange`   |
 
 Selection is single by default. Install `selectionFeature({ multiple: true })` or set the matching
 controller option to enable multiple selection.
@@ -110,21 +107,21 @@ controller option to enable multiple selection.
 The controller always owns data indexing, snapshots, subscriptions, visible projection, and
 immutable tree-data mutations. Structural mutation is not a feature.
 
-| Method | Description |
-| --- | --- |
-| `getSnapshot()` | Returns tree data, interaction state, normalized items, and visible items. |
-| `subscribe(listener)` | Subscribes to the full snapshot. |
-| `subscribeNode(key, listener)` | Subscribes to one node row. |
-| `subscribeVisible(listener)` | Subscribes to visible-list changes. |
-| `updateOptions(nextOptions)` | Updates data, field mapping, callbacks, and controlled state. |
-| `updateNode(key, patch)` | Replaces only the changed node and its immutable ancestor path. |
-| `insertNode(input)` | Inserts a node under a parent or at the root. |
-| `removeNode(key)` | Removes a node and its descendants. |
-| `moveNode(input)` | Moves a node to an exact parent and child index. |
-| `replaceChildren(parentKey, children)` | Replaces root data or one node's children. |
-| `getVisibleItems()` | Returns the flattened expanded projection without a virtual-list dependency. |
-| `getVisibleCount()` / `getVisibleItemAt(index)` / `getVisibleIndex(key)` | Index-oriented virtualization helpers. |
-| `hasFeature(id)` / `getFeature(id)` | Reads an explicitly installed feature API. |
+| Method                                                                   | Description                                                                  |
+| ------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| `getSnapshot()`                                                          | Returns tree data, interaction state, normalized items, and visible items.   |
+| `subscribe(listener)`                                                    | Subscribes to the full snapshot.                                             |
+| `subscribeNode(key, listener)`                                           | Subscribes to one node row.                                                  |
+| `subscribeVisible(listener)`                                             | Subscribes to visible-list changes.                                          |
+| `updateOptions(nextOptions)`                                             | Updates data, field mapping, callbacks, and controlled state.                |
+| `updateNode(key, patch)`                                                 | Replaces only the changed node and its immutable ancestor path.              |
+| `insertNode(input)`                                                      | Inserts a node under a parent or at the root.                                |
+| `removeNode(key)`                                                        | Removes a node and its descendants.                                          |
+| `moveNode(input)`                                                        | Moves a node to an exact parent and child index.                             |
+| `replaceChildren(parentKey, children)`                                   | Replaces root data or one node's children.                                   |
+| `getVisibleItems()`                                                      | Returns the flattened expanded projection without a virtual-list dependency. |
+| `getVisibleCount()` / `getVisibleItemAt(index)` / `getVisibleIndex(key)` | Index-oriented virtualization helpers.                                       |
+| `hasFeature(id)` / `getFeature(id)`                                      | Reads an explicitly installed feature API.                                   |
 
 Mutation methods return `TreeMutationResult` and call `onTreeDataChange(nextTreeData, result)`.
 `updateNode` keeps the normalized index and visible list structurally shared when the node key and
@@ -133,16 +130,16 @@ structural projection because parent/depth/index relationships may change.
 
 ## Optional features
 
-| Feature | Public import | Options | Requires | API |
-| --- | --- | --- | --- | --- |
-| Expansion | `@fex/components-core/tree/features/expansion` | `defaultExpandedKeys` | — | `expand`, `collapse`, `toggle`, `expandAll`, `collapseAll` |
-| Selection | `@fex/components-core/tree/features/selection` | `defaultSelectedKeys`, `multiple` | — | `isMultiple`, `select`, `unselect`, `toggle`, `selectAll`, `clear` |
-| Check | `@fex/components-core/tree/features/check` | `mode`, `defaultCheckedKeys` | — | `check`, `uncheck`, `checkAll`, `clear`, `getState` |
-| Focus/locate | `@fex/components-core/tree/features/focus` | — | Expansion | `focus`, `reveal` |
-| Keyboard | `@fex/components-core/tree/features/keyboard` | — | Expansion, Focus | Enables primitive keyboard behavior. |
-| Async load | `@fex/components-core/tree/features/async-load` | `loadChildren`, `onLoadError` | Expansion | `load`, `retry`, `getState`, `getError` |
-| Search data | `@fex/components-core/tree/features/search` | — | — | `getSubtree` |
-| DnD | `@fex/components-core/tree/features/dnd` | `allowDropInsideLeaf`, `maxDepth`, `canDrag`, `canDrop` | — | `canDrag`, `resolve`, `drop` |
+| Feature      | Public import                                   | Options                                                 | Requires         | API                                                                |
+| ------------ | ----------------------------------------------- | ------------------------------------------------------- | ---------------- | ------------------------------------------------------------------ |
+| Expansion    | `@fex/components-core/tree/features/expansion`  | `defaultExpandedKeys`                                   | —                | `expand`, `collapse`, `toggle`, `expandAll`, `collapseAll`         |
+| Selection    | `@fex/components-core/tree/features/selection`  | `defaultSelectedKeys`, `multiple`                       | —                | `isMultiple`, `select`, `unselect`, `toggle`, `selectAll`, `clear` |
+| Check        | `@fex/components-core/tree/features/check`      | `mode`, `defaultCheckedKeys`                            | —                | `check`, `uncheck`, `checkAll`, `clear`, `getState`                |
+| Focus/locate | `@fex/components-core/tree/features/focus`      | —                                                       | Expansion        | `focus`, `reveal`                                                  |
+| Keyboard     | `@fex/components-core/tree/features/keyboard`   | —                                                       | Expansion, Focus | Enables primitive keyboard behavior.                               |
+| Async load   | `@fex/components-core/tree/features/async-load` | `loadChildren`, `onLoadError`                           | Expansion        | `load`, `retry`, `getState`, `getError`                            |
+| Search data  | `@fex/components-core/tree/features/search`     | —                                                       | —                | `getSubtree`                                                       |
+| DnD          | `@fex/components-core/tree/features/dnd`        | `allowDropInsideLeaf`, `maxDepth`, `canDrag`, `canDrop` | —                | `canDrag`, `resolve`, `drop`                                       |
 
 Each feature contains its own small algorithms in the same file. The controller does not import
 optional behavior, so unused features remain tree-shakeable. Dependencies are validated before

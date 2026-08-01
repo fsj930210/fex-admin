@@ -1,5 +1,8 @@
 <script setup lang="ts" generic="TFeatures extends TableFeatures, TData extends RowData">
-import { getDataGridColumnSize, getDataGridRenderedCells } from '@fex/components-core/data-grid/layout'
+import {
+  getDataGridColumnSize,
+  getDataGridRenderedCells,
+} from '@fex/components-core/data-grid/layout'
 import {
   dataGridBodyClassName,
   dataGridCellClassName,

@@ -4,5 +4,15 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [solid(), tailwindcss()],
-  server: { port: 4002, strictPort: true, proxy: { '/upload-api': { target: 'http://127.0.0.1:4310', changeOrigin: true, rewrite: (path) => path.replace(/^\/upload-api/, '') } } },
+  server: {
+    port: 4002,
+    strictPort: true,
+    proxy: {
+      '/upload-api': {
+        target: 'http://127.0.0.1:4310',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/upload-api/, ''),
+      },
+    },
+  },
 })

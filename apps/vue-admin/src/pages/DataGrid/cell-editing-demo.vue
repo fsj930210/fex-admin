@@ -21,15 +21,18 @@ const columns: ColumnDef<F, Person>[] = (['name', 'status', 'visits'] as const).
   ...(field === 'visits' ? { meta: { align: 'right' as const } } : {}),
   cell: ({ row, getValue }) =>
     editing.value?.rowId === row.id && editing.value.field === field
-      ? h(R, { defaultValue: String(getValue() ?? '') }, () => h(I, {
-        autofocus: true,
-        type: 'text',
-        onBlur: (event: FocusEvent) => update(row.id, field, (event.target as HTMLInputElement).value),
-        onKeydown: (event: KeyboardEvent) => {
-          if (event.key === 'Enter') (event.target as HTMLInputElement).blur()
-          if (event.key === 'Escape') editing.value = null
-        },
-      }))
+      ? h(R, { defaultValue: String(getValue() ?? '') }, () =>
+          h(I, {
+            autofocus: true,
+            type: 'text',
+            onBlur: (event: FocusEvent) =>
+              update(row.id, field, (event.target as HTMLInputElement).value),
+            onKeydown: (event: KeyboardEvent) => {
+              if (event.key === 'Enter') (event.target as HTMLInputElement).blur()
+              if (event.key === 'Escape') editing.value = null
+            },
+          }),
+        )
       : h(
           B,
           {

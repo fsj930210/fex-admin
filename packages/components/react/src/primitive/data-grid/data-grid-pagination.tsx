@@ -54,14 +54,30 @@ export function DataGridPagination<TFeatures extends TableFeatures, TData extend
             value={pagination.pageSize}
             onChange={(event) => paginationTable.setPageSize(Number(event.currentTarget.value))}
           >
-            {pageSizeOptions.map((size) => <option key={size} value={size}>{size} / page</option>)}
+            {pageSizeOptions.map((size) => (
+              <option key={size} value={size}>
+                {size} / page
+              </option>
+            ))}
           </select>
         </label>
-        <span>Page {pagination.pageIndex + 1} / {Math.max(1, paginationTable.getPageCount())}</span>
-        <Button size="sm" variant="outline" disabled={!paginationTable.getCanPreviousPage()} onClick={() => paginationTable.previousPage()}>
+        <span>
+          Page {pagination.pageIndex + 1} / {Math.max(1, paginationTable.getPageCount())}
+        </span>
+        <Button
+          size="sm"
+          variant="outline"
+          disabled={!paginationTable.getCanPreviousPage()}
+          onClick={() => paginationTable.previousPage()}
+        >
           Previous
         </Button>
-        <Button size="sm" variant="outline" disabled={!paginationTable.getCanNextPage()} onClick={() => paginationTable.nextPage()}>
+        <Button
+          size="sm"
+          variant="outline"
+          disabled={!paginationTable.getCanNextPage()}
+          onClick={() => paginationTable.nextPage()}
+        >
           Next
         </Button>
       </div>

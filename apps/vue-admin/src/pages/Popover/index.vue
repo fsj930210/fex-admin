@@ -53,28 +53,43 @@ const placementGroups = [
   <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
     <div class="mx-auto w-full max-w-5xl space-y-space-xl">
       <header class="space-y-space-xl">
-        <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/">Back home</RouterLink>
+        <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
+          >Back home</RouterLink
+        >
         <div>
           <h1 class="text-2xl font-semibold text-foreground">Popover</h1>
           <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
-            Vue adapter for the shared core floating overlay, covering triggers, placement, controlled state and custom popup containers.
+            Vue adapter for the shared core floating overlay, covering triggers, placement,
+            controlled state and custom popup containers.
           </p>
         </div>
       </header>
 
       <div class="space-y-space-xl">
-        <Card title="Primitive" description="Low-level composition API. Trigger exposes slot props.">
+        <Card
+          title="Primitive"
+          description="Low-level composition API. Trigger exposes slot props."
+        >
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
             <PopoverRoot side="bottom" align="start" :side-offset="8" arrow>
               <PopoverTrigger v-slot="{ props, ref }">
-                <button v-bind="props" :ref="ref" class="text-sm text-foreground hover:text-primary">Primitive trigger</button>
+                <button
+                  v-bind="props"
+                  :ref="ref"
+                  class="text-sm text-foreground hover:text-primary"
+                >
+                  Primitive trigger
+                </button>
               </PopoverTrigger>
               <PopoverPortal>
                 <PopoverContent>
                   <PopoverArrow />
                   <PopoverHeader class="w-64">
                     <PopoverTitle>Primitive content</PopoverTitle>
-                    <PopoverDescription>Content uses shared floating variables and data attributes.</PopoverDescription>
+                    <PopoverDescription
+                      >Content uses shared floating variables and data
+                      attributes.</PopoverDescription
+                    >
                   </PopoverHeader>
                 </PopoverContent>
               </PopoverPortal>
@@ -82,7 +97,10 @@ const placementGroups = [
           </div>
         </Card>
 
-        <Card title="Ui" description="Business UI can compose Button without an extra wrapper protocol.">
+        <Card
+          title="Ui"
+          description="Business UI can compose Button without an extra wrapper protocol."
+        >
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
             <PopoverRoot placement="bottomLeft" :side-offset="8" arrow>
               <PopoverTrigger v-slot="{ props, ref }">
@@ -93,7 +111,10 @@ const placementGroups = [
                   <PopoverArrow />
                   <PopoverHeader class="w-64">
                     <PopoverTitle>Click trigger</PopoverTitle>
-                    <PopoverDescription>The popover opens immediately while positioning stays in CSS variables.</PopoverDescription>
+                    <PopoverDescription
+                      >The popover opens immediately while positioning stays in CSS
+                      variables.</PopoverDescription
+                    >
                   </PopoverHeader>
                 </PopoverContent>
               </PopoverPortal>
@@ -105,14 +126,19 @@ const placementGroups = [
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
             <PopoverRoot :trigger="['hover', 'focus']" :hover-close-delay="120" arrow>
               <PopoverTrigger v-slot="{ props, ref }">
-                <button v-bind="props" :ref="ref" :class="secondaryButtonClass">Hover or focus</button>
+                <button v-bind="props" :ref="ref" :class="secondaryButtonClass">
+                  Hover or focus
+                </button>
               </PopoverTrigger>
               <PopoverPortal>
                 <PopoverContent>
                   <PopoverArrow />
                   <PopoverHeader class="w-64">
                     <PopoverTitle>Combined trigger</PopoverTitle>
-                    <PopoverDescription>Hover and focus share one trigger source model, so they do not close each other incorrectly.</PopoverDescription>
+                    <PopoverDescription
+                      >Hover and focus share one trigger source model, so they do not close each
+                      other incorrectly.</PopoverDescription
+                    >
                   </PopoverHeader>
                 </PopoverContent>
               </PopoverPortal>
@@ -126,7 +152,10 @@ const placementGroups = [
                 <PopoverContent>
                   <PopoverHeader class="w-64">
                     <PopoverTitle>Context menu trigger</PopoverTitle>
-                    <PopoverDescription>This is still Popover content; future ContextMenu will reuse the same trigger and floating core with Menu.</PopoverDescription>
+                    <PopoverDescription
+                      >This is still Popover content; future ContextMenu will reuse the same trigger
+                      and floating core with Menu.</PopoverDescription
+                    >
                   </PopoverHeader>
                 </PopoverContent>
               </PopoverPortal>
@@ -145,14 +174,19 @@ const placementGroups = [
                 <div class="justify-self-start">
                   <PopoverRoot :placement="group[0].placement" :side-offset="10" arrow>
                     <PopoverTrigger v-slot="{ props, ref }">
-                      <button v-bind="props" :ref="ref" :class="[outlineButtonClass, 'w-24']">{{ group[0].label }}</button>
+                      <button v-bind="props" :ref="ref" :class="[outlineButtonClass, 'w-24']">
+                        {{ group[0].label }}
+                      </button>
                     </PopoverTrigger>
                     <PopoverPortal>
                       <PopoverContent>
                         <PopoverArrow />
                         <PopoverHeader class="w-44">
                           <PopoverTitle>{{ group[0].placement }}</PopoverTitle>
-                          <PopoverDescription>Edge placements flip instead of shifting across the trigger.</PopoverDescription>
+                          <PopoverDescription
+                            >Edge placements flip instead of shifting across the
+                            trigger.</PopoverDescription
+                          >
                         </PopoverHeader>
                       </PopoverContent>
                     </PopoverPortal>
@@ -162,14 +196,19 @@ const placementGroups = [
                 <div class="justify-self-end">
                   <PopoverRoot :placement="group[1].placement" :side-offset="10" arrow>
                     <PopoverTrigger v-slot="{ props, ref }">
-                      <button v-bind="props" :ref="ref" :class="[outlineButtonClass, 'w-24']">{{ group[1].label }}</button>
+                      <button v-bind="props" :ref="ref" :class="[outlineButtonClass, 'w-24']">
+                        {{ group[1].label }}
+                      </button>
                     </PopoverTrigger>
                     <PopoverPortal>
                       <PopoverContent>
                         <PopoverArrow />
                         <PopoverHeader class="w-44">
                           <PopoverTitle>{{ group[1].placement }}</PopoverTitle>
-                          <PopoverDescription>Edge placements flip instead of shifting across the trigger.</PopoverDescription>
+                          <PopoverDescription
+                            >Edge placements flip instead of shifting across the
+                            trigger.</PopoverDescription
+                          >
                         </PopoverHeader>
                       </PopoverContent>
                     </PopoverPortal>
@@ -180,14 +219,19 @@ const placementGroups = [
                 <div v-for="item in group" :key="item.placement" class="justify-self-center">
                   <PopoverRoot :placement="item.placement" :side-offset="10" arrow>
                     <PopoverTrigger v-slot="{ props, ref }">
-                      <button v-bind="props" :ref="ref" :class="[outlineButtonClass, 'w-24']">{{ item.label }}</button>
+                      <button v-bind="props" :ref="ref" :class="[outlineButtonClass, 'w-24']">
+                        {{ item.label }}
+                      </button>
                     </PopoverTrigger>
                     <PopoverPortal>
                       <PopoverContent>
                         <PopoverArrow />
                         <PopoverHeader class="w-44">
                           <PopoverTitle>{{ item.placement }}</PopoverTitle>
-                          <PopoverDescription>Single-axis placements shift; edge placements only flip.</PopoverDescription>
+                          <PopoverDescription
+                            >Single-axis placements shift; edge placements only
+                            flip.</PopoverDescription
+                          >
                         </PopoverHeader>
                       </PopoverContent>
                     </PopoverPortal>
@@ -209,7 +253,10 @@ const placementGroups = [
                   <PopoverArrow />
                   <PopoverHeader class="w-64">
                     <PopoverTitle>Main-axis offset</PopoverTitle>
-                    <PopoverDescription>sideOffset increases the distance between trigger and content.</PopoverDescription>
+                    <PopoverDescription
+                      >sideOffset increases the distance between trigger and
+                      content.</PopoverDescription
+                    >
                   </PopoverHeader>
                 </PopoverContent>
               </PopoverPortal>
@@ -217,14 +264,18 @@ const placementGroups = [
 
             <PopoverRoot placement="bottomLeft" :side-offset="8" :align-offset="28" arrow>
               <PopoverTrigger v-slot="{ props, ref }">
-                <button v-bind="props" :ref="ref" :class="outlineButtonClass">alignOffset 28</button>
+                <button v-bind="props" :ref="ref" :class="outlineButtonClass">
+                  alignOffset 28
+                </button>
               </PopoverTrigger>
               <PopoverPortal>
                 <PopoverContent>
                   <PopoverArrow />
                   <PopoverHeader class="w-64">
                     <PopoverTitle>Cross-axis offset</PopoverTitle>
-                    <PopoverDescription>alignOffset moves the aligned edge along the cross axis.</PopoverDescription>
+                    <PopoverDescription
+                      >alignOffset moves the aligned edge along the cross axis.</PopoverDescription
+                    >
                   </PopoverHeader>
                 </PopoverContent>
               </PopoverPortal>
@@ -236,7 +287,11 @@ const placementGroups = [
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
             <PopoverRoot :open="open" @open-change="open = $event" placement="bottomLeft" arrow>
               <PopoverTrigger v-slot="{ props, ref }">
-                <button v-bind="props" :ref="ref" :class="open ? secondaryButtonClass : outlineButtonClass">
+                <button
+                  v-bind="props"
+                  :ref="ref"
+                  :class="open ? secondaryButtonClass : outlineButtonClass"
+                >
                   {{ open ? 'Controlled open' : 'Controlled closed' }}
                 </button>
               </PopoverTrigger>
@@ -245,7 +300,10 @@ const placementGroups = [
                   <PopoverArrow />
                   <PopoverHeader class="w-64">
                     <PopoverTitle>Controlled popover</PopoverTitle>
-                    <PopoverDescription>Click outside or press Escape to request closing through onOpenChange.</PopoverDescription>
+                    <PopoverDescription
+                      >Click outside or press Escape to request closing through
+                      onOpenChange.</PopoverDescription
+                    >
                   </PopoverHeader>
                 </PopoverContent>
               </PopoverPortal>
@@ -257,13 +315,17 @@ const placementGroups = [
           <div ref="container" class="relative min-h-40 rounded-md border border-dashed p-space-lg">
             <PopoverRoot :get-popup-container="getPopupContainer" placement="bottomLeft">
               <PopoverTrigger v-slot="{ props, ref }">
-                <button v-bind="props" :ref="ref" :class="outlineButtonClass">Mount inside dashed box</button>
+                <button v-bind="props" :ref="ref" :class="outlineButtonClass">
+                  Mount inside dashed box
+                </button>
               </PopoverTrigger>
               <PopoverPortal>
                 <PopoverContent>
                   <PopoverHeader class="w-64">
                     <PopoverTitle>Custom container</PopoverTitle>
-                    <PopoverDescription>The portal node is rendered inside the dashed container.</PopoverDescription>
+                    <PopoverDescription
+                      >The portal node is rendered inside the dashed container.</PopoverDescription
+                    >
                   </PopoverHeader>
                 </PopoverContent>
               </PopoverPortal>

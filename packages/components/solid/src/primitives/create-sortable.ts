@@ -1,6 +1,14 @@
-import { DEFAULT_SORTABLE_CONTAINER_ID, createSortableController } from '@fex/components-core/sortable/create-sortable-controller'
+import {
+  DEFAULT_SORTABLE_CONTAINER_ID,
+  createSortableController,
+} from '@fex/components-core/sortable/create-sortable-controller'
 import { restoreSortableItems } from '@fex/components-core/sortable/containers'
-import type { SortableAxis, SortableId, SortableItems, SortableMotionOptions } from '@fex/components-core/sortable/types'
+import type {
+  SortableAxis,
+  SortableId,
+  SortableItems,
+  SortableMotionOptions,
+} from '@fex/components-core/sortable/types'
 import { createMemo, createSignal, onCleanup } from 'solid-js'
 import type { JSX } from 'solid-js'
 
@@ -12,7 +20,9 @@ export interface CreateSortableOptions<TItems extends SortableItems> {
   onChange?: (items: TItems) => void
 }
 
-export function createSortable<TItems extends SortableItems>(options: CreateSortableOptions<TItems>) {
+export function createSortable<TItems extends SortableItems>(
+  options: CreateSortableOptions<TItems>,
+) {
   let currentOptions = options
   const controller = createSortableController(options)
   const [snapshot, setSnapshot] = createSignal(controller.getSnapshot())
@@ -41,7 +51,11 @@ export function createSortable<TItems extends SortableItems>(options: CreateSort
     }
   }
 
-  function onPointerDown(event: PointerEvent, id: SortableId, containerId = DEFAULT_SORTABLE_CONTAINER_ID) {
+  function onPointerDown(
+    event: PointerEvent,
+    id: SortableId,
+    containerId = DEFAULT_SORTABLE_CONTAINER_ID,
+  ) {
     if (currentOptions.disabled || !controller.startPointerDrag(toInput(event), id, containerId)) {
       return
     }
@@ -90,14 +104,17 @@ export function createSortable<TItems extends SortableItems>(options: CreateSort
       snapshot()
       return toSolidStyle(controller.getOverlayStyle())
     },
-    registerMotionTarget: (id: SortableId, element: HTMLElement | null) => controller.registerMotionTarget(id, element),
+    registerMotionTarget: (id: SortableId, element: HTMLElement | null) =>
+      controller.registerMotionTarget(id, element),
   }
 }
 
 function toSolidStyle(style: object): JSX.CSSProperties {
   const solidStyle: Record<string, string | number> = {}
 
-  for (const [key, value] of Object.entries(style) as Array<[string, string | number | undefined]>) {
+  for (const [key, value] of Object.entries(style) as Array<
+    [string, string | number | undefined]
+  >) {
     if (value === undefined) {
       continue
     }

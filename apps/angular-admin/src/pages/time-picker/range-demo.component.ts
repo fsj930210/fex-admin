@@ -1,1 +1,11 @@
-import Card from '@fex/components-angular/ui/card'; import { ChangeDetectionStrategy, Component } from '@angular/core'; import { DemoTimePickerComponent } from './demo-time-picker.component'; @Component({selector:'fex-range-time-demo',standalone:true,imports:[Card,DemoTimePickerComponent],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./range-demo.component.html'}) export class RangeDemoComponent {}
+import Card from '@fex/components-angular/ui/card'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { DemoTimePickerComponent } from './demo-time-picker.component'
+@Component({
+  selector: 'fex-range-time-demo',
+  standalone: true,
+  imports: [Card, DemoTimePickerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './range-demo.component.html',
+})
+export class RangeDemoComponent {}

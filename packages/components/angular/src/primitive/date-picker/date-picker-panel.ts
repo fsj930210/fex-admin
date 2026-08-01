@@ -6,7 +6,10 @@ import {
   type CalendarPanel,
   type CalendarValue,
 } from '@fex/components-core/calendar'
-import { getDefaultPanelByPicker, getGranularityByPicker } from '@fex/components-core/date-picker/panel'
+import {
+  getDefaultPanelByPicker,
+  getGranularityByPicker,
+} from '@fex/components-core/date-picker/panel'
 import { createRangePreviewValue } from '@fex/components-core/date-picker/range'
 import { normalizeDatePickerValue } from '@fex/components-core/date-picker/value'
 import {
@@ -16,15 +19,28 @@ import {
   datePickerPanelClassName,
   datePickerWeekHeaderClassName,
 } from '@fex/components-styles/date-picker'
-import { CalendarCellButton, CalendarGrid, CalendarRoot, CalendarWeekHeader } from '../calendar/calendar'
-import { DatePickerHeader, DatePickerHeaderButton, DatePickerHeaderLabel, DatePickerHeaderTitle } from './date-picker-header'
+import {
+  CalendarCellButton,
+  CalendarGrid,
+  CalendarRoot,
+  CalendarWeekHeader,
+} from '../calendar/calendar'
+import {
+  DatePickerHeader,
+  DatePickerHeaderButton,
+  DatePickerHeaderLabel,
+  DatePickerHeaderTitle,
+} from './date-picker-header'
 import { DatePickerState } from './use-date-picker'
 import { RangePickerState } from './use-range-picker'
 
 function getNextPanelAfterCell(panel: CalendarPanel, picker: string): CalendarPanel | null {
   if (picker === 'year') return null
   if (panel === 'decade') return 'year'
-  if (panel === 'year') return picker === 'month' || picker === 'quarter' ? getDefaultPanelByPicker(picker as 'month' | 'quarter') : 'month'
+  if (panel === 'year')
+    return picker === 'month' || picker === 'quarter'
+      ? getDefaultPanelByPicker(picker as 'month' | 'quarter')
+      : 'month'
   if (panel === 'month') return picker === 'month' ? null : 'date'
   if (panel === 'quarter') return null
   return null
@@ -110,7 +126,11 @@ export class RangePickerPanel {
 
   displayRange() {
     const context = this.state.context()
-    return createRangePreviewValue(context.rangeValue, context.hoverValue as CalendarValue | null, context.activePart)
+    return createRangePreviewValue(
+      context.rangeValue,
+      context.hoverValue as CalendarValue | null,
+      context.activePart,
+    )
   }
 
   selectCell(cell: CalendarCell) {

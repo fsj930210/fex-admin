@@ -40,34 +40,34 @@ import { TreeDndItemDirective } from '@fex/components-angular/primitive/tree/tre
 
 ## TreeRoot inputs
 
-| 参数 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `options` | `TreeOptions<TNode>` | - | 无 controller 时是 | 创建或更新内部 controller。 |
-| `controller` | `TreeController<TNode>` | - | 否 | 使用外部 controller。 |
-| `indent` | `number` | `16` | 否 | 每层缩进与 DnD 计算基准。 |
-| `rowHeight` | `number` | `32` | 否 | 行高与虚拟尺寸估算。 |
-| `class` | 原生 class | - | 否 | 自动与根元素默认 class 合并。 |
+| 参数         | 类型                    | 默认值 | 必填               | 说明                          |
+| ------------ | ----------------------- | ------ | ------------------ | ----------------------------- |
+| `options`    | `TreeOptions<TNode>`    | -      | 无 controller 时是 | 创建或更新内部 controller。   |
+| `controller` | `TreeController<TNode>` | -      | 否                 | 使用外部 controller。         |
+| `indent`     | `number`                | `16`   | 否                 | 每层缩进与 DnD 计算基准。     |
+| `rowHeight`  | `number`                | `32`   | 否                 | 行高与虚拟尺寸估算。          |
+| `class`      | 原生 class              | -      | 否                 | 自动与根元素默认 class 合并。 |
 
 ## 逻辑层与部件
 
-| API | 说明 |
-| --- | --- |
+| API                                          | 说明                                                                         |
+| -------------------------------------------- | ---------------------------------------------------------------------------- |
 | `createTreeSignals(getOptions, controller?)` | 返回 controller、snapshot signal 和 visibleItems signal，供自定义 DOM 使用。 |
-| `TreeViewport` | 通过 `ng-template` 输出普通可见列表。 |
-| `TreeVirtualViewport` | 使用 `@tanstack/angular-virtual`，实例方法支持 `scrollToKey`。 |
-| `TreeItemDirective` | 节点级订阅，提供 ARIA、状态 signal 和 actions。 |
-| `TreeTriggerDirective` | 事件驱动的异步加载、展开和折叠。 |
-| `TreeTitleDirective` | 最小 title 样式协议。 |
-| `TreeDndItemDirective` | 可选拖拽、预览与深度指示器。 |
+| `TreeViewport`                               | 通过 `ng-template` 输出普通可见列表。                                        |
+| `TreeVirtualViewport`                        | 使用 `@tanstack/angular-virtual`，实例方法支持 `scrollToKey`。               |
+| `TreeItemDirective`                          | 节点级订阅，提供 ARIA、状态 signal 和 actions。                              |
+| `TreeTriggerDirective`                       | 事件驱动的异步加载、展开和折叠。                                             |
+| `TreeTitleDirective`                         | 最小 title 样式协议。                                                        |
+| `TreeDndItemDirective`                       | 可选拖拽、预览与深度指示器。                                                 |
 
 ## 受控状态与回调
 
-| 受控值 | 非受控初值 | 回调 |
-| --- | --- | --- |
+| 受控值         | 非受控初值            | 回调                   |
+| -------------- | --------------------- | ---------------------- |
 | `expandedKeys` | `defaultExpandedKeys` | `onExpandedKeysChange` |
 | `selectedKeys` | `defaultSelectedKeys` | `onSelectedKeysChange` |
-| `checkedKeys` | `defaultCheckedKeys` | `onCheckedKeysChange` |
-| `focusedKey` | `defaultFocusedKey` | `onFocusedKeyChange` |
+| `checkedKeys`  | `defaultCheckedKeys`  | `onCheckedKeysChange`  |
+| `focusedKey`   | `defaultFocusedKey`   | `onFocusedKeyChange`   |
 
 选择默认单选；多选必须显式注册 selection feature 的 multiple 配置。展开、选择、勾选、焦点、键盘、异步加载、搜索和 DnD 都由调用方加入 `features`，core 会校验依赖与冲突。
 

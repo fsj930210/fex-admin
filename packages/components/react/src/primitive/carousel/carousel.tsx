@@ -37,7 +37,7 @@ export function useCarouselContext() {
 }
 
 export interface CarouselRootProps
-  extends HTMLAttributes<HTMLDivElement>, CreateCarouselControllerOptions {
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'>, CreateCarouselControllerOptions {
   children?: ReactNode
   controllerRef?: Ref<CarouselController>
 }
@@ -45,9 +45,13 @@ export interface CarouselRootProps
 export function CarouselRoot({
   children,
   controllerRef,
+  options,
+  plugins,
+  autoplay,
   onSelect,
   onSettle,
-  ...config
+  className,
+  ...domProps
 }: CarouselRootProps) {
   const selectEvent = useEffectEvent((snapshot: ReturnType<CarouselController['getSnapshot']>) =>
     onSelect?.(snapshot),
@@ -55,12 +59,15 @@ export function CarouselRoot({
   const settleEvent = useEffectEvent((snapshot: ReturnType<CarouselController['getSnapshot']>) =>
     onSettle?.(snapshot),
   )
-  const configRef = useRef<CreateCarouselControllerOptions>({
-    ...config,
+  const currentConfig: CreateCarouselControllerOptions = {
+    ...(options === undefined ? {} : { options }),
+    ...(plugins === undefined ? {} : { plugins }),
+    ...(autoplay === undefined ? {} : { autoplay }),
     onSelect: selectEvent,
     onSettle: settleEvent,
-  })
-  configRef.current = { ...config, onSelect: selectEvent, onSettle: settleEvent }
+  }
+  const configRef = useRef<CreateCarouselControllerOptions>(currentConfig)
+  configRef.current = currentConfig
   const controller = useLazyRef(() => createCarouselController(configRef.current)).current
   const snapshot = useCoreStore(controller)
   useUnmount(() => controller.destroy())
@@ -68,7 +75,9 @@ export function CarouselRoot({
   else if (controllerRef) controllerRef.current = controller
   return (
     <CarouselContext value={{ controller, snapshot }}>
-      <div className={cn(carouselRootClassName, config.className)}>{children}</div>
+      <div {...domProps} className={cn(carouselRootClassName, className)}>
+        {children}
+      </div>
     </CarouselContext>
   )
 }

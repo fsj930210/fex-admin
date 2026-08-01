@@ -18,14 +18,14 @@ import { ListboxRoot, ListboxItem } from '@fex/components-vue/ui/listbox'
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `items` | `unknown[]` | `[]` | No | Items used for selected item metadata. |
-| `value` | `string \| number \| Array<string \| number>` | - | No | Controlled selected value. |
-| `defaultValue` | `string \| number \| Array<string \| number>` | - | No | Initial uncontrolled value. |
-| `multiple` | `boolean` | `false` | No | Enables multiple selection. |
-| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | No | Layout orientation. |
-| `disabled` | `boolean` | `false` | No | Disables all values. |
+| Name           | Type                                          | Default      | Required | Description                            |
+| -------------- | --------------------------------------------- | ------------ | -------- | -------------------------------------- |
+| `items`        | `unknown[]`                                   | `[]`         | No       | Items used for selected item metadata. |
+| `value`        | `string \| number \| Array<string \| number>` | -            | No       | Controlled selected value.             |
+| `defaultValue` | `string \| number \| Array<string \| number>` | -            | No       | Initial uncontrolled value.            |
+| `multiple`     | `boolean`                                     | `false`      | No       | Enables multiple selection.            |
+| `orientation`  | `'vertical' \| 'horizontal'`                  | `'vertical'` | No       | Layout orientation.                    |
+| `disabled`     | `boolean`                                     | `false`      | No       | Disables all values.                   |
 
 ## Events
 

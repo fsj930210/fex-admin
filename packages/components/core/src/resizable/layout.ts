@@ -1,9 +1,6 @@
 import type { ResizablePanelConfig } from './types'
 
-export function normalizePanelLayout(
-  panels: ResizablePanelConfig[],
-  layout?: number[],
-): number[] {
+export function normalizePanelLayout(panels: ResizablePanelConfig[], layout?: number[]): number[] {
   if (layout?.length === panels.length) {
     return normalizeSum(layout)
   }

@@ -35,7 +35,9 @@ export function Example() {
   return (
     <InputRoot defaultValue="fex-admin">
       <InputAddonBefore>https://</InputAddonBefore>
-      <InputPrefix><SearchIcon aria-hidden /></InputPrefix>
+      <InputPrefix>
+        <SearchIcon aria-hidden />
+      </InputPrefix>
       <InputControl name="site" placeholder="输入站点" />
       <InputClear aria-label="清空站点" />
     </InputRoot>
@@ -49,37 +51,37 @@ export function Example() {
 
 ### `InputRoot`
 
-| 参数名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `value` | `string` | `undefined` | 否 | 受控输入值。 |
-| `defaultValue` | `string` | `''` | 否 | 非受控初始值。 |
-| `onValueChange` | `(value, meta) => void` | `undefined` | 否 | 输入或清空后触发。`meta.reason` 为 `input` 或 `clear`。 |
-| `onClear` | `(meta) => void` | `undefined` | 否 | 清空成功后触发。 |
-| `disabled` | `boolean` | `false` | 否 | 禁用控制节点及清空操作。 |
-| `readOnly` | `boolean` | `false` | 否 | 保留可聚焦能力，但禁止值修改和清空。 |
-| `invalid` | `boolean` | `false` | 否 | 为 Root 和 Control 提供错误状态。 |
-| `aria-invalid` | `boolean \| 'true' \| 'false'` | `undefined` | 否 | 与 `invalid` 等价，可由独立 `Field` 透传。 |
-| `className` | `string` | `undefined` | 否 | 合并到输入组合根节点。 |
+| 参数名          | 类型                           | 默认值      | 必填 | 说明                                                    |
+| --------------- | ------------------------------ | ----------- | ---- | ------------------------------------------------------- |
+| `value`         | `string`                       | `undefined` | 否   | 受控输入值。                                            |
+| `defaultValue`  | `string`                       | `''`        | 否   | 非受控初始值。                                          |
+| `onValueChange` | `(value, meta) => void`        | `undefined` | 否   | 输入或清空后触发。`meta.reason` 为 `input` 或 `clear`。 |
+| `onClear`       | `(meta) => void`               | `undefined` | 否   | 清空成功后触发。                                        |
+| `disabled`      | `boolean`                      | `false`     | 否   | 禁用控制节点及清空操作。                                |
+| `readOnly`      | `boolean`                      | `false`     | 否   | 保留可聚焦能力，但禁止值修改和清空。                    |
+| `invalid`       | `boolean`                      | `false`     | 否   | 为 Root 和 Control 提供错误状态。                       |
+| `aria-invalid`  | `boolean \| 'true' \| 'false'` | `undefined` | 否   | 与 `invalid` 等价，可由独立 `Field` 透传。              |
+| `className`     | `string`                       | `undefined` | 否   | 合并到输入组合根节点。                                  |
 
 ### `InputControl`
 
-| 参数名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| 原生 `input` 属性 | `ComponentProps<'input'>` | `undefined` | 否 | 例如 `name`、`type`、`placeholder`、`required`、`autoComplete`。 |
-| `className` | `string` | `undefined` | 否 | 合并到原生 input。 |
-| `onChange` | `(event) => void` | `undefined` | 否 | 保留原生事件；未阻止默认行为时会更新 Root 值。 |
+| 参数名            | 类型                      | 默认值      | 必填 | 说明                                                             |
+| ----------------- | ------------------------- | ----------- | ---- | ---------------------------------------------------------------- |
+| 原生 `input` 属性 | `ComponentProps<'input'>` | `undefined` | 否   | 例如 `name`、`type`、`placeholder`、`required`、`autoComplete`。 |
+| `className`       | `string`                  | `undefined` | 否   | 合并到原生 input。                                               |
+| `onChange`        | `(event) => void`         | `undefined` | 否   | 保留原生事件；未阻止默认行为时会更新 Root 值。                   |
 
 `InputControl` 必须位于 `InputRoot` 内，且一个 Root 只放置一个 Control。
 
 ### 附属原子组件
 
-| 组件 | 原生节点 | 关键参数 | 说明 |
-| --- | --- | --- | --- |
-| `InputPrefix` | `span` | 原生 `span` 属性 | 输入框内左侧内容。 |
-| `InputSuffix` | `span` | 原生 `span` 属性 | 输入框内右侧内容。 |
-| `InputAddonBefore` | `span` | 原生 `span` 属性 | 输入框外左侧附加内容。 |
-| `InputAddonAfter` | `span` | 原生 `span` 属性 | 输入框外右侧附加内容。 |
-| `InputClear` | `button` | `forceMount`、原生 button 属性 | 清空操作；无值、只读或禁用时默认不渲染。 |
+| 组件               | 原生节点 | 关键参数                       | 说明                                     |
+| ------------------ | -------- | ------------------------------ | ---------------------------------------- |
+| `InputPrefix`      | `span`   | 原生 `span` 属性               | 输入框内左侧内容。                       |
+| `InputSuffix`      | `span`   | 原生 `span` 属性               | 输入框内右侧内容。                       |
+| `InputAddonBefore` | `span`   | 原生 `span` 属性               | 输入框外左侧附加内容。                   |
+| `InputAddonAfter`  | `span`   | 原生 `span` 属性               | 输入框外右侧附加内容。                   |
+| `InputClear`       | `button` | `forceMount`、原生 button 属性 | 清空操作；无值、只读或禁用时默认不渲染。 |
 
 ## 事件/回调
 

@@ -7,7 +7,11 @@ const owner = createDatePickerFooterActions()
 </script>
 
 <template>
-  <Button data-slot="date-picker-confirm" :class="datePickerConfirmClassName" @click="owner.confirm()">
+  <Button
+    data-slot="date-picker-confirm"
+    :class="datePickerConfirmClassName"
+    @click="owner.confirm()"
+  >
     <slot>确定</slot>
   </Button>
 </template>

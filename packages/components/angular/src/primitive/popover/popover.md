@@ -33,25 +33,25 @@ import {
 
 ## Props / Inputs
 
-| 参数名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `open` | `boolean` | - | 否 | 受控打开状态。 |
-| `defaultOpen` | `boolean` | `false` | 否 | 非受控默认打开状态。 |
-| `trigger` | `OverlayTrigger[]` | `['click']` | 否 | 触发方式数组。 |
-| `placement` | `FloatingPlacement` | `bottom` | 否 | antd 风格位置，如 `bottomLeft`。 |
-| `side` | `top \| right \| bottom \| left` | - | 否 | Radix 风格主方向。 |
-| `align` | `start \| center \| end` | - | 否 | Radix 风格对齐方式。 |
-| `sideOffset` | `number` | `6` | 否 | 主轴偏移。 |
-| `alignOffset` | `number` | `0` | 否 | 交叉轴偏移。 |
-| `arrow` | `boolean` | `false` | 否 | 是否启用箭头。 |
-| `hoverOpenDelay` | `number` | `0` | 否 | hover 打开延迟。 |
-| `hoverCloseDelay` | `number` | `0` | 否 | hover 关闭延迟。 |
-| `getPopupContainer` | `(reference) => HTMLElement` | `document.body` | 否 | 浮层挂载容器。 |
+| 参数名              | 类型                             | 默认值          | 必填 | 说明                             |
+| ------------------- | -------------------------------- | --------------- | ---- | -------------------------------- |
+| `open`              | `boolean`                        | -               | 否   | 受控打开状态。                   |
+| `defaultOpen`       | `boolean`                        | `false`         | 否   | 非受控默认打开状态。             |
+| `trigger`           | `OverlayTrigger[]`               | `['click']`     | 否   | 触发方式数组。                   |
+| `placement`         | `FloatingPlacement`              | `bottom`        | 否   | antd 风格位置，如 `bottomLeft`。 |
+| `side`              | `top \| right \| bottom \| left` | -               | 否   | Radix 风格主方向。               |
+| `align`             | `start \| center \| end`         | -               | 否   | Radix 风格对齐方式。             |
+| `sideOffset`        | `number`                         | `6`             | 否   | 主轴偏移。                       |
+| `alignOffset`       | `number`                         | `0`             | 否   | 交叉轴偏移。                     |
+| `arrow`             | `boolean`                        | `false`         | 否   | 是否启用箭头。                   |
+| `hoverOpenDelay`    | `number`                         | `0`             | 否   | hover 打开延迟。                 |
+| `hoverCloseDelay`   | `number`                         | `0`             | 否   | hover 关闭延迟。                 |
+| `getPopupContainer` | `(reference) => HTMLElement`     | `document.body` | 否   | 浮层挂载容器。                   |
 
 ## 事件 / Outputs
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
+| 名称         | 类型                    | 说明               |
+| ------------ | ----------------------- | ------------------ |
 | `openChange` | `EventEmitter<boolean>` | 打开状态变化请求。 |
 
 ## 受控 / 非受控

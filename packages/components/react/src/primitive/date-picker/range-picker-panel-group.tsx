@@ -9,12 +9,21 @@ export interface RangePickerPanelGroupProps extends ComponentProps<'div'> {
   panelCount?: 1 | 2 | undefined
 }
 
-export function RangePickerPanelGroup({ panelCount = 2, className, children, ...props }: RangePickerPanelGroupProps) {
+export function RangePickerPanelGroup({
+  panelCount = 2,
+  className,
+  children,
+  ...props
+}: RangePickerPanelGroupProps) {
   const context = useRangePickerContext('RangePickerPanelGroup')
   const viewDates = getRangePanelViewDates(context.viewDate, context.panel)
 
   return (
-    <div {...props} data-slot="range-picker-panel-group" className={cn(datePickerPanelsClassName, className)}>
+    <div
+      {...props}
+      data-slot="range-picker-panel-group"
+      className={cn(datePickerPanelsClassName, className)}
+    >
       {children ?? (
         <>
           <RangePickerPanel panelViewDate={viewDates[0]} />

@@ -48,7 +48,9 @@ export class TransferTablePanelComponent {
   constructor() {
     effect(() => {
       const panel = this.panel()
-      const selection = Object.fromEntries(panel.checkedKeys.map((key) => [String(key), true as const]))
+      const selection = Object.fromEntries(
+        panel.checkedKeys.map((key) => [String(key), true as const]),
+      )
       this.table.setDataGridOptions({
         features: this.features,
         data: panel.items,
@@ -82,6 +84,8 @@ export class TransferTablePanelComponent {
   protected headerChecked() {
     return this.table.getIsAllRowsSelected()
       ? true
-      : this.table.getIsSomeRowsSelected() ? 'indeterminate' as const : false
+      : this.table.getIsSomeRowsSelected()
+        ? ('indeterminate' as const)
+        : false
   }
 }

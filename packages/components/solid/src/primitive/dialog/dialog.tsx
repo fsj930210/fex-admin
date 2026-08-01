@@ -1,4 +1,7 @@
-import { createDialogController, type DialogOptions } from '@fex/components-core/dialog/create-dialog-controller'
+import {
+  createDialogController,
+  type DialogOptions,
+} from '@fex/components-core/dialog/create-dialog-controller'
 import {
   dialogBodyClassName,
   dialogCloseClassName,
@@ -12,14 +15,7 @@ import {
 } from '@fex/components-styles/dialog'
 import { cn } from '@fex/utils'
 import { Portal } from 'solid-js/web'
-import {
-  createSignal,
-  onCleanup,
-  Show,
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { createSignal, onCleanup, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
 import { DialogContext, useDialog } from './dialog-context'
 let nextDialogId = 1
@@ -27,7 +23,17 @@ let nextDialogId = 1
 export interface DialogProps extends ParentProps, DialogOptions {}
 
 export function Dialog(props: DialogProps) {
-  const [local] = splitProps(props, ['children', 'open', 'defaultOpen', 'onOpenChange', 'modal', 'forceMount', 'closeDelay', 'dismiss', 'closeOnOverlayPointer'])
+  const [local] = splitProps(props, [
+    'children',
+    'open',
+    'defaultOpen',
+    'onOpenChange',
+    'modal',
+    'forceMount',
+    'closeDelay',
+    'dismiss',
+    'closeOnOverlayPointer',
+  ])
   const [open, setOpen] = createSignal(local.open ?? local.defaultOpen ?? false)
   const triggerElement = { current: null as HTMLButtonElement | null }
   const dialogId = nextDialogId++
@@ -150,7 +156,11 @@ export function DialogOverlay(props: DialogOverlayProps) {
       class={cn(dialogOverlayClassName, local.class)}
       onClick={(event) => {
         if (event.target === event.currentTarget) {
-          dialog.dismiss.overlayPointer({ target: event.target, currentTarget: event.currentTarget, event })
+          dialog.dismiss.overlayPointer({
+            target: event.target,
+            currentTarget: event.currentTarget,
+            event,
+          })
         }
       }}
     />
@@ -182,7 +192,11 @@ export function DialogContent(props: DialogContentProps) {
         class={cn(dialogContentClassName({ size: local.size }), local.class)}
         onKeyDown={(event) => {
           if (event.key === 'Escape') {
-            dialog.dismiss.escapeKey({ target: event.target, currentTarget: event.currentTarget, event })
+            dialog.dismiss.escapeKey({
+              target: event.target,
+              currentTarget: event.currentTarget,
+              event,
+            })
           }
         }}
       >
@@ -195,7 +209,11 @@ export function DialogContent(props: DialogContentProps) {
 function createPart(slot: string, className: string) {
   return function DialogPart(props: ParentProps<{ class?: string }>) {
     const [local, rest] = splitProps(props, ['children', 'class'])
-    return <div {...rest} data-slot={slot} class={cn(className, local.class)}>{local.children}</div>
+    return (
+      <div {...rest} data-slot={slot} class={cn(className, local.class)}>
+        {local.children}
+      </div>
+    )
   }
 }
 
@@ -206,13 +224,31 @@ export const DialogFooter = createPart('dialog-footer', dialogFooterClassName)
 export function DialogTitle(props: ParentProps<{ class?: string }>) {
   const [local, rest] = splitProps(props, ['children', 'class'])
   const { titleId } = useDialog('DialogTitle')
-  return <h2 {...rest} id={titleId} data-slot="dialog-title" class={cn(dialogTitleClassName, local.class)}>{local.children}</h2>
+  return (
+    <h2
+      {...rest}
+      id={titleId}
+      data-slot="dialog-title"
+      class={cn(dialogTitleClassName, local.class)}
+    >
+      {local.children}
+    </h2>
+  )
 }
 
 export function DialogDescription(props: ParentProps<{ class?: string }>) {
   const [local, rest] = splitProps(props, ['children', 'class'])
   const { descriptionId } = useDialog('DialogDescription')
-  return <p {...rest} id={descriptionId} data-slot="dialog-description" class={cn(dialogDescriptionClassName, local.class)}>{local.children}</p>
+  return (
+    <p
+      {...rest}
+      id={descriptionId}
+      data-slot="dialog-description"
+      class={cn(dialogDescriptionClassName, local.class)}
+    >
+      {local.children}
+    </p>
+  )
 }
 
 export type DialogCloseRenderProps = {
@@ -235,10 +271,13 @@ export function DialogClose(props: DialogCloseProps) {
     type: 'button' as const,
     'data-slot': 'dialog-close' as const,
     class: cn(dialogCloseClassName, local.class),
-    onClick: (event: MouseEvent) => dialog.close({ reason: 'manual', source: 'close-button', event }),
+    onClick: (event: MouseEvent) =>
+      dialog.close({ reason: 'manual', source: 'close-button', event }),
   }
 
-  return typeof local.children === 'function'
-    ? local.children(closeProps)
-    : <button {...closeProps}>{local.children ?? 'Close'}</button>
+  return typeof local.children === 'function' ? (
+    local.children(closeProps)
+  ) : (
+    <button {...closeProps}>{local.children ?? 'Close'}</button>
+  )
 }

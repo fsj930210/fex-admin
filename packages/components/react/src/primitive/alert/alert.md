@@ -27,11 +27,11 @@ export function Demo() {
 
 ## Props
 
-| 参数名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `variant` | `'default' \| 'destructive' \| 'success' \| 'warning' \| 'info'` | `'default'` | 否 | 提示语义样式。 |
-| `className` | `string` | `undefined` | 否 | 合并到根元素或子 slot 的 class。 |
-| `children` | `ReactNode` | `undefined` | 否 | 提示内容。 |
+| 参数名      | 类型                                                             | 默认值      | 必填 | 说明                             |
+| ----------- | ---------------------------------------------------------------- | ----------- | ---- | -------------------------------- |
+| `variant`   | `'default' \| 'destructive' \| 'success' \| 'warning' \| 'info'` | `'default'` | 否   | 提示语义样式。                   |
+| `className` | `string`                                                         | `undefined` | 否   | 合并到根元素或子 slot 的 class。 |
+| `children`  | `ReactNode`                                                      | `undefined` | 否   | 提示内容。                       |
 
 ## 事件/回调
 

@@ -12,7 +12,7 @@
   const visibleDates = $derived(panelCount === 1 ? [dates[0]] : dates)
 </script>
 
-<div class={cn(datePickerPanelsClassName, className)} onmouseleave={() => context.setHoverValue(null)}>
+<div role="group" class={cn(datePickerPanelsClassName, className)} onmouseleave={() => context.setHoverValue(null)}>
   {#if children}
     {@render children()}
   {:else}

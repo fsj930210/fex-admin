@@ -19,30 +19,19 @@ import { MinusIcon } from '../../icon/minus'
 
 export type { CheckboxCheckedState } from '../../primitive/checkbox/checkbox'
 
-export interface CheckboxProps
-  extends ComponentProps<typeof CheckboxRoot>,
-    CheckboxStyleProps {}
+export interface CheckboxProps extends ComponentProps<typeof CheckboxRoot>, CheckboxStyleProps {}
 
 export interface CheckboxGroupProps
-  extends ComponentProps<typeof PrimitiveCheckboxGroup>,
-    CheckboxGroupStyleProps {}
+  extends ComponentProps<typeof PrimitiveCheckboxGroup>, CheckboxGroupStyleProps {}
 
-export function Checkbox({
-  className,
-  children,
-  size,
-  ...props
-}: CheckboxProps) {
+export function Checkbox({ className, children, size, ...props }: CheckboxProps) {
   return (
     <CheckboxRoot
       data-slot="checkbox"
       className={cn(checkboxClassName({ size }), className)}
       {...props}
     >
-      <CheckboxIndicator
-        data-slot="checkbox-indicator"
-        className={checkboxIndicatorClassName}
-      >
+      <CheckboxIndicator data-slot="checkbox-indicator" className={checkboxIndicatorClassName}>
         {children ?? (
           <>
             <CheckIcon className={checkboxCheckIconClassName} />

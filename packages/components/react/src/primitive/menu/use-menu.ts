@@ -183,7 +183,9 @@ export function useMenu({
     multiple: expandMultiple,
     disabledKeys,
     onChange: (keys: ExpansionKey[], meta: { previousKeys: ExpansionKey[] }) => {
-      const changedKey = keys.find((key) => !meta.previousKeys.includes(key)) ?? meta.previousKeys.find((key) => !keys.includes(key))
+      const changedKey =
+        keys.find((key) => !meta.previousKeys.includes(key)) ??
+        meta.previousKeys.find((key) => !keys.includes(key))
       const info = getInfoByKey(changedKey ?? keys[0] ?? meta.previousKeys[0] ?? '')
       optionsRef.current.onExpandChange?.(keysFromExpansion(keys), {
         ...info,
@@ -201,7 +203,9 @@ export function useMenu({
     onChange: (values: SelectionValue[], meta: { previousValues: SelectionValue[] }) => {
       const previousKeys = keysFromSelection(meta.previousValues)
       const nextKeys = keysFromSelection(values)
-      const changedKey = nextKeys.find((key) => !previousKeys.includes(key)) ?? previousKeys.find((key) => !nextKeys.includes(key))
+      const changedKey =
+        nextKeys.find((key) => !previousKeys.includes(key)) ??
+        previousKeys.find((key) => !nextKeys.includes(key))
       const info = getInfoByKey(changedKey ?? nextKeys[0] ?? previousKeys[0] ?? '')
       const callbackInfo = {
         ...info,
@@ -288,7 +292,11 @@ export function useMenu({
         },
         onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => {
           props.onKeyDown?.(event)
-          if (event.defaultPrevented || itemHidden || (event.key !== 'Enter' && event.key !== ' ')) {
+          if (
+            event.defaultPrevented ||
+            itemHidden ||
+            (event.key !== 'Enter' && event.key !== ' ')
+          ) {
             return
           }
           event.preventDefault()

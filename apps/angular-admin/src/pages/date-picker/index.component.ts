@@ -1,6 +1,13 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { createCalendarDate, getCalendarValueDate, getCalendarValueKey, type CalendarDate, type CalendarRange, type CalendarValue } from '@fex/components-core/calendar'
+import {
+  createCalendarDate,
+  getCalendarValueDate,
+  getCalendarValueKey,
+  type CalendarDate,
+  type CalendarRange,
+  type CalendarValue,
+} from '@fex/components-core/calendar'
 import { isAfterDate, isBeforeDate } from '@fex/components-core/date/utils'
 import { Card } from '@fex/components-angular/ui/card'
 import { Button } from '@fex/components-angular/ui/button'
@@ -12,7 +19,16 @@ import { StatusDemos } from './status-demos.component'
 @Component({
   selector: 'fex-date-picker-page',
   standalone: true,
-  imports: [RouterLink, Card, Button, DemoDatePicker, DemoRangePicker, CustomDemos, IntegrationDemos, StatusDemos],
+  imports: [
+    RouterLink,
+    Card,
+    Button,
+    DemoDatePicker,
+    DemoRangePicker,
+    CustomDemos,
+    IntegrationDemos,
+    StatusDemos,
+  ],
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -43,15 +59,15 @@ export class DatePickerComponent {
   }
 
   protected setControlled(next: CalendarValue | readonly CalendarValue[] | null) {
-    this.controlled.set(Array.isArray(next) ? null : next as CalendarValue | null)
+    this.controlled.set(Array.isArray(next) ? null : (next as CalendarValue | null))
   }
 
   protected setValue(next: CalendarValue | readonly CalendarValue[] | null) {
-    this.value.set(Array.isArray(next) ? null : next as CalendarValue | null)
+    this.value.set(Array.isArray(next) ? null : (next as CalendarValue | null))
   }
 
   protected setPanelValue(next: CalendarValue | readonly CalendarValue[] | null) {
-    this.panelValue.set(Array.isArray(next) ? null : next as CalendarValue | null)
+    this.panelValue.set(Array.isArray(next) ? null : (next as CalendarValue | null))
   }
 
   protected readonly dynamicDisabled = (date: CalendarDate, part: 'start' | 'end') => {

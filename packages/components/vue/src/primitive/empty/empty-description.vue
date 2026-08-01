@@ -7,7 +7,11 @@ const props = defineProps<{ class?: string | undefined }>()
 </script>
 
 <template>
-  <p v-bind="$attrs" data-slot="empty-description" :class="cn(emptyDescriptionClassName, props.class)">
+  <p
+    v-bind="$attrs"
+    data-slot="empty-description"
+    :class="cn(emptyDescriptionClassName, props.class)"
+  >
     <slot />
   </p>
 </template>

@@ -5,7 +5,11 @@ import {
   type CalendarValue,
   type CalendarWeekday,
 } from '@fex/components-core/calendar'
-import { getCalendarValueDate, getCalendarValueKey, isSameCalendarValue } from '@fex/components-core/calendar/value'
+import {
+  getCalendarValueDate,
+  getCalendarValueKey,
+  isSameCalendarValue,
+} from '@fex/components-core/calendar/value'
 import { createDatePickerDisabledDate } from '@fex/components-core/date-picker/constraints'
 import { getDefaultPanelByPicker } from '@fex/components-core/date-picker/panel'
 import { getDefaultDatePickerFormat } from '@fex/components-core/date-picker/value'
@@ -60,7 +64,12 @@ export function useDatePicker<TValue extends CalendarValue = CalendarValue>(
   const multiple = options.multiple ?? false
   const needConfirm = options.needConfirm ?? multiple
   const [value, setValue] = useControllableState<DatePickerSelectionValue<TValue>>(
-    { value: options.value, defaultValue: options.defaultValue, onChange: options.onChange, isEqual: valuesEqual },
+    {
+      value: options.value,
+      defaultValue: options.defaultValue,
+      onChange: options.onChange,
+      isEqual: valuesEqual,
+    },
     { defaultValue: multiple ? [] : null },
   )
   const [open, setOpenState] = useControllableState<boolean>(

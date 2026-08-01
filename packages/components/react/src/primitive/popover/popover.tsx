@@ -1,10 +1,4 @@
-import {
-  useRef,
-  useState,
-  type ComponentProps,
-  type ReactNode,
-  type Ref,
-} from 'react'
+import { useRef, useState, type ComponentProps, type ReactNode, type Ref } from 'react'
 import { createPortal } from 'react-dom'
 import {
   createFloatingOverlay,
@@ -194,4 +188,3 @@ export function PopoverDescription({ ref, className, ...props }: PopoverDescript
     />
   )
 }
-

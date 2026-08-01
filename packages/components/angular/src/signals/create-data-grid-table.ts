@@ -13,10 +13,9 @@ export type AngularDataGridTable<
   setDataGridOptions: (options: TableOptions<TFeatures, TData>) => void
 }
 
-export function createDataGridTable<
-  TFeatures extends TableFeatures,
-  TData extends RowData,
->(options: TableOptions<TFeatures, TData>): AngularDataGridTable<TFeatures, TData> {
+export function createDataGridTable<TFeatures extends TableFeatures, TData extends RowData>(
+  options: TableOptions<TFeatures, TData>,
+): AngularDataGridTable<TFeatures, TData> {
   const controller = createDataGridController(options)
   return Object.assign(controller.table, {
     dataGridSnapshot: createCoreStoreSignal(controller),

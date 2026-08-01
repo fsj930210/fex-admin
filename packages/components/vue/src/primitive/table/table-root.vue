@@ -13,4 +13,3 @@ const props = defineProps<{ class?: string | undefined }>()
     </table>
   </div>
 </template>
-

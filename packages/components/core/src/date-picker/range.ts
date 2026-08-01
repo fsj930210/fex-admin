@@ -75,5 +75,8 @@ export function isDatePickerValueInHoverRange<TValue extends CalendarValue>(
   if (!from) return false
   const hoverRange = normalizeCalendarRange({ start: from, end: hoverValue })
   if (!hoverRange.start || !hoverRange.end) return false
-  return compareCalendarValue(value, hoverRange.start) >= 0 && compareCalendarValue(value, hoverRange.end) <= 0
+  return (
+    compareCalendarValue(value, hoverRange.start) >= 0 &&
+    compareCalendarValue(value, hoverRange.end) <= 0
+  )
 }

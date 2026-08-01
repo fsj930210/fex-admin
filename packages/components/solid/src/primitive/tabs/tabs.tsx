@@ -1,4 +1,9 @@
-import { tabsCloseClassName, tabsContentClassName, tabsItemClassName, tabsListClassName } from '@fex/components-styles/tabs'
+import {
+  tabsCloseClassName,
+  tabsContentClassName,
+  tabsItemClassName,
+  tabsListClassName,
+} from '@fex/components-styles/tabs'
 import { cn } from '@fex/utils'
 import { mergeProps, onCleanup, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { CloseIcon } from '../../icon/close'
@@ -13,7 +18,9 @@ import { TabsContext, useTabsContext } from './tabs-context'
 
 type RenderChild<T> = (context: T) => JSX.Element
 
-function isRenderChild<T>(child: JSX.Element | RenderChild<T> | undefined): child is RenderChild<T> {
+function isRenderChild<T>(
+  child: JSX.Element | RenderChild<T> | undefined,
+): child is RenderChild<T> {
   return typeof child === 'function' && child.length > 0
 }
 
@@ -23,7 +30,11 @@ export interface TabsRootProps extends ParentProps<CreateTabsOptions> {
 
 export function TabsRoot(props: TabsRootProps) {
   const tabs = createTabs(props)
-  return <TabsContext.Provider value={{ ...tabs, variant: () => props.variant ?? 'default' }}>{props.children}</TabsContext.Provider>
+  return (
+    <TabsContext.Provider value={{ ...tabs, variant: () => props.variant ?? 'default' }}>
+      {props.children}
+    </TabsContext.Provider>
+  )
 }
 
 export interface TabsListProps extends Omit<JSX.HTMLAttributes<any>, 'children'> {
@@ -36,22 +47,29 @@ export function TabsList(props: TabsListProps) {
   const renderProps = (): TabsListDOMProps => ({
     ...rest,
     ...tabs.getListProps(),
-    class: cn(tabsListClassName({ variant: tabs.variant(), orientation: tabs.orientation() }), local.class),
+    class: cn(
+      tabsListClassName({ variant: tabs.variant(), orientation: tabs.orientation() }),
+      local.class,
+    ),
   })
-  return isRenderChild(local.children)
-    ? local.children({ props: renderProps() })
-    : <div {...renderProps()}>{local.children}</div>
+  return isRenderChild(local.children) ? (
+    local.children({ props: renderProps() })
+  ) : (
+    <div {...renderProps()}>{local.children}</div>
+  )
 }
 
 export interface TabsItemProps extends Omit<JSX.HTMLAttributes<any>, 'children'> {
   value: string
   disabled?: boolean
   closable?: boolean
-  children?: JSX.Element | RenderChild<{
-    props: TabsItemDOMProps
-    state: ReturnType<ReturnType<typeof createTabs>['itemState']>
-    closeProps: JSX.ButtonHTMLAttributes<HTMLButtonElement>
-  }>
+  children?:
+    | JSX.Element
+    | RenderChild<{
+        props: TabsItemDOMProps
+        state: ReturnType<ReturnType<typeof createTabs>['itemState']>
+        closeProps: JSX.ButtonHTMLAttributes<HTMLButtonElement>
+      }>
 }
 
 export function TabsItem(props: TabsItemProps) {
@@ -64,18 +82,34 @@ export function TabsItem(props: TabsItemProps) {
   })
   tabs.registerItem(item())
   onCleanup(() => tabs.registerItem(item(), null))
-  const renderProps = (): TabsItemDOMProps => mergeProps(rest, tabs.getItemProps(item()), {
-    get class() { return cn(tabsItemClassName({ variant: tabs.variant() }), local.class) },
-  })
+  const renderProps = (): TabsItemDOMProps =>
+    mergeProps(rest, tabs.getItemProps(item()), {
+      get class() {
+        return cn(tabsItemClassName({ variant: tabs.variant() }), local.class)
+      },
+    })
   const closeProps = () => ({ ...tabs.getCloseProps(item()), class: tabsCloseClassName })
-  return isRenderChild(local.children)
-    ? local.children({ props: renderProps(), state: tabs.itemState(item()), closeProps: closeProps() })
-    : <div {...renderProps()}>{local.children}{local.closable && <button {...closeProps()}><CloseIcon class="size-4" /></button>}</div>
+  return isRenderChild(local.children) ? (
+    local.children({
+      props: renderProps(),
+      state: tabs.itemState(item()),
+      closeProps: closeProps(),
+    })
+  ) : (
+    <div {...renderProps()}>
+      {local.children}
+      {local.closable && (
+        <button {...closeProps()}>
+          <CloseIcon class="size-4" />
+        </button>
+      )}
+    </div>
+  )
 }
 
 export interface TabsContentProps extends Omit<JSX.HTMLAttributes<any>, 'children'> {
   value: string
-  children?: JSX.Element | RenderChild<{ props: TabsContentDOMProps, state: { active: boolean } }>
+  children?: JSX.Element | RenderChild<{ props: TabsContentDOMProps; state: { active: boolean } }>
 }
 
 export function TabsContent(props: TabsContentProps) {
@@ -86,11 +120,20 @@ export function TabsContent(props: TabsContentProps) {
     ...tabs.getContentProps(local.value),
     class: cn(tabsContentClassName({ variant: tabs.variant() }), local.class),
   })
+  const isMounted = () => {
+    tabs.snapshot()
+    return tabs.isContentMounted(local.value)
+  }
   return (
-    <Show when={(tabs.snapshot(), tabs.isContentMounted(local.value))}>
-      {isRenderChild(local.children)
-        ? local.children({ props: renderProps(), state: { active: tabs.snapshot().value === local.value } })
-        : <div {...renderProps()}>{local.children}</div>}
+    <Show when={isMounted()}>
+      {isRenderChild(local.children) ? (
+        local.children({
+          props: renderProps(),
+          state: { active: tabs.snapshot().value === local.value },
+        })
+      ) : (
+        <div {...renderProps()}>{local.children}</div>
+      )}
     </Show>
   )
 }

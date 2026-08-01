@@ -4,5 +4,12 @@ import { readableCoreStore } from './core-store'
 
 export function createCarousel(options: CreateCarouselControllerOptions = {}) {
   const controller = createCarouselController(options)
-  return { controller, snapshot: readableCoreStore(controller), mount: (node: HTMLElement) => { controller.mount(node); return { destroy: () => controller.destroy() } } }
+  return {
+    controller,
+    snapshot: readableCoreStore(controller),
+    mount: (node: HTMLElement) => {
+      controller.mount(node)
+      return { destroy: () => controller.destroy() }
+    },
+  }
 }

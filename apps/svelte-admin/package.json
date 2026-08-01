@@ -4,8 +4,8 @@
   "type": "module",
   "dependencies": {
     "@fex/components-core": "workspace:*",
-    "@fex/components-svelte": "workspace:*",
     "@fex/components-styles": "workspace:*",
+    "@fex/components-svelte": "workspace:*",
     "@fex/styles": "workspace:*",
     "@fex/utils": "workspace:*",
     "@sveltejs/kit": "latest",

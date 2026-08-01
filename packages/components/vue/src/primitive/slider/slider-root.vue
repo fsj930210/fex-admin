@@ -10,25 +10,28 @@ import { sliderContextKey } from './context'
 
 defineOptions({ inheritAttrs: false })
 
-const props = withDefaults(defineProps<{
-  defaultValue?: number[]
-  disabled?: boolean
-  max?: number
-  min?: number
-  minStepsBetweenThumbs?: number
-  orientation?: SliderOrientation
-  size?: SliderStyleProps['size']
-  step?: number
-  value?: number[]
-}>(), {
-  disabled: false,
-  max: 100,
-  min: 0,
-  minStepsBetweenThumbs: 0,
-  orientation: 'horizontal',
-  size: 'default',
-  step: 1,
-})
+const props = withDefaults(
+  defineProps<{
+    defaultValue?: number[]
+    disabled?: boolean
+    max?: number
+    min?: number
+    minStepsBetweenThumbs?: number
+    orientation?: SliderOrientation
+    size?: SliderStyleProps['size']
+    step?: number
+    value?: number[]
+  }>(),
+  {
+    disabled: false,
+    max: 100,
+    min: 0,
+    minStepsBetweenThumbs: 0,
+    orientation: 'horizontal',
+    size: 'default',
+    step: 1,
+  },
+)
 
 const emit = defineEmits<{
   valueChange: [value: number[]]
@@ -38,14 +41,30 @@ const emit = defineEmits<{
 const attrs = useAttrs()
 const rootElement = ref<HTMLDivElement>()
 const options = {
-  get value() { return props.value },
-  get defaultValue() { return props.defaultValue },
-  get min() { return props.min },
-  get max() { return props.max },
-  get step() { return props.step },
-  get minStepsBetweenThumbs() { return props.minStepsBetweenThumbs },
-  get orientation() { return props.orientation },
-  get disabled() { return props.disabled },
+  get value() {
+    return props.value
+  },
+  get defaultValue() {
+    return props.defaultValue
+  },
+  get min() {
+    return props.min
+  },
+  get max() {
+    return props.max
+  },
+  get step() {
+    return props.step
+  },
+  get minStepsBetweenThumbs() {
+    return props.minStepsBetweenThumbs
+  },
+  get orientation() {
+    return props.orientation
+  },
+  get disabled() {
+    return props.disabled
+  },
   onChange: (value: number[]) => emit('valueChange', value),
   onCommit: (value: number[]) => emit('valueCommit', value),
 }
@@ -80,7 +99,12 @@ function handlePointerDown(event: PointerEvent) {
 }
 
 function handlePointerMove(event: PointerEvent) {
-  if (event.defaultPrevented || snapshot.value.disabled || !rootElement.value?.hasPointerCapture(event.pointerId)) return
+  if (
+    event.defaultPrevented ||
+    snapshot.value.disabled ||
+    !rootElement.value?.hasPointerCapture(event.pointerId)
+  )
+    return
   const value = pointerValue(event)
   if (value !== undefined) controller.moveSlide(value)
 }
@@ -98,7 +122,12 @@ function handlePointerUp(event: PointerEvent) {
     ref="rootElement"
     :data-disabled="snapshot.disabled ? 'true' : undefined"
     :data-orientation="snapshot.orientation"
-    :class="cn(sliderRootClassName({ size: props.size, orientation: snapshot.orientation }), attrs.class as string | undefined)"
+    :class="
+      cn(
+        sliderRootClassName({ size: props.size, orientation: snapshot.orientation }),
+        attrs.class as string | undefined,
+      )
+    "
     @pointerdown="handlePointerDown"
     @pointermove="handlePointerMove"
     @pointerup="handlePointerUp"

@@ -7,4 +7,9 @@ export { default as TimePickerMinuteColumn } from './time-picker-minute-column.s
 export { default as TimePickerSecondColumn } from './time-picker-second-column.svelte'
 export { default as TimePickerPeriodColumn } from './time-picker-period-column.svelte'
 export { default as TimePickerColumn } from './time-picker-column.svelte'
-export type { DisabledTime, TimePeriod, TimePickerChangeDetails, TimeValue } from '@fex/components-core/time-picker/types'
+export type {
+  DisabledTime,
+  TimePeriod,
+  TimePickerChangeDetails,
+  TimeValue,
+} from '@fex/components-core/time-picker/types'

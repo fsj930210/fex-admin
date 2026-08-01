@@ -5,7 +5,11 @@ const context = useCalendarContext('CalendarGrid')
 </script>
 
 <template>
-  <div data-slot="calendar-grid" :data-panel="context.panel.value" @mouseleave="context.clearHoveredRow()">
+  <div
+    data-slot="calendar-grid"
+    :data-panel="context.panel.value"
+    @mouseleave="context.clearHoveredRow()"
+  >
     <div
       v-for="row in context.grid.value.rows"
       :key="row.map((cell) => cell.key).join('|')"

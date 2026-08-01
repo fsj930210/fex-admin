@@ -47,7 +47,10 @@ function Row<T extends TreeNodeData>(props: {
   itemClass?: string
 }) {
   return (
-    <TreeItem<T> itemKey={props.item.key} {...(props.itemClass === undefined ? {} : { class: props.itemClass })}>
+    <TreeItem<T>
+      itemKey={props.item.key}
+      {...(props.itemClass === undefined ? {} : { class: props.itemClass })}
+    >
       {({ item, itemProps, checkedState, loadState, actions }) => (
         <div {...itemProps}>
           <Show when={loadState === 'loading'} fallback={<TreeTrigger itemKey={item.key} />}>

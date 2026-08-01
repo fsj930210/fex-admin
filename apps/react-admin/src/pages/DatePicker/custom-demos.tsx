@@ -1,5 +1,9 @@
 import { createCalendarDate, getCalendarValueKey } from '@fex/components-core/calendar'
-import { CalendarCell, CalendarGrid, CalendarWeekHeader } from '@fex/components-react/primitive/calendar'
+import {
+  CalendarCell,
+  CalendarGrid,
+  CalendarWeekHeader,
+} from '@fex/components-react/primitive/calendar'
 import {
   DatePickerFooter,
   DatePickerPanel,
@@ -13,7 +17,10 @@ const releaseDate = createCalendarDate(2026, 7, 30)
 export function CustomDemos() {
   return (
     <>
-      <DemoSection title="自定义单元格" description="DatePickerPanel 透传 Calendar，可以直接自定义 CalendarGrid / CalendarCell。">
+      <DemoSection
+        title="自定义单元格"
+        description="DatePickerPanel 透传 Calendar，可以直接自定义 CalendarGrid / CalendarCell。"
+      >
         <DemoDatePicker>
           <DatePickerPanel>
             <CalendarWeekHeader className="grid grid-cols-7 px-3 py-2 text-center text-xs text-muted-foreground" />
@@ -25,7 +32,9 @@ export function CustomDemos() {
                 >
                   <span className="flex flex-col items-center">
                     <span>{cell.label}</span>
-                    {getCalendarValueKey(cell.value) === getCalendarValueKey(releaseDate) ? <span className="text-[10px]">发布</span> : null}
+                    {getCalendarValueKey(cell.value) === getCalendarValueKey(releaseDate) ? (
+                      <span className="text-[10px]">发布</span>
+                    ) : null}
                   </span>
                 </CalendarCell>
               )}
@@ -34,16 +43,25 @@ export function CustomDemos() {
         </DemoDatePicker>
       </DemoSection>
 
-      <DemoSection title="自定义 Footer" description="Footer 通过 context 获取 close / confirm / cancel / clear。">
+      <DemoSection
+        title="自定义 Footer"
+        description="Footer 通过 context 获取 close / confirm / cancel / clear。"
+      >
         <DemoDatePicker
           needConfirm
           footer={
             <DatePickerFooter>
               {({ close, clear, confirm }) => (
                 <>
-                  <Button size="sm" variant="ghost" onClick={clear}>清空</Button>
-                  <Button size="sm" variant="outline" onClick={close}>只关闭</Button>
-                  <Button size="sm" onClick={confirm}>确认</Button>
+                  <Button size="sm" variant="ghost" onClick={clear}>
+                    清空
+                  </Button>
+                  <Button size="sm" variant="outline" onClick={close}>
+                    只关闭
+                  </Button>
+                  <Button size="sm" onClick={confirm}>
+                    确认
+                  </Button>
                 </>
               )}
             </DatePickerFooter>
@@ -51,7 +69,10 @@ export function CustomDemos() {
         />
       </DemoSection>
 
-      <DemoSection title="自定义面板" description="自定义面板可以调用 primitive 暴露的 close，并按业务自由组合内容。">
+      <DemoSection
+        title="自定义面板"
+        description="自定义面板可以调用 primitive 暴露的 close，并按业务自由组合内容。"
+      >
         <DemoDatePicker>
           <CustomPanel />
         </DemoDatePicker>
@@ -64,8 +85,12 @@ function CustomPanel() {
   const picker = useDatePickerContext('CustomPanel')
   return (
     <div className="grid gap-space-sm p-space-md">
-      <p className="text-sm text-muted-foreground">这是完全自定义面板，仍可访问 DatePicker primitive 暴露的关闭方法。</p>
-      <Button size="sm" onClick={picker.close}>关闭面板</Button>
+      <p className="text-sm text-muted-foreground">
+        这是完全自定义面板，仍可访问 DatePicker primitive 暴露的关闭方法。
+      </p>
+      <Button size="sm" onClick={picker.close}>
+        关闭面板
+      </Button>
     </div>
   )
 }

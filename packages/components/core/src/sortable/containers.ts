@@ -8,7 +8,9 @@ export function normalizeSortableItems(items: SortableItems): Record<string, Sor
     return { [DEFAULT_SORTABLE_CONTAINER_ID]: [...items] }
   }
 
-  return Object.fromEntries(Object.entries(items).map(([containerId, value]) => [containerId, [...value]]))
+  return Object.fromEntries(
+    Object.entries(items).map(([containerId, value]) => [containerId, [...value]]),
+  )
 }
 
 export function restoreSortableItems<TItems extends SortableItems>(
@@ -44,7 +46,10 @@ export function moveSortableItem(
   to: SortableLocation,
 ): Record<string, SortableId[]> {
   const next = Object.fromEntries(
-    Object.entries(items).map(([containerId, containerItems]) => [containerId, [...containerItems]]),
+    Object.entries(items).map(([containerId, containerItems]) => [
+      containerId,
+      [...containerItems],
+    ]),
   )
 
   const sourceItems = next[from.containerId]

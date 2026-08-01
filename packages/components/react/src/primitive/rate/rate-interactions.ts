@@ -22,9 +22,16 @@ export function getRatePointerValue(
       return getRateValueFromPointer(index, ratio, step, count)
     }
 
-    const edges = direction === 'rtl'
-      ? [{ position: rect.right, value: index }, { position: rect.left, value: index + 1 }]
-      : [{ position: rect.left, value: index }, { position: rect.right, value: index + 1 }]
+    const edges =
+      direction === 'rtl'
+        ? [
+            { position: rect.right, value: index },
+            { position: rect.left, value: index + 1 },
+          ]
+        : [
+            { position: rect.left, value: index },
+            { position: rect.right, value: index + 1 },
+          ]
     for (const edge of edges) {
       const distance = Math.abs(clientX - edge.position)
       if (distance < closestDistance) {

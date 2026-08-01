@@ -7,8 +7,11 @@ const props = defineProps<{ class?: string | undefined }>()
 </script>
 
 <template>
-  <ul v-bind="$attrs" data-slot="pagination-content" :class="cn(paginationContentClassName, props.class)">
+  <ul
+    v-bind="$attrs"
+    data-slot="pagination-content"
+    :class="cn(paginationContentClassName, props.class)"
+  >
     <slot />
   </ul>
 </template>
-

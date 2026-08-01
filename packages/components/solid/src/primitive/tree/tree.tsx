@@ -34,8 +34,10 @@ import { createTreeItem } from './create-tree-item'
 import { createTreeVisibleItems } from './create-tree-visible-items'
 import { TreeContext, useTreeContext, type TreeContextValue } from './tree-context'
 
-export interface TreeRootProps<TNode extends TreeNodeData>
-  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'children' | 'style'> {
+export interface TreeRootProps<TNode extends TreeNodeData> extends Omit<
+  JSX.HTMLAttributes<HTMLDivElement>,
+  'children' | 'style'
+> {
   controller?: TreeController<TNode>
   options?: TreeOptions<TNode> | Accessor<TreeOptions<TNode>>
   indent?: number
@@ -45,8 +47,7 @@ export interface TreeRootProps<TNode extends TreeNodeData>
 }
 
 export function TreeRoot<TNode extends TreeNodeData>(props: TreeRootProps<TNode>) {
-  const getOptions = () =>
-    typeof props.options === 'function' ? props.options() : props.options
+  const getOptions = () => (typeof props.options === 'function' ? props.options() : props.options)
   const tree = createTreeAdapter(
     () => getOptions() ?? (props.controller ? undefined : { treeData: [] }),
     props.controller,
@@ -115,9 +116,7 @@ export function TreeRoot<TNode extends TreeNodeData>(props: TreeRootProps<TNode>
   }
 
   return (
-    <TreeContext.Provider
-      value={{ tree, indent, rowHeight } as TreeContextValue<TreeNodeData>}
-    >
+    <TreeContext.Provider value={{ tree, indent, rowHeight } as TreeContextValue<TreeNodeData>}>
       <div
         {...rootProps}
         role="tree"
@@ -134,14 +133,14 @@ export function TreeRoot<TNode extends TreeNodeData>(props: TreeRootProps<TNode>
   )
 }
 
-export interface TreeViewportProps<TNode extends TreeNodeData>
-  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface TreeViewportProps<TNode extends TreeNodeData> extends Omit<
+  JSX.HTMLAttributes<HTMLDivElement>,
+  'children'
+> {
   children: (item: TreeVisibleItem<TNode>) => JSX.Element
 }
 
-export function TreeViewport<TNode extends TreeNodeData>(
-  props: TreeViewportProps<TNode>,
-) {
+export function TreeViewport<TNode extends TreeNodeData>(props: TreeViewportProps<TNode>) {
   const [local, attrs] = splitProps(props, ['children', 'class'])
   const { tree } = useTreeContext<TNode>('TreeViewport')
   const items = createTreeVisibleItems(tree)
@@ -160,8 +159,10 @@ export interface TreeVirtualViewportHandle {
   ): boolean
 }
 
-export interface TreeVirtualViewportProps<TNode extends TreeNodeData>
-  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'children' | 'style' | 'ref'> {
+export interface TreeVirtualViewportProps<TNode extends TreeNodeData> extends Omit<
+  JSX.HTMLAttributes<HTMLDivElement>,
+  'children' | 'style' | 'ref'
+> {
   height: number
   overscan?: number
   style?: JSX.CSSProperties
@@ -258,8 +259,10 @@ export interface TreeItemState<TNode extends TreeNodeData> {
   }
 }
 
-export interface TreeItemProps<TNode extends TreeNodeData>
-  extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'children' | 'style'> {
+export interface TreeItemProps<TNode extends TreeNodeData> extends Omit<
+  JSX.HTMLAttributes<HTMLDivElement>,
+  'children' | 'style'
+> {
   itemKey: TreeKey
   block?: boolean
   style?: JSX.CSSProperties
@@ -280,21 +283,17 @@ export function TreeItem<TNode extends TreeNodeData>(props: TreeItemProps<TNode>
   const state = createTreeItem(tree, local.itemKey)
   const actions = {
     expand: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.expand(local.itemKey),
-    collapse: () =>
-      tree.getFeature<ExpansionFeatureApi>('expansion')?.collapse(local.itemKey),
-    toggleExpanded: () =>
-      tree.getFeature<ExpansionFeatureApi>('expansion')?.toggle(local.itemKey),
-    toggleSelected: () =>
-      tree.getFeature<SelectionFeatureApi>('selection')?.toggle(local.itemKey),
+    collapse: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.collapse(local.itemKey),
+    toggleExpanded: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.toggle(local.itemKey),
+    toggleSelected: () => tree.getFeature<SelectionFeatureApi>('selection')?.toggle(local.itemKey),
     toggleChecked: () =>
-      tree
-        .getFeature<CheckFeatureApi>('check')
-        ?.check(local.itemKey, !state().checked),
+      tree.getFeature<CheckFeatureApi>('check')?.check(local.itemKey, !state().checked),
   }
   const renderState = createMemo<TreeItemState<TNode> | undefined>(() => {
     const item = state().item
     if (!item) return undefined
-    const itemProps: JSX.HTMLAttributes<HTMLDivElement> & Record<`data-${string}`, string | boolean | undefined> = {
+    const itemProps: JSX.HTMLAttributes<HTMLDivElement> &
+      Record<`data-${string}`, string | boolean | undefined> = {
       ...attrs,
       role: 'treeitem',
       tabIndex: state().focused ? 0 : -1,
@@ -345,14 +344,11 @@ export function TreeItem<TNode extends TreeNodeData>(props: TreeItemProps<TNode>
   )
 }
 
-export interface TreeTriggerProps
-  extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface TreeTriggerProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
   itemKey: TreeKey
 }
 
-export function TreeTrigger(
-  props: TreeTriggerProps,
-) {
+export function TreeTrigger(props: TreeTriggerProps) {
   const [local, attrs] = splitProps(props, ['itemKey', 'class', 'children', 'onClick'])
   const { tree } = useTreeContext<TreeNodeData>('TreeTrigger')
   const state = createTreeItem(tree, local.itemKey)
@@ -378,7 +374,9 @@ export function TreeTrigger(
   return (
     <Show
       when={state().item && !state().item?.isLeaf && expansion()}
-      fallback={<span aria-hidden="true" data-slot="tree-trigger-placeholder" class="size-5 shrink-0" />}
+      fallback={
+        <span aria-hidden="true" data-slot="tree-trigger-placeholder" class="size-5 shrink-0" />
+      }
     >
       <button
         {...attrs}

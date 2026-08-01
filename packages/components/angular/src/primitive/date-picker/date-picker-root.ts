@@ -9,11 +9,7 @@ import {
   type AfterViewInit,
   type OnChanges,
 } from '@angular/core'
-import type {
-  CalendarDate,
-  CalendarValue,
-  CalendarWeekday,
-} from '@fex/components-core/calendar'
+import type { CalendarDate, CalendarValue, CalendarWeekday } from '@fex/components-core/calendar'
 import type { DatePickerPicker } from '@fex/components-core/date-picker/types'
 import { datePickerContentClassName } from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
@@ -30,7 +26,9 @@ import type { DatePickerSelectionValue } from './context'
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './date-picker-root.html',
 })
-export class DatePickerRoot<TValue extends CalendarValue = CalendarValue> implements AfterViewInit, OnChanges {
+export class DatePickerRoot<TValue extends CalendarValue = CalendarValue>
+  implements AfterViewInit, OnChanges
+{
   @Input() picker: DatePickerPicker | undefined = undefined
   @Input() status: 'error' | 'warning' | undefined = undefined
   @Input() value: DatePickerSelectionValue<TValue> | undefined = undefined

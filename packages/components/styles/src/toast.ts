@@ -47,11 +47,13 @@ export const toastRootClassName = cva(
   },
 )
 
-export const toastIconClassName = 'row-span-2 flex size-4 shrink-0 items-center justify-center self-center text-current'
+export const toastIconClassName =
+  'row-span-2 flex size-4 shrink-0 items-center justify-center self-center text-current'
 export const toastTitleClassName = 'min-w-0 font-normal leading-5 text-foreground'
 export const toastDescriptionClassName = 'text-sm leading-5 text-muted-foreground'
 export const toastActionClassName = 'col-start-2 mt-1'
-export const toastCloseClassName = 'row-span-2 -mr-1 grid size-5 place-items-center self-center rounded-md text-muted-foreground hover:text-foreground'
+export const toastCloseClassName =
+  'row-span-2 -mr-1 grid size-5 place-items-center self-center rounded-md text-muted-foreground hover:text-foreground'
 export const toastStackLayerClassName =
   'pointer-events-none absolute left-1/2 z-0 h-10 w-[calc(100%-16px)] -translate-x-1/2 rounded-md border border-border/60 bg-popover-background shadow-sm'
 

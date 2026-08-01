@@ -27,9 +27,7 @@ export function Example() {
         <CardTitle>Variants</CardTitle>
         <CardDescription>按钮的基础视觉语义。</CardDescription>
       </CardHeader>
-      <CardContent class="flex flex-wrap items-center gap-space-md">
-        Content
-      </CardContent>
+      <CardContent class="flex flex-wrap items-center gap-space-md">Content</CardContent>
     </Card>
   )
 }
@@ -37,10 +35,10 @@ export function Example() {
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `class` | `string` | `undefined` | No | Extra classes merged with the component defaults. |
-| native `div` props | `ComponentProps<'div'>` | `undefined` | No | Standard `div` attributes are passed through. |
+| Name               | Type                    | Default     | Required | Description                                       |
+| ------------------ | ----------------------- | ----------- | -------- | ------------------------------------------------- |
+| `class`            | `string`                | `undefined` | No       | Extra classes merged with the component defaults. |
+| native `div` props | `ComponentProps<'div'>` | `undefined` | No       | Standard `div` attributes are passed through.     |
 
 ## Events
 

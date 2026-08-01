@@ -1,16 +1,24 @@
 <script setup lang="ts">
-import { scrollToFirstError, type ScrollToFirstError } from '@fex/components-core'
+import {
+  scrollToFirstError as scrollToInvalidField,
+  type ScrollToFirstError,
+} from '@fex/components-core'
 import { nextTick, provide } from 'vue'
 import { formContextKey } from './form-context'
 defineOptions({ inheritAttrs: false })
-const props = withDefaults(defineProps<{
-  form: { Field: unknown; handleSubmit: () => unknown }
-  component?: 'form' | false
-  novalidate?: boolean
-  scrollToFirstError?: ScrollToFirstError
-}>(), { component: 'form' })
+const props = withDefaults(
+  defineProps<{
+    form: { Field: unknown; handleSubmit: () => unknown }
+    component?: 'form' | false
+    novalidate?: boolean
+    scrollToFirstError?: ScrollToFirstError
+  }>(),
+  { component: 'form' },
+)
 provide(formContextKey, props.form)
-function nextTask() { return new Promise<void>((resolve) => setTimeout(resolve, 0)) }
+function nextTask() {
+  return new Promise<void>((resolve) => setTimeout(resolve, 0))
+}
 async function submit(event: Event) {
   const submitEvent = event as SubmitEvent
   if (submitEvent.defaultPrevented) return
@@ -23,7 +31,10 @@ async function submit(event: Event) {
   }
   await nextTask()
   await nextTick()
-  await scrollToFirstError(element, props.scrollToFirstError ?? true)
+  await scrollToInvalidField(element, props.scrollToFirstError ?? true)
 }
 </script>
-<template><slot v-if="component === false" /><form v-else v-bind="$attrs" :noValidate="novalidate ?? true" @submit="submit"><slot /></form></template>
+<template>
+  <slot v-if="component === false" />
+  <form v-else v-bind="$attrs" :noValidate="novalidate ?? true" @submit="submit"><slot /></form>
+</template>

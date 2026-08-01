@@ -82,8 +82,7 @@ const grids = [
             >
               <Button size="icon-xs" variant="ghost" @click="row.toggleExpanded()">
                 <ChevronDownIcon v-if="row.getIsExpanded()" class="size-3.5" />
-                <ChevronRightIcon v-else class="size-3.5" />
-              </Button
+                <ChevronRightIcon v-else class="size-3.5" /> </Button
               ><span class="font-semibold">{{ row.groupingColumnId }}</span
               ><span>=</span><span>{{ String(row.groupingValue) }}</span
               ><span class="rounded-full bg-foreground/10 px-2 py-0.5 text-xs"

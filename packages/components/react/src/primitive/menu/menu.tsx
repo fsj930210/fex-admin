@@ -1,13 +1,10 @@
 import type { ComponentProps, ReactNode } from 'react'
 import { MenuContext, useMenuContext } from './menu-context'
-import type {
-  MenuListDomProps,
-  UseMenuOptions,
-  UseMenuReturn,
-} from './menu-types'
+import type { MenuListDomProps, UseMenuOptions, UseMenuReturn } from './menu-types'
 import { useMenu } from './use-menu'
 
-export interface MenuRootProps extends Omit<ComponentProps<'div'>, 'children' | 'onClick' | 'onSelect'>, UseMenuOptions {
+export interface MenuRootProps
+  extends Omit<ComponentProps<'div'>, 'children' | 'onClick' | 'onSelect'>, UseMenuOptions {
   children?: ReactNode | ((menu: UseMenuReturn) => ReactNode)
 }
 

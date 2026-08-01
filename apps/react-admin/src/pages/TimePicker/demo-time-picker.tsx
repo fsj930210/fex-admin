@@ -70,8 +70,7 @@ export function DemoTimePicker({
       <TimePickerContent>
         <TimePickerPanel>
           {columns.map((column) => {
-            if (column.unit === 'hour')
-              return <TimePickerHourColumn key="hour" step={step?.hour} />
+            if (column.unit === 'hour') return <TimePickerHourColumn key="hour" step={step?.hour} />
             if (column.unit === 'minute')
               return <TimePickerMinuteColumn key="minute" step={step?.minute} />
             if (column.unit === 'second')

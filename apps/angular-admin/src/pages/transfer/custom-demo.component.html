@@ -5,16 +5,30 @@
   <fex-transfer [items]="members" [fieldNames]="fieldNames" [defaultTargetKeys]="['ada', 'susan']">
     <ng-template fexTransferActions let-api>
       <div class="flex flex-col items-center gap-2">
-        <button fexButton variant="outline" size="sm" [disabled]="!api.canMoveToTarget" (click)="api.controller.moveToTarget()">
+        <button
+          fexButton
+          variant="outline"
+          size="sm"
+          [disabled]="!api.canMoveToTarget"
+          (click)="api.controller.moveToTarget()"
+        >
           Assign <fex-chevron-right-icon />
         </button>
-        <button fexButton variant="outline" size="sm" [disabled]="!api.canMoveToSource" (click)="api.controller.moveToSource()">
+        <button
+          fexButton
+          variant="outline"
+          size="sm"
+          [disabled]="!api.canMoveToSource"
+          (click)="api.controller.moveToSource()"
+        >
           <fex-chevron-left-icon /> Remove
         </button>
       </div>
     </ng-template>
     <ng-template fexTransferItem let-item>
-      <span>{{ item.name }} <span class="text-muted-foreground">· {{ item.department }}</span></span>
+      <span
+        >{{ item.name }} <span class="text-muted-foreground">· {{ item.department }}</span></span
+      >
     </ng-template>
     <ng-template fexTransferPanel="source" region="header" let-api>
       <span class="font-medium">Candidate pool</span><fex-badge>{{ api.items.length }}</fex-badge>

@@ -20,7 +20,9 @@ function createCheckboxSnapshot(
 
 export function createCheckboxController(options: CheckboxOptions = {}): CheckboxController {
   const isControlled = () => options.checked !== undefined
-  const store = createStore(createCheckboxSnapshot(options.checked ?? options.defaultChecked, options.disabled))
+  const store = createStore(
+    createCheckboxSnapshot(options.checked ?? options.defaultChecked, options.disabled),
+  )
   let controlledSnapshot = store.getSnapshot()
 
   const getCurrentSnapshot = () => {

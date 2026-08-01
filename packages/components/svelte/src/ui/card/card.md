@@ -33,15 +33,15 @@ Card groups related content in a bordered surface. It is used for admin panels, 
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `title` | `Snippet \| string` | `undefined` | No | Header title content. |
-| `description` | `Snippet \| string` | `undefined` | No | Header description content. |
-| `footer` | `Snippet \| string` | `undefined` | No | Footer content. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | No | Quick spacing preset for the card layout. |
-| `class` | `{ root?: string; header?: string; title?: string; description?: string; content?: string; footer?: string }` | `undefined` | No | Part classes merged with each card part. Set `root` to override `--card-spacing`. |
-| `style` | `{ root?: string; header?: string; title?: string; description?: string; content?: string; footer?: string }` | `undefined` | No | Part inline styles. Set `root` to override `--card-spacing`. |
-| native `div` props | `Omit<HTMLAttributes<HTMLDivElement>, 'class' \| 'style' \| 'title'>` | `undefined` | No | Standard `div` attributes are passed through. |
+| Name               | Type                                                                                                          | Default     | Required | Description                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------- | ----------- | -------- | --------------------------------------------------------------------------------- |
+| `title`            | `Snippet \| string`                                                                                           | `undefined` | No       | Header title content.                                                             |
+| `description`      | `Snippet \| string`                                                                                           | `undefined` | No       | Header description content.                                                       |
+| `footer`           | `Snippet \| string`                                                                                           | `undefined` | No       | Footer content.                                                                   |
+| `size`             | `'sm' \| 'md' \| 'lg'`                                                                                        | `'md'`      | No       | Quick spacing preset for the card layout.                                         |
+| `class`            | `{ root?: string; header?: string; title?: string; description?: string; content?: string; footer?: string }` | `undefined` | No       | Part classes merged with each card part. Set `root` to override `--card-spacing`. |
+| `style`            | `{ root?: string; header?: string; title?: string; description?: string; content?: string; footer?: string }` | `undefined` | No       | Part inline styles. Set `root` to override `--card-spacing`.                      |
+| native `div` props | `Omit<HTMLAttributes<HTMLDivElement>, 'class' \| 'style' \| 'title'>`                                         | `undefined` | No       | Standard `div` attributes are passed through.                                     |
 
 ## Events
 

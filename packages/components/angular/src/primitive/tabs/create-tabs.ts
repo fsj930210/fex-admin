@@ -1,5 +1,9 @@
 import { createTabsController } from '@fex/components-core/tabs/create-tabs-controller'
-import type { TabsActivationMode, TabsChangeMeta, TabsItemRecord, TabsOrientation } from '@fex/components-core/tabs/types'
+import type {
+  TabsActivationMode,
+  TabsChangeMeta,
+  TabsOrientation,
+} from '@fex/components-core/tabs/types'
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
 
 export interface CreateTabsOptions {

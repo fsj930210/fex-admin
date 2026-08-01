@@ -20,7 +20,7 @@
     onValueCommit?: (value: number) => void
   }
   let { value, defaultValue, count = 5, step = 1, disabled = false, readOnly = false, allowClear = true, direction = 'ltr', size = 'default', getValueText, children, class: className, onpointerdown, onpointermove, onpointerup, onpointercancel, onpointerleave, onpointerout, onkeydown, onValuePreviewChange, onValueChange, onValueCommit, ...rest }: RateProps = $props()
-  let root: HTMLDivElement | undefined
+  let root: HTMLDivElement | undefined = undefined
   const options = {
     get value() { return value }, get defaultValue() { return defaultValue }, get count() { return count }, get step() { return step },
     get disabled() { return disabled }, get readOnly() { return readOnly }, get allowClear() { return allowClear }, get direction() { return direction },

@@ -1,8 +1,18 @@
 import type { Routes } from '@angular/router'
 
 export const componentRoutes: Routes = [
-  { path: 'auto-complete', loadComponent: () => import('../../pages/auto-complete/index.component').then((module) => module.AutoCompleteComponent) },
-  { path: 'carousel', loadComponent: () => import('../../pages/carousel/index.component').then((module) => module.CarouselComponent) },
+  {
+    path: 'auto-complete',
+    loadComponent: () =>
+      import('../../pages/auto-complete/index.component').then(
+        (module) => module.AutoCompleteComponent,
+      ),
+  },
+  {
+    path: 'carousel',
+    loadComponent: () =>
+      import('../../pages/carousel/index.component').then((module) => module.CarouselComponent),
+  },
   {
     path: 'button',
     loadComponent: () =>
@@ -36,7 +46,9 @@ export const componentRoutes: Routes = [
   {
     path: 'date-picker',
     loadComponent: () =>
-      import('../../pages/date-picker/index.component').then((module) => module.DatePickerComponent),
+      import('../../pages/date-picker/index.component').then(
+        (module) => module.DatePickerComponent,
+      ),
   },
   {
     path: 'alert',
@@ -125,7 +137,8 @@ export const componentRoutes: Routes = [
   },
   {
     path: 'tabs',
-    loadComponent: () => import('../../pages/tabs/index.component').then((module) => module.TabsComponent),
+    loadComponent: () =>
+      import('../../pages/tabs/index.component').then((module) => module.TabsComponent),
   },
   {
     path: 'toast',
@@ -154,9 +167,23 @@ export const componentRoutes: Routes = [
     loadComponent: () =>
       import('../../pages/textarea/index.component').then((module) => module.TextareaComponent),
   },
-  { path: 'time-picker', loadComponent: () => import('../../pages/time-picker/index.component').then((module) => module.TimePickerComponent) },
-  { path: 'transfer', loadComponent: () => import('../../pages/transfer/index.component').then((module) => module.TransferComponent) },
-  { path: 'upload', loadComponent: () => import('../../pages/upload/index.component').then((module) => module.UploadComponent) },
+  {
+    path: 'time-picker',
+    loadComponent: () =>
+      import('../../pages/time-picker/index.component').then(
+        (module) => module.TimePickerComponent,
+      ),
+  },
+  {
+    path: 'transfer',
+    loadComponent: () =>
+      import('../../pages/transfer/index.component').then((module) => module.TransferComponent),
+  },
+  {
+    path: 'upload',
+    loadComponent: () =>
+      import('../../pages/upload/index.component').then((module) => module.UploadComponent),
+  },
   {
     path: 'tree',
     loadComponent: () =>
@@ -164,6 +191,8 @@ export const componentRoutes: Routes = [
   },
   {
     path: 'rate',
-    loadComponent: () => import('../../pages/rate/index.component').then((module) => module.RateComponent),
+    loadComponent: () =>
+      import('../../pages/rate/index.component').then((module) => module.RateComponent),
   },
+  // eslint-disable-next-line unicorn/no-array-sort -- this literal is newly created and not shared.
 ].sort((left, right) => left.path.localeCompare(right.path))

@@ -1,7 +1,9 @@
 import type { Overlay, OverlayOptions, OverlaySnapshot } from '../overlay/types'
 
-export interface DialogOptions
-  extends Omit<OverlayOptions, 'trigger' | 'allowedTriggers' | 'hoverOpenDelay' | 'hoverCloseDelay'> {
+export interface DialogOptions extends Omit<
+  OverlayOptions,
+  'trigger' | 'allowedTriggers' | 'hoverOpenDelay' | 'hoverCloseDelay'
+> {
   closeOnOverlayPointer?: boolean | undefined
 }
 

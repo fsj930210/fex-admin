@@ -4,5 +4,12 @@ export { default as DataGridPagination } from './data-grid-pagination.svelte'
 export { default as DataGridRowOverlay } from './data-grid-row-overlay.svelte'
 export { default as DataGridSortButton } from './data-grid-sort-button.svelte'
 export { tableFeatures } from '@tanstack/table-core'
-export type { Cell, ColumnDef, Header, Row, TableFeatures } from '@tanstack/table-core'
+export type {
+  Cell,
+  ColumnDef,
+  Header,
+  Row,
+  TableFeatures,
+  TableOptions,
+} from '@tanstack/table-core'
 export type { SvelteDataGridTable } from '../../stores/create-data-grid-table'

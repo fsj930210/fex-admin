@@ -29,7 +29,15 @@ type Features = typeof modules & { columnMeta: DataGridColumnMeta<Features, Pers
 export
 @Component({
   selector: 'fex-data-grid-expansion-demo',
-  imports: [Card, DataGrid, DataGridCellTemplate, DataGridSubComponentTemplate, Button, MinusIcon, PlusIcon],
+  imports: [
+    Card,
+    DataGrid,
+    DataGridCellTemplate,
+    DataGridSubComponentTemplate,
+    Button,
+    MinusIcon,
+    PlusIcon,
+  ],
   templateUrl: './expansion-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

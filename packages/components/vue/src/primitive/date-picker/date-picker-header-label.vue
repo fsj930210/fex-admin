@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { getDatePickerHeaderLabelParts, getNextPanelByHeaderLabel } from '@fex/components-core/date-picker/panel'
+import {
+  getDatePickerHeaderLabelParts,
+  getNextPanelByHeaderLabel,
+} from '@fex/components-core/date-picker/panel'
 import type { DatePickerHeaderLabelPart } from '@fex/components-core/date-picker/types'
 import { datePickerHeaderLabelClassName } from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
@@ -12,7 +15,9 @@ const props = defineProps<{ part: DatePickerHeaderLabelPart; class?: string }>()
 const owner = useHeaderOwner('DatePickerHeaderLabel')
 const calendar = useCalendarContext('DatePickerHeaderLabel')
 const hovered = ref(false)
-const visible = computed(() => getDatePickerHeaderLabelParts(owner.picker, calendar.panel.value).includes(props.part))
+const visible = computed(() =>
+  getDatePickerHeaderLabelParts(owner.picker, calendar.panel.value).includes(props.part),
+)
 const label = computed(() => {
   if (props.part === 'month') return `${calendar.viewDate.value.month}月`
   const decadeStart = Math.floor(calendar.viewDate.value.year / 10) * 10

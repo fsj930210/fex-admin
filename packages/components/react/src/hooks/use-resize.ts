@@ -69,7 +69,8 @@ export function useResize({
   }
 
   const getTargetProps = useMemoizedFn(
-    (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement>; style: CSSProperties } => ({
+    (): HTMLAttributes<HTMLElement> &
+      DataAttributes & { ref: RefCallback<HTMLElement>; style: CSSProperties } => ({
       ref: controller.setTarget,
       style: getStyle(snapshot.rect, snapshot.resizing),
       'data-resizing': snapshot.resizing || undefined,
@@ -77,7 +78,9 @@ export function useResize({
   )
 
   const getHandleProps = useMemoizedFn(
-    (edge: ResizeEdge): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => ({
+    (
+      edge: ResizeEdge,
+    ): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => ({
       ref: () => {},
       onPointerDown: (event) => {
         if (disabled || !controller.start(pointerEventToInput(event.nativeEvent), edge)) {

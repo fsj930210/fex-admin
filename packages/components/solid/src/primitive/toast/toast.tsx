@@ -40,20 +40,32 @@ export function ToastViewport(props: ToastViewportProps) {
       {(placement) => {
         const items = () => toastItems().filter((item) => item.placement === placement)
         const stacked = () => props.stack === true && items().length > (props.stackThreshold ?? 3)
-        const renderedItems = () => stacked() ? items().slice(-1) : items()
+        const renderedItems = () => (stacked() ? items().slice(-1) : items())
         return (
           <Show when={items().length > 0}>
             <div
               data-slot="toast-viewport"
               class={cn(toastViewportClassName({ placement }), props.class)}
-              style={{ '--toast-offset': typeof props.offset === 'number' ? `${props.offset}px` : (props.offset ?? '24px'), ...styleObject(props.style) }}
+              style={{
+                '--toast-offset':
+                  typeof props.offset === 'number' ? `${props.offset}px` : (props.offset ?? '24px'),
+                ...styleObject(props.style),
+              }}
             >
               <div class={toastStackContainerClassName({ placement })}>
                 <Show when={stacked()}>
-                  <div aria-hidden="true" class={cn(toastStackLayerClassName, 'top-2 opacity-70')} />
-                  <div aria-hidden="true" class={cn(toastStackLayerClassName, 'top-4 w-[calc(100%-32px)] opacity-40')} />
+                  <div
+                    aria-hidden="true"
+                    class={cn(toastStackLayerClassName, 'top-2 opacity-70')}
+                  />
+                  <div
+                    aria-hidden="true"
+                    class={cn(toastStackLayerClassName, 'top-4 w-[calc(100%-32px)] opacity-40')}
+                  />
                 </Show>
-                <div class={toastStackItemsClassName({ placement })}>{props.children(renderedItems())}</div>
+                <div class={toastStackItemsClassName({ placement })}>
+                  {props.children(renderedItems())}
+                </div>
               </div>
             </div>
           </Show>
@@ -72,17 +84,20 @@ export interface ToastRootProps extends JSX.HTMLAttributes<HTMLDivElement> {
 
 export function ToastRoot(props: ToastRootProps) {
   const manager = () => props.manager ?? toast
-  const knownVariant = () => isKnownVariant(props.toast.variant) ? props.toast.variant : 'default'
+  const knownVariant = () => (isKnownVariant(props.toast.variant) ? props.toast.variant : 'default')
 
   return (
     <div
       data-paused={props.toast.paused ? '' : undefined}
       data-slot="toast"
-        data-variant={props.toast.variant}
-        role="status"
-      class={cn(toastRootClassName({
-        variant: knownVariant(),
-      }), props.class)}
+      data-variant={props.toast.variant}
+      role="status"
+      class={cn(
+        toastRootClassName({
+          variant: knownVariant(),
+        }),
+        props.class,
+      )}
       onPointerEnter={() => {
         manager().pause(props.toast.id)
       }}
@@ -95,7 +110,14 @@ export function ToastRoot(props: ToastRootProps) {
   )
 }
 
-const toastPlacements: ToastPlacement[] = ['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right']
+const toastPlacements: ToastPlacement[] = [
+  'top-left',
+  'top',
+  'top-right',
+  'bottom-left',
+  'bottom',
+  'bottom-right',
+]
 
 export function ToastIcon(props: JSX.HTMLAttributes<HTMLDivElement>) {
   return <div {...props} data-slot="toast-icon" class={cn(toastIconClassName, props.class)} />
@@ -106,14 +128,25 @@ export function ToastTitle(props: JSX.HTMLAttributes<HTMLDivElement>) {
 }
 
 export function ToastDescription(props: JSX.HTMLAttributes<HTMLDivElement>) {
-  return <div {...props} data-slot="toast-description" class={cn(toastDescriptionClassName, props.class)} />
+  return (
+    <div
+      {...props}
+      data-slot="toast-description"
+      class={cn(toastDescriptionClassName, props.class)}
+    />
+  )
 }
 
 export function ToastAction(props: JSX.HTMLAttributes<HTMLDivElement>) {
   return <div {...props} data-slot="toast-action" class={cn(toastActionClassName, props.class)} />
 }
 
-export function ToastClose(props: JSX.ButtonHTMLAttributes<HTMLButtonElement> & { manager?: SolidToastManager, toast: SolidToastItem }) {
+export function ToastClose(
+  props: JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
+    manager?: SolidToastManager
+    toast: SolidToastItem
+  },
+) {
   const manager = () => props.manager ?? toast
   return (
     <button
@@ -129,8 +162,17 @@ export function ToastClose(props: JSX.ButtonHTMLAttributes<HTMLButtonElement> & 
   )
 }
 
-function isKnownVariant(variant: SolidToastItem['variant']): variant is NonNullable<ToastStyleProps['variant']> {
-  return variant === 'default' || variant === 'success' || variant === 'info' || variant === 'warning' || variant === 'error' || variant === 'loading'
+function isKnownVariant(
+  variant: SolidToastItem['variant'],
+): variant is NonNullable<ToastStyleProps['variant']> {
+  return (
+    variant === 'default' ||
+    variant === 'success' ||
+    variant === 'info' ||
+    variant === 'warning' ||
+    variant === 'error' ||
+    variant === 'loading'
+  )
 }
 
 function styleObject(style: JSX.CSSProperties | string | undefined) {

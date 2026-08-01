@@ -29,7 +29,9 @@ type SectionStyle = {
 
 type CardSize = 'sm' | 'md' | 'lg'
 
-export interface CardProps extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'class' | 'style' | 'title'>> {
+export interface CardProps extends ParentProps<
+  Omit<JSX.HTMLAttributes<HTMLDivElement>, 'class' | 'style' | 'title'>
+> {
   title?: JSX.Element
   description?: JSX.Element
   footer?: JSX.Element
@@ -39,7 +41,15 @@ export interface CardProps extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivEl
 }
 
 export function Card(props: CardProps) {
-  const [local, rest] = splitProps(props, ['title', 'description', 'footer', 'size', 'class', 'style', 'children'])
+  const [local, rest] = splitProps(props, [
+    'title',
+    'description',
+    'footer',
+    'size',
+    'class',
+    'style',
+    'children',
+  ])
 
   return (
     <PrimitiveCard

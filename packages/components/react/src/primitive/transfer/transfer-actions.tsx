@@ -28,5 +28,9 @@ export function TransferActions({ children, ...props }: TransferActionsProps) {
     canMoveAllToTarget: controller.canMoveAllToTarget(),
     canMoveAllToSource: controller.canMoveAllToSource(),
   }
-  return <div {...props} data-slot="transfer-actions">{typeof children === 'function' ? children(api) : children}</div>
+  return (
+    <div {...props} data-slot="transfer-actions">
+      {typeof children === 'function' ? children(api) : children}
+    </div>
+  )
 }

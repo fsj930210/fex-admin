@@ -9,12 +9,19 @@ import {
 import { cn } from '@fex/utils'
 import { createEffect, createSignal, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { CalendarIcon } from '../../icon/calendar'
-import { InputClear, InputControl, InputRoot, InputSuffix, type InputRootProps } from '../input/input'
+import {
+  InputClear,
+  InputControl,
+  InputRoot,
+  InputSuffix,
+  type InputRootProps,
+} from '../input/input'
 import { PopoverTrigger } from '../popover/popover'
 import { useRangePickerContext } from './context'
 
-export interface RangePickerTriggerProps
-  extends ParentProps<Omit<InputRootProps, 'value' | 'defaultValue' | 'onValueChange' | 'onClear'>> {
+export interface RangePickerTriggerProps extends ParentProps<
+  Omit<InputRootProps, 'value' | 'defaultValue' | 'onValueChange' | 'onClear'>
+> {
   startPlaceholder?: string
   endPlaceholder?: string
   separator?: JSX.Element
@@ -49,9 +56,19 @@ export function RangePickerTrigger(props: RangePickerTriggerProps) {
   })
 
   const previewStartValue = () =>
-    getRangeInputPreviewValue(context.rangeValue(), context.hoverValue(), context.activePart(), 'start')
+    getRangeInputPreviewValue(
+      context.rangeValue(),
+      context.hoverValue(),
+      context.activePart(),
+      'start',
+    )
   const previewEndValue = () =>
-    getRangeInputPreviewValue(context.rangeValue(), context.hoverValue(), context.activePart(), 'end')
+    getRangeInputPreviewValue(
+      context.rangeValue(),
+      context.hoverValue(),
+      context.activePart(),
+      'end',
+    )
   const previewStartText = () =>
     context.activePart() === 'start' && previewStartValue()
       ? formatDatePickerValue(previewStartValue(), context)
@@ -108,12 +125,17 @@ export function RangePickerTrigger(props: RangePickerTriggerProps) {
                 event.stopPropagation()
                 return
               }
-              const part = (event.target as HTMLElement).closest('[data-range-part]')?.getAttribute('data-range-part')
+              const part = (event.target as HTMLElement)
+                .closest('[data-range-part]')
+                ?.getAttribute('data-range-part')
               context.openPanel(part === 'start' || part === 'end' ? part : undefined)
             }}
             onBlur={(event) => {
-              rest.onBlur?.(event)
-              if (!event.defaultPrevented && !event.currentTarget.contains(event.relatedTarget)) {
+              if (typeof rest.onBlur === 'function') rest.onBlur(event)
+              if (
+                !event.defaultPrevented &&
+                !event.currentTarget.contains(event.relatedTarget as Node | null)
+              ) {
                 setFocusedPart(null)
               }
             }}
@@ -123,7 +145,9 @@ export function RangePickerTrigger(props: RangePickerTriggerProps) {
               value={previewStartText()}
               placeholder={local.startPlaceholder ?? '开始日期'}
               active={context.open() ? context.activePart() === 'start' : focusedPart() === 'start'}
-              inputProps={local.startInputProps ?? local.inputProps}
+              {...((local.startInputProps ?? local.inputProps)
+                ? { inputProps: local.startInputProps ?? local.inputProps }
+                : {})}
               onClick={(event) => clickInput(event, 'start')}
               onFocus={() => focus('start')}
               onValueChange={(value) => input('start', value)}
@@ -137,7 +161,9 @@ export function RangePickerTrigger(props: RangePickerTriggerProps) {
               value={previewEndText()}
               placeholder={local.endPlaceholder ?? '结束日期'}
               active={context.open() ? context.activePart() === 'end' : focusedPart() === 'end'}
-              inputProps={local.endInputProps ?? local.inputProps}
+              {...((local.endInputProps ?? local.inputProps)
+                ? { inputProps: local.endInputProps ?? local.inputProps }
+                : {})}
               onClick={(event) => clickInput(event, 'end')}
               onFocus={() => focus('end')}
               onValueChange={(value) => input('end', value)}
@@ -192,12 +218,12 @@ function RangeInput(props: {
         )}
         placeholder={props.placeholder}
         onClick={(event) => {
-          props.inputProps?.onClick?.(event)
-          if (!event.defaultPrevented) props.onClick(event)
+          if (typeof props.inputProps?.onClick === 'function') props.inputProps.onClick(event)
+          if (!event.defaultPrevented && typeof props.onClick === 'function') props.onClick(event)
         }}
         onFocus={(event) => {
-          props.inputProps?.onFocus?.(event)
-          props.onFocus(event)
+          if (typeof props.inputProps?.onFocus === 'function') props.inputProps.onFocus(event)
+          if (typeof props.onFocus === 'function') props.onFocus(event)
         }}
       />
     </InputRoot>

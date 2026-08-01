@@ -9,7 +9,12 @@ export function Button(props: ButtonProps) {
   const [local, rest] = splitProps(props, ['class', 'children', 'type'])
 
   return (
-    <button data-slot="button" {...rest} type={local.type ?? 'button'} class={cn(buttonPrimitiveClassName, local.class)}>
+    <button
+      data-slot="button"
+      {...rest}
+      type={local.type ?? 'button'}
+      class={cn(buttonPrimitiveClassName, local.class)}
+    >
       {local.children}
     </button>
   )

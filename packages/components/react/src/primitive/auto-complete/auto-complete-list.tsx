@@ -7,24 +7,32 @@ import { type ComponentProps, type ReactNode } from 'react'
 import { useAutoComplete, useAutoCompleteOption } from './use-auto-complete'
 
 export interface AutoCompleteListProps extends ComponentProps<'div'> {
-  renderItem?: (
-    item: unknown,
-    state: { active: boolean; disabled: boolean },
-  ) => ReactNode
+  renderItem?: (item: unknown, state: { active: boolean; disabled: boolean }) => ReactNode
 }
 
-export function AutoCompleteList({ className, children, renderItem, ...props }: AutoCompleteListProps) {
+export function AutoCompleteList({
+  className,
+  children,
+  renderItem,
+  ...props
+}: AutoCompleteListProps) {
   const autoComplete = useAutoComplete()
   return (
-    <div {...props} id={autoComplete.listId} role="listbox" className={cn(autoCompleteListClassName, className)}>
-      {children ?? autoComplete.items.map((entry) => (
-        <AutoCompleteOption key={entry.key} itemKey={entry.key}>
-          {renderItem?.(entry.item, {
-            active: autoComplete.snapshot.activeKey === entry.key,
-            disabled: entry.disabled,
-          }) ?? entry.label}
-        </AutoCompleteOption>
-      ))}
+    <div
+      {...props}
+      id={autoComplete.listId}
+      role="listbox"
+      className={cn(autoCompleteListClassName, className)}
+    >
+      {children ??
+        autoComplete.items.map((entry) => (
+          <AutoCompleteOption key={entry.key} itemKey={entry.key}>
+            {renderItem?.(entry.item, {
+              active: autoComplete.snapshot.activeKey === entry.key,
+              disabled: entry.disabled,
+            }) ?? entry.label}
+          </AutoCompleteOption>
+        ))}
     </div>
   )
 }

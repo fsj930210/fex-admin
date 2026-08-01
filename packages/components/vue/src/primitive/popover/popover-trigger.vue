@@ -10,11 +10,12 @@ const { overlay, snapshot, triggerElement } = usePopoverContext('PopoverTrigger'
 
 function setReference(element: Element | ComponentPublicInstance | null) {
   const component = element as (ComponentPublicInstance & { $el?: unknown }) | null
-  const reference = element instanceof HTMLElement
-    ? element
-    : component?.$el instanceof HTMLElement
-      ? component.$el
-      : null
+  const reference =
+    element instanceof HTMLElement
+      ? element
+      : component?.$el instanceof HTMLElement
+        ? component.$el
+        : null
   triggerElement.value = reference
   overlay.setReferenceElement(reference)
 }

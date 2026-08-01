@@ -149,7 +149,11 @@ export function createTreeController<TNode extends TreeNodeData>(
   ): readonly TNode[] | undefined {
     if (input.parentKey === null) {
       const nextNodes = [...nodes]
-      nextNodes.splice(Math.max(0, Math.min(input.index ?? nextNodes.length, nextNodes.length)), 0, input.node)
+      nextNodes.splice(
+        Math.max(0, Math.min(input.index ?? nextNodes.length, nextNodes.length)),
+        0,
+        input.node,
+      )
       return nextNodes
     }
     let inserted = false
@@ -157,7 +161,11 @@ export function createTreeController<TNode extends TreeNodeData>(
       if (getKey(node) === input.parentKey) {
         inserted = true
         const children = [...getChildren(node)]
-        children.splice(Math.max(0, Math.min(input.index ?? children.length, children.length)), 0, input.node)
+        children.splice(
+          Math.max(0, Math.min(input.index ?? children.length, children.length)),
+          0,
+          input.node,
+        )
         return { ...node, [getFieldNames().children]: children }
       }
       const children = getChildren(node)
@@ -268,18 +276,24 @@ export function createTreeController<TNode extends TreeNodeData>(
   }
 
   function commitState(
-    patch: Partial<Pick<TreeSnapshot<TNode>, 'expandedKeys' | 'selectedKeys' | 'checkedKeys' | 'focusedKey'>>,
+    patch: Partial<
+      Pick<TreeSnapshot<TNode>, 'expandedKeys' | 'selectedKeys' | 'checkedKeys' | 'focusedKey'>
+    >,
     changedKeys: readonly TreeKey[],
     visibleChanged = false,
   ) {
     const current = getSnapshot()
-    setSnapshot({
-      ...current,
-      ...patch,
-      visibleItems: visibleChanged
-        ? buildVisibleItems(patch.expandedKeys ?? current.expandedKeys)
-        : current.visibleItems,
-    }, changedKeys, visibleChanged)
+    setSnapshot(
+      {
+        ...current,
+        ...patch,
+        visibleItems: visibleChanged
+          ? buildVisibleItems(patch.expandedKeys ?? current.expandedKeys)
+          : current.visibleItems,
+      },
+      changedKeys,
+      visibleChanged,
+    )
   }
 
   function commitTreeData(treeData: readonly TNode[], mutation: TreeMutationResult) {
@@ -323,7 +337,11 @@ export function createTreeController<TNode extends TreeNodeData>(
         ? { ...nextItem, visibleIndex: visibleItem.visibleIndex }
         : visibleItem,
     )
-    setSnapshot({ ...current, treeData: nextTreeData, items: nextItems, visibleItems }, [key], false)
+    setSnapshot(
+      { ...current, treeData: nextTreeData, items: nextItems, visibleItems },
+      [key],
+      false,
+    )
     options.onTreeDataChange?.(nextTreeData, mutation)
     return mutation
   }
@@ -339,12 +357,11 @@ export function createTreeController<TNode extends TreeNodeData>(
     if (nextTreeData === getSnapshot().treeData) {
       return { ok: true, type: 'update', changedKeys: [] }
     }
-    return commitNodeUpdate(
-      key,
-      nextNode,
-      nextTreeData,
-      { ok: true, type: 'update', changedKeys: [key] },
-    )
+    return commitNodeUpdate(key, nextNode, nextTreeData, {
+      ok: true,
+      type: 'update',
+      changedKeys: [key],
+    })
   }
 
   function insertNode(input: TreeInsertInput<TNode>): TreeMutationResult {
@@ -382,8 +399,8 @@ export function createTreeController<TNode extends TreeNodeData>(
       return failMutation('move', 'Target parent was not found.')
     }
     if (
-      input.parentKey === input.sourceKey
-      || (input.parentKey !== null && getDescendantKeys(input.sourceKey).includes(input.parentKey))
+      input.parentKey === input.sourceKey ||
+      (input.parentKey !== null && getDescendantKeys(input.sourceKey).includes(input.parentKey))
     ) {
       return failMutation('move', 'Cannot move a node into its descendant.')
     }
@@ -405,7 +422,10 @@ export function createTreeController<TNode extends TreeNodeData>(
     })
   }
 
-  function replaceChildren(parentKey: TreeKey | null, children: readonly TNode[]): TreeMutationResult {
+  function replaceChildren(
+    parentKey: TreeKey | null,
+    children: readonly TNode[],
+  ): TreeMutationResult {
     if (parentKey === null) {
       return commitTreeData(children, {
         ok: true,
@@ -416,11 +436,10 @@ export function createTreeController<TNode extends TreeNodeData>(
     if (!index.items.has(parentKey)) {
       return failMutation('replace-children', 'Parent node was not found.')
     }
-    const nextTreeData = updateTreeNode(
-      getSnapshot().treeData,
-      parentKey,
-      (node) => ({ ...node, [getFieldNames().children]: children }),
-    )
+    const nextTreeData = updateTreeNode(getSnapshot().treeData, parentKey, (node) => ({
+      ...node,
+      [getFieldNames().children]: children,
+    }))
     return commitTreeData(nextTreeData, {
       ok: true,
       type: 'replace-children',
@@ -528,7 +547,8 @@ export function createTreeController<TNode extends TreeNodeData>(
       const current = getSnapshot()
       const structureChanged =
         (Object.hasOwn(nextOptions, 'treeData') && nextOptions.treeData !== current.treeData) ||
-        (Object.hasOwn(nextOptions, 'fieldNames') && nextOptions.fieldNames !== previousOptions.fieldNames) ||
+        (Object.hasOwn(nextOptions, 'fieldNames') &&
+          nextOptions.fieldNames !== previousOptions.fieldNames) ||
         (Object.hasOwn(nextOptions, 'isLeaf') && nextOptions.isLeaf !== previousOptions.isLeaf)
 
       if (structureChanged) {
@@ -538,7 +558,7 @@ export function createTreeController<TNode extends TreeNodeData>(
           nextOptions.selectedKeys ?? current.selectedKeys,
           nextOptions.checkedKeys ?? current.checkedKeys,
           Object.hasOwn(nextOptions, 'focusedKey')
-            ? nextOptions.focusedKey ?? null
+            ? (nextOptions.focusedKey ?? null)
             : current.focusedKey,
         )
         setSnapshot(next, uniqueKeys([...current.items.keys(), ...next.items.keys()]), true)
@@ -546,35 +566,42 @@ export function createTreeController<TNode extends TreeNodeData>(
       }
 
       const nextExpandedKeys = Object.hasOwn(nextOptions, 'expandedKeys')
-        ? nextOptions.expandedKeys ?? []
+        ? (nextOptions.expandedKeys ?? [])
         : current.expandedKeys
       const nextSelectedKeys = Object.hasOwn(nextOptions, 'selectedKeys')
-        ? nextOptions.selectedKeys ?? []
+        ? (nextOptions.selectedKeys ?? [])
         : current.selectedKeys
       const nextCheckedKeys = Object.hasOwn(nextOptions, 'checkedKeys')
-        ? nextOptions.checkedKeys ?? []
+        ? (nextOptions.checkedKeys ?? [])
         : current.checkedKeys
       const nextFocusedKey = Object.hasOwn(nextOptions, 'focusedKey')
-        ? nextOptions.focusedKey ?? null
+        ? (nextOptions.focusedKey ?? null)
         : current.focusedKey
       const expandedChanged = !sameKeys(current.expandedKeys, nextExpandedKeys)
       const selectedChanged = !sameKeys(current.selectedKeys, nextSelectedKeys)
       const checkedChanged = !sameKeys(current.checkedKeys, nextCheckedKeys)
       const focusedChanged = current.focusedKey !== nextFocusedKey
       if (!expandedChanged && !selectedChanged && !checkedChanged && !focusedChanged) return
-      commitState({
-        expandedKeys: uniqueKeys(nextExpandedKeys),
-        selectedKeys: uniqueKeys(nextSelectedKeys),
-        checkedKeys: uniqueKeys(nextCheckedKeys),
-        focusedKey: nextFocusedKey,
-      }, uniqueKeys([
-        ...(expandedChanged ? [...current.expandedKeys, ...nextExpandedKeys] : []),
-        ...(selectedChanged ? [...current.selectedKeys, ...nextSelectedKeys] : []),
-        ...(checkedChanged ? [...current.checkedKeys, ...nextCheckedKeys] : []),
-        ...(focusedChanged
-          ? [...(current.focusedKey === null ? [] : [current.focusedKey]), ...(nextFocusedKey === null ? [] : [nextFocusedKey])]
-          : []),
-      ]), expandedChanged)
+      commitState(
+        {
+          expandedKeys: uniqueKeys(nextExpandedKeys),
+          selectedKeys: uniqueKeys(nextSelectedKeys),
+          checkedKeys: uniqueKeys(nextCheckedKeys),
+          focusedKey: nextFocusedKey,
+        },
+        uniqueKeys([
+          ...(expandedChanged ? [...current.expandedKeys, ...nextExpandedKeys] : []),
+          ...(selectedChanged ? [...current.selectedKeys, ...nextSelectedKeys] : []),
+          ...(checkedChanged ? [...current.checkedKeys, ...nextCheckedKeys] : []),
+          ...(focusedChanged
+            ? [
+                ...(current.focusedKey === null ? [] : [current.focusedKey]),
+                ...(nextFocusedKey === null ? [] : [nextFocusedKey]),
+              ]
+            : []),
+        ]),
+        expandedChanged,
+      )
     },
     getItem: (key) => index.items.get(key),
     // oxlint-disable-next-line unicorn/no-array-reverse -- getAncestorKeys returns a fresh array and the workspace targets ES2022.
@@ -594,7 +621,9 @@ export function createTreeController<TNode extends TreeNodeData>(
     // oxlint-disable-next-line unicorn/no-array-reverse -- getAncestorKeys returns a fresh array and the workspace targets ES2022.
     getPath: (key) => [...getAncestorKeys(key).reverse(), key],
     updateFeatureState: (changedKeys = []) => commitState({}, changedKeys),
-    configure: (featureOptions) => { options = { ...options, ...featureOptions } },
+    configure: (featureOptions) => {
+      options = { ...options, ...featureOptions }
+    },
     getOptions: () => options,
     getItems: () => index.items,
     getVisibleItems: () => getSnapshot().visibleItems,

@@ -22,12 +22,18 @@ const spacingOptions: SpacingOption[] = [
   { label: 'sm', value: 'sm', size: 'sm' },
   defaultSpacingOption,
   { label: 'lg', value: 'lg', size: 'lg' },
-  { label: '40px', value: 'custom', size: 'md', rootStyle: { '--card-spacing': '40px' } as CSSProperties },
+  {
+    label: '40px',
+    value: 'custom',
+    size: 'md',
+    rootStyle: { '--card-spacing': '40px' } as CSSProperties,
+  },
 ]
 
 export function CardPage() {
   const [spacing, setSpacing] = useState<SpacingOption['value']>('md')
-  const selectedSpacing = spacingOptions.find((option) => option.value === spacing) ?? defaultSpacingOption
+  const selectedSpacing =
+    spacingOptions.find((option) => option.value === spacing) ?? defaultSpacingOption
 
   return (
     <main className="min-h-screen bg-secondary-background px-page-padding py-space-xl">
@@ -60,7 +66,9 @@ export function CardPage() {
           <Card title="Ui" description="面向业务的默认卡片封装。">
             <div className="flex min-w-0 flex-wrap items-center gap-space-md">
               <Card title="Basic" description="包含标题、描述和内容区域。">
-                <p className="text-sm leading-6 text-foreground">Card 默认使用系统边框、背景、圆角和 spacing token。</p>
+                <p className="text-sm leading-6 text-foreground">
+                  Card 默认使用系统边框、背景、圆角和 spacing token。
+                </p>
               </Card>
             </div>
           </Card>
@@ -71,7 +79,10 @@ export function CardPage() {
             </p>
           </Card>
 
-          <Card title="Spacing" description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。">
+          <Card
+            title="Spacing"
+            description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。"
+          >
             <div className="flex flex-wrap gap-space-sm">
               {spacingOptions.map((option) => (
                 <button
@@ -107,7 +118,9 @@ export function CardPage() {
                 className={{
                   root: 'w-full max-w-md',
                 }}
-                {...(selectedSpacing.rootStyle ? { style: { root: selectedSpacing.rootStyle } } : {})}
+                {...(selectedSpacing.rootStyle
+                  ? { style: { root: selectedSpacing.rootStyle } }
+                  : {})}
               >
                 <div className="grid gap-space-lg">
                   <div className="grid gap-space-sm">
@@ -119,7 +132,9 @@ export function CardPage() {
                   <div className="grid gap-space-sm">
                     <div className="flex items-center justify-between gap-space-md text-sm font-medium text-foreground">
                       <span>Password</span>
-                      <span className="font-normal text-muted-foreground">Forgot your password?</span>
+                      <span className="font-normal text-muted-foreground">
+                        Forgot your password?
+                      </span>
                     </div>
                     <div className="h-9 rounded-md border border-border bg-background" />
                   </div>
@@ -133,9 +148,9 @@ export function CardPage() {
             description="需要底部操作区时使用 footer。"
             footer={<span className="text-sm text-muted-foreground">Footer content</span>}
           >
-              <p className="text-sm leading-6 text-muted-foreground">
-                Header、Content 和 Footer 分别维护自己的 padding，组合时保持一致的信息密度。
-              </p>
+            <p className="text-sm leading-6 text-muted-foreground">
+              Header、Content 和 Footer 分别维护自己的 padding，组合时保持一致的信息密度。
+            </p>
           </Card>
         </div>
       </div>

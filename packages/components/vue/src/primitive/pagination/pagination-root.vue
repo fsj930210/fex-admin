@@ -7,8 +7,12 @@ const props = defineProps<{ class?: string | undefined }>()
 </script>
 
 <template>
-  <nav v-bind="$attrs" aria-label="pagination" data-slot="pagination" :class="cn(paginationClassName, props.class)">
+  <nav
+    v-bind="$attrs"
+    aria-label="pagination"
+    data-slot="pagination"
+    :class="cn(paginationClassName, props.class)"
+  >
     <slot />
   </nav>
 </template>
-

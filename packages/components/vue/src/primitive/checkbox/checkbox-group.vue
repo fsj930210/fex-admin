@@ -1,1 +1,3 @@
-<template><div v-bind="$attrs"><slot /></div></template>
+<template>
+  <div v-bind="$attrs"><slot /></div>
+</template>

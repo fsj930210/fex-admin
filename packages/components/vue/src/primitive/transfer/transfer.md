@@ -21,18 +21,18 @@ import { Transfer } from '@fex/components-vue/primitive/transfer'
 
 ## Props
 
-| Prop | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| `items` | `readonly TItem[]` | 必填 | 完整数据；数据引用变化会清空临时勾选。 |
-| `fieldNames` | `TransferFieldNames` | 标准字段 | 映射 key、label、disabled。 |
-| `targetKeys` | `readonly TransferKey[]` | — | 受控目标 keys，顺序即目标侧顺序。 |
-| `defaultTargetKeys` | `readonly TransferKey[]` | `[]` | 非受控初始目标 keys。 |
-| `checkedKeys` | `Partial<TransferCheckedKeys>` | — | 受控两侧勾选。 |
-| `defaultCheckedKeys` | `Partial<TransferCheckedKeys>` | `{}` | 非受控初始勾选。 |
-| `disabled` | `boolean` | `false` | 禁止勾选和全部移动操作。 |
-| `title` | `{ source?, target? }` | Source/Target | 两侧默认标题。 |
-| `panels` | `TransferPanels` | `{}` | 控制内置 header/footer region。 |
-| `validation` | `{ status, message }` | — | error 或 warning 展示。 |
+| Prop                 | 类型                           | 默认值        | 说明                                   |
+| -------------------- | ------------------------------ | ------------- | -------------------------------------- |
+| `items`              | `readonly TItem[]`             | 必填          | 完整数据；数据引用变化会清空临时勾选。 |
+| `fieldNames`         | `TransferFieldNames`           | 标准字段      | 映射 key、label、disabled。            |
+| `targetKeys`         | `readonly TransferKey[]`       | —             | 受控目标 keys，顺序即目标侧顺序。      |
+| `defaultTargetKeys`  | `readonly TransferKey[]`       | `[]`          | 非受控初始目标 keys。                  |
+| `checkedKeys`        | `Partial<TransferCheckedKeys>` | —             | 受控两侧勾选。                         |
+| `defaultCheckedKeys` | `Partial<TransferCheckedKeys>` | `{}`          | 非受控初始勾选。                       |
+| `disabled`           | `boolean`                      | `false`       | 禁止勾选和全部移动操作。               |
+| `title`              | `{ source?, target? }`         | Source/Target | 两侧默认标题。                         |
+| `panels`             | `TransferPanels`               | `{}`          | 控制内置 header/footer region。        |
+| `validation`         | `{ status, message }`          | —             | error 或 warning 展示。                |
 
 ## 事件
 

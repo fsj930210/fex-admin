@@ -10,5 +10,9 @@ const props = defineProps<{ column: Column<TFeatures, TData>; placeholder?: stri
 const column = props.column as unknown as FilterableColumn
 </script>
 <template>
-  <InputRoot :value="String(column.getFilterValue() ?? '')" :class="dataGridInputRootClassName"><InputControl :placeholder="props.placeholder" @input="column.setFilterValue(($event.target as HTMLInputElement).value)" /></InputRoot>
+  <InputRoot :value="String(column.getFilterValue() ?? '')" :class="dataGridInputRootClassName"
+    ><InputControl
+      :placeholder="props.placeholder"
+      @input="column.setFilterValue(($event.target as HTMLInputElement).value)"
+  /></InputRoot>
 </template>

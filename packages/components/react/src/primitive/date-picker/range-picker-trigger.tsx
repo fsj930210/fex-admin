@@ -1,7 +1,12 @@
 import { getRangePickerDisplayTexts } from '@fex/components-core/date-picker/input'
 import { getRangeInputPreviewValue } from '@fex/components-core/date-picker/range'
 import { formatDatePickerValue, parseDatePickerValue } from '@fex/components-core/date-picker/value'
-import { datePickerRangeInputClassName, datePickerRangeInputControlClassName, datePickerRangeSeparatorClassName, datePickerRangeTriggerClassName } from '@fex/components-styles/date-picker'
+import {
+  datePickerRangeInputClassName,
+  datePickerRangeInputControlClassName,
+  datePickerRangeSeparatorClassName,
+  datePickerRangeTriggerClassName,
+} from '@fex/components-styles/date-picker'
 import { CalendarIcon } from '../../icon/calendar'
 import { cn } from '@fex/utils'
 import useUpdateEffect from '../../hooks/use-update-effect'
@@ -17,8 +22,10 @@ import { PopoverTrigger } from '../popover/popover'
 import { useState, type ComponentProps, type ReactNode } from 'react'
 import { useRangePickerContext } from './context'
 
-export interface RangePickerTriggerProps
-  extends Omit<InputRootProps, 'value' | 'defaultValue' | 'onValueChange' | 'onClear' | 'children'> {
+export interface RangePickerTriggerProps extends Omit<
+  InputRootProps,
+  'value' | 'defaultValue' | 'onValueChange' | 'onClear' | 'children'
+> {
   startPlaceholder?: string | undefined
   endPlaceholder?: string | undefined
   separator?: ReactNode
@@ -45,14 +52,26 @@ export function RangePickerTrigger({
   const [startText, setStartText] = useState(startValue)
   const [endText, setEndText] = useState(endValue)
   const [focusedPart, setFocusedPart] = useState<'start' | 'end' | null>(null)
-  const previewStartValue = getRangeInputPreviewValue(context.rangeValue, context.hoverValue, context.activePart, 'start')
-  const previewEndValue = getRangeInputPreviewValue(context.rangeValue, context.hoverValue, context.activePart, 'end')
-  const previewStartText = context.activePart === 'start' && previewStartValue
-    ? formatDatePickerValue(previewStartValue, context)
-    : startText
-  const previewEndText = context.activePart === 'end' && previewEndValue
-    ? formatDatePickerValue(previewEndValue, context)
-    : endText
+  const previewStartValue = getRangeInputPreviewValue(
+    context.rangeValue,
+    context.hoverValue,
+    context.activePart,
+    'start',
+  )
+  const previewEndValue = getRangeInputPreviewValue(
+    context.rangeValue,
+    context.hoverValue,
+    context.activePart,
+    'end',
+  )
+  const previewStartText =
+    context.activePart === 'start' && previewStartValue
+      ? formatDatePickerValue(previewStartValue, context)
+      : startText
+  const previewEndText =
+    context.activePart === 'end' && previewEndValue
+      ? formatDatePickerValue(previewEndValue, context)
+      : endText
   const hasValue = Boolean(startValue || endValue)
 
   useUpdateEffect(() => setStartText(startValue), [startValue])
@@ -92,7 +111,9 @@ export function RangePickerTrigger({
                 event.stopPropagation()
                 return
               }
-              const part = (event.target as HTMLElement).closest('[data-range-part]')?.getAttribute('data-range-part')
+              const part = (event.target as HTMLElement)
+                .closest('[data-range-part]')
+                ?.getAttribute('data-range-part')
               context.openPanel(part === 'start' || part === 'end' ? part : undefined)
             }}
             onBlur={(event) => {
@@ -116,7 +137,9 @@ export function RangePickerTrigger({
               onValueChange={(value) => input('start', value)}
               preview={previewStartText !== startText}
             />
-            <span aria-hidden="true" className={datePickerRangeSeparatorClassName}>{separator}</span>
+            <span aria-hidden="true" className={datePickerRangeSeparatorClassName}>
+              {separator}
+            </span>
             <RangeInput
               part="end"
               value={previewEndText}
@@ -181,7 +204,11 @@ function RangeInput({
     >
       <InputControl
         {...inputProps}
-        className={cn(datePickerRangeInputControlClassName, preview && 'text-muted-foreground', inputProps?.className)}
+        className={cn(
+          datePickerRangeInputControlClassName,
+          preview && 'text-muted-foreground',
+          inputProps?.className,
+        )}
         placeholder={placeholder}
         onFocus={(event) => {
           inputProps?.onFocus?.(event)

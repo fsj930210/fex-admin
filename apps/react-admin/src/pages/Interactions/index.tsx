@@ -33,7 +33,12 @@ export function InteractionsPage() {
     minWidth: 220,
     minHeight: 120,
   })
-  const reportDrop = (zoneId: 'card-zone' | 'any-zone', zone: string, source: Record<string, unknown>, edge: string | null) => {
+  const reportDrop = (
+    zoneId: 'card-zone' | 'any-zone',
+    zone: string,
+    source: Record<string, unknown>,
+    edge: string | null,
+  ) => {
     const itemId = String(source.id)
     if (!draggableItems[itemId as keyof typeof draggableItems]) {
       return
@@ -68,12 +73,18 @@ export function InteractionsPage() {
         </header>
 
         <div className="space-y-space-xl">
-          <Card title="Drag And Drop" description="useDraggable and useDroppable wrap Pragmatic for cross-component drops.">
+          <Card
+            title="Drag And Drop"
+            description="useDraggable and useDroppable wrap Pragmatic for cross-component drops."
+          >
             <div className="grid gap-space-md md:grid-cols-[280px_1fr]">
               <div className="space-y-space-sm rounded-md border border-border bg-background p-space-md">
                 <p className="text-sm font-medium text-muted-foreground">Draggable items</p>
                 {dropDemoItems.source.map((itemId) => (
-                  <DraggableToken key={itemId} {...draggableItems[itemId as keyof typeof draggableItems]} />
+                  <DraggableToken
+                    key={itemId}
+                    {...draggableItems[itemId as keyof typeof draggableItems]}
+                  />
                 ))}
                 {dropDemoItems.source.length === 0 && (
                   <p className="rounded-md border border-dashed border-border px-space-md py-space-sm text-sm text-muted-foreground">
@@ -104,7 +115,10 @@ export function InteractionsPage() {
             </p>
           </Card>
 
-          <Card title="Dropzone" description="The hook handles drag state, validation, and hidden input selection.">
+          <Card
+            title="Dropzone"
+            description="The hook handles drag state, validation, and hidden input selection."
+          >
             <div
               {...dropzone.getRootProps()}
               className="flex min-h-32 cursor-pointer items-center justify-center rounded-md border border-dashed border-border bg-muted-background text-sm text-muted-foreground transition-colors data-[dragging=true]:border-ring data-[dragging=true]:bg-accent-background"
@@ -134,7 +148,10 @@ export function InteractionsPage() {
             </div>
           </Card>
 
-          <Card title="Resize" description="useResize supports edge and corner handles for floating surfaces.">
+          <Card
+            title="Resize"
+            description="useResize supports edge and corner handles for floating surfaces."
+          >
             <div className="relative h-80 overflow-hidden rounded-md border border-border bg-background">
               <div
                 {...resize.getTargetProps()}
@@ -144,14 +161,38 @@ export function InteractionsPage() {
                 <p className="mt-space-sm text-sm text-muted-foreground">
                   Drag any edge or corner. Handles are intentionally visible for this demo.
                 </p>
-                <div {...resize.getHandleProps('top')} className="absolute left-4 right-4 top-0 z-10 h-2 cursor-n-resize rounded-b bg-primary/50 hover:bg-primary" />
-                <div {...resize.getHandleProps('right')} className="absolute bottom-4 right-0 top-4 z-10 w-2 cursor-e-resize rounded-l bg-primary/50 hover:bg-primary" />
-                <div {...resize.getHandleProps('bottom')} className="absolute bottom-0 left-4 right-4 z-10 h-2 cursor-s-resize rounded-t bg-primary/50 hover:bg-primary" />
-                <div {...resize.getHandleProps('left')} className="absolute bottom-4 left-0 top-4 z-10 w-2 cursor-w-resize rounded-r bg-primary/50 hover:bg-primary" />
-                <div {...resize.getHandleProps('top-left')} className="absolute left-0 top-0 z-20 size-6 cursor-nw-resize rounded-br bg-primary shadow-sm" />
-                <div {...resize.getHandleProps('top-right')} className="absolute right-0 top-0 z-20 size-6 cursor-ne-resize rounded-bl bg-primary shadow-sm" />
-                <div {...resize.getHandleProps('bottom-left')} className="absolute bottom-0 left-0 z-20 size-6 cursor-sw-resize rounded-tr bg-primary shadow-sm" />
-                <div {...resize.getHandleProps('bottom-right')} className="absolute bottom-0 right-0 z-20 size-6 cursor-se-resize rounded-tl bg-primary shadow-sm" />
+                <div
+                  {...resize.getHandleProps('top')}
+                  className="absolute left-4 right-4 top-0 z-10 h-2 cursor-n-resize rounded-b bg-primary/50 hover:bg-primary"
+                />
+                <div
+                  {...resize.getHandleProps('right')}
+                  className="absolute bottom-4 right-0 top-4 z-10 w-2 cursor-e-resize rounded-l bg-primary/50 hover:bg-primary"
+                />
+                <div
+                  {...resize.getHandleProps('bottom')}
+                  className="absolute bottom-0 left-4 right-4 z-10 h-2 cursor-s-resize rounded-t bg-primary/50 hover:bg-primary"
+                />
+                <div
+                  {...resize.getHandleProps('left')}
+                  className="absolute bottom-4 left-0 top-4 z-10 w-2 cursor-w-resize rounded-r bg-primary/50 hover:bg-primary"
+                />
+                <div
+                  {...resize.getHandleProps('top-left')}
+                  className="absolute left-0 top-0 z-20 size-6 cursor-nw-resize rounded-br bg-primary shadow-sm"
+                />
+                <div
+                  {...resize.getHandleProps('top-right')}
+                  className="absolute right-0 top-0 z-20 size-6 cursor-ne-resize rounded-bl bg-primary shadow-sm"
+                />
+                <div
+                  {...resize.getHandleProps('bottom-left')}
+                  className="absolute bottom-0 left-0 z-20 size-6 cursor-sw-resize rounded-tr bg-primary shadow-sm"
+                />
+                <div
+                  {...resize.getHandleProps('bottom-right')}
+                  className="absolute bottom-0 right-0 z-20 size-6 cursor-se-resize rounded-tl bg-primary shadow-sm"
+                />
               </div>
             </div>
           </Card>
@@ -171,20 +212,19 @@ function DraggableToken({ id, label, type }: { id: string; label: string; type: 
         className="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[opacity,box-shadow] hover:shadow-md active:cursor-grabbing data-[dragging=true]:opacity-35"
       >
         <span>{label}</span>
-        <span className="text-muted-foreground">
-          ::
-        </span>
+        <span className="text-muted-foreground">::</span>
       </div>
-      {draggable.dragging && createPortal(
-        <div
-          className="flex min-h-11 items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
-          style={draggable.getOverlayStyle()}
-        >
-          <span>{label}</span>
-          <span className="text-muted-foreground">::</span>
-        </div>,
-        document.body,
-      )}
+      {draggable.dragging &&
+        createPortal(
+          <div
+            className="flex min-h-11 items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+            style={draggable.getOverlayStyle()}
+          >
+            <span>{label}</span>
+            <span className="text-muted-foreground">::</span>
+          </div>,
+          document.body,
+        )}
     </>
   )
 }
@@ -221,20 +261,26 @@ function DroppableZone({
       <div>
         <p className="font-medium text-foreground">{title}</p>
         <p className="mt-space-sm text-muted-foreground">
-          {droppable.over ? (droppable.canDrop ? 'Release to drop.' : 'This item is not accepted.') : 'Drop target'}
+          {droppable.over
+            ? droppable.canDrop
+              ? 'Release to drop.'
+              : 'This item is not accepted.'
+            : 'Drop target'}
         </p>
         <div className="mt-space-md space-y-space-sm">
           {items.map((itemId) => {
             const item = draggableItems[itemId as keyof typeof draggableItems]
 
-            return (
-              <DraggableToken key={itemId} {...item} />
-            )
+            return <DraggableToken key={itemId} {...item} />
           })}
         </div>
       </div>
       <p className="text-xs text-muted-foreground">
-        {droppable.edge ? `Closest edge: ${droppable.edge}` : accept ? `Accepts: ${accept}` : 'Accepts all'}
+        {droppable.edge
+          ? `Closest edge: ${droppable.edge}`
+          : accept
+            ? `Accepts: ${accept}`
+            : 'Accepts all'}
       </p>
     </div>
   )

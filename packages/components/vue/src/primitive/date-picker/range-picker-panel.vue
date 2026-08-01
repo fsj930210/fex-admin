@@ -2,7 +2,7 @@
 import type { CalendarDate } from '@fex/components-core/calendar'
 import DatePickerPanel from './date-picker-panel.vue'
 
-defineProps<{ class?: string; panelViewDate?: CalendarDate }>()
+defineProps<{ class?: string | undefined; panelViewDate?: CalendarDate | undefined }>()
 </script>
 
 <template>

@@ -23,12 +23,17 @@ export function ResizablePage() {
         </header>
 
         <div className="space-y-space-xl">
-          <Card title="Horizontal" description="Pointer and keyboard resizing with min and max constraints.">
+          <Card
+            title="Horizontal"
+            description="Pointer and keyboard resizing with min and max constraints."
+          >
             <div className="h-72 overflow-hidden rounded-md border border-border bg-background">
               <ResizablePanelGroup direction="horizontal" defaultLayout={[28, 72]}>
                 <ResizablePanel id="sidebar" minSize={18} maxSize={45} className="p-space-md">
                   <h2 className="text-sm font-medium">Sidebar</h2>
-                  <p className="mt-space-sm text-sm text-muted-foreground">Resize from the handle.</p>
+                  <p className="mt-space-sm text-sm text-muted-foreground">
+                    Resize from the handle.
+                  </p>
                 </ResizablePanel>
                 <ResizableHandle />
                 <ResizablePanel id="content" minSize={45} className="p-space-md">
@@ -56,7 +61,10 @@ export function ResizablePage() {
             </div>
           </Card>
 
-          <Card title="Nested" description="Horizontal and vertical groups can be composed in one frame.">
+          <Card
+            title="Nested"
+            description="Horizontal and vertical groups can be composed in one frame."
+          >
             <div className="h-96 overflow-hidden rounded-md border border-border bg-background">
               <ResizablePanelGroup direction="horizontal" defaultLayout={[28, 72]}>
                 <ResizablePanel id="nested-sidebar" minSize={18} className="p-space-md">
@@ -96,4 +104,3 @@ export function ResizablePage() {
     </main>
   )
 }
-

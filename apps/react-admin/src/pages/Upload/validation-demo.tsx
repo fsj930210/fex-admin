@@ -1,10 +1,6 @@
 import { uploadFeature } from '@fex/components-core/upload/features/upload'
 import type { UploadItem } from '@fex/components-core/upload/types'
-import {
-  UploadRoot,
-  UploadTrigger,
-  useUpload,
-} from '@fex/components-react/primitive/upload'
+import { UploadRoot, UploadTrigger, useUpload } from '@fex/components-react/primitive/upload'
 import { Button } from '@fex/components-react/ui/button'
 import { useState } from 'react'
 import { uploadBody, uploadServerUrl } from './api'

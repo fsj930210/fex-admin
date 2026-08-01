@@ -9,5 +9,9 @@ const attrs = useAttrs()
 </script>
 
 <template>
-  <textarea v-bind="attrs" data-slot="textarea" :class="cn(textareaClassName, attrs.class as string | undefined)" />
+  <textarea
+    v-bind="attrs"
+    data-slot="textarea"
+    :class="cn(textareaClassName, attrs.class as string | undefined)"
+  />
 </template>

@@ -8,7 +8,9 @@
   import { setUploadContext } from './context'
   interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> { controller?: UploadController<TResponse>, options?: UploadOptions<TResponse>, invalid?: boolean, name?: string, required?: boolean, children?: Snippet }
   let { controller, options, invalid = false, name, required = false, children, class: className, ...rest }: Props = $props()
+  // svelte-ignore state_referenced_locally -- controller ownership is selected once at mount.
   const owned = controller ? undefined : createUploadController(options ?? {})
+  // svelte-ignore state_referenced_locally -- switching controller ownership after mount is unsupported.
   const upload = controller ?? owned!
   if (owned) onDestroy(() => owned.destroy())
   let input: HTMLInputElement

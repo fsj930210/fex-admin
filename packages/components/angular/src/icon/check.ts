@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 
 @Component({
-  selector: "fex-check-icon",
+  selector: 'fex-check-icon',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: "contents" },
-  templateUrl: "./check.html",
+  host: { class: 'contents' },
+  templateUrl: './check.html',
 })
 export class CheckIcon {}

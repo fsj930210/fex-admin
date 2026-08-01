@@ -9,7 +9,7 @@ export function useTimePicker(options: TimePickerControllerOptions, controlledVa
   const snapshot = computed(() => storeSnapshot.value)
   if (controlledValue) {
     // Controlled props are an external state boundary; keep the core controller in sync.
-    watch(controlledValue, value => controller.setControlledValue(value), { immediate: true })
+    watch(controlledValue, (value) => controller.setControlledValue(value), { immediate: true })
   }
   return { controller, snapshot }
 }

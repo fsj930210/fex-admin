@@ -37,8 +37,11 @@
                 [attr.aria-expanded]="row.getIsExpanded()"
                 (click)="row.toggleExpanded()"
               >
-                @if (row.getIsExpanded()) { <fex-chevron-down-icon class="block size-3.5" /> }
-                @else { <fex-chevron-right-icon class="block size-3.5" /> }
+                @if (row.getIsExpanded()) {
+                  <fex-chevron-down-icon class="block size-3.5" />
+                } @else {
+                  <fex-chevron-right-icon class="block size-3.5" />
+                }
               </button>
               <span class="text-sm font-semibold">{{ groupLabel(grid.table, row) }}</span>
               <span class="text-sm text-muted-foreground">=</span>

@@ -106,7 +106,9 @@ export function createFloating(options: FloatingOptions = {}): Floating {
   function setSnapshot(nextSnapshot: FloatingSnapshot) {
     // setSnapshot 是 floating 内部唯一写快照入口。
     // 统一去重可以保证 middleware 只写 CSS 变量时不会误触发 adapter 刷新。
-    store.updateSnapshot((snapshot) => (isSameSnapshot(snapshot, nextSnapshot) ? snapshot : nextSnapshot))
+    store.updateSnapshot((snapshot) =>
+      isSameSnapshot(snapshot, nextSnapshot) ? snapshot : nextSnapshot,
+    )
   }
 
   function getReference() {
@@ -308,9 +310,7 @@ export function createFloating(options: FloatingOptions = {}): Floating {
         ? oppositeSide
         : preferredParts.side
     const resolvedPlacement: Placement =
-      preferredParts.align === 'center'
-        ? resolvedSide
-        : `${resolvedSide}-${preferredParts.align}`
+      preferredParts.align === 'center' ? resolvedSide : `${resolvedSide}-${preferredParts.align}`
     const result = await computePosition(reference, floating, {
       placement: resolvedPlacement,
       strategy: currentOptions.strategy ?? 'absolute',
@@ -340,13 +340,16 @@ export function createFloating(options: FloatingOptions = {}): Floating {
       referenceHeight: referenceRect.height,
       ...(arrowData?.x !== undefined ? { arrowX: arrowData.x } : {}),
       ...(arrowData?.y !== undefined ? { arrowY: arrowData.y } : {}),
-      ...(currentArrow && arrowElement === currentArrow ? { arrowSize: currentArrow.offsetWidth } : {}),
+      ...(currentArrow && arrowElement === currentArrow
+        ? { arrowSize: currentArrow.offsetWidth }
+        : {}),
       ...(currentOptions.zIndex !== undefined ? { zIndex: currentOptions.zIndex } : {}),
     })
 
     // 对外 snapshot 使用和 Floating UI 兼容的 placement 字符串。
     // center 对齐时简化成 top/right/bottom/left，减少 adapter 和样式层分支。
-    const placement = resultParts.align === 'center' ? resultParts.side : `${resultParts.side}-${resultParts.align}`
+    const placement =
+      resultParts.align === 'center' ? resultParts.side : `${resultParts.side}-${resultParts.align}`
     floating.style.setProperty(
       '--floating-transform-origin',
       getTransformOrigin(resultParts.side, arrowData?.x, arrowData?.y),
@@ -366,7 +369,9 @@ export function createFloating(options: FloatingOptions = {}): Floating {
       referenceHidden: Boolean(hideData?.referenceHidden),
       escaped: Boolean(hideData?.escaped),
     }
-    store.updateSnapshot((snapshot) => (isSameSnapshot(snapshot, nextSnapshot) ? snapshot : nextSnapshot))
+    store.updateSnapshot((snapshot) =>
+      isSameSnapshot(snapshot, nextSnapshot) ? snapshot : nextSnapshot,
+    )
   }
 
   function startAutoUpdate() {

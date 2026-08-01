@@ -4,7 +4,10 @@ import type { TreeController, TreeKey, TreeNodeData } from '@fex/components-core
 import { createMemo } from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
 
-export function createTreeItem<TNode extends TreeNodeData>(tree: TreeController<TNode>, key: TreeKey) {
+export function createTreeItem<TNode extends TreeNodeData>(
+  tree: TreeController<TNode>,
+  key: TreeKey,
+) {
   const snapshot = createCoreStoreSignal({
     getSnapshot: tree.getSnapshot,
     subscribe: (listener) => tree.subscribeNode(key, listener),

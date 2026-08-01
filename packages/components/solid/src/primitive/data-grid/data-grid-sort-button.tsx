@@ -12,12 +12,16 @@ interface SortableColumn {
   getToggleSortingHandler: () => ((event: unknown) => void) | undefined
 }
 
-export interface DataGridSortButtonProps<TFeatures extends TableFeatures, TData extends RowData>
-  extends ParentProps<Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'children'>> {
+export interface DataGridSortButtonProps<
+  TFeatures extends TableFeatures,
+  TData extends RowData,
+> extends ParentProps<Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'children'>> {
   column: Column<TFeatures, TData>
 }
 
-export function DataGridSortButton<TFeatures extends TableFeatures, TData extends RowData>(props: DataGridSortButtonProps<TFeatures, TData>) {
+export function DataGridSortButton<TFeatures extends TableFeatures, TData extends RowData>(
+  props: DataGridSortButtonProps<TFeatures, TData>,
+) {
   const [local, rest] = splitProps(props, ['column', 'children', 'class', 'onClick'])
   const column = local.column as unknown as SortableColumn
   const direction = () => column.getIsSorted()
@@ -34,7 +38,19 @@ export function DataGridSortButton<TFeatures extends TableFeatures, TData extend
       }}
     >
       <span>{local.children}</span>
-      <span class="inline-flex items-center" aria-hidden>{direction() === 'asc' ? <ChevronUpIcon class="size-3.5" /> : direction() === 'desc' ? <ChevronDownIcon class="size-3.5" /> : <span class="relative inline-block size-3.5"><ChevronUpIcon class="absolute inset-x-0 top-0 size-3" /><ChevronDownIcon class="absolute inset-x-0 bottom-0 size-3" /></span>}{direction() && column.getSortIndex() >= 0 ? <sup>{column.getSortIndex() + 1}</sup> : null}</span>
+      <span class="inline-flex items-center" aria-hidden>
+        {direction() === 'asc' ? (
+          <ChevronUpIcon class="size-3.5" />
+        ) : direction() === 'desc' ? (
+          <ChevronDownIcon class="size-3.5" />
+        ) : (
+          <span class="relative inline-block size-3.5">
+            <ChevronUpIcon class="absolute inset-x-0 top-0 size-3" />
+            <ChevronDownIcon class="absolute inset-x-0 bottom-0 size-3" />
+          </span>
+        )}
+        {direction() && column.getSortIndex() >= 0 ? <sup>{column.getSortIndex() + 1}</sup> : null}
+      </span>
     </Button>
   )
 }

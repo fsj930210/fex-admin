@@ -1,8 +1,16 @@
 <script setup lang="ts">
-import { getCalendarToday, type CalendarRange } from '@fex/components-core/calendar'
+import {
+  getCalendarToday,
+  type CalendarDate,
+  type CalendarRange,
+} from '@fex/components-core/calendar'
 import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
 import { endOfDate } from '@fex/components-core/date/utils'
-import { DatePickerPreset, RangePickerPanelGroup, useRangePickerContext } from '@fex/components-vue/primitive/date-picker'
+import {
+  DatePickerPreset,
+  RangePickerPanelGroup,
+  useRangePickerContext,
+} from '@fex/components-vue/primitive/date-picker'
 import { computed } from 'vue'
 
 const emit = defineEmits<{ select: [value: CalendarRange] }>()
@@ -18,7 +26,7 @@ const activeKey = computed(() => getRangeKey(rangePicker.rangeValue.value))
 
 function select(value: CalendarRange) {
   emit('select', value)
-  if (value.start) rangePicker.setViewDate(value.start)
+  if (value.start) rangePicker.setViewDate(value.start as CalendarDate)
 }
 
 function lastDays(days: number): CalendarRange {
@@ -42,7 +50,13 @@ function getRangeKey(value: CalendarRange) {
 <template>
   <div class="flex">
     <div class="flex w-32 shrink-0 flex-col gap-1 border-r border-border p-2">
-      <DatePickerPreset v-for="[label, value] in presets" :key="label" :data-selected="activeKey === getRangeKey(value)" class="justify-start" @click="select(value)">
+      <DatePickerPreset
+        v-for="[label, value] in presets"
+        :key="label"
+        :data-selected="activeKey === getRangeKey(value)"
+        class="justify-start"
+        @click="select(value)"
+      >
         {{ label }}
       </DatePickerPreset>
     </div>

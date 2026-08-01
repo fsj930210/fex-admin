@@ -7,7 +7,7 @@ import { useAutoComplete } from './use-auto-complete'
 defineOptions({ inheritAttrs: false })
 const props = defineProps<{ itemKey: string | number; class?: string }>()
 const autoComplete = useAutoComplete('AutoCompleteOption')
-const entry = computed(() => autoComplete.items.value.find(item => item.key === props.itemKey))
+const entry = computed(() => autoComplete.items.value.find((item) => item.key === props.itemKey))
 const active = computed(() => autoComplete.snapshot.value.activeKey === props.itemKey)
 </script>
 <template>
@@ -23,5 +23,7 @@ const active = computed(() => autoComplete.snapshot.value.activeKey === props.it
     @pointermove="autoComplete.controller.setActiveKey(props.itemKey, 'pointer')"
     @pointerdown.prevent
     @click="autoComplete.controller.selectItem(props.itemKey)"
-  ><slot>{{ entry?.label }}</slot></div>
+  >
+    <slot>{{ entry?.label }}</slot>
+  </div>
 </template>

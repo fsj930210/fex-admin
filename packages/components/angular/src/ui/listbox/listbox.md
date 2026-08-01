@@ -18,13 +18,13 @@ import { ListboxRoot, ListboxItem } from '@fex/components-angular/ui/listbox'
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `value` | `SelectionValue \| SelectionValue[]` | - | No | Controlled selected value. |
-| `defaultValue` | `SelectionValue \| SelectionValue[]` | - | No | Initial uncontrolled selected value. |
-| `multiple` | `boolean` | `false` | No | Enables multiple selection. |
-| `disabledValues` | `SelectionValue[]` | `[]` | No | Values that user actions cannot change. |
-| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | No | Layout and ARIA orientation. |
+| Name             | Type                                 | Default      | Required | Description                             |
+| ---------------- | ------------------------------------ | ------------ | -------- | --------------------------------------- |
+| `value`          | `SelectionValue \| SelectionValue[]` | -            | No       | Controlled selected value.              |
+| `defaultValue`   | `SelectionValue \| SelectionValue[]` | -            | No       | Initial uncontrolled selected value.    |
+| `multiple`       | `boolean`                            | `false`      | No       | Enables multiple selection.             |
+| `disabledValues` | `SelectionValue[]`                   | `[]`         | No       | Values that user actions cannot change. |
+| `orientation`    | `'vertical' \| 'horizontal'`         | `'vertical'` | No       | Layout and ARIA orientation.            |
 
 ## Events
 

@@ -1,1 +1,8 @@
-@if (context.items().length) { <div role="list" [class]="className"><ng-container [ngTemplateOutlet]="custom().template" [ngTemplateOutletContext]="{ $implicit: context.items() }" /></div> }
+@if (context.items().length) {
+<div role="list" [class]="className">
+  <ng-container
+    [ngTemplateOutlet]="custom().template"
+    [ngTemplateOutletContext]="{ $implicit: context.items() }"
+  />
+</div>
+}

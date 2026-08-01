@@ -4,8 +4,12 @@ import { InputClear, InputControl, InputRoot, InputSuffix } from '../input/input
 import { PopoverTrigger } from '../popover/popover'
 import { useAutoComplete } from './context'
 
-export interface AutoCompleteTriggerProps
-  extends ParentProps<Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue' | 'disabled' | 'readOnly'>> {
+export interface AutoCompleteTriggerProps extends ParentProps<
+  Omit<
+    JSX.InputHTMLAttributes<HTMLInputElement>,
+    'value' | 'defaultValue' | 'disabled' | 'readOnly' | 'prefix'
+  >
+> {
   class?: string
   clearable?: boolean
   invalid?: boolean
@@ -16,10 +20,19 @@ export interface AutoCompleteTriggerProps
 export function AutoCompleteTrigger(props: AutoCompleteTriggerProps) {
   const autoComplete = useAutoComplete('AutoCompleteTrigger')
   const [local, controlProps] = splitProps(props, [
-    'children', 'class', 'clearable', 'invalid', 'status', 'prefix', 'suffix', 'onBlur', 'onFocus', 'onKeyDown',
+    'children',
+    'class',
+    'clearable',
+    'invalid',
+    'status',
+    'prefix',
+    'suffix',
+    'onBlur',
+    'onFocus',
+    'onKeyDown',
   ])
   function keydown(event: KeyboardEvent & { currentTarget: HTMLInputElement }) {
-    if (typeof local.onKeyDown === 'function') local.onKeyDown(event)
+    if (typeof local.onKeyDown === 'function') local.onKeyDown(event as never)
     if (event.defaultPrevented) return
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault()
@@ -52,7 +65,11 @@ export function AutoCompleteTrigger(props: AutoCompleteTriggerProps) {
             role="combobox"
             aria-expanded={autoComplete.snapshot().open}
             aria-controls={autoComplete.listId}
-            aria-activedescendant={autoComplete.snapshot().activeKey === undefined ? undefined : `${autoComplete.listId}-${autoComplete.snapshot().activeKey}`}
+            aria-activedescendant={
+              autoComplete.snapshot().activeKey === undefined
+                ? undefined
+                : `${autoComplete.listId}-${autoComplete.snapshot().activeKey}`
+            }
             onFocus={(event) => {
               if (typeof local.onFocus === 'function') local.onFocus(event)
               if (!event.defaultPrevented) autoComplete.controller.setOpen(true, 'focus')
@@ -64,7 +81,11 @@ export function AutoCompleteTrigger(props: AutoCompleteTriggerProps) {
             onKeyDown={keydown}
           />
           {local.clearable ? <InputClear /> : null}
-          {(autoComplete.loading() || local.suffix) && <InputSuffix>{autoComplete.loading() ? <LoadingIcon class="animate-spin" /> : local.suffix}</InputSuffix>}
+          {(autoComplete.loading() || local.suffix) && (
+            <InputSuffix>
+              {autoComplete.loading() ? <LoadingIcon class="animate-spin" /> : local.suffix}
+            </InputSuffix>
+          )}
         </InputRoot>
       )}
     </PopoverTrigger>

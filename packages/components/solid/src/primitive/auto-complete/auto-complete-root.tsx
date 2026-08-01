@@ -7,39 +7,59 @@ import type {
 import { createMemo, createUniqueId, type ParentProps } from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
 import { Popover, type PopoverProps } from '../popover/popover'
-import { AutoCompleteContext } from './context'
+import { AutoCompleteContext, type AutoCompleteContextValue } from './context'
 
-type Item = Record<string, unknown>
-export interface AutoCompleteRootProps extends ParentProps, Omit<PopoverProps, 'children' | 'open' | 'defaultOpen' | 'onOpenChange'> {
-  items?: readonly Item[]
-  fieldNames?: Partial<AutoCompleteFieldNames<Item>>
+export interface AutoCompleteRootProps<TItem extends object = Record<string, unknown>>
+  extends ParentProps, Omit<PopoverProps, 'children' | 'open' | 'defaultOpen' | 'onOpenChange'> {
+  items?: readonly TItem[]
+  fieldNames?: Partial<AutoCompleteFieldNames<TItem>>
   value?: string
   defaultValue?: string
-  onChange?: (value: string, meta: AutoCompleteChangeMeta<Item>) => void
-  onSearch?: AutoCompleteControllerOptions<Item>['onSearch']
-  onSelect?: AutoCompleteControllerOptions<Item>['onSelect']
-  onClear?: AutoCompleteControllerOptions<Item>['onClear']
+  onChange?: (value: string, meta: AutoCompleteChangeMeta<TItem>) => void
+  onSearch?: AutoCompleteControllerOptions<TItem>['onSearch']
+  onSelect?: AutoCompleteControllerOptions<TItem>['onSelect']
+  onClear?: AutoCompleteControllerOptions<TItem>['onClear']
   open?: boolean
   defaultOpen?: boolean
-  onOpenChange?: AutoCompleteControllerOptions<Item>['onOpenChange']
-  filterOption?: AutoCompleteControllerOptions<Item>['filterOption']
+  onOpenChange?: AutoCompleteControllerOptions<TItem>['onOpenChange']
+  filterOption?: AutoCompleteControllerOptions<TItem>['filterOption']
   loading?: boolean
   disabled?: boolean
   readOnly?: boolean
   closeOnSelect?: boolean
   loop?: boolean
 }
-export function AutoCompleteRoot(props: AutoCompleteRootProps) {
-  const controller = createAutoCompleteController<Item>({
-    get items() { return props.items },
-    get fieldNames() { return props.fieldNames },
-    get value() { return props.value },
-    get defaultValue() { return props.defaultValue },
-    get open() { return props.open },
-    get defaultOpen() { return props.defaultOpen },
-    get filterOption() { return props.filterOption },
-    get closeOnSelect() { return props.closeOnSelect },
-    get loop() { return props.loop },
+export function AutoCompleteRoot<TItem extends object = Record<string, unknown>>(
+  props: AutoCompleteRootProps<TItem>,
+) {
+  const controller = createAutoCompleteController<TItem>({
+    get items() {
+      return props.items
+    },
+    get fieldNames() {
+      return props.fieldNames
+    },
+    get value() {
+      return props.value
+    },
+    get defaultValue() {
+      return props.defaultValue
+    },
+    get open() {
+      return props.open
+    },
+    get defaultOpen() {
+      return props.defaultOpen
+    },
+    get filterOption() {
+      return props.filterOption
+    },
+    get closeOnSelect() {
+      return props.closeOnSelect
+    },
+    get loop() {
+      return props.loop
+    },
     onChange: (value, meta) => props.onChange?.(value, meta),
     onSearch: (value, meta) => props.onSearch?.(value, meta),
     onSelect: (value, meta) => props.onSelect?.(value, meta),
@@ -51,8 +71,8 @@ export function AutoCompleteRoot(props: AutoCompleteRootProps) {
     controller,
     snapshot,
     items: createMemo(() => {
-      props.items
-      snapshot().value
+      void props.items
+      void snapshot().value
       return controller.getVisibleItems()
     }),
     loading: () => props.loading === true,
@@ -61,20 +81,22 @@ export function AutoCompleteRoot(props: AutoCompleteRootProps) {
     listId: `auto-complete-${createUniqueId()}`,
   }
   return (
-    <AutoCompleteContext.Provider value={context}>
+    <AutoCompleteContext.Provider value={context as unknown as AutoCompleteContextValue}>
       <Popover
         trigger={[]}
-        placement={props.placement}
-        side={props.side}
-        align={props.align}
-        alignOffset={props.alignOffset}
-        sideOffset={props.sideOffset}
-        arrow={props.arrow}
-        getPopupContainer={props.getPopupContainer}
-        hoverCloseDelay={props.hoverCloseDelay}
-        hoverOpenDelay={props.hoverOpenDelay}
+        {...(props.placement === undefined ? {} : { placement: props.placement })}
+        {...(props.side === undefined ? {} : { side: props.side })}
+        {...(props.align === undefined ? {} : { align: props.align })}
+        {...(props.alignOffset === undefined ? {} : { alignOffset: props.alignOffset })}
+        {...(props.sideOffset === undefined ? {} : { sideOffset: props.sideOffset })}
+        {...(props.arrow === undefined ? {} : { arrow: props.arrow })}
+        {...(props.getPopupContainer === undefined
+          ? {}
+          : { getPopupContainer: props.getPopupContainer })}
+        {...(props.hoverCloseDelay === undefined ? {} : { hoverCloseDelay: props.hoverCloseDelay })}
+        {...(props.hoverOpenDelay === undefined ? {} : { hoverOpenDelay: props.hoverOpenDelay })}
+        {...(props.defaultOpen === undefined ? {} : { defaultOpen: props.defaultOpen })}
         open={snapshot().open}
-        defaultOpen={props.defaultOpen}
         onOpenChange={(open) => controller.setOpen(open, open ? 'programmatic' : 'outside')}
       >
         {props.children}

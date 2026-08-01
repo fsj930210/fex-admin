@@ -179,11 +179,12 @@ export function createSortableController<TItems extends SortableItems>({
       y: axis === 'x' ? 0 : input.clientY - pointerStart.y,
     }
     if (!snapshot.dragging) {
-      const activationDistance = axis === 'x'
-        ? Math.abs(dragOffset.x)
-        : axis === 'y'
-          ? Math.abs(dragOffset.y)
-          : Math.hypot(dragOffset.x, dragOffset.y)
+      const activationDistance =
+        axis === 'x'
+          ? Math.abs(dragOffset.x)
+          : axis === 'y'
+            ? Math.abs(dragOffset.y)
+            : Math.hypot(dragOffset.x, dragOffset.y)
       if (activationDistance < POINTER_ACTIVATION_DISTANCE) return
       motion.measureFirst()
       setSnapshot({
@@ -319,7 +320,13 @@ export function createSortableController<TItems extends SortableItems>({
       width: active.activeRect.width,
       height: active.activeRect.height,
     }
-    const toIndex = getNextIndexByAdjacentOverlap(containerItems, active.id, containerId, activeRect, dragOffset)
+    const toIndex = getNextIndexByAdjacentOverlap(
+      containerItems,
+      active.id,
+      containerId,
+      activeRect,
+      dragOffset,
+    )
     if (toIndex === null) {
       return previewItems
     }
@@ -335,7 +342,14 @@ export function createSortableController<TItems extends SortableItems>({
     containerItems: SortableId[],
     activeId: SortableId,
     containerId: string,
-    activeRect: { left: number; right: number; top: number; bottom: number; width: number; height: number },
+    activeRect: {
+      left: number
+      right: number
+      top: number
+      bottom: number
+      width: number
+      height: number
+    },
     dragOffset: { x: number; y: number },
   ) {
     const activeIndex = containerItems.indexOf(activeId)
@@ -345,10 +359,20 @@ export function createSortableController<TItems extends SortableItems>({
       const nextRect = getItemRect(containerItems[activeIndex + 1], containerId)
       const mainOffset = axis === 'x' ? dragOffset.x : dragOffset.y
 
-      if (mainOffset > 0 && nextRect && getMainAxisOverlap(activeRect, nextRect) >= getMainAxisSize(nextRect) * SORTABLE_SWAP_OVERLAP_RATIO) {
+      if (
+        mainOffset > 0 &&
+        nextRect &&
+        getMainAxisOverlap(activeRect, nextRect) >=
+          getMainAxisSize(nextRect) * SORTABLE_SWAP_OVERLAP_RATIO
+      ) {
         return activeIndex + 1
       }
-      if (mainOffset < 0 && previousRect && getMainAxisOverlap(activeRect, previousRect) >= getMainAxisSize(previousRect) * SORTABLE_SWAP_OVERLAP_RATIO) {
+      if (
+        mainOffset < 0 &&
+        previousRect &&
+        getMainAxisOverlap(activeRect, previousRect) >=
+          getMainAxisSize(previousRect) * SORTABLE_SWAP_OVERLAP_RATIO
+      ) {
         return activeIndex - 1
       }
 
@@ -404,10 +428,16 @@ export function createSortableController<TItems extends SortableItems>({
     targetRect: { left: number; right: number; top: number; bottom: number },
   ) {
     if (axis === 'x') {
-      return Math.max(0, Math.min(activeRect.right, targetRect.right) - Math.max(activeRect.left, targetRect.left))
+      return Math.max(
+        0,
+        Math.min(activeRect.right, targetRect.right) - Math.max(activeRect.left, targetRect.left),
+      )
     }
 
-    return Math.max(0, Math.min(activeRect.bottom, targetRect.bottom) - Math.max(activeRect.top, targetRect.top))
+    return Math.max(
+      0,
+      Math.min(activeRect.bottom, targetRect.bottom) - Math.max(activeRect.top, targetRect.top),
+    )
   }
 
   function getContainerIdAtPoint(clientX: number, clientY: number) {

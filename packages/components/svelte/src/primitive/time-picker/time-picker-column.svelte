@@ -20,7 +20,7 @@
   let { options, selectedValue, disabled = false, onselect, class: className, onkeydown, ...rest }: Props = $props()
   const context = getContext<TimePickerContext>(timePickerContextKey)
   if (!context) throw new Error('TimePickerColumn must be used inside TimePickerRoot.')
-  let listElement: HTMLDivElement
+  let listElement = $state<HTMLDivElement | undefined>(undefined)
   const itemElements = new Map<ColumnValue, HTMLButtonElement>()
   let activeValue = $state<ColumnValue>()
   const resolvedDisabled = $derived(context.disabled() || disabled)

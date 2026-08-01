@@ -1,6 +1,5 @@
 import type {
   SelectController,
-  SelectFilterOption,
   SelectOption,
   SelectVirtualOptions,
 } from '@fex/components-core/select/types'

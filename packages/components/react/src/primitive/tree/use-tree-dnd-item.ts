@@ -1,9 +1,13 @@
-import type {
-  DndFeatureApi,
-  TreeDropIntent,
-} from '@fex/components-core/tree/features/dnd'
+import type { DndFeatureApi, TreeDropIntent } from '@fex/components-core/tree/features/dnd'
 import type { TreeController, TreeKey, TreeNodeData } from '@fex/components-core/tree/types'
-import { DND_DRAG_START_RECT_HEIGHT, DND_DRAG_START_RECT_WIDTH, DND_DRAG_START_RECT_X, DND_DRAG_START_RECT_Y, DND_DRAG_START_X, DND_DRAG_START_Y } from '@fex/components-core/interactions/dnd-store'
+import {
+  DND_DRAG_START_RECT_HEIGHT,
+  DND_DRAG_START_RECT_WIDTH,
+  DND_DRAG_START_RECT_X,
+  DND_DRAG_START_RECT_Y,
+  DND_DRAG_START_X,
+  DND_DRAG_START_Y,
+} from '@fex/components-core/interactions/dnd-store'
 import { useRef, useSyncExternalStore, type CSSProperties } from 'react'
 import { useComposedRef } from '../../hooks/use-composed-ref'
 import { useDraggable } from '../../hooks/use-draggable'
@@ -33,27 +37,29 @@ export function useTreeDndItem<TNode extends TreeNodeData>({
   const item = tree.getItem(itemKey)
   const dropDisabled = disabled || item?.disabled === true || !feature
   const dragDisabled = dropDisabled || feature?.canDrag(itemKey) !== true
-  const subscribeActiveIntent = useMemoizedFn((listener: () => void) => (
-    feature?.subscribeActiveIntent(listener) ?? (() => {})
-  ))
+  const subscribeActiveIntent = useMemoizedFn(
+    (listener: () => void) => feature?.subscribeActiveIntent(listener) ?? (() => {}),
+  )
   const activeIntent = useSyncExternalStore(
     subscribeActiveIntent,
     () => feature?.getActiveIntent() ?? null,
     () => null,
   )
 
-  const resolveIntent = useMemoizedFn((args: Pick<TreeDropEventArgs, 'source' | 'pointer' | 'targetRect'>) => {
-    const sourceKey = getTreeKey(args.source.treeKey)
-    if (sourceKey === undefined) return undefined
-    return feature?.resolve({
-      sourceKey,
-      targetKey: itemKey,
-      pointer: args.pointer,
-      dragRect: getDragRect(args.source, args.pointer),
-      targetRect: args.targetRect,
-      indent,
-    })
-  })
+  const resolveIntent = useMemoizedFn(
+    (args: Pick<TreeDropEventArgs, 'source' | 'pointer' | 'targetRect'>) => {
+      const sourceKey = getTreeKey(args.source.treeKey)
+      if (sourceKey === undefined) return undefined
+      return feature?.resolve({
+        sourceKey,
+        targetKey: itemKey,
+        pointer: args.pointer,
+        dragRect: getDragRect(args.source, args.pointer),
+        targetRect: args.targetRect,
+        indent,
+      })
+    },
+  )
 
   const updateActiveIntent = useMemoizedFn((nextIntent: TreeDropIntent | null | undefined) => {
     feature?.setActiveIntent(nextIntent?.valid ? nextIntent : null)
@@ -137,9 +143,14 @@ function getDragRect(source: Record<string, unknown>, pointer: { x: number; y: n
   const width = source[DND_DRAG_START_RECT_WIDTH]
   const height = source[DND_DRAG_START_RECT_HEIGHT]
   if (
-    typeof startX !== 'number' || typeof startY !== 'number' || typeof x !== 'number'
-    || typeof y !== 'number' || typeof width !== 'number' || typeof height !== 'number'
-  ) return undefined
+    typeof startX !== 'number' ||
+    typeof startY !== 'number' ||
+    typeof x !== 'number' ||
+    typeof y !== 'number' ||
+    typeof width !== 'number' ||
+    typeof height !== 'number'
+  )
+    return undefined
   return { x: x + pointer.x - startX, y: y + pointer.y - startY, width, height }
 }
 
@@ -155,7 +166,10 @@ function getTreeTitleOffset(element: HTMLElement | null) {
   return title.getBoundingClientRect().left - element.getBoundingClientRect().left
 }
 
-function getDropIndicatorStyle(element: HTMLElement | null, indicatorOffset: number): CSSProperties | undefined {
+function getDropIndicatorStyle(
+  element: HTMLElement | null,
+  indicatorOffset: number,
+): CSSProperties | undefined {
   if (!element) return undefined
   const itemRect = element.getBoundingClientRect()
   const treeRect = element.closest<HTMLElement>('[data-slot="tree"]')?.getBoundingClientRect()

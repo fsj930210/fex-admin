@@ -22,15 +22,15 @@ const options = [{ value: 'kickflip', title: 'Kickflip' }]
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `items` | `TItem[]` | `[]` | No | Items used to map selected values back to `selectedItems`. |
-| `value` | `SelectionValue \| SelectionValue[]` | - | No | Controlled selected value. |
-| `defaultValue` | `SelectionValue \| SelectionValue[]` | - | No | Initial uncontrolled selected value. |
-| `multiple` | `boolean` | `false` | No | Enables multiple selection. |
-| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | No | Layout and ARIA orientation. |
-| `disabled` | `boolean` | `false` | No | Disables all items from user changes. |
-| `onChange` | `(valueOrValues, meta) => void` | - | No | Fires when selected values change. |
+| Name           | Type                                 | Default      | Required | Description                                                |
+| -------------- | ------------------------------------ | ------------ | -------- | ---------------------------------------------------------- |
+| `items`        | `TItem[]`                            | `[]`         | No       | Items used to map selected values back to `selectedItems`. |
+| `value`        | `SelectionValue \| SelectionValue[]` | -            | No       | Controlled selected value.                                 |
+| `defaultValue` | `SelectionValue \| SelectionValue[]` | -            | No       | Initial uncontrolled selected value.                       |
+| `multiple`     | `boolean`                            | `false`      | No       | Enables multiple selection.                                |
+| `orientation`  | `'vertical' \| 'horizontal'`         | `'vertical'` | No       | Layout and ARIA orientation.                               |
+| `disabled`     | `boolean`                            | `false`      | No       | Disables all items from user changes.                      |
+| `onChange`     | `(valueOrValues, meta) => void`      | -            | No       | Fires when selected values change.                         |
 
 ## Events
 

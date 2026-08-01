@@ -10,12 +10,7 @@ import {
   type RadioStyleProps,
 } from '@fex/components-styles/radio'
 import { cn } from '@fex/utils'
-import {
-  useRef,
-  type ButtonHTMLAttributes,
-  type HTMLAttributes,
-  type Ref,
-} from 'react'
+import { useRef, type ButtonHTMLAttributes, type HTMLAttributes, type Ref } from 'react'
 import { useCoreStore } from '../../hooks/use-core-store'
 import { useLazyRef } from '../../hooks/use-lazy-ref'
 
@@ -28,8 +23,7 @@ export interface RadioChangeMeta {
 }
 
 export interface RadioGroupProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>,
-    RadioGroupStyleProps {
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>, RadioGroupStyleProps {
   value?: RadioValue
   defaultValue?: RadioValue
   disabled?: boolean
@@ -38,14 +32,16 @@ export interface RadioGroupProps
 }
 
 export interface RadioProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'defaultValue' | 'onChange' | 'type' | 'value'>,
+  extends
+    Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'defaultValue' | 'onChange' | 'type' | 'value'>,
     RadioStyleProps {
   value: RadioValue
   ref?: Ref<HTMLButtonElement>
 }
 
 export interface RadioButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'defaultValue' | 'onChange' | 'type' | 'value'>,
+  extends
+    Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'defaultValue' | 'onChange' | 'type' | 'value'>,
     RadioButtonStyleProps {
   value: RadioValue
   ref?: Ref<HTMLButtonElement>

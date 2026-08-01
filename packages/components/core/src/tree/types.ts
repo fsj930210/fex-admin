@@ -67,7 +67,9 @@ export interface TreeOptions<TNode extends TreeNodeData> {
   defaultFocusedKey?: TreeKey | null | undefined
   onFocusedKeyChange?: ((key: TreeKey | null) => void) | undefined
 
-  onTreeDataChange?: ((treeData: readonly TNode[], mutation: TreeMutationResult) => void) | undefined
+  onTreeDataChange?:
+    | ((treeData: readonly TNode[], mutation: TreeMutationResult) => void)
+    | undefined
 }
 
 export interface TreeAsyncLoaderOptions<TNode extends TreeNodeData> {
@@ -127,10 +129,7 @@ export interface TreeController<TNode extends TreeNodeData> {
   getFeature<TApi>(id: string): TApi | undefined
   updateOptions(options: Partial<TreeOptions<TNode>>): void
 
-  updateNode(
-    key: TreeKey,
-    patch: Partial<TNode> | ((node: TNode) => TNode),
-  ): TreeMutationResult
+  updateNode(key: TreeKey, patch: Partial<TNode> | ((node: TNode) => TNode)): TreeMutationResult
   insertNode(input: TreeInsertInput<TNode>): TreeMutationResult
   removeNode(key: TreeKey): TreeMutationResult
   moveNode(input: TreeMoveInput): TreeMutationResult

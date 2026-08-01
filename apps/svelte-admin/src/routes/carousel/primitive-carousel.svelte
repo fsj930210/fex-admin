@@ -20,6 +20,7 @@
     children: Snippet
   } = $props()
 
+  // svelte-ignore state_referenced_locally -- createCarousel reads the stable config object through its getters.
   const { controller, snapshot, mount } = createCarousel(config)
 </script>
 

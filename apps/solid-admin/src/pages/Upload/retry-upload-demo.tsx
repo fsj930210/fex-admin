@@ -1,2 +1,21 @@
-import { UploadRoot, UploadTrigger } from '@fex/components-solid/primitive/upload'; import { Button } from '@fex/components-solid/ui/button'; import { createMultipartDemoUpload } from './create-multipart-upload'; import { DemoUploadList } from './demo-list'; import { UploadDemoSection } from './demo-section'
-export function RetryUploadDemo() { const upload = createMultipartDemoUpload('retry'); return <UploadDemoSection title="失败分片重传" description="第 2 个分片第一次会被有意置为失败。点击“重试”后，已成功分片保持完成状态，只重新上传失败及尚未上传的分片。"><UploadRoot controller={upload}><UploadTrigger>{({ props }) => <Button {...props}>选择至少 2 MB 的文件</Button>}</UploadTrigger><DemoUploadList showMultipart /></UploadRoot></UploadDemoSection> }
+import { UploadRoot, UploadTrigger } from '@fex/components-solid/primitive/upload'
+import { Button } from '@fex/components-solid/ui/button'
+import { createMultipartDemoUpload } from './create-multipart-upload'
+import { DemoUploadList } from './demo-list'
+import { UploadDemoSection } from './demo-section'
+export function RetryUploadDemo() {
+  const upload = createMultipartDemoUpload('retry')
+  return (
+    <UploadDemoSection
+      title="失败分片重传"
+      description="第 2 个分片第一次会被有意置为失败。点击“重试”后，已成功分片保持完成状态，只重新上传失败及尚未上传的分片。"
+    >
+      <UploadRoot controller={upload}>
+        <UploadTrigger>
+          {({ props }) => <Button {...props}>选择至少 2 MB 的文件</Button>}
+        </UploadTrigger>
+        <DemoUploadList showMultipart />
+      </UploadRoot>
+    </UploadDemoSection>
+  )
+}

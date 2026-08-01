@@ -21,10 +21,14 @@ interface SortableRootContentProps<TItems extends SortableItems> {
   render: JSX.Element | ((state: { items: TItems }) => JSX.Element)
 }
 
-function SortableRootContent<TItems extends SortableItems>(props: SortableRootContentProps<TItems>) {
-  const rendered = createMemo(() => typeof props.render === 'function'
-    ? (props.render as (state: { items: TItems }) => JSX.Element)({ items: props.items })
-    : props.render)
+function SortableRootContent<TItems extends SortableItems>(
+  props: SortableRootContentProps<TItems>,
+) {
+  const rendered = createMemo(() =>
+    typeof props.render === 'function'
+      ? (props.render as (state: { items: TItems }) => JSX.Element)({ items: props.items })
+      : props.render,
+  )
   return <>{rendered()}</>
 }
 
@@ -118,7 +122,9 @@ export function SortableOverlay(props: SortableOverlayProps) {
             )}
           >
             {typeof props.children === 'function'
-              ? (props.children as (activeId: SortableId) => JSX.Element)(sortable.snapshot().activeId as SortableId)
+              ? (props.children as (activeId: SortableId) => JSX.Element)(
+                  sortable.snapshot().activeId as SortableId,
+                )
               : props.children}
           </div>
         </Portal>

@@ -5,7 +5,16 @@ Angular Upload 是 standalone、Signal-first 的共享上传 controller 适配�
 ## 导入
 
 ```ts
-import { UploadRoot, UploadTrigger, UploadList, UploadListTemplate, UploadItem, UploadItemTemplate, UploadItemProgress, createUploadSignals } from '@fex/components-angular/primitive/upload'
+import {
+  UploadRoot,
+  UploadTrigger,
+  UploadList,
+  UploadListTemplate,
+  UploadItem,
+  UploadItemTemplate,
+  UploadItemProgress,
+  createUploadSignals,
+} from '@fex/components-angular/primitive/upload'
 ```
 
 ## 基础组合
@@ -16,9 +25,11 @@ import { UploadRoot, UploadTrigger, UploadList, UploadListTemplate, UploadItem, 
   <fex-upload-list>
     <ng-template fexUploadList let-items>
       @for (item of items; track item.id) {
-        <fex-upload-item [id]="item.id">
-          <ng-template fexUploadItem let-state>{{ state.item()?.name }}<fex-upload-progress /></ng-template>
-        </fex-upload-item>
+      <fex-upload-item [id]="item.id">
+        <ng-template fexUploadItem let-state
+          >{{ state.item()?.name }}<fex-upload-progress
+        /></ng-template>
+      </fex-upload-item>
       }
     </ng-template>
   </fex-upload-list>

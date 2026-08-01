@@ -15,5 +15,6 @@ const { snapshot } = useSliderContext('SliderTrack')
     :data-disabled="snapshot.disabled ? 'true' : undefined"
     :data-orientation="snapshot.orientation"
     :class="cn(sliderTrackClassName, attrs.class as string | undefined)"
-  ><slot /></span>
+    ><slot
+  /></span>
 </template>

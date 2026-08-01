@@ -24,11 +24,9 @@ export function createTimePickerController(
   }
 
   function publish(value: TimeValue | null, scroll?: 'auto' | 'smooth') {
-    store.updateSnapshot(snapshot => ({
+    store.updateSnapshot((snapshot) => ({
       value,
-      scrollRequest: scroll
-        ? { id: ++scrollRequestId, behavior: scroll }
-        : snapshot.scrollRequest,
+      scrollRequest: scroll ? { id: ++scrollRequestId, behavior: scroll } : snapshot.scrollRequest,
     }))
   }
 
@@ -76,11 +74,7 @@ export function createTimePickerController(
     },
     selectPeriod(period: TimePeriod) {
       const current = baseValue()
-      change(
-        { ...current, hour: from12Hour(to12Hour(current.hour), period) },
-        'period',
-        'smooth',
-      )
+      change({ ...current, hour: from12Hour(to12Hour(current.hour), period) }, 'period', 'smooth')
     },
     clear() {
       change(null, 'clear')

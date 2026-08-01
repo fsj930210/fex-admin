@@ -34,7 +34,10 @@ abstract class DatePickerFooterAction {
 
   protected owner() {
     const owner = this.datePicker ?? this.rangePicker
-    if (!owner) throw new Error('DatePicker footer actions must be used within DatePickerRoot or RangePickerRoot')
+    if (!owner)
+      throw new Error(
+        'DatePicker footer actions must be used within DatePickerRoot or RangePickerRoot',
+      )
     return owner
   }
 }
@@ -44,11 +47,17 @@ abstract class DatePickerFooterAction {
   standalone: true,
   hostDirectives: [Button],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'data-slot': 'date-picker-confirm', '[class]': 'className()', '(click)': 'owner().confirm()' },
+  host: {
+    'data-slot': 'date-picker-confirm',
+    '[class]': 'className()',
+    '(click)': 'owner().confirm()',
+  },
   template: '<ng-content>确定</ng-content>',
 })
 export class DatePickerConfirm extends DatePickerFooterAction {
-  protected readonly className = createHostClassName(() => cn(buttonPrimitiveClassName(), datePickerConfirmClassName))
+  protected readonly className = createHostClassName(() =>
+    cn(buttonPrimitiveClassName(), datePickerConfirmClassName),
+  )
 }
 
 @Component({
@@ -56,11 +65,17 @@ export class DatePickerConfirm extends DatePickerFooterAction {
   standalone: true,
   hostDirectives: [Button],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { 'data-slot': 'date-picker-cancel', '[class]': 'className()', '(click)': 'owner().cancel()' },
+  host: {
+    'data-slot': 'date-picker-cancel',
+    '[class]': 'className()',
+    '(click)': 'owner().cancel()',
+  },
   template: '<ng-content>取消</ng-content>',
 })
 export class DatePickerCancel extends DatePickerFooterAction {
-  protected readonly className = createHostClassName(() => cn(buttonPrimitiveClassName(), datePickerCancelClassName))
+  protected readonly className = createHostClassName(() =>
+    cn(buttonPrimitiveClassName(), datePickerCancelClassName),
+  )
 }
 
 @Component({
@@ -72,7 +87,9 @@ export class DatePickerCancel extends DatePickerFooterAction {
   template: '<ng-content>今天</ng-content>',
 })
 export class DatePickerToday extends DatePickerFooterAction {
-  protected readonly className = createHostClassName(() => cn(buttonPrimitiveClassName(), datePickerTodayClassName))
+  protected readonly className = createHostClassName(() =>
+    cn(buttonPrimitiveClassName(), datePickerTodayClassName),
+  )
 
   today() {
     const owner = this.owner()
@@ -90,5 +107,7 @@ export class DatePickerToday extends DatePickerFooterAction {
   template: '<ng-content />',
 })
 export class DatePickerPreset {
-  protected readonly className = createHostClassName(() => cn(buttonPrimitiveClassName(), datePickerPresetClassName))
+  protected readonly className = createHostClassName(() =>
+    cn(buttonPrimitiveClassName(), datePickerPresetClassName),
+  )
 }

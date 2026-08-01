@@ -1,4 +1,9 @@
-import { Radio, RadioButton, RadioGroup, type RadioValue } from '@fex/components-react/primitive/radio'
+import {
+  Radio,
+  RadioButton,
+  RadioGroup,
+  type RadioValue,
+} from '@fex/components-react/primitive/radio'
 import { Card } from '@fex/components-react/ui/card'
 import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
@@ -9,7 +14,15 @@ const options = [
   { label: 'Orange', value: 'orange' },
 ] as const
 
-function DemoSection({ title, description, children }: { title: string; description: string; children: ReactNode }) {
+function DemoSection({
+  title,
+  description,
+  children,
+}: {
+  title: string
+  description: string
+  children: ReactNode
+}) {
   return (
     <Card title={title} description={description}>
       <div className="grid min-w-0 gap-space-md">{children}</div>
@@ -17,7 +30,15 @@ function DemoSection({ title, description, children }: { title: string; descript
   )
 }
 
-function RadioRow({ value, children, disabled }: { value: RadioValue; children: ReactNode; disabled?: boolean }) {
+function RadioRow({
+  value,
+  children,
+  disabled,
+}: {
+  value: RadioValue
+  children: ReactNode
+  disabled?: boolean
+}) {
   return (
     <label className="inline-flex min-w-0 items-center gap-2 text-sm text-foreground has-disabled:opacity-60">
       <Radio value={value} disabled={disabled} />
@@ -57,7 +78,10 @@ export function RadioPage() {
             </RadioGroup>
           </DemoSection>
 
-          <DemoSection title="Controlled" description="Controlled state uses value and onValueChange.">
+          <DemoSection
+            title="Controlled"
+            description="Controlled state uses value and onValueChange."
+          >
             <RadioGroup value={controlled} onValueChange={setControlled} orientation="horizontal">
               {options.map((option) => (
                 <RadioRow key={option.value} value={option.value}>
@@ -68,7 +92,10 @@ export function RadioPage() {
             <p className="text-sm text-muted-foreground">Current value: {controlled}</p>
           </DemoSection>
 
-          <DemoSection title="Group" description="Vertical group layout still uses one selected value.">
+          <DemoSection
+            title="Group"
+            description="Vertical group layout still uses one selected value."
+          >
             <RadioGroup value={groupValue} onValueChange={setGroupValue}>
               {options.map((option) => (
                 <RadioRow key={option.value} value={option.value}>
@@ -79,7 +106,10 @@ export function RadioPage() {
             <p className="text-sm text-muted-foreground">Selected: {groupValue}</p>
           </DemoSection>
 
-          <DemoSection title="RadioButton" description="Button-form radios share the same RadioGroup value.">
+          <DemoSection
+            title="RadioButton"
+            description="Button-form radios share the same RadioGroup value."
+          >
             <RadioGroup
               value={buttonValue}
               onValueChange={setButtonValue}
@@ -95,7 +125,10 @@ export function RadioPage() {
             <p className="text-sm text-muted-foreground">Current value: {buttonValue}</p>
           </DemoSection>
 
-          <DemoSection title="Disabled" description="Disabled state can live on the group or a single radio.">
+          <DemoSection
+            title="Disabled"
+            description="Disabled state can live on the group or a single radio."
+          >
             <RadioGroup defaultValue="pear" orientation="horizontal">
               <RadioRow value="apple">Apple</RadioRow>
               <RadioRow value="pear">Pear</RadioRow>
@@ -103,7 +136,12 @@ export function RadioPage() {
                 Orange disabled
               </RadioRow>
             </RadioGroup>
-            <RadioGroup defaultValue="apple" disabled orientation="horizontal" className="grid grid-cols-3 gap-0">
+            <RadioGroup
+              defaultValue="apple"
+              disabled
+              orientation="horizontal"
+              className="grid grid-cols-3 gap-0"
+            >
               {options.map((option) => (
                 <RadioButton key={option.value} value={option.value}>
                   {option.label}

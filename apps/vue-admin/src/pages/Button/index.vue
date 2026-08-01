@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import PrimitiveButton from "@fex/components-vue/primitive/button";
-import Button from "@fex/components-vue/ui/button";
-import Card from "@fex/components-vue/ui/card";
-import { PlusIcon } from "@fex/components-vue/icon/plus";
+import PrimitiveButton from '@fex/components-vue/primitive/button'
+import Button from '@fex/components-vue/ui/button'
+import Card from '@fex/components-vue/ui/card'
+import { PlusIcon } from '@fex/components-vue/icon/plus'
 
 const variants = [
-  "default",
-  "outline",
-  "secondary",
-  "ghost",
-  "destructive",
-  "link",
-  "dashed",
-] as const;
-const sizes = ["xs", "sm", "default", "lg", "icon", "icon-xs", "icon-sm", "icon-lg"] as const;
+  'default',
+  'outline',
+  'secondary',
+  'ghost',
+  'destructive',
+  'link',
+  'dashed',
+] as const
+const sizes = ['xs', 'sm', 'default', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'] as const
 const effects = [
-  "expand-icon",
-  "ring-hover",
-  "shine",
-  "shine-hover",
-  "gooey-left",
-  "gooey-right",
-  "gradient-slide-show",
-] as const;
+  'expand-icon',
+  'ring-hover',
+  'shine',
+  'shine-hover',
+  'gooey-left',
+  'gooey-right',
+  'gradient-slide-show',
+] as const
 </script>
 
 <template>
@@ -49,13 +49,17 @@ const effects = [
 
         <Card title="Ui" description="面向业务的默认按钮封装。">
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
-            <Button v-for="variant in variants" :key="variant" :variant="variant">{{ variant }}</Button>
+            <Button v-for="variant in variants" :key="variant" :variant="variant">{{
+              variant
+            }}</Button>
           </div>
         </Card>
 
         <Card title="Variants" description="按钮的基础视觉语义。">
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
-            <Button v-for="variant in variants" :key="variant" :variant="variant">{{ variant }}</Button>
+            <Button v-for="variant in variants" :key="variant" :variant="variant">{{
+              variant
+            }}</Button>
           </div>
         </Card>
 

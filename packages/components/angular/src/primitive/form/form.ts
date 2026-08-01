@@ -1,9 +1,23 @@
-import { scrollToFirstError, type ScrollToFirstError } from '@fex/components-core/form/scroll-to-first-error'
+import {
+  scrollToFirstError,
+  type ScrollToFirstError,
+} from '@fex/components-core/form/scroll-to-first-error'
 export { scrollToField } from '@fex/components-core/form/scroll-to-first-error'
-import { ChangeDetectorRef, Directive, HostBinding, HostListener, Input, type OnChanges, type OnDestroy, type OnInit } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Directive,
+  HostBinding,
+  HostListener,
+  Input,
+  type OnChanges,
+  type OnDestroy,
+  type OnInit,
+} from '@angular/core'
 import { FieldApi, type AnyFieldApi } from '@tanstack/angular-form'
 
-export interface FormApiLike { handleSubmit: () => unknown }
+export interface FormApiLike {
+  handleSubmit: () => unknown
+}
 
 @Directive({ selector: '[fexForm]', standalone: true })
 export class Form {
@@ -15,7 +29,8 @@ export class Form {
     event.preventDefault()
     const element = event.currentTarget
     await this.form.handleSubmit()
-    if (element instanceof HTMLFormElement) await scrollToFirstError(element, this.scrollToFirstError)
+    if (element instanceof HTMLFormElement)
+      await scrollToFirstError(element, this.scrollToFirstError)
   }
 }
 

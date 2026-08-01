@@ -24,15 +24,15 @@ export function Example() {
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `title` | `ReactNode` | `undefined` | No | Header title content. |
-| `description` | `ReactNode` | `undefined` | No | Header description content. |
-| `footer` | `ReactNode` | `undefined` | No | Footer content. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | No | Quick spacing preset for the card layout. |
-| `className` | `{ root?: string; header?: string; title?: string; description?: string; content?: string; footer?: string }` | `undefined` | No | Part classes merged with each card part. Set `root` to override `--card-spacing`. |
-| `style` | `{ root?: CSSProperties; header?: CSSProperties; title?: CSSProperties; description?: CSSProperties; content?: CSSProperties; footer?: CSSProperties }` | `undefined` | No | Part inline styles. Set `root` to override `--card-spacing`. |
-| native `div` props | `Omit<ComponentProps<'div'>, 'className' \| 'style'>` | `undefined` | No | Standard `div` attributes are passed through. |
+| Name               | Type                                                                                                                                                    | Default     | Required | Description                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------- | --------------------------------------------------------------------------------- |
+| `title`            | `ReactNode`                                                                                                                                             | `undefined` | No       | Header title content.                                                             |
+| `description`      | `ReactNode`                                                                                                                                             | `undefined` | No       | Header description content.                                                       |
+| `footer`           | `ReactNode`                                                                                                                                             | `undefined` | No       | Footer content.                                                                   |
+| `size`             | `'sm' \| 'md' \| 'lg'`                                                                                                                                  | `'md'`      | No       | Quick spacing preset for the card layout.                                         |
+| `className`        | `{ root?: string; header?: string; title?: string; description?: string; content?: string; footer?: string }`                                           | `undefined` | No       | Part classes merged with each card part. Set `root` to override `--card-spacing`. |
+| `style`            | `{ root?: CSSProperties; header?: CSSProperties; title?: CSSProperties; description?: CSSProperties; content?: CSSProperties; footer?: CSSProperties }` | `undefined` | No       | Part inline styles. Set `root` to override `--card-spacing`.                      |
+| native `div` props | `Omit<ComponentProps<'div'>, 'className' \| 'style'>`                                                                                                   | `undefined` | No       | Standard `div` attributes are passed through.                                     |
 
 ## Events
 

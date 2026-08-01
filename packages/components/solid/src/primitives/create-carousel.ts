@@ -17,6 +17,8 @@ export function createCarousel(options: CreateCarouselControllerOptions = {}) {
   return {
     controller,
     snapshot,
-    mount: (node: HTMLElement | null) => { viewport = node ?? undefined },
+    mount: (node: HTMLElement | null) => {
+      viewport = node ?? undefined
+    },
   }
 }

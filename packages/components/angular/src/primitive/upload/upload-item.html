@@ -1,1 +1,8 @@
-@if (state.item(); as item) { <div role="listitem" [class]="className" [attr.data-status]="item.status"><ng-container [ngTemplateOutlet]="custom().template" [ngTemplateOutletContext]="{ $implicit: state }" /></div> }
+@if (state.item(); as item) {
+<div role="listitem" [class]="className" [attr.data-status]="item.status">
+  <ng-container
+    [ngTemplateOutlet]="custom().template"
+    [ngTemplateOutletContext]="{ $implicit: state }"
+  />
+</div>
+}

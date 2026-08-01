@@ -11,7 +11,9 @@ export function useDataGridTable<
   selector?: (state: TableState<TFeatures>) => TSelected,
 ): ReactTable<TFeatures, TData, TSelected> {
   if (!options.getRowId) {
-    throw new Error('[DataGrid] getRowId is required so row identity never falls back to array position.')
+    throw new Error(
+      '[DataGrid] getRowId is required so row identity never falls back to array position.',
+    )
   }
   const columns = useStableDataGridColumns(options.columns)
   // TanStack v9 syncs legacy options.state into its atoms from useTable's render.
@@ -21,9 +23,7 @@ export function useDataGridTable<
   // unless the caller explicitly requests a table-store selector.
   const table = useTable<TFeatures, TData, TSelected>(
     { ...options, columns },
-    selector ?? (options.state ? (() => null as TSelected) : undefined),
+    selector ?? (options.state ? () => null as TSelected : undefined),
   )
-  return options.state && !selector
-    ? { ...table, state: options.state as TSelected }
-    : table
+  return options.state && !selector ? { ...table, state: options.state as TSelected } : table
 }

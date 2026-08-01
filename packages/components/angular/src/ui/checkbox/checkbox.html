@@ -1,4 +1,9 @@
-<span fexCheckboxIndicator [checked]="currentChecked()" [class]="indicatorClassName" data-slot="checkbox-indicator">
+<span
+  fexCheckboxIndicator
+  [checked]="currentChecked()"
+  [class]="indicatorClassName"
+  data-slot="checkbox-indicator"
+>
   @if (currentChecked() === 'indeterminate') {
   <fex-minus-icon />
   } @else if (currentChecked() === true) {

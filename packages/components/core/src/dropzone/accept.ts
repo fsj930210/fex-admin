@@ -27,4 +27,3 @@ export function matchAccept(file: File, accept?: string | string[]) {
     return mimeType === rule
   })
 }
-

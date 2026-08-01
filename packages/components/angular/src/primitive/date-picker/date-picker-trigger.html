@@ -9,10 +9,9 @@
   (clear)="clear()"
 >
   @if (prefix) {
-    <span fexInputPrefix>{{ prefix }}</span>
-  }
-  @if (state.context().multiple && state.calendarValues().length) {
-    <fex-date-picker-tags />
+  <span fexInputPrefix>{{ prefix }}</span>
+  } @if (state.context().multiple && state.calendarValues().length) {
+  <fex-date-picker-tags />
   }
   <input
     #datePickerInputControl
@@ -22,15 +21,19 @@
     (focus)="open(datePickerInputControl, $event)"
   />
   @if (state.context().allowClear) {
-    <button fexInputClear type="button" (pointerdown)="$event.stopPropagation()" (click)="clear($event)"></button>
-  }
-  @if (showSuffix()) {
-    <span fexInputSuffix>
-      @if (suffix) {
-        <span>{{ suffix }}</span>
-      } @else {
-        <fex-calendar-icon />
-      }
-    </span>
+  <button
+    fexInputClear
+    type="button"
+    (pointerdown)="$event.stopPropagation()"
+    (click)="clear($event)"
+  ></button>
+  } @if (showSuffix()) {
+  <span fexInputSuffix>
+    @if (suffix) {
+    <span>{{ suffix }}</span>
+    } @else {
+    <fex-calendar-icon />
+    }
+  </span>
   }
 </fex-input-root>

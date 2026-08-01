@@ -135,7 +135,9 @@ export function createMoveController(options: MoveControllerOptions) {
       targetRect: session.targetRect,
       boundsRect: session.boundsRect,
     }
-    const nextPosition = resolveMoveRect(currentOptions.axis ? { ...moveInput, axis: currentOptions.axis } : moveInput)
+    const nextPosition = resolveMoveRect(
+      currentOptions.axis ? { ...moveInput, axis: currentOptions.axis } : moveInput,
+    )
     setSnapshot({ position: nextPosition })
     currentOptions.onMove?.(nextPosition)
   }

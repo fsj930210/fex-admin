@@ -20,7 +20,9 @@ type DataAttributes = {
   [key: `data-${string}`]: string | boolean | undefined
 }
 
-export interface UseDraggableOptions<TData extends Record<string, unknown> = Record<string, unknown>> {
+export interface UseDraggableOptions<
+  TData extends Record<string, unknown> = Record<string, unknown>,
+> {
   id: string
   type?: string
   data?: TData
@@ -60,7 +62,8 @@ export function useDraggable<TData extends Record<string, unknown> = Record<stri
 
     const previewElement = element.cloneNode(true) as HTMLElement
     previewElement.removeAttribute('id')
-    for (const descendant of previewElement.querySelectorAll('[id]')) descendant.removeAttribute('id')
+    for (const descendant of previewElement.querySelectorAll('[id]'))
+      descendant.removeAttribute('id')
     previewElement.setAttribute('aria-hidden', 'true')
     previewElement.setAttribute('data-drag-preview', 'true')
     Object.assign(previewElement.style, {

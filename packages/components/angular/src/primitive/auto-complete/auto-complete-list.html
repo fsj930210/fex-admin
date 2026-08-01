@@ -1,23 +1,23 @@
 @if (autoComplete.loading) {
-  <div class="flex min-h-20 items-center justify-center"><fex-spinner /></div>
+<div class="flex min-h-20 items-center justify-center"><fex-spinner /></div>
 } @else if (!autoComplete.visibleItems.length) {
-  <fex-empty><fex-empty-description>No suggestions</fex-empty-description></fex-empty>
+<fex-empty><fex-empty-description>No suggestions</fex-empty-description></fex-empty>
 } @else { @for (entry of autoComplete.visibleItems; track entry.key) {
-  <div
-    role="option"
-    [id]="autoComplete.listId + '-' + entry.key"
-    [attr.aria-selected]="autoComplete.snapshot().activeKey === entry.key"
-    [attr.aria-disabled]="entry.disabled || null"
-    [attr.data-active]="autoComplete.snapshot().activeKey === entry.key || null"
-    [attr.data-disabled]="entry.disabled || null"
-    [class]="optionClass"
-    (pointermove)="autoComplete.controller.setActiveKey(entry.key, 'pointer')"
-    (click)="autoComplete.controller.selectItem(entry.key)"
-  >
-    @if (item) {
-      <ng-container *ngTemplateOutlet="item; context: { $implicit: entry.item, active: autoComplete.snapshot().activeKey === entry.key, disabled: entry.disabled }" />
-    } @else {
-      {{ entry.label }}
-    }
-  </div>
+<div
+  role="option"
+  [id]="autoComplete.listId + '-' + entry.key"
+  [attr.aria-selected]="autoComplete.snapshot().activeKey === entry.key"
+  [attr.aria-disabled]="entry.disabled || null"
+  [attr.data-active]="autoComplete.snapshot().activeKey === entry.key || null"
+  [attr.data-disabled]="entry.disabled || null"
+  [class]="optionClass"
+  (pointermove)="autoComplete.controller.setActiveKey(entry.key, 'pointer')"
+  (click)="autoComplete.controller.selectItem(entry.key)"
+>
+  @if (item) {
+  <ng-container
+    *ngTemplateOutlet="item; context: { $implicit: entry.item, active: autoComplete.snapshot().activeKey === entry.key, disabled: entry.disabled }"
+  />
+  } @else { {{ entry.label }} }
+</div>
 } }

@@ -24,7 +24,8 @@ export const fieldGroupClassName = cva('min-w-0', {
 export const fieldSetClassName = 'grid min-w-0 gap-4 border-0 p-0'
 export const fieldLegendClassName = 'text-sm font-semibold text-foreground'
 export const fieldContentClassName = 'grid min-w-0 gap-1.5'
-export const fieldLabelClassName = 'inline-flex w-fit items-center gap-1 text-sm font-medium text-foreground group-data-[disabled=true]/field:cursor-not-allowed group-data-[disabled=true]/field:opacity-60'
+export const fieldLabelClassName =
+  'inline-flex w-fit items-center gap-1 text-sm font-medium text-foreground group-data-[disabled=true]/field:cursor-not-allowed group-data-[disabled=true]/field:opacity-60'
 export const fieldTitleClassName = 'text-sm font-medium text-foreground'
 export const fieldDescriptionClassName = 'text-sm leading-5 text-muted-foreground'
 export const fieldErrorClassName = 'text-sm leading-5 text-danger'

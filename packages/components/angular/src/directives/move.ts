@@ -48,7 +48,11 @@ export class FexMoveDirective implements OnInit, OnDestroy {
   }
 
   private readonly onPointerDown = (event: PointerEvent) => {
-    if (this.moveHandle && event.target instanceof Node && !this.moveHandle.contains(event.target)) {
+    if (
+      this.moveHandle &&
+      event.target instanceof Node &&
+      !this.moveHandle.contains(event.target)
+    ) {
       return
     }
     if (this.disabled || !this.controller.start(toInput(event))) {

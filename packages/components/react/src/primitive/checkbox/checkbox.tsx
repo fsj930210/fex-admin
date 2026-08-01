@@ -1,8 +1,5 @@
 import { createCheckboxController } from '@fex/components-core/checkbox/create-checkbox-controller'
-import type {
-  CheckboxChangeMeta,
-  CheckboxCheckedState,
-} from '@fex/components-core/checkbox/types'
+import type { CheckboxChangeMeta, CheckboxCheckedState } from '@fex/components-core/checkbox/types'
 import {
   createContext,
   use,
@@ -16,11 +13,10 @@ import { useLazyRef } from '../../hooks/use-lazy-ref'
 
 export type { CheckboxChangeMeta, CheckboxCheckedState } from '@fex/components-core/checkbox/types'
 
-export interface CheckboxRootProps
-  extends Omit<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    'checked' | 'defaultChecked' | 'onChange' | 'type'
-  > {
+export interface CheckboxRootProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'checked' | 'defaultChecked' | 'onChange' | 'type'
+> {
   checked?: CheckboxCheckedState
   defaultChecked?: CheckboxCheckedState
   ref?: Ref<HTMLButtonElement>
@@ -62,7 +58,8 @@ export function CheckboxRoot({
   const snapshot = useCoreStore(controllerRef.current)
   const currentChecked = checked ?? snapshot.checked
   const currentDisabled = disabled ?? snapshot.disabled
-  const state = currentChecked === 'indeterminate' ? 'indeterminate' : currentChecked ? 'checked' : 'unchecked'
+  const state =
+    currentChecked === 'indeterminate' ? 'indeterminate' : currentChecked ? 'checked' : 'unchecked'
 
   return (
     <CheckboxContext value={{ checked: currentChecked }}>

@@ -30,7 +30,10 @@ function getSnapshotFromOptions(options: PresenceOptions): PresenceSnapshot {
   }
 }
 
-function setPresenceSnapshot(store: ReturnType<typeof createStore<PresenceSnapshot>>, next: PresenceSnapshot) {
+function setPresenceSnapshot(
+  store: ReturnType<typeof createStore<PresenceSnapshot>>,
+  next: PresenceSnapshot,
+) {
   // presence 更新频率会比较高，尤其 closeDelay/opening 定时器会连续触发。
   // 字段相同就返回原引用，避免 overlay 组合层和 adapter 被重复唤醒。
   store.updateSnapshot((snapshot) =>

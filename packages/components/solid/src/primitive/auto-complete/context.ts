@@ -7,7 +7,7 @@ import { createContext, useContext, type Accessor } from 'solid-js'
 type Item = Record<string, unknown>
 export interface AutoCompleteContextValue {
   controller: AutoCompleteController<Item>
-  snapshot: Accessor<ReturnType<AutoCompleteController['getSnapshot']>>
+  snapshot: Accessor<ReturnType<AutoCompleteController<Item>['getSnapshot']>>
   items: Accessor<readonly ResolvedAutoCompleteItem<Item>[]>
   loading: Accessor<boolean>
   disabled: Accessor<boolean>

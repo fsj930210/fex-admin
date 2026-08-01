@@ -27,16 +27,17 @@ export function createDataGridExpandColumn<TFeatures extends TableFeatures, TDat
     enableColumnFilter: false,
     enableHiding: false,
     header: '',
-    cell: ({ row }: { row: ExpandRow }) => row.getCanExpand() ? (
-      <Button
-        aria-label={`${ariaLabel} ${row.id}`}
-        aria-expanded={row.getIsExpanded()}
-        size="icon-sm"
-        variant="outline"
-        onClick={row.getToggleExpandedHandler()}
-      >
-        {row.getIsExpanded() ? <MinusIcon className="size-4" /> : <PlusIcon className="size-4" />}
-      </Button>
-    ) : null,
+    cell: ({ row }: { row: ExpandRow }) =>
+      row.getCanExpand() ? (
+        <Button
+          aria-label={`${ariaLabel} ${row.id}`}
+          aria-expanded={row.getIsExpanded()}
+          size="icon-sm"
+          variant="outline"
+          onClick={row.getToggleExpandedHandler()}
+        >
+          {row.getIsExpanded() ? <MinusIcon className="size-4" /> : <PlusIcon className="size-4" />}
+        </Button>
+      ) : null,
   } as unknown as ColumnDef<TFeatures, TData>
 }

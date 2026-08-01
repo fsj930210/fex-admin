@@ -1,7 +1,9 @@
 # Spinner UI
 
-## 用�?
-`Spinner` 用于局部加载反馈。Primitive 层只提供动画图形和尺寸样式�?
+## 用途
+
+`Spinner` 用于局部加载反馈，提供动画图形和尺寸样式。
+
 ## 导入路径
 
 ```tsx
@@ -11,28 +13,16 @@ import { Spinner } from '@fex/components-react/ui/spinner'
 ## 核心示例
 
 ```tsx
-import { Spinner } from '@fex/components-react/ui/spinner'
-
-export function Demo() {
-  return <Spinner size="md" aria-label="Loading" />
-}
+<Spinner size="md" aria-label="加载中" />
 ```
 
 ## Props
 
-| 参数�?| 类型 | 默认�?| 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | �?| 图标尺寸�?|
-| `className` | `string` | `undefined` | �?| 合并到根元素�?class�?|
+| 参数        | 类型                   | 默认值      | 必填 | 说明                   |
+| ----------- | ---------------------- | ----------- | ---- | ---------------------- |
+| `size`      | `'sm' \| 'md' \| 'lg'` | `'md'`      | 否   | 图标尺寸。             |
+| `className` | `string`               | `undefined` | 否   | 合并到根元素的 class。 |
 
-## 事件/回调
+## 事件与状态
 
-继承 `span` 原生事件。通常不需要绑定事件�?
-## 受控/非受�?
-无内部状态�?
-## 注意事项
-
-需要可访问提示时传�?`aria-label` 或在外层提供文本�?
-## 常见组合
-
-常与按钮 loading、卡片局部加载和表格空白区加载组合�?
+组件继承 `span` 原生属性与事件，没有受控状态。需要无障碍提示时应提供 `aria-label` 或可见文本。

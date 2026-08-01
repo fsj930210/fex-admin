@@ -20,16 +20,62 @@ export function TreeBatchActionsDemo() {
   )
 
   return (
-    <TreeDemoSection title="Controller batch actions" description="All batch operations are explicit controller actions. selectAll only acts when multiple selection is enabled.">
+    <TreeDemoSection
+      title="Controller batch actions"
+      description="All batch operations are explicit controller actions. selectAll only acts when multiple selection is enabled."
+    >
       <div className="mb-space-md flex flex-wrap gap-space-sm">
-        <Button size="sm" variant="outline" onClick={() => controller.getFeature<ExpansionFeatureApi>('expansion')?.expandAll()}>Expand all</Button>
-        <Button size="sm" variant="outline" onClick={() => controller.getFeature<ExpansionFeatureApi>('expansion')?.collapseAll()}>Collapse all</Button>
-        <Button size="sm" variant="outline" onClick={() => controller.getFeature<SelectionFeatureApi>('selection')?.selectAll()}>Select all</Button>
-        <Button size="sm" variant="outline" onClick={() => controller.getFeature<SelectionFeatureApi>('selection')?.clear()}>Clear selection</Button>
-        <Button size="sm" variant="outline" onClick={() => controller.getFeature<CheckFeatureApi>('check')?.checkAll()}>Check all</Button>
-        <Button size="sm" variant="outline" onClick={() => controller.getFeature<CheckFeatureApi>('check')?.clear()}>Clear checks</Button>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => controller.getFeature<ExpansionFeatureApi>('expansion')?.expandAll()}
+        >
+          Expand all
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => controller.getFeature<ExpansionFeatureApi>('expansion')?.collapseAll()}
+        >
+          Collapse all
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => controller.getFeature<SelectionFeatureApi>('selection')?.selectAll()}
+        >
+          Select all
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => controller.getFeature<SelectionFeatureApi>('selection')?.clear()}
+        >
+          Clear selection
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => controller.getFeature<CheckFeatureApi>('check')?.checkAll()}
+        >
+          Check all
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => controller.getFeature<CheckFeatureApi>('check')?.clear()}
+        >
+          Clear checks
+        </Button>
       </div>
-      <DemoTree controller={controller} treeData={departmentTreeData} fieldNames={departmentFieldNames} isLeaf={(node) => node.childCount === 0} checkable className="max-w-xl rounded-md border border-border bg-background p-space-sm" />
+      <DemoTree
+        controller={controller}
+        treeData={departmentTreeData}
+        fieldNames={departmentFieldNames}
+        isLeaf={(node) => node.childCount === 0}
+        checkable
+        className="max-w-xl rounded-md border border-border bg-background p-space-sm"
+      />
     </TreeDemoSection>
   )
 }

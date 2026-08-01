@@ -4,8 +4,9 @@
   import type { Snippet } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
   import { setInputContext, type InputChangeReason } from './context'
-  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'class'> { class?: string; value?: string; defaultValue?: string; disabled?: boolean; readOnly?: boolean; invalid?: boolean; status?: 'error' | 'warning'; action?: (element: HTMLElement) => { destroy?: () => void } | void; onValueChange?: (value: string, meta: { reason: InputChangeReason; event?: Event }) => void; onClear?: () => void; children?: Snippet }
+  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'class'> { class?: string | undefined; value?: string | undefined; defaultValue?: string | undefined; disabled?: boolean | undefined; readOnly?: boolean | undefined; invalid?: boolean | undefined; status?: 'error' | 'warning' | undefined; action?: ((element: HTMLElement) => { destroy?: () => void } | void) | undefined; onValueChange?: ((value: string, meta: { reason: InputChangeReason; event?: Event }) => void) | undefined; onClear?: (() => void) | undefined; children?: Snippet | undefined }
   let { class: className, value, defaultValue = '', disabled = false, readOnly = false, invalid = false, status, action, onValueChange, onClear, children, ...rest }: Props = $props()
+  // svelte-ignore state_referenced_locally -- defaultValue initializes uncontrolled state once.
   let internalValue = $state(defaultValue)
   let element = $state<HTMLElement | null>(null)
   const currentValue = $derived(value ?? internalValue)

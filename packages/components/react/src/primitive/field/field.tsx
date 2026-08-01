@@ -135,15 +135,29 @@ export function Field({ children, ...props }: FieldProps) {
   const form = useFormContext()
   const TanStackField = form.Field as unknown as (fieldProps: FieldProps) => ReactNode
 
-  return <TanStackField {...props}>{(field: AnyFieldApi) => <FormFieldNameContext value={String(field.name)}>{children(field)}</FormFieldNameContext>}</TanStackField>
+  return (
+    <TanStackField {...props}>
+      {(field: AnyFieldApi) => (
+        <FormFieldNameContext value={String(field.name)}>{children(field)}</FormFieldNameContext>
+      )}
+    </TanStackField>
+  )
 }
 
-export function FieldControl({ children }: { children: (binding: FieldControlBinding) => ReactNode }) {
+export function FieldControl({
+  children,
+}: {
+  children: (binding: FieldControlBinding) => ReactNode
+}) {
   const context = useFieldContext('FieldControl')
   const fieldName = use(FormFieldNameContext)
-  const describedBy = [context.hasDescription ? context.descriptionId : null, context.hasError ? context.errorId : null]
-    .filter(Boolean)
-    .join(' ') || undefined
+  const describedBy =
+    [
+      context.hasDescription ? context.descriptionId : null,
+      context.hasError ? context.errorId : null,
+    ]
+      .filter(Boolean)
+      .join(' ') || undefined
   return children({
     props: {
       id: context.controlId,
@@ -161,31 +175,109 @@ export function FieldControl({ children }: { children: (binding: FieldControlBin
 
 export function FieldLabel({ className, ...props }: ComponentProps<'label'>) {
   const context = useFieldContext('FieldLabel')
-  return <label {...props} htmlFor={props.htmlFor ?? context.controlId} data-slot="field-label" className={cn(fieldLabelClassName, className)} />
+  return (
+    <label
+      {...props}
+      htmlFor={props.htmlFor ?? context.controlId}
+      data-slot="field-label"
+      className={cn(fieldLabelClassName, className)}
+    />
+  )
 }
 
-export function FieldRequiredIndicator({ className, children = '*', ...props }: ComponentProps<'span'>) {
-  return <span {...props} aria-hidden="true" data-slot="field-required-indicator" className={cn(fieldRequiredIndicatorClassName, className)}>{children}</span>
+export function FieldRequiredIndicator({
+  className,
+  children = '*',
+  ...props
+}: ComponentProps<'span'>) {
+  return (
+    <span
+      {...props}
+      aria-hidden="true"
+      data-slot="field-required-indicator"
+      className={cn(fieldRequiredIndicatorClassName, className)}
+    >
+      {children}
+    </span>
+  )
 }
 
 export function FieldDescription({ className, ...props }: ComponentProps<'p'>) {
   const context = useFieldContext('FieldDescription')
-  return <p {...props} id={props.id ?? context.descriptionId} data-slot="field-description" className={cn(fieldDescriptionClassName, className)} />
+  return (
+    <p
+      {...props}
+      id={props.id ?? context.descriptionId}
+      data-slot="field-description"
+      className={cn(fieldDescriptionClassName, className)}
+    />
+  )
 }
 
-export interface FieldErrorProps extends ComponentProps<'div'> { errors?: readonly ReactNode[] | undefined }
+export interface FieldErrorProps extends ComponentProps<'div'> {
+  errors?: readonly ReactNode[] | undefined
+}
 export function FieldError({ errors, className, children, ...props }: FieldErrorProps) {
   const context = useFieldContext('FieldError')
-  const uniqueErrors = errors?.filter((error, index, values) => values.findIndex((value) => String(value) === String(error)) === index)
-  const content = children ?? uniqueErrors?.map((error, index) => <div key={typeof error === 'string' ? error : index}>{error}</div>)
+  const uniqueErrors = errors?.filter(
+    (error, index, values) =>
+      values.findIndex((value) => String(value) === String(error)) === index,
+  )
+  const content =
+    children ??
+    uniqueErrors?.map((error, index) => (
+      <div key={typeof error === 'string' ? error : index}>{error}</div>
+    ))
   if (!content) return null
-  return <div {...props} id={props.id ?? context.errorId} role="alert" aria-live="polite" data-slot="field-error" className={cn(fieldErrorClassName, className)}>{content}</div>
+  return (
+    <div
+      {...props}
+      id={props.id ?? context.errorId}
+      role="alert"
+      aria-live="polite"
+      data-slot="field-error"
+      className={cn(fieldErrorClassName, className)}
+    >
+      {content}
+    </div>
+  )
 }
 
 export interface FieldGroupProps extends ComponentProps<'div'>, FieldGroupStyleProps {}
-export function FieldGroup({ orientation, className, ...props }: FieldGroupProps) { return <div {...props} role={props.role ?? 'group'} data-slot="field-group" data-orientation={orientation} className={cn(fieldGroupClassName({ orientation }), className)} /> }
-export function FieldSet({ className, ...props }: ComponentProps<'fieldset'>) { return <fieldset {...props} data-slot="field-set" className={cn(fieldSetClassName, className)} /> }
-export function FieldLegend({ className, ...props }: ComponentProps<'legend'>) { return <legend {...props} data-slot="field-legend" className={cn(fieldLegendClassName, className)} /> }
-export function FieldContent({ className, ...props }: ComponentProps<'div'>) { return <div {...props} data-slot="field-content" className={cn(fieldContentClassName, className)} /> }
-export function FieldTitle({ className, ...props }: ComponentProps<'div'>) { return <div {...props} data-slot="field-title" className={cn(fieldTitleClassName, className)} /> }
-export function FieldSeparator({ className, ...props }: ComponentProps<'div'>) { return <div {...props} role={props.role ?? 'separator'} data-slot="field-separator" className={cn(fieldSeparatorClassName, className)} /> }
+export function FieldGroup({ orientation, className, ...props }: FieldGroupProps) {
+  return (
+    <div
+      {...props}
+      role={props.role ?? 'group'}
+      data-slot="field-group"
+      data-orientation={orientation}
+      className={cn(fieldGroupClassName({ orientation }), className)}
+    />
+  )
+}
+export function FieldSet({ className, ...props }: ComponentProps<'fieldset'>) {
+  return <fieldset {...props} data-slot="field-set" className={cn(fieldSetClassName, className)} />
+}
+export function FieldLegend({ className, ...props }: ComponentProps<'legend'>) {
+  return (
+    <legend {...props} data-slot="field-legend" className={cn(fieldLegendClassName, className)} />
+  )
+}
+export function FieldContent({ className, ...props }: ComponentProps<'div'>) {
+  return (
+    <div {...props} data-slot="field-content" className={cn(fieldContentClassName, className)} />
+  )
+}
+export function FieldTitle({ className, ...props }: ComponentProps<'div'>) {
+  return <div {...props} data-slot="field-title" className={cn(fieldTitleClassName, className)} />
+}
+export function FieldSeparator({ className, ...props }: ComponentProps<'div'>) {
+  return (
+    <div
+      {...props}
+      role={props.role ?? 'separator'}
+      data-slot="field-separator"
+      className={cn(fieldSeparatorClassName, className)}
+    />
+  )
+}

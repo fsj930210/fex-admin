@@ -23,12 +23,14 @@ export class TransferTreePanelComponent {
       id: `department:${department}`,
       name: department,
       childCount: panel.items.filter((item) => item.department === department).length,
-      childrenList: panel.items.filter((item) => item.department === department).map((item) => ({
-        id: item.id,
-        name: item.name,
-        ...(item.disabled === undefined ? {} : { disabled: item.disabled }),
-        childCount: 0,
-      })),
+      childrenList: panel.items
+        .filter((item) => item.department === department)
+        .map((item) => ({
+          id: item.id,
+          name: item.name,
+          ...(item.disabled === undefined ? {} : { disabled: item.disabled }),
+          childCount: 0,
+        })),
     }))
     return {
       treeData,

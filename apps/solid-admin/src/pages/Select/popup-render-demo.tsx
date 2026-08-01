@@ -1,12 +1,7 @@
 import type { SelectOption } from '@fex/components-core/select/types'
 import { PlusIcon } from '@fex/components-solid/icon/plus'
 import { InputControl, InputRoot } from '@fex/components-solid/primitive/input'
-import {
-  SelectContent,
-  SelectList,
-  SelectRoot,
-  SelectTrigger,
-} from '@fex/components-solid/primitive/select'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex/components-solid/primitive/select'
 import { Button } from '@fex/components-solid/ui/button'
 import { createSignal } from 'solid-js'
 import { SelectDemoSection as Demo } from './demo-section'

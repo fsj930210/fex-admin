@@ -15,7 +15,9 @@ export interface TreeFeatureRuntime<TNode extends TreeNodeData> {
 }
 
 /** Validates a feature graph before any feature side effect runs. */
-export function createTreeFeatureRuntime<TNode extends TreeNodeData>(context: TreeFeatureContext<TNode>): TreeFeatureRuntime<TNode> {
+export function createTreeFeatureRuntime<TNode extends TreeNodeData>(
+  context: TreeFeatureContext<TNode>,
+): TreeFeatureRuntime<TNode> {
   const installed = new Map<TreeFeatureId, { api: unknown; conflicts: readonly TreeFeatureId[] }>()
 
   const validate = (registrations: readonly TreeFeatureRegistration<TNode>[]) => {
@@ -28,7 +30,9 @@ export function createTreeFeatureRuntime<TNode extends TreeNodeData>(context: Tr
       }
       for (const dependency of feature.requires ?? []) {
         if (!available.has(dependency)) {
-          throw new Error(`Tree feature "${feature.id}" requires "${dependency}" to be installed first.`)
+          throw new Error(
+            `Tree feature "${feature.id}" requires "${dependency}" to be installed first.`,
+          )
         }
       }
       for (const [availableId, conflicts] of available) {
@@ -47,11 +51,16 @@ export function createTreeFeatureRuntime<TNode extends TreeNodeData>(context: Tr
       }
       for (const dependency of feature.requires ?? []) {
         if (!installed.has(dependency)) {
-          throw new Error(`Tree feature "${feature.id}" requires "${dependency}" to be installed first.`)
+          throw new Error(
+            `Tree feature "${feature.id}" requires "${dependency}" to be installed first.`,
+          )
         }
       }
       for (const [installedId, installedFeature] of installed) {
-        if ((feature.conflicts ?? []).includes(installedId) || installedFeature.conflicts.includes(feature.id)) {
+        if (
+          (feature.conflicts ?? []).includes(installedId) ||
+          installedFeature.conflicts.includes(feature.id)
+        ) {
           throw new Error(`Tree feature "${feature.id}" conflicts with "${installedId}".`)
         }
       }

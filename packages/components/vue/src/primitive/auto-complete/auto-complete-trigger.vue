@@ -9,7 +9,12 @@ import PopoverTrigger from '../popover/popover-trigger.vue'
 import { useAutoComplete } from './use-auto-complete'
 
 defineOptions({ inheritAttrs: false })
-const props = defineProps<{ clearable?: boolean; invalid?: boolean; status?: 'error' | 'warning'; class?: string }>()
+const props = defineProps<{
+  clearable?: boolean
+  invalid?: boolean
+  status?: 'error' | 'warning'
+  class?: string
+}>()
 const slots = useSlots()
 const attrs = useAttrs()
 const autoComplete = useAutoComplete('AutoCompleteTrigger')
@@ -49,7 +54,11 @@ function input(event: Event) {
         role="combobox"
         :aria-expanded="autoComplete.snapshot.value.open"
         :aria-controls="autoComplete.listId"
-        :aria-activedescendant="autoComplete.snapshot.value.activeKey === undefined ? undefined : `${autoComplete.listId}-${autoComplete.snapshot.value.activeKey}`"
+        :aria-activedescendant="
+          autoComplete.snapshot.value.activeKey === undefined
+            ? undefined
+            : `${autoComplete.listId}-${autoComplete.snapshot.value.activeKey}`
+        "
         @input="input"
         @focus="autoComplete.controller.setOpen(true, 'focus')"
         @blur="autoComplete.controller.setOpen(false, 'blur')"

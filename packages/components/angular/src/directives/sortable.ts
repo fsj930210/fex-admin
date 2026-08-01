@@ -1,9 +1,29 @@
-import { Directive, ElementRef, EventEmitter, Input, Output, computed, inject, signal } from '@angular/core'
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  computed,
+  inject,
+  signal,
+} from '@angular/core'
 import type { OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core'
-import { DEFAULT_SORTABLE_CONTAINER_ID, createSortableController } from '@fex/components-core/sortable/create-sortable-controller'
-import type { SortablePointerInput, SortablePointerMoveInput } from '@fex/components-core/sortable/create-sortable-controller'
+import {
+  DEFAULT_SORTABLE_CONTAINER_ID,
+  createSortableController,
+} from '@fex/components-core/sortable/create-sortable-controller'
+import type {
+  SortablePointerInput,
+  SortablePointerMoveInput,
+} from '@fex/components-core/sortable/create-sortable-controller'
 import { restoreSortableItems } from '@fex/components-core/sortable/containers'
-import type { SortableAxis, SortableId, SortableItems, SortableMotionOptions } from '@fex/components-core/sortable/types'
+import type {
+  SortableAxis,
+  SortableId,
+  SortableItems,
+  SortableMotionOptions,
+} from '@fex/components-core/sortable/types'
 
 export interface FexSortableHost {
   controller: {
@@ -25,7 +45,9 @@ export interface FexSortableHost {
   standalone: true,
   exportAs: 'fexSortableContainer',
 })
-export class FexSortableContainerDirective<TItems extends SortableItems = SortableItems> implements OnInit, OnChanges, OnDestroy {
+export class FexSortableContainerDirective<TItems extends SortableItems = SortableItems>
+  implements OnInit, OnChanges, OnDestroy
+{
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
   private cleanup: (() => void) | undefined
   private unsubscribe: (() => void) | undefined
@@ -42,8 +64,13 @@ export class FexSortableContainerDirective<TItems extends SortableItems = Sortab
 
   ngOnInit() {
     this.updateController()
-    this.unsubscribe = this.controller.subscribe(() => this.snapshot.set(this.controller.getSnapshot()))
-    this.cleanup = this.controller.registerContainer(this.containerId, this.elementRef.nativeElement)
+    this.unsubscribe = this.controller.subscribe(() =>
+      this.snapshot.set(this.controller.getSnapshot()),
+    )
+    this.cleanup = this.controller.registerContainer(
+      this.containerId,
+      this.elementRef.nativeElement,
+    )
   }
 
   ngOnChanges(_changes: SimpleChanges) {
@@ -94,7 +121,10 @@ export class FexSortableRegionDirective implements OnInit, OnDestroy {
   @Input({ required: true }) containerId!: string
 
   ngOnInit() {
-    this.cleanup = this.sortable.controller.registerContainer(this.containerId, this.elementRef.nativeElement)
+    this.cleanup = this.sortable.controller.registerContainer(
+      this.containerId,
+      this.elementRef.nativeElement,
+    )
   }
 
   ngOnDestroy() {
@@ -115,7 +145,13 @@ export class FexSortableItemDirective implements OnInit, OnDestroy {
   @Input() disabled = false
 
   ngOnInit() {
-    this.cleanup = bindSortableItem(this.sortable, this.elementRef.nativeElement, this.sortableId, this.containerId, () => this.disabled)
+    this.cleanup = bindSortableItem(
+      this.sortable,
+      this.elementRef.nativeElement,
+      this.sortableId,
+      this.containerId,
+      () => this.disabled,
+    )
   }
 
   ngOnDestroy() {
@@ -137,8 +173,21 @@ export function bindSortableItem(
   // every consumer app and prevents browser panning from stealing the gesture.
   element.style.touchAction = 'none'
   const applyStyle = () => {
-    const style = sortable.controller.getItemStyle(sortableId) as Record<string, string | number | undefined>
-    for (const property of ['width', 'height', 'minWidth', 'minHeight', 'boxSizing', 'flexShrink', 'visibility', 'transition', 'transform'] as const) {
+    const style = sortable.controller.getItemStyle(sortableId) as Record<
+      string,
+      string | number | undefined
+    >
+    for (const property of [
+      'width',
+      'height',
+      'minWidth',
+      'minHeight',
+      'boxSizing',
+      'flexShrink',
+      'visibility',
+      'transition',
+      'transform',
+    ] as const) {
       const value = style[property]
       element.style[property] = value === undefined ? '' : String(value)
     }
@@ -147,14 +196,19 @@ export function bindSortableItem(
   let cleanupPointerSession: (() => void) | undefined
   let draggingThisItem = false
   const onPointerDown = (event: PointerEvent) => {
-    if (disabled() || !sortable.controller.startPointerDrag(toInput(event), sortableId, containerId)) return
+    if (
+      disabled() ||
+      !sortable.controller.startPointerDrag(toInput(event), sortableId, containerId)
+    )
+      return
     draggingThisItem = true
     element.setPointerCapture?.(event.pointerId)
-    const onPointerMove = (pointerEvent: PointerEvent) => sortable.controller.updatePointer({
-      clientX: pointerEvent.clientX,
-      clientY: pointerEvent.clientY,
-      preventDefault: () => pointerEvent.preventDefault(),
-    })
+    const onPointerMove = (pointerEvent: PointerEvent) =>
+      sortable.controller.updatePointer({
+        clientX: pointerEvent.clientX,
+        clientY: pointerEvent.clientY,
+        preventDefault: () => pointerEvent.preventDefault(),
+      })
     const onPointerUp = () => {
       cleanupPointerSession?.()
       if (element.hasPointerCapture?.(event.pointerId)) {

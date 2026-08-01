@@ -7,7 +7,9 @@ export interface CreateInputOptions {
   disabled?: Accessor<boolean | undefined>
   readOnly?: Accessor<boolean | undefined>
   invalid?: Accessor<boolean | undefined>
-  onValueChange?: ((value: string, meta: { reason: InputChangeReason; event?: InputEvent }) => void) | undefined
+  onValueChange?:
+    | ((value: string, meta: { reason: InputChangeReason; event?: InputEvent }) => void)
+    | undefined
   onClear?: (() => void) | undefined
 }
 export function createInput(options: CreateInputOptions = {}) {
@@ -29,5 +31,17 @@ export function createInput(options: CreateInputOptions = {}) {
     options.onClear?.()
     focusElement?.focus()
   }
-  return { value, disabled, readOnly, invalid, canClear, setValue, clear, focus: () => focusElement?.focus(), setFocusElement: (element: HTMLElement) => { focusElement = element } }
+  return {
+    value,
+    disabled,
+    readOnly,
+    invalid,
+    canClear,
+    setValue,
+    clear,
+    focus: () => focusElement?.focus(),
+    setFocusElement: (element: HTMLElement) => {
+      focusElement = element
+    },
+  }
 }

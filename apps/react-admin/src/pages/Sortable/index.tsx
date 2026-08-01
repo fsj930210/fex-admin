@@ -54,7 +54,10 @@ export function SortablePage() {
         </header>
 
         <div className="space-y-space-xl">
-          <Card title="Sortable Component" description="Use the primitive component for common one-container lists.">
+          <Card
+            title="Sortable Component"
+            description="Use the primitive component for common one-container lists."
+          >
             <Sortable.SortableRoot items={tasks} axis="y" onChange={setTasks}>
               {({ items }) => (
                 <>
@@ -85,7 +88,10 @@ export function SortablePage() {
             </Sortable.SortableRoot>
           </Card>
 
-          <Card title="Multiple Containers" description="The same sortable hook supports transfer panels.">
+          <Card
+            title="Multiple Containers"
+            description="The same sortable hook supports transfer panels."
+          >
             <div className="grid gap-space-md md:grid-cols-2">
               {Object.entries(previewPanels).map(([containerId, items]) => (
                 <div
@@ -114,23 +120,30 @@ export function SortablePage() {
                 </div>
               ))}
             </div>
-            {typeof panelSortable.activeId === 'string' && createPortal(
-              <div
-                data-sortable-overlay=""
-                className="flex min-h-11 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
-                style={panelSortable.getOverlayStyle()}
-              >
-                <span className="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">
-                  ::
-                </span>
-                {panelSortable.activeId}
-              </div>,
-              document.body,
-            )}
+            {typeof panelSortable.activeId === 'string' &&
+              createPortal(
+                <div
+                  data-sortable-overlay=""
+                  className="flex min-h-11 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+                  style={panelSortable.getOverlayStyle()}
+                >
+                  <span className="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">
+                    ::
+                  </span>
+                  {panelSortable.activeId}
+                </div>,
+                document.body,
+              )}
           </Card>
 
-          <Card title="Table Columns" description="useSortable can share motion styles across header and body cells.">
-            <div {...tableSortable.getContainerProps()} className="overflow-hidden rounded-md border border-border bg-background">
+          <Card
+            title="Table Columns"
+            description="useSortable can share motion styles across header and body cells."
+          >
+            <div
+              {...tableSortable.getContainerProps()}
+              className="overflow-hidden rounded-md border border-border bg-background"
+            >
               <table className="w-full table-fixed border-collapse text-sm">
                 <thead>
                   <tr>
@@ -172,27 +185,31 @@ export function SortablePage() {
                 </tbody>
               </table>
             </div>
-            {typeof tableSortable.activeId === 'string' && createPortal(
-              <div
-                data-sortable-overlay=""
-                className="overflow-hidden rounded-md border border-border bg-card text-sm text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
-                style={{
-                  ...tableSortable.getOverlayStyle(),
-                  height: 'auto',
-                }}
-              >
-                <div className="flex min-h-12 items-center gap-space-sm border-b border-border px-space-md font-medium text-muted-foreground">
-                  <span>::</span>
-                  {columnLabels[tableSortable.activeId]}
-                </div>
-                {rows.map((row) => (
-                  <div key={row.email} className="border-b border-border px-space-md py-space-sm last:border-0">
-                    {row[tableSortable.activeId as keyof typeof row]}
+            {typeof tableSortable.activeId === 'string' &&
+              createPortal(
+                <div
+                  data-sortable-overlay=""
+                  className="overflow-hidden rounded-md border border-border bg-card text-sm text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+                  style={{
+                    ...tableSortable.getOverlayStyle(),
+                    height: 'auto',
+                  }}
+                >
+                  <div className="flex min-h-12 items-center gap-space-sm border-b border-border px-space-md font-medium text-muted-foreground">
+                    <span>::</span>
+                    {columnLabels[tableSortable.activeId]}
                   </div>
-                ))}
-              </div>,
-              document.body,
-            )}
+                  {rows.map((row) => (
+                    <div
+                      key={row.email}
+                      className="border-b border-border px-space-md py-space-sm last:border-0"
+                    >
+                      {row[tableSortable.activeId as keyof typeof row]}
+                    </div>
+                  ))}
+                </div>,
+                document.body,
+              )}
           </Card>
         </div>
       </div>

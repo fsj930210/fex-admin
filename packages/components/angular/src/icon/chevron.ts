@@ -1,39 +1,49 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 
 @Component({
-  selector: "fex-chevron-right-icon",
+  selector: 'fex-chevron-right-icon',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: "./chevron-right.html",
+  templateUrl: './chevron-right.html',
 })
 export class ChevronRightIcon {}
 
 @Component({
-  selector: "fex-chevron-left-icon",
+  selector: 'fex-chevron-left-icon',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: "./chevron-left.html",
+  templateUrl: './chevron-left.html',
 })
 export class ChevronLeftIcon {}
 
 @Component({
-  selector: "fex-chevron-down-icon",
+  selector: 'fex-chevron-down-icon',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: "./chevron-down.html",
+  templateUrl: './chevron-down.html',
 })
 export class ChevronDownIcon {}
 
 @Component({
-  selector: "fex-chevron-up-icon",
+  selector: 'fex-chevron-up-icon',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: "./chevron-up.html",
+  templateUrl: './chevron-up.html',
 })
 export class ChevronUpIcon {}
 
-@Component({ selector: "fex-chevrons-right-icon", standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: "./chevrons-right.html" })
+@Component({
+  selector: 'fex-chevrons-right-icon',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './chevrons-right.html',
+})
 export class ChevronsRightIcon {}
 
-@Component({ selector: "fex-chevrons-left-icon", standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, templateUrl: "./chevrons-left.html" })
+@Component({
+  selector: 'fex-chevrons-left-icon',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './chevrons-left.html',
+})
 export class ChevronsLeftIcon {}

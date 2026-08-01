@@ -35,7 +35,7 @@
     weekStartsOn?: CalendarWeekday
     minDate?: CalendarDate
     maxDate?: CalendarDate
-    disabledDate?: ((date: CalendarDate) => boolean) | ((date: CalendarDate, activePart: 'start' | 'end') => boolean)
+    disabledDate?: (date: CalendarDate, activePart: 'start' | 'end') => boolean
     range?: boolean
     onChange?: (value: unknown) => void
     onOpenChange?: (open: boolean) => void

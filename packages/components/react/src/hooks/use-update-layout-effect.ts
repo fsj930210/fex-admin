@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
-import { createUpdateEffect } from "./create-update-effect";
+import { useLayoutEffect } from 'react'
+import { createUpdateEffect } from './create-update-effect'
 
-export default createUpdateEffect(useLayoutEffect);
+export default createUpdateEffect(useLayoutEffect)

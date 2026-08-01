@@ -6,7 +6,10 @@ const props = defineProps<{ class?: string }>()
 </script>
 
 <template>
-  <div data-slot="date-picker-header-title" :class="cn(datePickerHeaderTitleClassName, props.class)">
+  <div
+    data-slot="date-picker-header-title"
+    :class="cn(datePickerHeaderTitleClassName, props.class)"
+  >
     <slot />
   </div>
 </template>

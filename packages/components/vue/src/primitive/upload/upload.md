@@ -5,7 +5,14 @@ Vue Upload 将文件列表和上传行为交给共享 core controller，组件�
 ## 导入
 
 ```ts
-import { UploadRoot, UploadTrigger, UploadList, UploadItem, UploadItemProgress, useUpload } from '@fex/components-vue/primitive/upload'
+import {
+  UploadRoot,
+  UploadTrigger,
+  UploadList,
+  UploadItem,
+  UploadItemProgress,
+  useUpload,
+} from '@fex/components-vue/primitive/upload'
 ```
 
 ## 基础组合

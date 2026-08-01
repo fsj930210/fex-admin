@@ -12,12 +12,13 @@
   import { useDatePickerContext } from './context'
   import DatePickerTags from './date-picker-tags.svelte'
 
-  let { class: className, displayValue: displayValueProp, placeholder, suffix, status }: { class?: string; displayValue?: string; placeholder?: string; suffix?: Snippet; status?: 'error' | 'warning' } = $props()
+  let { class: className, displayValue: displayValueProp, placeholder, suffix, status }: { class?: string | undefined; displayValue?: string | undefined; placeholder?: string | undefined; suffix?: Snippet | undefined; status?: 'error' | 'warning' | undefined } = $props()
   const context = useDatePickerContext('DatePickerTrigger')
   const pickerDisplayValue = $derived(Array.isArray(context.getValue()) ? (context.getValue() as readonly never[]).map((item) => formatDatePickerValue(item, context)).join(', ') : formatDatePickerValue(context.getValue() as never, context))
   const displayValue = $derived(displayValueProp ?? pickerDisplayValue)
+  // svelte-ignore state_referenced_locally -- the effect below owns subsequent synchronization.
   let text = $state(displayValue)
-  let inputControl: { focus: () => void } | undefined
+  let inputControl: { focus: () => void } | undefined = undefined
   $effect(() => { text = displayValue })
   function input(nextText: string) { text = nextText; if (context.multiple) return; const result = parseDatePickerValue(nextText, context); if (result.valid) context.select(result.value as never) }
   function open(event: MouseEvent) {

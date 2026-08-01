@@ -22,7 +22,15 @@ import { DatePickerState } from './use-date-picker'
 @Component({
   selector: 'fex-date-picker-trigger',
   standalone: true,
-  imports: [InputRoot, InputControl, InputClear, InputPrefix, InputSuffix, CalendarIcon, DatePickerTags],
+  imports: [
+    InputRoot,
+    InputControl,
+    InputClear,
+    InputPrefix,
+    InputSuffix,
+    CalendarIcon,
+    DatePickerTags,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { 'data-slot': 'date-picker-trigger', class: 'inline-block' },
   templateUrl: './date-picker-trigger.html',

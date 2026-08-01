@@ -5,7 +5,13 @@ Tabs provides composable tab navigation, keyboard focus management, close reques
 ## Import
 
 ```tsx
-import { TabsContent, TabsItem, TabsList, TabsRoot, useTabs } from '@fex/components-react/primitive/tabs'
+import {
+  TabsContent,
+  TabsItem,
+  TabsList,
+  TabsRoot,
+  useTabs,
+} from '@fex/components-react/primitive/tabs'
 ```
 
 ## Basic usage
@@ -14,7 +20,9 @@ import { TabsContent, TabsItem, TabsList, TabsRoot, useTabs } from '@fex/compone
 <TabsRoot>
   <TabsList>
     <TabsItem value="overview">Overview</TabsItem>
-    <TabsItem value="analytics" closable>Analytics</TabsItem>
+    <TabsItem value="analytics" closable>
+      Analytics
+    </TabsItem>
   </TabsList>
   <TabsContent value="overview">Overview content</TabsContent>
   <TabsContent value="analytics">Analytics content</TabsContent>
@@ -25,20 +33,20 @@ Without `value` or `defaultValue`, the first enabled Item is selected. Unvisited
 
 ## Props
 
-| Component | Prop | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- | --- |
-| TabsRoot | value | `string` | - | No | Controlled active value. |
-| TabsRoot | defaultValue | `string` | First enabled Item | No | Initial uncontrolled value. |
-| TabsRoot | onChange | `(value, meta) => void` | - | No | Active value change callback. |
-| TabsRoot | onClose | `(item) => void` | - | No | Close request callback. It does not remove caller data. |
-| TabsRoot | variant | `'default' \| 'line'` | `'default'` | No | Base List, Item and Content appearance. |
-| TabsRoot | orientation | `'horizontal' \| 'vertical'` | `'horizontal'` | No | Layout and arrow-key direction. |
-| TabsRoot | activationMode | `'automatic' \| 'manual'` | `'automatic'` | No | Select on focus, or require Enter/Space. |
-| TabsRoot | loop | `boolean` | `true` | No | Wrap keyboard focus at list boundaries. |
-| TabsItem | value | `string` | - | Yes | Stable Item identity. |
-| TabsItem | disabled | `boolean` | `false` | No | Prevents pointer and keyboard selection. |
-| TabsItem | closable | `boolean` | `false` | No | Renders the default icon close control. |
-| TabsContent | value | `string` | - | Yes | Associates a panel with an Item. |
+| Component   | Prop           | Type                         | Default            | Required | Description                                             |
+| ----------- | -------------- | ---------------------------- | ------------------ | -------- | ------------------------------------------------------- |
+| TabsRoot    | value          | `string`                     | -                  | No       | Controlled active value.                                |
+| TabsRoot    | defaultValue   | `string`                     | First enabled Item | No       | Initial uncontrolled value.                             |
+| TabsRoot    | onChange       | `(value, meta) => void`      | -                  | No       | Active value change callback.                           |
+| TabsRoot    | onClose        | `(item) => void`             | -                  | No       | Close request callback. It does not remove caller data. |
+| TabsRoot    | variant        | `'default' \| 'line'`        | `'default'`        | No       | Base List, Item and Content appearance.                 |
+| TabsRoot    | orientation    | `'horizontal' \| 'vertical'` | `'horizontal'`     | No       | Layout and arrow-key direction.                         |
+| TabsRoot    | activationMode | `'automatic' \| 'manual'`    | `'automatic'`      | No       | Select on focus, or require Enter/Space.                |
+| TabsRoot    | loop           | `boolean`                    | `true`             | No       | Wrap keyboard focus at list boundaries.                 |
+| TabsItem    | value          | `string`                     | -                  | Yes      | Stable Item identity.                                   |
+| TabsItem    | disabled       | `boolean`                    | `false`            | No       | Prevents pointer and keyboard selection.                |
+| TabsItem    | closable       | `boolean`                    | `false`            | No       | Renders the default icon close control.                 |
+| TabsContent | value          | `string`                     | -                  | Yes      | Associates a panel with an Item.                        |
 
 ## Custom rendering
 

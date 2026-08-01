@@ -6,8 +6,10 @@ import type { SortableAxis, SortableId, SortableItems } from '@fex/components-co
 import { useSortable } from '../../hooks/use-sortable'
 import { SortableContext, useSortableContext } from './sortable-context'
 
-export interface SortableRootProps<TItems extends SortableItems>
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'onChange'> {
+export interface SortableRootProps<TItems extends SortableItems> extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'children' | 'onChange'
+> {
   items: TItems
   axis?: SortableAxis
   containerId?: string
@@ -30,7 +32,9 @@ export function SortableRoot<TItems extends SortableItems>({
   return (
     <SortableContext value={sortable}>
       <div {...props} {...containerProps} className={cn(sortableClassName, className)}>
-        {typeof children === 'function' ? children({ items: sortable.previewItems as TItems }) : children}
+        {typeof children === 'function'
+          ? children({ items: sortable.previewItems as TItems })
+          : children}
       </div>
     </SortableContext>
   )
@@ -136,4 +140,3 @@ export function SortableOverlay({ className, children, style, ...props }: Sortab
     document.body,
   )
 }
-

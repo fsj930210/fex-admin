@@ -1,3 +1,15 @@
-export interface Member extends Record<string, unknown> { id: string; name: string; department: string; disabled?: boolean }
-export const members: Member[] = [{ id:'ada',name:'Ada Lovelace',department:'Engineering'},{id:'grace',name:'Grace Hopper',department:'Engineering'},{id:'margaret',name:'Margaret Hamilton',department:'Engineering'},{id:'susan',name:'Susan Kare',department:'Design'},{id:'dieter',name:'Dieter Rams',department:'Design',disabled:true},{id:'katherine',name:'Katherine Johnson',department:'Operations'}]
-export const fieldNames={key:'id',label:'name',disabled:'disabled'} as const
+export interface Member extends Record<string, unknown> {
+  id: string
+  name: string
+  department: string
+  disabled?: boolean
+}
+export const members: Member[] = [
+  { id: 'ada', name: 'Ada Lovelace', department: 'Engineering' },
+  { id: 'grace', name: 'Grace Hopper', department: 'Engineering' },
+  { id: 'margaret', name: 'Margaret Hamilton', department: 'Engineering' },
+  { id: 'susan', name: 'Susan Kare', department: 'Design' },
+  { id: 'dieter', name: 'Dieter Rams', department: 'Design', disabled: true },
+  { id: 'katherine', name: 'Katherine Johnson', department: 'Operations' },
+]
+export const fieldNames = { key: 'id', label: 'name', disabled: 'disabled' } as const

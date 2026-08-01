@@ -1,14 +1,21 @@
 import { resizePanelPair, normalizePanelLayout } from '@fex/components-core/resizable/layout'
 import { cn } from '@fex/utils'
 import { useRef, useState } from 'react'
-import type { HTMLAttributes, KeyboardEvent, PointerEvent as ReactPointerEvent, ReactNode } from 'react'
+import type {
+  HTMLAttributes,
+  KeyboardEvent,
+  PointerEvent as ReactPointerEvent,
+  ReactNode,
+} from 'react'
 import type { ResizableDirection, ResizablePanelConfig } from '@fex/components-core/resizable/types'
 import { useControllableState } from '../../hooks/use-controllable-state'
 
 import { ResizableContext, useResizableContext } from './resizable-context'
 
-export interface ResizablePanelGroupProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
+export interface ResizablePanelGroupProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'defaultValue' | 'onChange'
+> {
   direction?: ResizableDirection
   layout?: number[]
   defaultLayout?: number[]
@@ -62,11 +69,7 @@ export function ResizablePanelGroup({
       <div
         {...props}
         ref={setGroupElement}
-        className={cn(
-          'flex h-full w-full',
-          direction === 'vertical' && 'flex-col',
-          className,
-        )}
+        className={cn('flex h-full w-full', direction === 'vertical' && 'flex-col', className)}
         data-resizable-panel-group=""
         data-orientation={direction}
       >
@@ -123,7 +126,13 @@ export interface ResizableHandleProps extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean
 }
 
-export function ResizableHandle({ index, disabled, className, onKeyDown, ...props }: ResizableHandleProps) {
+export function ResizableHandle({
+  index,
+  disabled,
+  className,
+  onKeyDown,
+  ...props
+}: ResizableHandleProps) {
   const context = useResizableContext()
   const handleRef = useRef<HTMLDivElement | null>(null)
   const handleIndex = index ?? Math.max(0, context.layout.length - 2)
@@ -171,7 +180,10 @@ export function ResizableHandle({ index, disabled, className, onKeyDown, ...prop
       context.resizeHandle(handleIndex, -step)
       event.preventDefault()
     }
-    if ((isHorizontal && event.key === 'ArrowRight') || (!isHorizontal && event.key === 'ArrowDown')) {
+    if (
+      (isHorizontal && event.key === 'ArrowRight') ||
+      (!isHorizontal && event.key === 'ArrowDown')
+    ) {
       context.resizeHandle(handleIndex, step)
       event.preventDefault()
     }
@@ -199,4 +211,3 @@ export function ResizableHandle({ index, disabled, className, onKeyDown, ...prop
     />
   )
 }
-

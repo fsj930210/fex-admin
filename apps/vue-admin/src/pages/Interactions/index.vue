@@ -34,7 +34,12 @@ const resize = useResize({
   minHeight: 120,
 })
 
-function reportDrop(zoneId: 'card-zone' | 'any-zone', zone: string, source: Record<string, unknown>, edge: string | null) {
+function reportDrop(
+  zoneId: 'card-zone' | 'any-zone',
+  zone: string,
+  source: Record<string, unknown>,
+  edge: string | null,
+) {
   const itemId = String(source.id)
   if (!(itemId in draggableItems)) {
     return
@@ -56,7 +61,6 @@ function reportDrop(zoneId: 'card-zone' | 'any-zone', zone: string, source: Reco
 function itemById(itemId: string) {
   return draggableItems[itemId as keyof typeof draggableItems]
 }
-
 </script>
 
 <script lang="ts">
@@ -67,7 +71,9 @@ export default { name: 'InteractionsPage' }
   <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
     <div class="mx-auto w-full max-w-5xl space-y-space-xl">
       <header class="space-y-space-xl">
-        <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/">Back home</RouterLink>
+        <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
+          >Back home</RouterLink
+        >
         <div>
           <h1 class="text-2xl font-semibold text-foreground">Interactions</h1>
           <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
@@ -77,12 +83,22 @@ export default { name: 'InteractionsPage' }
       </header>
 
       <div class="space-y-space-xl">
-        <Card title="Drag And Drop" description="useDraggable and useDroppable wrap shared drag-drop state for cross-component drops.">
+        <Card
+          title="Drag And Drop"
+          description="useDraggable and useDroppable wrap shared drag-drop state for cross-component drops."
+        >
           <div class="grid gap-space-md md:grid-cols-[280px_1fr]">
             <div class="space-y-space-sm rounded-md border border-border bg-background p-space-md">
               <p class="text-sm font-medium text-muted-foreground">Draggable items</p>
-              <DraggableToken v-for="itemId in dropDemoItems.source" :key="itemId" v-bind="itemById(itemId)" />
-              <p v-if="dropDemoItems.source.length === 0" class="rounded-md border border-dashed border-border px-space-md py-space-sm text-sm text-muted-foreground">
+              <DraggableToken
+                v-for="itemId in dropDemoItems.source"
+                :key="itemId"
+                v-bind="itemById(itemId)"
+              />
+              <p
+                v-if="dropDemoItems.source.length === 0"
+                class="rounded-md border border-dashed border-border px-space-md py-space-sm text-sm text-muted-foreground"
+              >
                 All items have been dropped.
               </p>
             </div>
@@ -104,10 +120,17 @@ export default { name: 'InteractionsPage' }
               />
             </div>
           </div>
-          <p class="mt-space-md rounded-md bg-muted-background px-space-md py-space-sm text-sm text-muted-foreground">{{ dropResult }}</p>
+          <p
+            class="mt-space-md rounded-md bg-muted-background px-space-md py-space-sm text-sm text-muted-foreground"
+          >
+            {{ dropResult }}
+          </p>
         </Card>
 
-        <Card title="Dropzone" description="The composable handles drag state, validation, and hidden input selection.">
+        <Card
+          title="Dropzone"
+          description="The composable handles drag state, validation, and hidden input selection."
+        >
           <div
             :ref="(element) => dropzone.setRoot(element as HTMLElement | null)"
             v-bind="dropzone.rootDataAttributes.value"
@@ -125,34 +148,79 @@ export default { name: 'InteractionsPage' }
               v-bind="dropzone.inputAttributes.value"
               @change="dropzone.onInputChange"
             />
-            <span>{{ files.length > 0 ? files.join(', ') : 'Drop images or text files here' }}</span>
+            <span>{{
+              files.length > 0 ? files.join(', ') : 'Drop images or text files here'
+            }}</span>
           </div>
         </Card>
 
         <Card title="Move" description="useMove adds draggable behavior to any existing element.">
           <div class="relative h-64 overflow-hidden rounded-md border border-border bg-background">
-            <div :ref="(element) => move.setTarget(element as HTMLElement | null)" class="absolute w-72 overflow-hidden rounded-md border border-border bg-card shadow-lg" :style="move.style.value">
-              <div :ref="(element) => move.setHandle(element as HTMLElement | null)" class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between border-b border-border bg-muted-background px-space-md text-sm font-medium active:cursor-grabbing" @pointerdown="move.onPointerDown">
+            <div
+              :ref="(element) => move.setTarget(element as HTMLElement | null)"
+              class="absolute w-72 overflow-hidden rounded-md border border-border bg-card shadow-lg"
+              :style="move.style.value"
+            >
+              <div
+                :ref="(element) => move.setHandle(element as HTMLElement | null)"
+                class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between border-b border-border bg-muted-background px-space-md text-sm font-medium active:cursor-grabbing"
+                @pointerdown="move.onPointerDown"
+              >
                 <span>Drag this title bar</span><span class="text-muted-foreground">::</span>
               </div>
-              <p class="p-space-md text-sm text-muted-foreground">The card is constrained to its parent. The title bar is the move handle.</p>
+              <p class="p-space-md text-sm text-muted-foreground">
+                The card is constrained to its parent. The title bar is the move handle.
+              </p>
             </div>
           </div>
         </Card>
 
-        <Card title="Resize" description="useResize supports edge and corner handles for floating surfaces.">
+        <Card
+          title="Resize"
+          description="useResize supports edge and corner handles for floating surfaces."
+        >
           <div class="relative h-80 overflow-hidden rounded-md border border-border bg-background">
-            <div :ref="(element) => resize.setTarget(element as HTMLElement | null)" class="absolute rounded-md border border-border bg-card p-space-md shadow-lg" :style="resize.style.value">
+            <div
+              :ref="(element) => resize.setTarget(element as HTMLElement | null)"
+              class="absolute rounded-md border border-border bg-card p-space-md shadow-lg"
+              :style="resize.style.value"
+            >
               <p class="text-sm font-medium">Resizable surface</p>
-              <p class="mt-space-sm text-sm text-muted-foreground">Drag any edge or corner. Handles are intentionally visible for this demo.</p>
-              <div v-bind="resize.getHandleProps('top')" class="absolute left-4 right-4 top-0 z-10 h-2 cursor-n-resize rounded-b bg-primary/50 hover:bg-primary" />
-              <div v-bind="resize.getHandleProps('right')" class="absolute bottom-4 right-0 top-4 z-10 w-2 cursor-e-resize rounded-l bg-primary/50 hover:bg-primary" />
-              <div v-bind="resize.getHandleProps('bottom')" class="absolute bottom-0 left-4 right-4 z-10 h-2 cursor-s-resize rounded-t bg-primary/50 hover:bg-primary" />
-              <div v-bind="resize.getHandleProps('left')" class="absolute bottom-4 left-0 top-4 z-10 w-2 cursor-w-resize rounded-r bg-primary/50 hover:bg-primary" />
-              <div v-bind="resize.getHandleProps('top-left')" class="absolute left-0 top-0 z-20 size-6 cursor-nw-resize rounded-br bg-primary shadow-sm" />
-              <div v-bind="resize.getHandleProps('top-right')" class="absolute right-0 top-0 z-20 size-6 cursor-ne-resize rounded-bl bg-primary shadow-sm" />
-              <div v-bind="resize.getHandleProps('bottom-left')" class="absolute bottom-0 left-0 z-20 size-6 cursor-sw-resize rounded-tr bg-primary shadow-sm" />
-              <div v-bind="resize.getHandleProps('bottom-right')" class="absolute bottom-0 right-0 z-20 size-6 cursor-se-resize rounded-tl bg-primary shadow-sm" />
+              <p class="mt-space-sm text-sm text-muted-foreground">
+                Drag any edge or corner. Handles are intentionally visible for this demo.
+              </p>
+              <div
+                v-bind="resize.getHandleProps('top')"
+                class="absolute left-4 right-4 top-0 z-10 h-2 cursor-n-resize rounded-b bg-primary/50 hover:bg-primary"
+              />
+              <div
+                v-bind="resize.getHandleProps('right')"
+                class="absolute bottom-4 right-0 top-4 z-10 w-2 cursor-e-resize rounded-l bg-primary/50 hover:bg-primary"
+              />
+              <div
+                v-bind="resize.getHandleProps('bottom')"
+                class="absolute bottom-0 left-4 right-4 z-10 h-2 cursor-s-resize rounded-t bg-primary/50 hover:bg-primary"
+              />
+              <div
+                v-bind="resize.getHandleProps('left')"
+                class="absolute bottom-4 left-0 top-4 z-10 w-2 cursor-w-resize rounded-r bg-primary/50 hover:bg-primary"
+              />
+              <div
+                v-bind="resize.getHandleProps('top-left')"
+                class="absolute left-0 top-0 z-20 size-6 cursor-nw-resize rounded-br bg-primary shadow-sm"
+              />
+              <div
+                v-bind="resize.getHandleProps('top-right')"
+                class="absolute right-0 top-0 z-20 size-6 cursor-ne-resize rounded-bl bg-primary shadow-sm"
+              />
+              <div
+                v-bind="resize.getHandleProps('bottom-left')"
+                class="absolute bottom-0 left-0 z-20 size-6 cursor-sw-resize rounded-tr bg-primary shadow-sm"
+              />
+              <div
+                v-bind="resize.getHandleProps('bottom-right')"
+                class="absolute bottom-0 right-0 z-20 size-6 cursor-se-resize rounded-tl bg-primary shadow-sm"
+              />
             </div>
           </div>
         </Card>

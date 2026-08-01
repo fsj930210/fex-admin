@@ -14,4 +14,3 @@ export function getFilesFromDataTransfer(dataTransfer: DataTransfer | null): Fil
 
   return Array.from(dataTransfer.files ?? [])
 }
-

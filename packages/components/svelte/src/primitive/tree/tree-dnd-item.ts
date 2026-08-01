@@ -9,7 +9,11 @@ import {
   DND_DRAG_START_Y,
 } from '@fex/components-core/interactions/dnd-store'
 import { draggableAction } from '../../actions/draggable'
-import { droppableAction, type DroppableActionOptions, type DroppableEventArgs } from '../../actions/droppable'
+import {
+  droppableAction,
+  type DroppableActionOptions,
+  type DroppableEventArgs,
+} from '../../actions/droppable'
 
 export interface TreeDndItemOptions<TNode extends TreeNodeData> {
   tree: TreeController<TNode>
@@ -24,7 +28,9 @@ export function treeDndItemAction<TNode extends TreeNodeData>(
 ) {
   let current = options
   let drag: ReturnType<typeof draggableAction> | undefined
-  let drop: { update: (current: DroppableActionOptions<{ treeKey: TreeKey }>) => void; destroy(): void } | undefined
+  let drop:
+    | { update: (current: DroppableActionOptions<{ treeKey: TreeKey }>) => void; destroy(): void }
+    | undefined
   let intent: TreeDropIntent | null = null
 
   const bind = (nextOptions: TreeDndItemOptions<TNode>) => {

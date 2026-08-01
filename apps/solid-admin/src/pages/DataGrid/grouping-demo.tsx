@@ -88,7 +88,11 @@ function GroupingGrid(props: { mode: 'reorder' | 'remove' }) {
                 aria-expanded={row.getIsExpanded()}
                 onClick={row.getToggleExpandedHandler()}
               >
-                {row.getIsExpanded() ? <ChevronDownIcon class="size-3.5" /> : <ChevronRightIcon class="size-3.5" />}
+                {row.getIsExpanded() ? (
+                  <ChevronDownIcon class="size-3.5" />
+                ) : (
+                  <ChevronRightIcon class="size-3.5" />
+                )}
               </Button>
               <span class="text-sm font-semibold">{label}</span>
               <span class="text-sm text-muted-foreground">=</span>

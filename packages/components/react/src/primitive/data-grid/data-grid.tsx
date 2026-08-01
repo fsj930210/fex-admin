@@ -49,7 +49,14 @@ import {
 } from '@fex/components-styles/data-grid'
 import { cn } from '@fex/utils'
 import type { Cell, Header, Row, RowData, TableFeatures } from '@tanstack/react-table'
-import { useRef, type ComponentProps, type CSSProperties, type MouseEvent, type ReactNode, type TouchEvent } from 'react'
+import {
+  useRef,
+  type ComponentProps,
+  type CSSProperties,
+  type MouseEvent,
+  type ReactNode,
+  type TouchEvent,
+} from 'react'
 import type { ReactTable } from '@tanstack/react-table'
 import { useVirtualizer } from '@tanstack/react-virtual'
 
@@ -67,8 +74,10 @@ export interface DataGridClassName {
   loading?: string
 }
 
-export interface DataGridProps<TFeatures extends TableFeatures, TData extends RowData>
-  extends Omit<ComponentProps<'div'>, 'children' | 'className'> {
+export interface DataGridProps<TFeatures extends TableFeatures, TData extends RowData> extends Omit<
+  ComponentProps<'div'>,
+  'children' | 'className'
+> {
   table: ReactTable<TFeatures, TData, unknown>
   className?: DataGridClassName
   density?: 'compact' | 'default' | 'comfortable'
@@ -78,8 +87,12 @@ export interface DataGridProps<TFeatures extends TableFeatures, TData extends Ro
   loading?: boolean
   loadingContent?: ReactNode
   emptyContent?: ReactNode
-  renderSubComponent?: (row: ReturnType<ReactTable<TFeatures, TData>['getRowModel']>['rows'][number]) => ReactNode
-  renderGroupRow?: (row: ReturnType<ReactTable<TFeatures, TData>['getRowModel']>['rows'][number]) => ReactNode
+  renderSubComponent?: (
+    row: ReturnType<ReactTable<TFeatures, TData>['getRowModel']>['rows'][number],
+  ) => ReactNode
+  renderGroupRow?: (
+    row: ReturnType<ReactTable<TFeatures, TData>['getRowModel']>['rows'][number],
+  ) => ReactNode
   virtual?: {
     height: number
     estimateRowHeight?: number
@@ -90,8 +103,9 @@ export interface DataGridProps<TFeatures extends TableFeatures, TData extends Ro
   getRowProps?: (row: Row<TFeatures, TData>) => ComponentProps<'tr'>
 }
 
-type DataGridRenderColumn<TFeatures extends TableFeatures, TData extends RowData> =
-  ReturnType<ReactTable<TFeatures, TData, unknown>['getAllLeafColumns']>[number] &
+type DataGridRenderColumn<TFeatures extends TableFeatures, TData extends RowData> = ReturnType<
+  ReactTable<TFeatures, TData, unknown>['getAllLeafColumns']
+>[number] &
   DataGridColumnLayoutSource & {
     getIsSorted?: () => false | 'asc' | 'desc'
     getCanResize?: () => boolean
@@ -99,11 +113,15 @@ type DataGridRenderColumn<TFeatures extends TableFeatures, TData extends RowData
     resetSize?: () => void
   }
 
-type DataGridRenderCell<TFeatures extends TableFeatures, TData extends RowData> =
-  Cell<TFeatures, TData> & { column: DataGridRenderColumn<TFeatures, TData> }
+type DataGridRenderCell<TFeatures extends TableFeatures, TData extends RowData> = Cell<
+  TFeatures,
+  TData
+> & { column: DataGridRenderColumn<TFeatures, TData> }
 
-type DataGridRenderRow<TFeatures extends TableFeatures, TData extends RowData> =
-  Row<TFeatures, TData> &
+type DataGridRenderRow<TFeatures extends TableFeatures, TData extends RowData> = Row<
+  TFeatures,
+  TData
+> &
   DataGridRowRenderingSource<DataGridRenderCell<TFeatures, TData>> & {
     getIsPinned?: () => false | 'top' | 'bottom'
     getPinnedIndex?: () => number
@@ -112,14 +130,21 @@ type DataGridRenderRow<TFeatures extends TableFeatures, TData extends RowData> =
     getIsExpanded?: () => boolean
   }
 
-type DataGridRenderHeader<TFeatures extends TableFeatures, TData extends RowData> =
-  Header<TFeatures, TData> & {
-    column: DataGridRenderColumn<TFeatures, TData>
-    getResizeHandler?: () => ((event: MouseEvent<HTMLSpanElement> | TouchEvent<HTMLSpanElement>) => void)
-  }
+type DataGridRenderHeader<TFeatures extends TableFeatures, TData extends RowData> = Header<
+  TFeatures,
+  TData
+> & {
+  column: DataGridRenderColumn<TFeatures, TData>
+  getResizeHandler?: () => (
+    event: MouseEvent<HTMLSpanElement> | TouchEvent<HTMLSpanElement>,
+  ) => void
+}
 
-type DataGridRenderTable<TFeatures extends TableFeatures, TData extends RowData> =
-  ReactTable<TFeatures, TData, unknown> &
+type DataGridRenderTable<TFeatures extends TableFeatures, TData extends RowData> = ReactTable<
+  TFeatures,
+  TData,
+  unknown
+> &
   DataGridRenderingTableSource<
     DataGridRenderRow<TFeatures, TData>,
     DataGridRenderColumn<TFeatures, TData>
@@ -180,7 +205,8 @@ export function DataGrid<TFeatures extends TableFeatures, TData extends RowData>
   const visibleLeafColumns = getDataGridVisibleLeafColumns(renderTable)
   const { tableWidth, rootWidth } = getDataGridSizingLayout(renderTable)
   const hasPinnedColumns = Boolean(
-    pinningTable.getStartVisibleLeafColumns?.().length || pinningTable.getEndVisibleLeafColumns?.().length,
+    pinningTable.getStartVisibleLeafColumns?.().length ||
+    pinningTable.getEndVisibleLeafColumns?.().length,
   )
   return (
     <div
@@ -188,7 +214,13 @@ export function DataGrid<TFeatures extends TableFeatures, TData extends RowData>
       data-slot="data-grid"
       data-loading={loading || undefined}
       className={cn(dataGridRootClassName({ density, striped, bordered: border }), className?.root)}
-      style={{ ...props.style, width: rootWidth, '--data-grid-header-height': 'var(--data-grid-row-height)' } as CSSProperties}
+      style={
+        {
+          ...props.style,
+          width: rootWidth,
+          '--data-grid-header-height': 'var(--data-grid-row-height)',
+        } as CSSProperties
+      }
     >
       <div
         ref={virtual ? viewportRef : undefined}
@@ -209,7 +241,13 @@ export function DataGrid<TFeatures extends TableFeatures, TData extends RowData>
           )}
           <thead className={cn(dataGridHeaderClassName, className?.header)}>
             {renderTable.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id} className={cn(dataGridHeaderRowClassName({ bordered: border }), className?.headerRow)}>
+              <tr
+                key={headerGroup.id}
+                className={cn(
+                  dataGridHeaderRowClassName({ bordered: border }),
+                  className?.headerRow,
+                )}
+              >
                 {headerGroup.headers.map((header, headerIndex) => {
                   const renderHeader = header as unknown as DataGridRenderHeader<TFeatures, TData>
                   const meta = renderHeader.column.columnDef.meta as DataGridColumnMeta | undefined
@@ -224,7 +262,13 @@ export function DataGrid<TFeatures extends TableFeatures, TData extends RowData>
                       {...externalHeaderProps}
                       key={header.id}
                       colSpan={header.colSpan}
-                      aria-sort={sorted === 'asc' ? 'ascending' : sorted === 'desc' ? 'descending' : undefined}
+                      aria-sort={
+                        sorted === 'asc'
+                          ? 'ascending'
+                          : sorted === 'desc'
+                            ? 'descending'
+                            : undefined
+                      }
                       className={cn(
                         dataGridHeaderCellClassName,
                         pinning.pinned && dataGridPinnedCellClassName,
@@ -242,7 +286,10 @@ export function DataGrid<TFeatures extends TableFeatures, TData extends RowData>
                       style={{ ...getLayoutStyle(pinning.style), ...externalHeaderProps.style }}
                     >
                       {renderHeader.isPlaceholder ? null : (
-                        <div data-slot="data-grid-header-content" className={dataGridHeaderContentClassName}>
+                        <div
+                          data-slot="data-grid-header-content"
+                          className={dataGridHeaderContentClassName}
+                        >
                           <table.FlexRender header={renderHeader} />
                         </div>
                       )}
@@ -268,7 +315,15 @@ export function DataGrid<TFeatures extends TableFeatures, TData extends RowData>
             {(virtual ? virtualRows : renderedRows).length ? (
               virtual ? (
                 <>
-                  {virtualTop ? <tr aria-hidden="true"><td colSpan={visibleLeafColumnCount} className={dataGridVirtualSpacerClassName} style={{ height: virtualTop }} /></tr> : null}
+                  {virtualTop ? (
+                    <tr aria-hidden="true">
+                      <td
+                        colSpan={visibleLeafColumnCount}
+                        className={dataGridVirtualSpacerClassName}
+                        style={{ height: virtualTop }}
+                      />
+                    </tr>
+                  ) : null}
                   {virtualItems.map((virtualItem) => {
                     const row = virtualRows[virtualItem.index]
                     return row ? (
@@ -284,23 +339,36 @@ export function DataGrid<TFeatures extends TableFeatures, TData extends RowData>
                       />
                     ) : null
                   })}
-                  {virtualBottom ? <tr aria-hidden="true"><td colSpan={visibleLeafColumnCount} className={dataGridVirtualSpacerClassName} style={{ height: virtualBottom }} /></tr> : null}
+                  {virtualBottom ? (
+                    <tr aria-hidden="true">
+                      <td
+                        colSpan={visibleLeafColumnCount}
+                        className={dataGridVirtualSpacerClassName}
+                        style={{ height: virtualBottom }}
+                      />
+                    </tr>
+                  ) : null}
                 </>
-              ) : renderedRows.map((row) => (
-                <DataGridRenderedRow
-                  key={row.id}
-                  row={row}
-                  table={renderTable}
-                  className={className}
-                  renderSubComponent={renderSubComponent}
-                  renderGroupRow={renderGroupRow}
-                  getCellProps={getCellProps}
-                  getRowProps={getRowProps}
-                />
-              ))
+              ) : (
+                renderedRows.map((row) => (
+                  <DataGridRenderedRow
+                    key={row.id}
+                    row={row}
+                    table={renderTable}
+                    className={className}
+                    renderSubComponent={renderSubComponent}
+                    renderGroupRow={renderGroupRow}
+                    getCellProps={getCellProps}
+                    getRowProps={getRowProps}
+                  />
+                ))
+              )
             ) : (
               <tr>
-                <td colSpan={visibleLeafColumnCount} className={cn(dataGridEmptyClassName, className?.empty)}>
+                <td
+                  colSpan={visibleLeafColumnCount}
+                  className={cn(dataGridEmptyClassName, className?.empty)}
+                >
                   {emptyContent}
                 </td>
               </tr>
@@ -308,7 +376,9 @@ export function DataGrid<TFeatures extends TableFeatures, TData extends RowData>
           </tbody>
         </table>
       </div>
-      {loading ? <div className={cn(dataGridLoadingClassName, className?.loading)}>{loadingContent}</div> : null}
+      {loading ? (
+        <div className={cn(dataGridLoadingClassName, className?.loading)}>{loadingContent}</div>
+      ) : null}
     </div>
   )
 }
@@ -336,7 +406,8 @@ export function DataGridRowOverlay<TFeatures extends TableFeatures, TData extend
   const pinningTable = table as unknown as DataGridPinningTableSource
   const { tableWidth } = getDataGridSizingLayout(renderTable)
   const hasPinnedColumns = Boolean(
-    pinningTable.getStartVisibleLeafColumns?.().length || pinningTable.getEndVisibleLeafColumns?.().length,
+    pinningTable.getStartVisibleLeafColumns?.().length ||
+    pinningTable.getEndVisibleLeafColumns?.().length,
   )
   const visibleLeafColumns = getDataGridVisibleLeafColumns(renderTable)
 
@@ -358,7 +429,11 @@ export function DataGridRowOverlay<TFeatures extends TableFeatures, TData extend
           </colgroup>
         )}
         <tbody>
-          <DataGridRenderedRow row={row as DataGridRenderRow<TFeatures, TData>} table={renderTable} className={className} />
+          <DataGridRenderedRow
+            row={row as DataGridRenderRow<TFeatures, TData>}
+            table={renderTable}
+            className={className}
+          />
         </tbody>
       </table>
     </div>
@@ -366,7 +441,10 @@ export function DataGridRowOverlay<TFeatures extends TableFeatures, TData extend
 }
 
 /** Renders a real header and its cells for column drag previews. */
-export interface DataGridColumnOverlayProps<TFeatures extends TableFeatures, TData extends RowData> {
+export interface DataGridColumnOverlayProps<
+  TFeatures extends TableFeatures,
+  TData extends RowData,
+> {
   table: ReactTable<TFeatures, TData, unknown>
   header: Header<TFeatures, TData>
   rows?: readonly ReturnType<ReactTable<TFeatures, TData>['getRowModel']>['rows'][number][]
@@ -391,7 +469,9 @@ export function DataGridColumnOverlay<TFeatures extends TableFeatures, TData ext
       style={{ ...style, height: 'auto' }}
     >
       <table className={dataGridTableClassName} style={{ width: '100%' }}>
-        <colgroup><col style={{ width: getDataGridColumnSize(header.column) }} /></colgroup>
+        <colgroup>
+          <col style={{ width: getDataGridColumnSize(header.column) }} />
+        </colgroup>
         <thead className={dataGridHeaderClassName}>
           <tr className={dataGridHeaderRowClassName()}>
             <th className={dataGridHeaderCellClassName}>
@@ -407,7 +487,9 @@ export function DataGridColumnOverlay<TFeatures extends TableFeatures, TData ext
             return cell ? (
               <tr key={row.id} className={dataGridRowClassName}>
                 <td className={dataGridCellClassName}>
-                  <div className={dataGridCellContentClassName}><table.FlexRender cell={cell} /></div>
+                  <div className={dataGridCellContentClassName}>
+                    <table.FlexRender cell={cell} />
+                  </div>
                 </td>
               </tr>
             ) : null
@@ -464,7 +546,10 @@ function DataGridRenderedRow<TFeatures extends TableFeatures, TData extends RowD
         className={rowClassName}
         style={rowStyle}
       >
-        <td colSpan={Math.max(1, getDataGridVisibleLeafColumnCount(table))} className={cn(dataGridCellClassName, className?.cell)}>
+        <td
+          colSpan={Math.max(1, getDataGridVisibleLeafColumnCount(table))}
+          className={cn(dataGridCellClassName, className?.cell)}
+        >
           {renderGroupRow(row)}
         </td>
       </tr>
@@ -502,7 +587,9 @@ function DataGridRenderedRow<TFeatures extends TableFeatures, TData extends RowD
               )}
               style={{ ...getLayoutStyle(pinning.style), ...externalCellProps.style }}
             >
-              <div className={dataGridCellContentClassName}><table.FlexRender cell={cell} /></div>
+              <div className={dataGridCellContentClassName}>
+                <table.FlexRender cell={cell} />
+              </div>
             </td>
           )
         })}
@@ -537,11 +624,4 @@ export {
   dataGridRowClassName,
   dataGridTableClassName,
 } from '@fex/components-styles/data-grid'
-export type {
-  Cell,
-  Column,
-  ColumnDef,
-  Header,
-  Row,
-  TableFeatures,
-} from '@tanstack/react-table'
+export type { Cell, Column, ColumnDef, Header, Row, TableFeatures } from '@tanstack/react-table'

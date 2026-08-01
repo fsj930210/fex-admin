@@ -10,7 +10,11 @@ export function DataGridDemoSection({
   description: string
   children: ReactNode
 }) {
-  return <Card title={title} description={description}>{children}</Card>
+  return (
+    <Card title={title} description={description}>
+      {children}
+    </Card>
+  )
 }
 
 export function DemoBranch({ title, children }: { title: string; children: ReactNode }) {
@@ -21,4 +25,3 @@ export function DemoBranch({ title, children }: { title: string; children: React
     </section>
   )
 }
-

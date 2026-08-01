@@ -26,20 +26,21 @@ export function focusFeature<TNode extends TreeNodeData>(): TreeFeatureRegistrat
     feature: {
       id: 'focus',
       requires: ['expansion'],
-      setup: (context) => ({
-        focus: (key) => context.setFocusedKey(key),
-        reveal: (key) => {
-          const next = getRevealExpandedKeys(
-            context.getSnapshot().expandedKeys,
-            key,
-            context.getItems(),
-            context.getAncestorKeys,
-          )
-          if (!next) return false
-          context.setStateKeys('expandedKeys', next, context.getAncestorKeys(key))
-          return true
-        },
-      }) satisfies FocusFeatureApi,
+      setup: (context) =>
+        ({
+          focus: (key) => context.setFocusedKey(key),
+          reveal: (key) => {
+            const next = getRevealExpandedKeys(
+              context.getSnapshot().expandedKeys,
+              key,
+              context.getItems(),
+              context.getAncestorKeys,
+            )
+            if (!next) return false
+            context.setStateKeys('expandedKeys', next, context.getAncestorKeys(key))
+            return true
+          },
+        }) satisfies FocusFeatureApi,
     },
   }
 }

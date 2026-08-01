@@ -5,9 +5,12 @@ export const dataGridRootClassName = cva(
   {
     variants: {
       density: {
-        compact: '[--data-grid-row-height:2rem] [&_th]:h-8 [&_th]:px-2 [&_td]:h-8 [&_td]:px-2 [&_td]:py-1',
-        default: '[--data-grid-row-height:2.5rem] [&_th]:h-10 [&_th]:px-3 [&_td]:h-10 [&_td]:px-3 [&_td]:py-2',
-        comfortable: '[--data-grid-row-height:3rem] [&_th]:h-12 [&_th]:px-4 [&_td]:h-12 [&_td]:px-4 [&_td]:py-3',
+        compact:
+          '[--data-grid-row-height:2rem] [&_th]:h-8 [&_th]:px-2 [&_td]:h-8 [&_td]:px-2 [&_td]:py-1',
+        default:
+          '[--data-grid-row-height:2.5rem] [&_th]:h-10 [&_th]:px-3 [&_td]:h-10 [&_td]:px-3 [&_td]:py-2',
+        comfortable:
+          '[--data-grid-row-height:3rem] [&_th]:h-12 [&_th]:px-4 [&_td]:h-12 [&_td]:px-4 [&_td]:py-3',
       },
       striped: {
         true: '[&_tbody_tr:nth-child(even)]:bg-muted-background/35',
@@ -28,24 +31,20 @@ export const dataGridTableClassName = 'w-full table-fixed border-collapse text-s
 // Grouped and leaf header rows therefore share one cross-framework contract.
 export const dataGridHeaderClassName =
   'sticky top-0 z-30 border-b border-border bg-muted-background text-foreground [&_th]:font-semibold [&_[data-slot=data-grid-header-content]]:font-semibold'
-export const dataGridHeaderRowClassName = cva(
-  'border-b border-border',
-  {
-    variants: {
-      bordered: {
-        true: '[&>th]:after:hidden',
-        false: '',
-      },
+export const dataGridHeaderRowClassName = cva('border-b border-border', {
+  variants: {
+    bordered: {
+      true: '[&>th]:after:hidden',
+      false: '',
     },
-    defaultVariants: { bordered: false },
   },
-)
+  defaultVariants: { bordered: false },
+})
 export const dataGridHeaderSeparatorClassName =
   'after:pointer-events-none after:absolute after:inset-y-2 after:end-0 after:w-px after:bg-border after:content-[""]'
 export const dataGridHeaderCellClassName =
   'relative select-none bg-muted-background text-left align-middle font-semibold whitespace-nowrap text-foreground'
-export const dataGridHeaderContentClassName =
-  'min-w-0 overflow-hidden text-ellipsis font-semibold'
+export const dataGridHeaderContentClassName = 'min-w-0 overflow-hidden text-ellipsis font-semibold'
 export const dataGridBodyClassName = 'bg-background text-foreground [&_tr:last-child]:border-b-0'
 export const dataGridRowClassName =
   'border-b border-border transition-colors hover:bg-muted-background/50 data-[state=selected]:bg-muted-background'
@@ -61,8 +60,10 @@ export const dataGridPinnedTopEdgeClassName =
   'after:-bottom-8 after:shadow-[inset_0_10px_8px_-8px_rgb(15_23_42_/_0.18)]'
 export const dataGridPinnedBottomEdgeClassName =
   'after:-top-8 after:shadow-[inset_0_-10px_8px_-8px_rgb(15_23_42_/_0.18)]'
-export const dataGridGroupedRowClassName = 'bg-muted-background/55 hover:bg-muted-background/70 [&>td]:p-0'
-export const dataGridCellClassName = 'relative align-middle font-normal whitespace-nowrap text-foreground'
+export const dataGridGroupedRowClassName =
+  'bg-muted-background/55 hover:bg-muted-background/70 [&>td]:p-0'
+export const dataGridCellClassName =
+  'relative align-middle font-normal whitespace-nowrap text-foreground'
 export const dataGridCellContentClassName =
   'min-w-0 overflow-hidden text-ellipsis focus-within:overflow-visible'
 export const dataGridEmptyClassName = 'h-32 text-center text-sm text-muted-foreground'

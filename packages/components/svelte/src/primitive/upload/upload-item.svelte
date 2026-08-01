@@ -13,6 +13,7 @@
   const state = createUploadItem(upload, () => id)
   const { item } = state
   const slotState: State = $derived({ ...state, item: $item })
+  // svelte-ignore state_referenced_locally -- keyed upload items keep a stable id while mounted.
   setUploadItemId(id)
 </script>
 {#if $item}<div {...rest} role="listitem" class={cn(uploadItemClassName(), className)} data-status={$item.status}>{@render children?.(slotState)}</div>{/if}

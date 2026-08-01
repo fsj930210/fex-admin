@@ -55,7 +55,11 @@ function createColumnGrid(constrained: boolean) {
     ({
       accessorKey: id,
       size: id === 'name' ? 180 : id === 'department' ? 170 : 140,
-      header: () => h('span', { class: 'inline-flex items-center gap-2' }, [h(EllipsisIcon, { class: 'size-4 rotate-90 text-muted-foreground' }), labels[id]]),
+      header: () =>
+        h('span', { class: 'inline-flex items-center gap-2' }, [
+          h(EllipsisIcon, { class: 'size-4 rotate-90 text-muted-foreground' }),
+          labels[id],
+        ]),
     }) as unknown as ColumnDef<ColumnFeatures, Person>
   const leaves = initialOrder.map(leaf)
   const columns: ColumnDef<ColumnFeatures, Person>[] = constrained
@@ -153,7 +157,12 @@ const free = createColumnGrid(false)
 const locked = createColumnGrid(true)
 const rowOrder = ref(people5.map((person) => person.id))
 const rowColumns: ColumnDef<RowFeatures, Person>[] = [
-  { id: '__drag__', header: '', cell: () => h(EllipsisIcon, { class: 'size-4 rotate-90 text-muted-foreground' }), size: 44 },
+  {
+    id: '__drag__',
+    header: '',
+    cell: () => h(EllipsisIcon, { class: 'size-4 rotate-90 text-muted-foreground' }),
+    size: 44,
+  },
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'department', header: 'Department' },
   { accessorKey: 'status', header: 'Status' },

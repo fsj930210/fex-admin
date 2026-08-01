@@ -46,8 +46,8 @@ function input(event: Event) {
   select.controller.open()
 }
 function inputPointerdown(event: PointerEvent) {
-  const input = event.currentTarget as HTMLInputElement
-  if (document.activeElement === input) select.controller.toggleOpen()
+  const inputElement = event.currentTarget as HTMLInputElement
+  if (document.activeElement === inputElement) select.controller.toggleOpen()
   else select.controller.open()
 }
 </script>

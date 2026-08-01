@@ -7,8 +7,11 @@ const props = defineProps<{ class?: string | undefined }>()
 </script>
 
 <template>
-  <div v-bind="$attrs" data-slot="card-description" :class="cn(cardDescriptionClassName, props.class)">
+  <div
+    v-bind="$attrs"
+    data-slot="card-description"
+    :class="cn(cardDescriptionClassName, props.class)"
+  >
     <slot />
   </div>
 </template>
-

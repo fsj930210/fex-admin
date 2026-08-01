@@ -3,7 +3,7 @@
   import { cn } from '@fex/utils'
   import type { Snippet } from 'svelte'
   import type { HTMLAttributes } from 'svelte/elements'
-  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'class'> { class?: string; children?: Snippet }
+  interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'class'> { class?: string | undefined; children?: Snippet | undefined }
   let { class: className, children, ...rest }: Props = $props()
 </script>
 

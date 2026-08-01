@@ -1,7 +1,10 @@
 import { createStore } from '../store/create-store'
 import type { ToggleChangeMeta, ToggleController, ToggleOptions, ToggleSnapshot } from './types'
 
-function createToggleSnapshot(checked: boolean | undefined, disabled: boolean | undefined): ToggleSnapshot {
+function createToggleSnapshot(
+  checked: boolean | undefined,
+  disabled: boolean | undefined,
+): ToggleSnapshot {
   return {
     checked: checked === true,
     disabled: disabled === true,
@@ -10,7 +13,9 @@ function createToggleSnapshot(checked: boolean | undefined, disabled: boolean | 
 
 export function createToggleController(options: ToggleOptions = {}): ToggleController {
   const isControlled = () => options.checked !== undefined
-  const store = createStore(createToggleSnapshot(options.checked ?? options.defaultChecked, options.disabled))
+  const store = createStore(
+    createToggleSnapshot(options.checked ?? options.defaultChecked, options.disabled),
+  )
   let controlledSnapshot = store.getSnapshot()
 
   const getCurrentSnapshot = () => {

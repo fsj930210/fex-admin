@@ -33,10 +33,10 @@ Card groups related content in a bordered surface. It is used for admin panels, 
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `class` | `string` | `undefined` | No | Extra classes merged with the component defaults. |
-| native `div` props | `HTMLAttributes<HTMLDivElement>` | `undefined` | No | Standard `div` attributes are passed through. |
+| Name               | Type                             | Default     | Required | Description                                       |
+| ------------------ | -------------------------------- | ----------- | -------- | ------------------------------------------------- |
+| `class`            | `string`                         | `undefined` | No       | Extra classes merged with the component defaults. |
+| native `div` props | `HTMLAttributes<HTMLDivElement>` | `undefined` | No       | Standard `div` attributes are passed through.     |
 
 ## Events
 

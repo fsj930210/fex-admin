@@ -1,11 +1,34 @@
-import { getCalendarToday, getCalendarValueDate, type CalendarRange, type CalendarValue } from '@fex/components-core/calendar'
+import {
+  getCalendarToday,
+  getCalendarValueDate,
+  type CalendarRange,
+  type CalendarValue,
+} from '@fex/components-core/calendar'
 import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
 import { endOfDate } from '@fex/components-core/date/utils'
 import { datePickerDateTimePanelClassName } from '@fex/components-styles/date-picker'
-import { DatePickerCancel, DatePickerConfirm, DatePickerContent, DatePickerFooter, DatePickerPanel, DatePickerPreset, DatePickerRoot, DatePickerTrigger, RangePickerPanelGroup, useRangePickerContext } from '@fex/components-solid/primitive/date-picker'
-import { TimePickerHourColumn, TimePickerMinuteColumn, TimePickerPanel, TimePickerRoot, TimePickerSecondColumn, type TimeValue } from '@fex/components-solid/primitive/time-picker'
+import {
+  DatePickerCancel,
+  DatePickerConfirm,
+  DatePickerContent,
+  DatePickerFooter,
+  DatePickerPanel,
+  DatePickerPreset,
+  DatePickerRoot,
+  DatePickerTrigger,
+  RangePickerPanelGroup,
+  useRangePickerContext,
+} from '@fex/components-solid/primitive/date-picker'
+import {
+  TimePickerHourColumn,
+  TimePickerMinuteColumn,
+  TimePickerPanel,
+  TimePickerRoot,
+  TimePickerSecondColumn,
+  type TimeValue,
+} from '@fex/components-solid/primitive/time-picker'
 import { createSignal, For } from 'solid-js'
-import { DemoDatePicker, DemoRangePicker, Section } from './shared'
+import { DemoRangePicker, Section } from './shared'
 
 const today = getCalendarToday()
 
@@ -16,7 +39,10 @@ export function IntegrationDemos() {
 
   return (
     <>
-      <Section title="预设范围" description="预设会直接写入受控范围并保持面板打开，可用于报表、审计和运营筛选。">
+      <Section
+        title="预设范围"
+        description="预设会直接写入受控范围并保持面板打开，可用于报表、审计和运营筛选。"
+      >
         <div>
           <DemoRangePicker value={range()} onChange={setRange}>
             <PresetRangePanel onSelect={setRange} />
@@ -24,7 +50,10 @@ export function IntegrationDemos() {
         </div>
       </Section>
 
-      <Section title="确认后提交" description="选择过程只更新面板草稿；点击确认后，才向外部提交范围。">
+      <Section
+        title="确认后提交"
+        description="选择过程只更新面板草稿；点击确认后，才向外部提交范围。"
+      >
         <div>
           <DemoRangePicker
             needConfirm
@@ -32,7 +61,9 @@ export function IntegrationDemos() {
             onChange={setSubmitted}
             footer={
               <DatePickerFooter>
-                <DatePickerConfirm onClick={() => setSubmitCount((count) => count + 1)}>确认并提交</DatePickerConfirm>
+                <DatePickerConfirm onClick={() => setSubmitCount((count) => count + 1)}>
+                  确认并提交
+                </DatePickerConfirm>
               </DatePickerFooter>
             }
           />
@@ -40,7 +71,10 @@ export function IntegrationDemos() {
         </div>
       </Section>
 
-      <Section title="日期与时间" description="DatePicker 与 TimePicker 可分别组合，最终按业务需要一起提交。">
+      <Section
+        title="日期与时间"
+        description="DatePicker 与 TimePicker 可分别组合，最终按业务需要一起提交。"
+      >
         <DateTimeDemo />
       </Section>
     </>
@@ -51,23 +85,41 @@ function DateTimeDemo() {
   const [date, setDate] = createSignal<CalendarValue | null>(today)
   const [time, setTime] = createSignal<TimeValue>({ hour: 9, minute: 30, second: 0 })
   const [draftTime, setDraftTime] = createSignal<TimeValue>(time())
-  const displayValue = () => `${formatDatePickerValue(date(), { picker: 'date' })} ${formatTime(time())}`.trim()
+  const displayValue = () =>
+    `${formatDatePickerValue(date(), { picker: 'date' })} ${formatTime(time())}`.trim()
 
   return (
     <DatePickerRoot
       needConfirm
       placement="bottom"
       value={date()}
-      onChange={(next) => setDate(Array.isArray(next) ? null : next)}
-      onOpenChange={(open) => { if (open) setDraftTime(time()) }}
+      onChange={(next) => setDate(Array.isArray(next) ? null : (next as CalendarValue | null))}
+      onOpenChange={(open) => {
+        if (open) setDraftTime(time())
+      }}
     >
-      <DatePickerTrigger class="w-64" displayValue={displayValue()} placeholder="请选择日期和时间" />
+      <DatePickerTrigger
+        class="w-64"
+        displayValue={displayValue()}
+        placeholder="请选择日期和时间"
+      />
       <DatePickerContent class="w-[36rem] min-w-[36rem] overflow-hidden p-0">
-        <TimePickerRoot open value={draftTime()} format="HH:mm:ss" onChange={(next) => { if (next) setDraftTime(next) }}>
+        <TimePickerRoot
+          open
+          value={draftTime()}
+          format="HH:mm:ss"
+          onChange={(next) => {
+            if (next) setDraftTime(next)
+          }}
+        >
           <div class="flex">
-            <DatePickerPanel class={`min-w-0 flex-1 self-start ${datePickerDateTimePanelClassName}`} />
+            <DatePickerPanel
+              class={`min-w-0 flex-1 self-start ${datePickerDateTimePanelClassName}`}
+            />
             <div class="flex w-42 shrink-0 flex-col border-l border-border">
-              <div class="flex h-12 shrink-0 items-center justify-center border-b border-border text-sm font-semibold">{formatTime(draftTime())}</div>
+              <div class="flex h-12 shrink-0 items-center justify-center border-b border-border text-sm font-semibold">
+                {formatTime(draftTime())}
+              </div>
               <TimePickerPanel class="h-[224px] min-h-0 overflow-hidden">
                 <TimePickerHourColumn class="h-[224px]" />
                 <TimePickerMinuteColumn class="h-[224px]" />

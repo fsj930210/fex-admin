@@ -75,7 +75,7 @@ function readMethod(value: unknown, key: PropertyKey): ((...args: never[]) => un
   if (!isRecord(value)) return undefined
   const candidate = value[key]
   return typeof candidate === 'function'
-    ? candidate.bind(value) as (...args: never[]) => unknown
+    ? (candidate.bind(value) as (...args: never[]) => unknown)
     : undefined
 }
 
@@ -94,12 +94,12 @@ export function getDataGridSizingLayout(table: unknown): {
   rootWidth: string | undefined
 } {
   const headers = readMethod(table, 'getFlatHeaders')?.()
-  const resizable = Array.isArray(headers)
-    && headers.some(header => readMethod(header, 'getResizeHandler') !== undefined)
+  const resizable =
+    Array.isArray(headers) &&
+    headers.some((header) => readMethod(header, 'getResizeHandler') !== undefined)
   const totalSize = resizable ? readMethod(table, 'getTotalSize')?.() : undefined
-  const tableWidth = typeof totalSize === 'number' && Number.isFinite(totalSize)
-    ? totalSize
-    : undefined
+  const tableWidth =
+    typeof totalSize === 'number' && Number.isFinite(totalSize) ? totalSize : undefined
   return {
     tableWidth,
     rootWidth: tableWidth === undefined ? undefined : `min(100%, ${tableWidth}px)`,
@@ -162,8 +162,8 @@ export function getDataGridVisibleLeafColumns<TColumn extends DataGridColumnLayo
 
 function getPinnedColumns(table: DataGridPinningTableSource, position: 'start' | 'end') {
   return position === 'start'
-    ? table.getStartVisibleLeafColumns?.() ?? []
-    : table.getEndVisibleLeafColumns?.() ?? []
+    ? (table.getStartVisibleLeafColumns?.() ?? [])
+    : (table.getEndVisibleLeafColumns?.() ?? [])
 }
 
 /**
@@ -220,10 +220,15 @@ export function getDataGridHeaderLayout(
   header: DataGridHeaderLayoutSource,
   table: DataGridPinningTableSource,
 ): DataGridColumnLayout {
-  const leaves = header.column.getLeafColumns?.().filter((column) => column.getIsVisible?.() !== false) ?? [header.column]
+  const leaves = header.column
+    .getLeafColumns?.()
+    .filter((column) => column.getIsVisible?.() !== false) ?? [header.column]
   const first = leaves[0]
   const pinned = first?.getIsPinned?.() ?? false
-  if (leaves.length > 1 && (!pinned || leaves.some((column) => column.getIsPinned?.() !== pinned))) {
+  if (
+    leaves.length > 1 &&
+    (!pinned || leaves.some((column) => column.getIsPinned?.() !== pinned))
+  ) {
     // A mixed or unpinned group must keep the browser's colSpan sizing. Applying
     // the group column's single-leaf size here collapses the real header group.
     return {
@@ -239,7 +244,7 @@ export function getDataGridHeaderLayout(
 
   const layout = getDataGridColumnLayout(first, table, 'header')
   const offsets = leaves.map((column) =>
-    pinned === 'start' ? column.getStart?.('start') ?? 0 : column.getAfter?.('end') ?? 0,
+    pinned === 'start' ? (column.getStart?.('start') ?? 0) : (column.getAfter?.('end') ?? 0),
   )
   const edgeColumn = pinned === 'start' ? leaves.at(-1) : leaves[0]
   const pinnedColumns = getPinnedColumns(table, pinned)

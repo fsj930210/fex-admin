@@ -4,9 +4,7 @@ import { departmentFieldNames } from './data'
 import { DemoTree } from './demo-tree'
 import { TreeDemoSection } from './demo-section'
 
-const asyncTreeData: DepartmentNode[] = [
-  { id: 'remote-root', name: 'Remote root', childCount: 2 },
-]
+const asyncTreeData: DepartmentNode[] = [{ id: 'remote-root', name: 'Remote root', childCount: 2 }]
 
 async function loadChildren(node: { key: string | number; node: DepartmentNode }) {
   await new Promise<void>((resolve) => window.setTimeout(resolve, 800))
@@ -18,7 +16,10 @@ async function loadChildren(node: { key: string | number; node: DepartmentNode }
 
 export function AsyncTreeDemo() {
   return (
-    <TreeDemoSection title="Async children" description="A node without children can still expand when isLeaf says it may have descendants.">
+    <TreeDemoSection
+      title="Async children"
+      description="A node without children can still expand when isLeaf says it may have descendants."
+    >
       <DemoTree
         treeData={asyncTreeData}
         fieldNames={departmentFieldNames}

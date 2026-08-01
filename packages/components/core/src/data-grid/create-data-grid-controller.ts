@@ -1,18 +1,9 @@
 import { constructTable } from '@tanstack/table-core'
 import { storeReactivityBindings } from '@tanstack/table-core/store-reactivity-bindings'
-import type {
-  RowData,
-  Table,
-  TableFeatures,
-  TableOptions,
-  TableState,
-} from '@tanstack/table-core'
+import type { RowData, Table, TableFeatures, TableOptions, TableState } from '@tanstack/table-core'
 import { prepareDataGridColumns } from './prepare-columns'
 
-export interface DataGridController<
-  TFeatures extends TableFeatures,
-  TData extends RowData,
-> {
+export interface DataGridController<TFeatures extends TableFeatures, TData extends RowData> {
   readonly table: Table<TFeatures, TData>
   getSnapshot: () => DataGridControllerSnapshot<TFeatures, TData>
   subscribe: (listener: () => void) => () => void
@@ -33,10 +24,9 @@ export interface DataGridControllerSnapshot<
  * adapter. Framework packages only bridge this controller's subscription to
  * their native reactive primitive and render the resulting row/header model.
  */
-export function createDataGridController<
-  TFeatures extends TableFeatures,
-  TData extends RowData,
->(options: TableOptions<TFeatures, TData>): DataGridController<TFeatures, TData> {
+export function createDataGridController<TFeatures extends TableFeatures, TData extends RowData>(
+  options: TableOptions<TFeatures, TData>,
+): DataGridController<TFeatures, TData> {
   const table = constructTable<TFeatures, TData>({
     ...options,
     columns: prepareDataGridColumns(options.columns),

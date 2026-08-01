@@ -1,4 +1,9 @@
-export interface Member extends Record<string, unknown> { id: string; name: string; department: string; disabled?: boolean }
+export interface Member extends Record<string, unknown> {
+  id: string
+  name: string
+  department: string
+  disabled?: boolean
+}
 export const members: Member[] = [
   { id: 'ada', name: 'Ada Lovelace', department: 'Engineering' },
   { id: 'grace', name: 'Grace Hopper', department: 'Engineering' },

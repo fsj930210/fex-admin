@@ -17,12 +17,15 @@
   import DatePickerHeaderLabel from './date-picker-header-label.svelte'
   import DatePickerHeaderTitle from './date-picker-header-title.svelte'
 
-  interface Props { class?: string; range?: boolean; panelViewDate?: CalendarDate; children?: Snippet }
+  interface Props { class?: string | undefined; range?: boolean | undefined; panelViewDate?: CalendarDate | undefined; children?: Snippet | undefined }
   let { class: className, range = false, panelViewDate, children }: Props = $props()
+  // svelte-ignore state_referenced_locally -- range selects the immutable context branch at mount.
   const datePicker = range ? undefined : getContext<DatePickerContextValue | undefined>(datePickerContextKey)
+  // svelte-ignore state_referenced_locally -- range selects the immutable context branch at mount.
   const rangePicker = range ? getContext<RangePickerContextValue | undefined>(rangePickerContextKey) : undefined
   const owner = rangePicker ?? datePicker
   if (!owner) throw new Error('DatePickerPanel must be used within DatePickerRoot or RangePickerRoot')
+  const resolvedOwner = owner
   const displayRange = $derived(rangePicker ? createRangePreviewValue(rangePicker.getRangeValue(), rangePicker.getHoverValue(), rangePicker.getActivePart()) : undefined)
 
   function nextPanelAfterCell(panel: CalendarPanel, picker: string): CalendarPanel | null {
@@ -35,14 +38,14 @@
   }
 
   function selectCell(cell: CalendarCell) {
-    const nextPanel = nextPanelAfterCell(cell.panel, owner.picker)
+    const nextPanel = nextPanelAfterCell(cell.panel, resolvedOwner.picker)
     const nextViewDate = getCalendarValueDate(cell.value)
     if (nextPanel) {
-      owner.setViewDate(nextViewDate)
-      owner.setPanel(nextPanel)
+      resolvedOwner.setViewDate(nextViewDate)
+      resolvedOwner.setPanel(nextPanel)
       return
     }
-    owner.select(normalizeDatePickerValue(nextViewDate, owner.picker, owner.weekStartsOn) as never)
+    resolvedOwner.select(normalizeDatePickerValue(nextViewDate, resolvedOwner.picker, resolvedOwner.weekStartsOn) as never)
   }
 
   function disabledDate(date: CalendarDate) {

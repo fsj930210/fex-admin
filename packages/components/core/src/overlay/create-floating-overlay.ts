@@ -1,6 +1,10 @@
 import type { DisclosureChangeInfo } from '../disclosure/create-disclosure'
 import { createStore } from '../store/create-store'
-import { createFloating, type FloatingOptions, type FloatingSnapshot } from '../floating/create-floating'
+import {
+  createFloating,
+  type FloatingOptions,
+  type FloatingSnapshot,
+} from '../floating/create-floating'
 import { createOverlay } from './create-overlay'
 import { createTrigger, type OverlayTrigger } from './trigger/create-trigger'
 import type { Overlay, OverlayEventInfo, OverlayOptions, OverlaySnapshot } from './types'
@@ -18,8 +22,10 @@ export interface FloatingOverlaySnapshot extends OverlaySnapshot, FloatingSnapsh
   trigger: OverlayTrigger[]
 }
 
-export interface FloatingOverlay
-  extends Omit<Overlay, 'getSnapshot' | 'subscribe' | 'setOptions' | 'destroy'> {
+export interface FloatingOverlay extends Omit<
+  Overlay,
+  'getSnapshot' | 'subscribe' | 'setOptions' | 'destroy'
+> {
   getSnapshot: () => FloatingOverlaySnapshot
   subscribe: (listener: () => void) => () => void
   setOptions: (options: FloatingOverlayOptions) => void
@@ -47,7 +53,6 @@ function toEventInfo(event: Event & Partial<PointerEvent>) {
     stopPropagation: event.stopPropagation.bind(event),
   }
 }
-
 
 export function createFloatingOverlay(options: FloatingOverlayOptions = {}): FloatingOverlay {
   let currentOptions = options
@@ -107,7 +112,6 @@ export function createFloatingOverlay(options: FloatingOverlayOptions = {}): Flo
     store.setSnapshot(nextSnapshot)
     return nextSnapshot
   }
-
 
   function isInsideDismissBoundary(target: EventTarget | null) {
     return (

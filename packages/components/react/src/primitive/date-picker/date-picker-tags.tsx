@@ -1,5 +1,9 @@
 import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
-import { datePickerTagClassName, datePickerTagOverflowClassName, datePickerTagRemoveClassName } from '@fex/components-styles/date-picker'
+import {
+  datePickerTagClassName,
+  datePickerTagOverflowClassName,
+  datePickerTagRemoveClassName,
+} from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
 import type { ComponentProps, MouseEvent } from 'react'
 import { CloseIcon } from '../../icon/close'
@@ -17,7 +21,11 @@ export function DatePickerTags({ className, maxVisible = 1, ...props }: DatePick
   const visibleValues = values.slice(0, maxVisible)
   const hiddenCount = values.length - visibleValues.length
   return (
-    <div {...props} data-slot="date-picker-tags" className={cn('flex shrink items-center gap-1', className)}>
+    <div
+      {...props}
+      data-slot="date-picker-tags"
+      className={cn('flex shrink items-center gap-1', className)}
+    >
       {visibleValues.map((value) => {
         const label = formatDatePickerValue(value, context)
         return <DatePickerTag key={label} value={label} onRemove={() => context.select(value)} />

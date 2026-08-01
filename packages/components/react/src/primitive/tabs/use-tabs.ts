@@ -1,12 +1,29 @@
 import { createTabsController } from '@fex/components-core/tabs/create-tabs-controller'
-import type { TabsActivationMode, TabsChangeMeta, TabsItemRecord, TabsOrientation, TabsValue } from '@fex/components-core/tabs/types'
-import { useId, useRef, type ButtonHTMLAttributes, type HTMLAttributes, type KeyboardEvent, type MouseEvent, type ReactNode, type RefCallback } from 'react'
+import type {
+  TabsActivationMode,
+  TabsChangeMeta,
+  TabsItemRecord,
+  TabsOrientation,
+  TabsValue,
+} from '@fex/components-core/tabs/types'
+import {
+  useId,
+  useRef,
+  type ButtonHTMLAttributes,
+  type HTMLAttributes,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ReactNode,
+  type RefCallback,
+} from 'react'
 import { useCoreStore } from '../../hooks/use-core-store'
 import { useIsomorphicLayoutEffect } from '../../hooks/use-isomorphic-layout-effect'
 import { useLazyRef } from '../../hooks/use-lazy-ref'
 import { useMemoizedFn } from '../../hooks/use-memoized-fn'
 
-export interface TabsItemData extends TabsItemRecord { label?: ReactNode }
+export interface TabsItemData extends TabsItemRecord {
+  label?: ReactNode
+}
 export interface UseTabsOptions {
   value?: TabsValue
   defaultValue?: TabsValue
@@ -50,12 +67,24 @@ export function useTabs(options: UseTabsOptions = {}) {
   const baseId = useId()
   const controllerRef = useLazyRef(() =>
     createTabsController({
-      get value() { return optionsRef.current.value },
-      get defaultValue() { return optionsRef.current.defaultValue },
-      get orientation() { return optionsRef.current.orientation },
-      get activationMode() { return optionsRef.current.activationMode },
-      get loop() { return optionsRef.current.loop },
-      onChange(value, meta) { optionsRef.current.onChange?.(value, meta) },
+      get value() {
+        return optionsRef.current.value
+      },
+      get defaultValue() {
+        return optionsRef.current.defaultValue
+      },
+      get orientation() {
+        return optionsRef.current.orientation
+      },
+      get activationMode() {
+        return optionsRef.current.activationMode
+      },
+      get loop() {
+        return optionsRef.current.loop
+      },
+      onChange(value, meta) {
+        optionsRef.current.onChange?.(value, meta)
+      },
     }),
   )
   const controller = controllerRef.current
@@ -65,19 +94,23 @@ export function useTabs(options: UseTabsOptions = {}) {
   const snapshot = useCoreStore(controller)
   const orientation = options.orientation ?? 'horizontal'
 
-  const getItemState = useMemoizedFn((item: TabsItemData): TabsItemState => ({
-    active: snapshot.value === item.value,
-    focused: snapshot.focusedValue === item.value,
-    disabled: item.disabled === true,
-    closable: item.closable === true,
-    orientation,
-  }))
+  const getItemState = useMemoizedFn(
+    (item: TabsItemData): TabsItemState => ({
+      active: snapshot.value === item.value,
+      focused: snapshot.focusedValue === item.value,
+      disabled: item.disabled === true,
+      closable: item.closable === true,
+      orientation,
+    }),
+  )
 
-  const getListProps = useMemoizedFn((): TabsListDOMProps => ({
-    role: 'tablist' as const,
-    'aria-orientation': orientation,
-    'data-orientation': orientation,
-  }))
+  const getListProps = useMemoizedFn(
+    (): TabsListDOMProps => ({
+      role: 'tablist' as const,
+      'aria-orientation': orientation,
+      'data-orientation': orientation,
+    }),
+  )
 
   const getItemProps = useMemoizedFn((item: TabsItemData): TabsItemDOMProps => {
     itemsRef.current.set(item.value, item)
@@ -101,7 +134,11 @@ export function useTabs(options: UseTabsOptions = {}) {
         const cleanupToken = {}
         cleanupTokensRef.current.set(item.value, cleanupToken)
         queueMicrotask(() => {
-          if (cleanupTokensRef.current.get(item.value) !== cleanupToken || elementsRef.current.has(item.value)) return
+          if (
+            cleanupTokensRef.current.get(item.value) !== cleanupToken ||
+            elementsRef.current.has(item.value)
+          )
+            return
           cleanupTokensRef.current.delete(item.value)
           itemsRef.current.delete(item.value)
           itemRefs.current.delete(item.value)
@@ -126,9 +163,16 @@ export function useTabs(options: UseTabsOptions = {}) {
       onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
         if (state.disabled) return
         const horizontal = orientation === 'horizontal'
-        const direction = event.key === 'Home' ? 'first' : event.key === 'End' ? 'last'
-          : event.key === (horizontal ? 'ArrowRight' : 'ArrowDown') ? 'next'
-          : event.key === (horizontal ? 'ArrowLeft' : 'ArrowUp') ? 'previous' : undefined
+        const direction =
+          event.key === 'Home'
+            ? 'first'
+            : event.key === 'End'
+              ? 'last'
+              : event.key === (horizontal ? 'ArrowRight' : 'ArrowDown')
+                ? 'next'
+                : event.key === (horizontal ? 'ArrowLeft' : 'ArrowUp')
+                  ? 'previous'
+                  : undefined
         if (direction) {
           event.preventDefault()
           const focusedValue = controller.moveFocus(direction)
@@ -143,24 +187,37 @@ export function useTabs(options: UseTabsOptions = {}) {
     }
   })
 
-  const getCloseProps = useMemoizedFn((item: TabsItemData): ButtonHTMLAttributes<HTMLButtonElement> => ({
-    type: 'button',
-    'aria-label': `Close ${item.value}`,
-    onPointerDown: (event) => event.stopPropagation(),
-    onClick: (event) => {
-      event.stopPropagation()
-      optionsRef.current.onClose?.(item)
-    },
-  }))
+  const getCloseProps = useMemoizedFn(
+    (item: TabsItemData): ButtonHTMLAttributes<HTMLButtonElement> => ({
+      type: 'button',
+      'aria-label': `Close ${item.value}`,
+      onPointerDown: (event) => event.stopPropagation(),
+      onClick: (event) => {
+        event.stopPropagation()
+        optionsRef.current.onClose?.(item)
+      },
+    }),
+  )
 
-  const getContentProps = useMemoizedFn((value: TabsValue): TabsContentDOMProps => ({
-    id: `${baseId}-panel-${value}`,
-    role: 'tabpanel',
-    tabIndex: 0,
-    'aria-labelledby': `${baseId}-tab-${value}`,
-    hidden: snapshot.value !== value,
-    'data-state': snapshot.value === value ? 'active' : 'inactive',
-  }))
+  const getContentProps = useMemoizedFn(
+    (value: TabsValue): TabsContentDOMProps => ({
+      id: `${baseId}-panel-${value}`,
+      role: 'tabpanel',
+      tabIndex: 0,
+      'aria-labelledby': `${baseId}-tab-${value}`,
+      hidden: snapshot.value !== value,
+      'data-state': snapshot.value === value ? 'active' : 'inactive',
+    }),
+  )
 
-  return { snapshot, orientation, getListProps, getItemProps, getItemState, getCloseProps, getContentProps, isContentMounted: controller.isContentMounted }
+  return {
+    snapshot,
+    orientation,
+    getListProps,
+    getItemProps,
+    getItemState,
+    getCloseProps,
+    getContentProps,
+    isContentMounted: controller.isContentMounted,
+  }
 }

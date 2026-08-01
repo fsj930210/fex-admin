@@ -10,7 +10,11 @@ import { useCoreStore } from '../../hooks/use-core-store'
 import { useIsomorphicLayoutEffect } from '../../hooks/use-isomorphic-layout-effect'
 import { useLazyRef } from '../../hooks/use-lazy-ref'
 import { TransferContext } from './transfer-context'
-import { TransferPanel, type TransferPanelClassName, type TransferPanelConfig } from './transfer-panel'
+import {
+  TransferPanel,
+  type TransferPanelClassName,
+  type TransferPanelConfig,
+} from './transfer-panel'
 
 export interface TransferRootClassName {
   root?: string | undefined
@@ -22,7 +26,8 @@ export interface TransferRootClassName {
 }
 
 export interface TransferRootProps<TItem extends TransferDataItem>
-  extends TransferControllerOptions<TItem>,
+  extends
+    TransferControllerOptions<TItem>,
     Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'className' | 'defaultValue' | 'onChange'> {
   controller?: TransferController<TItem> | undefined
   source: TransferPanelConfig<TItem>
@@ -71,10 +76,23 @@ export function TransferRoot<TItem extends TransferDataItem>({
 
   useIsomorphicLayoutEffect(() => {
     if (!suppliedController) controller.updateOptions(optionsRef.current)
-  }, [controller, suppliedController, options.items, options.targetKeys, options.checkedKeys, options.disabled, options.fieldNames])
+  }, [
+    controller,
+    suppliedController,
+    options.items,
+    options.targetKeys,
+    options.checkedKeys,
+    options.disabled,
+    options.fieldNames,
+  ])
 
   return (
-    <TransferContext value={{ controller, disabled: options.disabled === true }}>
+    <TransferContext
+      value={{
+        controller: controller as unknown as TransferController<TransferDataItem>,
+        disabled: options.disabled === true,
+      }}
+    >
       <div
         {...domProps}
         data-slot="transfer-root"
@@ -87,7 +105,15 @@ export function TransferRoot<TItem extends TransferDataItem>({
           <div className={className?.actions}>{actions}</div>
           <TransferPanel side="target" config={target} partClassName={className?.target} />
         </div>
-        {message !== undefined ? <div data-slot="transfer-message" role={invalid ? 'alert' : undefined} className={className?.message}>{message}</div> : null}
+        {message !== undefined ? (
+          <div
+            data-slot="transfer-message"
+            role={invalid ? 'alert' : undefined}
+            className={className?.message}
+          >
+            {message}
+          </div>
+        ) : null}
       </div>
     </TransferContext>
   )

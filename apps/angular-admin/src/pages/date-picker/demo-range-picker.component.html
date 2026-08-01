@@ -19,7 +19,11 @@
   (change)="change.emit($event)"
   (openChange)="openChange.emit($event)"
 >
-  <fex-range-picker-trigger class="w-80" [startPlaceholder]="startPlaceholder()" [endPlaceholder]="endPlaceholder()" />
+  <fex-range-picker-trigger
+    class="w-80"
+    [startPlaceholder]="startPlaceholder()"
+    [endPlaceholder]="endPlaceholder()"
+  />
   <fex-range-picker-content>
     <fex-range-picker-panel-group [panelCount]="panelCount" />
     @if (needConfirm) {

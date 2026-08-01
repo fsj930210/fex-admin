@@ -78,7 +78,8 @@ export function useMove({
   })
 
   const getTargetProps = useMemoizedFn(
-    (): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement>; style: CSSProperties } => ({
+    (): HTMLAttributes<HTMLElement> &
+      DataAttributes & { ref: RefCallback<HTMLElement>; style: CSSProperties } => ({
       ref: controller.setTarget,
       style: getStyle(snapshot.position, snapshot.moving),
       'data-moving': snapshot.moving || undefined,

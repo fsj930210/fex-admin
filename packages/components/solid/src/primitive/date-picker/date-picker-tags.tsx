@@ -1,6 +1,9 @@
-import type { CalendarValue } from '@fex/components-core/calendar'
 import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
-import { datePickerTagClassName, datePickerTagOverflowClassName, datePickerTagRemoveClassName } from '@fex/components-styles/date-picker'
+import {
+  datePickerTagClassName,
+  datePickerTagOverflowClassName,
+  datePickerTagRemoveClassName,
+} from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
 import { For, Show, splitProps, type JSX } from 'solid-js'
 import { CloseIcon } from '../../icon/close'
@@ -29,7 +32,10 @@ export function DatePickerTags(props: DatePickerTagsProps) {
               aria-label={`移除 ${formatDatePickerValue(item, context)}`}
               class={datePickerTagRemoveClassName}
               onPointerDown={(event) => event.stopPropagation()}
-              onClick={(event) => { event.stopPropagation(); context.select(item as never) }}
+              onClick={(event) => {
+                event.stopPropagation()
+                context.select(item as never)
+              }}
             >
               <CloseIcon />
             </button>

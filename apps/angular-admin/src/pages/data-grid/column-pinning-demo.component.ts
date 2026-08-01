@@ -20,7 +20,15 @@ type Features = typeof modules & { columnMeta: DataGridColumnMeta<Features, Pers
 
 @Component({
   selector: 'fex-data-grid-column-pinning-demo',
-  imports: [Card, DataGrid, DataGridHeaderTemplate, Button, ChevronLeftIcon, ChevronRightIcon, MinusIcon],
+  imports: [
+    Card,
+    DataGrid,
+    DataGridHeaderTemplate,
+    Button,
+    ChevronLeftIcon,
+    ChevronRightIcon,
+    MinusIcon,
+  ],
   templateUrl: './column-pinning-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,5 +1,4 @@
-import { createSelectController } from '@fex/components-core/select/create-select-controller'
-import { filterSelectOptions, groupSelectOptions } from '@fex/components-core/select/filter-options'
+import { groupSelectOptions } from '@fex/components-core/select/filter-options'
 import { getSelectVirtualRange } from '@fex/components-core/select/virtual'
 import type {
   SelectFilterOption,
@@ -7,48 +6,21 @@ import type {
   SelectOption,
   SelectVirtualOptions,
 } from '@fex/components-core/select/types'
-import { createSelectionController } from '@fex/components-core/selection/create-selection-controller'
-import type { SelectionValue } from '@fex/components-core/selection/types'
 import {
-  selectClearClassName,
   selectContentClassName,
   selectEmptyClassName,
   selectGroupLabelClassName,
-  selectIndicatorClassName,
-  selectInputClassName,
   selectListClassName,
   selectLoadingClassName,
   selectOptionClassName,
   selectOptionIndicatorClassName,
   selectOptionLabelClassName,
-  selectPlaceholderClassName,
-  selectSuffixClassName,
-  selectTagClassName,
-  selectTagOverflowClassName,
-  selectTagRemoveClassName,
-  selectTriggerClassName,
-  selectValueClassName,
-  selectValueContainerClassName,
 } from '@fex/components-styles/select'
 import { cn } from '@fex/utils'
-import {
-  createMemo,
-  createSignal,
-  createUniqueId,
-  For,
-  Show,
-  splitProps,
-  type JSX,
-  type ParentProps,
-} from 'solid-js'
+import { createMemo, createSignal, For, Show, type JSX, type ParentProps } from 'solid-js'
 import { CheckIcon } from '../../icon/check'
-import { ChevronDownIcon } from '../../icon/chevron'
-import { CloseIcon } from '../../icon/close'
-import { LoadingIcon } from '../../icon/loading'
-import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
-import { Button } from '../button/button'
-import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover/popover'
-import { SelectContext, useSelect } from './select-context'
+import { PopoverContent, PopoverPortal } from '../popover/popover'
+import { useSelect } from './select-context'
 
 export function SelectContent(
   props: ParentProps<{

@@ -1,4 +1,8 @@
-import type { DisabledTime, TimePickerController, TimePickerSnapshot } from '@fex/components-core/time-picker/types'
+import type {
+  DisabledTime,
+  TimePickerController,
+  TimePickerSnapshot,
+} from '@fex/components-core/time-picker/types'
 
 export const timePickerContextKey = Symbol('TimePicker')
 export interface TimePickerContext {

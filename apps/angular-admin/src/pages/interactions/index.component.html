@@ -11,7 +11,10 @@
     </header>
 
     <div class="space-y-space-xl">
-      <fex-card title="Drag And Drop" description="useDraggable and useDroppable wrap shared drag-drop state for cross-component drops.">
+      <fex-card
+        title="Drag And Drop"
+        description="useDraggable and useDroppable wrap shared drag-drop state for cross-component drops."
+      >
         <div class="grid gap-space-md md:grid-cols-[280px_1fr]">
           <div class="space-y-space-sm rounded-md border border-border bg-background p-space-md">
             <p class="text-sm font-medium text-muted-foreground">Draggable items</p>
@@ -31,7 +34,11 @@
               </div>
             }
             @if (dropDemoItems.source.length === 0) {
-              <p class="rounded-md border border-dashed border-border px-space-md py-space-sm text-sm text-muted-foreground">All items have been dropped.</p>
+              <p
+                class="rounded-md border border-dashed border-border px-space-md py-space-sm text-sm text-muted-foreground"
+              >
+                All items have been dropped.
+              </p>
             }
           </div>
           <div class="grid gap-space-md md:grid-cols-2">
@@ -49,10 +56,19 @@
                 <p class="font-medium text-foreground">Cards only</p>
                 <p class="mt-space-sm text-muted-foreground">Drop target</p>
                 <div class="mt-space-md space-y-space-sm">
-                  @for (itemId of dropDemoItems["card-zone"]; track itemId) {
+                  @for (itemId of dropDemoItems['card-zone']; track itemId) {
                     @let item = itemById(itemId);
-                    <div fexDraggable [draggableId]="item.id" [draggableType]="item.type" [draggableData]="{ label: item.label }" (draggingChange)="$event ? null : clearDragOverlay()" (overlayStyleChange)="setDragOverlay(item.label, $event)" class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm">
-                      <span>{{ item.label }}</span><span class="text-muted-foreground">::</span>
+                    <div
+                      fexDraggable
+                      [draggableId]="item.id"
+                      [draggableType]="item.type"
+                      [draggableData]="{ label: item.label }"
+                      (draggingChange)="$event ? null : clearDragOverlay()"
+                      (overlayStyleChange)="setDragOverlay(item.label, $event)"
+                      class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm"
+                    >
+                      <span>{{ item.label }}</span
+                      ><span class="text-muted-foreground">::</span>
                     </div>
                   }
                 </div>
@@ -72,10 +88,19 @@
                 <p class="font-medium text-foreground">Any item</p>
                 <p class="mt-space-sm text-muted-foreground">Drop target</p>
                 <div class="mt-space-md space-y-space-sm">
-                  @for (itemId of dropDemoItems["any-zone"]; track itemId) {
+                  @for (itemId of dropDemoItems['any-zone']; track itemId) {
                     @let item = itemById(itemId);
-                    <div fexDraggable [draggableId]="item.id" [draggableType]="item.type" [draggableData]="{ label: item.label }" (draggingChange)="$event ? null : clearDragOverlay()" (overlayStyleChange)="setDragOverlay(item.label, $event)" class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm">
-                      <span>{{ item.label }}</span><span class="text-muted-foreground">::</span>
+                    <div
+                      fexDraggable
+                      [draggableId]="item.id"
+                      [draggableType]="item.type"
+                      [draggableData]="{ label: item.label }"
+                      (draggingChange)="$event ? null : clearDragOverlay()"
+                      (overlayStyleChange)="setDragOverlay(item.label, $event)"
+                      class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm"
+                    >
+                      <span>{{ item.label }}</span
+                      ><span class="text-muted-foreground">::</span>
                     </div>
                   }
                 </div>
@@ -84,16 +109,26 @@
             </div>
           </div>
         </div>
-        <p class="mt-space-md rounded-md bg-muted-background px-space-md py-space-sm text-sm text-muted-foreground">{{ dropResult }}</p>
+        <p
+          class="mt-space-md rounded-md bg-muted-background px-space-md py-space-sm text-sm text-muted-foreground"
+        >
+          {{ dropResult }}
+        </p>
         @if (dragOverlay) {
-          <div class="flex min-h-11 items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70" [ngStyle]="dragOverlay.style">
+          <div
+            class="flex min-h-11 items-center justify-between rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+            [ngStyle]="dragOverlay.style"
+          >
             <span>{{ dragOverlay.label }}</span>
             <span class="text-muted-foreground">::</span>
           </div>
         }
       </fex-card>
 
-      <fex-card title="Dropzone" description="The directive handles drag state, validation, and hidden input selection.">
+      <fex-card
+        title="Dropzone"
+        description="The directive handles drag state, validation, and hidden input selection."
+      >
         <div
           fexDropzone
           [accept]="['image/*', '.txt']"
@@ -103,7 +138,7 @@
           class="flex min-h-32 cursor-pointer items-center justify-center rounded-md border border-dashed border-border bg-muted-background text-sm text-muted-foreground transition-colors data-[dragging=true]:border-ring data-[dragging=true]:bg-accent-background"
         >
           <input #fileInput type="file" hidden accept="image/*,.txt" multiple />
-          <span>{{ files.length > 0 ? files.join(", ") : "Drop images or text files here" }}</span>
+          <span>{{ files.length > 0 ? files.join(', ') : 'Drop images or text files here' }}</span>
         </div>
       </fex-card>
 
@@ -116,15 +151,23 @@
             [moveHandle]="moveHandle"
             class="absolute w-72 overflow-hidden rounded-md border border-border bg-card shadow-lg"
           >
-            <div #moveHandle class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between border-b border-border bg-muted-background px-space-md text-sm font-medium active:cursor-grabbing">
+            <div
+              #moveHandle
+              class="flex min-h-11 cursor-grab touch-none select-none items-center justify-between border-b border-border bg-muted-background px-space-md text-sm font-medium active:cursor-grabbing"
+            >
               <span>Drag this title bar</span><span class="text-muted-foreground">::</span>
             </div>
-            <p class="p-space-md text-sm text-muted-foreground">The card is constrained to its parent. The title bar is the move handle.</p>
+            <p class="p-space-md text-sm text-muted-foreground">
+              The card is constrained to its parent. The title bar is the move handle.
+            </p>
           </div>
         </div>
       </fex-card>
 
-      <fex-card title="Resize" description="useResize supports edge and corner handles for floating surfaces.">
+      <fex-card
+        title="Resize"
+        description="useResize supports edge and corner handles for floating surfaces."
+      >
         <div class="relative h-80 overflow-hidden rounded-md border border-border bg-background">
           <div
             fexResize
@@ -136,15 +179,41 @@
             class="absolute rounded-md border border-border bg-card p-space-md shadow-lg"
           >
             <p class="text-sm font-medium">Resizable surface</p>
-            <p class="mt-space-sm text-sm text-muted-foreground">Drag any edge or corner. Handles are intentionally visible for this demo.</p>
-            <div fexResizeHandle="top" class="absolute left-4 right-4 top-0 z-10 h-2 cursor-n-resize rounded-b bg-primary/50 hover:bg-primary"></div>
-            <div fexResizeHandle="right" class="absolute bottom-4 right-0 top-4 z-10 w-2 cursor-e-resize rounded-l bg-primary/50 hover:bg-primary"></div>
-            <div fexResizeHandle="bottom" class="absolute bottom-0 left-4 right-4 z-10 h-2 cursor-s-resize rounded-t bg-primary/50 hover:bg-primary"></div>
-            <div fexResizeHandle="left" class="absolute bottom-4 left-0 top-4 z-10 w-2 cursor-w-resize rounded-r bg-primary/50 hover:bg-primary"></div>
-            <div fexResizeHandle="top-left" class="absolute left-0 top-0 z-20 size-6 cursor-nw-resize rounded-br bg-primary shadow-sm"></div>
-            <div fexResizeHandle="top-right" class="absolute right-0 top-0 z-20 size-6 cursor-ne-resize rounded-bl bg-primary shadow-sm"></div>
-            <div fexResizeHandle="bottom-left" class="absolute bottom-0 left-0 z-20 size-6 cursor-sw-resize rounded-tr bg-primary shadow-sm"></div>
-            <div fexResizeHandle="bottom-right" class="absolute bottom-0 right-0 z-20 size-6 cursor-se-resize rounded-tl bg-primary shadow-sm"></div>
+            <p class="mt-space-sm text-sm text-muted-foreground">
+              Drag any edge or corner. Handles are intentionally visible for this demo.
+            </p>
+            <div
+              fexResizeHandle="top"
+              class="absolute left-4 right-4 top-0 z-10 h-2 cursor-n-resize rounded-b bg-primary/50 hover:bg-primary"
+            ></div>
+            <div
+              fexResizeHandle="right"
+              class="absolute bottom-4 right-0 top-4 z-10 w-2 cursor-e-resize rounded-l bg-primary/50 hover:bg-primary"
+            ></div>
+            <div
+              fexResizeHandle="bottom"
+              class="absolute bottom-0 left-4 right-4 z-10 h-2 cursor-s-resize rounded-t bg-primary/50 hover:bg-primary"
+            ></div>
+            <div
+              fexResizeHandle="left"
+              class="absolute bottom-4 left-0 top-4 z-10 w-2 cursor-w-resize rounded-r bg-primary/50 hover:bg-primary"
+            ></div>
+            <div
+              fexResizeHandle="top-left"
+              class="absolute left-0 top-0 z-20 size-6 cursor-nw-resize rounded-br bg-primary shadow-sm"
+            ></div>
+            <div
+              fexResizeHandle="top-right"
+              class="absolute right-0 top-0 z-20 size-6 cursor-ne-resize rounded-bl bg-primary shadow-sm"
+            ></div>
+            <div
+              fexResizeHandle="bottom-left"
+              class="absolute bottom-0 left-0 z-20 size-6 cursor-sw-resize rounded-tr bg-primary shadow-sm"
+            ></div>
+            <div
+              fexResizeHandle="bottom-right"
+              class="absolute bottom-0 right-0 z-20 size-6 cursor-se-resize rounded-tl bg-primary shadow-sm"
+            ></div>
           </div>
         </div>
       </fex-card>

@@ -9,26 +9,27 @@
 
   interface Props {
     children?: Snippet
-    value?: DatePickerSelectionValue
-    defaultValue?: DatePickerSelectionValue
-    open?: boolean
-    defaultOpen?: boolean
-    picker?: DatePickerPicker
-    status?: 'error' | 'warning'
-    multiple?: boolean
-    needConfirm?: boolean
-    disabled?: boolean
-    readOnly?: boolean
-    allowClear?: boolean
-    format?: string
-    weekStartsOn?: CalendarWeekday
-    minDate?: CalendarDate
-    maxDate?: CalendarDate
-    disabledDate?: (date: CalendarDate) => boolean
-    onChange?: (value: DatePickerSelectionValue) => void
-    onOpenChange?: (open: boolean) => void
+    value?: DatePickerSelectionValue | undefined
+    defaultValue?: DatePickerSelectionValue | undefined
+    open?: boolean | undefined
+    defaultOpen?: boolean | undefined
+    picker?: DatePickerPicker | undefined
+    status?: 'error' | 'warning' | undefined
+    multiple?: boolean | undefined
+    needConfirm?: boolean | undefined
+    disabled?: boolean | undefined
+    readOnly?: boolean | undefined
+    allowClear?: boolean | undefined
+    format?: string | undefined
+    weekStartsOn?: CalendarWeekday | undefined
+    minDate?: CalendarDate | undefined
+    maxDate?: CalendarDate | undefined
+    disabledDate?: ((date: CalendarDate) => boolean) | undefined
+    onChange?: ((value: DatePickerSelectionValue) => void) | undefined
+    onOpenChange?: ((open: boolean) => void) | undefined
   }
   let props: Props = $props()
+  // svelte-ignore state_referenced_locally -- the props proxy remains live inside the controller adapter.
   const picker = useDatePicker<CalendarValue>(props)
   setContext(datePickerContextKey, picker)
 </script>

@@ -1,9 +1,17 @@
 import type { MultipartFeatureApi } from '@fex/components-core/upload/features/multipart'
-import type { UploadController, UploadFeatureApi, UploadId } from '@fex/components-core/upload/types'
+import type {
+  UploadController,
+  UploadFeatureApi,
+  UploadId,
+} from '@fex/components-core/upload/types'
 import { useSyncExternalStore } from 'react'
 
 export function useUploadItem<TResponse>(upload: UploadController<TResponse>, id: UploadId) {
-  const item = useSyncExternalStore((listener) => upload.subscribeItem(id, listener), () => upload.getItem(id), () => upload.getItem(id))
+  const item = useSyncExternalStore(
+    (listener) => upload.subscribeItem(id, listener),
+    () => upload.getItem(id),
+    () => upload.getItem(id),
+  )
   const executor = upload.getFeature<UploadFeatureApi>('upload')
   const multipart = executor as MultipartFeatureApi | undefined
   return {

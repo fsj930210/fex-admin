@@ -35,4 +35,6 @@ export interface CreateCarouselControllerOptions {
 }
 
 /** A lazy config source is required by adapters whose inputs are initialized after class fields. */
-export type CarouselControllerConfig = CreateCarouselControllerOptions | (() => CreateCarouselControllerOptions)
+export type CarouselControllerConfig =
+  | CreateCarouselControllerOptions
+  | (() => CreateCarouselControllerOptions)

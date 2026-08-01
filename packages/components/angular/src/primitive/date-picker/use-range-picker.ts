@@ -10,7 +10,11 @@ import {
 import { getCalendarValueDate } from '@fex/components-core/calendar/value'
 import { createDatePickerDisabledDate } from '@fex/components-core/date-picker/constraints'
 import { getDefaultPanelByPicker } from '@fex/components-core/date-picker/panel'
-import { createNextRangeValue, getNextRangeActivePart, getRangeFromValue } from '@fex/components-core/date-picker/range'
+import {
+  createNextRangeValue,
+  getNextRangeActivePart,
+  getRangeFromValue,
+} from '@fex/components-core/date-picker/range'
 import { getDefaultDatePickerFormat } from '@fex/components-core/date-picker/value'
 import type { DatePickerPicker } from '@fex/components-core/date-picker/types'
 import type { RangePickerContextValue } from './context'
@@ -37,7 +41,8 @@ export interface UseRangePickerOptions<TValue extends CalendarValue = CalendarVa
 
 function normalizeAllowEmpty(value: UseRangePickerOptions['allowEmpty']) {
   if (value === true) return { start: true, end: true }
-  if (value && typeof value === 'object') return { start: Boolean(value.start), end: Boolean(value.end) }
+  if (value && typeof value === 'object')
+    return { start: Boolean(value.start), end: Boolean(value.end) }
   return { start: false, end: false }
 }
 
@@ -59,7 +64,9 @@ export class RangePickerState<TValue extends CalendarValue = CalendarValue> {
   readonly needConfirm = computed(() => this.optionsState().needConfirm ?? false)
   readonly open = computed(() => this.optionsState().open ?? this.localOpen())
   readonly rangeValue = computed(() => this.optionsState().value ?? this.localValue())
-  readonly activeRangeValue = computed(() => this.needConfirm() || this.open() ? this.pendingValue() : this.rangeValue())
+  readonly activeRangeValue = computed(() =>
+    this.needConfirm() || this.open() ? this.pendingValue() : this.rangeValue(),
+  )
   readonly activePart = computed(() => this.activePartState())
   readonly hoverValue = computed(() => this.hoverValueState())
   readonly panel = computed(() => this.panelState())
@@ -72,7 +79,8 @@ export class RangePickerState<TValue extends CalendarValue = CalendarValue> {
       this.localValue.set(options.defaultValue ?? {})
     }
     if (options.open === undefined) this.localOpen.set(options.defaultOpen ?? this.localOpen())
-    if (previousPicker !== this.picker()) this.panelState.set(getDefaultPanelByPicker(this.picker()))
+    if (previousPicker !== this.picker())
+      this.panelState.set(getDefaultPanelByPicker(this.picker()))
     if (!this.open()) this.pendingValue.set(this.rangeValue())
   }
 

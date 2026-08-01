@@ -9,7 +9,13 @@
 ## 导入
 
 ```tsx
-import { Field, FieldControl, FieldError, FieldLabel, FieldRoot } from '@fex/components-react/primitive/field'
+import {
+  Field,
+  FieldControl,
+  FieldError,
+  FieldLabel,
+  FieldRoot,
+} from '@fex/components-react/primitive/field'
 import { Form, scrollToField, useForm } from '@fex/components-react/primitive/form'
 ```
 
@@ -22,38 +28,51 @@ export function Example() {
     onSubmit: ({ value }) => console.log(value),
   })
 
-  return <Form form={form}>
-    <Field
-      name="email"
-      validators={{
-        onBlur: ({ value }) => /^\S+@\S+\.\S+$/.test(value) ? undefined : '请输入有效邮箱',
-      }}
-    >
-      {(field) => {
-        const invalid = field.state.meta.isTouched && !field.state.meta.isValid
+  return (
+    <Form form={form}>
+      <Field
+        name="email"
+        validators={{
+          onBlur: ({ value }) => (/^\S+@\S+\.\S+$/.test(value) ? undefined : '请输入有效邮箱'),
+        }}
+      >
+        {(field) => {
+          const invalid = field.state.meta.isTouched && !field.state.meta.isValid
 
-        return <FieldRoot required invalid={invalid} hasError={invalid}>
-          <FieldLabel>邮箱</FieldLabel>
-          <FieldControl>{({ props }) => <input {...props} value={field.state.value} onBlur={field.handleBlur} onChange={(event) => field.handleChange(event.target.value)} />}</FieldControl>
-          {invalid && <FieldError errors={field.state.meta.errors.map(String)} />}
-        </FieldRoot>
-      }}
-    </Field>
-    <button type="submit">提交</button>
-  </Form>
+          return (
+            <FieldRoot required invalid={invalid} hasError={invalid}>
+              <FieldLabel>邮箱</FieldLabel>
+              <FieldControl>
+                {({ props }) => (
+                  <input
+                    {...props}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(event) => field.handleChange(event.target.value)}
+                  />
+                )}
+              </FieldControl>
+              {invalid && <FieldError errors={field.state.meta.errors.map(String)} />}
+            </FieldRoot>
+          )
+        }}
+      </Field>
+      <button type="submit">提交</button>
+    </Form>
+  )
 }
 ```
 
 ## API
 
-| 组件 | 参数 | 说明 |
-| --- | --- | --- |
-| `Form` | `form` | 必填。TanStack Form 实例。 |
-| `Form` | `component` | `'form' \| false`；`false` 时仅提供 Context，不渲染宿主 form。 |
-| `Form` | `scrollToFirstError` | `boolean \| ScrollIntoViewOptions & { focus?: boolean }`；提交失败后定位首个无效控件。 |
-| `Field` | TanStack Field props | 原样支持 `name`、`defaultValue`、`validators`、`listeners` 等全部 TanStack 参数。 |
-| `FieldRoot` | `orientation` | `'vertical' \| 'horizontal' \| 'responsive' \| 'inline'`。字段内部结构流向。 |
-| `FieldGroup` | `orientation` | `'vertical' \| 'inline'`。字段集合排布。 |
+| 组件         | 参数                 | 说明                                                                                   |
+| ------------ | -------------------- | -------------------------------------------------------------------------------------- |
+| `Form`       | `form`               | 必填。TanStack Form 实例。                                                             |
+| `Form`       | `component`          | `'form' \| false`；`false` 时仅提供 Context，不渲染宿主 form。                         |
+| `Form`       | `scrollToFirstError` | `boolean \| ScrollIntoViewOptions & { focus?: boolean }`；提交失败后定位首个无效控件。 |
+| `Field`      | TanStack Field props | 原样支持 `name`、`defaultValue`、`validators`、`listeners` 等全部 TanStack 参数。      |
+| `FieldRoot`  | `orientation`        | `'vertical' \| 'horizontal' \| 'responsive' \| 'inline'`。字段内部结构流向。           |
+| `FieldGroup` | `orientation`        | `'vertical' \| 'inline'`。字段集合排布。                                               |
 
 ## TanStack 校验与依赖
 
@@ -63,7 +82,8 @@ export function Example() {
 <Field
   name="confirmPassword"
   validators={{
-    onChange: ({ value }) => value === form.getFieldValue('password') ? undefined : '两次密码不一致',
+    onChange: ({ value }) =>
+      value === form.getFieldValue('password') ? undefined : '两次密码不一致',
     onChangeListenTo: ['password'],
     onChangeAsync: async ({ value }) => await checkAvailability(value),
     onChangeAsyncDebounceMs: 400,

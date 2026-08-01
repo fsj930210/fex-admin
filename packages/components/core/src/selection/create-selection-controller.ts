@@ -1,9 +1,5 @@
 import { createStore } from '../store/create-store'
-import type {
-  SelectionController,
-  SelectionOptions,
-  SelectionValue,
-} from './types'
+import type { SelectionController, SelectionOptions, SelectionValue } from './types'
 import {
   createSelectionSnapshot,
   diffSelectionValues,
@@ -30,7 +26,10 @@ export function createSelectionController(options: SelectionOptions = {}): Selec
 
   const getCurrentSnapshot = () => {
     if (isControlled()) {
-      const nextSnapshot = createSelectionSnapshot(normalizeSelectionValues(options.value, getMultiple()), getMultiple())
+      const nextSnapshot = createSelectionSnapshot(
+        normalizeSelectionValues(options.value, getMultiple()),
+        getMultiple(),
+      )
       if (
         controlledSnapshot.multiple === nextSnapshot.multiple &&
         valuesEqual(controlledSnapshot.values, nextSnapshot.values)

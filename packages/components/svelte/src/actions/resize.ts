@@ -103,7 +103,11 @@ function getEventEdge(event: PointerEvent) {
     return null
   }
 
-  return target.closest<HTMLElement>('[data-resize-edge]')?.dataset.resizeEdge as ResizeEdge | undefined ?? null
+  return (
+    (target.closest<HTMLElement>('[data-resize-edge]')?.dataset.resizeEdge as
+      | ResizeEdge
+      | undefined) ?? null
+  )
 }
 
 function toInput(event: PointerEvent) {

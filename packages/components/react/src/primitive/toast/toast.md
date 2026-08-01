@@ -5,7 +5,14 @@ Toast provides a global message primitive. The command API can be called outside
 ## Import
 
 ```tsx
-import { ToastViewport, ToastRoot, ToastTitle, ToastDescription, ToastClose, toast } from '@fex/components-react/primitive/toast'
+import {
+  ToastViewport,
+  ToastRoot,
+  ToastTitle,
+  ToastDescription,
+  ToastClose,
+  toast,
+} from '@fex/components-react/primitive/toast'
 import { CloseIcon } from '@fex/components-react/icon/close'
 ```
 
@@ -28,13 +35,13 @@ toast.error({ id: 'http-401', title: 'Session expired' })
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `placement` | `'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | `'top'` | No | Viewport position. |
-| `offset` | `number \| string` | `24` | No | Distance from the viewport edge. |
-| `stack` | `boolean` | `false` | No | Collapses older toast items when the threshold is exceeded. |
-| `stackThreshold` | `number` | `3` | No | Number of items that triggers stacked display. |
-| `id` | `string` | generated | No | Stable identity. The same id updates the existing toast instead of creating another one. |
+| Name             | Type                                                                                | Default   | Required | Description                                                                              |
+| ---------------- | ----------------------------------------------------------------------------------- | --------- | -------- | ---------------------------------------------------------------------------------------- |
+| `placement`      | `'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | `'top'`   | No       | Viewport position.                                                                       |
+| `offset`         | `number \| string`                                                                  | `24`      | No       | Distance from the viewport edge.                                                         |
+| `stack`          | `boolean`                                                                           | `false`   | No       | Collapses older toast items when the threshold is exceeded.                              |
+| `stackThreshold` | `number`                                                                            | `3`       | No       | Number of items that triggers stacked display.                                           |
+| `id`             | `string`                                                                            | generated | No       | Stable identity. The same id updates the existing toast instead of creating another one. |
 
 ## Notes
 

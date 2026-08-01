@@ -13,10 +13,7 @@ export function getRangePickerDisplayTexts(
   value: CalendarRange | null | undefined,
   options: DatePickerFormatOptions,
 ): [string, string] {
-  return [
-    formatDatePickerValue(value?.start, options),
-    formatDatePickerValue(value?.end, options),
-  ]
+  return [formatDatePickerValue(value?.start, options), formatDatePickerValue(value?.end, options)]
 }
 
 export function parseDatePickerInputText<TPicker extends DatePickerPicker>(

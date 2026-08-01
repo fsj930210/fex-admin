@@ -11,5 +11,14 @@ const props = defineProps<{ class?: string }>()
 const className = computed(() => cn(autoCompleteContentClassName, props.class))
 </script>
 <template>
-  <PopoverPortal><PopoverContent v-bind="$attrs" :class="className" :style="{ width: 'var(--auto-complete-content-width,var(--floating-reference-width))', maxWidth: 'var(--auto-complete-content-width,var(--floating-reference-width))' }"><slot><AutoCompleteList /></slot></PopoverContent></PopoverPortal>
+  <PopoverPortal
+    ><PopoverContent
+      v-bind="$attrs"
+      :class="className"
+      :style="{
+        width: 'var(--auto-complete-content-width,var(--floating-reference-width))',
+        maxWidth: 'var(--auto-complete-content-width,var(--floating-reference-width))',
+      }"
+      ><slot><AutoCompleteList /></slot></PopoverContent
+  ></PopoverPortal>
 </template>

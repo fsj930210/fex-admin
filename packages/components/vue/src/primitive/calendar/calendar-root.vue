@@ -14,20 +14,20 @@ import { calendarContextKey } from './context'
 
 const props = withDefaults(
   defineProps<{
-    value?: CalendarValue | null
-    values?: readonly CalendarValue[]
-    range?: CalendarRange
-    defaultValue?: CalendarValue | null
-    viewDate?: CalendarDate
-    defaultViewDate?: CalendarDate
-    panel?: CalendarPanel
-    defaultPanel?: CalendarPanel
-    granularity?: CalendarGranularity
-    weekStartsOn?: CalendarWeekday
-    today?: CalendarDate
-    min?: CalendarDate
-    max?: CalendarDate
-    disabledDate?: (date: CalendarDate) => boolean
+    value?: CalendarValue | null | undefined
+    values?: readonly CalendarValue[] | undefined
+    range?: CalendarRange | undefined
+    defaultValue?: CalendarValue | null | undefined
+    viewDate?: CalendarDate | undefined
+    defaultViewDate?: CalendarDate | undefined
+    panel?: CalendarPanel | undefined
+    defaultPanel?: CalendarPanel | undefined
+    granularity?: CalendarGranularity | undefined
+    weekStartsOn?: CalendarWeekday | undefined
+    today?: CalendarDate | undefined
+    min?: CalendarDate | undefined
+    max?: CalendarDate | undefined
+    disabledDate?: ((date: CalendarDate) => boolean) | undefined
   }>(),
   {
     defaultValue: null,
@@ -117,7 +117,12 @@ provide(calendarContextKey, {
 </script>
 
 <template>
-  <div data-slot="calendar-root" :data-panel="currentPanel" :data-granularity="currentGranularity" @mouseleave="hoveredRowIndex = null">
+  <div
+    data-slot="calendar-root"
+    :data-panel="currentPanel"
+    :data-granularity="currentGranularity"
+    @mouseleave="hoveredRowIndex = null"
+  >
     <slot />
   </div>
 </template>

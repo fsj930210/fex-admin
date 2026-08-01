@@ -11,7 +11,10 @@
     </header>
 
     <div class="space-y-space-xl">
-      <fex-card title="Primitive" description="Headless root and item parts without default item layout.">
+      <fex-card
+        title="Primitive"
+        description="Headless root and item parts without default item layout."
+      >
         <fex-listbox class="flex max-w-xl flex-col gap-2" defaultValue="kickflip">
           @for (trick of tricks.slice(0, 3); track trick.value) {
             <fex-listbox-item
@@ -29,8 +32,12 @@
           @for (trick of tricks.slice(0, 4); track trick.value) {
             <fex-ui-listbox-item [value]="trick.value">
               <span class="min-w-0 flex-1 space-y-1">
-                <span class="block truncate text-sm font-medium leading-5 text-foreground">{{ trick.title }}</span>
-                <span class="block text-xs leading-5 text-muted-foreground">{{ trick.description }}</span>
+                <span class="block truncate text-sm font-medium leading-5 text-foreground">{{
+                  trick.title
+                }}</span>
+                <span class="block text-xs leading-5 text-muted-foreground">{{
+                  trick.description
+                }}</span>
               </span>
               <fex-ui-listbox-item-indicator />
             </fex-ui-listbox-item>
@@ -39,12 +46,21 @@
       </fex-card>
 
       <fex-card title="Multiple" description="Multiple selection returns an array.">
-        <fex-ui-listbox class="max-w-xl" multiple [value]="selectedTricks()" (change)="setMultiple($event)">
+        <fex-ui-listbox
+          class="max-w-xl"
+          multiple
+          [value]="selectedTricks()"
+          (change)="setMultiple($event)"
+        >
           @for (trick of tricks.slice(0, 4); track trick.value) {
             <fex-ui-listbox-item [value]="trick.value">
               <span class="min-w-0 flex-1 space-y-1">
-                <span class="block truncate text-sm font-medium leading-5 text-foreground">{{ trick.title }}</span>
-                <span class="block text-xs leading-5 text-muted-foreground">{{ trick.description }}</span>
+                <span class="block truncate text-sm font-medium leading-5 text-foreground">{{
+                  trick.title
+                }}</span>
+                <span class="block text-xs leading-5 text-muted-foreground">{{
+                  trick.description
+                }}</span>
               </span>
               <fex-ui-listbox-item-indicator />
             </fex-ui-listbox-item>
@@ -57,8 +73,12 @@
           @for (trick of tricks.slice(0, 4); track trick.value) {
             <fex-ui-listbox-item class="w-56" [value]="trick.value">
               <span class="min-w-0 flex-1 space-y-1">
-                <span class="block truncate text-sm font-medium leading-5 text-foreground">{{ trick.title }}</span>
-                <span class="block text-xs leading-5 text-muted-foreground">{{ trick.description }}</span>
+                <span class="block truncate text-sm font-medium leading-5 text-foreground">{{
+                  trick.title
+                }}</span>
+                <span class="block text-xs leading-5 text-muted-foreground">{{
+                  trick.description
+                }}</span>
               </span>
               <fex-ui-listbox-item-indicator />
             </fex-ui-listbox-item>
@@ -73,8 +93,12 @@
             @for (trick of tricks.slice(0, 2); track trick.value) {
               <fex-ui-listbox-item [value]="trick.value">
                 <span class="min-w-0 flex-1 space-y-1">
-                  <span class="block truncate text-sm font-medium leading-5 text-foreground">{{ trick.title }}</span>
-                  <span class="block text-xs leading-5 text-muted-foreground">{{ trick.description }}</span>
+                  <span class="block truncate text-sm font-medium leading-5 text-foreground">{{
+                    trick.title
+                  }}</span>
+                  <span class="block text-xs leading-5 text-muted-foreground">{{
+                    trick.description
+                  }}</span>
                 </span>
                 <fex-ui-listbox-item-indicator />
               </fex-ui-listbox-item>
@@ -85,8 +109,12 @@
             @for (trick of tricks.slice(4); track trick.value) {
               <fex-ui-listbox-item [value]="trick.value">
                 <span class="min-w-0 flex-1 space-y-1">
-                  <span class="block truncate text-sm font-medium leading-5 text-foreground">{{ trick.title }}</span>
-                  <span class="block text-xs leading-5 text-muted-foreground">{{ trick.description }}</span>
+                  <span class="block truncate text-sm font-medium leading-5 text-foreground">{{
+                    trick.title
+                  }}</span>
+                  <span class="block text-xs leading-5 text-muted-foreground">{{
+                    trick.description
+                  }}</span>
                 </span>
                 <fex-ui-listbox-item-indicator />
               </fex-ui-listbox-item>
@@ -95,13 +123,20 @@
         </fex-ui-listbox>
       </fex-card>
 
-      <fex-card title="Disabled" description="Disabled values can be displayed as selected but cannot be changed by user actions.">
+      <fex-card
+        title="Disabled"
+        description="Disabled values can be displayed as selected but cannot be changed by user actions."
+      >
         <fex-ui-listbox class="max-w-xl" defaultValue="fs-540">
           @for (trick of tricks.slice(2, 5); track trick.value) {
             <fex-ui-listbox-item [value]="trick.value" [disabled]="trick.value === 'fs-540'">
               <span class="min-w-0 flex-1 space-y-1">
-                <span class="block truncate text-sm font-medium leading-5 text-foreground">{{ trick.title }}</span>
-                <span class="block text-xs leading-5 text-muted-foreground">{{ trick.description }}</span>
+                <span class="block truncate text-sm font-medium leading-5 text-foreground">{{
+                  trick.title
+                }}</span>
+                <span class="block text-xs leading-5 text-muted-foreground">{{
+                  trick.description
+                }}</span>
               </span>
               <fex-ui-listbox-item-indicator />
             </fex-ui-listbox-item>

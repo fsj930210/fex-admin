@@ -9,27 +9,28 @@
 
   interface Props {
     children?: Snippet
-    value?: CalendarRange<CalendarValue>
-    defaultValue?: CalendarRange<CalendarValue>
-    open?: boolean
-    defaultOpen?: boolean
-    picker?: DatePickerPicker
-    status?: 'error' | 'warning'
-    needConfirm?: boolean
-    disabled?: boolean
-    readOnly?: boolean
-    allowClear?: boolean
-    allowEmpty?: boolean | { start?: boolean; end?: boolean }
-    order?: boolean
-    format?: string
-    weekStartsOn?: CalendarWeekday
-    minDate?: CalendarDate
-    maxDate?: CalendarDate
-    disabledDate?: (date: CalendarDate, activePart: 'start' | 'end') => boolean
-    onChange?: (value: CalendarRange<CalendarValue>) => void
-    onOpenChange?: (open: boolean) => void
+    value?: CalendarRange<CalendarValue> | undefined
+    defaultValue?: CalendarRange<CalendarValue> | undefined
+    open?: boolean | undefined
+    defaultOpen?: boolean | undefined
+    picker?: DatePickerPicker | undefined
+    status?: 'error' | 'warning' | undefined
+    needConfirm?: boolean | undefined
+    disabled?: boolean | undefined
+    readOnly?: boolean | undefined
+    allowClear?: boolean | undefined
+    allowEmpty?: boolean | { start?: boolean; end?: boolean } | undefined
+    order?: boolean | undefined
+    format?: string | undefined
+    weekStartsOn?: CalendarWeekday | undefined
+    minDate?: CalendarDate | undefined
+    maxDate?: CalendarDate | undefined
+    disabledDate?: ((date: CalendarDate, activePart: 'start' | 'end') => boolean) | undefined
+    onChange?: ((value: CalendarRange<CalendarValue>) => void) | undefined
+    onOpenChange?: ((open: boolean) => void) | undefined
   }
   let props: Props = $props()
+  // svelte-ignore state_referenced_locally -- the props proxy remains live inside the controller adapter.
   const picker = useRangePicker<CalendarValue>(props)
   setContext(rangePickerContextKey, picker)
 </script>

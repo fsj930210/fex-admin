@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { getCalendarToday, type CalendarRange, type CalendarValue } from '@fex/components-core/calendar'
+import {
+  getCalendarToday,
+  type CalendarRange,
+  type CalendarValue,
+} from '@fex/components-core/calendar'
 import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
 import { datePickerDateTimePanelClassName } from '@fex/components-styles/date-picker'
 import {
@@ -15,7 +19,14 @@ import {
   RangePickerRoot,
   RangePickerTrigger,
 } from '@fex/components-vue/primitive/date-picker'
-import { TimePickerHourColumn, TimePickerMinuteColumn, TimePickerPanel, TimePickerRoot, TimePickerSecondColumn, type TimeValue } from '@fex/components-vue/primitive/time-picker'
+import {
+  TimePickerHourColumn,
+  TimePickerMinuteColumn,
+  TimePickerPanel,
+  TimePickerRoot,
+  TimePickerSecondColumn,
+  type TimeValue,
+} from '@fex/components-vue/primitive/time-picker'
 import Card from '@fex/components-vue/ui/card'
 import { ref } from 'vue'
 import PresetRangePanel from './preset-range-panel.vue'
@@ -41,7 +52,7 @@ function setSubmitted(value: CalendarRange<CalendarValue>) {
 }
 
 function setDateTimeDate(value: CalendarValue | readonly CalendarValue[] | null) {
-  dateTimeDate.value = Array.isArray(value) ? null : value
+  dateTimeDate.value = Array.isArray(value) ? null : (value as CalendarValue | null)
 }
 
 function rangeText(value: CalendarRange<CalendarValue>) {
@@ -58,7 +69,10 @@ function formatTime(value: TimeValue) {
 </script>
 
 <template>
-  <Card title="预设范围" description="预设会直接写入受控范围并保持面板打开，可用于报表、审计和运营筛选。">
+  <Card
+    title="预设范围"
+    description="预设会直接写入受控范围并保持面板打开，可用于报表、审计和运营筛选。"
+  >
     <div>
       <RangePickerRoot :value="presetRange" @change="setPreset">
         <RangePickerTrigger class="w-80" />
@@ -66,11 +80,16 @@ function formatTime(value: TimeValue) {
           <PresetRangePanel @select="setPreset" />
         </RangePickerContent>
       </RangePickerRoot>
-      <p class="mt-space-sm w-full text-xs text-muted-foreground">当前范围：{{ rangeText(presetRange) }}</p>
+      <p class="mt-space-sm w-full text-xs text-muted-foreground">
+        当前范围：{{ rangeText(presetRange) }}
+      </p>
     </div>
   </Card>
 
-  <Card title="确认后提交" description="选择过程只更新面板草稿；点击确认并提交后，才向外部提交范围。">
+  <Card
+    title="确认后提交"
+    description="选择过程只更新面板草稿；点击确认并提交后，才向外部提交范围。"
+  >
     <div>
       <RangePickerRoot need-confirm @change="setSubmitted">
         <RangePickerTrigger class="w-80" />
@@ -81,20 +100,51 @@ function formatTime(value: TimeValue) {
           </DatePickerFooter>
         </RangePickerContent>
       </RangePickerRoot>
-      <p class="mt-space-sm w-full text-xs text-muted-foreground">当前范围：{{ rangeText(submitted) }}</p>
+      <p class="mt-space-sm w-full text-xs text-muted-foreground">
+        当前范围：{{ rangeText(submitted) }}
+      </p>
       <p class="mt-space-sm text-xs text-muted-foreground">已提交 {{ submitCount }} 次</p>
     </div>
   </Card>
 
   <Card title="日期与时间" description="一个触发器组合日期和时间，确认后一起关闭面板。">
-    <DatePickerRoot need-confirm placement="bottom" :value="dateTimeDate" @change="setDateTimeDate" @open-change="(open) => { if (open) draftTime = time }">
-      <DatePickerTrigger class="w-64" :display-value="dateTimeDisplayValue()" placeholder="请选择日期和时间" />
+    <DatePickerRoot
+      need-confirm
+      placement="bottom"
+      :value="dateTimeDate"
+      @change="setDateTimeDate"
+      @open-change="
+        (open) => {
+          if (open) draftTime = time
+        }
+      "
+    >
+      <DatePickerTrigger
+        class="w-64"
+        :display-value="dateTimeDisplayValue()"
+        placeholder="请选择日期和时间"
+      />
       <DatePickerContent class="w-[36rem] min-w-[36rem] overflow-hidden p-0">
-        <TimePickerRoot :open="true" :value="draftTime" format="HH:mm:ss" @change="(next) => { if (next) draftTime = next }">
+        <TimePickerRoot
+          :open="true"
+          :value="draftTime"
+          format="HH:mm:ss"
+          @change="
+            (next) => {
+              if (next) draftTime = next
+            }
+          "
+        >
           <div class="flex">
-            <DatePickerPanel :class="`min-w-0 flex-1 self-start ${datePickerDateTimePanelClassName}`" />
+            <DatePickerPanel
+              :class="`min-w-0 flex-1 self-start ${datePickerDateTimePanelClassName}`"
+            />
             <div class="flex w-42 shrink-0 flex-col border-l border-border">
-              <div class="flex h-12 shrink-0 items-center justify-center border-b border-border text-sm font-semibold">{{ formatTime(draftTime) }}</div>
+              <div
+                class="flex h-12 shrink-0 items-center justify-center border-b border-border text-sm font-semibold"
+              >
+                {{ formatTime(draftTime) }}
+              </div>
               <TimePickerPanel class="h-[224px] min-h-0 overflow-hidden">
                 <TimePickerHourColumn class="h-[224px]" />
                 <TimePickerMinuteColumn class="h-[224px]" />

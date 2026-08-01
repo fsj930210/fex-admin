@@ -30,12 +30,26 @@ export function convertValueToPercentage(value: number, min: number, max: number
   return clamp(((value - min) / (max - min)) * 100, 0, 100)
 }
 
-export function getSliderValueFromPointer(clientX: number, clientY: number, rect: DOMRect, min: number, max: number, orientation: 'horizontal' | 'vertical') {
-  const percent = orientation === 'vertical' ? (rect.bottom - clientY) / rect.height : (clientX - rect.left) / rect.width
+export function getSliderValueFromPointer(
+  clientX: number,
+  clientY: number,
+  rect: DOMRect,
+  min: number,
+  max: number,
+  orientation: 'horizontal' | 'vertical',
+) {
+  const percent =
+    orientation === 'vertical'
+      ? (rect.bottom - clientY) / rect.height
+      : (clientX - rect.left) / rect.width
   return min + percent * (max - min)
 }
 
-export function getNextSortedValues(prevValues: readonly number[], nextValue: number, atIndex: number) {
+export function getNextSortedValues(
+  prevValues: readonly number[],
+  nextValue: number,
+  atIndex: number,
+) {
   const nextValues = [...prevValues]
   nextValues[atIndex] = nextValue
   // oxlint-disable-next-line unicorn/no-array-sort -- nextValues is already a copy and the workspace targets ES2022.

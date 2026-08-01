@@ -15,11 +15,9 @@ export type DisabledTime = (now: TimeValue) => {
   disabledHours?: (() => number[]) | undefined
   disabledMinutes?: ((selectedHour: number) => number[]) | undefined
   disabledSeconds?: ((selectedHour: number, selectedMinute: number) => number[]) | undefined
-  disabledMilliseconds?: ((
-    selectedHour: number,
-    selectedMinute: number,
-    selectedSecond: number,
-  ) => number[]) | undefined
+  disabledMilliseconds?:
+    | ((selectedHour: number, selectedMinute: number, selectedSecond: number) => number[])
+    | undefined
 }
 
 export interface TimePickerChangeDetails {
@@ -40,7 +38,11 @@ export interface TimePickerControllerOptions {
 
 export interface TimePickerController extends SnapshotStore<TimePickerSnapshot> {
   setControlledValue(value: TimeValue | null): void
-  change(value: TimeValue | null, reason: TimePickerChangeDetails['reason'], scroll?: TimePickerScrollBehavior): void
+  change(
+    value: TimeValue | null,
+    reason: TimePickerChangeDetails['reason'],
+    scroll?: TimePickerScrollBehavior,
+  ): void
   selectHour(hour: number, use12Hours?: boolean): void
   selectMinute(minute: number): void
   selectSecond(second: number): void

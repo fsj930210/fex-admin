@@ -12,7 +12,9 @@ import {
 } from '@fex/components-core/interactions/dnd-store'
 import { createMemo, createSignal, onCleanup } from 'solid-js'
 
-export interface CreateDraggableOptions<TData extends Record<string, unknown> = Record<string, unknown>> {
+export interface CreateDraggableOptions<
+  TData extends Record<string, unknown> = Record<string, unknown>,
+> {
   id: string
   type?: string
   data?: TData
@@ -30,13 +32,35 @@ export function createDraggable<TData extends Record<string, unknown> = Record<s
   const [dragOffset, setDragOffset] = createSignal({ x: 0, y: 0 })
   let cleanupWindow: (() => void) | undefined
   let previewElement: HTMLElement | null = null
-  function clearPreview() { previewElement?.remove(); previewElement = null }
+  function clearPreview() {
+    previewElement?.remove()
+    previewElement = null
+  }
   function mountPreview(rect: DOMRect) {
-    clearPreview(); const element = target(); if (options.dragPreview !== 'clone' || !element) return
-    const preview = element.cloneNode(true) as HTMLElement; preview.removeAttribute('id'); for (const child of preview.querySelectorAll('[id]')) child.removeAttribute('id')
-    preview.setAttribute('aria-hidden', 'true'); preview.setAttribute('data-drag-preview', 'true')
-    Object.assign(preview.style, { position: 'fixed', top: `${rect.top}px`, left: `${rect.left}px`, width: 'max-content', maxWidth: 'none', height: `${rect.height}px`, marginInlineStart: '0', overflow: 'visible', opacity: '0.45', pointerEvents: 'none', zIndex: '20', willChange: 'left, top' })
-    document.body.append(preview); previewElement = preview
+    clearPreview()
+    const element = target()
+    if (options.dragPreview !== 'clone' || !element) return
+    const preview = element.cloneNode(true) as HTMLElement
+    preview.removeAttribute('id')
+    for (const child of preview.querySelectorAll('[id]')) child.removeAttribute('id')
+    preview.setAttribute('aria-hidden', 'true')
+    preview.setAttribute('data-drag-preview', 'true')
+    Object.assign(preview.style, {
+      position: 'fixed',
+      top: `${rect.top}px`,
+      left: `${rect.left}px`,
+      width: 'max-content',
+      maxWidth: 'none',
+      height: `${rect.height}px`,
+      marginInlineStart: '0',
+      overflow: 'visible',
+      opacity: '0.45',
+      pointerEvents: 'none',
+      zIndex: '20',
+      willChange: 'left, top',
+    })
+    document.body.append(preview)
+    previewElement = preview
   }
 
   function source() {
@@ -56,7 +80,15 @@ export function createDraggable<TData extends Record<string, unknown> = Record<s
     event.preventDefault()
     const start = { x: event.clientX, y: event.clientY }
     const bounds = element.getBoundingClientRect()
-    setCurrentDndSource({ ...source(), [DND_DRAG_START_X]: start.x, [DND_DRAG_START_Y]: start.y, [DND_DRAG_START_RECT_X]: bounds.left, [DND_DRAG_START_RECT_Y]: bounds.top, [DND_DRAG_START_RECT_WIDTH]: bounds.width, [DND_DRAG_START_RECT_HEIGHT]: bounds.height })
+    setCurrentDndSource({
+      ...source(),
+      [DND_DRAG_START_X]: start.x,
+      [DND_DRAG_START_Y]: start.y,
+      [DND_DRAG_START_RECT_X]: bounds.left,
+      [DND_DRAG_START_RECT_Y]: bounds.top,
+      [DND_DRAG_START_RECT_WIDTH]: bounds.width,
+      [DND_DRAG_START_RECT_HEIGHT]: bounds.height,
+    })
     moveCurrentDndSource(start)
     setActiveRect(bounds)
     setDragOffset({ x: 0, y: 0 })

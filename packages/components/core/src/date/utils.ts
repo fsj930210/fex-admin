@@ -1,5 +1,10 @@
 import { Temporal } from '../calendar/temporal'
-import type { CalendarDate, CalendarQuarter, CalendarWeekday, CalendarYear } from '../calendar/types'
+import type {
+  CalendarDate,
+  CalendarQuarter,
+  CalendarWeekday,
+  CalendarYear,
+} from '../calendar/types'
 import type { TimeValue } from '../time-picker/types'
 
 export interface CalendarDateFields {
@@ -91,7 +96,11 @@ export function maxDate(left: CalendarDate, right: CalendarDate): CalendarDate {
   return isAfterDate(left, right) ? left : right
 }
 
-export function clampDate(date: CalendarDate, min?: CalendarDate, max?: CalendarDate): CalendarDate {
+export function clampDate(
+  date: CalendarDate,
+  min?: CalendarDate,
+  max?: CalendarDate,
+): CalendarDate {
   if (min && isBeforeDate(date, min)) return min
   if (max && isAfterDate(date, max)) return max
   return date
@@ -136,8 +145,23 @@ function getUnitDuration(unit: CalendarDateUnit): CalendarDateDuration {
 }
 
 export type DateFormatToken =
-  | 'YYYY' | 'YY' | 'MM' | 'M' | 'DD' | 'D'
-  | 'HH' | 'H' | 'hh' | 'h' | 'mm' | 'm' | 'ss' | 's' | 'SSS' | 'A' | 'a'
+  | 'YYYY'
+  | 'YY'
+  | 'MM'
+  | 'M'
+  | 'DD'
+  | 'D'
+  | 'HH'
+  | 'H'
+  | 'hh'
+  | 'h'
+  | 'mm'
+  | 'm'
+  | 'ss'
+  | 's'
+  | 'SSS'
+  | 'A'
+  | 'a'
 
 export type DateFormatPart =
   | { type: 'token'; token: DateFormatToken }
@@ -153,7 +177,11 @@ export type DateTimeInput = Date | Partial<DateTimeFields>
 
 export type DateTimeParseResult =
   | { valid: true; value: DateTimeFields }
-  | { valid: false; reason: 'incomplete' | 'format-mismatch' | 'out-of-range'; token?: DateFormatToken }
+  | {
+      valid: false
+      reason: 'incomplete' | 'format-mismatch' | 'out-of-range'
+      token?: DateFormatToken
+    }
 
 export interface TimeFormatColumn {
   unit: 'hour' | 'minute' | 'second' | 'period'
@@ -168,7 +196,23 @@ export interface TimeFormatAnalysis {
 }
 
 const DATE_FORMAT_TOKENS: readonly DateFormatToken[] = [
-  'YYYY', 'SSS', 'YY', 'MM', 'DD', 'HH', 'hh', 'mm', 'ss', 'M', 'D', 'H', 'h', 'm', 's', 'A', 'a',
+  'YYYY',
+  'SSS',
+  'YY',
+  'MM',
+  'DD',
+  'HH',
+  'hh',
+  'mm',
+  'ss',
+  'M',
+  'D',
+  'H',
+  'h',
+  'm',
+  's',
+  'A',
+  'a',
 ]
 
 export function tokenizeDateFormat(pattern: string): readonly DateFormatPart[] {
@@ -182,7 +226,7 @@ export function tokenizeDateFormat(pattern: string): readonly DateFormatPart[] {
       index = end === -1 ? pattern.length : end + 1
       continue
     }
-    const token = DATE_FORMAT_TOKENS.find(candidate => pattern.startsWith(candidate, index))
+    const token = DATE_FORMAT_TOKENS.find((candidate) => pattern.startsWith(candidate, index))
     if (token) {
       parts.push({ type: 'token', token })
       index += token.length
@@ -196,23 +240,29 @@ export function tokenizeDateFormat(pattern: string): readonly DateFormatPart[] {
 
 export function format(value: DateTimeInput, pattern: string): string {
   const fields = toDateTimeFields(value)
-  return tokenizeDateFormat(pattern).map(part => {
-    if (part.type === 'literal') return part.value
-    return formatToken(fields, part.token)
-  }).join('')
+  return tokenizeDateFormat(pattern)
+    .map((part) => {
+      if (part.type === 'literal') return part.value
+      return formatToken(fields, part.token)
+    })
+    .join('')
 }
 
 export function parse(text: string, pattern: string): DateTimeParseResult {
   const parts = tokenizeDateFormat(pattern)
   const captures: DateFormatToken[] = []
-  const source = parts.map(part => {
-    if (part.type === 'literal') return escapeRegExp(part.value)
-    captures.push(part.token)
-    return tokenPattern(part.token)
-  }).join('')
+  const source = parts
+    .map((part) => {
+      if (part.type === 'literal') return escapeRegExp(part.value)
+      captures.push(part.token)
+      return tokenPattern(part.token)
+    })
+    .join('')
   const match = new RegExp(`^${source}$`, 'i').exec(text)
   if (!match) {
-    const incomplete = text.length < format({ year: 2000, month: 1, day: 1, hour: 0, minute: 0, second: 0 }, pattern).length
+    const incomplete =
+      text.length <
+      format({ year: 2000, month: 1, day: 1, hour: 0, minute: 0, second: 0 }, pattern).length
     return { valid: false, reason: incomplete ? 'incomplete' : 'format-mismatch' }
   }
 
@@ -233,13 +283,15 @@ export function parse(text: string, pattern: string): DateTimeParseResult {
     else if (token === 'M' || token === 'MM') fields.month = numeric
     else if (token === 'D' || token === 'DD') fields.day = numeric
     else if (token === 'H' || token === 'HH') fields.hour = numeric
-    else if (token === 'h' || token === 'hh') { fields.hour = numeric; parsed12Hour = numeric }
-    else if (token === 'm' || token === 'mm') fields.minute = numeric
+    else if (token === 'h' || token === 'hh') {
+      fields.hour = numeric
+      parsed12Hour = numeric
+    } else if (token === 'm' || token === 'mm') fields.minute = numeric
     else if (token === 's' || token === 'ss') fields.second = numeric
     else if (token === 'SSS') fields.millisecond = numeric
   }
 
-  const hour12 = captures.some(token => token === 'h' || token === 'hh')
+  const hour12 = captures.some((token) => token === 'h' || token === 'hh')
   if (hour12 && (parsed12Hour === undefined || parsed12Hour < 1 || parsed12Hour > 12)) {
     return { valid: false, reason: 'out-of-range', token: 'h' }
   }
@@ -262,8 +314,8 @@ export function analyzeTimeFormat(pattern: string, use12Hours = false): TimeForm
     seen.add(unit)
     columns.push({ unit, token: part.token })
   }
-  const has12Hour = columns.some(column => column.token === 'h' || column.token === 'hh')
-  const has24Hour = columns.some(column => column.token === 'H' || column.token === 'HH')
+  const has12Hour = columns.some((column) => column.token === 'h' || column.token === 'hh')
+  const has24Hour = columns.some((column) => column.token === 'H' || column.token === 'HH')
   if ((use12Hours && has24Hour) || (!use12Hours && (has12Hour || seen.has('period')))) {
     return { valid: false, columns, parts, reason: 'hour-cycle' }
   }
@@ -276,8 +328,12 @@ export function analyzeTimeFormat(pattern: string, use12Hours = false): TimeForm
 function toDateTimeFields(value: DateTimeInput): DateTimeFields {
   if (value instanceof Date) {
     return {
-      year: value.getFullYear(), month: value.getMonth() + 1, day: value.getDate(),
-      hour: value.getHours(), minute: value.getMinutes(), second: value.getSeconds(),
+      year: value.getFullYear(),
+      month: value.getMonth() + 1,
+      day: value.getDate(),
+      hour: value.getHours(),
+      minute: value.getMinutes(),
+      second: value.getSeconds(),
       millisecond: value.getMilliseconds(),
     }
   }
@@ -297,12 +353,23 @@ function toDateTimeFields(value: DateTimeInput): DateTimeFields {
 function formatToken(value: DateTimeFields, token: DateFormatToken): string {
   const hour12 = value.hour % 12 || 12
   const map: Record<DateFormatToken, string> = {
-    YYYY: pad(value.year ?? 0, 4), YY: pad((value.year ?? 0) % 100, 2),
-    MM: pad(value.month ?? 0, 2), M: String(value.month ?? 0),
-    DD: pad(value.day ?? 0, 2), D: String(value.day ?? 0),
-    HH: pad(value.hour, 2), H: String(value.hour), hh: pad(hour12, 2), h: String(hour12),
-    mm: pad(value.minute, 2), m: String(value.minute), ss: pad(value.second, 2), s: String(value.second),
-    SSS: pad(value.millisecond ?? 0, 3), A: value.hour >= 12 ? 'PM' : 'AM', a: value.hour >= 12 ? 'pm' : 'am',
+    YYYY: pad(value.year ?? 0, 4),
+    YY: pad((value.year ?? 0) % 100, 2),
+    MM: pad(value.month ?? 0, 2),
+    M: String(value.month ?? 0),
+    DD: pad(value.day ?? 0, 2),
+    D: String(value.day ?? 0),
+    HH: pad(value.hour, 2),
+    H: String(value.hour),
+    hh: pad(hour12, 2),
+    h: String(hour12),
+    mm: pad(value.minute, 2),
+    m: String(value.minute),
+    ss: pad(value.second, 2),
+    s: String(value.second),
+    SSS: pad(value.millisecond ?? 0, 3),
+    A: value.hour >= 12 ? 'PM' : 'AM',
+    a: value.hour >= 12 ? 'pm' : 'am',
   }
   return map[token]
 }
@@ -318,10 +385,12 @@ function tokenPattern(token: DateFormatToken): string {
 function getInvalidFieldToken(value: DateTimeFields, hour12: boolean): DateFormatToken | undefined {
   if (value.month !== undefined && (value.month < 1 || value.month > 12)) return 'M'
   if (value.day !== undefined && (value.day < 1 || value.day > 31)) return 'D'
-  if (hour12 ? value.hour < 0 || value.hour > 23 : value.hour < 0 || value.hour > 23) return hour12 ? 'h' : 'H'
+  if (hour12 ? value.hour < 0 || value.hour > 23 : value.hour < 0 || value.hour > 23)
+    return hour12 ? 'h' : 'H'
   if (value.minute < 0 || value.minute > 59) return 'm'
   if (value.second < 0 || value.second > 59) return 's'
-  if (value.millisecond !== undefined && (value.millisecond < 0 || value.millisecond > 999)) return 'SSS'
+  if (value.millisecond !== undefined && (value.millisecond < 0 || value.millisecond > 999))
+    return 'SSS'
   return undefined
 }
 

@@ -22,12 +22,30 @@ function nextYear() {
 
 function previous() {
   const panel = context.panel.value
-  context.setViewDate(subtractDate(context.viewDate.value, panel === 'date' ? { months: 1 } : panel === 'year' || panel === 'decade' ? { years: 10 } : { years: 1 }))
+  context.setViewDate(
+    subtractDate(
+      context.viewDate.value,
+      panel === 'date'
+        ? { months: 1 }
+        : panel === 'year' || panel === 'decade'
+          ? { years: 10 }
+          : { years: 1 },
+    ),
+  )
 }
 
 function next() {
   const panel = context.panel.value
-  context.setViewDate(addDate(context.viewDate.value, panel === 'date' ? { months: 1 } : panel === 'year' || panel === 'decade' ? { years: 10 } : { years: 1 }))
+  context.setViewDate(
+    addDate(
+      context.viewDate.value,
+      panel === 'date'
+        ? { months: 1 }
+        : panel === 'year' || panel === 'decade'
+          ? { years: 10 }
+          : { years: 1 },
+    ),
+  )
 }
 </script>
 

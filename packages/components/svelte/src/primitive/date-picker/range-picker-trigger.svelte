@@ -15,7 +15,9 @@
   const context = useRangePickerContext('RangePickerTrigger')
   const startValue = $derived(formatDatePickerValue(context.getRangeValue().start ?? null, context))
   const endValue = $derived(formatDatePickerValue(context.getRangeValue().end ?? null, context))
+  // svelte-ignore state_referenced_locally -- the effect below owns subsequent synchronization.
   let startText = $state(startValue)
+  // svelte-ignore state_referenced_locally -- the effect below owns subsequent synchronization.
   let endText = $state(endValue)
   let focusedPart = $state<'start' | 'end' | null>(null)
   $effect(() => { startText = startValue; endText = endValue })

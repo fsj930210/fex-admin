@@ -5,6 +5,21 @@ import UploadList from './upload-list.svelte'
 import UploadItem from './upload-item.svelte'
 import UploadItemPreview from './upload-preview.svelte'
 import UploadItemProgress from './upload-progress.svelte'
-export { UploadRoot, UploadTrigger, UploadDropzone, UploadList, UploadItem, UploadItemPreview, UploadItemProgress }
+export {
+  UploadRoot,
+  UploadTrigger,
+  UploadDropzone,
+  UploadList,
+  UploadItem,
+  UploadItemPreview,
+  UploadItemProgress,
+}
 export { useUploadContext } from './context'
-export { createUpload, createUploadItem, createUploadMd5, createUploadParts, createUploadPreview, createUploadProgress } from './create-upload'
+export {
+  createUpload,
+  createUploadItem,
+  createUploadMd5,
+  createUploadParts,
+  createUploadPreview,
+  createUploadProgress,
+} from './create-upload'

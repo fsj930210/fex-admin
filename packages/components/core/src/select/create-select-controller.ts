@@ -171,8 +171,13 @@ export function createSelectController<TValue extends SelectionValue>(
     },
     removeLastSelected: () => {
       const values = options.selection.getSnapshot().values
-      const value = [...values].reverse().find((item) => !options.selection.isDisabled(item))
-      if (value !== undefined) options.selection.unselect(value)
+      for (let index = values.length - 1; index >= 0; index -= 1) {
+        const value = values[index]
+        if (value !== undefined && !options.selection.isDisabled(value)) {
+          options.selection.unselect(value)
+          break
+        }
+      }
     },
     clear: () => {
       options.selection.clear()

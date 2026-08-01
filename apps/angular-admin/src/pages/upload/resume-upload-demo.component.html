@@ -1,1 +1,7 @@
-<fex-upload-demo-section title="断点续传" description="暂停后可直接继续；刷新页面后重新选择同一个文件，也会根据 MD5 找回 uploadId，查询服务端已完成分片并跳过它们。浏览器安全限制决定了刷新后必须由用户重新选择文件。"><fex-upload-root [controller]="upload"><button fexButton fexUploadTrigger variant="outline">选择需要续传的文件</button><fex-demo-upload-list showMultipart /></fex-upload-root></fex-upload-demo-section>
+<fex-upload-demo-section
+  title="断点续传"
+  description="暂停后可直接继续；刷新页面后重新选择同一个文件，也会根据 MD5 找回 uploadId，查询服务端已完成分片并跳过它们。浏览器安全限制决定了刷新后必须由用户重新选择文件。"
+  ><fex-upload-root [controller]="upload"
+    ><button fexButton fexUploadTrigger variant="outline">选择需要续传的文件</button
+    ><fex-demo-upload-list showMultipart /></fex-upload-root
+></fex-upload-demo-section>

@@ -138,7 +138,7 @@ const visibleOptions = computed(() =>
     : props.options,
 )
 const selectedOptions = computed(() => {
-  snapshot.value.selectedValues
+  void snapshot.value.selectedValues
   return selection
     .getSnapshot()
     .values.map(

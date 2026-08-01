@@ -10,7 +10,11 @@ import type {
 } from './types'
 
 function createSnapshot(value: TabsValue | undefined): TabsSnapshot {
-  return { value, focusedValue: value, visitedValues: value === undefined ? new Set() : new Set([value]) }
+  return {
+    value,
+    focusedValue: value,
+    visitedValues: value === undefined ? new Set() : new Set([value]),
+  }
 }
 
 /**
@@ -31,13 +35,19 @@ export function createTabsController(initialOptions: TabsControllerOptions = {})
     return { ...snapshot, value: options.value }
   }
 
-  function commit(nextValue: TabsValue | undefined, cause: TabsChangeMeta['cause'] = 'programmatic') {
+  function commit(
+    nextValue: TabsValue | undefined,
+    cause: TabsChangeMeta['cause'] = 'programmatic',
+  ) {
     const previous = currentSnapshot()
     if (previous.value === nextValue) return
     const nextSnapshot: TabsSnapshot = {
       value: nextValue,
       focusedValue: nextValue ?? previous.focusedValue,
-      visitedValues: nextValue === undefined ? previous.visitedValues : new Set([...previous.visitedValues, nextValue]),
+      visitedValues:
+        nextValue === undefined
+          ? previous.visitedValues
+          : new Set([...previous.visitedValues, nextValue]),
     }
     if (!isControlled()) store.setSnapshot(nextSnapshot)
     options.onChange?.(nextValue, { previousValue: previous.value, cause })
@@ -71,7 +81,8 @@ export function createTabsController(initialOptions: TabsControllerOptions = {})
     const next = {
       ...previous,
       focusedValue: value,
-      visitedValues: value === undefined ? previous.visitedValues : new Set([...previous.visitedValues, value]),
+      visitedValues:
+        value === undefined ? previous.visitedValues : new Set([...previous.visitedValues, value]),
     }
     if (!isControlled()) store.setSnapshot(next)
     if (activationMode() === 'automatic' && value !== undefined) commit(value, cause)
@@ -111,7 +122,8 @@ export function createTabsController(initialOptions: TabsControllerOptions = {})
       items.delete(value)
       if (currentSnapshot().value !== value) return
       const remainingItems = availableItems()
-      const fallback = remainingItems[Math.min(Math.max(removedIndex, 0), remainingItems.length - 1)]
+      const fallback =
+        remainingItems[Math.min(Math.max(removedIndex, 0), remainingItems.length - 1)]
       commit(fallback?.value, 'programmatic')
     },
     select: commit,

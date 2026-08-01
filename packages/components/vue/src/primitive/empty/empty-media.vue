@@ -10,7 +10,12 @@ const props = withDefaults(
 </script>
 
 <template>
-  <div v-bind="$attrs" data-slot="empty-icon" :data-variant="props.variant" :class="cn(emptyMediaClassName({ variant: props.variant }), props.class)">
+  <div
+    v-bind="$attrs"
+    data-slot="empty-icon"
+    :data-variant="props.variant"
+    :class="cn(emptyMediaClassName({ variant: props.variant }), props.class)"
+  >
     <slot />
   </div>
 </template>

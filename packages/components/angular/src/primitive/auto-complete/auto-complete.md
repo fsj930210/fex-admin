@@ -13,15 +13,15 @@ AutoComplete preserves free text. Selecting a suggestion fills the input and emi
 
 ## Root inputs
 
-| Input | Purpose |
-| --- | --- |
-| `items` / `fieldNames` | Original records and `key`, `value`, optional `label`, `disabled` mapping |
-| `value` / `defaultValue` | Controlled or initial input text |
-| `open` / `defaultOpen` | Controlled or initial panel state |
-| `filterOption` | Contains filter, predicate, or `false` |
-| `loading` | Replaceable loading state |
-| `disabled` / `readOnly` | Shared Input states |
-| `closeOnSelect` / `loop` | Closing and keyboard wrapping |
+| Input                    | Purpose                                                                   |
+| ------------------------ | ------------------------------------------------------------------------- |
+| `items` / `fieldNames`   | Original records and `key`, `value`, optional `label`, `disabled` mapping |
+| `value` / `defaultValue` | Controlled or initial input text                                          |
+| `open` / `defaultOpen`   | Controlled or initial panel state                                         |
+| `filterOption`           | Contains filter, predicate, or `false`                                    |
+| `loading`                | Replaceable loading state                                                 |
+| `disabled` / `readOnly`  | Shared Input states                                                       |
+| `closeOnSelect` / `loop` | Closing and keyboard wrapping                                             |
 
 ## Outputs and controlled state
 

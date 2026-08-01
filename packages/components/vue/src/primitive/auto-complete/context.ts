@@ -6,7 +6,7 @@ import type { InjectionKey, ShallowRef } from 'vue'
 
 export interface AutoCompleteContext {
   controller: AutoCompleteController<Record<string, unknown>>
-  snapshot: ShallowRef<ReturnType<AutoCompleteController['getSnapshot']>>
+  snapshot: ShallowRef<ReturnType<AutoCompleteController<Record<string, unknown>>['getSnapshot']>>
   items: ShallowRef<readonly ResolvedAutoCompleteItem<Record<string, unknown>>[]>
   loading: ShallowRef<boolean>
   disabled: ShallowRef<boolean>

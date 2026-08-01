@@ -30,7 +30,9 @@ import { RangePickerState, type UseRangePickerOptions } from './use-range-picker
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './range-picker-root.html',
 })
-export class RangePickerRoot<TValue extends CalendarValue = CalendarValue> implements AfterViewInit, OnChanges {
+export class RangePickerRoot<TValue extends CalendarValue = CalendarValue>
+  implements AfterViewInit, OnChanges
+{
   @Input() picker: DatePickerPicker | undefined = undefined
   @Input() status: 'error' | 'warning' | undefined = undefined
   @Input() value: CalendarRange<TValue> | undefined = undefined
@@ -47,7 +49,9 @@ export class RangePickerRoot<TValue extends CalendarValue = CalendarValue> imple
   @Input() weekStartsOn: CalendarWeekday | undefined = undefined
   @Input() minDate: CalendarDate | undefined = undefined
   @Input() maxDate: CalendarDate | undefined = undefined
-  @Input() disabledDate: ((date: CalendarDate, activePart: 'start' | 'end') => boolean) | undefined = undefined
+  @Input() disabledDate:
+    | ((date: CalendarDate, activePart: 'start' | 'end') => boolean)
+    | undefined = undefined
   @Output() readonly change = new EventEmitter<CalendarRange<TValue>>()
   @Output() readonly openChange = new EventEmitter<boolean>()
 

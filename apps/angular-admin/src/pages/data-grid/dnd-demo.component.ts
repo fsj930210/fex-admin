@@ -54,7 +54,16 @@ const groups: Partial<Record<string, 'identity' | 'metrics'>> = {
 
 @Component({
   selector: 'fex-data-grid-dnd-demo',
-  imports: [Card, DataGrid, DataGridCellTemplate, DataGridColumnOverlay, DataGridHeaderTemplate, DataGridRowOverlay, FexSortable, EllipsisIcon],
+  imports: [
+    Card,
+    DataGrid,
+    DataGridCellTemplate,
+    DataGridColumnOverlay,
+    DataGridHeaderTemplate,
+    DataGridRowOverlay,
+    FexSortable,
+    EllipsisIcon,
+  ],
   templateUrl: './dnd-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

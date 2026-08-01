@@ -9,7 +9,10 @@ import {
   type Ref,
 } from 'react'
 import { createPortal } from 'react-dom'
-import { createDialogController, type DialogOptions } from '@fex/components-core/dialog/create-dialog-controller'
+import {
+  createDialogController,
+  type DialogOptions,
+} from '@fex/components-core/dialog/create-dialog-controller'
 import {
   dialogBodyClassName,
   dialogCloseClassName,
@@ -32,7 +35,11 @@ import { useDialogTrigger } from './use-dialog-trigger'
 
 const defaultDismiss = { escapeKey: true, overlayPointer: true }
 
-function toEventInfo(event: { target: EventTarget | null; currentTarget: EventTarget | null; event?: Event }) {
+function toEventInfo(event: {
+  target: EventTarget | null
+  currentTarget: EventTarget | null
+  event?: Event
+}) {
   return {
     target: event.target,
     currentTarget: event.currentTarget,
@@ -58,13 +65,22 @@ export function DialogRoot({
   const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen ?? false)
   const open = isControlled ? openProp : uncontrolledOpen
   const triggerRef = useRef<HTMLButtonElement | null>(null)
-  const handleOpenChange = useMemoizedFn<NonNullable<DialogOptions['onOpenChange']>>((nextOpen, info) => {
-    if (!isControlled) {
-      setUncontrolledOpen(nextOpen)
-    }
-    onOpenChange?.(nextOpen, info)
-  })
-  const dialogOptions: DialogOptions = { ...options, open, onOpenChange: handleOpenChange, modal, closeDelay, dismiss }
+  const handleOpenChange = useMemoizedFn<NonNullable<DialogOptions['onOpenChange']>>(
+    (nextOpen, info) => {
+      if (!isControlled) {
+        setUncontrolledOpen(nextOpen)
+      }
+      onOpenChange?.(nextOpen, info)
+    },
+  )
+  const dialogOptions: DialogOptions = {
+    ...options,
+    open,
+    onOpenChange: handleOpenChange,
+    modal,
+    closeDelay,
+    dismiss,
+  }
   const dialogRef = useLazyRef(() => createDialogController(dialogOptions))
   const latestOptionsRef = useRef(dialogOptions)
   const dialog = dialogRef.current
@@ -193,17 +209,33 @@ export function DialogContent({ ref, className, size, onKeyDown, ...props }: Dia
 }
 
 export function DialogHeader({ className, ...props }: ComponentProps<'div'>) {
-  return <div {...props} data-slot="dialog-header" className={cn(dialogHeaderClassName, className)} />
+  return (
+    <div {...props} data-slot="dialog-header" className={cn(dialogHeaderClassName, className)} />
+  )
 }
 
 export function DialogTitle({ className, ...props }: ComponentProps<'h2'>) {
   const { titleId } = useDialog('DialogTitle')
-  return <h2 {...props} id={titleId} data-slot="dialog-title" className={cn(dialogTitleClassName, className)} />
+  return (
+    <h2
+      {...props}
+      id={titleId}
+      data-slot="dialog-title"
+      className={cn(dialogTitleClassName, className)}
+    />
+  )
 }
 
 export function DialogDescription({ className, ...props }: ComponentProps<'p'>) {
   const { descriptionId } = useDialog('DialogDescription')
-  return <p {...props} id={descriptionId} data-slot="dialog-description" className={cn(dialogDescriptionClassName, className)} />
+  return (
+    <p
+      {...props}
+      id={descriptionId}
+      data-slot="dialog-description"
+      className={cn(dialogDescriptionClassName, className)}
+    />
+  )
 }
 
 export function DialogBody({ className, ...props }: ComponentProps<'div'>) {
@@ -211,7 +243,9 @@ export function DialogBody({ className, ...props }: ComponentProps<'div'>) {
 }
 
 export function DialogFooter({ className, ...props }: ComponentProps<'div'>) {
-  return <div {...props} data-slot="dialog-footer" className={cn(dialogFooterClassName, className)} />
+  return (
+    <div {...props} data-slot="dialog-footer" className={cn(dialogFooterClassName, className)} />
+  )
 }
 
 export type DialogCloseRenderProps = Omit<ComponentProps<'button'>, 'children' | 'ref'> & {
@@ -223,7 +257,13 @@ export interface DialogCloseProps extends Omit<ComponentProps<'button'>, 'childr
   ref?: Ref<HTMLButtonElement>
 }
 
-export function DialogClose({ children, className, onClick, type = 'button', ...props }: DialogCloseProps) {
+export function DialogClose({
+  children,
+  className,
+  onClick,
+  type = 'button',
+  ...props
+}: DialogCloseProps) {
   const { dialog } = useDialog('DialogClose')
   const closeProps = {
     ...props,
@@ -238,5 +278,9 @@ export function DialogClose({ children, className, onClick, type = 'button', ...
     },
   }
 
-  return typeof children === 'function' ? children(closeProps) : <button {...closeProps}>{children ?? 'Close'}</button>
+  return typeof children === 'function' ? (
+    children(closeProps)
+  ) : (
+    <button {...closeProps}>{children ?? 'Close'}</button>
+  )
 }

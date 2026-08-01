@@ -22,11 +22,11 @@ export function Demo() {
 
 ## Props
 
-| 参数名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `value` | `string \| readonly string[] \| number` | `undefined` | 否 | 受控值。 |
-| `defaultValue` | `string \| readonly string[] \| number` | `undefined` | 否 | 非受控初始值。 |
-| `className` | `string` | `undefined` | 否 | 合并到 textarea 的 class。 |
+| 参数名         | 类型                                    | 默认值      | 必填 | 说明                       |
+| -------------- | --------------------------------------- | ----------- | ---- | -------------------------- |
+| `value`        | `string \| readonly string[] \| number` | `undefined` | 否   | 受控值。                   |
+| `defaultValue` | `string \| readonly string[] \| number` | `undefined` | 否   | 非受控初始值。             |
+| `className`    | `string`                                | `undefined` | 否   | 合并到 textarea 的 class。 |
 
 ## 事件/回调
 

@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { autoCompleteListClassName, autoCompleteOptionClassName } from '@fex/components-styles/auto-complete'
+import {
+  autoCompleteListClassName,
+  autoCompleteOptionClassName,
+} from '@fex/components-styles/auto-complete'
 import { cn } from '@fex/utils'
 import { computed } from 'vue'
 import { Empty, EmptyDescription } from '../empty/empty'
@@ -13,8 +16,12 @@ const className = computed(() => cn(autoCompleteListClassName, props.class))
 </script>
 <template>
   <div v-bind="$attrs" :id="autoComplete.listId" role="listbox" :class="className">
-    <slot v-if="autoComplete.loading.value" name="loading"><div class="flex min-h-20 items-center justify-center"><Spinner /></div></slot>
-    <slot v-else-if="!autoComplete.items.value.length" name="empty"><Empty><EmptyDescription>No suggestions</EmptyDescription></Empty></slot>
+    <slot v-if="autoComplete.loading.value" name="loading"
+      ><div class="flex min-h-20 items-center justify-center"><Spinner /></div
+    ></slot>
+    <slot v-else-if="!autoComplete.items.value.length" name="empty"
+      ><Empty><EmptyDescription>No suggestions</EmptyDescription></Empty></slot
+    >
     <slot v-else>
       <div
         v-for="entry in autoComplete.items.value"
@@ -29,7 +36,15 @@ const className = computed(() => cn(autoCompleteListClassName, props.class))
         @pointermove="autoComplete.controller.setActiveKey(entry.key, 'pointer')"
         @pointerdown.prevent
         @click="autoComplete.controller.selectItem(entry.key)"
-      ><slot name="option" :item="entry.item" :active="autoComplete.snapshot.value.activeKey === entry.key" :disabled="entry.disabled">{{ entry.label }}</slot></div>
+      >
+        <slot
+          name="option"
+          :item="entry.item"
+          :active="autoComplete.snapshot.value.activeKey === entry.key"
+          :disabled="entry.disabled"
+          >{{ entry.label }}</slot
+        >
+      </div>
     </slot>
   </div>
 </template>

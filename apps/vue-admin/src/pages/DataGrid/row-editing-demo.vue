@@ -20,11 +20,13 @@ const rows = ref(people6),
   B = Button as Component
 const edit = (field: 'name' | 'department' | 'status', row: Person, value: unknown) =>
   draft.value?.id === row.id
-    ? h(R, { value: String(draft.value[field]) }, () => h(I, {
-      onInput: (event: Event) => {
-        draft.value = { ...draft.value!, [field]: (event.target as HTMLInputElement).value }
-      },
-    }))
+    ? h(R, { value: String(draft.value[field]) }, () =>
+        h(I, {
+          onInput: (event: Event) => {
+            draft.value = { ...draft.value!, [field]: (event.target as HTMLInputElement).value }
+          },
+        }),
+      )
     : String(value ?? '')
 const columns: ColumnDef<F, Person>[] = [
   {

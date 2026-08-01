@@ -1,8 +1,26 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, computed, inject, signal } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  computed,
+  inject,
+  signal,
+} from '@angular/core'
 import type { OnChanges, OnDestroy, OnInit } from '@angular/core'
-import { DEFAULT_SORTABLE_CONTAINER_ID, createSortableController } from '@fex/components-core/sortable/create-sortable-controller'
+import {
+  DEFAULT_SORTABLE_CONTAINER_ID,
+  createSortableController,
+} from '@fex/components-core/sortable/create-sortable-controller'
 import { restoreSortableItems } from '@fex/components-core/sortable/containers'
-import type { SortableAxis, SortableControllerSnapshot, SortableId, SortableItems, SortableMotionOptions } from '@fex/components-core/sortable/types'
+import type {
+  SortableAxis,
+  SortableControllerSnapshot,
+  SortableId,
+  SortableItems,
+  SortableMotionOptions,
+} from '@fex/components-core/sortable/types'
 import { ElementRef } from '@angular/core'
 
 @Component({
@@ -16,7 +34,9 @@ import { ElementRef } from '@angular/core'
   },
   template: '<ng-content />',
 })
-export class FexSortable<TItems extends SortableItems = SortableItems> implements OnInit, OnChanges, OnDestroy {
+export class FexSortable<TItems extends SortableItems = SortableItems>
+  implements OnInit, OnChanges, OnDestroy
+{
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
   private cleanup: (() => void) | undefined
   private unsubscribe: (() => void) | undefined
@@ -39,7 +59,10 @@ export class FexSortable<TItems extends SortableItems = SortableItems> implement
       this.snapshot.set(snapshot)
       this.snapshotChange.emit(snapshot)
     })
-    this.cleanup = this.controller.registerContainer(this.containerId, this.elementRef.nativeElement)
+    this.cleanup = this.controller.registerContainer(
+      this.containerId,
+      this.elementRef.nativeElement,
+    )
   }
 
   ngOnChanges() {

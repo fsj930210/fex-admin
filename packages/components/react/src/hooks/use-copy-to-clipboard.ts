@@ -1,54 +1,54 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import useUnmount from "./use-unmount";
+import * as React from 'react'
+import useUnmount from './use-unmount'
 
 export function useCopyToClipboard({
   timeout = 2000,
   onCopy,
 }: {
-  timeout?: number;
-  onCopy?: () => void;
+  timeout?: number
+  onCopy?: () => void
 } = {}): { copyToClipboard: (value: string) => void; isCopied: boolean } {
-  const [isCopied, setIsCopied] = React.useState(false);
-  const timeoutIdRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isCopied, setIsCopied] = React.useState(false)
+  const timeoutIdRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const copyToClipboard = (value: string): void => {
-    if (typeof window === "undefined" || !navigator.clipboard.writeText) {
-      return;
+    if (typeof window === 'undefined' || !navigator.clipboard.writeText) {
+      return
     }
 
-    if (!value) return;
+    if (!value) return
 
     navigator.clipboard.writeText(value).then(
       () => {
         if (timeoutIdRef.current) {
-          clearTimeout(timeoutIdRef.current);
+          clearTimeout(timeoutIdRef.current)
         }
-        setIsCopied(true);
+        setIsCopied(true)
 
         if (onCopy) {
-          onCopy();
+          onCopy()
         }
 
         if (timeout !== 0) {
           timeoutIdRef.current = setTimeout(() => {
-            setIsCopied(false);
-            timeoutIdRef.current = null;
-          }, timeout);
+            setIsCopied(false)
+            timeoutIdRef.current = null
+          }, timeout)
         }
       },
       () => {
-        setIsCopied(false);
-      }
-    );
-  };
+        setIsCopied(false)
+      },
+    )
+  }
 
   useUnmount(() => {
     if (timeoutIdRef.current) {
-      clearTimeout(timeoutIdRef.current);
+      clearTimeout(timeoutIdRef.current)
     }
-  });
+  })
 
-  return { copyToClipboard, isCopied };
+  return { copyToClipboard, isCopied }
 }

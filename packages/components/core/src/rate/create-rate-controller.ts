@@ -2,13 +2,18 @@ import { createStore } from '../store/create-store'
 import type { RateChangeMeta, RateController, RateOptions, RateSnapshot } from './types'
 import { normalizeRateCount, normalizeRateStep, normalizeRateValue, snapRateValue } from './utils'
 
-function createRateSnapshot(options: RateOptions, fallbackValue?: number, transient?: Partial<RateSnapshot>): RateSnapshot {
+function createRateSnapshot(
+  options: RateOptions,
+  fallbackValue?: number,
+  transient?: Partial<RateSnapshot>,
+): RateSnapshot {
   const count = normalizeRateCount(options.count)
   const step = normalizeRateStep(options.step)
   const value = normalizeRateValue(options.value ?? fallbackValue ?? options.defaultValue, count)
-  const previewValue = transient?.previewValue === null || transient?.previewValue === undefined
-    ? null
-    : normalizeRateValue(transient.previewValue, count)
+  const previewValue =
+    transient?.previewValue === null || transient?.previewValue === undefined
+      ? null
+      : normalizeRateValue(transient.previewValue, count)
 
   return {
     value,
@@ -25,16 +30,18 @@ function createRateSnapshot(options: RateOptions, fallbackValue?: number, transi
 }
 
 function snapshotsEqual(left: RateSnapshot, right: RateSnapshot) {
-  return left.value === right.value
-    && left.previewValue === right.previewValue
-    && left.displayValue === right.displayValue
-    && left.count === right.count
-    && left.step === right.step
-    && left.disabled === right.disabled
-    && left.readOnly === right.readOnly
-    && left.allowClear === right.allowClear
-    && left.direction === right.direction
-    && left.interacting === right.interacting
+  return (
+    left.value === right.value &&
+    left.previewValue === right.previewValue &&
+    left.displayValue === right.displayValue &&
+    left.count === right.count &&
+    left.step === right.step &&
+    left.disabled === right.disabled &&
+    left.readOnly === right.readOnly &&
+    left.allowClear === right.allowClear &&
+    left.direction === right.direction &&
+    left.interacting === right.interacting
+  )
 }
 
 export function createRateController(options: RateOptions = {}): RateController {
@@ -48,7 +55,10 @@ export function createRateController(options: RateOptions = {}): RateController 
   function getCurrentSnapshot() {
     const stored = store.getSnapshot()
     if (!isControlled() && !hasResolvedDefaultValue && options.defaultValue !== undefined) {
-      uncontrolledValue = normalizeRateValue(options.defaultValue, normalizeRateCount(options.count))
+      uncontrolledValue = normalizeRateValue(
+        options.defaultValue,
+        normalizeRateCount(options.count),
+      )
       hasResolvedDefaultValue = true
     }
     const next = createRateSnapshot(options, isControlled() ? undefined : uncontrolledValue, stored)
@@ -59,10 +69,14 @@ export function createRateController(options: RateOptions = {}): RateController 
 
   function updateTransient(transient: Partial<RateSnapshot>) {
     const current = getCurrentSnapshot()
-    store.setSnapshot(createRateSnapshot(options, isControlled() ? undefined : current.value, {
-      previewValue: transient.previewValue === undefined ? current.previewValue : transient.previewValue,
-      interacting: transient.interacting === undefined ? current.interacting : transient.interacting,
-    }))
+    store.setSnapshot(
+      createRateSnapshot(options, isControlled() ? undefined : current.value, {
+        previewValue:
+          transient.previewValue === undefined ? current.previewValue : transient.previewValue,
+        interacting:
+          transient.interacting === undefined ? current.interacting : transient.interacting,
+      }),
+    )
   }
 
   function setValue(value: number, actionOptions: { commit?: boolean } = {}) {
@@ -74,7 +88,9 @@ export function createRateController(options: RateOptions = {}): RateController 
     const meta: RateChangeMeta = { previousValue: snapshot.value, value: nextValue }
     if (!isControlled()) {
       uncontrolledValue = nextValue
-      store.setSnapshot(createRateSnapshot(options, nextValue, { previewValue: null, interacting: false }))
+      store.setSnapshot(
+        createRateSnapshot(options, nextValue, { previewValue: null, interacting: false }),
+      )
     }
     options.onChange?.(nextValue, meta)
     if (actionOptions.commit) options.onCommit?.(nextValue, meta)
@@ -120,9 +136,10 @@ export function createRateController(options: RateOptions = {}): RateController 
     commitInteraction: () => {
       const snapshot = getCurrentSnapshot()
       if (!snapshot.interacting || snapshot.previewValue === null) return undefined
-      const nextValue = snapshot.allowClear && snapshot.previewValue === interactionStartValue
-        ? 0
-        : snapshot.previewValue
+      const nextValue =
+        snapshot.allowClear && snapshot.previewValue === interactionStartValue
+          ? 0
+          : snapshot.previewValue
       updateTransient({ previewValue: null, interacting: false })
       options.onPreviewChange?.(null)
       return setValue(nextValue, { commit: true })

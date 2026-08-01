@@ -29,14 +29,7 @@ import { useState } from 'react'
 export function FractionExample() {
   const [value, setValue] = useState(4.3)
 
-  return (
-    <Rate
-      value={value}
-      step={0.1}
-      aria-label="Product rating"
-      onValueChange={setValue}
-    />
-  )
+  return <Rate value={value} step={0.1} aria-label="Product rating" onValueChange={setValue} />
 }
 ```
 
@@ -50,7 +43,9 @@ import { Rate, type RateItemRenderState } from '@fex/components-react/primitive/
 function renderHeart({ layer }: RateItemRenderState) {
   return (
     <HeartIcon
-      className={layer === 'filled' ? 'fill-danger text-danger' : 'fill-transparent text-muted-foreground'}
+      className={
+        layer === 'filled' ? 'fill-danger text-danger' : 'fill-transparent text-muted-foreground'
+      }
     />
   )
 }
@@ -66,22 +61,22 @@ export function CustomRate() {
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `value` | `number` | — | No | Controlled committed value. |
-| `defaultValue` | `number` | `0` | No | Initial uncontrolled value. |
-| `count` | `number` | `5` | No | Number of rendered rating items. |
-| `step` | `number` | `1` | No | Pointer and keyboard interaction increment. |
-| `disabled` | `boolean` | `false` | No | Disables focus and value changes. |
-| `readOnly` | `boolean` | `false` | No | Keeps slider semantics while preventing value changes. |
-| `allowClear` | `boolean` | `true` | No | Clears the value when the committed item region matches the current value. |
-| `direction` | `'ltr' \| 'rtl'` | `'ltr'` | No | Controls pointer, keyboard and fill direction. |
-| `size` | `'sm' \| 'default' \| 'lg'` | `'default'` | No | Sets the default item size and gap. |
-| `getValueText` | `(value, count) => string` | English value text | No | Produces `aria-valuetext`. |
-| `children` | `(state) => ReactNode` | Star | No | Renders the empty and filled content layers. |
-| `onValuePreviewChange` | `(value \| null) => void` | — | No | Reports hover and drag previews; `null` restores the committed value. |
-| `onValueChange` | `(value) => void` | — | No | Runs when a pointer or keyboard interaction changes the value. |
-| `onValueCommit` | `(value) => void` | — | No | Runs when an interaction is committed. |
+| Name                   | Type                        | Default            | Required | Description                                                                |
+| ---------------------- | --------------------------- | ------------------ | -------- | -------------------------------------------------------------------------- |
+| `value`                | `number`                    | —                  | No       | Controlled committed value.                                                |
+| `defaultValue`         | `number`                    | `0`                | No       | Initial uncontrolled value.                                                |
+| `count`                | `number`                    | `5`                | No       | Number of rendered rating items.                                           |
+| `step`                 | `number`                    | `1`                | No       | Pointer and keyboard interaction increment.                                |
+| `disabled`             | `boolean`                   | `false`            | No       | Disables focus and value changes.                                          |
+| `readOnly`             | `boolean`                   | `false`            | No       | Keeps slider semantics while preventing value changes.                     |
+| `allowClear`           | `boolean`                   | `true`             | No       | Clears the value when the committed item region matches the current value. |
+| `direction`            | `'ltr' \| 'rtl'`            | `'ltr'`            | No       | Controls pointer, keyboard and fill direction.                             |
+| `size`                 | `'sm' \| 'default' \| 'lg'` | `'default'`        | No       | Sets the default item size and gap.                                        |
+| `getValueText`         | `(value, count) => string`  | English value text | No       | Produces `aria-valuetext`.                                                 |
+| `children`             | `(state) => ReactNode`      | Star               | No       | Renders the empty and filled content layers.                               |
+| `onValuePreviewChange` | `(value \| null) => void`   | —                  | No       | Reports hover and drag previews; `null` restores the committed value.      |
+| `onValueChange`        | `(value) => void`           | —                  | No       | Runs when a pointer or keyboard interaction changes the value.             |
+| `onValueCommit`        | `(value) => void`           | —                  | No       | Runs when an interaction is committed.                                     |
 
 Native `div` attributes are forwarded except attributes whose meaning conflicts with Rate.
 

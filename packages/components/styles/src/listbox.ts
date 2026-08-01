@@ -24,8 +24,7 @@ export const listboxGroupClassName = [
   'data-[orientation=horizontal]:contents',
 ].join(' ')
 
-export const listboxGroupLabelClassName =
-  'px-2 text-sm font-medium leading-5 text-muted-foreground'
+export const listboxGroupLabelClassName = 'px-2 text-sm font-medium leading-5 text-muted-foreground'
 
 export const listboxItemClassName = cva(
   [
@@ -52,7 +51,8 @@ export const listboxItemClassName = cva(
 
 export const listboxItemContentClassName = 'min-w-0 flex-1 space-y-1'
 
-export const listboxItemTitleClassName = 'block truncate text-sm font-medium leading-5 text-foreground'
+export const listboxItemTitleClassName =
+  'block truncate text-sm font-medium leading-5 text-foreground'
 
 export const listboxItemDescriptionClassName = 'block text-xs leading-5 text-muted-foreground'
 

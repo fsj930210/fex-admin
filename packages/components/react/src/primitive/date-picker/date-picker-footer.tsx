@@ -16,19 +16,36 @@ function useFooterOwner() {
   const datePicker = use(DatePickerContext)
   const rangePicker = use(RangePickerContext)
   const context = datePicker ?? rangePicker
-  if (!context) throw new Error('DatePickerFooter must be used within DatePickerRoot or RangePickerRoot')
+  if (!context)
+    throw new Error('DatePickerFooter must be used within DatePickerRoot or RangePickerRoot')
   return context
 }
 
 export interface DatePickerFooterProps extends Omit<ComponentProps<'div'>, 'children'> {
-  children?: ReactNode | ((actions: { close: () => void; clear: () => void; confirm: () => void; cancel: () => void }) => ReactNode)
+  children?:
+    | ReactNode
+    | ((actions: {
+        close: () => void
+        clear: () => void
+        confirm: () => void
+        cancel: () => void
+      }) => ReactNode)
 }
 
 export function DatePickerFooter({ className, children, ...props }: DatePickerFooterProps) {
   const context = useFooterOwner()
-  const actions = { close: context.close, clear: context.clear, confirm: context.confirm, cancel: context.cancel }
+  const actions = {
+    close: context.close,
+    clear: context.clear,
+    confirm: context.confirm,
+    cancel: context.cancel,
+  }
   return (
-    <div {...props} data-slot="date-picker-footer" className={cn(datePickerFooterClassName, className)}>
+    <div
+      {...props}
+      data-slot="date-picker-footer"
+      className={cn(datePickerFooterClassName, className)}
+    >
       {typeof children === 'function' ? children(actions) : children}
     </div>
   )
@@ -36,7 +53,12 @@ export function DatePickerFooter({ className, children, ...props }: DatePickerFo
 
 export interface DatePickerConfirmProps extends ComponentProps<'button'> {}
 
-export function DatePickerConfirm({ className, children = '确定', onClick, ...props }: DatePickerConfirmProps) {
+export function DatePickerConfirm({
+  className,
+  children = '确定',
+  onClick,
+  ...props
+}: DatePickerConfirmProps) {
   const context = useFooterOwner()
   return (
     <Button
@@ -54,7 +76,12 @@ export function DatePickerConfirm({ className, children = '确定', onClick, ...
   )
 }
 
-export function DatePickerCancel({ className, children = '取消', onClick, ...props }: DatePickerConfirmProps) {
+export function DatePickerCancel({
+  className,
+  children = '取消',
+  onClick,
+  ...props
+}: DatePickerConfirmProps) {
   const context = useFooterOwner()
   return (
     <Button
@@ -72,7 +99,12 @@ export function DatePickerCancel({ className, children = '取消', onClick, ...p
   )
 }
 
-export function DatePickerPreset({ className, children, onClick, ...props }: DatePickerConfirmProps) {
+export function DatePickerPreset({
+  className,
+  children,
+  onClick,
+  ...props
+}: DatePickerConfirmProps) {
   return (
     <Button
       {...props}
@@ -90,7 +122,12 @@ export function DatePickerPreset({ className, children, onClick, ...props }: Dat
 
 export interface DatePickerTodayProps extends ComponentProps<'button'> {}
 
-export function DatePickerToday({ className, children = '今天', onClick, ...props }: DatePickerTodayProps) {
+export function DatePickerToday({
+  className,
+  children = '今天',
+  onClick,
+  ...props
+}: DatePickerTodayProps) {
   const context = useFooterOwner()
   return (
     <Button

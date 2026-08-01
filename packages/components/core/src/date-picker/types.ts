@@ -49,10 +49,9 @@ export interface DatePickerConstraintOptions<TValue extends CalendarValue = Cale
   panel: CalendarPanel
   minDate?: CalendarDate | undefined
   maxDate?: CalendarDate | undefined
-  disabledDate?: (
-    date: CalendarDate,
-    info: DatePickerDisabledDateInfo<TValue>,
-  ) => boolean
+  disabledDate?:
+    | ((date: CalendarDate, info: DatePickerDisabledDateInfo<TValue>) => boolean)
+    | undefined
 }
 
 export interface DatePickerFormatOptions {

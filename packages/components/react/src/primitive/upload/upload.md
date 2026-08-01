@@ -57,19 +57,19 @@ const upload = useUpload({
 
 ## UploadRoot options
 
-| Option | Type | Description |
-| --- | --- | --- |
-| `items` | `readonly UploadItem[]` | Controlled item list. |
-| `defaultItems` | `readonly UploadItem[]` | Initial uncontrolled list. |
-| `onItemsChange` | `(items) => void` | Reports every list or item-state change. |
-| `beforeUpload` | `(file, context) => boolean \| File \| Blob \| UPLOAD_IGNORE \| Promise` | Validates, transforms, rejects, or ignores a file before upload. |
-| `autoUpload` | `boolean` | Starts the installed upload feature after a file is accepted. Defaults to `true`. |
-| `accept` | `string` | Native file-picker accept hint. Enforce strict validation in `beforeUpload`. |
-| `multiple` | `boolean` | Enables multiple selection. |
-| `maxCount` | `number` | Rejects files beyond the current available list capacity. |
-| `disabled` | `boolean` | Disables file acquisition. |
-| `beforeRemove` | `(item) => boolean \| Promise<boolean>` | Asynchronously allows or blocks removal. |
-| `features` | `UploadFeatureRegistration[]` | Explicit core behavior registrations. |
+| Option          | Type                                                                     | Description                                                                       |
+| --------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| `items`         | `readonly UploadItem[]`                                                  | Controlled item list.                                                             |
+| `defaultItems`  | `readonly UploadItem[]`                                                  | Initial uncontrolled list.                                                        |
+| `onItemsChange` | `(items) => void`                                                        | Reports every list or item-state change.                                          |
+| `beforeUpload`  | `(file, context) => boolean \| File \| Blob \| UPLOAD_IGNORE \| Promise` | Validates, transforms, rejects, or ignores a file before upload.                  |
+| `autoUpload`    | `boolean`                                                                | Starts the installed upload feature after a file is accepted. Defaults to `true`. |
+| `accept`        | `string`                                                                 | Native file-picker accept hint. Enforce strict validation in `beforeUpload`.      |
+| `multiple`      | `boolean`                                                                | Enables multiple selection.                                                       |
+| `maxCount`      | `number`                                                                 | Rejects files beyond the current available list capacity.                         |
+| `disabled`      | `boolean`                                                                | Disables file acquisition.                                                        |
+| `beforeRemove`  | `(item) => boolean \| Promise<boolean>`                                  | Asynchronously allows or blocks removal.                                          |
+| `features`      | `UploadFeatureRegistration[]`                                            | Explicit core behavior registrations.                                             |
 
 `UploadRoot` additionally accepts `invalid`, `name`, and `required` for React DOM and form integration. `invalid` is reflected by `aria-invalid` and primitive error styles.
 
@@ -98,7 +98,7 @@ const upload = useUpload({
 ```ts
 resolveUploadPlan: async ({ parts }) => ({
   completed: await loadCompletedParts(),
-  batches: [parts.filter(isMissing).map(part => part.index)],
+  batches: [parts.filter(isMissing).map((part) => part.index)],
 })
 ```
 
@@ -111,16 +111,16 @@ The outer `batches` array is sequential; indices inside one batch are started to
 
 ## Hooks
 
-| Hook | Purpose |
-| --- | --- |
-| `useUpload` | Creates a stable controller. |
-| `useUploadContext` | Reads the nearest root controller. |
-| `useUploadItem` | Subscribes to one item and exposes start, retry, cancel, pause, continue, and remove actions. |
-| `useUploadFeature` | Reads a feature API by ID. |
-| `useUploadMd5` | Subscribes to Worker MD5 state and progress. |
-| `useUploadParts` | Subscribes to Multipart part states. |
+| Hook                | Purpose                                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `useUpload`         | Creates a stable controller.                                                                                   |
+| `useUploadContext`  | Reads the nearest root controller.                                                                             |
+| `useUploadItem`     | Subscribes to one item and exposes start, retry, cancel, pause, continue, and remove actions.                  |
+| `useUploadFeature`  | Reads a feature API by ID.                                                                                     |
+| `useUploadMd5`      | Subscribes to Worker MD5 state and progress.                                                                   |
+| `useUploadParts`    | Subscribes to Multipart part states.                                                                           |
 | `useUploadProgress` | Derives one process percentage from MD5 processing and network upload progress. `md5Weight` defaults to `0.1`. |
-| `useUploadPreview` | Gets a preview feature object URL. |
+| `useUploadPreview`  | Gets a preview feature object URL.                                                                             |
 
 ```tsx
 const progress = useUploadProgress(item.id, { md5Weight: 0.1 })

@@ -50,7 +50,9 @@ export function createCheckboxGroupController(
 ): CheckboxGroupController {
   const isControlled = () => options.value !== undefined
   const getDisabledValues = () => toDisabledSet(options.disabledValues)
-  const store = createStore(createCheckboxGroupSnapshot(options.value ?? options.defaultValue, options.disabled))
+  const store = createStore(
+    createCheckboxGroupSnapshot(options.value ?? options.defaultValue, options.disabled),
+  )
   let controlledSnapshot = store.getSnapshot()
 
   const getCurrentSnapshot = () => {
@@ -88,7 +90,10 @@ export function createCheckboxGroupController(
       return undefined
     }
 
-    const snapshot = createCheckboxGroupSnapshot(withoutDisabledChanges(nextValue), options.disabled)
+    const snapshot = createCheckboxGroupSnapshot(
+      withoutDisabledChanges(nextValue),
+      options.disabled,
+    )
     if (checkboxValuesEqual(previousSnapshot.value, snapshot.value)) {
       return undefined
     }
@@ -126,7 +131,8 @@ export function createCheckboxGroupController(
       }
       return commit(getCurrentSnapshot().value.filter((item) => item !== value))
     },
-    toggle: (value) => (controller.isChecked(value) ? controller.uncheck(value) : controller.check(value)),
+    toggle: (value) =>
+      controller.isChecked(value) ? controller.uncheck(value) : controller.check(value),
     setValue: commit,
     clear: () => commit([]),
     checkAll: (values) => commit([...getCurrentSnapshot().value, ...values]),

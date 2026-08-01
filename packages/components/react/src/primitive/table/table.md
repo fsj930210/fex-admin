@@ -7,13 +7,27 @@
 ## 导入路径
 
 ```tsx
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@fex/components-react/primitive/table'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@fex/components-react/primitive/table'
 ```
 
 ## 核心示例
 
 ```tsx
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@fex/components-react/primitive/table'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@fex/components-react/primitive/table'
 
 export function Demo() {
   return (
@@ -37,10 +51,10 @@ export function Demo() {
 
 ## Props
 
-| 参数名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `className` | `string` | `undefined` | 否 | 合并到对应表格元素的 class。 |
-| `children` | `ReactNode` | `undefined` | 否 | 表格内容。 |
+| 参数名      | 类型        | 默认值      | 必填 | 说明                         |
+| ----------- | ----------- | ----------- | ---- | ---------------------------- |
+| `className` | `string`    | `undefined` | 否   | 合并到对应表格元素的 class。 |
+| `children`  | `ReactNode` | `undefined` | 否   | 表格内容。                   |
 
 ## 事件/回调
 

@@ -108,6 +108,8 @@ export class SelectRoot implements OnChanges {
   private defaultValueInitialized = false
   private suppressChange = false
   constructor() {
+    // The controller getters intentionally capture the component instance for live signal inputs.
+    // oxlint-disable-next-line typescript/no-this-alias
     const root = this
     this.selection = createSelectionController({
       get value() {

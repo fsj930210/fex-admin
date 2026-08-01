@@ -38,14 +38,22 @@ import {
 } from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
 
-export type { TreeController, TreeKey, TreeNodeData, TreeOptions, TreeVisibleItem } from '@fex/components-core/tree/types'
+export type {
+  TreeController,
+  TreeKey,
+  TreeNodeData,
+  TreeOptions,
+  TreeVisibleItem,
+} from '@fex/components-core/tree/types'
 export { useTreeContext } from './tree-context'
 export { useTree } from './use-tree'
 export { useTreeItem, type TreeItemState } from './use-tree-item'
 export { useTreeVisibleItems } from './use-tree-visible-items'
 
-export interface TreeRootProps<TNode extends TreeNodeData>
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface TreeRootProps<TNode extends TreeNodeData> extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'children'
+> {
   controller?: TreeController<TNode> | undefined
   options?: TreeOptions<TNode> | undefined
   indent?: number | undefined
@@ -68,14 +76,21 @@ function TreeRootWithController<TNode extends TreeNodeData>({
   const selection = controller.getFeature<SelectionFeatureApi>('selection')
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     onKeyDown?.(event)
-    if (event.defaultPrevented || event.nativeEvent.isComposing || !controller.hasFeature('keyboard')) return
+    if (
+      event.defaultPrevented ||
+      event.nativeEvent.isComposing ||
+      !controller.hasFeature('keyboard')
+    )
+      return
     const target = event.target
     if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) return
     const visibleItems = controller.getVisibleItems()
     const expansion = controller.getFeature<ExpansionFeatureApi>('expansion')
     const check = controller.getFeature<CheckFeatureApi>('check')
     const focus = controller.getFeature<FocusFeatureApi>('focus')
-    const focusedIndex = visibleItems.findIndex((item) => item.key === controller.getSnapshot().focusedKey)
+    const focusedIndex = visibleItems.findIndex(
+      (item) => item.key === controller.getSnapshot().focusedKey,
+    )
     const focusedItem = focusedIndex >= 0 ? visibleItems[focusedIndex] : undefined
     const focusAt = (index: number) => focus?.focus(visibleItems[index]?.key ?? null)
 
@@ -141,12 +156,18 @@ export function TreeRoot<TNode extends TreeNodeData>(props: TreeRootProps<TNode>
   return <TreeRootWithController {...rootProps} controller={controller} />
 }
 
-export interface TreeViewportProps<TNode extends TreeNodeData>
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface TreeViewportProps<TNode extends TreeNodeData> extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'children'
+> {
   children: (item: TreeVisibleItem<TNode>) => ReactNode
 }
 
-export function TreeViewport<TNode extends TreeNodeData>({ children, className, ...props }: TreeViewportProps<TNode>) {
+export function TreeViewport<TNode extends TreeNodeData>({
+  children,
+  className,
+  ...props
+}: TreeViewportProps<TNode>) {
   const { tree } = useTreeContext<TNode>()
   const items = useTreeVisibleItems(tree)
   return (
@@ -156,8 +177,10 @@ export function TreeViewport<TNode extends TreeNodeData>({ children, className, 
   )
 }
 
-export interface TreeVirtualViewportProps<TNode extends TreeNodeData>
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface TreeVirtualViewportProps<TNode extends TreeNodeData> extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'children'
+> {
   height: number
   overscan?: number | undefined
   ref?: Ref<TreeVirtualViewportHandle> | undefined
@@ -190,15 +213,19 @@ export function TreeVirtualViewport<TNode extends TreeNodeData>({
     overscan,
   })
 
-  useImperativeHandle(ref, () => ({
-    scrollToKey(key, options) {
-      if (options?.reveal) tree.getFeature<FocusFeatureApi>('focus')?.reveal(key)
-      const visibleIndex = tree.getVisibleIndex(key)
-      if (visibleIndex === undefined || visibleIndex < 0) return false
-      virtualizer.scrollToIndex(visibleIndex, { align: options?.align ?? 'auto' })
-      return true
-    },
-  }), [tree, virtualizer])
+  useImperativeHandle(
+    ref,
+    () => ({
+      scrollToKey(key, options) {
+        if (options?.reveal) tree.getFeature<FocusFeatureApi>('focus')?.reveal(key)
+        const visibleIndex = tree.getVisibleIndex(key)
+        if (visibleIndex === undefined || visibleIndex < 0) return false
+        virtualizer.scrollToIndex(visibleIndex, { align: options?.align ?? 'auto' })
+        return true
+      },
+    }),
+    [tree, virtualizer],
+  )
 
   return (
     <div
@@ -227,7 +254,8 @@ export function TreeVirtualViewport<TNode extends TreeNodeData>({
   )
 }
 
-type TreeItemDomProps = HTMLAttributes<HTMLDivElement> & Record<`data-${string}`, string | boolean | undefined>
+type TreeItemDomProps = HTMLAttributes<HTMLDivElement> &
+  Record<`data-${string}`, string | boolean | undefined>
 
 export interface TreeItemRenderState<TNode extends TreeNodeData> extends TreeItemState<TNode> {
   item: CoreTreeItem<TNode>
@@ -241,8 +269,10 @@ export interface TreeItemRenderState<TNode extends TreeNodeData> extends TreeIte
   }
 }
 
-export interface TreeItemProps<TNode extends TreeNodeData>
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+export interface TreeItemProps<TNode extends TreeNodeData> extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  'children'
+> {
   itemKey: TreeKey
   /** Makes the selectable title fill the remaining row after leading tree controls. */
   block?: boolean | undefined
@@ -290,7 +320,8 @@ export function TreeItem<TNode extends TreeNodeData>({
     onFocus: () => tree.getFeature<FocusFeatureApi>('focus')?.focus(item.key),
     onClick: (event) => {
       onClick?.(event)
-      if (!event.defaultPrevented && !item.disabled) tree.getFeature<SelectionFeatureApi>('selection')?.toggle(item.key)
+      if (!event.defaultPrevented && !item.disabled)
+        tree.getFeature<SelectionFeatureApi>('selection')?.toggle(item.key)
     },
   }
   const renderState: TreeItemRenderState<TNode> = {
@@ -302,10 +333,15 @@ export function TreeItem<TNode extends TreeNodeData>({
       collapse: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.collapse(item.key),
       toggleExpanded: () => tree.getFeature<ExpansionFeatureApi>('expansion')?.toggle(item.key),
       toggleSelected: () => tree.getFeature<SelectionFeatureApi>('selection')?.toggle(item.key),
-      toggleChecked: () => tree.getFeature<CheckFeatureApi>('check')?.check(item.key, !state.checked),
+      toggleChecked: () =>
+        tree.getFeature<CheckFeatureApi>('check')?.check(item.key, !state.checked),
     },
   }
-  return typeof children === 'function' ? children(renderState) : <div {...itemProps}>{children}</div>
+  return typeof children === 'function' ? (
+    children(renderState)
+  ) : (
+    <div {...itemProps}>{children}</div>
+  )
 }
 
 export interface TreeTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -317,7 +353,9 @@ export function TreeTrigger({ itemKey, className, onClick, children, ...props }:
   const state = useTreeItem(tree, itemKey)
   const expansion = tree.getFeature<ExpansionFeatureApi>('expansion')
   if (!state.item || state.item.isLeaf || !expansion) {
-    return <span aria-hidden="true" data-slot="tree-trigger-placeholder" className="size-5 shrink-0" />
+    return (
+      <span aria-hidden="true" data-slot="tree-trigger-placeholder" className="size-5 shrink-0" />
+    )
   }
   return (
     <button
@@ -356,8 +394,10 @@ export function TreeTitle({ className, ...props }: TreeTitleProps) {
   return <span {...props} data-slot="tree-title" className={cn(treeTitleClassName, className)} />
 }
 
-export interface TreeDropIndicatorProps<TNode extends TreeNodeData>
-  extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
+export interface TreeDropIndicatorProps<TNode extends TreeNodeData> extends Omit<
+  HTMLAttributes<HTMLSpanElement>,
+  'children'
+> {
   item?: CoreTreeItem<TNode> | undefined
   intent?: TreeDropIntent | null | undefined
 }
@@ -378,7 +418,12 @@ export function TreeDropIndicator<TNode extends TreeNodeData>({
       data-slot="tree-drop-indicator"
       data-position={intent.position}
       className={cn(treeDropIndicatorClassName, className)}
-      style={{ left: intent.position === 'inside' ? indent : 4, bottom: 0, transform: 'translateY(1px)', ...style }}
+      style={{
+        left: intent.position === 'inside' ? indent : 4,
+        bottom: 0,
+        transform: 'translateY(1px)',
+        ...style,
+      }}
     />
   )
 }

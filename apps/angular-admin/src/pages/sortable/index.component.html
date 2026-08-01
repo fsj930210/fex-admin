@@ -5,13 +5,17 @@
       <div>
         <h1 class="text-2xl font-semibold text-foreground">Sortable</h1>
         <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
-          Quick sortable components for common lists, plus useSortable for table columns and other custom layouts.
+          Quick sortable components for common lists, plus useSortable for table columns and other
+          custom layouts.
         </p>
       </div>
     </header>
 
     <div class="space-y-space-xl">
-      <fex-card title="Sortable Component" description="Use the primitive component for common one-container lists.">
+      <fex-card
+        title="Sortable Component"
+        description="Use the primitive component for common one-container lists."
+      >
         <fex-sortable
           #listSortable="fexSortable"
           [items]="tasks"
@@ -26,20 +30,33 @@
               [attr.data-sortable-id]="task"
               class="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing"
             >
-              <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
+              <span
+                class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground"
+                >::</span
+              >
               {{ task }}
             </div>
           }
         </fex-sortable>
         @if (listSortable.activeId(); as activeId) {
-          <div data-sortable-overlay class="flex min-h-12 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70" [ngStyle]="listSortable.getOverlayStyle()">
-            <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
+          <div
+            data-sortable-overlay
+            class="flex min-h-12 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+            [ngStyle]="listSortable.getOverlayStyle()"
+          >
+            <span
+              class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground"
+              >::</span
+            >
             {{ activeId }}
           </div>
         }
       </fex-card>
 
-      <fex-card title="Multiple Containers" description="The same sortable hook supports transfer panels.">
+      <fex-card
+        title="Multiple Containers"
+        description="The same sortable hook supports transfer panels."
+      >
         <div
           #panelSortable="fexSortableContainer"
           fexSortableContainer
@@ -54,7 +71,9 @@
               [containerId]="panel[0]"
               class="min-h-56 rounded-md border border-border bg-background p-space-md"
             >
-              <h2 class="mb-space-md text-sm font-medium capitalize text-muted-foreground">{{ panel[0] }}</h2>
+              <h2 class="mb-space-md text-sm font-medium capitalize text-muted-foreground">
+                {{ panel[0] }}
+              </h2>
               @for (item of panelItems(panelSortable.previewItems(), panel[0]); track item) {
                 <div
                   fexSortableItem
@@ -64,7 +83,10 @@
                   [attr.data-sortable-id]="item"
                   class="mb-space-sm flex min-h-11 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing"
                 >
-                  <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
+                  <span
+                    class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground"
+                    >::</span
+                  >
                   {{ item }}
                 </div>
               }
@@ -72,14 +94,24 @@
           }
         </div>
         @if (panelSortable.activeId(); as activeId) {
-          <div data-sortable-overlay class="flex min-h-11 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70" [ngStyle]="panelSortable.getOverlayStyle()">
-            <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
+          <div
+            data-sortable-overlay
+            class="flex min-h-11 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+            [ngStyle]="panelSortable.getOverlayStyle()"
+          >
+            <span
+              class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground"
+              >::</span
+            >
             {{ activeId }}
           </div>
         }
       </fex-card>
 
-      <fex-card title="Table Columns" description="useSortable can share motion styles across header and body cells.">
+      <fex-card
+        title="Table Columns"
+        description="useSortable can share motion styles across header and body cells."
+      >
         <div
           #tableSortable="fexSortableContainer"
           fexSortableContainer
@@ -99,7 +131,9 @@
                     [attr.data-sortable-id]="column"
                     class="cursor-grab touch-none select-none border-b border-border bg-card px-space-md py-space-md text-left font-medium text-muted-foreground transition-[transform,background-color,box-shadow,opacity] hover:bg-muted-background active:cursor-grabbing"
                   >
-                    <span class="inline-flex items-center gap-space-sm"><span class="text-muted-foreground">::</span>{{ columnLabels[column] }}</span>
+                    <span class="inline-flex items-center gap-space-sm"
+                      ><span class="text-muted-foreground">::</span>{{ columnLabels[column] }}</span
+                    >
                   </th>
                 }
               </tr>
@@ -108,7 +142,13 @@
               @for (row of rows; track row.email) {
                 <tr class="border-b border-border last:border-0">
                   @for (column of tableSortable.previewItems(); track column) {
-                    <td class="px-space-md py-space-sm" [ngStyle]="tableSortable.getMotionStyle(column)" [style.visibility]="tableSortable.activeId() === column ? 'hidden' : null">{{ getCellValue(row, column) }}</td>
+                    <td
+                      class="px-space-md py-space-sm"
+                      [ngStyle]="tableSortable.getMotionStyle(column)"
+                      [style.visibility]="tableSortable.activeId() === column ? 'hidden' : null"
+                    >
+                      {{ getCellValue(row, column) }}
+                    </td>
                   }
                 </tr>
               }
@@ -116,13 +156,21 @@
           </table>
         </div>
         @if (tableSortable.activeId(); as activeId) {
-          <div data-sortable-overlay class="overflow-hidden rounded-md border border-border bg-card text-sm text-foreground opacity-100 shadow-xl ring-1 ring-border/70" [ngStyle]="tableOverlayStyle(tableSortable.getOverlayStyle())">
-            <div class="flex min-h-12 items-center gap-space-sm border-b border-border px-space-md font-medium text-muted-foreground">
+          <div
+            data-sortable-overlay
+            class="overflow-hidden rounded-md border border-border bg-card text-sm text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
+            [ngStyle]="tableOverlayStyle(tableSortable.getOverlayStyle())"
+          >
+            <div
+              class="flex min-h-12 items-center gap-space-sm border-b border-border px-space-md font-medium text-muted-foreground"
+            >
               <span>::</span>
               {{ columnLabels[activeId] }}
             </div>
             @for (row of rows; track row.email) {
-              <div class="border-b border-border px-space-md py-space-sm last:border-0">{{ getCellValue(row, activeId) }}</div>
+              <div class="border-b border-border px-space-md py-space-sm last:border-0">
+                {{ getCellValue(row, activeId) }}
+              </div>
             }
           </div>
         }

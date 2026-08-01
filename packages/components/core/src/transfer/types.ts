@@ -67,11 +67,14 @@ export interface TransferControllerOptions<TItem extends TransferDataItem> {
   checkedKeys?: Partial<TransferCheckedKeys> | undefined
   defaultCheckedKeys?: Partial<TransferCheckedKeys> | undefined
   onChange?: ((keys: readonly TransferKey[], meta: TransferChangeMeta<TItem>) => void) | undefined
-  onCheckedChange?: ((keys: TransferCheckedKeys, meta: TransferCheckedChangeMeta<TItem>) => void) | undefined
+  onCheckedChange?:
+    | ((keys: TransferCheckedKeys, meta: TransferCheckedChangeMeta<TItem>) => void)
+    | undefined
 }
 
-export interface TransferController<TItem extends TransferDataItem>
-  extends SnapshotStore<TransferSnapshot<TItem>> {
+export interface TransferController<TItem extends TransferDataItem> extends SnapshotStore<
+  TransferSnapshot<TItem>
+> {
   updateOptions(options: Partial<TransferControllerOptions<TItem>>): void
   setSourceCheckedKeys(keys: readonly TransferKey[]): void
   setTargetCheckedKeys(keys: readonly TransferKey[]): void

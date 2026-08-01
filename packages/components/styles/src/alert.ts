@@ -11,12 +11,9 @@ export const alertClassName = cva(
     variants: {
       variant: {
         default: '',
-        destructive:
-          'border-danger/30 text-danger *:data-[slot=alert-description]:text-danger/90',
-        success:
-          'border-success/30 text-success *:data-[slot=alert-description]:text-success/90',
-        warning:
-          'border-warning/30 text-warning *:data-[slot=alert-description]:text-warning/90',
+        destructive: 'border-danger/30 text-danger *:data-[slot=alert-description]:text-danger/90',
+        success: 'border-success/30 text-success *:data-[slot=alert-description]:text-success/90',
+        warning: 'border-warning/30 text-warning *:data-[slot=alert-description]:text-warning/90',
         info: 'border-info/30 text-info *:data-[slot=alert-description]:text-info/90',
       },
     },

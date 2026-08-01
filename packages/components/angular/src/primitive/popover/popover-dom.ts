@@ -1,25 +1,28 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core'
 
 export interface PopoverPortalMount {
-  cleanup(): void;
+  cleanup(): void
 }
 
 @Injectable()
 export class PopoverDomService {
-  mountFloatingElement(element: HTMLElement, container: HTMLElement | null | undefined): PopoverPortalMount {
-    const originalParent = element.parentNode;
-    const targetContainer = container ?? originalParent;
+  mountFloatingElement(
+    element: HTMLElement,
+    container: HTMLElement | null | undefined,
+  ): PopoverPortalMount {
+    const originalParent = element.parentNode
+    const targetContainer = container ?? originalParent
 
     if (targetContainer && element.parentNode !== targetContainer) {
-      targetContainer.appendChild(element);
+      targetContainer.appendChild(element)
     }
 
     return {
       cleanup: () => {
         if (originalParent && element.parentNode !== originalParent) {
-          originalParent.appendChild(element);
+          originalParent.appendChild(element)
         }
       },
-    };
+    }
   }
 }

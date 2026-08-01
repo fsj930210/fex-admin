@@ -10,12 +10,20 @@ const triggerProps = computed(() => ({
   'aria-controls': inputId,
   'aria-invalid': invalid.value || undefined,
   class: uploadTriggerClassName(),
-  onClick: () => { input.value?.click() },
+  onClick: () => {
+    input.value?.click()
+  },
 }))
 </script>
 
 <template>
   <slot :props="triggerProps">
-    <PrimitiveButton :class="uploadTriggerClassName()" :disabled="upload.getOptions().disabled" :aria-controls="inputId" @click="input?.click()"><slot name="label">选择文件</slot></PrimitiveButton>
+    <PrimitiveButton
+      :class="uploadTriggerClassName()"
+      :disabled="upload.getOptions().disabled"
+      :aria-controls="inputId"
+      @click="input?.click()"
+      ><slot name="label">选择文件</slot></PrimitiveButton
+    >
   </slot>
 </template>

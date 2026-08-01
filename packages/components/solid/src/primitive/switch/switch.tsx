@@ -1,4 +1,8 @@
-import { switchClassName, switchThumbClassName, type SwitchStyleProps } from '@fex/components-styles/switch'
+import {
+  switchClassName,
+  switchThumbClassName,
+  type SwitchStyleProps,
+} from '@fex/components-styles/switch'
 import { cn } from '@fex/utils'
 import { createSignal, splitProps, type JSX } from 'solid-js'
 
@@ -7,7 +11,11 @@ export type SwitchState = 'checked' | 'unchecked'
 import { SwitchContext, useSwitchContext } from './switch-context'
 
 export interface SwitchRootProps
-  extends Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'checked' | 'defaultChecked' | 'onChange' | 'role' | 'type'>,
+  extends
+    Omit<
+      JSX.ButtonHTMLAttributes<HTMLButtonElement>,
+      'checked' | 'defaultChecked' | 'onChange' | 'role' | 'type'
+    >,
     SwitchStyleProps {
   checked?: boolean
   defaultChecked?: boolean
@@ -15,7 +23,16 @@ export interface SwitchRootProps
 }
 
 export function SwitchRoot(props: SwitchRootProps) {
-  const [local, rest] = splitProps(props, ['checked', 'defaultChecked', 'disabled', 'size', 'class', 'onClick', 'onCheckedChange', 'children'])
+  const [local, rest] = splitProps(props, [
+    'checked',
+    'defaultChecked',
+    'disabled',
+    'size',
+    'class',
+    'onClick',
+    'onCheckedChange',
+    'children',
+  ])
   const [internalChecked, setInternalChecked] = createSignal(local.defaultChecked ?? false)
   const currentChecked = () => local.checked ?? internalChecked()
   const state = (): SwitchState => (currentChecked() ? 'checked' : 'unchecked')
@@ -53,5 +70,11 @@ export function SwitchThumb(props: SwitchThumbProps) {
   const context = useSwitchContext('SwitchThumb')
   const size = () => local.size ?? context.size()
 
-  return <span {...rest} data-state={context.state()} class={cn(switchThumbClassName({ size: size() }), local.class)} />
+  return (
+    <span
+      {...rest}
+      data-state={context.state()}
+      class={cn(switchThumbClassName({ size: size() }), local.class)}
+    />
+  )
 }

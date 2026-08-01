@@ -5,30 +5,30 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@fex/components-vue/primitive/card";
-import Card from "@fex/components-vue/ui/card";
-import { computed, ref } from "vue";
+} from '@fex/components-vue/primitive/card'
+import Card from '@fex/components-vue/ui/card'
+import { computed, ref } from 'vue'
 
 type SpacingOption = {
-  label: string;
-  value: "sm" | "md" | "lg" | "custom";
-  size: "sm" | "md" | "lg";
-  rootStyle?: Record<string, string>;
-};
+  label: string
+  value: 'sm' | 'md' | 'lg' | 'custom'
+  size: 'sm' | 'md' | 'lg'
+  rootStyle?: Record<string, string>
+}
 
-const defaultSpacingOption: SpacingOption = { label: "md", value: "md", size: "md" };
+const defaultSpacingOption: SpacingOption = { label: 'md', value: 'md', size: 'md' }
 
 const spacingOptions: SpacingOption[] = [
-  { label: "sm", value: "sm", size: "sm" },
+  { label: 'sm', value: 'sm', size: 'sm' },
   defaultSpacingOption,
-  { label: "lg", value: "lg", size: "lg" },
-  { label: "40px", value: "custom", size: "md", rootStyle: { "--card-spacing": "40px" } },
-];
+  { label: 'lg', value: 'lg', size: 'lg' },
+  { label: '40px', value: 'custom', size: 'md', rootStyle: { '--card-spacing': '40px' } },
+]
 
-const spacing = ref<SpacingOption["value"]>("md");
+const spacing = ref<SpacingOption['value']>('md')
 const selectedSpacing = computed(
   () => spacingOptions.find((option) => option.value === spacing.value) ?? defaultSpacingOption,
-);
+)
 </script>
 
 <template>
@@ -62,7 +62,9 @@ const selectedSpacing = computed(
         <Card title="Ui" description="面向业务的默认卡片封装。">
           <div class="flex min-w-0 flex-wrap items-center gap-space-md">
             <Card title="Basic" description="包含标题、描述和内容区域。">
-              <p class="text-sm leading-6 text-foreground">Card 默认使用系统边框、背景、圆角和 spacing token。</p>
+              <p class="text-sm leading-6 text-foreground">
+                Card 默认使用系统边框、背景、圆角和 spacing token。
+              </p>
             </Card>
           </div>
         </Card>
@@ -73,7 +75,10 @@ const selectedSpacing = computed(
           </p>
         </Card>
 
-        <Card title="Spacing" description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。">
+        <Card
+          title="Spacing"
+          description="size 提供 sm、md、lg 三档；不满足时覆盖 --card-spacing。"
+        >
           <div class="flex flex-wrap gap-space-sm">
             <button
               v-for="option in spacingOptions"
@@ -96,17 +101,23 @@ const selectedSpacing = computed(
               title="Login to your account"
               description="Enter your email below to login to your account"
               :class="{ root: 'w-full max-w-md' }"
-              v-bind="selectedSpacing.rootStyle ? { style: { root: selectedSpacing.rootStyle } } : {}"
+              v-bind="
+                selectedSpacing.rootStyle ? { style: { root: selectedSpacing.rootStyle } } : {}
+              "
             >
               <div class="grid gap-space-lg">
                 <div class="grid gap-space-sm">
                   <div class="text-sm font-medium text-foreground">Email</div>
-                  <div class="h-9 rounded-md border border-border bg-background px-space-lg py-space-sm text-sm text-muted-foreground">
+                  <div
+                    class="h-9 rounded-md border border-border bg-background px-space-lg py-space-sm text-sm text-muted-foreground"
+                  >
                     m@example.com
                   </div>
                 </div>
                 <div class="grid gap-space-sm">
-                  <div class="flex items-center justify-between gap-space-md text-sm font-medium text-foreground">
+                  <div
+                    class="flex items-center justify-between gap-space-md text-sm font-medium text-foreground"
+                  >
                     <span>Password</span>
                     <span class="font-normal text-muted-foreground">Forgot your password?</span>
                   </div>
@@ -115,10 +126,14 @@ const selectedSpacing = computed(
               </div>
               <template #footer>
                 <div class="grid w-full gap-space-md">
-                  <div class="rounded-md bg-foreground px-space-lg py-space-sm text-center text-sm font-medium text-background">
+                  <div
+                    class="rounded-md bg-foreground px-space-lg py-space-sm text-center text-sm font-medium text-background"
+                  >
                     Login
                   </div>
-                  <div class="rounded-md border border-border bg-background px-space-lg py-space-sm text-center text-sm font-medium text-foreground">
+                  <div
+                    class="rounded-md border border-border bg-background px-space-lg py-space-sm text-center text-sm font-medium text-foreground"
+                  >
                     Login with Google
                   </div>
                 </div>
@@ -127,7 +142,11 @@ const selectedSpacing = computed(
           </div>
         </Card>
 
-        <Card title="With Footer" description="需要底部操作区时使用 footer。" footer="Footer content">
+        <Card
+          title="With Footer"
+          description="需要底部操作区时使用 footer。"
+          footer="Footer content"
+        >
           <p class="text-sm leading-6 text-muted-foreground">
             Header、Content 和 Footer 分别维护自己的 padding，组合时保持一致的信息密度。
           </p>

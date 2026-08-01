@@ -117,7 +117,10 @@ function getTargetAtPoint(point: { x: number; y: number }, source: DndSourceData
     const overlap = dragRect ? getOverlapArea(dragRect, rect) : 0
     const inside = dragRect
       ? overlap > 0
-      : point.x >= rect.left && point.x <= rect.right && point.y >= rect.top && point.y <= rect.bottom
+      : point.x >= rect.left &&
+        point.x <= rect.right &&
+        point.y >= rect.top &&
+        point.y <= rect.bottom
 
     if (!inside) {
       continue
@@ -125,9 +128,9 @@ function getTargetAtPoint(point: { x: number; y: number }, source: DndSourceData
 
     const area = rect.width * rect.height
     if (
-      (dragRect && overlap > largestOverlap)
-      || (dragRect && overlap === largestOverlap && area < matchedArea)
-      || (!dragRect && area < matchedArea)
+      (dragRect && overlap > largestOverlap) ||
+      (dragRect && overlap === largestOverlap && area < matchedArea) ||
+      (!dragRect && area < matchedArea)
     ) {
       matched = target
       largestOverlap = overlap
@@ -139,8 +142,9 @@ function getTargetAtPoint(point: { x: number; y: number }, source: DndSourceData
 }
 
 function getDropArgs(target: DndDropTarget, point: Point, source: DndSourceData): DndDropArgs {
-  const position = target.getPosition?.({ element: target.element, pointer: point, source })
-    ?? getDropPositionAtPoint(target.element, point, target.positions ?? target.edges ?? [])
+  const position =
+    target.getPosition?.({ element: target.element, pointer: point, source }) ??
+    getDropPositionAtPoint(target.element, point, target.positions ?? target.edges ?? [])
   const rect = target.element.getBoundingClientRect()
   return {
     source,
@@ -160,15 +164,26 @@ function getCurrentDragRect(source: DndSourceData, point: Point): Rect | undefin
   const width = source[DND_DRAG_START_RECT_WIDTH]
   const height = source[DND_DRAG_START_RECT_HEIGHT]
   if (
-    typeof startX !== 'number' || typeof startY !== 'number' || typeof x !== 'number'
-    || typeof y !== 'number' || typeof width !== 'number' || typeof height !== 'number'
-  ) return undefined
+    typeof startX !== 'number' ||
+    typeof startY !== 'number' ||
+    typeof x !== 'number' ||
+    typeof y !== 'number' ||
+    typeof width !== 'number' ||
+    typeof height !== 'number'
+  )
+    return undefined
   return { x: x + point.x - startX, y: y + point.y - startY, width, height }
 }
 
 function getOverlapArea(left: Rect, right: DOMRect): number {
-  const width = Math.max(0, Math.min(left.x + left.width, right.right) - Math.max(left.x, right.left))
-  const height = Math.max(0, Math.min(left.y + left.height, right.bottom) - Math.max(left.y, right.top))
+  const width = Math.max(
+    0,
+    Math.min(left.x + left.width, right.right) - Math.max(left.x, right.left),
+  )
+  const height = Math.max(
+    0,
+    Math.min(left.y + left.height, right.bottom) - Math.max(left.y, right.top),
+  )
   return width * height
 }
 

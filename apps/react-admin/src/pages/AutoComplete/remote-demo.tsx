@@ -26,17 +26,35 @@ export function RemoteDemo() {
     timer.current = setTimeout(() => {
       if (current !== request.current) return
       const normalized = keyword.trim().toLocaleLowerCase()
-      setItems(userSuggestions.filter(item => item.name.toLocaleLowerCase().includes(normalized)))
+      setItems(userSuggestions.filter((item) => item.name.toLocaleLowerCase().includes(normalized)))
       setLoading(false)
     }, 600)
   }
   return (
-    <Card title="Remote search and replaceable states" description="The caller owns requests; Content replaces generic loading and empty presentations.">
-      <AutoCompleteRoot items={items} fieldNames={fieldNames} loading={loading} filterOption={false} onSearch={search}>
+    <Card
+      title="Remote search and replaceable states"
+      description="The caller owns requests; Content replaces generic loading and empty presentations."
+    >
+      <AutoCompleteRoot
+        items={items}
+        fieldNames={fieldNames}
+        loading={loading}
+        filterOption={false}
+        onSearch={search}
+      >
         <AutoCompleteTrigger placeholder="Search remote users" clearable />
         <AutoCompleteContent
-          loadingContent={<div className="flex justify-center p-6"><Spinner /><span className="ml-2">Querying directory</span></div>}
-          emptyContent={<Empty><EmptyDescription>No remote matches</EmptyDescription></Empty>}
+          loadingContent={
+            <div className="flex justify-center p-6">
+              <Spinner />
+              <span className="ml-2">Querying directory</span>
+            </div>
+          }
+          emptyContent={
+            <Empty>
+              <EmptyDescription>No remote matches</EmptyDescription>
+            </Empty>
+          }
         />
       </AutoCompleteRoot>
     </Card>

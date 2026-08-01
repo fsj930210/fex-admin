@@ -28,8 +28,9 @@ interface DemoTreeTitleRenderContext<TNode extends TreeNodeData> {
   searchKeyword: string
 }
 
-interface DemoTreeRenderItemContext<TNode extends TreeNodeData>
-  extends DemoTreeTitleRenderContext<TNode> {
+interface DemoTreeRenderItemContext<
+  TNode extends TreeNodeData,
+> extends DemoTreeTitleRenderContext<TNode> {
   defaultNode: ReactNode
 }
 
@@ -92,7 +93,8 @@ function DemoTreeRow<TNode extends TreeNodeData>({
               />
             ) : null}
             <TreeTitle>
-              {titleRender?.(titleContext) ?? String(currentItem.node[titleField] ?? currentItem.key)}
+              {titleRender?.(titleContext) ??
+                String(currentItem.node[titleField] ?? currentItem.key)}
             </TreeTitle>
           </div>
         )
@@ -169,11 +171,7 @@ export function DemoTree<TNode extends TreeNodeData>({
     >
       {(tree) =>
         virtual ? (
-          <TreeVirtualViewport<TNode>
-            ref={virtualViewportRef}
-            height={height}
-            overscan={overscan}
-          >
+          <TreeVirtualViewport<TNode> ref={virtualViewportRef} height={height} overscan={overscan}>
             {(item) => (
               <DemoTreeRow
                 key={item.key}

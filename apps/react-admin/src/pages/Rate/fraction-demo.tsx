@@ -7,7 +7,10 @@ export function FractionDemo() {
   const [previewValue, setPreviewValue] = useState<number | null>(null)
 
   return (
-    <Card title="Arbitrary fractions" description="step controls interaction precision, while read-only values preserve their exact fraction.">
+    <Card
+      title="Arbitrary fractions"
+      description="step controls interaction precision, while read-only values preserve their exact fraction."
+    >
       <div className="grid gap-space-lg">
         <div className="grid gap-space-sm">
           <Rate
@@ -18,7 +21,9 @@ export function FractionDemo() {
             getValueText={(nextValue, count) => `${nextValue} points out of ${count}`}
             aria-label="Decimal rating"
           />
-          <p className="text-sm text-muted-foreground">Interactive value: {(previewValue ?? value).toFixed(1)}</p>
+          <p className="text-sm text-muted-foreground">
+            Interactive value: {(previewValue ?? value).toFixed(1)}
+          </p>
         </div>
         <div className="grid gap-space-sm">
           <Rate value={4.37} readOnly aria-label="Exact read-only rating" />

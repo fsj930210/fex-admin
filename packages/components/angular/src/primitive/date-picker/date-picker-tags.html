@@ -1,17 +1,18 @@
 @for (value of visibleValues(); track label(value)) {
-  <span data-slot="date-picker-tag" [class]="tagClassName">
-    {{ label(value) }}
-    <button
-      type="button"
-      [attr.aria-label]="'移除 ' + label(value)"
-      [class]="tagRemoveClassName"
-      (pointerdown)="$event.stopPropagation()"
-      (click)="remove(value, $event)"
-    >
-      <fex-close-icon />
-    </button>
-  </span>
-}
-@if (overflowCount() > 0) {
-  <span data-slot="date-picker-tag-overflow" [class]="tagOverflowClassName">+{{ overflowCount() }}</span>
+<span data-slot="date-picker-tag" [class]="tagClassName">
+  {{ label(value) }}
+  <button
+    type="button"
+    [attr.aria-label]="'移除 ' + label(value)"
+    [class]="tagRemoveClassName"
+    (pointerdown)="$event.stopPropagation()"
+    (click)="remove(value, $event)"
+  >
+    <fex-close-icon />
+  </button>
+</span>
+} @if (overflowCount() > 0) {
+<span data-slot="date-picker-tag-overflow" [class]="tagOverflowClassName"
+  >+{{ overflowCount() }}</span
+>
 }

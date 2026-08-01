@@ -11,19 +11,29 @@
     </header>
 
     <div class="space-y-space-xl">
-      <fex-card title="Primitive" description="Trigger uses an Angular attribute directive and content owns ARIA labels.">
+      <fex-card
+        title="Primitive"
+        description="Trigger uses an Angular attribute directive and content owns ARIA labels."
+      >
         <div class="flex min-w-0 flex-wrap items-center gap-space-md">
           <fex-dialog>
             <button fexButton fexDialogTrigger>Open dialog</button>
             <fex-dialog-portal>
               <fex-dialog-overlay />
               <fex-dialog-content>
-                <button fexDialogClose [class]="iconCloseClassName" aria-label="Close">&times;</button>
+                <button fexDialogClose [class]="iconCloseClassName" aria-label="Close">
+                  &times;
+                </button>
                 <fex-dialog-header>
                   <fex-dialog-title>Archive record</fex-dialog-title>
-                  <fex-dialog-description>Review the record before archiving it.</fex-dialog-description>
+                  <fex-dialog-description
+                    >Review the record before archiving it.</fex-dialog-description
+                  >
                 </fex-dialog-header>
-                <fex-dialog-body>The shared controller handles open state, mounted phase, Escape, and top-layer dismiss.</fex-dialog-body>
+                <fex-dialog-body
+                  >The shared controller handles open state, mounted phase, Escape, and top-layer
+                  dismiss.</fex-dialog-body
+                >
                 <fex-dialog-footer>
                   <button fexButton fexDialogClose variant="outline">Cancel</button>
                   <button fexButton fexDialogClose>Confirm</button>
@@ -34,20 +44,32 @@
         </div>
       </fex-card>
 
-      <fex-card title="Controlled" description="Controlled mode requests updates through openChange.">
+      <fex-card
+        title="Controlled"
+        description="Controlled mode requests updates through openChange."
+      >
         <div class="flex min-w-0 flex-wrap items-center gap-space-md">
           <fex-dialog [open]="open" (openChange)="setOpen($event)">
-            <button fexButton fexDialogTrigger variant="outline">{{ open ? "Open" : "Closed" }}</button>
+            <button fexButton fexDialogTrigger variant="outline">
+              {{ open ? 'Open' : 'Closed' }}
+            </button>
             <fex-dialog-portal>
               <fex-dialog-overlay />
               <fex-dialog-content>
-                <button fexDialogClose [class]="iconCloseClassName" aria-label="Close">&times;</button>
+                <button fexDialogClose [class]="iconCloseClassName" aria-label="Close">
+                  &times;
+                </button>
                 <fex-dialog-header>
                   <fex-dialog-title>Controlled dialog</fex-dialog-title>
                   <fex-dialog-description>The parent owns the open state.</fex-dialog-description>
                 </fex-dialog-header>
-                <fex-dialog-body>Overlay click and Escape request closing through the controlled callback.</fex-dialog-body>
-                <fex-dialog-footer><button fexButton fexDialogClose>Done</button></fex-dialog-footer>
+                <fex-dialog-body
+                  >Overlay click and Escape request closing through the controlled
+                  callback.</fex-dialog-body
+                >
+                <fex-dialog-footer
+                  ><button fexButton fexDialogClose>Done</button></fex-dialog-footer
+                >
               </fex-dialog-content>
             </fex-dialog-portal>
           </fex-dialog>
@@ -62,13 +84,19 @@
               <fex-dialog-portal>
                 <fex-dialog-overlay />
                 <fex-dialog-content [size]="size">
-                  <button fexDialogClose [class]="iconCloseClassName" aria-label="Close">&times;</button>
+                  <button fexDialogClose [class]="iconCloseClassName" aria-label="Close">
+                    &times;
+                  </button>
                   <fex-dialog-header>
                     <fex-dialog-title>{{ size }} dialog</fex-dialog-title>
-                    <fex-dialog-description>Each size keeps the same behavior contract.</fex-dialog-description>
+                    <fex-dialog-description
+                      >Each size keeps the same behavior contract.</fex-dialog-description
+                    >
                   </fex-dialog-header>
                   <fex-dialog-body>The size prop only changes content width.</fex-dialog-body>
-                  <fex-dialog-footer><button fexButton fexDialogClose>Close</button></fex-dialog-footer>
+                  <fex-dialog-footer
+                    ><button fexButton fexDialogClose>Close</button></fex-dialog-footer
+                  >
                 </fex-dialog-content>
               </fex-dialog-portal>
             </fex-dialog>
@@ -83,10 +111,14 @@
             <fex-dialog-portal>
               <fex-dialog-overlay />
               <fex-dialog-content>
-                <button fexDialogClose [class]="iconCloseClassName" aria-label="Close">&times;</button>
+                <button fexDialogClose [class]="iconCloseClassName" aria-label="Close">
+                  &times;
+                </button>
                 <fex-dialog-header>
                   <fex-dialog-title>Explicit close</fex-dialog-title>
-                  <fex-dialog-description>Clicking the overlay does not close this dialog.</fex-dialog-description>
+                  <fex-dialog-description
+                    >Clicking the overlay does not close this dialog.</fex-dialog-description
+                  >
                 </fex-dialog-header>
                 <fex-dialog-body>Use the footer actions or Escape to close.</fex-dialog-body>
                 <fex-dialog-footer>

@@ -1,13 +1,19 @@
 import { flattenTree } from '@fex/utils/tree'
 import { createMemo, createSignal, type Accessor } from 'solid-js'
-import type { MenuItem, MenuKey, MenuNodeEntry, MenuNodeItem, MenuRenderItemInfo } from './menu-types'
+import type {
+  MenuItem,
+  MenuKey,
+  MenuNodeEntry,
+  MenuNodeItem,
+  MenuRenderItemInfo,
+} from './menu-types'
 
 function isMenuNodeItem(item: MenuItem): item is MenuNodeItem {
   return !('type' in item)
 }
 
 function getMenuItemKey(item: MenuItem) {
-  return isMenuNodeItem(item) ? item.key : item.key ?? item.type
+  return isMenuNodeItem(item) ? item.key : (item.key ?? item.type)
 }
 
 function getMenuItemChildren(item: MenuItem) {
@@ -39,16 +45,24 @@ export function createMenu(props: {
   onExpandChange?: (keys: MenuKey[], info: MenuRenderItemInfo) => void
   onSelect?: (keys: MenuKey[], info: MenuRenderItemInfo) => void
 }) {
-  const [uncontrolledExpandKeys, setUncontrolledExpandKeys] = createSignal(normalizeKeys(props.defaultExpandKeys, props.expandMultiple?.() ?? true))
-  const [uncontrolledSelectedKeys, setUncontrolledSelectedKeys] = createSignal(normalizeKeys(props.defaultSelectedKeys, props.selectMultiple?.() ?? false))
+  const [uncontrolledExpandKeys, setUncontrolledExpandKeys] = createSignal(
+    normalizeKeys(props.defaultExpandKeys, props.expandMultiple?.() ?? true),
+  )
+  const [uncontrolledSelectedKeys, setUncontrolledSelectedKeys] = createSignal(
+    normalizeKeys(props.defaultSelectedKeys, props.selectMultiple?.() ?? false),
+  )
   const items = createMemo(() => props.items?.() ?? [])
   const nodeItems = createMemo(() =>
     flattenTree(items(), { getKey: getMenuItemKey, getChildren: getMenuItemChildren }).filter(
       (entry): entry is MenuNodeEntry => isMenuNodeItem(entry.node),
     ),
   )
-  const currentExpandKeys = createMemo(() => [...(props.expandKeys?.() ?? uncontrolledExpandKeys())])
-  const currentSelectedKeys = createMemo(() => [...(props.selectedKeys?.() ?? uncontrolledSelectedKeys())])
+  const currentExpandKeys = createMemo(() => [
+    ...(props.expandKeys?.() ?? uncontrolledExpandKeys()),
+  ])
+  const currentSelectedKeys = createMemo(() => [
+    ...(props.selectedKeys?.() ?? uncontrolledSelectedKeys()),
+  ])
 
   function getItemInfo(entry: MenuNodeEntry): MenuRenderItemInfo {
     return {
@@ -78,7 +92,12 @@ export function createMenu(props: {
   function clickItem(info: MenuRenderItemInfo) {
     if (info.disabled) return
     if (info.hasChildren) {
-      setExpandKeys(info.expanded ? currentExpandKeys().filter((key) => key !== info.key) : [...currentExpandKeys(), info.key], info)
+      setExpandKeys(
+        info.expanded
+          ? currentExpandKeys().filter((key) => key !== info.key)
+          : [...currentExpandKeys(), info.key],
+        info,
+      )
       return
     }
     if (props.selectable?.() === false) return

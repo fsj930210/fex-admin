@@ -22,7 +22,14 @@ export function getDatePickerHeaderLabelParts(
   panel: CalendarPanel,
 ): DatePickerHeaderLabelPart[] {
   if (picker === 'year') return ['year']
-  if (picker === 'quarter' || panel === 'month' || panel === 'quarter' || panel === 'year' || panel === 'decade') return ['year']
+  if (
+    picker === 'quarter' ||
+    panel === 'month' ||
+    panel === 'quarter' ||
+    panel === 'year' ||
+    panel === 'decade'
+  )
+    return ['year']
   return ['year', 'month']
 }
 
@@ -45,7 +52,10 @@ export function getNextViewDateByHeaderAction(
     : addDate(viewDate, { years: panel === 'decade' || panel === 'year' ? 10 : 1 })
 }
 
-export function getRangePanelViewDates(viewDate: CalendarDate, panel: CalendarPanel): [CalendarDate, CalendarDate] {
+export function getRangePanelViewDates(
+  viewDate: CalendarDate,
+  panel: CalendarPanel,
+): [CalendarDate, CalendarDate] {
   if (panel === 'date') return [viewDate, addDate(viewDate, { months: 1 })]
   if (panel === 'month' || panel === 'quarter') return [viewDate, addDate(viewDate, { years: 1 })]
   if (panel === 'year') return [viewDate, addDate(viewDate, { years: 12 })]

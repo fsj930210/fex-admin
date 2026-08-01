@@ -25,6 +25,7 @@
   let submitCount = $state(0)
   let dateTimeDate: CalendarValue | null = $state(today)
   let time: TimeValue = $state({ hour: 9, minute: 30, second: 0 })
+  // svelte-ignore state_referenced_locally -- draft state is reset explicitly by dialog events.
   let draftTime: TimeValue = $state(time)
 
   function lastDays(days: number): CalendarRange<CalendarValue> {
@@ -32,7 +33,7 @@
   }
 
   function setDateTimeDate(value: CalendarValue | readonly CalendarValue[] | null) {
-    dateTimeDate = Array.isArray(value) ? null : value
+    dateTimeDate = Array.isArray(value) ? null : value as CalendarValue | null
   }
 
   function rangeText(value: CalendarRange<CalendarValue>) {
@@ -77,7 +78,7 @@
 </Card>
 
 <Card title="日期与时间" description="一个触发器组合日期和时间，确认后一起关闭面板。">
-  <DatePickerRoot needConfirm placement="bottom" value={dateTimeDate} onChange={setDateTimeDate} onOpenChange={(open) => { if (open) draftTime = time }}>
+  <DatePickerRoot needConfirm value={dateTimeDate} onChange={setDateTimeDate} onOpenChange={(open) => { if (open) draftTime = time }}>
     <DatePickerTrigger class="w-64" displayValue={dateTimeDisplayValue()} placeholder="请选择日期和时间" />
     <DatePickerContent class="w-[36rem] min-w-[36rem] overflow-hidden p-0">
       <TimePickerRoot open={true} value={draftTime} format="HH:mm:ss" onchange={(next) => { if (next) draftTime = next }}>

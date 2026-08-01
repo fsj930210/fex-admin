@@ -30,20 +30,20 @@ Without `value` or `defaultValue`, the first enabled Item is selected. Content m
 
 ## Props
 
-| Component | Prop | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- | --- |
-| TabsRoot | value | `string` | - | No | Controlled active value. |
-| TabsRoot | defaultValue | `string` | First enabled Item | No | Initial uncontrolled value. |
-| TabsRoot | onchange | `(value) => void` | - | No | Active value callback. |
-| TabsRoot | onclose | `(item) => void` | - | No | Close request; caller removes data. |
-| TabsRoot | variant | `'default' \| 'line'` | `'default'` | No | Base appearance. |
-| TabsRoot | orientation | `'horizontal' \| 'vertical'` | `'horizontal'` | No | Layout and keyboard direction. |
-| TabsRoot | activationMode | `'automatic' \| 'manual'` | `'automatic'` | No | Focus activation behavior. |
-| TabsRoot | loop | `boolean` | `true` | No | Wrap keyboard focus. |
-| TabsItem | value | `string` | - | Yes | Stable identity. |
-| TabsItem | disabled | `boolean` | `false` | No | Disables selection. |
-| TabsItem | closable | `boolean` | `false` | No | Renders the icon close control. |
-| TabsContent | value | `string` | - | Yes | Associated Item value. |
+| Component   | Prop           | Type                         | Default            | Required | Description                         |
+| ----------- | -------------- | ---------------------------- | ------------------ | -------- | ----------------------------------- |
+| TabsRoot    | value          | `string`                     | -                  | No       | Controlled active value.            |
+| TabsRoot    | defaultValue   | `string`                     | First enabled Item | No       | Initial uncontrolled value.         |
+| TabsRoot    | onchange       | `(value) => void`            | -                  | No       | Active value callback.              |
+| TabsRoot    | onclose        | `(item) => void`             | -                  | No       | Close request; caller removes data. |
+| TabsRoot    | variant        | `'default' \| 'line'`        | `'default'`        | No       | Base appearance.                    |
+| TabsRoot    | orientation    | `'horizontal' \| 'vertical'` | `'horizontal'`     | No       | Layout and keyboard direction.      |
+| TabsRoot    | activationMode | `'automatic' \| 'manual'`    | `'automatic'`      | No       | Focus activation behavior.          |
+| TabsRoot    | loop           | `boolean`                    | `true`             | No       | Wrap keyboard focus.                |
+| TabsItem    | value          | `string`                     | -                  | Yes      | Stable identity.                    |
+| TabsItem    | disabled       | `boolean`                    | `false`            | No       | Disables selection.                 |
+| TabsItem    | closable       | `boolean`                    | `false`            | No       | Renders the icon close control.     |
+| TabsContent | value          | `string`                     | -                  | Yes      | Associated Item value.              |
 
 ## Custom rendering
 

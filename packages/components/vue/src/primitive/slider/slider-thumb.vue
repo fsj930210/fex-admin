@@ -9,16 +9,39 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<{ index?: number }>(), { index: 0 })
 const attrs = useAttrs()
 const context = useSliderContext('SliderThumb')
-const value = computed(() => context.snapshot.value.values[props.index] ?? context.snapshot.value.min)
-const percent = computed(() => convertValueToPercentage(value.value, context.snapshot.value.min, context.snapshot.value.max))
-const thumbStyle = computed<CSSProperties>(() => context.snapshot.value.orientation === 'vertical'
-  ? { position: 'absolute', bottom: `${percent.value}%`, left: '50%', transform: 'translate(-50%, 50%)' }
-  : { position: 'absolute', top: '50%', left: `${percent.value}%`, transform: 'translate(-50%, -50%)' })
+const value = computed(
+  () => context.snapshot.value.values[props.index] ?? context.snapshot.value.min,
+)
+const percent = computed(() =>
+  convertValueToPercentage(value.value, context.snapshot.value.min, context.snapshot.value.max),
+)
+const thumbStyle = computed<CSSProperties>(() =>
+  context.snapshot.value.orientation === 'vertical'
+    ? {
+        position: 'absolute',
+        bottom: `${percent.value}%`,
+        left: '50%',
+        transform: 'translate(-50%, 50%)',
+      }
+    : {
+        position: 'absolute',
+        top: '50%',
+        left: `${percent.value}%`,
+        transform: 'translate(-50%, -50%)',
+      },
+)
 
 function handleKeydown(event: KeyboardEvent) {
   const snapshot = context.snapshot.value
   if (event.defaultPrevented || snapshot.disabled) return
-  const keyMap: Record<string, number> = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1, PageUp: 10, PageDown: -10 }
+  const keyMap: Record<string, number> = {
+    ArrowRight: 1,
+    ArrowUp: 1,
+    ArrowLeft: -1,
+    ArrowDown: -1,
+    PageUp: 10,
+    PageDown: -10,
+  }
   if (event.key === 'Home') {
     event.preventDefault()
     context.controller.setValueAt(props.index, snapshot.min, { commit: true })

@@ -1,11 +1,5 @@
 import type { TreeFeatureRegistration } from '../feature-types'
-import type {
-  TreeCheckMode,
-  TreeCheckedState,
-  TreeItem,
-  TreeKey,
-  TreeNodeData,
-} from '../types'
+import type { TreeCheckMode, TreeCheckedState, TreeItem, TreeKey, TreeNodeData } from '../types'
 
 export interface CheckFeatureOptions {
   mode?: TreeCheckMode | undefined
@@ -115,24 +109,14 @@ export function checkFeature<TNode extends TreeNodeData>(
             context.setStateKeys('checkedKeys', keys, keys)
           },
           clear: () => context.setStateKeys('checkedKeys', [], context.getSnapshot().checkedKeys),
-          getState: (key) => getCheckedState(
-            context.getSnapshot().checkedKeys,
-            key,
-            getMode(),
-            relations,
-          ),
+          getState: (key) =>
+            getCheckedState(context.getSnapshot().checkedKeys, key, getMode(), relations),
         }
         let initialKeys = context.getSnapshot().checkedKeys
         for (const key of featureOptions.defaultCheckedKeys ?? []) {
           const item = context.getItem(key)
           if (!item || item.disabled) continue
-          initialKeys = getCheckedKeysAfterToggle(
-            initialKeys,
-            key,
-            true,
-            getMode(),
-            relations,
-          ).keys
+          initialKeys = getCheckedKeysAfterToggle(initialKeys, key, true, getMode(), relations).keys
         }
         context.initializeStateKeys('checkedKeys', initialKeys)
         return api

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" generics="TItem extends TransferDataItem">
   import { createTransferController } from '@fex/components-core/transfer/create-transfer-controller'
   import type { TransferControllerOptions, TransferDataItem, TransferKey, TransferSide, TransferSnapshot } from '@fex/components-core/transfer/types'
   import { readTransferDisabled, readTransferKey, resolveTransferFieldNames } from '@fex/components-core/transfer/utils'
@@ -22,14 +22,14 @@
   import ListboxItem from '../listbox/listbox-item.svelte'
 
   export interface TransferPanelApi<TItem extends TransferDataItem> { side: TransferSide; items: readonly TItem[]; checkedKeys: readonly TransferKey[]; controller: ReturnType<typeof createTransferController<TItem>>; setCheckedKeys(keys: readonly TransferKey[]): void; isChecked(key: TransferKey): boolean }
-  interface Props<TItem extends TransferDataItem> extends TransferControllerOptions<TItem> { title?: { source?: string; target?: string }; sourceHeader?: Snippet<[TransferPanelApi<TItem>]>; sourceBody?: Snippet<[TransferPanelApi<TItem>]>; sourceFooter?: Snippet<[TransferPanelApi<TItem>]>; targetHeader?: Snippet<[TransferPanelApi<TItem>]>; targetBody?: Snippet<[TransferPanelApi<TItem>]>; targetFooter?: Snippet<[TransferPanelApi<TItem>]>; actions?: Snippet<[ReturnType<typeof createTransferController<TItem>>, TransferSnapshot<TItem>]>; item?: Snippet<[TItem, TransferSide]>; validation?: { status: 'error' | 'warning'; message: string }; class?: string }
-  let { items, fieldNames, disabled, targetKeys, defaultTargetKeys, checkedKeys, defaultCheckedKeys, onChange, onCheckedChange, title = {}, sourceHeader, sourceBody, sourceFooter, targetHeader, targetBody, targetFooter, actions, item, validation, class: className }: Props<TransferDataItem> = $props()
+  interface Props<TItem extends TransferDataItem> extends TransferControllerOptions<TItem> { title?: { source?: string; target?: string }; sourceHeader?: Snippet<[TransferPanelApi<TItem>]>; sourceBody?: Snippet<[TransferPanelApi<TItem>]>; sourceFooter?: Snippet<[TransferPanelApi<TItem>]>; targetHeader?: Snippet<[TransferPanelApi<TItem>]>; targetBody?: Snippet<[TransferPanelApi<TItem>]>; targetFooter?: Snippet<[TransferPanelApi<TItem>]>; actions?: Snippet<[ReturnType<typeof createTransferController<TItem>>, TransferSnapshot<TItem>]>; item?: Snippet<[TItem, TransferSide]>; validation?: { status: 'error' | 'warning'; message: string | undefined } | undefined; class?: string }
+  let { items, fieldNames, disabled, targetKeys, defaultTargetKeys, checkedKeys, defaultCheckedKeys, onChange, onCheckedChange, title = {}, sourceHeader, sourceBody, sourceFooter, targetHeader, targetBody, targetFooter, actions, item, validation, class: className }: Props<TItem> = $props()
   const currentOptions = () => ({ items, fieldNames, disabled, targetKeys, defaultTargetKeys, checkedKeys, defaultCheckedKeys, onChange, onCheckedChange })
   const controller = createTransferController(currentOptions())
   const snapshot = readableCoreStore(controller)
   $effect(() => { controller.updateOptions(currentOptions()) })
   const fields = $derived(resolveTransferFieldNames(fieldNames))
-  function api(side: TransferSide): TransferPanelApi<TransferDataItem> { const source = side === 'source'; const keys = source ? $snapshot.sourceCheckedKeys : $snapshot.targetCheckedKeys; return { side, items: source ? $snapshot.sourceItems : $snapshot.targetItems, checkedKeys: keys, controller, setCheckedKeys: source ? controller.setSourceCheckedKeys : controller.setTargetCheckedKeys, isChecked: (key) => keys.includes(key) } }
+  function api(side: TransferSide): TransferPanelApi<TItem> { const source = side === 'source'; const keys = source ? $snapshot.sourceCheckedKeys : $snapshot.targetCheckedKeys; return { side, items: source ? $snapshot.sourceItems : $snapshot.targetItems, checkedKeys: keys, controller, setCheckedKeys: source ? controller.setSourceCheckedKeys : controller.setTargetCheckedKeys, isChecked: (key) => keys.includes(key) } }
   function enabledKeys(side: TransferSide) { return api(side).items.filter((entry) => !readTransferDisabled(entry, fields)).map((entry) => readTransferKey(entry, fields)) }
   function checkedState(side: TransferSide) { const keys = enabledKeys(side); const count = keys.filter((key) => api(side).checkedKeys.includes(key)).length; return count === keys.length && keys.length > 0 ? true : count > 0 ? 'indeterminate' as const : false }
   function toggleAll(side: TransferSide, checked: boolean) { api(side).setCheckedKeys(checked ? enabledKeys(side) : []) }

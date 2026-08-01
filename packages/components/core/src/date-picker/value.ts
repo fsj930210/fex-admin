@@ -44,7 +44,10 @@ export function normalizeDatePickerValue<TPicker extends DatePickerPicker>(
     return { start, end: getWeekEnd(start, weekStartsOn) } as DatePickerValue<TPicker>
   }
   if (picker === 'month') {
-    return Temporal.PlainYearMonth.from({ year: date.year, month: date.month }) as DatePickerValue<TPicker>
+    return Temporal.PlainYearMonth.from({
+      year: date.year,
+      month: date.month,
+    }) as DatePickerValue<TPicker>
   }
   if (picker === 'quarter') return getQuarter(date) as DatePickerValue<TPicker>
   if (picker === 'year') return getYear(date) as DatePickerValue<TPicker>
@@ -57,7 +60,10 @@ export function formatDatePickerValue(
 ): string {
   if (!value) return ''
   if (options.picker === 'week') {
-    const date = getCalendarValueDate(value) as CalendarDate & { yearOfWeek?: number; weekOfYear?: number }
+    const date = getCalendarValueDate(value) as CalendarDate & {
+      yearOfWeek?: number
+      weekOfYear?: number
+    }
     const year = date.yearOfWeek ?? date.year
     const week = date.weekOfYear
     return week ? `${year}-${week}周` : format(date, options.format ?? 'YYYY-MM-DD')
@@ -71,7 +77,10 @@ export function formatDatePickerValue(
     const year = value as CalendarYear
     return String(year.year)
   }
-  return format(getCalendarValueDate(value), options.format ?? getDefaultDatePickerFormat(options.picker))
+  return format(
+    getCalendarValueDate(value),
+    options.format ?? getDefaultDatePickerFormat(options.picker),
+  )
 }
 
 export function parseDatePickerValue<TPicker extends DatePickerPicker>(
@@ -90,11 +99,19 @@ export function parseDatePickerValue<TPicker extends DatePickerPicker>(
     if (!match) return { valid: false, reason: 'invalid' }
     return {
       valid: true,
-      value: { year: Number(match[1]), quarter: Number(match[2]) as 1 | 2 | 3 | 4 } as DatePickerValue<TPicker>,
+      value: {
+        year: Number(match[1]),
+        quarter: Number(match[2]) as 1 | 2 | 3 | 4,
+      } as DatePickerValue<TPicker>,
     }
   }
   const result = parse(trimmed, options.format ?? getDefaultDatePickerFormat(options.picker))
-  if (!result.valid || !result.value.year || !result.value.month || (options.picker === 'date' && !result.value.day)) {
+  if (
+    !result.valid ||
+    !result.value.year ||
+    !result.value.month ||
+    (options.picker === 'date' && !result.value.day)
+  ) {
     return { valid: false, reason: 'invalid' }
   }
   const date = Temporal.PlainDate.from({

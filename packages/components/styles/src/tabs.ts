@@ -23,7 +23,8 @@ export const tabsItemClassName = cva(
   {
     variants: {
       variant: {
-        default: 'text-muted-foreground hover:text-foreground data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm',
+        default:
+          'text-muted-foreground hover:text-foreground data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm',
         line: 'rounded-none border-b-2 border-transparent px-3 text-muted-foreground hover:text-foreground data-[state=active]:border-primary data-[state=active]:text-primary',
       },
     },
@@ -31,11 +32,15 @@ export const tabsItemClassName = cva(
   },
 )
 
-export const tabsContentClassName = cva('mt-space-md rounded-md border border-border bg-card p-space-lg text-sm text-foreground', {
-  variants: { variant: { default: '', line: 'border-0 bg-transparent p-0' } },
-  defaultVariants: { variant: 'default' },
-})
+export const tabsContentClassName = cva(
+  'mt-space-md rounded-md border border-border bg-card p-space-lg text-sm text-foreground',
+  {
+    variants: { variant: { default: '', line: 'border-0 bg-transparent p-0' } },
+    defaultVariants: { variant: 'default' },
+  },
+)
 
-export const tabsCloseClassName = 'grid size-4 shrink-0 place-items-center rounded-sm text-muted-foreground hover:bg-hover-background hover:text-foreground'
+export const tabsCloseClassName =
+  'grid size-4 shrink-0 place-items-center rounded-sm text-muted-foreground hover:bg-hover-background hover:text-foreground'
 
 export type TabsStyleProps = VariantProps<typeof tabsListClassName>

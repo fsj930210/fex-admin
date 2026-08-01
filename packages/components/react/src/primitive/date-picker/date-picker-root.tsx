@@ -5,7 +5,8 @@ import { DatePickerContext } from './context'
 import { useDatePicker, type UseDatePickerOptions } from './use-date-picker'
 
 export interface DatePickerRootProps<TValue extends CalendarValue = CalendarValue>
-  extends Omit<PopoverRootProps, 'open' | 'defaultOpen' | 'onOpenChange' | 'children'>,
+  extends
+    Omit<PopoverRootProps, 'open' | 'defaultOpen' | 'onOpenChange' | 'children'>,
     UseDatePickerOptions<TValue> {
   children?: ReactNode
 }

@@ -7,13 +7,25 @@
 ## 导入路径
 
 ```tsx
-import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@fex/components-react/primitive/empty'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@fex/components-react/primitive/empty'
 ```
 
 ## 核心示例
 
 ```tsx
-import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@fex/components-react/primitive/empty'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@fex/components-react/primitive/empty'
 
 export function Demo() {
   return (
@@ -30,11 +42,11 @@ export function Demo() {
 
 ## Props
 
-| 参数名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `variant` | `'default' \| 'icon'` | `'default'` | 否 | 仅 `EmptyMedia` 支持，控制媒体区域样式。 |
-| `className` | `string` | `undefined` | 否 | 合并到对应 slot 的 class。 |
-| `children` | `ReactNode` | `undefined` | 否 | 空状态内容。 |
+| 参数名      | 类型                  | 默认值      | 必填 | 说明                                     |
+| ----------- | --------------------- | ----------- | ---- | ---------------------------------------- |
+| `variant`   | `'default' \| 'icon'` | `'default'` | 否   | 仅 `EmptyMedia` 支持，控制媒体区域样式。 |
+| `className` | `string`              | `undefined` | 否   | 合并到对应 slot 的 class。               |
+| `children`  | `ReactNode`           | `undefined` | 否   | 空状态内容。                             |
 
 ## 事件/回调
 

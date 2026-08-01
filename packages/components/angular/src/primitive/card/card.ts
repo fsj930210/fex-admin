@@ -5,90 +5,90 @@ import {
   cardFooterClassName,
   cardHeaderClassName,
   cardTitleClassName,
-} from "@fex/components-styles/card";
-import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { createHostClassName } from "../../signals/host-class";
+} from '@fex/components-styles/card'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { createHostClassName } from '../../signals/host-class'
 
 @Component({
-  selector: "fex-card-primitive",
+  selector: 'fex-card-primitive',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    "[class]": "hostClassName()",
-    "data-slot": "card",
+    '[class]': 'hostClassName()',
+    'data-slot': 'card',
   },
-  template: "<ng-content />",
+  template: '<ng-content />',
 })
 export class Card {
-  protected readonly hostClassName = createHostClassName(cardClassName);
+  protected readonly hostClassName = createHostClassName(cardClassName)
 }
 
 @Component({
-  selector: "fex-card-header",
+  selector: 'fex-card-header',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    "[class]": "hostClassName()",
-    "data-slot": "card-header",
+    '[class]': 'hostClassName()',
+    'data-slot': 'card-header',
   },
-  template: "<ng-content />",
+  template: '<ng-content />',
 })
 export class CardHeader {
-  protected readonly hostClassName = createHostClassName(cardHeaderClassName);
+  protected readonly hostClassName = createHostClassName(cardHeaderClassName)
 }
 
 @Component({
-  selector: "fex-card-title",
+  selector: 'fex-card-title',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    "[class]": "hostClassName()",
-    "data-slot": "card-title",
+    '[class]': 'hostClassName()',
+    'data-slot': 'card-title',
   },
-  template: "<ng-content />",
+  template: '<ng-content />',
 })
 export class CardTitle {
-  protected readonly hostClassName = createHostClassName(cardTitleClassName);
+  protected readonly hostClassName = createHostClassName(cardTitleClassName)
 }
 
 @Component({
-  selector: "fex-card-description",
+  selector: 'fex-card-description',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    "[class]": "hostClassName()",
-    "data-slot": "card-description",
+    '[class]': 'hostClassName()',
+    'data-slot': 'card-description',
   },
-  template: "<ng-content />",
+  template: '<ng-content />',
 })
 export class CardDescription {
-  protected readonly hostClassName = createHostClassName(cardDescriptionClassName);
+  protected readonly hostClassName = createHostClassName(cardDescriptionClassName)
 }
 
 @Component({
-  selector: "fex-card-content",
+  selector: 'fex-card-content',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    "[class]": "hostClassName()",
-    "data-slot": "card-content",
+    '[class]': 'hostClassName()',
+    'data-slot': 'card-content',
   },
-  template: "<ng-content />",
+  template: '<ng-content />',
 })
 export class CardContent {
-  protected readonly hostClassName = createHostClassName(cardContentClassName);
+  protected readonly hostClassName = createHostClassName(cardContentClassName)
 }
 
 @Component({
-  selector: "fex-card-footer",
+  selector: 'fex-card-footer',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    "[class]": "hostClassName()",
-    "data-slot": "card-footer",
+    '[class]': 'hostClassName()',
+    'data-slot': 'card-footer',
   },
-  template: "<ng-content />",
+  template: '<ng-content />',
 })
 export class CardFooter {
-  protected readonly hostClassName = createHostClassName(cardFooterClassName);
+  protected readonly hostClassName = createHostClassName(cardFooterClassName)
 }

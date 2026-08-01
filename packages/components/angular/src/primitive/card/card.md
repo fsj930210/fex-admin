@@ -25,18 +25,16 @@ import {
     <fex-card-title>Variants</fex-card-title>
     <fex-card-description>按钮的基础视觉语义。</fex-card-description>
   </fex-card-header>
-  <fex-card-content class="flex flex-wrap items-center gap-space-md">
-    Content
-  </fex-card-content>
+  <fex-card-content class="flex flex-wrap items-center gap-space-md"> Content </fex-card-content>
 </fex-card>
 ```
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `class` | `string` | `undefined` | No | Extra classes merged with the component defaults. |
-| native attributes | `HTMLElement attributes` | `undefined` | No | Standard host attributes are passed through. |
+| Name              | Type                     | Default     | Required | Description                                       |
+| ----------------- | ------------------------ | ----------- | -------- | ------------------------------------------------- |
+| `class`           | `string`                 | `undefined` | No       | Extra classes merged with the component defaults. |
+| native attributes | `HTMLElement attributes` | `undefined` | No       | Standard host attributes are passed through.      |
 
 ## Events
 

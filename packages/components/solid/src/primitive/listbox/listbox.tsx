@@ -1,11 +1,6 @@
 import { createSelectionController } from '@fex/components-core/selection/create-selection-controller'
 import type { SelectionValue } from '@fex/components-core/selection/types'
-import {
-  createMemo,
-  type JSX,
-  type ParentProps,
-  splitProps,
-} from 'solid-js'
+import { createMemo, type JSX, type ParentProps, splitProps } from 'solid-js'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
 
 import type { ListboxOrientation } from './listbox-context'
@@ -22,18 +17,18 @@ type ListboxChangeMeta<TItem> = {
 
 type ListboxRootBaseProps<TItem> = ParentProps<
   Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onChange'> & {
-    items?: readonly TItem[]
-    getItemValue?: (item: TItem) => SelectionValue
-    getItemDisabled?: (item: TItem) => boolean
-    orientation?: ListboxOrientation
-    disabled?: boolean
+    items?: readonly TItem[] | undefined
+    getItemValue?: ((item: TItem) => SelectionValue) | undefined
+    getItemDisabled?: ((item: TItem) => boolean) | undefined
+    orientation?: ListboxOrientation | undefined
+    disabled?: boolean | undefined
   }
 >
 
 export type ListboxRootProps<TItem = unknown> = ListboxRootBaseProps<TItem> & {
   multiple?: boolean
-  value?: SelectionValue | SelectionValue[] | undefined
-  defaultValue?: SelectionValue | SelectionValue[] | undefined
+  value?: SelectionValue | readonly SelectionValue[] | undefined
+  defaultValue?: SelectionValue | readonly SelectionValue[] | undefined
   onChange?: (
     value: SelectionValue | SelectionValue[] | undefined,
     meta: ListboxChangeMeta<TItem>,
@@ -56,7 +51,9 @@ export function ListboxRoot<TItem = unknown>(props: ListboxRootProps<TItem>) {
   const optionMap = createMemo(() => {
     const map = new Map<SelectionValue, TItem>()
     for (const item of local.items ?? []) {
-      const value = local.getItemValue ? local.getItemValue(item) : (item as { value: SelectionValue }).value
+      const value = local.getItemValue
+        ? local.getItemValue(item)
+        : (item as { value: SelectionValue }).value
       map.set(value, item)
     }
     return map
@@ -64,8 +61,14 @@ export function ListboxRoot<TItem = unknown>(props: ListboxRootProps<TItem>) {
   const disabledValues = createMemo(() => {
     const values: SelectionValue[] = []
     for (const item of local.items ?? []) {
-      const value = local.getItemValue ? local.getItemValue(item) : (item as { value: SelectionValue }).value
-      if (local.disabled || local.getItemDisabled?.(item) || (item as { disabled?: boolean }).disabled) {
+      const value = local.getItemValue
+        ? local.getItemValue(item)
+        : (item as { value: SelectionValue }).value
+      if (
+        local.disabled ||
+        local.getItemDisabled?.(item) ||
+        (item as { disabled?: boolean }).disabled
+      ) {
         values.push(value)
       }
     }
@@ -73,10 +76,14 @@ export function ListboxRoot<TItem = unknown>(props: ListboxRootProps<TItem>) {
   })
   const controller = createSelectionController({
     get value() {
-      return local.value
+      return Array.isArray(local.value)
+        ? [...local.value]
+        : (local.value as SelectionValue | undefined)
     },
     get defaultValue() {
-      return local.defaultValue
+      return Array.isArray(local.defaultValue)
+        ? [...local.defaultValue]
+        : (local.defaultValue as SelectionValue | undefined)
     },
     get multiple() {
       return local.multiple
@@ -96,16 +103,18 @@ export function ListboxRoot<TItem = unknown>(props: ListboxRootProps<TItem>) {
         changedValues: meta.changedValues,
       }
       if (local.multiple) {
-        ;(local.onChange as ((values: SelectionValue[], meta: ListboxChangeMeta<TItem>) => void) | undefined)?.(
-          values,
-          changeMeta,
-        )
+        ;(
+          local.onChange as
+            | ((values: SelectionValue[], meta: ListboxChangeMeta<TItem>) => void)
+            | undefined
+        )?.(values, changeMeta)
         return
       }
-      ;(local.onChange as ((value: SelectionValue | undefined, meta: ListboxChangeMeta<TItem>) => void) | undefined)?.(
-        values[0],
-        changeMeta,
-      )
+      ;(
+        local.onChange as
+          | ((value: SelectionValue | undefined, meta: ListboxChangeMeta<TItem>) => void)
+          | undefined
+      )?.(values[0], changeMeta)
     },
   })
   const snapshot = createCoreStoreSignal(controller)
@@ -148,14 +157,18 @@ export function ListboxRoot<TItem = unknown>(props: ListboxRootProps<TItem>) {
 
 export function ListboxGroup(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
   const context = useListboxContext('ListboxGroup')
-  return <div {...props} role="group" data-slot="listbox-group" data-orientation={context.orientation} />
+  return (
+    <div {...props} role="group" data-slot="listbox-group" data-orientation={context.orientation} />
+  )
 }
 
 export function ListboxGroupLabel(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
   return <div {...props} data-slot="listbox-group-label" />
 }
 
-export interface ListboxItemProps extends ParentProps<Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onSelect'>> {
+export interface ListboxItemProps extends ParentProps<
+  Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onSelect'>
+> {
   value: SelectionValue
   disabled?: boolean
   onSelect?: (value: SelectionValue) => void

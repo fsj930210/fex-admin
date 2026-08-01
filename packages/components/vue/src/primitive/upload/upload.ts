@@ -7,4 +7,10 @@ export { default as UploadItemPreview } from './upload-preview.vue'
 export { default as UploadItemProgress } from './upload-progress.vue'
 export { useUploadContext } from './context'
 export { useUpload, useUploadController, useUploadItem } from './use-upload'
-export { useUploadFeature, useUploadMd5, useUploadParts, useUploadPreview, useUploadProgress } from './use-upload-feature'
+export {
+  useUploadFeature,
+  useUploadMd5,
+  useUploadParts,
+  useUploadPreview,
+  useUploadProgress,
+} from './use-upload-feature'

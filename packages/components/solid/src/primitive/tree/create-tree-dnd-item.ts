@@ -1,17 +1,17 @@
 import type { DndFeatureApi, TreeDropIntent } from '@fex/components-core/tree/features/dnd'
-import type {
-  TreeController,
-  TreeKey,
-  TreeNodeData,
-} from '@fex/components-core/tree/types'
-import { DND_DRAG_START_RECT_HEIGHT, DND_DRAG_START_RECT_WIDTH, DND_DRAG_START_RECT_X, DND_DRAG_START_RECT_Y, DND_DRAG_START_X, DND_DRAG_START_Y } from '@fex/components-core/interactions/dnd-store'
+import type { TreeController, TreeKey, TreeNodeData } from '@fex/components-core/tree/types'
+import {
+  DND_DRAG_START_RECT_HEIGHT,
+  DND_DRAG_START_RECT_WIDTH,
+  DND_DRAG_START_RECT_X,
+  DND_DRAG_START_RECT_Y,
+  DND_DRAG_START_X,
+  DND_DRAG_START_Y,
+} from '@fex/components-core/interactions/dnd-store'
 import { createMemo } from 'solid-js'
 import { createDraggable } from '../../primitives/create-draggable'
 import { createCoreStoreSignal } from '../../primitives/create-core-store-signal'
-import {
-  createDroppable,
-  type CreateDroppableEventArgs,
-} from '../../primitives/create-droppable'
+import { createDroppable, type CreateDroppableEventArgs } from '../../primitives/create-droppable'
 import { useTreeContext } from './tree-context'
 
 export interface CreateTreeDndItemOptions<TNode extends TreeNodeData> {
@@ -29,9 +29,9 @@ export function createTreeDndItem<TNode extends TreeNodeData>({
   const feature = tree.getFeature<DndFeatureApi>('dnd')
   const activeIntent = feature
     ? createCoreStoreSignal<TreeDropIntent | null>({
-      getSnapshot: feature.getActiveIntent,
-      subscribe: feature.subscribeActiveIntent,
-    })
+        getSnapshot: feature.getActiveIntent,
+        subscribe: feature.subscribeActiveIntent,
+      })
     : () => null
   const item = tree.getItem(itemKey)
   const dropDisabled = disabled || item?.disabled === true || !feature
@@ -104,7 +104,11 @@ export function createTreeDndItem<TNode extends TreeNodeData>({
     ...drop.dataAttributes(),
     'data-dragging': drag.dragging() || undefined,
     'data-dnd-enabled': !dragDisabled || undefined,
-    'data-drop-position': intent() ? (intent()!.position === 'after' ? 'bottom' : 'inside') : undefined,
+    'data-drop-position': intent()
+      ? intent()!.position === 'after'
+        ? 'bottom'
+        : 'inside'
+      : undefined,
     onPointerDown: drag.onPointerDown,
     style: intent() ? getDropIndicatorStyle(itemElement, intent()!.indicatorOffset) : undefined,
   }))
@@ -125,10 +129,21 @@ function getKey(value: unknown): TreeKey | undefined {
 }
 
 function getDragRect(source: Record<string, unknown>, pointer: { x: number; y: number }) {
-  const startX = source[DND_DRAG_START_X]; const startY = source[DND_DRAG_START_Y]
-  const x = source[DND_DRAG_START_RECT_X]; const y = source[DND_DRAG_START_RECT_Y]
-  const width = source[DND_DRAG_START_RECT_WIDTH]; const height = source[DND_DRAG_START_RECT_HEIGHT]
-  if (typeof startX !== 'number' || typeof startY !== 'number' || typeof x !== 'number' || typeof y !== 'number' || typeof width !== 'number' || typeof height !== 'number') return undefined
+  const startX = source[DND_DRAG_START_X]
+  const startY = source[DND_DRAG_START_Y]
+  const x = source[DND_DRAG_START_RECT_X]
+  const y = source[DND_DRAG_START_RECT_Y]
+  const width = source[DND_DRAG_START_RECT_WIDTH]
+  const height = source[DND_DRAG_START_RECT_HEIGHT]
+  if (
+    typeof startX !== 'number' ||
+    typeof startY !== 'number' ||
+    typeof x !== 'number' ||
+    typeof y !== 'number' ||
+    typeof width !== 'number' ||
+    typeof height !== 'number'
+  )
+    return undefined
   return { x: x + pointer.x - startX, y: y + pointer.y - startY, width, height }
 }
 

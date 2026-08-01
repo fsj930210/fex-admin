@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import Card from '@fex/components-vue/ui/card'
 import { useSortable } from '@fex/components-vue/composables/use-sortable'
-import { SortableHandle, SortableItem, SortableOverlay, SortableRoot } from '@fex/components-vue/primitive/sortable'
+import {
+  SortableHandle,
+  SortableItem,
+  SortableOverlay,
+  SortableRoot,
+} from '@fex/components-vue/primitive/sortable'
 import { computed, ref } from 'vue'
 import type { SortableItems } from '@fex/components-core/sortable/types'
 
@@ -32,7 +37,9 @@ const tableSortable = useSortable({ items: columns.value, axis: 'x', onChange: u
 function updateTasks(items: unknown) {
   tasks.value = items as string[]
 }
-function taskItems(items: SortableItems) { return items as string[] }
+function taskItems(items: SortableItems) {
+  return items as string[]
+}
 
 function updatePanels(items: typeof initialPanels) {
   panels.value = items
@@ -52,17 +59,23 @@ const previewColumns = computed(() => tableSortable.previewItems.value as string
   <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
     <div class="mx-auto w-full max-w-5xl space-y-space-xl">
       <header class="space-y-space-xl">
-        <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/">Back home</RouterLink>
+        <RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/"
+          >Back home</RouterLink
+        >
         <div>
           <h1 class="text-2xl font-semibold text-foreground">Sortable</h1>
           <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
-            Quick sortable components for common lists, plus useSortable for table columns and other custom layouts.
+            Quick sortable components for common lists, plus useSortable for table columns and other
+            custom layouts.
           </p>
         </div>
       </header>
 
       <div class="space-y-space-xl">
-        <Card title="Sortable Component" description="Use the primitive component for common one-container lists.">
+        <Card
+          title="Sortable Component"
+          description="Use the primitive component for common one-container lists."
+        >
           <SortableRoot :items="tasks" axis="y" @change="updateTasks" v-slot="{ items }">
             <SortableItem
               v-for="task in taskItems(items)"
@@ -70,19 +83,28 @@ const previewColumns = computed(() => tableSortable.previewItems.value as string
               :key="task"
               class="flex min-h-12 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing data-[active]:shadow-lg"
             >
-              <SortableHandle class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</SortableHandle>
+              <SortableHandle
+                class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground"
+                >::</SortableHandle
+              >
               {{ task }}
             </SortableItem>
             <SortableOverlay v-slot="{ activeId }">
               <div class="flex min-h-12 items-center gap-space-sm">
-                <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
+                <span
+                  class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground"
+                  >::</span
+                >
                 {{ activeId }}
               </div>
             </SortableOverlay>
           </SortableRoot>
         </Card>
 
-        <Card title="Multiple Containers" description="The same sortable hook supports transfer panels.">
+        <Card
+          title="Multiple Containers"
+          description="The same sortable hook supports transfer panels."
+        >
           <div class="grid gap-space-md md:grid-cols-2">
             <div
               v-for="(items, containerId) in previewPanels"
@@ -90,7 +112,9 @@ const previewColumns = computed(() => tableSortable.previewItems.value as string
               :ref="panelSortable.setContainerRef(String(containerId))"
               class="min-h-56 rounded-md border border-border bg-background p-space-md"
             >
-              <h2 class="mb-space-md text-sm font-medium capitalize text-muted-foreground">{{ containerId }}</h2>
+              <h2 class="mb-space-md text-sm font-medium capitalize text-muted-foreground">
+                {{ containerId }}
+              </h2>
               <div
                 v-for="item in items"
                 :key="item"
@@ -98,9 +122,14 @@ const previewColumns = computed(() => tableSortable.previewItems.value as string
                 :data-sortable-id="item"
                 class="mb-space-sm flex min-h-11 cursor-grab touch-none select-none items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium shadow-sm transition-[transform,box-shadow,background-color,opacity] hover:bg-muted-background hover:shadow-md active:cursor-grabbing"
                 :style="panelSortable.getItemStyle(item)"
-                @pointerdown="(event) => panelSortable.onItemPointerDown(event, item, String(containerId))"
+                @pointerdown="
+                  (event) => panelSortable.onItemPointerDown(event, item, String(containerId))
+                "
               >
-                <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
+                <span
+                  class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground"
+                  >::</span
+                >
                 {{ item }}
               </div>
             </div>
@@ -112,14 +141,23 @@ const previewColumns = computed(() => tableSortable.previewItems.value as string
               class="flex min-h-11 items-center gap-space-sm rounded-md border border-border bg-card px-space-md text-sm font-medium text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
               :style="panelSortable.getOverlayStyle()"
             >
-              <span class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground">::</span>
+              <span
+                class="grid size-7 place-items-center rounded-md bg-muted-background text-muted-foreground"
+                >::</span
+              >
               {{ panelSortable.snapshot.value.activeId }}
             </div>
           </Teleport>
         </Card>
 
-        <Card title="Table Columns" description="useSortable can share motion styles across header and body cells.">
-          <div :ref="tableSortable.setContainerRef()" class="overflow-hidden rounded-md border border-border bg-background">
+        <Card
+          title="Table Columns"
+          description="useSortable can share motion styles across header and body cells."
+        >
+          <div
+            :ref="tableSortable.setContainerRef()"
+            class="overflow-hidden rounded-md border border-border bg-background"
+          >
             <table class="w-full table-fixed border-collapse text-sm">
               <thead>
                 <tr>
@@ -132,17 +170,27 @@ const previewColumns = computed(() => tableSortable.previewItems.value as string
                     :style="tableSortable.getItemStyle(column)"
                     @pointerdown="(event) => tableSortable.onItemPointerDown(event, column)"
                   >
-                    <span class="inline-flex items-center gap-space-sm"><span class="text-muted-foreground">::</span>{{ columnLabels[column] }}</span>
+                    <span class="inline-flex items-center gap-space-sm"
+                      ><span class="text-muted-foreground">::</span>{{ columnLabels[column] }}</span
+                    >
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="row in rows" :key="row.email" class="border-b border-border last:border-0">
+                <tr
+                  v-for="row in rows"
+                  :key="row.email"
+                  class="border-b border-border last:border-0"
+                >
                   <td
                     v-for="column in previewColumns"
                     :key="column"
                     class="px-space-md py-space-sm"
-                    :style="{ ...tableSortable.getMotionStyle(column), visibility: tableSortable.snapshot.value.activeId === column ? 'hidden' : undefined }"
+                    :style="{
+                      ...tableSortable.getMotionStyle(column),
+                      visibility:
+                        tableSortable.snapshot.value.activeId === column ? 'hidden' : undefined,
+                    }"
                   >
                     {{ row[column as keyof typeof row] }}
                   </td>
@@ -157,11 +205,17 @@ const previewColumns = computed(() => tableSortable.previewItems.value as string
               class="overflow-hidden rounded-md border border-border bg-card text-sm text-foreground opacity-100 shadow-xl ring-1 ring-border/70"
               :style="{ ...tableSortable.getOverlayStyle(), height: 'auto' }"
             >
-              <div class="flex min-h-12 items-center gap-space-sm border-b border-border px-space-md font-medium text-muted-foreground">
+              <div
+                class="flex min-h-12 items-center gap-space-sm border-b border-border px-space-md font-medium text-muted-foreground"
+              >
                 <span>::</span>
                 {{ columnLabels[tableSortable.snapshot.value.activeId] }}
               </div>
-              <div v-for="row in rows" :key="row.email" class="border-b border-border px-space-md py-space-sm last:border-0">
+              <div
+                v-for="row in rows"
+                :key="row.email"
+                class="border-b border-border px-space-md py-space-sm last:border-0"
+              >
                 {{ row[tableSortable.snapshot.value.activeId as keyof typeof row] }}
               </div>
             </div>

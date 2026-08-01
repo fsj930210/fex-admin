@@ -8,20 +8,43 @@
 import { FieldControl, FieldLabel, FieldRoot } from '@fex/components-solid/primitive/field'
 import { createForm, Form } from '@fex/components-solid/primitive/form'
 import { InputControl, InputRoot } from '@fex/components-solid/primitive/input'
-const form = createForm(() => ({ defaultValues: { name: '' }, onSubmit: ({ value }) => console.log(value) }))
-export function Example() { return <Form form={form}><form.Field name="name">{(field) => <FieldRoot><FieldLabel>Name</FieldLabel><FieldControl>{({ props }) => <InputRoot value={field().state.value} onValueChange={field().handleChange}><InputControl {...props} onBlur={field().handleBlur} /></InputRoot>}</FieldControl></FieldRoot>}</form.Field><button type="submit">Submit</button></Form> }
+const form = createForm(() => ({
+  defaultValues: { name: '' },
+  onSubmit: ({ value }) => console.log(value),
+}))
+export function Example() {
+  return (
+    <Form form={form}>
+      <form.Field name="name">
+        {(field) => (
+          <FieldRoot>
+            <FieldLabel>Name</FieldLabel>
+            <FieldControl>
+              {({ props }) => (
+                <InputRoot value={field().state.value} onValueChange={field().handleChange}>
+                  <InputControl {...props} onBlur={field().handleBlur} />
+                </InputRoot>
+              )}
+            </FieldControl>
+          </FieldRoot>
+        )}
+      </form.Field>
+      <button type="submit">Submit</button>
+    </Form>
+  )
+}
 ```
 
 ## Props
 
-| 组件 | 参数名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- | --- |
-| `Form` | `form` | `{ handleSubmit(): unknown }` | — | 是 | TanStack 实例。 |
-| `Form` | `component` | `'form' \| false` | `'form'` | 否 | 无 DOM 模式。 |
-| `Form` | `scrollToFirstError` | `boolean \| (ScrollIntoViewOptions & { focus?: boolean })` | `true` | 否 | 提交失败后定位并聚焦当前 form 的第一个无效控件。 |
-| `FieldRoot` | `orientation` | `vertical/horizontal/responsive` | `vertical` | 否 | 字段方向。 |
-| `FieldRoot` | 状态 props | `boolean` | `false` | 否 | required、disabled、readOnly、invalid、hasDescription、hasError。 |
-| `FieldControl` | `children` | `(binding) => JSX.Element` | — | 是 | 显式 control 绑定。 |
+| 组件           | 参数名               | 类型                                                       | 默认值     | 必填 | 说明                                                              |
+| -------------- | -------------------- | ---------------------------------------------------------- | ---------- | ---- | ----------------------------------------------------------------- |
+| `Form`         | `form`               | `{ handleSubmit(): unknown }`                              | —          | 是   | TanStack 实例。                                                   |
+| `Form`         | `component`          | `'form' \| false`                                          | `'form'`   | 否   | 无 DOM 模式。                                                     |
+| `Form`         | `scrollToFirstError` | `boolean \| (ScrollIntoViewOptions & { focus?: boolean })` | `true`     | 否   | 提交失败后定位并聚焦当前 form 的第一个无效控件。                  |
+| `FieldRoot`    | `orientation`        | `vertical/horizontal/responsive`                           | `vertical` | 否   | 字段方向。                                                        |
+| `FieldRoot`    | 状态 props           | `boolean`                                                  | `false`    | 否   | required、disabled、readOnly、invalid、hasDescription、hasError。 |
+| `FieldControl` | `children`           | `(binding) => JSX.Element`                                 | —          | 是   | 显式 control 绑定。                                               |
 
 其余原子为 Label、RequiredIndicator、Description、Error、Group、Set、Legend、Content、Title、Separator，均透传原生属性。
 

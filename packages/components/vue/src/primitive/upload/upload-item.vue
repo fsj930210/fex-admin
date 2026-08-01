@@ -12,4 +12,22 @@ const { upload } = useUploadContext()
 const state = useUploadItem(upload, () => props.id)
 provide(uploadItemIdKey, props.id)
 </script>
-<template><div v-if="state.item.value" v-bind="{ ...attrs, class: undefined }" role="listitem" :data-status="state.item.value.status" :class="cn(uploadItemClassName(), attrs.class as string | undefined)"><slot :item="state.item.value" :start="state.start" :retry="state.retry" :cancel="state.cancel" :pause="state.pause" :continue="state.continue" :remove="state.remove" /></div></template>
+<template>
+  <div
+    v-if="state.item.value"
+    v-bind="{ ...attrs, class: undefined }"
+    role="listitem"
+    :data-status="state.item.value.status"
+    :class="cn(uploadItemClassName(), attrs.class as string | undefined)"
+  >
+    <slot
+      :item="state.item.value"
+      :start="state.start"
+      :retry="state.retry"
+      :cancel="state.cancel"
+      :pause="state.pause"
+      :continue="state.continue"
+      :remove="state.remove"
+    />
+  </div>
+</template>

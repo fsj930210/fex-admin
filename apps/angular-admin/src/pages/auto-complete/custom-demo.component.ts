@@ -1,10 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { AutoCompleteContent, AutoCompleteList, AutoCompleteRoot, AutoCompleteTrigger } from '@fex/components-angular/primitive/auto-complete'
+import {
+  AutoCompleteContent,
+  AutoCompleteList,
+  AutoCompleteRoot,
+  AutoCompleteTrigger,
+} from '@fex/components-angular/primitive/auto-complete'
 import Card from '@fex/components-angular/ui/card'
 import { fieldNames, users } from './data'
 
 @Component({
-  selector: 'fex-auto-complete-custom-demo', standalone: true,
+  selector: 'fex-auto-complete-custom-demo',
+  standalone: true,
   imports: [Card, AutoCompleteRoot, AutoCompleteTrigger, AutoCompleteContent, AutoCompleteList],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './custom-demo.component.html',

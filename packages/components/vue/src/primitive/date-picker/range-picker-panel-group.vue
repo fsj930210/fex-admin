@@ -9,13 +9,20 @@ import RangePickerPanel from './range-picker-panel.vue'
 const props = defineProps<{ class?: string; panelCount?: 1 | 2 }>()
 const context = useRangePickerContext('RangePickerPanelGroup')
 const dates = computed(() => getRangePanelViewDates(context.viewDate.value, context.panel.value))
-const visibleDates = computed(() => props.panelCount === 1 ? [dates.value[0]] : dates.value)
+const visibleDates = computed(() => (props.panelCount === 1 ? [dates.value[0]] : dates.value))
 </script>
 
 <template>
-  <div :class="cn(datePickerPanelsClassName, props.class)" @mouseleave="context.setHoverValue(null)">
+  <div
+    :class="cn(datePickerPanelsClassName, props.class)"
+    @mouseleave="context.setHoverValue(null)"
+  >
     <slot>
-      <RangePickerPanel v-for="(date, index) in visibleDates" :key="`${date.year}-${date.month}-${index}`" :panel-view-date="date" />
+      <RangePickerPanel
+        v-for="(date, index) in visibleDates"
+        :key="`${date.year}-${date.month}-${index}`"
+        :panel-view-date="date"
+      />
     </slot>
   </div>
 </template>

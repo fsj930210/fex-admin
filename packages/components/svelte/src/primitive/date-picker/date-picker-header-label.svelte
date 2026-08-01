@@ -26,7 +26,7 @@
   })
 
   function selectPanel(event: MouseEvent) {
-    onclick?.(event)
+    onclick?.(event as Parameters<NonNullable<typeof onclick>>[0])
     if (event.defaultPrevented) return
     const nextPanel = getNextPanelByHeaderLabel(part)
     calendar.setPanel(nextPanel)

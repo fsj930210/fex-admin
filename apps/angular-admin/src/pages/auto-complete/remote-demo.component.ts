@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core'
-import { AutoCompleteContent, AutoCompleteRoot, AutoCompleteTrigger } from '@fex/components-angular/primitive/auto-complete'
+import {
+  AutoCompleteContent,
+  AutoCompleteRoot,
+  AutoCompleteTrigger,
+} from '@fex/components-angular/primitive/auto-complete'
 import Card from '@fex/components-angular/ui/card'
 import { fieldNames, users, type UserSuggestion } from './data'
 
@@ -29,7 +33,7 @@ export class RemoteDemo {
     this.timer = setTimeout(() => {
       if (current !== this.request) return
       const normalized = event.value.trim().toLocaleLowerCase()
-      this.items.set(users.filter(item => item.name.toLocaleLowerCase().includes(normalized)))
+      this.items.set(users.filter((item) => item.name.toLocaleLowerCase().includes(normalized)))
       this.loading.set(false)
     }, 600)
   }

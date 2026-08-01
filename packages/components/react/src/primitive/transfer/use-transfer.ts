@@ -1,4 +1,8 @@
-import type { TransferDataItem, TransferKey, TransferSide } from '@fex/components-core/transfer/types'
+import type {
+  TransferDataItem,
+  TransferKey,
+  TransferSide,
+} from '@fex/components-core/transfer/types'
 import { useCoreStore } from '../../hooks/use-core-store'
 import { useTransferContext, useTransferPanelSide } from './transfer-context'
 
@@ -13,7 +17,9 @@ export function useTransferPanel<TItem extends TransferDataItem = TransferDataIt
   const side = useTransferPanelSide('useTransferPanel')
   const source = side === 'source'
   const items = source ? transfer.snapshot.sourceItems : transfer.snapshot.targetItems
-  const checkedKeys = source ? transfer.snapshot.sourceCheckedKeys : transfer.snapshot.targetCheckedKeys
+  const checkedKeys = source
+    ? transfer.snapshot.sourceCheckedKeys
+    : transfer.snapshot.targetCheckedKeys
   const setCheckedKeys = source
     ? transfer.controller.setSourceCheckedKeys
     : transfer.controller.setTargetCheckedKeys

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getCalendarToday, type CalendarRange } from '@fex/components-core/calendar'
+  import { getCalendarToday, type CalendarDate, type CalendarRange } from '@fex/components-core/calendar'
   import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
   import { endOfDate } from '@fex/components-core/date/utils'
   import { DatePickerPreset, RangePickerPanelGroup, useRangePickerContext } from '@fex/components-svelte/primitive/date-picker'
@@ -16,7 +16,7 @@
 
   function select(value: CalendarRange) {
     onSelect(value)
-    if (value.start) rangePicker.setViewDate(value.start)
+    if (value.start) rangePicker.setViewDate(value.start as CalendarDate)
   }
 
   function lastDays(days: number): CalendarRange {

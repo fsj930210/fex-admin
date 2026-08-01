@@ -25,7 +25,10 @@ export function DataGridFilterInput<TFeatures extends TableFeatures, TData exten
       value={String(filterColumn.getFilterValue() ?? '')}
       className={cn(dataGridInputRootClassName, className)}
     >
-      <InputControl {...props} onChange={(event) => filterColumn.setFilterValue(event.currentTarget.value)} />
+      <InputControl
+        {...props}
+        onChange={(event) => filterColumn.setFilterValue(event.currentTarget.value)}
+      />
     </InputRoot>
   )
 }

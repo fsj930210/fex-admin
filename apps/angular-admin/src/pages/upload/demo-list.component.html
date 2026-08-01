@@ -1,1 +1,59 @@
-<fex-upload-list><ng-template fexUploadList let-items>@for (item of items; track item.id) { <fex-upload-item [id]="item.id"><ng-template fexUploadItem let-state><fex-upload-preview /><div class="min-w-0 flex-1"><div class="flex min-w-0 flex-1 flex-col gap-0.5"><span class="truncate font-medium">{{ state.item()?.name }}</span><span class="text-xs text-muted-foreground">{{ ((state.item()?.size ?? 0) / 1024).toFixed(1) }} KB</span></div>@if (!showMultipart() && state.item()?.status === 'uploading') { <fex-upload-progress /> }@if (showMultipart() && context.upload(); as upload) { <fex-multipart-details [id]="item.id" [upload]="upload" /> }@if (state.item()?.status === 'success') { <p class="mt-1 text-xs text-primary">{{ instant(state.item()?.response) ? 'MD5 命中，已秒传' : '上传完成' }}</p> }@if (state.item()?.error !== undefined && state.item()?.error !== false) { <div class="mt-1 text-xs text-danger">{{ message(state.item()?.error) }}</div> }</div><div class="flex gap-space-xs">@if (state.item()?.status === 'pending') { <button fexButton size="xs" variant="ghost" (click)="state.start()">上传</button> }@if (state.item()?.status === 'error' && state.item()?.errorStage !== 'before-upload') { <button fexButton size="xs" variant="ghost" (click)="state.retry()">重试</button> }@if (state.pause && state.item()?.status === 'uploading') { <button fexButton size="xs" variant="ghost" (click)="state.pause()">暂停</button> }@if (state.continue && state.item()?.status === 'paused') { <button fexButton size="xs" variant="ghost" (click)="state.continue()">继续</button> }<button fexButton size="xs" variant="destructive" (click)="state.remove()">删除</button></div></ng-template></fex-upload-item> }</ng-template></fex-upload-list>@if (context.items().length) { <button fexButton class="mt-space-sm w-full" size="xs" variant="ghost" (click)="context.upload()?.clear()">清空列表</button> }
+<fex-upload-list
+  ><ng-template fexUploadList let-items>
+    @for (item of items; track item.id) {
+      <fex-upload-item [id]="item.id"
+        ><ng-template fexUploadItem let-state
+          ><fex-upload-preview />
+          <div class="min-w-0 flex-1">
+            <div class="flex min-w-0 flex-1 flex-col gap-0.5">
+              <span class="truncate font-medium">{{ state.item()?.name }}</span
+              ><span class="text-xs text-muted-foreground"
+                >{{ ((state.item()?.size ?? 0) / 1024).toFixed(1) }} KB</span
+              >
+            </div>
+            @if (!showMultipart() && state.item()?.status === 'uploading') {
+              <fex-upload-progress />
+            }
+            @if (showMultipart() && context.upload(); as upload) {
+              <fex-multipart-details [id]="item.id" [upload]="upload" />
+            }
+            @if (state.item()?.status === 'success') {
+              <p class="mt-1 text-xs text-primary">
+                {{ instant(state.item()?.response) ? 'MD5 命中，已秒传' : '上传完成' }}
+              </p>
+            }
+            @if (state.item()?.error !== undefined && state.item()?.error !== false) {
+              <div class="mt-1 text-xs text-danger">{{ message(state.item()?.error) }}</div>
+            }
+          </div>
+          <div class="flex gap-space-xs">
+            @if (state.item()?.status === 'pending') {
+              <button fexButton size="xs" variant="ghost" (click)="state.start()">上传</button>
+            }
+            @if (state.item()?.status === 'error' && state.item()?.errorStage !== 'before-upload') {
+              <button fexButton size="xs" variant="ghost" (click)="state.retry()">重试</button>
+            }
+            @if (state.pause && state.item()?.status === 'uploading') {
+              <button fexButton size="xs" variant="ghost" (click)="state.pause()">暂停</button>
+            }
+            @if (state.continue && state.item()?.status === 'paused') {
+              <button fexButton size="xs" variant="ghost" (click)="state.continue()">继续</button>
+            }
+            <button fexButton size="xs" variant="destructive" (click)="state.remove()">删除</button>
+          </div></ng-template
+        ></fex-upload-item
+      >
+    }
+  </ng-template></fex-upload-list
+>
+@if (context.items().length) {
+  <button
+    fexButton
+    class="mt-space-sm w-full"
+    size="xs"
+    variant="ghost"
+    (click)="context.upload()?.clear()"
+  >
+    清空列表
+  </button>
+}

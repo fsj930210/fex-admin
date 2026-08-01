@@ -22,25 +22,43 @@ import {
   type ListboxRootProps as PrimitiveListboxRootProps,
 } from '../../primitive/listbox/listbox'
 
-export type ListboxRootProps<TItem = unknown> = Omit<PrimitiveListboxRootProps<TItem>, 'className'> &
+export type ListboxRootProps<TItem = unknown> = Omit<
+  PrimitiveListboxRootProps<TItem>,
+  'className'
+> &
   ListboxRootStyleProps & {
     className?: string
   }
 
-export function ListboxRoot<TItem = unknown>({ className, variant, ...props }: ListboxRootProps<TItem>) {
-  return <PrimitiveListboxRoot {...props} className={cn(listboxRootClassName({ variant }), className)} />
+export function ListboxRoot<TItem = unknown>({
+  className,
+  variant,
+  ...props
+}: ListboxRootProps<TItem>) {
+  return (
+    <PrimitiveListboxRoot {...props} className={cn(listboxRootClassName({ variant }), className)} />
+  )
 }
 
-export function ListboxGroup({ className, ...props }: ComponentProps<typeof PrimitiveListboxGroup>) {
+export function ListboxGroup({
+  className,
+  ...props
+}: ComponentProps<typeof PrimitiveListboxGroup>) {
   return <PrimitiveListboxGroup {...props} className={cn(listboxGroupClassName, className)} />
 }
 
-export function ListboxGroupLabel({ className, ...props }: ComponentProps<typeof PrimitiveListboxGroupLabel>) {
-  return <PrimitiveListboxGroupLabel {...props} className={cn(listboxGroupLabelClassName, className)} />
+export function ListboxGroupLabel({
+  className,
+  ...props
+}: ComponentProps<typeof PrimitiveListboxGroupLabel>) {
+  return (
+    <PrimitiveListboxGroupLabel {...props} className={cn(listboxGroupLabelClassName, className)} />
+  )
 }
 
 export interface ListboxItemProps
-  extends Omit<ComponentProps<typeof PrimitiveListboxItem>, 'className' | 'children' | 'title'>,
+  extends
+    Omit<ComponentProps<typeof PrimitiveListboxItem>, 'className' | 'children' | 'title'>,
     ListboxItemStyleProps {
   title?: ReactNode
   description?: ReactNode
@@ -48,14 +66,23 @@ export interface ListboxItemProps
   children?: ReactNode
 }
 
-export function ListboxItem({ title, description, size, className, children, ...props }: ListboxItemProps) {
+export function ListboxItem({
+  title,
+  description,
+  size,
+  className,
+  children,
+  ...props
+}: ListboxItemProps) {
   return (
     <PrimitiveListboxItem {...props} className={cn(listboxItemClassName({ size }), className)}>
       {children ?? (
         <>
           <span className={listboxItemContentClassName}>
             <span className={listboxItemTitleClassName}>{title}</span>
-            {description ? <span className={listboxItemDescriptionClassName}>{description}</span> : null}
+            {description ? (
+              <span className={listboxItemDescriptionClassName}>{description}</span>
+            ) : null}
           </span>
           <PrimitiveListboxItemIndicator className={listboxItemIndicatorClassName}>
             <CheckIcon />
@@ -68,7 +95,10 @@ export function ListboxItem({ title, description, size, className, children, ...
 
 export function ListboxItemIndicator(props: ComponentProps<typeof PrimitiveListboxItemIndicator>) {
   return (
-    <PrimitiveListboxItemIndicator {...props} className={cn(listboxItemIndicatorClassName, props.className)}>
+    <PrimitiveListboxItemIndicator
+      {...props}
+      className={cn(listboxItemIndicatorClassName, props.className)}
+    >
       {props.children ?? <CheckIcon />}
     </PrimitiveListboxItemIndicator>
   )

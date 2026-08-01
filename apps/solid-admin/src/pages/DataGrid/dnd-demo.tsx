@@ -229,9 +229,8 @@ function RowDndGrid() {
   // Match the React adapter: the table consumes the controller preview while
   // dragging, so the drop target and the overlay always use the same row order.
   createEffect(() => {
-    const preview = sortable.snapshot().activeId === null
-      ? rowOrder()
-      : (sortable.previewItems() as string[])
+    const preview =
+      sortable.snapshot().activeId === null ? rowOrder() : (sortable.previewItems() as string[])
     table.setDataGridOptions({
       features: rowDndFeatures,
       data: rowsForOrder(preview),

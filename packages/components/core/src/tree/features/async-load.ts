@@ -42,7 +42,8 @@ function createTreeAsyncLoadManager<TNode extends TreeNodeData>(
     states.set(key, 'loading')
     errors.delete(key)
     options.publish(key)
-    const request = loader.loadChildren(item, { signal: controller.signal })
+    const request = loader
+      .loadChildren(item, { signal: controller.signal })
       .then((children) => {
         if (controller.signal.aborted) return undefined
         states.set(key, 'loaded')

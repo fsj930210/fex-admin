@@ -19,9 +19,8 @@ import {
   datePickerWeekHeaderClassName,
 } from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
-import { Show, splitProps, type JSX, type ParentProps } from 'solid-js'
+import { Show, splitProps, type ParentProps } from 'solid-js'
 import {
-  CalendarCell,
   CalendarGrid,
   CalendarRoot,
   CalendarWeekHeader,

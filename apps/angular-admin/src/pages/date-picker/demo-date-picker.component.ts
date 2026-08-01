@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core'
-import type { CalendarDate, CalendarRange, CalendarValue, CalendarWeekday } from '@fex/components-core/calendar'
+import type {
+  CalendarDate,
+  CalendarRange,
+  CalendarValue,
+  CalendarWeekday,
+} from '@fex/components-core/calendar'
 import type { DatePickerPicker } from '@fex/components-angular/primitive/date-picker'
 import {
   DatePickerCancel,
@@ -87,7 +92,9 @@ export class DemoRangePicker {
   @Input() weekStartsOn: CalendarWeekday | undefined = undefined
   @Input() minDate: CalendarDate | undefined = undefined
   @Input() maxDate: CalendarDate | undefined = undefined
-  @Input() disabledDate: ((date: CalendarDate, activePart: 'start' | 'end') => boolean) | undefined = undefined
+  @Input() disabledDate:
+    | ((date: CalendarDate, activePart: 'start' | 'end') => boolean)
+    | undefined = undefined
   @Input() panelCount: 1 | 2 = 2
   @Output() readonly change = new EventEmitter<CalendarRange<CalendarValue>>()
   @Output() readonly openChange = new EventEmitter<boolean>()

@@ -10,11 +10,16 @@ import { fieldNames, userSuggestions } from './data'
 export function BasicDemo() {
   const [selected, setSelected] = useState('No suggestion accepted')
   return (
-    <Card title="Free input and local suggestions" description="Type any text, or accept a matching name with pointer or keyboard.">
+    <Card
+      title="Free input and local suggestions"
+      description="Type any text, or accept a matching name with pointer or keyboard."
+    >
       <AutoCompleteRoot
         items={userSuggestions}
         fieldNames={fieldNames}
-        onSelect={(_, meta) => setSelected(`${meta.selectedItem.name} · ${meta.selectedItem.email}`)}
+        onSelect={(_, meta) =>
+          setSelected(`${meta.selectedItem.name} · ${meta.selectedItem.email}`)
+        }
       >
         <AutoCompleteTrigger placeholder="Try A or Bella" clearable />
         <AutoCompleteContent />

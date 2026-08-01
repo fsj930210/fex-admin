@@ -33,16 +33,19 @@ export function DataGridColumnVisibility<TFeatures extends TableFeatures, TData 
   return (
     <fieldset {...props} className={cn(dataGridVisibilityPanelClassName, className)}>
       <legend className={dataGridSrOnlyClassName}>Visible columns</legend>
-      {visibilityTable.getAllLeafColumns().filter((column) => column.getCanHide()).map((column) => (
-        <label key={column.id} className={dataGridVisibilityItemClassName}>
-          <DataGridCheckbox
-            checked={column.getIsVisible()}
-            aria-label={`Toggle ${column.id} column`}
-            onCheckedChange={(checked) => column.toggleVisibility(checked === true)}
-          />
-          {typeof column.columnDef.header === 'string' ? column.columnDef.header : column.id}
-        </label>
-      ))}
+      {visibilityTable
+        .getAllLeafColumns()
+        .filter((column) => column.getCanHide())
+        .map((column) => (
+          <label key={column.id} className={dataGridVisibilityItemClassName}>
+            <DataGridCheckbox
+              checked={column.getIsVisible()}
+              aria-label={`Toggle ${column.id} column`}
+              onCheckedChange={(checked) => column.toggleVisibility(checked === true)}
+            />
+            {typeof column.columnDef.header === 'string' ? column.columnDef.header : column.id}
+          </label>
+        ))}
     </fieldset>
   )
 }

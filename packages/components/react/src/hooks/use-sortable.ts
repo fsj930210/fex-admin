@@ -5,7 +5,12 @@ import {
 import { restoreSortableItems } from '@fex/components-core/sortable/containers'
 import { useRef, useSyncExternalStore } from 'react'
 import type { CSSProperties, HTMLAttributes, PointerEvent, RefCallback } from 'react'
-import type { SortableAxis, SortableId, SortableItems, SortableMotionOptions } from '@fex/components-core/sortable/types'
+import type {
+  SortableAxis,
+  SortableId,
+  SortableItems,
+  SortableMotionOptions,
+} from '@fex/components-core/sortable/types'
 import { shallowEqualObject } from '@fex/utils'
 import { useLazyRef } from './use-lazy-ref'
 import { useMemoizedFn } from './use-memoized-fn'
@@ -45,7 +50,9 @@ export function useSortable<TItems extends SortableItems>({
   )
 
   const getContainerProps = useMemoizedFn(
-    (containerId = DEFAULT_SORTABLE_CONTAINER_ID): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => {
+    (
+      containerId = DEFAULT_SORTABLE_CONTAINER_ID,
+    ): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => {
       let cleanup: (() => void) | undefined
 
       return {
@@ -59,8 +66,10 @@ export function useSortable<TItems extends SortableItems>({
   )
 
   const getItemProps = useMemoizedFn(
-    (id: SortableId, containerId = DEFAULT_SORTABLE_CONTAINER_ID):
-      HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => {
+    (
+      id: SortableId,
+      containerId = DEFAULT_SORTABLE_CONTAINER_ID,
+    ): HTMLAttributes<HTMLElement> & DataAttributes & { ref: RefCallback<HTMLElement> } => {
       let cleanup: (() => void) | undefined
 
       return {
@@ -102,12 +111,12 @@ export function useSortable<TItems extends SortableItems>({
     'data-sortable-handle': '',
   }))
 
-  const getMotionStyle = useMemoizedFn((id: SortableId): CSSProperties =>
-    controller.getMotionStyle(id) as CSSProperties,
+  const getMotionStyle = useMemoizedFn(
+    (id: SortableId): CSSProperties => controller.getMotionStyle(id) as CSSProperties,
   )
 
-  const getOverlayStyle = useMemoizedFn((): CSSProperties =>
-    controller.getOverlayStyle() as CSSProperties,
+  const getOverlayStyle = useMemoizedFn(
+    (): CSSProperties => controller.getOverlayStyle() as CSSProperties,
   )
 
   const registerMotionTarget = useMemoizedFn((id: SortableId, element: HTMLElement | null) =>

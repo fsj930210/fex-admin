@@ -11,7 +11,10 @@ import {
   type CalendarValue,
   type CalendarWeekday,
 } from '@fex/components-core/calendar'
-import { calendarCellClassName, calendarWeekRangeCellClassName } from '@fex/components-styles/calendar'
+import {
+  calendarCellClassName,
+  calendarWeekRangeCellClassName,
+} from '@fex/components-styles/calendar'
 import { cn } from '@fex/utils'
 import { Fragment, type ComponentProps, type ReactNode, useState } from 'react'
 import { useControllableState } from '../../hooks/use-controllable-state'
@@ -376,30 +379,53 @@ export function CalendarCell<TValue extends CalendarValue = CalendarValue>({
       data-in-range={cell.granularity !== 'week' && cell.state.inRange ? 'true' : undefined}
       data-week-selected={cell.granularity === 'week' && cell.state.selected ? 'true' : undefined}
       data-week-hover={
-        cell.granularity === 'week' && context.hoveredRowIndex === cell.rowIndex ? 'true' : undefined
+        cell.granularity === 'week' && context.hoveredRowIndex === cell.rowIndex
+          ? 'true'
+          : undefined
       }
-      data-week-row-start={cell.granularity === 'week' && cell.columnIndex === 0 ? 'true' : undefined}
+      data-week-row-start={
+        cell.granularity === 'week' && cell.columnIndex === 0 ? 'true' : undefined
+      }
       data-week-row-end={cell.granularity === 'week' && cell.columnIndex === 6 ? 'true' : undefined}
-      data-week-start={cell.granularity === 'week' && cell.state.selected && cell.columnIndex === 0 ? 'true' : undefined}
-      data-week-end={cell.granularity === 'week' && cell.state.selected && cell.columnIndex === 6 ? 'true' : undefined}
+      data-week-start={
+        cell.granularity === 'week' && cell.state.selected && cell.columnIndex === 0
+          ? 'true'
+          : undefined
+      }
+      data-week-end={
+        cell.granularity === 'week' && cell.state.selected && cell.columnIndex === 6
+          ? 'true'
+          : undefined
+      }
       data-week-range-start={
-        cell.granularity === 'week' && cell.state.rangeStart && !cell.state.rangeEnd ? 'true' : undefined
+        cell.granularity === 'week' && cell.state.rangeStart && !cell.state.rangeEnd
+          ? 'true'
+          : undefined
       }
       data-week-range-end={
-        cell.granularity === 'week' && cell.state.rangeEnd && !cell.state.rangeStart ? 'true' : undefined
+        cell.granularity === 'week' && cell.state.rangeEnd && !cell.state.rangeStart
+          ? 'true'
+          : undefined
       }
       data-week-range-single={
-        cell.granularity === 'week' && cell.state.rangeStart && cell.state.rangeEnd ? 'true' : undefined
+        cell.granularity === 'week' && cell.state.rangeStart && cell.state.rangeEnd
+          ? 'true'
+          : undefined
       }
       data-week-in-range={cell.granularity === 'week' && cell.state.inRange ? 'true' : undefined}
       data-week-range={
-        cell.granularity === 'week' && (cell.state.rangeStart || cell.state.rangeEnd || cell.state.inRange)
+        cell.granularity === 'week' &&
+        (cell.state.rangeStart || cell.state.rangeEnd || cell.state.inRange)
           ? 'true'
           : undefined
       }
       data-disabled={cell.state.disabled ? 'true' : undefined}
       disabled={cell.state.disabled}
-      className={cn(calendarCellClassName, cell.granularity === 'week' && calendarWeekRangeCellClassName, className)}
+      className={cn(
+        calendarCellClassName,
+        cell.granularity === 'week' && calendarWeekRangeCellClassName,
+        className,
+      )}
       onClick={(event) => {
         onClick?.(event)
         if (event.defaultPrevented) return

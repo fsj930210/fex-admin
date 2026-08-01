@@ -6,5 +6,13 @@ import { LoadingIcon } from '../../icon/loading'
 
 export function Spinner(props: JSX.HTMLAttributes<HTMLSpanElement> & SpinnerStyleProps) {
   const [local, rest] = splitProps(props, ['class', 'size'])
-  return <span {...rest} data-slot="spinner" class={cn(spinnerClassName({ size: local.size }), local.class)}><LoadingIcon /></span>
+  return (
+    <span
+      {...rest}
+      data-slot="spinner"
+      class={cn(spinnerClassName({ size: local.size }), local.class)}
+    >
+      <LoadingIcon />
+    </span>
+  )
 }

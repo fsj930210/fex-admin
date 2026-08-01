@@ -1,5 +1,11 @@
 export type BuiltinToastVariant = 'default' | 'success' | 'info' | 'warning' | 'error' | 'loading'
-export type ToastPlacement = 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right'
+export type ToastPlacement =
+  | 'top-left'
+  | 'top'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom'
+  | 'bottom-right'
 
 export type ToastInput<TContent = unknown> = TContent | ToastOptions<TContent>
 

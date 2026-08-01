@@ -18,7 +18,8 @@ export const locations = {
   广东: ['广州', '深圳', '珠海'],
 } as const
 
-export const selectClassName = 'h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/20'
+export const selectClassName =
+  'h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/20'
 
 export type SetDemoResult = (result: string) => void
 
@@ -46,19 +47,33 @@ export function TextField({
   validators,
 }: TextFieldProps) {
   return (
-    <Field name={name} validators={validators}>
+    <Field name={name} {...(validators === undefined ? {} : { validators })}>
       {(field) => {
         const invalid = field.state.meta.isTouched && !field.state.meta.isValid
 
         return (
-          <FieldRoot required={required} invalid={invalid} hasDescription={Boolean(description)} hasError={invalid}>
+          <FieldRoot
+            required={required}
+            invalid={invalid}
+            hasDescription={Boolean(description)}
+            hasError={invalid}
+          >
             <FieldLabel>
               {label} {required && <FieldRequiredIndicator />}
             </FieldLabel>
             <FieldControl>
               {({ props }) => (
-                <InputRoot value={field.state.value as string} onValueChange={field.handleChange} invalid={invalid}>
-                  <InputControl {...props} placeholder={placeholder} type={type} onBlur={field.handleBlur} />
+                <InputRoot
+                  value={field.state.value as string}
+                  onValueChange={field.handleChange}
+                  invalid={invalid}
+                >
+                  <InputControl
+                    {...props}
+                    placeholder={placeholder}
+                    type={type}
+                    onBlur={field.handleBlur}
+                  />
                 </InputRoot>
               )}
             </FieldControl>

@@ -43,8 +43,8 @@ export function FormStatusDemo() {
                 <FieldControl>
                   {({ props }) => (
                     <SelectRoot
-                      value={field.state.value}
-                      status={invalid ? 'error' : undefined}
+                      value={field.state.value as string}
+                      {...(invalid ? { status: 'error' as const } : {})}
                       options={frameworkOptions}
                       onChange={(value) => field.handleChange(String(value ?? ''))}
                     >

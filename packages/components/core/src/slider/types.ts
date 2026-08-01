@@ -37,7 +37,11 @@ export interface SliderController extends SnapshotStore<SliderSnapshot> {
   startSlide: (value: number) => SliderChangeMeta | undefined
   moveSlide: (value: number) => SliderChangeMeta | undefined
   endSlide: () => SliderChangeMeta | undefined
-  setValueAt: (index: number, value: number, options?: { commit?: boolean }) => SliderChangeMeta | undefined
+  setValueAt: (
+    index: number,
+    value: number,
+    options?: { commit?: boolean },
+  ) => SliderChangeMeta | undefined
   stepThumb: (index: number, direction: number, multiplier?: number) => SliderChangeMeta | undefined
   setActiveIndex: (index: number) => void
 }

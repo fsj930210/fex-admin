@@ -7,7 +7,9 @@ export interface UseInputOptions {
   disabled?: MaybeRefOrGetter<boolean | undefined>
   readOnly?: MaybeRefOrGetter<boolean | undefined>
   invalid?: MaybeRefOrGetter<boolean | undefined>
-  onValueChange?: ((value: string, meta: { reason: 'input' | 'clear'; event?: Event }) => void) | undefined
+  onValueChange?:
+    | ((value: string, meta: { reason: 'input' | 'clear'; event?: Event }) => void)
+    | undefined
   onClear?: ((meta: { reason: 'clear' }) => void) | undefined
 }
 
@@ -30,5 +32,17 @@ export function useInput(options: UseInputOptions = {}): InputContextValue {
     options.onClear?.({ reason: 'clear' })
     focusElement.value?.focus()
   }
-  return { value, disabled, readOnly, invalid, canClear, setValue, clear, focus: () => focusElement.value?.focus(), setFocusElement: (element) => { focusElement.value = element } }
+  return {
+    value,
+    disabled,
+    readOnly,
+    invalid,
+    canClear,
+    setValue,
+    clear,
+    focus: () => focusElement.value?.focus(),
+    setFocusElement: (element) => {
+      focusElement.value = element
+    },
+  }
 }

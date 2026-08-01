@@ -14,4 +14,3 @@ export type { ColumnSort, SortDirection, SortingState, SortFn } from '@tanstack/
 
 /** Keeps a remotely sorted column in the shared sorting state without changing local row order. */
 export const dataGridRemoteSortFn: SortFn<TableFeatures, RowData> = () => 0
-

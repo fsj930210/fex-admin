@@ -26,7 +26,13 @@ export function Section(props: { title: string; description: string; children: J
   )
 }
 
-export function DemoDatePicker(props: DatePickerRootProps & { triggerProps?: DatePickerTriggerProps; children?: JSX.Element; footer?: JSX.Element }) {
+export function DemoDatePicker(
+  props: DatePickerRootProps & {
+    triggerProps?: DatePickerTriggerProps
+    children?: JSX.Element
+    footer?: JSX.Element
+  },
+) {
   const [local, rootProps] = splitProps(props, ['triggerProps', 'children', 'footer'])
   return (
     <DatePickerRoot {...rootProps}>
@@ -39,13 +45,24 @@ export function DemoDatePicker(props: DatePickerRootProps & { triggerProps?: Dat
   )
 }
 
-export function DemoRangePicker(props: RangePickerRootProps & { triggerProps?: RangePickerTriggerProps; panelCount?: 1 | 2; children?: JSX.Element; footer?: JSX.Element }) {
+export function DemoRangePicker(
+  props: RangePickerRootProps & {
+    triggerProps?: RangePickerTriggerProps
+    panelCount?: 1 | 2
+    children?: JSX.Element
+    footer?: JSX.Element
+  },
+) {
   const [local, rootProps] = splitProps(props, ['triggerProps', 'panelCount', 'children', 'footer'])
   return (
     <RangePickerRoot {...rootProps}>
       <RangePickerTrigger {...local.triggerProps} class={cn('w-80', local.triggerProps?.class)} />
       <RangePickerContent class="overflow-hidden p-0">
-        {local.children ?? <RangePickerPanelGroup panelCount={local.panelCount} />}
+        {local.children ?? (
+          <RangePickerPanelGroup
+            {...(local.panelCount === undefined ? {} : { panelCount: local.panelCount })}
+          />
+        )}
         {local.footer}
       </RangePickerContent>
     </RangePickerRoot>
@@ -53,14 +70,23 @@ export function DemoRangePicker(props: RangePickerRootProps & { triggerProps?: R
 }
 
 export function ValuePreview(props: { value: CalendarValue | readonly CalendarValue[] | null }) {
-  const text = () => Array.isArray(props.value)
-    ? props.value.map((item) => formatDatePickerValue(item, { picker: 'date' })).join(', ')
-    : formatDatePickerValue(props.value, { picker: 'date' })
-  return <p class="mt-space-sm w-full text-xs text-muted-foreground">当前值：{text() || '未选择'}</p>
+  const text = () => {
+    const value = props.value
+    return Array.isArray(value)
+      ? value.map((item) => formatDatePickerValue(item, { picker: 'date' })).join(', ')
+      : formatDatePickerValue(value as CalendarValue | null, { picker: 'date' })
+  }
+  return (
+    <p class="mt-space-sm w-full text-xs text-muted-foreground">当前值：{text() || '未选择'}</p>
+  )
 }
 
 export function RangePreview(props: { value: CalendarRange<CalendarValue> }) {
   const start = () => formatDatePickerValue(props.value.start, { picker: 'date' })
   const end = () => formatDatePickerValue(props.value.end, { picker: 'date' })
-  return <p class="mt-space-sm w-full text-xs text-muted-foreground">当前范围：{start() || '空'} ~ {end() || '空'}</p>
+  return (
+    <p class="mt-space-sm w-full text-xs text-muted-foreground">
+      当前范围：{start() || '空'} ~ {end() || '空'}
+    </p>
+  )
 }

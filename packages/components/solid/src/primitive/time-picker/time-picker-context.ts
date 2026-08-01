@@ -1,4 +1,8 @@
-import type { DisabledTime, TimePickerController, TimePickerSnapshot } from '@fex/components-core/time-picker/types'
+import type {
+  DisabledTime,
+  TimePickerController,
+  TimePickerSnapshot,
+} from '@fex/components-core/time-picker/types'
 import { createContext, useContext, type Accessor } from 'solid-js'
 
 export interface TimePickerContextValue {

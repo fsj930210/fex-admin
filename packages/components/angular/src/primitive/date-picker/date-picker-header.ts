@@ -1,6 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input, Optional } from '@angular/core'
-import { getDatePickerHeaderLabelParts, getNextPanelByHeaderLabel, getNextViewDateByHeaderAction } from '@fex/components-core/date-picker/panel'
-import type { DatePickerHeaderAction, DatePickerHeaderLabelPart } from '@fex/components-core/date-picker/types'
+import {
+  getDatePickerHeaderLabelParts,
+  getNextPanelByHeaderLabel,
+  getNextViewDateByHeaderAction,
+} from '@fex/components-core/date-picker/panel'
+import type {
+  DatePickerHeaderAction,
+  DatePickerHeaderLabelPart,
+} from '@fex/components-core/date-picker/types'
 import {
   datePickerHeaderClassName,
   datePickerHeaderDoubleIconClassName,
@@ -77,14 +84,21 @@ export class DatePickerHeaderButton {
 
   runAction(event: Event) {
     if (event.defaultPrevented) return
-    const nextViewDate = getNextViewDateByHeaderAction(this.calendar.currentViewDate(), this.action, this.calendar.currentPanel())
+    const nextViewDate = getNextViewDateByHeaderAction(
+      this.calendar.currentViewDate(),
+      this.action,
+      this.calendar.currentPanel(),
+    )
     this.calendar.setViewDate(nextViewDate)
     this.owner().setViewDate(nextViewDate)
   }
 
   private owner() {
     const owner = this.datePicker ?? this.rangePicker
-    if (!owner) throw new Error('DatePickerHeaderButton must be used within DatePickerRoot or RangePickerRoot')
+    if (!owner)
+      throw new Error(
+        'DatePickerHeaderButton must be used within DatePickerRoot or RangePickerRoot',
+      )
     return owner
   }
 }
@@ -118,14 +132,19 @@ export class DatePickerHeaderLabel {
   ) {}
 
   visible() {
-    return getDatePickerHeaderLabelParts(this.owner().context().picker, this.calendar.currentPanel()).includes(this.part)
+    return getDatePickerHeaderLabelParts(
+      this.owner().context().picker,
+      this.calendar.currentPanel(),
+    ).includes(this.part)
   }
 
   label() {
     if (this.part === 'month') return `${this.calendar.currentViewDate().month}月`
     const year = this.calendar.currentViewDate().year
     const decadeStart = Math.floor(year / 10) * 10
-    return this.calendar.currentPanel() === 'decade' ? `${decadeStart}-${decadeStart + 9}年` : `${year}年`
+    return this.calendar.currentPanel() === 'decade'
+      ? `${decadeStart}-${decadeStart + 9}年`
+      : `${year}年`
   }
 
   selectPanel(event: Event) {
@@ -137,7 +156,8 @@ export class DatePickerHeaderLabel {
 
   private owner() {
     const owner = this.datePicker ?? this.rangePicker
-    if (!owner) throw new Error('DatePickerHeaderLabel must be used within DatePickerRoot or RangePickerRoot')
+    if (!owner)
+      throw new Error('DatePickerHeaderLabel must be used within DatePickerRoot or RangePickerRoot')
     return owner
   }
 }

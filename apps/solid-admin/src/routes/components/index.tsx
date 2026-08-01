@@ -4,7 +4,9 @@ import type { AppRoute } from '../types'
 const ButtonPage = lazy(() =>
   import('../../pages/Button').then((module) => ({ default: module.ButtonPage })),
 )
-const AutoCompletePage = lazy(() => import('../../pages/AutoComplete').then((module) => ({ default: module.AutoCompletePage })))
+const AutoCompletePage = lazy(() =>
+  import('../../pages/AutoComplete').then((module) => ({ default: module.AutoCompletePage })),
+)
 const CalendarPage = lazy(() =>
   import('../../pages/Calendar').then((module) => ({ default: module.CalendarPage })),
 )
@@ -29,8 +31,12 @@ const EmptyPage = lazy(() =>
 const InputPage = lazy(() =>
   import('../../pages/Input').then((module) => ({ default: module.InputPage })),
 )
-const FormPage = lazy(() => import('../../pages/Form').then((module) => ({ default: module.FormPage })))
-const TransferPage = lazy(() => import('../../pages/Transfer').then((module) => ({ default: module.TransferPage })))
+const FormPage = lazy(() =>
+  import('../../pages/Form').then((module) => ({ default: module.FormPage })),
+)
+const TransferPage = lazy(() =>
+  import('../../pages/Transfer').then((module) => ({ default: module.TransferPage })),
+)
 const KbdPage = lazy(() =>
   import('../../pages/Kbd').then((module) => ({ default: module.KbdPage })),
 )
@@ -61,7 +67,9 @@ const SliderPage = lazy(() =>
 const ScrollbarPage = lazy(() =>
   import('../../pages/Scrollbar').then((module) => ({ default: module.ScrollbarPage })),
 )
-const SelectPage = lazy(() => import('../../pages/Select').then((module) => ({ default: module.SelectPage })))
+const SelectPage = lazy(() =>
+  import('../../pages/Select').then((module) => ({ default: module.SelectPage })),
+)
 const SwitchPage = lazy(() =>
   import('../../pages/Switch').then((module) => ({ default: module.SwitchPage })),
 )
@@ -86,7 +94,9 @@ const ResizablePage = lazy(() =>
 const TextareaPage = lazy(() =>
   import('../../pages/Textarea').then((module) => ({ default: module.TextareaPage })),
 )
-const TimePickerPage = lazy(() => import('../../pages/TimePicker').then((module) => ({ default: module.TimePickerPage })))
+const TimePickerPage = lazy(() =>
+  import('../../pages/TimePicker').then((module) => ({ default: module.TimePickerPage })),
+)
 const DataGridPage = lazy(() =>
   import('../../pages/DataGrid').then((module) => ({ default: module.DataGridPage })),
 )
@@ -96,8 +106,12 @@ const DatePickerPage = lazy(() =>
 const TreePage = lazy(() =>
   import('../../pages/Tree').then((module) => ({ default: module.TreePage })),
 )
-const CarouselPage = lazy(() => import('../../pages/Carousel').then((module) => ({ default: module.CarouselPage })))
-const UploadPage = lazy(() => import('../../pages/Upload').then((module) => ({ default: module.UploadPage })))
+const CarouselPage = lazy(() =>
+  import('../../pages/Carousel').then((module) => ({ default: module.CarouselPage })),
+)
+const UploadPage = lazy(() =>
+  import('../../pages/Upload').then((module) => ({ default: module.UploadPage })),
+)
 
 export const componentRoutes: AppRoute[] = [
   { path: '/auto-complete', component: AutoCompletePage },
@@ -233,4 +247,5 @@ export const componentRoutes: AppRoute[] = [
   },
   { path: '/transfer', component: TransferPage },
   { path: '/upload', component: UploadPage },
+  // eslint-disable-next-line unicorn/no-array-sort -- this literal is newly created and not shared.
 ].sort((left, right) => left.path.localeCompare(right.path))

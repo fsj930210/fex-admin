@@ -1,26 +1,8 @@
-import { createSelectController } from '@fex/components-core/select/create-select-controller'
-import { filterSelectOptions, groupSelectOptions } from '@fex/components-core/select/filter-options'
-import { getSelectVirtualRange } from '@fex/components-core/select/virtual'
-import type {
-  SelectFilterOption,
-  SelectMode,
-  SelectOption,
-  SelectVirtualOptions,
-} from '@fex/components-core/select/types'
-import { createSelectionController } from '@fex/components-core/selection/create-selection-controller'
-import type { SelectionValue } from '@fex/components-core/selection/types'
+import type { SelectOption } from '@fex/components-core/select/types'
 import {
   selectClearClassName,
-  selectContentClassName,
-  selectEmptyClassName,
-  selectGroupLabelClassName,
   selectIndicatorClassName,
   selectInputClassName,
-  selectListClassName,
-  selectLoadingClassName,
-  selectOptionClassName,
-  selectOptionIndicatorClassName,
-  selectOptionLabelClassName,
   selectPlaceholderClassName,
   selectSuffixClassName,
   selectTagClassName,
@@ -31,24 +13,13 @@ import {
   selectValueContainerClassName,
 } from '@fex/components-styles/select'
 import { cn } from '@fex/utils'
-import {
-  type ComponentProps,
-  type KeyboardEvent,
-  type ReactNode,
-  useId,
-  useRef,
-  useState,
-} from 'react'
+import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { ChevronDownIcon } from '../../icon/chevron'
-import { CheckIcon } from '../../icon/check'
 import { LoadingIcon } from '../../icon/loading'
 import { CloseIcon } from '../../icon/close'
-import { useCoreStore } from '../../hooks/use-core-store'
-import { useMemoizedFn } from '../../hooks/use-memoized-fn'
 import { InputClearButton } from '../input/input'
-import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from '../popover/popover'
-import { SelectContext } from './select-context'
-import { useSelect, useSelectOption } from './use-select'
+import { PopoverTrigger } from '../popover/popover'
+import { useSelect } from './use-select'
 
 export interface SelectTriggerProps extends Omit<ComponentProps<'div'>, 'children' | 'prefix'> {
   children?: ReactNode

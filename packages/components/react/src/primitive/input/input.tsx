@@ -45,7 +45,8 @@ export function InputRoot({
   children,
   ...props
 }: InputRootProps) {
-  const resolvedInvalid = invalid || status === 'error' || ariaInvalid === true || ariaInvalid === 'true'
+  const resolvedInvalid =
+    invalid || status === 'error' || ariaInvalid === true || ariaInvalid === 'true'
   const input = useInput({
     value,
     defaultValue,

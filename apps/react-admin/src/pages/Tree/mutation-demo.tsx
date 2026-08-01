@@ -14,20 +14,48 @@ export function TreeMutationDemo() {
       treeData: departmentTreeData,
       fieldNames: departmentFieldNames,
       isLeaf: (node) => node.childCount === 0,
-      features: [expansionFeature({ defaultExpandedKeys: ['company', 'engineering'] }), focusFeature()],
+      features: [
+        expansionFeature({ defaultExpandedKeys: ['company', 'engineering'] }),
+        focusFeature(),
+      ],
     }),
   )
 
   return (
-    <TreeDemoSection title="External controller and node mutation" description="The controller can live outside Tree. Renaming keeps the normalized index and updates only the subscribed node row; structural actions return a new immutable tree through onTreeDataChange.">
+    <TreeDemoSection
+      title="External controller and node mutation"
+      description="The controller can live outside Tree. Renaming keeps the normalized index and updates only the subscribed node row; structural actions return a new immutable tree through onTreeDataChange."
+    >
       <div className="mb-space-md flex flex-wrap gap-space-sm">
-        <Button size="sm" variant="outline" onClick={() => controller.updateNode('engineering', { name: 'Engineering (renamed)' })}>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => controller.updateNode('engineering', { name: 'Engineering (renamed)' })}
+        >
           Rename Engineering
         </Button>
-        <Button size="sm" variant="outline" onClick={() => controller.insertNode({ parentKey: 'engineering', node: { id: `api-${Date.now()}`, name: 'New API node', childrenList: [], childCount: 0 } })}>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() =>
+            controller.insertNode({
+              parentKey: 'engineering',
+              node: {
+                id: `api-${Date.now()}`,
+                name: 'New API node',
+                childrenList: [],
+                childCount: 0,
+              },
+            })
+          }
+        >
           Add child
         </Button>
-        <Button size="sm" variant="outline" onClick={() => controller.getFeature<FocusFeatureApi>('focus')?.reveal('design')}>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => controller.getFeature<FocusFeatureApi>('focus')?.reveal('design')}
+        >
           Reveal Design
         </Button>
       </div>

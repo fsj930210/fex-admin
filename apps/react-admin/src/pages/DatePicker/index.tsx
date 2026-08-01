@@ -16,7 +16,8 @@ export function DatePickerPage() {
           <div>
             <h1 className="text-2xl font-semibold text-foreground">DatePicker</h1>
             <p className="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
-              DatePicker primitive 组合 Input、Popover 和 Calendar，示例覆盖单选、多选、范围、禁用、面板切换和自定义渲染。
+              DatePicker primitive 组合 Input、Popover 和
+              Calendar，示例覆盖单选、多选、范围、禁用、面板切换和自定义渲染。
             </p>
           </div>
         </header>

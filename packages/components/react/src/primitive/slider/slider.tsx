@@ -1,6 +1,9 @@
 import { createSliderController } from '@fex/components-core/slider/create-slider-controller'
 import type { SliderOptions, SliderOrientation } from '@fex/components-core/slider/types'
-import { convertValueToPercentage, getSliderValueFromPointer } from '@fex/components-core/slider/utils'
+import {
+  convertValueToPercentage,
+  getSliderValueFromPointer,
+} from '@fex/components-core/slider/utils'
 import {
   sliderRangeClassName,
   sliderRootClassName,
@@ -19,7 +22,8 @@ import {
 import { useCoreStore } from '../../hooks/use-core-store'
 import { useLazyRef } from '../../hooks/use-lazy-ref'
 
-export interface SliderRootProps extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>, SliderStyleProps {
+export interface SliderRootProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'>, SliderStyleProps {
   value?: number[] | undefined
   defaultValue?: number[] | undefined
   min?: number
@@ -105,13 +109,36 @@ export function SliderRoot({
           if (event.defaultPrevented || snapshot.disabled || !rootRef.current) return
           rootRef.current.setPointerCapture(event.pointerId)
           const rect = rootRef.current.getBoundingClientRect()
-          controllerRef.current.startSlide(getSliderValueFromPointer(event.clientX, event.clientY, rect, snapshot.min, snapshot.max, snapshot.orientation))
+          controllerRef.current.startSlide(
+            getSliderValueFromPointer(
+              event.clientX,
+              event.clientY,
+              rect,
+              snapshot.min,
+              snapshot.max,
+              snapshot.orientation,
+            ),
+          )
         }}
         onPointerMove={(event) => {
           onPointerMove?.(event)
-          if (event.defaultPrevented || snapshot.disabled || !rootRef.current?.hasPointerCapture(event.pointerId)) return
+          if (
+            event.defaultPrevented ||
+            snapshot.disabled ||
+            !rootRef.current?.hasPointerCapture(event.pointerId)
+          )
+            return
           const rect = rootRef.current.getBoundingClientRect()
-          controllerRef.current.moveSlide(getSliderValueFromPointer(event.clientX, event.clientY, rect, snapshot.min, snapshot.max, snapshot.orientation))
+          controllerRef.current.moveSlide(
+            getSliderValueFromPointer(
+              event.clientX,
+              event.clientY,
+              rect,
+              snapshot.min,
+              snapshot.max,
+              snapshot.orientation,
+            ),
+          )
         }}
         onPointerUp={(event) => {
           onPointerUp?.(event)
@@ -134,7 +161,15 @@ export interface SliderTrackProps extends HTMLAttributes<HTMLSpanElement> {
 export function SliderTrack({ ref, className, ...props }: SliderTrackProps) {
   const { snapshot } = useSliderContext('SliderTrack')
 
-  return <span {...props} ref={ref} data-disabled={snapshot.disabled ? 'true' : undefined} data-orientation={snapshot.orientation} className={cn(sliderTrackClassName, className)} />
+  return (
+    <span
+      {...props}
+      ref={ref}
+      data-disabled={snapshot.disabled ? 'true' : undefined}
+      data-orientation={snapshot.orientation}
+      className={cn(sliderTrackClassName, className)}
+    />
+  )
 }
 
 export interface SliderRangeProps extends HTMLAttributes<HTMLSpanElement> {
@@ -143,7 +178,9 @@ export interface SliderRangeProps extends HTMLAttributes<HTMLSpanElement> {
 
 export function SliderRange({ ref, className, style, ...props }: SliderRangeProps) {
   const { snapshot } = useSliderContext('SliderRange')
-  const percentages = snapshot.values.map((value) => convertValueToPercentage(value, snapshot.min, snapshot.max))
+  const percentages = snapshot.values.map((value) =>
+    convertValueToPercentage(value, snapshot.min, snapshot.max),
+  )
   const start = snapshot.values.length > 1 ? Math.min(...percentages) : 0
   const end = 100 - Math.max(...percentages)
 
@@ -154,7 +191,11 @@ export function SliderRange({ ref, className, style, ...props }: SliderRangeProp
       data-disabled={snapshot.disabled ? 'true' : undefined}
       data-orientation={snapshot.orientation}
       className={cn(sliderRangeClassName, className)}
-      style={snapshot.orientation === 'vertical' ? { bottom: `${start}%`, top: `${end}%`, ...style } : { left: `${start}%`, right: `${end}%`, ...style }}
+      style={
+        snapshot.orientation === 'vertical'
+          ? { bottom: `${start}%`, top: `${end}%`, ...style }
+          : { left: `${start}%`, right: `${end}%`, ...style }
+      }
     />
   )
 }
@@ -164,7 +205,11 @@ export interface SliderThumbProps extends HTMLAttributes<HTMLSpanElement> {
   ref?: Ref<HTMLSpanElement>
 }
 
-function handleThumbKeyDown(event: KeyboardEvent<HTMLSpanElement>, index: number, context: SliderContextValue) {
+function handleThumbKeyDown(
+  event: KeyboardEvent<HTMLSpanElement>,
+  index: number,
+  context: SliderContextValue,
+) {
   const { controller, snapshot } = context
   const isRtl = false
   const directionMap: Record<string, number> = {
@@ -193,15 +238,33 @@ function handleThumbKeyDown(event: KeyboardEvent<HTMLSpanElement>, index: number
   }
 }
 
-export function SliderThumb({ index = 0, ref, className, style, onFocus, onKeyDown, ...props }: SliderThumbProps) {
+export function SliderThumb({
+  index = 0,
+  ref,
+  className,
+  style,
+  onFocus,
+  onKeyDown,
+  ...props
+}: SliderThumbProps) {
   const context = useSliderContext('SliderThumb')
   const { controller, snapshot } = context
   const value = snapshot.values[index] ?? snapshot.min
   const percent = convertValueToPercentage(value, snapshot.min, snapshot.max)
   const positionStyle =
     snapshot.orientation === 'vertical'
-      ? { position: 'absolute' as const, bottom: `${percent}%`, left: '50%', transform: 'translate(-50%, 50%)' }
-      : { position: 'absolute' as const, top: '50%', left: `${percent}%`, transform: 'translate(-50%, -50%)' }
+      ? {
+          position: 'absolute' as const,
+          bottom: `${percent}%`,
+          left: '50%',
+          transform: 'translate(-50%, 50%)',
+        }
+      : {
+          position: 'absolute' as const,
+          top: '50%',
+          left: `${percent}%`,
+          transform: 'translate(-50%, -50%)',
+        }
 
   return (
     <span

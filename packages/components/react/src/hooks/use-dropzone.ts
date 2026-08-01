@@ -2,8 +2,17 @@ import { createDropzoneController } from '@fex/components-core/dropzone/create-d
 import { getFilesFromDataTransfer } from '@fex/components-core/dropzone/files'
 import { shallowEqualObject } from '@fex/utils'
 import { useRef, useState, useSyncExternalStore } from 'react'
-import type { ChangeEvent, DragEvent, HTMLAttributes, InputHTMLAttributes, RefCallback } from 'react'
-import type { DropzoneFileRejection, DropzoneValidationOptions } from '@fex/components-core/dropzone/types'
+import type {
+  ChangeEvent,
+  DragEvent,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  RefCallback,
+} from 'react'
+import type {
+  DropzoneFileRejection,
+  DropzoneValidationOptions,
+} from '@fex/components-core/dropzone/types'
 import { useMemoizedFn } from './use-memoized-fn'
 import { useLazyRef } from './use-lazy-ref'
 

@@ -1,4 +1,17 @@
-import { Field, FieldContent, FieldControl, FieldDescription, FieldError, FieldGroup, FieldLabel, FieldLegend, FieldRequiredIndicator, FieldRoot, FieldSet, FieldTitle } from '@fex/components-solid/primitive/field'
+import {
+  Field,
+  FieldContent,
+  FieldControl,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldRequiredIndicator,
+  FieldRoot,
+  FieldSet,
+  FieldTitle,
+} from '@fex/components-solid/primitive/field'
 import { createForm, Form, scrollToField } from '@fex/components-solid/primitive/form'
 import { InputControl, InputRoot } from '@fex/components-solid/primitive/input'
 import { Button } from '@fex/components-solid/ui/button'
@@ -7,53 +20,726 @@ import { Checkbox } from '@fex/components-solid/ui/checkbox'
 import { A } from '@solidjs/router'
 import { createSignal, For, Show, type JSX } from 'solid-js'
 
-const locations = { 浙江: ['杭州', '宁波', '温州'], 江苏: ['南京', '苏州', '无锡'], 广东: ['广州', '深圳', '珠海'] } as const
+const locations = {
+  浙江: ['杭州', '宁波', '温州'],
+  江苏: ['南京', '苏州', '无锡'],
+  广东: ['广州', '深圳', '珠海'],
+} as const
 type Province = keyof typeof locations
-interface Contact { email: string; id: string; name: string; notifications: boolean }
-const selectClass = 'h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-ring/20'
+interface Contact {
+  email: string
+  id: string
+  name: string
+  notifications: boolean
+}
+const selectClass =
+  'h-9 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-ring/20'
 const errors = (items: readonly unknown[]) => [...new Set(items.map(String))] as JSX.Element[]
-const emailValidator = ({ value }: { value: unknown }) => /^\S+@\S+\.\S+$/.test(String(value)) ? undefined : '请输入有效邮箱'
-const createContact = (): Contact => ({ id: crypto.randomUUID(), name: '', email: '', notifications: false })
+const emailValidator = ({ value }: { value: unknown }) =>
+  /^\S+@\S+\.\S+$/.test(String(value)) ? undefined : '请输入有效邮箱'
+const createContact = (): Contact => ({
+  id: crypto.randomUUID(),
+  name: '',
+  email: '',
+  notifications: false,
+})
 
-function TextField(props: { autocomplete?: string; description?: JSX.Element; label: JSX.Element; name: string; placeholder?: string; required?: boolean; type?: 'email' | 'password' | 'text'; validators?: unknown }) {
-  return <Field name={props.name} validators={props.validators}>{(field) => { const invalid = () => field().state.meta.isTouched && !field().state.meta.isValid; return <FieldRoot required={props.required === true} invalid={invalid()} hasDescription={Boolean(props.description)} hasError={invalid()}><FieldLabel>{props.label} <Show when={props.required}><FieldRequiredIndicator /></Show></FieldLabel><FieldControl>{({ props: controlProps }) => <InputRoot value={field().state.value as string} onValueChange={field().handleChange} invalid={invalid()}><InputControl {...controlProps} data-field-name={props.name} autocomplete={props.autocomplete} placeholder={props.placeholder} type={props.type ?? 'text'} onBlur={field().handleBlur} /></InputRoot>}</FieldControl><Show when={props.description}><FieldDescription>{props.description}</FieldDescription></Show><Show when={invalid()}><FieldError errors={errors(field().state.meta.errors)} /></Show></FieldRoot> }}</Field>
+function TextField(props: {
+  autocomplete?: string
+  description?: JSX.Element
+  label: JSX.Element
+  name: string
+  placeholder?: string
+  required?: boolean
+  type?: 'email' | 'password' | 'text'
+  validators?: unknown
+}) {
+  return (
+    <Field name={props.name} validators={props.validators}>
+      {(field) => {
+        const invalid = () => field().state.meta.isTouched && !field().state.meta.isValid
+        return (
+          <FieldRoot
+            required={props.required === true}
+            invalid={invalid()}
+            hasDescription={Boolean(props.description)}
+            hasError={invalid()}
+          >
+            <FieldLabel>
+              {props.label}{' '}
+              <Show when={props.required}>
+                <FieldRequiredIndicator />
+              </Show>
+            </FieldLabel>
+            <FieldControl>
+              {({ props: controlProps }) => (
+                <InputRoot
+                  value={field().state.value as string}
+                  onValueChange={field().handleChange}
+                  invalid={invalid()}
+                >
+                  <InputControl
+                    {...controlProps}
+                    data-field-name={props.name}
+                    autocomplete={props.autocomplete}
+                    placeholder={props.placeholder}
+                    type={props.type ?? 'text'}
+                    onBlur={field().handleBlur}
+                  />
+                </InputRoot>
+              )}
+            </FieldControl>
+            <Show when={props.description}>
+              <FieldDescription>{props.description}</FieldDescription>
+            </Show>
+            <Show when={invalid()}>
+              <FieldError errors={errors(field().state.meta.errors)} />
+            </Show>
+          </FieldRoot>
+        )
+      }}
+    </Field>
+  )
 }
 
 export function FormPage() {
   const [result, setResult] = createSignal('尚未提交')
   const [instanceResult, setInstanceResult] = createSignal('点击按钮读取或设置字段值')
-  const loginForm = createForm(() => ({ defaultValues: { account: '', password: '', remember: false }, onSubmit: async ({ value }) => { await new Promise((resolve) => setTimeout(resolve, 300)); setResult(`登录：${JSON.stringify(value)}`) } }))
-  const validationForm = createForm(() => ({ defaultValues: { username: '', password: '', confirmPassword: '' }, onSubmit: ({ value }) => setResult(`校验：${JSON.stringify(value)}`) }))
-  const dynamicRuleForm = createForm(() => ({ defaultValues: { nicknameRequired: true, nickname: '' }, onSubmit: ({ value }) => setResult(`动态规则：${JSON.stringify(value)}`) }))
-  const cascadeForm = createForm(() => ({ defaultValues: { province: '浙江' as Province, city: '杭州' }, onSubmit: ({ value }) => setResult(`级联：${JSON.stringify(value)}`) }))
-  const instanceForm = createForm(() => ({ defaultValues: { source: '来自 Form defaultValues', nickname: '' } }))
-  const contactsForm = createForm(() => ({ defaultValues: { contacts: [{ id: 'primary', name: '', email: '', notifications: true }] as Contact[] }, onSubmit: ({ value }) => setResult(`联系人：${JSON.stringify(value)}`) }))
-  const prefixedForm = createForm(() => ({ defaultValues: { profile: { displayName: '', email: '' } }, onSubmit: ({ value }) => setResult(`路径前缀：${JSON.stringify(value)}`) }))
-  const profileForm = createForm(() => ({ defaultValues: { name: '', email: '' }, onSubmit: ({ value }) => setResult(`资料表单：${JSON.stringify(value)}`) }))
-  const securityForm = createForm(() => ({ defaultValues: { notificationEmail: '', twoFactor: false }, onSubmit: ({ value }) => setResult(`安全表单：${JSON.stringify(value)}`) }))
-  const scrollForm = createForm(() => ({ defaultValues: { note: '', deliveryAddress: '' }, onSubmit: ({ value }) => setResult(`长表单：${JSON.stringify(value)}`) }))
-  const accountValidators = { onBlur: ({ value }: { value: string }) => value.trim() ? undefined : '请输入账号', onSubmit: ({ value }: { value: string }) => value.trim() ? undefined : '请输入账号' }
-  const loginPasswordValidators = { onChange: ({ value }: { value: string }) => value.length >= 6 ? undefined : '密码至少 6 位', onSubmit: ({ value }: { value: string }) => value.length >= 6 ? undefined : '密码至少 6 位' }
-  const usernameValidators = { onBlur: ({ value }: { value: string }) => value.trim() ? undefined : '请输入用户名', onChangeAsync: async ({ value }: { value: string }) => { await new Promise((resolve) => setTimeout(resolve, 200)); return value === 'admin' ? '用户名已被占用' : undefined }, onChangeAsyncDebounceMs: 400 }
-  const newPasswordValidators = { onChange: ({ value }: { value: string }) => value.length >= 8 ? undefined : '密码至少 8 位' }
-  const confirmValidators = { onChange: ({ value }: { value: string }) => !value ? '请再次输入密码' : value === validationForm.getFieldValue('password') ? undefined : '两次密码不一致', onChangeListenTo: ['password'] }
-  const nicknameValidators = { onChange: ({ value }: { value: string }) => dynamicRuleForm.getFieldValue('nicknameRequired') && !value.trim() ? '请输入昵称' : undefined, onChangeListenTo: ['nicknameRequired'] }
-  const contactNameValidators = { onChange: ({ value }: { value: string }) => value.trim() ? undefined : '请输入联系人姓名' }
-  const contactEmailValidators = { onChange: ({ value }: { value: string }) => /^\S+@\S+\.\S+$/.test(value) ? undefined : '邮箱格式不正确' }
-  const displayNameValidators = { onChange: ({ value }: { value: string }) => value.trim() ? undefined : '请输入显示名称' }
-  const deliveryAddressValidators = { onSubmit: ({ value }: { value: string }) => value.trim() ? undefined : '请输入收货地址' }
+  const loginForm = createForm(() => ({
+    defaultValues: { account: '', password: '', remember: false },
+    onSubmit: async ({ value }) => {
+      await new Promise((resolve) => setTimeout(resolve, 300))
+      setResult(`登录：${JSON.stringify(value)}`)
+    },
+  }))
+  const validationForm = createForm(() => ({
+    defaultValues: { username: '', password: '', confirmPassword: '' },
+    onSubmit: ({ value }) => setResult(`校验：${JSON.stringify(value)}`),
+  }))
+  const dynamicRuleForm = createForm(() => ({
+    defaultValues: { nicknameRequired: true, nickname: '' },
+    onSubmit: ({ value }) => setResult(`动态规则：${JSON.stringify(value)}`),
+  }))
+  const cascadeForm = createForm(() => ({
+    defaultValues: { province: '浙江' as Province, city: '杭州' },
+    onSubmit: ({ value }) => setResult(`级联：${JSON.stringify(value)}`),
+  }))
+  const instanceForm = createForm(() => ({
+    defaultValues: { source: '来自 Form defaultValues', nickname: '' },
+  }))
+  const contactsForm = createForm(() => ({
+    defaultValues: {
+      contacts: [{ id: 'primary', name: '', email: '', notifications: true }] as Contact[],
+    },
+    onSubmit: ({ value }) => setResult(`联系人：${JSON.stringify(value)}`),
+  }))
+  const prefixedForm = createForm(() => ({
+    defaultValues: { profile: { displayName: '', email: '' } },
+    onSubmit: ({ value }) => setResult(`路径前缀：${JSON.stringify(value)}`),
+  }))
+  const profileForm = createForm(() => ({
+    defaultValues: { name: '', email: '' },
+    onSubmit: ({ value }) => setResult(`资料表单：${JSON.stringify(value)}`),
+  }))
+  const securityForm = createForm(() => ({
+    defaultValues: { notificationEmail: '', twoFactor: false },
+    onSubmit: ({ value }) => setResult(`安全表单：${JSON.stringify(value)}`),
+  }))
+  const scrollForm = createForm(() => ({
+    defaultValues: { note: '', deliveryAddress: '' },
+    onSubmit: ({ value }) => setResult(`长表单：${JSON.stringify(value)}`),
+  }))
+  const accountValidators = {
+    onBlur: ({ value }: { value: string }) => (value.trim() ? undefined : '请输入账号'),
+    onSubmit: ({ value }: { value: string }) => (value.trim() ? undefined : '请输入账号'),
+  }
+  const loginPasswordValidators = {
+    onChange: ({ value }: { value: string }) => (value.length >= 6 ? undefined : '密码至少 6 位'),
+    onSubmit: ({ value }: { value: string }) => (value.length >= 6 ? undefined : '密码至少 6 位'),
+  }
+  const usernameValidators = {
+    onBlur: ({ value }: { value: string }) => (value.trim() ? undefined : '请输入用户名'),
+    onChangeAsync: async ({ value }: { value: string }) => {
+      await new Promise((resolve) => setTimeout(resolve, 200))
+      return value === 'admin' ? '用户名已被占用' : undefined
+    },
+    onChangeAsyncDebounceMs: 400,
+  }
+  const newPasswordValidators = {
+    onChange: ({ value }: { value: string }) => (value.length >= 8 ? undefined : '密码至少 8 位'),
+  }
+  const confirmValidators = {
+    onChange: ({ value }: { value: string }) =>
+      !value
+        ? '请再次输入密码'
+        : value === validationForm.getFieldValue('password')
+          ? undefined
+          : '两次密码不一致',
+    onChangeListenTo: ['password'],
+  }
+  const nicknameValidators = {
+    onChange: ({ value }: { value: string }) =>
+      dynamicRuleForm.getFieldValue('nicknameRequired') && !value.trim() ? '请输入昵称' : undefined,
+    onChangeListenTo: ['nicknameRequired'],
+  }
+  const contactNameValidators = {
+    onChange: ({ value }: { value: string }) => (value.trim() ? undefined : '请输入联系人姓名'),
+  }
+  const contactEmailValidators = {
+    onChange: ({ value }: { value: string }) =>
+      /^\S+@\S+\.\S+$/.test(value) ? undefined : '邮箱格式不正确',
+  }
+  const displayNameValidators = {
+    onChange: ({ value }: { value: string }) => (value.trim() ? undefined : '请输入显示名称'),
+  }
+  const deliveryAddressValidators = {
+    onSubmit: ({ value }: { value: string }) => (value.trim() ? undefined : '请输入收货地址'),
+  }
 
-  return <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl"><div class="mx-auto w-full max-w-5xl space-y-space-xl">
-    <header class="space-y-space-md"><A class="text-sm text-muted-foreground hover:text-foreground" href="/">返回首页</A><div><h1 class="text-2xl font-semibold text-foreground">Form and Field primitives</h1><p class="max-w-3xl text-sm leading-6 text-muted-foreground">Form 提供提交边界和 form 实例上下文；Field 是唯一字段状态入口。FieldRoot、Label、Control、Description 和 Error 只负责 DOM 语义、可访问性与结构。</p></div></header>
-    <Card title="Basic form" description="Field 是唯一字段入口；直接使用 TanStack validators 管理校验。"><Form form={loginForm} class="grid max-w-xl gap-space-lg"><TextField name="account" label="账号" required autocomplete="username" placeholder="admin" description="使用 validators.onBlur 校验必填。" validators={accountValidators} /><TextField name="password" label="密码" required type="password" autocomplete="current-password" validators={loginPasswordValidators} /><Field name="remember">{(field) => <FieldRoot orientation="horizontal"><FieldControl>{({ props }) => <Checkbox {...props} checked={field().state.value as boolean} onCheckedChange={(checked) => field().handleChange(checked === true)} />}</FieldControl><FieldContent><FieldLabel>记住登录状态</FieldLabel><FieldDescription>自定义控件显式绑定值与事件。</FieldDescription></FieldContent></FieldRoot>}</Field><div class="flex gap-space-sm"><loginForm.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting] as const}>{(state) => <Button type="submit" disabled={!state()[0] || state()[1]}>{state()[1] ? '提交中…' : '登录'}</Button>}</loginForm.Subscribe><Button type="button" variant="outline" onClick={() => loginForm.reset()}>重置</Button></div></Form></Card>
-    <Card title="Validation timing, async validation and dependencies" description="展示 onBlur、onChangeAsync、防抖与 onChangeListenTo。"><Form form={validationForm} class="grid max-w-xl gap-space-lg"><TextField name="username" label="用户名" required description="onBlur 校验必填；onChangeAsync 经 400ms 防抖校验占用。" validators={usernameValidators} /><TextField name="password" label="新密码" required type="password" validators={newPasswordValidators} /><TextField name="confirmPassword" label="确认密码" required type="password" description="password 变化时，onChangeListenTo 会重跑当前字段校验。" validators={confirmValidators} /><Button class="w-fit" type="submit">验证</Button></Form></Card>
-    <Card title="Dynamic validation and cascading updates" description="业务联动在用户事件中完成；校验依赖使用 TanStack validators.onChangeListenTo。"><div class="grid gap-space-xl lg:grid-cols-2"><Form form={dynamicRuleForm} class="grid gap-space-lg"><Field name="nicknameRequired">{(field) => <FieldRoot orientation="horizontal"><FieldControl>{({ props }) => <Checkbox {...props} checked={field().state.value as boolean} onCheckedChange={(checked) => field().handleChange(checked === true)} />}</FieldControl><FieldContent><FieldLabel>昵称必填</FieldLabel><FieldDescription>开关改变后，昵称字段的 onChange 校验会自动重跑。</FieldDescription></FieldContent></FieldRoot>}</Field><TextField name="nickname" label="昵称" required={dynamicRuleForm.getFieldValue('nicknameRequired')} validators={nicknameValidators} /><Button class="w-fit" type="submit">检查规则</Button></Form><Form form={cascadeForm} class="grid gap-space-lg"><Field name="province">{(field) => <FieldRoot><FieldLabel>省份</FieldLabel><FieldControl>{({ props }) => <select {...props as Record<string, unknown>} class={selectClass} value={field().state.value as string} onChange={(event) => { const province = event.currentTarget.value as Province; field().handleChange(province); cascadeForm.setFieldValue('city', locations[province][0]) }}>{Object.keys(locations).map((province) => <option value={province}>{province}</option>)}</select>}</FieldControl></FieldRoot>}</Field><cascadeForm.Subscribe selector={(state) => state.values.province}>{(province) => <Field name="city">{(field) => <FieldRoot hasDescription><FieldLabel>城市</FieldLabel><FieldControl>{({ props }) => <select {...props as Record<string, unknown>} class={selectClass} value={field().state.value as string} onChange={(event) => field().handleChange(event.currentTarget.value)}>{locations[province()].map((city) => <option value={city}>{city}</option>)}</select>}</FieldControl><FieldDescription>省份 change 事件中同步重设城市。</FieldDescription></FieldRoot>}</Field>}</cascadeForm.Subscribe><Button class="w-fit" type="submit">保存地区</Button></Form></div></Card>
-    <Card title="Field structure and primitive layouts" description="布局属于 Field 的 DOM 结构能力，不是 Form 的 labelCol/wrapperCol 配置；UI 层以后只组合这些 primitive。"><FieldGroup><FieldRoot orientation="vertical"><FieldLabel>Vertical</FieldLabel><InputRoot value=""><InputControl placeholder="标签在上方" /></InputRoot></FieldRoot><FieldRoot orientation="horizontal"><FieldLabel>Horizontal</FieldLabel><InputRoot value=""><InputControl placeholder="标签按内容宽度排列" /></InputRoot></FieldRoot><FieldRoot orientation="responsive"><FieldLabel>Responsive</FieldLabel><InputRoot value=""><InputControl placeholder="窄屏纵向，变宽后横向" /></InputRoot></FieldRoot></FieldGroup><FieldGroup orientation="inline" class="mt-space-lg"><FieldRoot orientation="inline"><FieldLabel>关键字</FieldLabel><InputRoot value=""><InputControl class="w-48" placeholder="内联筛选" /></InputRoot></FieldRoot><FieldRoot orientation="inline"><FieldLabel>状态</FieldLabel><select class={`${selectClass} w-32`}><option>全部</option><option>启用</option></select></FieldRoot><Button type="button" variant="outline">查询</Button></FieldGroup></Card>
-    <Card title="Form instance and defaultValue" description="字段默认值，以及 getFieldValue、setFieldValue、reset 等 TanStack Form 实例方法。"><Form form={instanceForm} class="grid max-w-xl gap-space-lg"><Field name="source">{(field) => <FieldRoot hasDescription><FieldLabel>Form 初始值</FieldLabel><FieldControl>{({ props }) => <InputRoot value={field().state.value as string} onValueChange={field().handleChange}><InputControl {...props} onBlur={field().handleBlur} /></InputRoot>}</FieldControl><FieldDescription>来自 useForm.defaultValues。</FieldDescription></FieldRoot>}</Field><Field name="nickname" defaultValue="来自 Field defaultValue">{(field) => <FieldRoot hasDescription><FieldLabel>字段初始值</FieldLabel><FieldControl>{({ props }) => <InputRoot value={field().state.value as string} onValueChange={field().handleChange}><InputControl {...props} onBlur={field().handleBlur} /></InputRoot>}</FieldControl><FieldDescription>使用 TanStack 原生 defaultValue。</FieldDescription></FieldRoot>}</Field><div class="flex flex-wrap gap-space-sm"><Button type="button" onClick={() => instanceForm.setFieldValue('nickname', '通过 setFieldValue 设置')}>设置昵称</Button><Button type="button" variant="outline" onClick={() => setInstanceResult(String(instanceForm.getFieldValue('nickname')))}>读取昵称</Button><Button type="button" variant="outline" onClick={() => instanceForm.reset()}>重置</Button></div><p class="rounded-md bg-muted px-3 py-2 text-sm text-muted-foreground" aria-live="polite">{instanceResult()}</p></Form></Card>
-    <Card title="Dynamic nested fields" description="数组本身也是 Field；在用户事件中调用 pushValue、insertValue、removeValue。嵌套字段使用完整路径，数组项使用稳定业务 id 作为 React key。"><Form form={contactsForm} class="grid gap-space-lg"><Field name="contacts" validators={{ onSubmit: ({ value }: { value: Contact[] }) => value.length > 0 ? undefined : '至少保留一位联系人' }}>{(contactsField) => <><FieldSet><FieldLegend>联系人</FieldLegend><p class="text-sm text-muted-foreground">每位联系人的姓名、邮箱和通知偏好都是独立的嵌套字段。</p><FieldGroup><For each={contactsField().state.value as Contact[]}>{(contact, index) => <div class="rounded-md border border-border p-4"><FieldTitle>联系人 {index() + 1}</FieldTitle><FieldGroup class="mt-space-md"><TextField name={`contacts[${index()}].name`} label="姓名" required validators={contactNameValidators} /><TextField name={`contacts[${index()}].email`} label="邮箱" required type="email" validators={contactEmailValidators} /><Field name={`contacts[${index()}].notifications`}>{(field) => <FieldRoot orientation="horizontal"><FieldControl>{({ props }) => <Checkbox {...props} checked={field().state.value as boolean} onCheckedChange={(checked) => field().handleChange(checked === true)} />}</FieldControl><FieldContent><FieldLabel>接收通知</FieldLabel><FieldDescription>嵌套布尔字段。</FieldDescription></FieldContent></FieldRoot>}</Field></FieldGroup><div class="mt-space-md flex gap-space-sm"><Button type="button" variant="outline" onClick={() => void contactsField().insertValue(index() + 1, createContact())}>在后面插入</Button><Button type="button" variant="outline" disabled={(contactsField().state.value as Contact[]).length === 1} onClick={() => void contactsField().removeValue(index())}>删除</Button></div></div>}</For></FieldGroup></FieldSet><Button class="w-fit" type="button" variant="outline" onClick={() => contactsField().pushValue(createContact())}>新增联系人</Button></>}</Field><Button class="w-fit" type="submit">校验并保存联系人</Button></Form></Card>
-    <Card title="Path prefix and multiple forms" description="primitive 不隐藏路径来源，也不注册全局 Form.Provider；跨表单更新由明确的用户事件完成。"><div class="grid gap-space-xl lg:grid-cols-2"><Form form={prefixedForm} class="grid gap-space-lg"><FieldSet><FieldLegend>profile</FieldLegend><FieldGroup><TextField name="profile.displayName" label="显示名称" required validators={displayNameValidators} /><TextField name="profile.email" label="联系邮箱" type="email" validators={{ onBlur: ({ value }: { value: string }) => !value || emailValidator({ value }) }} /></FieldGroup></FieldSet><Button class="w-fit" type="submit">提交 profile</Button></Form><div class="grid gap-space-md"><Form form={profileForm} class="grid gap-space-md rounded-md border border-border p-4"><FieldTitle>资料表单</FieldTitle><TextField name="name" label="姓名" /><TextField name="email" label="资料邮箱" type="email" required validators={{ onChange: emailValidator }} /><Button class="w-fit" type="submit">保存资料</Button></Form><Form form={securityForm} class="grid gap-space-md rounded-md border border-border p-4"><FieldTitle>安全表单</FieldTitle><TextField name="notificationEmail" label="通知邮箱" type="email" required validators={{ onChange: emailValidator }} /><Field name="twoFactor">{(field) => <FieldRoot orientation="horizontal"><FieldControl>{({ props }) => <Checkbox {...props} checked={field().state.value as boolean} onCheckedChange={(checked) => field().handleChange(checked === true)} />}</FieldControl><FieldLabel>开启双因素认证</FieldLabel></FieldRoot>}</Field><div class="flex gap-space-sm"><Button type="button" variant="outline" onClick={() => securityForm.setFieldValue('notificationEmail', profileForm.getFieldValue('email'))}>使用资料邮箱</Button><Button type="submit">保存安全设置</Button></div></Form></div></div></Card>
-    <Card title="Scroll to a specific field" description="scrollToField 是独立方法，可以定位任意字段；Form 提交失败时才自动定位第一个无效 FieldControl。"><Form form={scrollForm} class="grid max-w-xl gap-space-lg"><div class="flex flex-wrap gap-space-sm"><Button type="button" variant="outline" onClick={() => void scrollToField(document, 'deliveryAddress', { behavior: 'smooth', block: 'center', focus: true })}>定位收货地址</Button><Button type="submit">提交并定位首个错误</Button></div><TextField name="note" label="备注（选填）" /><div class="flex min-h-[24rem] items-center justify-center rounded-md border border-dashed border-border text-sm text-muted-foreground">模拟长表单内容</div><TextField name="deliveryAddress" label="收货地址" required placeholder="位于长表单底部" validators={deliveryAddressValidators} /></Form></Card>
-    <Card title="Latest result"><pre class="overflow-auto rounded-md bg-muted p-3 text-sm text-muted-foreground">{result()}</pre></Card>
-  </div></main>
+  return (
+    <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
+      <div class="mx-auto w-full max-w-5xl space-y-space-xl">
+        <header class="space-y-space-md">
+          <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
+            返回首页
+          </A>
+          <div>
+            <h1 class="text-2xl font-semibold text-foreground">Form and Field primitives</h1>
+            <p class="max-w-3xl text-sm leading-6 text-muted-foreground">
+              Form 提供提交边界和 form 实例上下文；Field
+              是唯一字段状态入口。FieldRoot、Label、Control、Description 和 Error 只负责 DOM
+              语义、可访问性与结构。
+            </p>
+          </div>
+        </header>
+        <Card
+          title="Basic form"
+          description="Field 是唯一字段入口；直接使用 TanStack validators 管理校验。"
+        >
+          <Form form={loginForm} class="grid max-w-xl gap-space-lg">
+            <TextField
+              name="account"
+              label="账号"
+              required
+              autocomplete="username"
+              placeholder="admin"
+              description="使用 validators.onBlur 校验必填。"
+              validators={accountValidators}
+            />
+            <TextField
+              name="password"
+              label="密码"
+              required
+              type="password"
+              autocomplete="current-password"
+              validators={loginPasswordValidators}
+            />
+            <Field name="remember">
+              {(field) => (
+                <FieldRoot orientation="horizontal">
+                  <FieldControl>
+                    {({ props }) => (
+                      <Checkbox
+                        {...props}
+                        checked={field().state.value as boolean}
+                        onCheckedChange={(checked) => field().handleChange(checked === true)}
+                      />
+                    )}
+                  </FieldControl>
+                  <FieldContent>
+                    <FieldLabel>记住登录状态</FieldLabel>
+                    <FieldDescription>自定义控件显式绑定值与事件。</FieldDescription>
+                  </FieldContent>
+                </FieldRoot>
+              )}
+            </Field>
+            <div class="flex gap-space-sm">
+              <loginForm.Subscribe
+                selector={(state) => [state.canSubmit, state.isSubmitting] as const}
+              >
+                {(state) => (
+                  <Button type="submit" disabled={!state()[0] || state()[1]}>
+                    {state()[1] ? '提交中…' : '登录'}
+                  </Button>
+                )}
+              </loginForm.Subscribe>
+              <Button type="button" variant="outline" onClick={() => loginForm.reset()}>
+                重置
+              </Button>
+            </div>
+          </Form>
+        </Card>
+        <Card
+          title="Validation timing, async validation and dependencies"
+          description="展示 onBlur、onChangeAsync、防抖与 onChangeListenTo。"
+        >
+          <Form form={validationForm} class="grid max-w-xl gap-space-lg">
+            <TextField
+              name="username"
+              label="用户名"
+              required
+              description="onBlur 校验必填；onChangeAsync 经 400ms 防抖校验占用。"
+              validators={usernameValidators}
+            />
+            <TextField
+              name="password"
+              label="新密码"
+              required
+              type="password"
+              validators={newPasswordValidators}
+            />
+            <TextField
+              name="confirmPassword"
+              label="确认密码"
+              required
+              type="password"
+              description="password 变化时，onChangeListenTo 会重跑当前字段校验。"
+              validators={confirmValidators}
+            />
+            <Button class="w-fit" type="submit">
+              验证
+            </Button>
+          </Form>
+        </Card>
+        <Card
+          title="Dynamic validation and cascading updates"
+          description="业务联动在用户事件中完成；校验依赖使用 TanStack validators.onChangeListenTo。"
+        >
+          <div class="grid gap-space-xl lg:grid-cols-2">
+            <Form form={dynamicRuleForm} class="grid gap-space-lg">
+              <Field name="nicknameRequired">
+                {(field) => (
+                  <FieldRoot orientation="horizontal">
+                    <FieldControl>
+                      {({ props }) => (
+                        <Checkbox
+                          {...props}
+                          checked={field().state.value as boolean}
+                          onCheckedChange={(checked) => field().handleChange(checked === true)}
+                        />
+                      )}
+                    </FieldControl>
+                    <FieldContent>
+                      <FieldLabel>昵称必填</FieldLabel>
+                      <FieldDescription>
+                        开关改变后，昵称字段的 onChange 校验会自动重跑。
+                      </FieldDescription>
+                    </FieldContent>
+                  </FieldRoot>
+                )}
+              </Field>
+              <TextField
+                name="nickname"
+                label="昵称"
+                required={dynamicRuleForm.getFieldValue('nicknameRequired')}
+                validators={nicknameValidators}
+              />
+              <Button class="w-fit" type="submit">
+                检查规则
+              </Button>
+            </Form>
+            <Form form={cascadeForm} class="grid gap-space-lg">
+              <Field name="province">
+                {(field) => (
+                  <FieldRoot>
+                    <FieldLabel>省份</FieldLabel>
+                    <FieldControl>
+                      {({ props }) => (
+                        <select
+                          {...(props as Record<string, unknown>)}
+                          class={selectClass}
+                          value={field().state.value as string}
+                          onChange={(event) => {
+                            const province = event.currentTarget.value as Province
+                            field().handleChange(province)
+                            cascadeForm.setFieldValue('city', locations[province][0])
+                          }}
+                        >
+                          {Object.keys(locations).map((province) => (
+                            <option value={province}>{province}</option>
+                          ))}
+                        </select>
+                      )}
+                    </FieldControl>
+                  </FieldRoot>
+                )}
+              </Field>
+              <cascadeForm.Subscribe selector={(state) => state.values.province}>
+                {(province) => (
+                  <Field name="city">
+                    {(field) => (
+                      <FieldRoot hasDescription>
+                        <FieldLabel>城市</FieldLabel>
+                        <FieldControl>
+                          {({ props }) => (
+                            <select
+                              {...(props as Record<string, unknown>)}
+                              class={selectClass}
+                              value={field().state.value as string}
+                              onChange={(event) => field().handleChange(event.currentTarget.value)}
+                            >
+                              {locations[province()].map((city) => (
+                                <option value={city}>{city}</option>
+                              ))}
+                            </select>
+                          )}
+                        </FieldControl>
+                        <FieldDescription>省份 change 事件中同步重设城市。</FieldDescription>
+                      </FieldRoot>
+                    )}
+                  </Field>
+                )}
+              </cascadeForm.Subscribe>
+              <Button class="w-fit" type="submit">
+                保存地区
+              </Button>
+            </Form>
+          </div>
+        </Card>
+        <Card
+          title="Field structure and primitive layouts"
+          description="布局属于 Field 的 DOM 结构能力，不是 Form 的 labelCol/wrapperCol 配置；UI 层以后只组合这些 primitive。"
+        >
+          <FieldGroup>
+            <FieldRoot orientation="vertical">
+              <FieldLabel>Vertical</FieldLabel>
+              <InputRoot value="">
+                <InputControl placeholder="标签在上方" />
+              </InputRoot>
+            </FieldRoot>
+            <FieldRoot orientation="horizontal">
+              <FieldLabel>Horizontal</FieldLabel>
+              <InputRoot value="">
+                <InputControl placeholder="标签按内容宽度排列" />
+              </InputRoot>
+            </FieldRoot>
+            <FieldRoot orientation="responsive">
+              <FieldLabel>Responsive</FieldLabel>
+              <InputRoot value="">
+                <InputControl placeholder="窄屏纵向，变宽后横向" />
+              </InputRoot>
+            </FieldRoot>
+          </FieldGroup>
+          <FieldGroup orientation="inline" class="mt-space-lg">
+            <FieldRoot orientation="inline">
+              <FieldLabel>关键字</FieldLabel>
+              <InputRoot value="">
+                <InputControl class="w-48" placeholder="内联筛选" />
+              </InputRoot>
+            </FieldRoot>
+            <FieldRoot orientation="inline">
+              <FieldLabel>状态</FieldLabel>
+              <select class={`${selectClass} w-32`}>
+                <option>全部</option>
+                <option>启用</option>
+              </select>
+            </FieldRoot>
+            <Button type="button" variant="outline">
+              查询
+            </Button>
+          </FieldGroup>
+        </Card>
+        <Card
+          title="Form instance and defaultValue"
+          description="字段默认值，以及 getFieldValue、setFieldValue、reset 等 TanStack Form 实例方法。"
+        >
+          <Form form={instanceForm} class="grid max-w-xl gap-space-lg">
+            <Field name="source">
+              {(field) => (
+                <FieldRoot hasDescription>
+                  <FieldLabel>Form 初始值</FieldLabel>
+                  <FieldControl>
+                    {({ props }) => (
+                      <InputRoot
+                        value={field().state.value as string}
+                        onValueChange={field().handleChange}
+                      >
+                        <InputControl {...props} onBlur={field().handleBlur} />
+                      </InputRoot>
+                    )}
+                  </FieldControl>
+                  <FieldDescription>来自 useForm.defaultValues。</FieldDescription>
+                </FieldRoot>
+              )}
+            </Field>
+            <Field name="nickname" defaultValue="来自 Field defaultValue">
+              {(field) => (
+                <FieldRoot hasDescription>
+                  <FieldLabel>字段初始值</FieldLabel>
+                  <FieldControl>
+                    {({ props }) => (
+                      <InputRoot
+                        value={field().state.value as string}
+                        onValueChange={field().handleChange}
+                      >
+                        <InputControl {...props} onBlur={field().handleBlur} />
+                      </InputRoot>
+                    )}
+                  </FieldControl>
+                  <FieldDescription>使用 TanStack 原生 defaultValue。</FieldDescription>
+                </FieldRoot>
+              )}
+            </Field>
+            <div class="flex flex-wrap gap-space-sm">
+              <Button
+                type="button"
+                onClick={() => instanceForm.setFieldValue('nickname', '通过 setFieldValue 设置')}
+              >
+                设置昵称
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setInstanceResult(String(instanceForm.getFieldValue('nickname')))}
+              >
+                读取昵称
+              </Button>
+              <Button type="button" variant="outline" onClick={() => instanceForm.reset()}>
+                重置
+              </Button>
+            </div>
+            <p
+              class="rounded-md bg-muted px-3 py-2 text-sm text-muted-foreground"
+              aria-live="polite"
+            >
+              {instanceResult()}
+            </p>
+          </Form>
+        </Card>
+        <Card
+          title="Dynamic nested fields"
+          description="数组本身也是 Field；在用户事件中调用 pushValue、insertValue、removeValue。嵌套字段使用完整路径，数组项使用稳定业务 id 作为 React key。"
+        >
+          <Form form={contactsForm} class="grid gap-space-lg">
+            <Field
+              name="contacts"
+              validators={{
+                onSubmit: ({ value }: { value: Contact[] }) =>
+                  value.length > 0 ? undefined : '至少保留一位联系人',
+              }}
+            >
+              {(contactsField) => (
+                <>
+                  <FieldSet>
+                    <FieldLegend>联系人</FieldLegend>
+                    <p class="text-sm text-muted-foreground">
+                      每位联系人的姓名、邮箱和通知偏好都是独立的嵌套字段。
+                    </p>
+                    <FieldGroup>
+                      <For each={contactsField().state.value as Contact[]}>
+                        {(contact, index) => (
+                          <div class="rounded-md border border-border p-4">
+                            <FieldTitle>联系人 {index() + 1}</FieldTitle>
+                            <FieldGroup class="mt-space-md">
+                              <TextField
+                                name={`contacts[${index()}].name`}
+                                label="姓名"
+                                required
+                                validators={contactNameValidators}
+                              />
+                              <TextField
+                                name={`contacts[${index()}].email`}
+                                label="邮箱"
+                                required
+                                type="email"
+                                validators={contactEmailValidators}
+                              />
+                              <Field name={`contacts[${index()}].notifications`}>
+                                {(field) => (
+                                  <FieldRoot orientation="horizontal">
+                                    <FieldControl>
+                                      {({ props }) => (
+                                        <Checkbox
+                                          {...props}
+                                          checked={field().state.value as boolean}
+                                          onCheckedChange={(checked) =>
+                                            field().handleChange(checked === true)
+                                          }
+                                        />
+                                      )}
+                                    </FieldControl>
+                                    <FieldContent>
+                                      <FieldLabel>接收通知</FieldLabel>
+                                      <FieldDescription>嵌套布尔字段。</FieldDescription>
+                                    </FieldContent>
+                                  </FieldRoot>
+                                )}
+                              </Field>
+                            </FieldGroup>
+                            <div class="mt-space-md flex gap-space-sm">
+                              <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() =>
+                                  void contactsField().insertValue(index() + 1, createContact())
+                                }
+                              >
+                                在后面插入
+                              </Button>
+                              <Button
+                                type="button"
+                                variant="outline"
+                                disabled={(contactsField().state.value as Contact[]).length === 1}
+                                onClick={() => void contactsField().removeValue(index())}
+                              >
+                                删除
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+                      </For>
+                    </FieldGroup>
+                  </FieldSet>
+                  <Button
+                    class="w-fit"
+                    type="button"
+                    variant="outline"
+                    onClick={() => contactsField().pushValue(createContact())}
+                  >
+                    新增联系人
+                  </Button>
+                </>
+              )}
+            </Field>
+            <Button class="w-fit" type="submit">
+              校验并保存联系人
+            </Button>
+          </Form>
+        </Card>
+        <Card
+          title="Path prefix and multiple forms"
+          description="primitive 不隐藏路径来源，也不注册全局 Form.Provider；跨表单更新由明确的用户事件完成。"
+        >
+          <div class="grid gap-space-xl lg:grid-cols-2">
+            <Form form={prefixedForm} class="grid gap-space-lg">
+              <FieldSet>
+                <FieldLegend>profile</FieldLegend>
+                <FieldGroup>
+                  <TextField
+                    name="profile.displayName"
+                    label="显示名称"
+                    required
+                    validators={displayNameValidators}
+                  />
+                  <TextField
+                    name="profile.email"
+                    label="联系邮箱"
+                    type="email"
+                    validators={{
+                      onBlur: ({ value }: { value: string }) => !value || emailValidator({ value }),
+                    }}
+                  />
+                </FieldGroup>
+              </FieldSet>
+              <Button class="w-fit" type="submit">
+                提交 profile
+              </Button>
+            </Form>
+            <div class="grid gap-space-md">
+              <Form
+                form={profileForm}
+                class="grid gap-space-md rounded-md border border-border p-4"
+              >
+                <FieldTitle>资料表单</FieldTitle>
+                <TextField name="name" label="姓名" />
+                <TextField
+                  name="email"
+                  label="资料邮箱"
+                  type="email"
+                  required
+                  validators={{ onChange: emailValidator }}
+                />
+                <Button class="w-fit" type="submit">
+                  保存资料
+                </Button>
+              </Form>
+              <Form
+                form={securityForm}
+                class="grid gap-space-md rounded-md border border-border p-4"
+              >
+                <FieldTitle>安全表单</FieldTitle>
+                <TextField
+                  name="notificationEmail"
+                  label="通知邮箱"
+                  type="email"
+                  required
+                  validators={{ onChange: emailValidator }}
+                />
+                <Field name="twoFactor">
+                  {(field) => (
+                    <FieldRoot orientation="horizontal">
+                      <FieldControl>
+                        {({ props }) => (
+                          <Checkbox
+                            {...props}
+                            checked={field().state.value as boolean}
+                            onCheckedChange={(checked) => field().handleChange(checked === true)}
+                          />
+                        )}
+                      </FieldControl>
+                      <FieldLabel>开启双因素认证</FieldLabel>
+                    </FieldRoot>
+                  )}
+                </Field>
+                <div class="flex gap-space-sm">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() =>
+                      securityForm.setFieldValue(
+                        'notificationEmail',
+                        profileForm.getFieldValue('email'),
+                      )
+                    }
+                  >
+                    使用资料邮箱
+                  </Button>
+                  <Button type="submit">保存安全设置</Button>
+                </div>
+              </Form>
+            </div>
+          </div>
+        </Card>
+        <Card
+          title="Scroll to a specific field"
+          description="scrollToField 是独立方法，可以定位任意字段；Form 提交失败时才自动定位第一个无效 FieldControl。"
+        >
+          <Form form={scrollForm} class="grid max-w-xl gap-space-lg">
+            <div class="flex flex-wrap gap-space-sm">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() =>
+                  void scrollToField(document, 'deliveryAddress', {
+                    behavior: 'smooth',
+                    block: 'center',
+                    focus: true,
+                  })
+                }
+              >
+                定位收货地址
+              </Button>
+              <Button type="submit">提交并定位首个错误</Button>
+            </div>
+            <TextField name="note" label="备注（选填）" />
+            <div class="flex min-h-[24rem] items-center justify-center rounded-md border border-dashed border-border text-sm text-muted-foreground">
+              模拟长表单内容
+            </div>
+            <TextField
+              name="deliveryAddress"
+              label="收货地址"
+              required
+              placeholder="位于长表单底部"
+              validators={deliveryAddressValidators}
+            />
+          </Form>
+        </Card>
+        <Card title="Latest result">
+          <pre class="overflow-auto rounded-md bg-muted p-3 text-sm text-muted-foreground">
+            {result()}
+          </pre>
+        </Card>
+      </div>
+    </main>
+  )
 }
-

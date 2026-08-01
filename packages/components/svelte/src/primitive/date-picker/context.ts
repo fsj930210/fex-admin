@@ -1,15 +1,24 @@
 import { getContext } from 'svelte'
-import type { CalendarDate, CalendarPanel, CalendarRange, CalendarValue, CalendarWeekday } from '@fex/components-core/calendar'
+import type {
+  CalendarDate,
+  CalendarPanel,
+  CalendarRange,
+  CalendarValue,
+  CalendarWeekday,
+} from '@fex/components-core/calendar'
 import type { DatePickerPicker } from '@fex/components-core/date-picker/types'
 
 export const datePickerContextKey = Symbol('DatePickerContext')
 export const rangePickerContextKey = Symbol('RangePickerContext')
 
-export type DatePickerSelectionValue<TValue extends CalendarValue = CalendarValue> = TValue | readonly TValue[] | null
+export type DatePickerSelectionValue<TValue extends CalendarValue = CalendarValue> =
+  | TValue
+  | readonly TValue[]
+  | null
 
 export interface DatePickerContextValue<TValue extends CalendarValue = CalendarValue> {
   picker: DatePickerPicker
-  status?: 'error' | 'warning'
+  status?: 'error' | 'warning' | undefined
   multiple: boolean
   needConfirm: boolean
   disabled: boolean
@@ -23,9 +32,9 @@ export interface DatePickerContextValue<TValue extends CalendarValue = CalendarV
   getValue: () => DatePickerSelectionValue<TValue>
   getCalendarValue: () => TValue | null
   getCalendarValues: () => readonly TValue[]
-  minDate?: CalendarDate
-  maxDate?: CalendarDate
-  disabledDate?: (date: CalendarDate) => boolean
+  minDate?: CalendarDate | undefined
+  maxDate?: CalendarDate | undefined
+  disabledDate?: ((date: CalendarDate) => boolean) | undefined
   setPanel: (panel: CalendarPanel) => void
   setViewDate: (viewDate: CalendarDate) => void
   setOpen: (open: boolean) => void
@@ -39,7 +48,7 @@ export interface DatePickerContextValue<TValue extends CalendarValue = CalendarV
 
 export interface RangePickerContextValue<TValue extends CalendarValue = CalendarValue> {
   picker: DatePickerPicker
-  status?: 'error' | 'warning'
+  status?: 'error' | 'warning' | undefined
   needConfirm: boolean
   disabled: boolean
   readOnly: boolean
@@ -53,9 +62,9 @@ export interface RangePickerContextValue<TValue extends CalendarValue = Calendar
   getRangeValue: () => CalendarRange<TValue>
   getActivePart: () => 'start' | 'end'
   getHoverValue: () => TValue | null
-  minDate?: CalendarDate
-  maxDate?: CalendarDate
-  disabledDate?: (date: CalendarDate, activePart: 'start' | 'end') => boolean
+  minDate?: CalendarDate | undefined
+  maxDate?: CalendarDate | undefined
+  disabledDate?: ((date: CalendarDate, activePart: 'start' | 'end') => boolean) | undefined
   setPanel: (panel: CalendarPanel) => void
   setViewDate: (viewDate: CalendarDate) => void
   setOpen: (open: boolean) => void

@@ -116,46 +116,46 @@ export function TimePickerColumn<TValue extends ColumnValue>({
         overflow={{ x: 'hidden', y: 'auto' }}
         onKeyDown={handleKeyDown}
       >
-      {options.map((item) => {
-        const selected = Object.is(item.value, selectedValue)
-        const itemProps: TimePickerColumnItemRenderState<TValue>['itemProps'] = {
-          ref: (element) => {
-            if (element) itemRefs.current.set(item.value, element)
-            else itemRefs.current.delete(item.value)
-          },
-          type: 'button',
-          role: 'option',
-          tabIndex: -1,
-          disabled: resolvedDisabled || item.disabled,
-          'aria-selected': selected,
-          'data-selected': selected ? 'true' : undefined,
-          'data-disabled': item.disabled ? 'true' : undefined,
-          'data-active': Object.is(activeValue, item.value) ? 'true' : undefined,
-          onFocus: () => {
-            activeValueRef.current = item.value
-            setActiveValue(item.value)
-          },
-          onClick: () => {
-            if (resolvedDisabled || readOnly || item.disabled) return
-            activeValueRef.current = item.value
-            setActiveValue(item.value)
-            onSelect(item.value)
-            const itemElement = itemRefs.current.get(item.value)
-            if (listRef.current && itemElement) {
-              listRef.current.scrollTo({ top: itemElement.offsetTop, behavior: 'smooth' })
-            }
-          },
-        }
-        const state = { item, selected, active: Object.is(activeValue, item.value), itemProps }
-        return typeof children === 'function' ? (
-          children(state)
-        ) : (
-          <TimePickerColumnItem key={String(item.value)} {...itemProps}>
-            {item.label}
-          </TimePickerColumnItem>
-        )
-      })}
-      <div aria-hidden="true" className={timePickerColumnSpacerClassName} />
+        {options.map((item) => {
+          const selected = Object.is(item.value, selectedValue)
+          const itemProps: TimePickerColumnItemRenderState<TValue>['itemProps'] = {
+            ref: (element) => {
+              if (element) itemRefs.current.set(item.value, element)
+              else itemRefs.current.delete(item.value)
+            },
+            type: 'button',
+            role: 'option',
+            tabIndex: -1,
+            disabled: resolvedDisabled || item.disabled,
+            'aria-selected': selected,
+            'data-selected': selected ? 'true' : undefined,
+            'data-disabled': item.disabled ? 'true' : undefined,
+            'data-active': Object.is(activeValue, item.value) ? 'true' : undefined,
+            onFocus: () => {
+              activeValueRef.current = item.value
+              setActiveValue(item.value)
+            },
+            onClick: () => {
+              if (resolvedDisabled || readOnly || item.disabled) return
+              activeValueRef.current = item.value
+              setActiveValue(item.value)
+              onSelect(item.value)
+              const itemElement = itemRefs.current.get(item.value)
+              if (listRef.current && itemElement) {
+                listRef.current.scrollTo({ top: itemElement.offsetTop, behavior: 'smooth' })
+              }
+            },
+          }
+          const state = { item, selected, active: Object.is(activeValue, item.value), itemProps }
+          return typeof children === 'function' ? (
+            children(state)
+          ) : (
+            <TimePickerColumnItem key={String(item.value)} {...itemProps}>
+              {item.label}
+            </TimePickerColumnItem>
+          )
+        })}
+        <div aria-hidden="true" className={timePickerColumnSpacerClassName} />
       </ScrollbarViewport>
       <ScrollbarBar axis="y" />
     </ScrollbarRoot>

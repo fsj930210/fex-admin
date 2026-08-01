@@ -6,11 +6,16 @@ import { useLazyRef } from '../../hooks/use-lazy-ref'
 import { useMemoizedFn } from '../../hooks/use-memoized-fn'
 
 export function useTimePicker(options: TimePickerControllerOptions = {}) {
-  const onChange = useMemoizedFn((...args: Parameters<NonNullable<TimePickerControllerOptions['onChange']>>) => options.onChange?.(...args))
-  const controllerRef = useLazyRef(() => createTimePickerController({
-    ...options,
-    onChange,
-  }))
+  const onChange = useMemoizedFn(
+    (...args: Parameters<NonNullable<TimePickerControllerOptions['onChange']>>) =>
+      options.onChange?.(...args),
+  )
+  const controllerRef = useLazyRef(() =>
+    createTimePickerController({
+      ...options,
+      onChange,
+    }),
+  )
   const controller = controllerRef.current
   const snapshot = useCoreStore(controller)
 

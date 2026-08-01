@@ -3,8 +3,17 @@ import {
   getNextPanelByHeaderLabel,
   getNextViewDateByHeaderAction,
 } from '@fex/components-core/date-picker/panel'
-import type { DatePickerHeaderAction, DatePickerHeaderLabelPart } from '@fex/components-core/date-picker/types'
-import { datePickerHeaderClassName, datePickerHeaderDoubleIconClassName, datePickerHeaderLabelClassName, datePickerHeaderNavigationClassName, datePickerHeaderTitleClassName } from '@fex/components-styles/date-picker'
+import type {
+  DatePickerHeaderAction,
+  DatePickerHeaderLabelPart,
+} from '@fex/components-core/date-picker/types'
+import {
+  datePickerHeaderClassName,
+  datePickerHeaderDoubleIconClassName,
+  datePickerHeaderLabelClassName,
+  datePickerHeaderNavigationClassName,
+  datePickerHeaderTitleClassName,
+} from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
 import { use, useState, type ComponentProps, type ReactNode } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../icon/chevron'
@@ -16,7 +25,8 @@ function useHeaderOwner() {
   const datePicker = use(DatePickerContext)
   const rangePicker = use(RangePickerContext)
   const context = datePicker ?? rangePicker
-  if (!context) throw new Error('DatePickerHeader must be used within DatePickerRoot or RangePickerRoot')
+  if (!context)
+    throw new Error('DatePickerHeader must be used within DatePickerRoot or RangePickerRoot')
   return context
 }
 
@@ -50,8 +60,16 @@ export function DatePickerHeaderButton({
     <span className="flex items-center">
       {action.includes('year') || action.includes('panel') ? (
         <>
-          {isPrevious ? <ChevronLeftIcon className="size-4" /> : <ChevronRightIcon className="size-4" />}
-          {isPrevious ? <ChevronLeftIcon className={cn(datePickerHeaderDoubleIconClassName, 'size-4')} /> : <ChevronRightIcon className={cn(datePickerHeaderDoubleIconClassName, 'size-4')} />}
+          {isPrevious ? (
+            <ChevronLeftIcon className="size-4" />
+          ) : (
+            <ChevronRightIcon className="size-4" />
+          )}
+          {isPrevious ? (
+            <ChevronLeftIcon className={cn(datePickerHeaderDoubleIconClassName, 'size-4')} />
+          ) : (
+            <ChevronRightIcon className={cn(datePickerHeaderDoubleIconClassName, 'size-4')} />
+          )}
         </>
       ) : isPrevious ? (
         <ChevronLeftIcon className="size-4" />
@@ -71,7 +89,11 @@ export function DatePickerHeaderButton({
       onClick={(event) => {
         onClick?.(event)
         if (event.defaultPrevented) return
-        const nextViewDate = getNextViewDateByHeaderAction(calendar.viewDate, action, calendar.panel)
+        const nextViewDate = getNextViewDateByHeaderAction(
+          calendar.viewDate,
+          action,
+          calendar.panel,
+        )
         calendar.setViewDate(nextViewDate)
         context.setViewDate(nextViewDate)
       }}
@@ -86,7 +108,13 @@ export interface DatePickerHeaderTitleProps extends ComponentProps<'div'> {
 }
 
 export function DatePickerHeaderTitle({ className, ...props }: DatePickerHeaderTitleProps) {
-  return <div {...props} data-slot="date-picker-header-title" className={cn(datePickerHeaderTitleClassName, className)} />
+  return (
+    <div
+      {...props}
+      data-slot="date-picker-header-title"
+      className={cn(datePickerHeaderTitleClassName, className)}
+    />
+  )
 }
 
 export interface DatePickerHeaderLabelProps extends Omit<ComponentProps<'button'>, 'children'> {
@@ -109,11 +137,13 @@ export function DatePickerHeaderLabel({
   const visible = getDatePickerHeaderLabelParts(context.picker, calendar.panel).includes(part)
   if (!visible) return null
   const decadeStart = Math.floor(calendar.viewDate.year / 10) * 10
-  const label = children ?? (part === 'year'
-    ? calendar.panel === 'decade'
-      ? `${decadeStart}-${decadeStart + 9}年`
-      : `${calendar.viewDate.year}年`
-    : `${calendar.viewDate.month}月`)
+  const label =
+    children ??
+    (part === 'year'
+      ? calendar.panel === 'decade'
+        ? `${decadeStart}-${decadeStart + 9}年`
+        : `${calendar.viewDate.year}年`
+      : `${calendar.viewDate.month}月`)
 
   return (
     <Button

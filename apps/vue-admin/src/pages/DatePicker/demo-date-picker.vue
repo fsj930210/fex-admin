@@ -1,6 +1,14 @@
 <script setup lang="ts">
-import type { CalendarDate, CalendarRange, CalendarValue, CalendarWeekday } from '@fex/components-core/calendar'
-import type { DatePickerPicker, DatePickerSelectionValue } from '@fex/components-vue/primitive/date-picker'
+import type {
+  CalendarDate,
+  CalendarRange,
+  CalendarValue,
+  CalendarWeekday,
+} from '@fex/components-core/calendar'
+import type {
+  DatePickerPicker,
+  DatePickerSelectionValue,
+} from '@fex/components-vue/primitive/date-picker'
 import {
   DatePickerCancel,
   DatePickerConfirm,
@@ -36,22 +44,33 @@ const props = defineProps<{
   weekStartsOn?: CalendarWeekday
   minDate?: CalendarDate
   maxDate?: CalendarDate
-  disabledDate?: ((date: CalendarDate) => boolean) | ((date: CalendarDate, activePart: 'start' | 'end') => boolean)
+  disabledDate?:
+    | ((date: CalendarDate) => boolean)
+    | ((date: CalendarDate, activePart: 'start' | 'end') => boolean)
   range?: boolean
 }>()
 const emit = defineEmits<{ change: [value: unknown]; openChange: [open: boolean] }>()
 const dateValue = computed(() => props.value as DatePickerSelectionValue | undefined)
 const dateDefaultValue = computed(() => props.defaultValue as DatePickerSelectionValue | undefined)
-const dateDisabledDate = computed(() => props.disabledDate as ((date: CalendarDate) => boolean) | undefined)
+const dateDisabledDate = computed(
+  () => props.disabledDate as ((date: CalendarDate) => boolean) | undefined,
+)
 const rangeValue = computed(() => props.value as CalendarRange<CalendarValue> | undefined)
-const rangeDefaultValue = computed(() => props.defaultValue as CalendarRange<CalendarValue> | undefined)
-const rangeDisabledDate = computed(() => props.disabledDate as ((date: CalendarDate, activePart: 'start' | 'end') => boolean) | undefined)
+const rangeDefaultValue = computed(
+  () => props.defaultValue as CalendarRange<CalendarValue> | undefined,
+)
+const rangeDisabledDate = computed(
+  () =>
+    props.disabledDate as
+      | ((date: CalendarDate, activePart: 'start' | 'end') => boolean)
+      | undefined,
+)
 const instance = getCurrentInstance()
 function hasProp(name: string) {
   const vnodeProps = instance?.vnode.props
   return Boolean(vnodeProps && Object.prototype.hasOwnProperty.call(vnodeProps, name))
 }
-const openProps = computed(() => hasProp('open') ? { open: props.open } : {})
+const openProps = computed(() => (hasProp('open') ? { open: props.open } : {}))
 const rangePlaceholder = computed(() => {
   if (props.picker === 'week') return { start: '开始周', end: '结束周' }
   if (props.picker === 'month') return { start: '开始月份', end: '结束月份' }
@@ -84,7 +103,11 @@ const rangePlaceholder = computed(() => {
     @change="emit('change', $event)"
     @open-change="emit('openChange', $event)"
   >
-    <RangePickerTrigger class="w-80" :start-placeholder="rangePlaceholder.start" :end-placeholder="rangePlaceholder.end" />
+    <RangePickerTrigger
+      class="w-80"
+      :start-placeholder="rangePlaceholder.start"
+      :end-placeholder="rangePlaceholder.end"
+    />
     <RangePickerContent class="overflow-hidden p-0">
       <RangePickerPanelGroup />
       <DatePickerFooter v-if="props.needConfirm">

@@ -83,19 +83,23 @@ export function ConfirmFooter() {
   return (
     <DatePickerFooter>
       <DatePickerToday />
-      <DatePickerCancel>
-        取消
-      </DatePickerCancel>
+      <DatePickerCancel>取消</DatePickerCancel>
       <DatePickerConfirm>确定</DatePickerConfirm>
     </DatePickerFooter>
   )
 }
 
-export function ValuePreview({ value }: { value: CalendarValue | readonly CalendarValue[] | null }) {
+export function ValuePreview({
+  value,
+}: {
+  value: CalendarValue | readonly CalendarValue[] | null
+}) {
   const text = isCalendarValueArray(value)
     ? value.map((item) => formatDatePickerValue(item, { picker: 'date' })).join(', ')
     : formatDatePickerValue(value, { picker: 'date' })
-  return <p className="mt-space-sm w-full text-xs text-muted-foreground">当前值：{text || '未选择'}</p>
+  return (
+    <p className="mt-space-sm w-full text-xs text-muted-foreground">当前值：{text || '未选择'}</p>
+  )
 }
 
 function isCalendarValueArray(value: unknown): value is readonly CalendarValue[] {
@@ -105,5 +109,9 @@ function isCalendarValueArray(value: unknown): value is readonly CalendarValue[]
 export function RangePreview({ value }: { value: CalendarRange }) {
   const start = formatDatePickerValue(value.start, { picker: 'date' })
   const end = formatDatePickerValue(value.end, { picker: 'date' })
-  return <p className="mt-space-sm w-full text-xs text-muted-foreground">当前范围：{start || '空'} ~ {end || '空'}</p>
+  return (
+    <p className="mt-space-sm w-full text-xs text-muted-foreground">
+      当前范围：{start || '空'} ~ {end || '空'}
+    </p>
+  )
 }

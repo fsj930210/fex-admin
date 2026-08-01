@@ -31,15 +31,15 @@ import { Dialog } from '@fex/components-react/primitive/dialog'
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `open` | `boolean` | - | No | Controlled open state. |
-| `defaultOpen` | `boolean` | `false` | No | Initial uncontrolled open state. |
-| `onOpenChange` | `(open, info) => void` | - | No | Called when user actions request an open state change. |
-| `modal` | `boolean` | `true` | No | Marks the dialog as a modal layer. |
-| `forceMount` | `boolean` | `false` | No | Keeps portal/content mounted while closed. |
-| `closeDelay` | `number` | `140` | No | Close phase duration in milliseconds. |
-| `closeOnOverlayPointer` | `boolean` | `true` | No | Closes when the overlay surface is clicked. |
+| Name                    | Type                   | Default | Required | Description                                            |
+| ----------------------- | ---------------------- | ------- | -------- | ------------------------------------------------------ |
+| `open`                  | `boolean`              | -       | No       | Controlled open state.                                 |
+| `defaultOpen`           | `boolean`              | `false` | No       | Initial uncontrolled open state.                       |
+| `onOpenChange`          | `(open, info) => void` | -       | No       | Called when user actions request an open state change. |
+| `modal`                 | `boolean`              | `true`  | No       | Marks the dialog as a modal layer.                     |
+| `forceMount`            | `boolean`              | `false` | No       | Keeps portal/content mounted while closed.             |
+| `closeDelay`            | `number`               | `140`   | No       | Close phase duration in milliseconds.                  |
+| `closeOnOverlayPointer` | `boolean`              | `true`  | No       | Closes when the overlay surface is clicked.            |
 
 ## Notes
 

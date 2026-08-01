@@ -15,7 +15,7 @@
     action?: (element: HTMLButtonElement) => { destroy?: () => void } | void
     iconPlacement?: 'start' | 'end'
     loading?: boolean
-    disabled?: boolean | null
+    disabled?: boolean | null | undefined
     class?: string
     children?: Snippet
     icon?: Snippet

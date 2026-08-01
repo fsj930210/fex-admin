@@ -9,7 +9,16 @@ import type {
   ToastSnapshot,
 } from './types'
 
-export type { BuiltinToastVariant, ToastConfig, ToastInput, ToastItem, ToastManager, ToastOptions, ToastPlacement, ToastSnapshot } from './types'
+export type {
+  BuiltinToastVariant,
+  ToastConfig,
+  ToastInput,
+  ToastItem,
+  ToastManager,
+  ToastOptions,
+  ToastPlacement,
+  ToastSnapshot,
+} from './types'
 
 const defaultConfig: ToastConfig = {
   duration: 3000,
@@ -63,7 +72,9 @@ function normalizeInput<TContent>(
   }
 }
 
-export function createToastManager<TContent = unknown>(initialConfig: Partial<ToastConfig> = {}): ToastManager<TContent> {
+export function createToastManager<TContent = unknown>(
+  initialConfig: Partial<ToastConfig> = {},
+): ToastManager<TContent> {
   const timers = new Map<string, ReturnType<typeof setTimeout>>()
   const store = createStore<ToastSnapshot<TContent>>({
     config: { ...defaultConfig, ...initialConfig },
@@ -83,7 +94,10 @@ export function createToastManager<TContent = unknown>(initialConfig: Partial<To
     if (duration < 0) {
       return
     }
-    timers.set(id, setTimeout(() => dismiss(id), duration))
+    timers.set(
+      id,
+      setTimeout(() => dismiss(id), duration),
+    )
   }
 
   function applyLimit(items: ToastItem<TContent>[], max: number) {
@@ -111,7 +125,7 @@ export function createToastManager<TContent = unknown>(initialConfig: Partial<To
       const nextItem: ToastItem<TContent> = {
         action: options.action,
         closable: options.closable ?? true,
-        createdAt: existingIndex >= 0 ? current.items[existingIndex]?.createdAt ?? now : now,
+        createdAt: existingIndex >= 0 ? (current.items[existingIndex]?.createdAt ?? now) : now,
         description: options.description,
         duration,
         icon: options.icon,
@@ -201,7 +215,9 @@ export function createToastManager<TContent = unknown>(initialConfig: Partial<To
       const remaining = Math.max(0, item.remaining - (Date.now() - item.startedAt))
       store.updateSnapshot((snapshot) => ({
         ...snapshot,
-        items: snapshot.items.map((current) => current.id === id ? { ...current, paused: true, remaining } : current),
+        items: snapshot.items.map((current) =>
+          current.id === id ? { ...current, paused: true, remaining } : current,
+        ),
       }))
     },
     remove,
@@ -213,7 +229,9 @@ export function createToastManager<TContent = unknown>(initialConfig: Partial<To
       const startedAt = Date.now()
       store.updateSnapshot((snapshot) => ({
         ...snapshot,
-        items: snapshot.items.map((current) => current.id === id ? { ...current, paused: false, startedAt } : current),
+        items: snapshot.items.map((current) =>
+          current.id === id ? { ...current, paused: false, startedAt } : current,
+        ),
       }))
       startTimer(id, item.remaining)
     },

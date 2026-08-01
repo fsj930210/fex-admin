@@ -20,7 +20,12 @@ import {
 ## 核心示例
 
 ```tsx
-import { Pagination, PaginationContent, PaginationItem, PaginationLink } from '@fex/components-react/primitive/pagination'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+} from '@fex/components-react/primitive/pagination'
 
 export function Demo() {
   return (
@@ -39,12 +44,12 @@ export function Demo() {
 
 ## Props
 
-| 参数名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `isActive` | `boolean` | `false` | 否 | 仅 `PaginationLink` 支持，标记当前页。 |
-| `size` | `'default' \| 'icon'` | `'icon'` | 否 | 仅 `PaginationLink` 支持，控制链接尺寸。 |
-| `text` | `string` | `'Previous'` / `'Next'` | 否 | 上一页、下一页展示文本。 |
-| `className` | `string` | `undefined` | 否 | 合并到对应 slot 的 class。 |
+| 参数名      | 类型                  | 默认值                  | 必填 | 说明                                     |
+| ----------- | --------------------- | ----------------------- | ---- | ---------------------------------------- |
+| `isActive`  | `boolean`             | `false`                 | 否   | 仅 `PaginationLink` 支持，标记当前页。   |
+| `size`      | `'default' \| 'icon'` | `'icon'`                | 否   | 仅 `PaginationLink` 支持，控制链接尺寸。 |
+| `text`      | `string`              | `'Previous'` / `'Next'` | 否   | 上一页、下一页展示文本。                 |
+| `className` | `string`              | `undefined`             | 否   | 合并到对应 slot 的 class。               |
 
 ## 事件/回调
 

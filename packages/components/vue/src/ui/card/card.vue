@@ -49,16 +49,30 @@ const props = defineProps<CardProps>()
     :class="props.class?.root"
     :style="props.style?.root"
   >
-    <CardHeader v-if="title || description" :class="props.class?.header" :style="props.style?.header">
-      <CardTitle v-if="title" :class="props.class?.title" :style="props.style?.title">{{ title }}</CardTitle>
-      <CardDescription v-if="description" :class="props.class?.description" :style="props.style?.description">
+    <CardHeader
+      v-if="title || description"
+      :class="props.class?.header"
+      :style="props.style?.header"
+    >
+      <CardTitle v-if="title" :class="props.class?.title" :style="props.style?.title">{{
+        title
+      }}</CardTitle>
+      <CardDescription
+        v-if="description"
+        :class="props.class?.description"
+        :style="props.style?.description"
+      >
         {{ description }}
       </CardDescription>
     </CardHeader>
     <CardContent :class="props.class?.content" :style="props.style?.content">
       <slot />
     </CardContent>
-    <CardFooter v-if="$slots.footer || footer" :class="props.class?.footer" :style="props.style?.footer">
+    <CardFooter
+      v-if="$slots.footer || footer"
+      :class="props.class?.footer"
+      :style="props.style?.footer"
+    >
       <slot name="footer">{{ footer }}</slot>
     </CardFooter>
   </PrimitiveCard>

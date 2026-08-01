@@ -17,7 +17,10 @@ export class FexDroppableDirective implements OnInit, OnChanges, OnDestroy {
   @Input() disabled = false
   @Input() edges?: DropEdge[]
   @Input() canDrop?: (source: Record<string, unknown>) => boolean
-  @Output() dragEntered = new EventEmitter<{ source: Record<string, unknown>; edge: DropEdge | null }>()
+  @Output() dragEntered = new EventEmitter<{
+    source: Record<string, unknown>
+    edge: DropEdge | null
+  }>()
   @Output() dragLeft = new EventEmitter<void>()
   @Output() dropped = new EventEmitter<{ source: Record<string, unknown>; edge: DropEdge | null }>()
 
@@ -65,11 +68,14 @@ export class FexDroppableDirective implements OnInit, OnChanges, OnDestroy {
         this.dropped.emit({ source, edge })
       },
     }
-    this.cleanup = registerDndDropTarget(this.edges ? { ...targetOptions, edges: this.edges } : targetOptions)
+    this.cleanup = registerDndDropTarget(
+      this.edges ? { ...targetOptions, edges: this.edges } : targetOptions,
+    )
   }
 
   private acceptsSource(source: Record<string, unknown>) {
-    const acceptList = this.accept === undefined ? [] : Array.isArray(this.accept) ? this.accept : [this.accept]
+    const acceptList =
+      this.accept === undefined ? [] : Array.isArray(this.accept) ? this.accept : [this.accept]
     const accepted = acceptList.length === 0 || acceptList.includes(String(source.type))
     return accepted && (this.canDrop?.(source) ?? true)
   }

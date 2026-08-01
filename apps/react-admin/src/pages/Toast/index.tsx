@@ -202,21 +202,14 @@ export function ToastPage() {
             <Button variant="outline" onClick={showManyMessages}>
               Show many
             </Button>
-            <Button
-              variant={stack ? 'default' : 'outline'}
-              onClick={toggleStack}
-            >
+            <Button variant={stack ? 'default' : 'outline'} onClick={toggleStack}>
               {stack ? 'Stack on' : 'Stack off'}
             </Button>
           </div>
         </Card>
       </div>
 
-      <ToastViewport
-        offset={72}
-        stack={stack}
-        stackThreshold={3}
-      >
+      <ToastViewport offset={72} stack={stack} stackThreshold={3}>
         {(items) => items.map((item) => <ToastCard key={item.id} item={item} />)}
       </ToastViewport>
     </main>
@@ -255,7 +248,13 @@ function hasToastIcon(item: ReactToastItem) {
 }
 
 function isBuiltInIconVariant(variant: string) {
-  return variant === 'success' || variant === 'info' || variant === 'warning' || variant === 'error' || variant === 'loading'
+  return (
+    variant === 'success' ||
+    variant === 'info' ||
+    variant === 'warning' ||
+    variant === 'error' ||
+    variant === 'loading'
+  )
 }
 
 function iconFor(variant: string) {

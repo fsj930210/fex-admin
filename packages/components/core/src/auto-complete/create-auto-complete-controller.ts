@@ -26,13 +26,18 @@ export function createAutoCompleteController<TItem>(
     if (current === cachedSource && value === cachedSnapshot.value && open === cachedSnapshot.open)
       return cachedSnapshot
     cachedSource = current
-    cachedSnapshot = value === current.value && open === current.open ? current : { ...current, value, open }
+    cachedSnapshot =
+      value === current.value && open === current.open ? current : { ...current, value, open }
     return cachedSnapshot
   }
   const update = (patch: Partial<AutoCompleteSnapshot>) =>
     store.updateSnapshot((current) => ({ ...current, ...patch }))
   const visibleItems = () =>
-    filterAutoCompleteItems(resolveAutoCompleteItems(options), snapshot().value, options.filterOption)
+    filterAutoCompleteItems(
+      resolveAutoCompleteItems(options),
+      snapshot().value,
+      options.filterOption,
+    )
   const setActiveKey = (
     key: AutoCompleteKey | undefined,
     interaction: Exclude<AutoCompleteInteraction, null> = 'pointer',
@@ -41,10 +46,7 @@ export function createAutoCompleteController<TItem>(
     if (key !== undefined && (!entry || entry.disabled)) return
     update({ activeKey: key, interaction })
   }
-  const setOpen: AutoCompleteController<TItem>['setOpen'] = (
-    open,
-    reason = 'programmatic',
-  ) => {
+  const setOpen: AutoCompleteController<TItem>['setOpen'] = (open, reason = 'programmatic') => {
     if (snapshot().open === open) return
     if (options.open === undefined) update({ open })
     if (!open) update({ activeKey: undefined, interaction: null })
@@ -70,9 +72,10 @@ export function createAutoCompleteController<TItem>(
       if (!items.length) return
       const current = items.findIndex((item) => item.key === snapshot().activeKey)
       let next = current < 0 ? (direction > 0 ? 0 : items.length - 1) : current + direction
-      next = options.loop === false
-        ? Math.max(0, Math.min(items.length - 1, next))
-        : (next + items.length) % items.length
+      next =
+        options.loop === false
+          ? Math.max(0, Math.min(items.length - 1, next))
+          : (next + items.length) % items.length
       setActiveKey(items[next]?.key, 'keyboard')
     },
     selectItem: (key) => {

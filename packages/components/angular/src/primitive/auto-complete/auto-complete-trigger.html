@@ -21,10 +21,9 @@
     (blur)="autoComplete.controller.setOpen(false, 'blur')"
     (keydown)="keydown($event)"
   />
-  @if (clearable) { <button fexInputClear type="button"></button> }
-  @if (autoComplete.loading) {
-    <span fexInputSuffix><fex-loading-icon class="animate-spin" /></span>
+  @if (clearable) { <button fexInputClear type="button"></button> } @if (autoComplete.loading) {
+  <span fexInputSuffix><fex-loading-icon class="animate-spin" /></span>
   } @else {
-    <ng-content select="[suffix]" />
+  <ng-content select="[suffix]" />
   }
 </fex-input-root>

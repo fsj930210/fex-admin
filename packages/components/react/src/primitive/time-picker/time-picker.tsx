@@ -1,6 +1,10 @@
 export { TimePickerRoot, type TimePickerRootProps } from './time-picker-root'
 export { TimePickerTrigger, type TimePickerTriggerProps } from './time-picker-trigger'
-export { TimePickerContent, TimePickerPanel, type TimePickerContentProps } from './time-picker-content'
+export {
+  TimePickerContent,
+  TimePickerPanel,
+  type TimePickerContentProps,
+} from './time-picker-content'
 export {
   TimePickerHourColumn,
   TimePickerMinuteColumn,

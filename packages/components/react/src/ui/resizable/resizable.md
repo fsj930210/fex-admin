@@ -24,17 +24,16 @@ import {
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | No | Resize direction of the panel group. |
-| `layout` | `number[]` | - | No | Controlled percentage layout. |
-| `defaultLayout` | `number[]` | - | No | Initial percentage layout. |
-| `onLayout` | `(layout: number[]) => void` | - | No | Called when the layout changes. |
-| `id` | `string` | - | Yes | Panel id. |
-| `minSize` | `number` | `0` | No | Minimum panel size in percent. |
-| `maxSize` | `number` | `100` | No | Maximum panel size in percent. |
+| Name            | Type                         | Default        | Required | Description                          |
+| --------------- | ---------------------------- | -------------- | -------- | ------------------------------------ |
+| `direction`     | `'horizontal' \| 'vertical'` | `'horizontal'` | No       | Resize direction of the panel group. |
+| `layout`        | `number[]`                   | -              | No       | Controlled percentage layout.        |
+| `defaultLayout` | `number[]`                   | -              | No       | Initial percentage layout.           |
+| `onLayout`      | `(layout: number[]) => void` | -              | No       | Called when the layout changes.      |
+| `id`            | `string`                     | -              | Yes      | Panel id.                            |
+| `minSize`       | `number`                     | `0`            | No       | Minimum panel size in percent.       |
+| `maxSize`       | `number`                     | `100`          | No       | Maximum panel size in percent.       |
 
 ## Keyboard
 
 Focus a handle and use arrow keys to resize. Hold Shift for a larger step.
-

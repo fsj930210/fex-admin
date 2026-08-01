@@ -1,7 +1,7 @@
 import {
   getCalendarToday,
+  type CalendarDate,
   type CalendarRange,
-  type CalendarValue,
 } from '@fex/components-core/calendar'
 import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
 import { endOfDate } from '@fex/components-core/date/utils'
@@ -30,23 +30,32 @@ import {
 } from '@fex/components-react/primitive/time-picker'
 import { CalendarIcon } from '@fex/components-react/icon/calendar'
 import { Button } from '@fex/components-react/ui/button'
-import { useState, type ComponentProps } from 'react'
-import { DemoDatePicker, DemoRangePicker, DemoSection, RangePreview } from './shared'
+import { useState, type ComponentProps, type ContextType } from 'react'
+import { DemoRangePicker, DemoSection, RangePreview } from './shared'
 
 const today = getCalendarToday()
 
 export function IntegrationDemos() {
   return (
     <>
-      <DemoSection title="预设范围" description="预设会直接写入受控范围并保持面板打开，可用于报表、审计和运营筛选。">
+      <DemoSection
+        title="预设范围"
+        description="预设会直接写入受控范围并保持面板打开，可用于报表、审计和运营筛选。"
+      >
         <PresetRangeDemo />
       </DemoSection>
 
-      <DemoSection title="确认后提交" description="选择过程只更新面板草稿；点击确认并提交后，才向外部提交范围。">
+      <DemoSection
+        title="确认后提交"
+        description="选择过程只更新面板草稿；点击确认并提交后，才向外部提交范围。"
+      >
         <DeferredRangeDemo />
       </DemoSection>
 
-      <DemoSection title="日期与时间" description="DatePicker 与 TimePicker 可以分别组合，最终按业务需要一起提交。">
+      <DemoSection
+        title="日期与时间"
+        description="DatePicker 与 TimePicker 可以分别组合，最终按业务需要一起提交。"
+      >
         <DateTimeDemo />
       </DemoSection>
     </>
@@ -85,7 +94,7 @@ function PresetRangePanel({ onSelect }: { onSelect: (value: CalendarRange) => vo
             data-selected={isSameRange(rangePicker.rangeValue, value)}
             onClick={() => {
               onSelect(value)
-              if (value.start) rangePicker.setViewDate(value.start)
+              if (value.start) rangePicker.setViewDate(value.start as CalendarDate)
             }}
           >
             {label}
@@ -121,11 +130,20 @@ function DeferredRangeDemo() {
 }
 
 function DateTimeDemo() {
-  const [date, setDate] = useState<CalendarValue | null>(today)
+  const [date, setDate] = useState<CalendarDate | null>(today)
   const [time, setTime] = useState<TimeValue>({ hour: 9, minute: 30, second: 0 })
   const [draftTime, setDraftTime] = useState<TimeValue>(time)
-  const datePicker = useDatePicker<CalendarValue>({ value: date, onChange: setDate, needConfirm: true })
-  const timePicker = useTimePicker({ value: draftTime, onChange: (value) => value && setDraftTime(value) })
+  const datePicker = useDatePicker<CalendarDate>({
+    value: date,
+    onChange: (next) => {
+      if (!Array.isArray(next)) setDate(next as CalendarDate | null)
+    },
+    needConfirm: true,
+  })
+  const timePicker = useTimePicker({
+    value: draftTime,
+    onChange: (value) => value && setDraftTime(value),
+  })
   const displayValue = `${formatDatePickerValue(date, { picker: 'date' })} ${formatTime(time)}`
 
   function setOpen(open: boolean) {
@@ -134,9 +152,22 @@ function DateTimeDemo() {
   }
 
   return (
-    <PopoverRoot open={datePicker.open} onOpenChange={setOpen} placement="bottom" trigger={['focus', 'click']}>
-      <DatePickerContext value={datePicker}>
-        <TimePickerContext value={{ ...timePicker, format: 'HH:mm:ss', use12Hours: false, disabled: false, readOnly: false }}>
+    <PopoverRoot
+      open={datePicker.open}
+      onOpenChange={setOpen}
+      placement="bottom"
+      trigger={['focus', 'click']}
+    >
+      <DatePickerContext value={datePicker as unknown as ContextType<typeof DatePickerContext>}>
+        <TimePickerContext
+          value={{
+            ...timePicker,
+            format: 'HH:mm:ss',
+            use12Hours: false,
+            disabled: false,
+            readOnly: false,
+          }}
+        >
           <PopoverTrigger>
             {(triggerProps) => (
               <InputRoot
@@ -147,17 +178,21 @@ function DateTimeDemo() {
                 onValueChange={() => undefined}
               >
                 <InputControl readOnly placeholder="请选择日期和时间" />
-                <InputSuffix><CalendarIcon className="size-4" /></InputSuffix>
+                <InputSuffix>
+                  <CalendarIcon className="size-4" />
+                </InputSuffix>
               </InputRoot>
             )}
           </PopoverTrigger>
-          <DatePickerContent
-            className="w-[36rem] min-w-[36rem] overflow-hidden p-0"
-          >
+          <DatePickerContent className="w-[36rem] min-w-[36rem] overflow-hidden p-0">
             <div className="flex">
-              <DatePickerPanel className={`min-w-0 flex-1 self-start ${datePickerDateTimePanelClassName}`} />
+              <DatePickerPanel
+                className={`min-w-0 flex-1 self-start ${datePickerDateTimePanelClassName}`}
+              />
               <div className="flex w-42 shrink-0 flex-col border-l border-border">
-                <div className="flex h-12 shrink-0 items-center justify-center border-b border-border text-sm font-semibold">{formatTime(draftTime)}</div>
+                <div className="flex h-12 shrink-0 items-center justify-center border-b border-border text-sm font-semibold">
+                  {formatTime(draftTime)}
+                </div>
                 <TimePickerPanel className="h-[224px] min-h-0 overflow-hidden">
                   <TimePickerHourColumn className="h-[224px]" />
                   <TimePickerMinuteColumn className="h-[224px]" />
@@ -166,16 +201,23 @@ function DateTimeDemo() {
               </div>
             </div>
             <div className="flex justify-end gap-2 border-t border-border p-2">
-              <Button size="sm" variant="outline" onClick={() => {
-                setDraftTime(time)
-                datePicker.cancel()
-              }}>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  setDraftTime(time)
+                  datePicker.cancel()
+                }}
+              >
                 取消
               </Button>
-              <Button size="sm" onClick={() => {
-                setTime(draftTime)
-                datePicker.confirm()
-              }}>
+              <Button
+                size="sm"
+                onClick={() => {
+                  setTime(draftTime)
+                  datePicker.confirm()
+                }}
+              >
                 确定
               </Button>
             </div>

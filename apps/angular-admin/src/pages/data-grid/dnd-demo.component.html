@@ -9,8 +9,11 @@
     </span>
   </ng-template>
   <ng-template #rowOverlayCell let-cell>
-    @if (cell.column.id === '__drag__') { <fex-ellipsis-icon class="block size-4 rotate-90 text-muted-foreground" /> }
-    @else { {{ cell.getValue() }} }
+    @if (cell.column.id === '__drag__') {
+      <fex-ellipsis-icon class="block size-4 rotate-90 text-muted-foreground" />
+    } @else {
+      {{ cell.getValue() }}
+    }
   </ng-template>
   <div class="space-y-space-lg">
     @for (grid of grids; track grid.title) {

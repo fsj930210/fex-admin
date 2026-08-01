@@ -19,12 +19,10 @@ export function SearchDemo() {
   const [keyword, setKeyword] = createSignal('')
   const subtree = createMemo(
     () =>
-      controller
-        .getFeature<SearchFeatureApi<DepartmentNode>>('search')
-        ?.getSubtree({
-          keyword: keyword(),
-          filterTreeNode: (n, v) => n.name.toLowerCase().includes(v.toLowerCase()),
-        }) ?? [],
+      controller.getFeature<SearchFeatureApi<DepartmentNode>>('search')?.getSubtree({
+        keyword: keyword(),
+        filterTreeNode: (n, v) => n.name.toLowerCase().includes(v.toLowerCase()),
+      }) ?? [],
   )
   const highlight = (title: string) => {
     const index = title.toLowerCase().indexOf(keyword().toLowerCase())
@@ -45,7 +43,12 @@ export function SearchDemo() {
       title="Search data and custom title rendering"
       description="The core returns filtered tree data; title rendering decides how a keyword is highlighted."
     >
-      <InputRoot value={keyword()} class="mb-space-md max-w-sm"><InputControl onInput={(e) => setKeyword(e.currentTarget.value)} placeholder="Search departments" /></InputRoot>
+      <InputRoot value={keyword()} class="mb-space-md max-w-sm">
+        <InputControl
+          onInput={(e) => setKeyword(e.currentTarget.value)}
+          placeholder="Search departments"
+        />
+      </InputRoot>
       <div hidden={Boolean(keyword().trim())}>
         <DemoTree<DepartmentNode>
           controller={controller}

@@ -71,8 +71,10 @@ function ServerPaginationGrid() {
   })
   const table = createDataGridTable(options())
 
-  function updatePagination(updater: PaginationState | ((previous: PaginationState) => PaginationState)) {
-    setPagination(previous => typeof updater === 'function' ? updater(previous) : updater)
+  function updatePagination(
+    updater: PaginationState | ((previous: PaginationState) => PaginationState),
+  ) {
+    setPagination((previous) => (typeof updater === 'function' ? updater(previous) : updater))
     table.setDataGridOptions(options())
   }
 

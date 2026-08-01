@@ -11,12 +11,13 @@ import { LoadingIcon } from '../../icon/loading'
 import { Button as PrimitiveButton } from '../../primitive/button/button'
 
 export interface ButtonProps
-  extends ParentProps<Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>>,
+  extends
+    ParentProps<Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'>>,
     ButtonStyleProps {
-  icon?: JSX.Element
-  iconPlacement?: 'start' | 'end'
-  loading?: boolean
-  disabled?: boolean
+  icon?: JSX.Element | undefined
+  iconPlacement?: 'start' | 'end' | undefined
+  loading?: boolean | undefined
+  disabled?: boolean | undefined
 }
 
 export function Button(props: ButtonProps) {
@@ -44,7 +45,10 @@ export function Button(props: ButtonProps) {
     <PrimitiveButton
       {...rest}
       type={local.type ?? 'button'}
-      class={cn(buttonClassName({ variant: variant(), size: size(), effect: local.effect }), local.class)}
+      class={cn(
+        buttonClassName({ variant: variant(), size: size(), effect: local.effect }),
+        local.class,
+      )}
       data-slot="button"
       data-variant={variant()}
       data-size={size()}
@@ -53,13 +57,19 @@ export function Button(props: ButtonProps) {
       disabled={isDisabled()}
     >
       <Show when={iconPlacement() === 'start' && iconNode()}>
-        <span class={buttonIconClassName({ placement: 'start', effect: local.effect })} data-icon="inline-start">
+        <span
+          class={buttonIconClassName({ placement: 'start', effect: local.effect })}
+          data-icon="inline-start"
+        >
           {iconNode()}
         </span>
       </Show>
       {local.children}
       <Show when={iconPlacement() === 'end' && iconNode()}>
-        <span class={buttonIconClassName({ placement: 'end', effect: local.effect })} data-icon="inline-end">
+        <span
+          class={buttonIconClassName({ placement: 'end', effect: local.effect })}
+          data-icon="inline-end"
+        >
           {iconNode()}
         </span>
       </Show>

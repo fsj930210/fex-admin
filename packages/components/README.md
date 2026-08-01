@@ -38,12 +38,12 @@ Do not import package internals such as `src/**`, `dist/**`, or removed root sho
 
 Complex cross-framework primitives should keep framework-free state in `@fex/components-core` and bridge `getSnapshot + subscribe` through the framework helper:
 
-| Framework | Adapter |
-| --- | --- |
-| React | `@fex/components-react/hooks/use-core-store` |
-| Vue | `@fex/components-vue/composables/use-core-store` |
-| Solid | `@fex/components-solid/primitives/create-core-store-signal` |
-| Svelte | `@fex/components-svelte/stores/core-store` |
-| Angular | `@fex/components-angular/signals/core-store-signal` |
+| Framework | Adapter                                                     |
+| --------- | ----------------------------------------------------------- |
+| React     | `@fex/components-react/hooks/use-core-store`                |
+| Vue       | `@fex/components-vue/composables/use-core-store`            |
+| Solid     | `@fex/components-solid/primitives/create-core-store-signal` |
+| Svelte    | `@fex/components-svelte/stores/core-store`                  |
+| Angular   | `@fex/components-angular/signals/core-store-signal`         |
 
 Adapters only synchronize snapshots into the framework runtime. Business actions still belong on explicit controllers, such as `open`, `close`, `select`, or `moveFocus`; do not turn component logic into a generic event bus.

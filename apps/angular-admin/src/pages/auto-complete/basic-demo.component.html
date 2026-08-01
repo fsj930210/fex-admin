@@ -1,4 +1,7 @@
-<fex-card title="Free input and local suggestions" description="Type any text, or accept a matching name with pointer or keyboard.">
+<fex-card
+  title="Free input and local suggestions"
+  description="Type any text, or accept a matching name with pointer or keyboard."
+>
   <fex-auto-complete [items]="users" [fieldNames]="fieldNames" (select)="accept($event)">
     <fex-auto-complete-trigger placeholder="Try A or Bella" [clearable]="true" />
     <fex-auto-complete-content><fex-auto-complete-list /></fex-auto-complete-content>

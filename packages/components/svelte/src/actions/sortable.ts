@@ -1,4 +1,7 @@
-import { DEFAULT_SORTABLE_CONTAINER_ID, createSortableController } from '@fex/components-core/sortable/create-sortable-controller'
+import {
+  DEFAULT_SORTABLE_CONTAINER_ID,
+  createSortableController,
+} from '@fex/components-core/sortable/create-sortable-controller'
 import type {
   SortableAxis,
   SortableControllerSnapshot,
@@ -30,10 +33,14 @@ export interface SortableActionOptions<TItems extends SortableItems> {
   onSnapshot?: (snapshot: SortableControllerSnapshot) => void
 }
 
-export function createSortableAction<TItems extends SortableItems>(options: SortableActionOptions<TItems>) {
+export function createSortableAction<TItems extends SortableItems>(
+  options: SortableActionOptions<TItems>,
+) {
   let currentOptions = options
   const controller = createSortableController(options)
-  const unsubscribe = controller.subscribe(() => currentOptions.onSnapshot?.(controller.getSnapshot()))
+  const unsubscribe = controller.subscribe(() =>
+    currentOptions.onSnapshot?.(controller.getSnapshot()),
+  )
   const cleanups = new Set<() => void>()
 
   function container(node: HTMLElement, containerId = DEFAULT_SORTABLE_CONTAINER_ID) {
@@ -68,7 +75,10 @@ export function createSortableAction<TItems extends SortableItems>(options: Sort
     let draggingThisItem = false
 
     function onPointerDown(event: PointerEvent) {
-      if (currentOptions.disabled || !controller.startPointerDrag(toInput(event), itemOptions.id, containerId)) {
+      if (
+        currentOptions.disabled ||
+        !controller.startPointerDrag(toInput(event), itemOptions.id, containerId)
+      ) {
         return
       }
       draggingThisItem = true

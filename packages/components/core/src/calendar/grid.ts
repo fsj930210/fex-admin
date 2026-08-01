@@ -126,8 +126,7 @@ function createCalendarCell<TValue extends CalendarValue>({
   const isAfterMax = options.max ? compareCalendarDate(date, options.max) > 0 : false
   const disabled = isBeforeMin || isAfterMax || Boolean(options.disabledDate?.(date))
   const singleRangeValue = Boolean(
-    (options.range?.start && !options.range.end) ||
-    (!options.range?.start && options.range?.end),
+    (options.range?.start && !options.range.end) || (!options.range?.start && options.range?.end),
   )
   const rangeStart = singleRangeValue
     ? isSameCalendarValue(value, options.range?.start ?? options.range?.end)

@@ -12,9 +12,15 @@ if (!context) throw new Error('TabsList must be used inside TabsRoot.')
 const listProps = computed(() => {
   const { class: userClass, ...forwardedAttrs } = attrs
   return mergeProps(forwardedAttrs, context.getListProps(), {
-    class: cn(tabsListClassName({ variant: context.variant(), orientation: context.orientation() }), userClass as string | undefined),
+    class: cn(
+      tabsListClassName({ variant: context.variant(), orientation: context.orientation() }),
+      userClass as string | undefined,
+    ),
   })
 })
 </script>
 
-<template><slot v-if="$slots.render" name="render" :props="listProps" /><div v-else v-bind="listProps"><slot /></div></template>
+<template>
+  <slot v-if="$slots.render" name="render" :props="listProps" />
+  <div v-else v-bind="listProps"><slot /></div>
+</template>

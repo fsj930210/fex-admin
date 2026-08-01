@@ -1,6 +1,6 @@
-import { IsHash } from 'class-validator';
+import { IsHash } from 'class-validator'
 
 export class CheckUploadDto {
   @IsHash('md5')
-  declare md5: string;
+  declare md5: string
 }

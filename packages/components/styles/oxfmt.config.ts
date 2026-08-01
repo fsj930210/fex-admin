@@ -1,1 +1,1 @@
-export { default } from '@fex/config-oxc/oxfmt'
+export { default } from '@fex/config-oxc/oxfmt/base'

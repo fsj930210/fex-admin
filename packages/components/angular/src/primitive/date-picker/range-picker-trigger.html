@@ -46,15 +46,19 @@
     />
   </fex-input-root>
   @if (state.context().allowClear && hasValue()) {
-    <button fexInputClear type="button" (pointerdown)="$event.stopPropagation()" (click)="clear($event)"></button>
-  }
-  @if (!state.context().allowClear || !hasValue()) {
-    <span fexInputSuffix>
-      @if (suffix) {
-        <span>{{ suffix }}</span>
-      } @else {
-        <fex-calendar-icon />
-      }
-    </span>
+  <button
+    fexInputClear
+    type="button"
+    (pointerdown)="$event.stopPropagation()"
+    (click)="clear($event)"
+  ></button>
+  } @if (!state.context().allowClear || !hasValue()) {
+  <span fexInputSuffix>
+    @if (suffix) {
+    <span>{{ suffix }}</span>
+    } @else {
+    <fex-calendar-icon />
+    }
+  </span>
   }
 </fex-input-root>

@@ -43,7 +43,16 @@ export function DataGridSortButton<TFeatures extends TableFeatures, TData extend
     >
       <span>{children}</span>
       <span className="inline-flex items-center" aria-hidden>
-        {direction === 'asc' ? <ChevronUpIcon className="size-3.5" /> : direction === 'desc' ? <ChevronDownIcon className="size-3.5" /> : <span className="relative inline-block size-3.5"><ChevronUpIcon className="absolute inset-x-0 top-0 size-3" /><ChevronDownIcon className="absolute inset-x-0 bottom-0 size-3" /></span>}
+        {direction === 'asc' ? (
+          <ChevronUpIcon className="size-3.5" />
+        ) : direction === 'desc' ? (
+          <ChevronDownIcon className="size-3.5" />
+        ) : (
+          <span className="relative inline-block size-3.5">
+            <ChevronUpIcon className="absolute inset-x-0 top-0 size-3" />
+            <ChevronDownIcon className="absolute inset-x-0 bottom-0 size-3" />
+          </span>
+        )}
         {direction && sortIndex >= 0 ? <sup>{sortIndex + 1}</sup> : null}
       </span>
     </Button>

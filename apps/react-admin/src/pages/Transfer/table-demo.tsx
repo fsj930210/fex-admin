@@ -1,5 +1,14 @@
-import { rowSelectionFeature } from '@fex/components-core/data-grid/features/row-selection'
-import { createDataGridSelectionColumn, DataGrid, tableFeatures, useDataGridTable, type ColumnDef } from '@fex/components-react/primitive/data-grid'
+import {
+  rowSelectionFeature,
+  type RowSelectionState,
+} from '@fex/components-core/data-grid/features/row-selection'
+import {
+  createDataGridSelectionColumn,
+  DataGrid,
+  tableFeatures,
+  useDataGridTable,
+  type ColumnDef,
+} from '@fex/components-react/primitive/data-grid'
 import type { TransferPanelRenderApi } from '@fex/components-react/primitive/transfer'
 import { Transfer } from '@fex/components-react/primitive/transfer'
 import { transferFieldNames, transferMembers, type TransferMember } from './data'
@@ -13,7 +22,9 @@ function TransferTable({ panel }: { panel: TransferPanelRenderApi<TransferMember
     { accessorKey: 'name', header: 'Name' },
     { accessorKey: 'department', header: 'Department' },
   ]
-  const selection = Object.fromEntries(panel.checkedKeys.map((key) => [String(key), true]))
+  const selection: RowSelectionState = Object.fromEntries(
+    panel.checkedKeys.map((key) => [String(key), true]),
+  )
   const table = useDataGridTable({
     features,
     data: panel.items,
@@ -31,7 +42,10 @@ function TransferTable({ panel }: { panel: TransferPanelRenderApi<TransferMember
 
 export function TableTransferDemo() {
   return (
-    <TransferDemoSection title="Custom DataGrid body" description="Each side can use row selection without reimplementing target-key updates or move-all filtering.">
+    <TransferDemoSection
+      title="Custom DataGrid body"
+      description="Each side can use row selection without reimplementing target-key updates or move-all filtering."
+    >
       <Transfer
         data-testid="table-transfer"
         items={transferMembers}
@@ -41,7 +55,10 @@ export function TableTransferDemo() {
           source: { body: (panel) => <TransferTable panel={panel} /> },
           target: { body: (panel) => <TransferTable panel={panel} /> },
         }}
-        className={{ source: { body: 'overflow-hidden p-0' }, target: { body: 'overflow-hidden p-0' } }}
+        className={{
+          source: { body: 'overflow-hidden p-0' },
+          target: { body: 'overflow-hidden p-0' },
+        }}
       />
     </TransferDemoSection>
   )

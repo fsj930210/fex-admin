@@ -97,7 +97,8 @@ export class TreeRoot<TNode extends TreeNodeData = TreeNodeData> {
   @HostListener('keydown', ['$event'])
   handleKeydown(event: KeyboardEvent) {
     if (event.defaultPrevented || event.isComposing || !this.tree().hasFeature('keyboard')) return
-    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return
+    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement)
+      return
 
     const tree = this.tree()
     const items = tree.getVisibleItems()
@@ -122,7 +123,8 @@ export class TreeRoot<TNode extends TreeNodeData = TreeNodeData> {
       focusAt(items.length - 1)
     } else if (event.key === 'ArrowRight' && item) {
       event.preventDefault()
-      if (!item.isLeaf && !tree.getSnapshot().expandedKeys.includes(item.key)) expansion?.expand(item.key)
+      if (!item.isLeaf && !tree.getSnapshot().expandedKeys.includes(item.key))
+        expansion?.expand(item.key)
       else focus?.focus(tree.getVisibleItemAt(index + 1)?.key ?? item.key)
     } else if (event.key === 'ArrowLeft' && item) {
       event.preventDefault()
@@ -141,7 +143,6 @@ export class TreeRoot<TNode extends TreeNodeData = TreeNodeData> {
     this.snapshot.set(snapshot)
     this.visibleItems.set(tree.getVisibleItems())
   }
-
 }
 
 @Component({
@@ -154,9 +155,10 @@ export class TreeRoot<TNode extends TreeNodeData = TreeNodeData> {
 })
 export class TreeViewport<TNode extends TreeNodeData = TreeNodeData> {
   readonly root = inject<TreeRoot<TNode>>(TreeRoot)
-  readonly template = contentChild.required<
-    TemplateRef<{ $implicit: TreeVisibleItem<TNode>; tree: TreeController<TNode> }>
-  >(TemplateRef)
+  readonly template =
+    contentChild.required<
+      TemplateRef<{ $implicit: TreeVisibleItem<TNode>; tree: TreeController<TNode> }>
+    >(TemplateRef)
   protected readonly hostClassName = createHostClassName(treeViewportClassName)
 }
 
@@ -172,9 +174,10 @@ export class TreeVirtualViewport<TNode extends TreeNodeData = TreeNodeData> {
   readonly root = inject<TreeRoot<TNode>>(TreeRoot)
   readonly height = input.required<number>()
   readonly overscan = input(6)
-  readonly template = contentChild.required<
-    TemplateRef<{ $implicit: TreeVisibleItem<TNode>; tree: TreeController<TNode> }>
-  >(TemplateRef)
+  readonly template =
+    contentChild.required<
+      TemplateRef<{ $implicit: TreeVisibleItem<TNode>; tree: TreeController<TNode> }>
+    >(TemplateRef)
   readonly scrollElement = viewChild<ElementRef<HTMLDivElement>>('scrollElement')
   readonly virtualizer = injectVirtualizer<HTMLDivElement, HTMLDivElement>(() => ({
     scrollElement: this.scrollElement(),
@@ -254,7 +257,10 @@ export class TreeItemDirective<TNode extends TreeNodeData = TreeNodeData> {
   })
   readonly loadState = computed(() => {
     this.version()
-    return this.root.tree().getFeature<AsyncLoadFeatureApi>('async-load')?.getState(this.key()) ?? 'unloaded'
+    return (
+      this.root.tree().getFeature<AsyncLoadFeatureApi>('async-load')?.getState(this.key()) ??
+      'unloaded'
+    )
   })
   protected readonly hostClassName = createHostClassName(() => treeItemClassName())
 

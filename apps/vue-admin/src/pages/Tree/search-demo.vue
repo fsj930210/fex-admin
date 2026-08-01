@@ -51,7 +51,9 @@ function parts(title: string) {
     title="Search data and custom title rendering"
     description="The core returns filtered tree data; title rendering decides how a keyword is highlighted."
   >
-    <InputRoot :value="keyword" class="mb-space-md max-w-sm"><InputControl placeholder="Search departments" @input="handleInput" /></InputRoot>
+    <InputRoot :value="keyword" class="mb-space-md max-w-sm"
+      ><InputControl placeholder="Search departments" @input="handleInput"
+    /></InputRoot>
     <div v-show="!showingSearchTree">
       <!-- @vue-generic {DepartmentNode} -->
       <DemoTree
@@ -74,9 +76,11 @@ function parts(title: string) {
       class="max-w-xl rounded-md border border-border bg-background p-space-sm"
     >
       <template #title="{ item }">
-        {{ parts(String(item.node.name)).before }}<mark
-          class="rounded-sm bg-warning/20 px-0.5 text-inherit"
-        >{{ parts(String(item.node.name)).match }}</mark>{{ parts(String(item.node.name)).after }}
+        {{ parts(String(item.node.name)).before
+        }}<mark class="rounded-sm bg-warning/20 px-0.5 text-inherit">{{
+          parts(String(item.node.name)).match
+        }}</mark
+        >{{ parts(String(item.node.name)).after }}
       </template>
     </DemoTree>
   </Card>

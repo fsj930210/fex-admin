@@ -1,4 +1,10 @@
-import { datePickerHeaderClassName, datePickerHeaderDoubleIconClassName, datePickerHeaderLabelClassName, datePickerHeaderNavigationClassName, datePickerHeaderTitleClassName } from '@fex/components-styles/date-picker'
+import {
+  datePickerHeaderClassName,
+  datePickerHeaderDoubleIconClassName,
+  datePickerHeaderLabelClassName,
+  datePickerHeaderNavigationClassName,
+  datePickerHeaderTitleClassName,
+} from '@fex/components-styles/date-picker'
 import { cn } from '@fex/utils'
 import { Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../icon/chevron'
@@ -7,11 +13,25 @@ import { useCalendarContext } from '../calendar/calendar-context'
 
 export function DatePickerHeader(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
   const [local, rest] = splitProps(props, ['class', 'children'])
-  return <div {...rest} data-slot="date-picker-header" class={cn(datePickerHeaderClassName, local.class)}>{local.children}</div>
+  return (
+    <div
+      {...rest}
+      data-slot="date-picker-header"
+      class={cn(datePickerHeaderClassName, local.class)}
+    >
+      {local.children}
+    </div>
+  )
 }
 
 export interface DatePickerHeaderButtonProps extends ButtonProps {
-  action: 'previous-year' | 'previous-month' | 'next-month' | 'next-year' | 'previous-panel' | 'next-panel'
+  action:
+    | 'previous-year'
+    | 'previous-month'
+    | 'next-month'
+    | 'next-year'
+    | 'previous-panel'
+    | 'next-panel'
 }
 
 export function DatePickerHeaderButton(props: DatePickerHeaderButtonProps) {
@@ -38,7 +58,7 @@ export function DatePickerHeaderButton(props: DatePickerHeaderButtonProps) {
       size={rest.size ?? 'icon-sm'}
       class={cn(datePickerHeaderNavigationClassName, local.class)}
       onClick={(event) => {
-        local.onClick?.(event)
+        if (typeof local.onClick === 'function') local.onClick(event)
         if (!event.defaultPrevented) runAction()
       }}
     >
@@ -46,9 +66,11 @@ export function DatePickerHeaderButton(props: DatePickerHeaderButtonProps) {
         <>
           {previous ? <ChevronLeftIcon class="size-4" /> : <ChevronRightIcon class="size-4" />}
           <Show when={double}>
-            {previous
-              ? <ChevronLeftIcon class={cn(datePickerHeaderDoubleIconClassName, 'size-4')} />
-              : <ChevronRightIcon class={cn(datePickerHeaderDoubleIconClassName, 'size-4')} />}
+            {previous ? (
+              <ChevronLeftIcon class={cn(datePickerHeaderDoubleIconClassName, 'size-4')} />
+            ) : (
+              <ChevronRightIcon class={cn(datePickerHeaderDoubleIconClassName, 'size-4')} />
+            )}
           </Show>
         </>
       )}
@@ -58,7 +80,11 @@ export function DatePickerHeaderButton(props: DatePickerHeaderButtonProps) {
 
 export function DatePickerHeaderTitle(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {
   const [local, rest] = splitProps(props, ['class', 'children'])
-  return <div {...rest} class={cn(datePickerHeaderTitleClassName, local.class)}>{local.children}</div>
+  return (
+    <div {...rest} class={cn(datePickerHeaderTitleClassName, local.class)}>
+      {local.children}
+    </div>
+  )
 }
 
 export interface DatePickerHeaderLabelProps extends ButtonProps {
@@ -84,7 +110,7 @@ export function DatePickerHeaderLabel(props: DatePickerHeaderLabelProps) {
       size={rest.size ?? 'sm'}
       class={cn(datePickerHeaderLabelClassName, local.class)}
       onClick={(event) => {
-        local.onClick?.(event)
+        if (typeof local.onClick === 'function') local.onClick(event)
         if (!event.defaultPrevented) calendar.setPanel(local.part)
       }}
     >

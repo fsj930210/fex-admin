@@ -5,7 +5,8 @@ import { RangePickerContext } from './context'
 import { useRangePicker, type UseRangePickerOptions } from './use-range-picker'
 
 export interface RangePickerRootProps<TValue extends CalendarValue = CalendarValue>
-  extends Omit<PopoverRootProps, 'open' | 'defaultOpen' | 'onOpenChange' | 'children'>,
+  extends
+    Omit<PopoverRootProps, 'open' | 'defaultOpen' | 'onOpenChange' | 'children'>,
     UseRangePickerOptions<TValue> {
   children?: ReactNode
 }

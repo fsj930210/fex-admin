@@ -11,14 +11,20 @@ import { treeContextKey, type TreeContextValue } from './context'
 import { useTreeController } from './use-tree'
 
 defineOptions({ inheritAttrs: false })
-const props = withDefaults(defineProps<{
-  options?: TreeOptions<TNode>
-  controller?: TreeController<TNode>
-  indent?: number
-  rowHeight?: number
-}>(), { indent: 16, rowHeight: 32 })
+const props = withDefaults(
+  defineProps<{
+    options?: TreeOptions<TNode>
+    controller?: TreeController<TNode>
+    indent?: number
+    rowHeight?: number
+  }>(),
+  { indent: 16, rowHeight: 32 },
+)
 const attrs = useAttrs()
-const tree = useTreeController(() => props.options ?? (props.controller ? undefined : { treeData: [] }), props.controller)
+const tree = useTreeController(
+  () => props.options ?? (props.controller ? undefined : { treeData: [] }),
+  props.controller,
+)
 const indent = computed(() => props.indent)
 const rowHeight = computed(() => props.rowHeight)
 provide(treeContextKey, { tree, indent, rowHeight } as unknown as TreeContextValue<TreeNodeData>)
@@ -35,7 +41,8 @@ function handleKeydown(event: KeyboardEvent) {
   const listener = attrs.onKeydown
   if (typeof listener === 'function') listener(event)
   if (event.defaultPrevented || event.isComposing || !tree.hasFeature('keyboard')) return
-  if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return
+  if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement)
+    return
   const visibleItems = tree.getVisibleItems()
   const expansion = tree.getFeature<ExpansionFeatureApi>('expansion')
   const check = tree.getFeature<CheckFeatureApi>('check')
@@ -44,17 +51,27 @@ function handleKeydown(event: KeyboardEvent) {
   const focusedItem = focusedIndex >= 0 ? visibleItems[focusedIndex] : undefined
   const focusAt = (index: number) => focus?.focus(visibleItems[index]?.key ?? null)
 
-  if (event.key === 'ArrowDown') { event.preventDefault(); focusAt(Math.min(focusedIndex + 1, visibleItems.length - 1)) }
-  else if (event.key === 'ArrowUp') { event.preventDefault(); focusAt(Math.max(focusedIndex - 1, 0)) }
-  else if (event.key === 'Home') { event.preventDefault(); focusAt(0) }
-  else if (event.key === 'End') { event.preventDefault(); focusAt(visibleItems.length - 1) }
-  else if (event.key === 'ArrowRight' && focusedItem) {
+  if (event.key === 'ArrowDown') {
     event.preventDefault()
-    if (!focusedItem.isLeaf && !tree.getSnapshot().expandedKeys.includes(focusedItem.key)) expansion?.expand(focusedItem.key)
+    focusAt(Math.min(focusedIndex + 1, visibleItems.length - 1))
+  } else if (event.key === 'ArrowUp') {
+    event.preventDefault()
+    focusAt(Math.max(focusedIndex - 1, 0))
+  } else if (event.key === 'Home') {
+    event.preventDefault()
+    focusAt(0)
+  } else if (event.key === 'End') {
+    event.preventDefault()
+    focusAt(visibleItems.length - 1)
+  } else if (event.key === 'ArrowRight' && focusedItem) {
+    event.preventDefault()
+    if (!focusedItem.isLeaf && !tree.getSnapshot().expandedKeys.includes(focusedItem.key))
+      expansion?.expand(focusedItem.key)
     else focus?.focus(tree.getVisibleItemAt(focusedIndex + 1)?.key ?? focusedItem.key)
   } else if (event.key === 'ArrowLeft' && focusedItem) {
     event.preventDefault()
-    if (tree.getSnapshot().expandedKeys.includes(focusedItem.key)) expansion?.collapse(focusedItem.key)
+    if (tree.getSnapshot().expandedKeys.includes(focusedItem.key))
+      expansion?.collapse(focusedItem.key)
     else focus?.focus(focusedItem.parentKey)
   } else if (event.key === 'Enter' && focusedItem) selection()?.toggle(focusedItem.key)
   else if (event.key === ' ' && focusedItem) {

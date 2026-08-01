@@ -55,7 +55,9 @@ export function DndDemo() {
         indent={24}
         class="max-w-xl rounded-md border border-border bg-background p-space-sm"
       >
-        <TreeViewport<DepartmentNode>>{(item) => <Row controller={controller} itemKey={item.key} />}</TreeViewport>
+        <TreeViewport<DepartmentNode>>
+          {(item) => <Row controller={controller} itemKey={item.key} />}
+        </TreeViewport>
       </TreeRoot>
     </Card>
   )

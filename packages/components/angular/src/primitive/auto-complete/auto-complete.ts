@@ -46,8 +46,12 @@ export class AutoCompleteRoot implements OnChanges {
   private readonly popover = inject(Popover)
   private readonly destroyRef = inject(DestroyRef)
   private readonly itemsState = signal<readonly Item[]>([])
-  @Input() set items(value: readonly object[]) { this.itemsState.set(value as readonly Item[]) }
-  get items(): readonly object[] { return this.itemsState() }
+  @Input() set items(value: readonly object[]) {
+    this.itemsState.set(value as readonly Item[])
+  }
+  get items(): readonly object[] {
+    return this.itemsState()
+  }
   @Input() fieldNames?: Partial<AutoCompleteFieldNames<Item>>
   @Input() value?: string
   @Input() defaultValue?: string
@@ -59,9 +63,18 @@ export class AutoCompleteRoot implements OnChanges {
   @Input() readOnly = false
   @Input() closeOnSelect?: boolean
   @Input() loop?: boolean
-  @Output() readonly change = new EventEmitter<{ value: string; meta: AutoCompleteChangeMeta<Item> }>()
-  @Output() readonly search = new EventEmitter<{ value: string; meta: { reason: 'input' | 'clear'; previousValue: string } }>()
-  @Output() readonly select = new EventEmitter<{ value: string; meta: { selectedItem: Item; selectedKey: string | number; previousValue: string } }>()
+  @Output() readonly change = new EventEmitter<{
+    value: string
+    meta: AutoCompleteChangeMeta<Item>
+  }>()
+  @Output() readonly search = new EventEmitter<{
+    value: string
+    meta: { reason: 'input' | 'clear'; previousValue: string }
+  }>()
+  @Output() readonly select = new EventEmitter<{
+    value: string
+    meta: { selectedItem: Item; selectedKey: string | number; previousValue: string }
+  }>()
   @Output() readonly clear = new EventEmitter<{ previousValue: string }>()
   @Output() readonly openChange = new EventEmitter<{ open: boolean; meta: { reason: string } }>()
   readonly controller: AutoCompleteController<Item>
@@ -69,22 +82,42 @@ export class AutoCompleteRoot implements OnChanges {
   private readonly refreshSnapshot: () => void
   readonly listId = `auto-complete-${crypto.randomUUID()}`
   constructor() {
+    // The option getters intentionally capture the component instance for live Angular inputs.
+    // oxlint-disable-next-line typescript/no-this-alias
     const root = this
     this.popover.trigger = []
     this.controller = createAutoCompleteController<Item>({
-      get items() { return root.items as readonly Item[] },
-      get fieldNames() { return root.fieldNames },
-      get value() { return root.value },
-      get defaultValue() { return root.defaultValue },
-      get open() { return root.open },
-      get defaultOpen() { return root.defaultOpen },
-      get filterOption() { return root.filterOption },
-      get closeOnSelect() { return root.closeOnSelect },
-      get loop() { return root.loop },
+      get items() {
+        return root.items as readonly Item[]
+      },
+      get fieldNames() {
+        return root.fieldNames
+      },
+      get value() {
+        return root.value
+      },
+      get defaultValue() {
+        return root.defaultValue
+      },
+      get open() {
+        return root.open
+      },
+      get defaultOpen() {
+        return root.defaultOpen
+      },
+      get filterOption() {
+        return root.filterOption
+      },
+      get closeOnSelect() {
+        return root.closeOnSelect
+      },
+      get loop() {
+        return root.loop
+      },
       onChange: (value, meta) => root.change.emit({ value, meta }),
       onSearch: (value, meta) => root.search.emit({ value, meta }),
       onSelect: (value, meta) => root.select.emit({ value, meta }),
-      onClear: meta => root.clear.emit(meta),
+      onClear: (meta) => root.clear.emit(meta),
       onOpenChange: (open, meta) => {
         root.popover.open = root.open ?? open
         root.popover.syncOptions()
@@ -97,8 +130,9 @@ export class AutoCompleteRoot implements OnChanges {
     this.popover.open = this.snapshot().open
     this.popover.defaultOpen = this.defaultOpen
     this.popover.syncOptions()
-    const subscription = this.popover.openChange.subscribe(open =>
-      this.controller.setOpen(open, open ? 'programmatic' : 'outside'))
+    const subscription = this.popover.openChange.subscribe((open) =>
+      this.controller.setOpen(open, open ? 'programmatic' : 'outside'),
+    )
     this.destroyRef.onDestroy(() => subscription.unsubscribe())
   }
   ngOnChanges(_changes: SimpleChanges) {
@@ -108,8 +142,8 @@ export class AutoCompleteRoot implements OnChanges {
     this.popover.syncOptions()
   }
   get visibleItems() {
-    this.itemsState()
-    this.snapshot().value
+    void this.itemsState()
+    void this.snapshot().value
     return this.controller.getVisibleItems()
   }
 }
@@ -193,8 +227,16 @@ export class AutoCompleteOption {
   readonly autoComplete = inject(AutoCompleteRoot)
   @Input({ required: true }) itemKey!: string | number
   @Input('class') className = ''
-  get entry() { return this.autoComplete.visibleItems.find(item => item.key === this.itemKey) }
-  get active() { return this.autoComplete.snapshot().activeKey === this.itemKey }
-  get disabled() { return this.entry?.disabled === true }
-  get optionClass() { return `${autoCompleteOptionClassName} ${this.className}` }
+  get entry() {
+    return this.autoComplete.visibleItems.find((item) => item.key === this.itemKey)
+  }
+  get active() {
+    return this.autoComplete.snapshot().activeKey === this.itemKey
+  }
+  get disabled() {
+    return this.entry?.disabled === true
+  }
+  get optionClass() {
+    return `${autoCompleteOptionClassName} ${this.className}`
+  }
 }

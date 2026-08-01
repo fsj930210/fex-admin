@@ -12,4 +12,3 @@ withDefaults(defineProps<{ text?: string }>(), { text: 'Next' })
     <ChevronRightIcon />
   </PaginationLink>
 </template>
-

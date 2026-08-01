@@ -11,12 +11,26 @@
     </header>
 
     <div class="grid gap-space-xl lg:grid-cols-2">
-      <fex-card title="Basic" description="Items, nested children, group, divider and disabled state.">
-        <fex-menu [items]="menuItems" [defaultExpandKeys]="['system']" [defaultSelectedKeys]="['dashboard']" />
+      <fex-card
+        title="Basic"
+        description="Items, nested children, group, divider and disabled state."
+      >
+        <fex-menu
+          [items]="menuItems"
+          [defaultExpandKeys]="['system']"
+          [defaultSelectedKeys]="['dashboard']"
+        />
       </fex-card>
 
-      <fex-card title="Horizontal" description="Horizontal displays top-level items; nested popup menus belong to Dropdown or Popover composition.">
-        <fex-menu [items]="horizontalItems" orientation="horizontal" [defaultSelectedKeys]="['analytics']" />
+      <fex-card
+        title="Horizontal"
+        description="Horizontal displays top-level items; nested popup menus belong to Dropdown or Popover composition."
+      >
+        <fex-menu
+          [items]="horizontalItems"
+          orientation="horizontal"
+          [defaultSelectedKeys]="['analytics']"
+        />
       </fex-card>
 
       <fex-card title="Controlled" description="Controlled expanded and selected key arrays.">
@@ -30,7 +44,10 @@
         />
       </fex-card>
 
-      <fex-card title="Multiple Selection" description="Leaf item selection can opt into multiple keys.">
+      <fex-card
+        title="Multiple Selection"
+        description="Leaf item selection can opt into multiple keys."
+      >
         <fex-menu
           [items]="menuItems"
           [defaultExpandKeys]="['system', 'content']"
@@ -40,12 +57,21 @@
       </fex-card>
 
       <fex-card title="Suffix" description="Right-side content can be provided by data.">
-        <fex-menu [items]="menuItems" [defaultExpandKeys]="['system', 'content']" [defaultSelectedKeys]="['comments']" />
+        <fex-menu
+          [items]="menuItems"
+          [defaultExpandKeys]="['system', 'content']"
+          [defaultSelectedKeys]="['comments']"
+        />
       </fex-card>
 
-      <fex-card title="Custom Item" description="itemTemplate replaces the whole item content area.">
+      <fex-card
+        title="Custom Item"
+        description="itemTemplate replaces the whole item content area."
+      >
         <ng-template #customItem let-info>
-          <span class="inline-flex size-4 shrink-0 items-center justify-center text-xs">{{ info.item.icon || "." }}</span>
+          <span class="inline-flex size-4 shrink-0 items-center justify-center text-xs">{{
+            info.item.icon || '.'
+          }}</span>
           <span class="min-w-0 flex-1 truncate">
             {{ info.item.label }}
             @if (info.selected) {
@@ -53,10 +79,16 @@
             }
           </span>
           @if (info.hasChildren) {
-            <span class="text-xs text-muted-foreground">{{ info.expanded ? "open" : "closed" }}</span>
+            <span class="text-xs text-muted-foreground">{{
+              info.expanded ? 'open' : 'closed'
+            }}</span>
           }
         </ng-template>
-        <fex-menu [items]="menuItems" [defaultExpandKeys]="['system']" [itemTemplate]="customItem" />
+        <fex-menu
+          [items]="menuItems"
+          [defaultExpandKeys]="['system']"
+          [itemTemplate]="customItem"
+        />
       </fex-card>
 
       <fex-card title="Headless Helper" description="Primitive tree helpers can drive custom DOM.">
@@ -96,7 +128,9 @@
           >
             <span class="min-w-0 flex-1 truncate">{{ entry.node.label }}</span>
             @if (info.hasChildren) {
-              <span class="inline-flex size-4 shrink-0 items-center justify-center text-muted-foreground">
+              <span
+                class="inline-flex size-4 shrink-0 items-center justify-center text-muted-foreground"
+              >
                 <ng-container [ngTemplateOutlet]="info.expanded ? minusIcon : plusIcon" />
               </span>
             }
@@ -117,7 +151,7 @@
           }
         </div>
       }
-    } @else if (item.type === "divider") {
+    } @else if (item.type === 'divider') {
       <div class="my-1 h-px bg-border"></div>
     } @else {
       <div class="py-1">

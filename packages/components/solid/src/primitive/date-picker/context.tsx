@@ -1,12 +1,21 @@
-import type { CalendarDate, CalendarPanel, CalendarRange, CalendarValue, CalendarWeekday } from '@fex/components-core/calendar'
+import type {
+  CalendarDate,
+  CalendarPanel,
+  CalendarRange,
+  CalendarValue,
+  CalendarWeekday,
+} from '@fex/components-core/calendar'
 import type { DatePickerPicker } from '@fex/components-core/date-picker/types'
 import { createContext, useContext, type Accessor } from 'solid-js'
 
-export type DatePickerSelectionValue<TValue extends CalendarValue = CalendarValue> = TValue | readonly TValue[] | null
+export type DatePickerSelectionValue<TValue extends CalendarValue = CalendarValue> =
+  | TValue
+  | readonly TValue[]
+  | null
 
 export interface DatePickerContextValue<TValue extends CalendarValue = CalendarValue> {
   picker: DatePickerPicker
-  status?: 'error' | 'warning'
+  status?: 'error' | 'warning' | undefined
   multiple: boolean
   needConfirm: boolean
   disabled: boolean
@@ -20,9 +29,9 @@ export interface DatePickerContextValue<TValue extends CalendarValue = CalendarV
   value: Accessor<DatePickerSelectionValue<TValue>>
   calendarValue: Accessor<TValue | null>
   calendarValues: Accessor<readonly TValue[]>
-  minDate?: CalendarDate
-  maxDate?: CalendarDate
-  disabledDate?: (date: CalendarDate) => boolean
+  minDate?: CalendarDate | undefined
+  maxDate?: CalendarDate | undefined
+  disabledDate?: ((date: CalendarDate) => boolean) | undefined
   setPanel: (panel: CalendarPanel) => void
   setViewDate: (viewDate: CalendarDate) => void
   setOpen: (open: boolean) => void
@@ -36,7 +45,7 @@ export interface DatePickerContextValue<TValue extends CalendarValue = CalendarV
 
 export interface RangePickerContextValue<TValue extends CalendarValue = CalendarValue> {
   picker: DatePickerPicker
-  status?: 'error' | 'warning'
+  status?: 'error' | 'warning' | undefined
   needConfirm: boolean
   disabled: boolean
   readOnly: boolean
@@ -50,9 +59,9 @@ export interface RangePickerContextValue<TValue extends CalendarValue = Calendar
   rangeValue: Accessor<CalendarRange<TValue>>
   activePart: Accessor<'start' | 'end'>
   hoverValue: Accessor<TValue | null>
-  minDate?: CalendarDate
-  maxDate?: CalendarDate
-  disabledDate?: (date: CalendarDate, activePart: 'start' | 'end') => boolean
+  minDate?: CalendarDate | undefined
+  maxDate?: CalendarDate | undefined
+  disabledDate?: ((date: CalendarDate, activePart: 'start' | 'end') => boolean) | undefined
   setPanel: (panel: CalendarPanel) => void
   setViewDate: (viewDate: CalendarDate) => void
   setOpen: (open: boolean) => void

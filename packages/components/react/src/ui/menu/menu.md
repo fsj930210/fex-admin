@@ -41,29 +41,29 @@ export function Demo() {
 
 ## Props
 
-| Name | Type | Default | Required | Description |
-| --- | --- | --- | --- | --- |
-| `items` | `MenuItem[]` | `[]` | No | Menu tree data. |
-| `expandKeys` | `MenuKey[]` | - | No | Controlled expanded keys. |
-| `defaultExpandKeys` | `MenuKey[]` | - | No | Initial expanded keys for uncontrolled mode. |
-| `expandMultiple` | `boolean` | `true` | No | Whether multiple parent items can be expanded at the same time. |
-| `selectedKeys` | `MenuKey[]` | - | No | Controlled selected keys. |
-| `defaultSelectedKeys` | `MenuKey[]` | - | No | Initial selected keys for uncontrolled mode. |
-| `selectMultiple` | `boolean` | `false` | No | Whether multiple leaf items can be selected. |
-| `selectable` | `boolean` | `true` | No | Whether leaf item clicks update selection. |
-| `disabled` | `boolean` | `false` | No | Disables all menu items. |
-| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | No | Menu body layout direction. It does not add dropdown or popup behavior. |
-| `indent` | `number` | `18` | No | Pixel indent added per nesting level. |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | No | Default menu density. |
-| `renderItem` | `(info) => ReactNode` | - | No | Fully custom item content. |
-| `renderSuffix` | `(info) => ReactNode` | - | No | Custom right-side content such as badges, counts or shortcuts. |
-| `renderExpandIcon` | `(info) => ReactNode` | - | No | Custom expand icon for parent items. |
-| `onExpandChange` | `(keys, info) => void` | - | No | Called after expanded keys change. |
-| `onSelect` | `(keys, info) => void` | - | No | Called after a key becomes selected. |
-| `onDeselect` | `(keys, info) => void` | - | No | Called after a key becomes deselected. |
-| `onClick` | `(info) => void` | - | No | Called when an enabled item is clicked or activated by keyboard. |
-| `className` | `MenuClassName` | - | No | Structured class names for root, item, label, suffix and other parts. |
-| `style` | `MenuStyle` | - | No | Structured styles for root and item. |
+| Name                  | Type                         | Default      | Required | Description                                                             |
+| --------------------- | ---------------------------- | ------------ | -------- | ----------------------------------------------------------------------- |
+| `items`               | `MenuItem[]`                 | `[]`         | No       | Menu tree data.                                                         |
+| `expandKeys`          | `MenuKey[]`                  | -            | No       | Controlled expanded keys.                                               |
+| `defaultExpandKeys`   | `MenuKey[]`                  | -            | No       | Initial expanded keys for uncontrolled mode.                            |
+| `expandMultiple`      | `boolean`                    | `true`       | No       | Whether multiple parent items can be expanded at the same time.         |
+| `selectedKeys`        | `MenuKey[]`                  | -            | No       | Controlled selected keys.                                               |
+| `defaultSelectedKeys` | `MenuKey[]`                  | -            | No       | Initial selected keys for uncontrolled mode.                            |
+| `selectMultiple`      | `boolean`                    | `false`      | No       | Whether multiple leaf items can be selected.                            |
+| `selectable`          | `boolean`                    | `true`       | No       | Whether leaf item clicks update selection.                              |
+| `disabled`            | `boolean`                    | `false`      | No       | Disables all menu items.                                                |
+| `orientation`         | `'vertical' \| 'horizontal'` | `'vertical'` | No       | Menu body layout direction. It does not add dropdown or popup behavior. |
+| `indent`              | `number`                     | `18`         | No       | Pixel indent added per nesting level.                                   |
+| `size`                | `'sm' \| 'md' \| 'lg'`       | `'md'`       | No       | Default menu density.                                                   |
+| `renderItem`          | `(info) => ReactNode`        | -            | No       | Fully custom item content.                                              |
+| `renderSuffix`        | `(info) => ReactNode`        | -            | No       | Custom right-side content such as badges, counts or shortcuts.          |
+| `renderExpandIcon`    | `(info) => ReactNode`        | -            | No       | Custom expand icon for parent items.                                    |
+| `onExpandChange`      | `(keys, info) => void`       | -            | No       | Called after expanded keys change.                                      |
+| `onSelect`            | `(keys, info) => void`       | -            | No       | Called after a key becomes selected.                                    |
+| `onDeselect`          | `(keys, info) => void`       | -            | No       | Called after a key becomes deselected.                                  |
+| `onClick`             | `(info) => void`             | -            | No       | Called when an enabled item is clicked or activated by keyboard.        |
+| `className`           | `MenuClassName`              | -            | No       | Structured class names for root, item, label, suffix and other parts.   |
+| `style`               | `MenuStyle`                  | -            | No       | Structured styles for root and item.                                    |
 
 ## MenuItem
 
@@ -124,7 +124,7 @@ Use `suffix` for simple right-side content, `renderSuffix` for computed right-si
 ```tsx
 <Menu
   items={items}
-  renderSuffix={({ item }) => item.key === 'messages' ? <span>12</span> : null}
+  renderSuffix={({ item }) => (item.key === 'messages' ? <span>12</span> : null)}
 />
 ```
 

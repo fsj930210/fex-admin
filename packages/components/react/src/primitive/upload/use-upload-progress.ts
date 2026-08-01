@@ -14,7 +14,10 @@ export interface UploadProcessProgress {
   uploadPercent: number
 }
 
-export function useUploadProgress(id: UploadId, options: UseUploadProgressOptions = {}): UploadProcessProgress {
+export function useUploadProgress(
+  id: UploadId,
+  options: UseUploadProgressOptions = {},
+): UploadProcessProgress {
   const { upload } = useUploadContext()
   const item = useUploadItem(upload, id).item
   const md5 = useUploadMd5(id)

@@ -28,8 +28,8 @@ const componentLinks = [
   { href: '/scrollbar', label: 'Scrollbar' },
   { href: '/select', label: 'Select' },
   { href: '/switch', label: 'Switch' },
-    { href: '/table', label: 'Table' },
-    { href: '/tabs', label: 'Tabs' },
+  { href: '/table', label: 'Table' },
+  { href: '/tabs', label: 'Tabs' },
   { href: '/transfer', label: 'Transfer' },
   { href: '/upload', label: 'Upload' },
   { href: '/tree', label: 'Tree' },
@@ -39,6 +39,7 @@ const componentLinks = [
   { href: '/resizable', label: 'Resizable' },
   { href: '/textarea', label: 'Textarea' },
   { href: '/time-picker', label: 'TimePicker' },
+  // eslint-disable-next-line unicorn/no-array-sort -- this literal is newly created and not shared.
 ].sort((left, right) => left.label.localeCompare(right.label))
 
 function NavLink(props: { href: string; label: string }) {

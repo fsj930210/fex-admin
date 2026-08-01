@@ -26,9 +26,17 @@ export function AutoCompleteContent({
   const autoComplete = useAutoComplete()
   let content = children
   if (content === undefined && autoComplete.loading)
-    content = loadingContent ?? <div className={autoCompleteStateClassName}><Spinner /></div>
+    content = loadingContent ?? (
+      <div className={autoCompleteStateClassName}>
+        <Spinner />
+      </div>
+    )
   else if (content === undefined && !autoComplete.items.length)
-    content = emptyContent ?? <Empty><EmptyDescription>No suggestions</EmptyDescription></Empty>
+    content = emptyContent ?? (
+      <Empty>
+        <EmptyDescription>No suggestions</EmptyDescription>
+      </Empty>
+    )
   else if (content === undefined) content = <AutoCompleteList />
   return (
     <PopoverPortal>

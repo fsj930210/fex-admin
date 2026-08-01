@@ -3,7 +3,7 @@
   import type { Snippet } from 'svelte'
   import DatePickerPanel from './date-picker-panel.svelte'
 
-  let { class: className, panelViewDate, children }: { class?: string; panelViewDate?: CalendarDate; children?: Snippet } = $props()
+  let { class: className, panelViewDate, children }: { class?: string | undefined; panelViewDate?: CalendarDate | undefined; children?: Snippet | undefined } = $props()
 </script>
 
 {#if children}

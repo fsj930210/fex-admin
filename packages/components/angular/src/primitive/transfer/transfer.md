@@ -24,15 +24,15 @@ import {
 
 ## Inputs
 
-| Input | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| `items` | `readonly TItem[]` | 必填 | 完整数据；数据引用变化会清空临时勾选。 |
-| `fieldNames` | `TransferFieldNames` | 标准字段 | 映射 key、label、disabled。 |
-| `targetKeys` / `defaultTargetKeys` | `readonly TransferKey[]` | — / `[]` | 受控值与非受控初始值。 |
-| `checkedKeys` / `defaultCheckedKeys` | `Partial<TransferCheckedKeys>` | — / `{}` | 两侧受控与非受控勾选。 |
-| `disabled` | `boolean` | `false` | 禁止勾选和所有移动。 |
-| `title` | `{ source?, target? }` | Source/Target | 默认 panel 标题。 |
-| `validation` | `{ status, message }` | — | error 或 warning 展示。 |
+| Input                                | 类型                           | 默认值        | 说明                                   |
+| ------------------------------------ | ------------------------------ | ------------- | -------------------------------------- |
+| `items`                              | `readonly TItem[]`             | 必填          | 完整数据；数据引用变化会清空临时勾选。 |
+| `fieldNames`                         | `TransferFieldNames`           | 标准字段      | 映射 key、label、disabled。            |
+| `targetKeys` / `defaultTargetKeys`   | `readonly TransferKey[]`       | — / `[]`      | 受控值与非受控初始值。                 |
+| `checkedKeys` / `defaultCheckedKeys` | `Partial<TransferCheckedKeys>` | — / `{}`      | 两侧受控与非受控勾选。                 |
+| `disabled`                           | `boolean`                      | `false`       | 禁止勾选和所有移动。                   |
+| `title`                              | `{ source?, target? }`         | Source/Target | 默认 panel 标题。                      |
+| `validation`                         | `{ status, message }`          | —             | error 或 warning 展示。                |
 
 `targetKeysChange` 与 `checkedKeysChange` 便于双向受控；`transferChange` 与 `transferCheckedChange` 额外返回完整 meta 和 items。
 

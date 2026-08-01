@@ -17,10 +17,10 @@
 
   interface ListboxProps<TItem> extends Omit<HTMLAttributes<HTMLDivElement>, 'onchange'> {
     items?: readonly TItem[]
-    value?: SelectionValue | SelectionValue[]
+    value?: SelectionValue | readonly SelectionValue[]
     defaultValue?: SelectionValue | SelectionValue[]
     multiple?: boolean
-    disabled?: boolean
+    disabled?: boolean | undefined
     orientation?: ListboxOrientation
     getItemValue?: (item: TItem) => SelectionValue
     getItemDisabled?: (item: TItem) => boolean
@@ -65,7 +65,7 @@
 
   const controller = createSelectionController({
     get value() {
-      return value
+      return Array.isArray(value) ? [...value] : value as SelectionValue | undefined
     },
     get defaultValue() {
       return defaultValue

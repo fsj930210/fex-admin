@@ -20,7 +20,12 @@ import {
 ## 基础用法
 
 ```tsx
-import { DatePickerContent, DatePickerPanel, DatePickerRoot, DatePickerTrigger } from '@fex/components-react/primitive/date-picker'
+import {
+  DatePickerContent,
+  DatePickerPanel,
+  DatePickerRoot,
+  DatePickerTrigger,
+} from '@fex/components-react/primitive/date-picker'
 
 export function Demo() {
   return (
@@ -37,7 +42,12 @@ export function Demo() {
 ## RangePicker
 
 ```tsx
-import { RangePickerContent, RangePickerPanelGroup, RangePickerRoot, RangePickerTrigger } from '@fex/components-react/primitive/date-picker'
+import {
+  RangePickerContent,
+  RangePickerPanelGroup,
+  RangePickerRoot,
+  RangePickerTrigger,
+} from '@fex/components-react/primitive/date-picker'
 
 export function Demo() {
   return (
@@ -53,40 +63,40 @@ export function Demo() {
 
 ## Props
 
-| 参数名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `picker` | `'date' \| 'week' \| 'month' \| 'quarter' \| 'year'` | `'date'` | 否 | 选择粒度。 |
-| `value` | `CalendarValue \| CalendarValue[] \| null` | - | 否 | 受控值，多选时为数组。 |
-| `defaultValue` | `CalendarValue \| CalendarValue[] \| null` | `null` | 否 | 非受控初始值。 |
-| `multiple` | `boolean` | `false` | 否 | DatePicker 多选。 |
-| `needConfirm` | `boolean` | `multiple` | 否 | 是否需要确认后提交。 |
-| `open` | `boolean` | - | 否 | 受控 Popover 打开状态。 |
-| `defaultOpen` | `boolean` | `false` | 否 | 非受控打开初始值。 |
-| `minDate` | `CalendarDate` | - | 否 | 最小可选日期。 |
-| `maxDate` | `CalendarDate` | - | 否 | 最大可选日期。 |
-| `disabledDate` | `(date: CalendarDate) => boolean` | - | 否 | 禁用日期规则。 |
-| `format` | `string` | 按 picker 推导 | 否 | 输入框展示和解析格式。 |
-| `weekStartsOn` | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `0` | 否 | 周起始日。 |
-| `allowClear` | `boolean` | `true` | 否 | 有值时显示清空按钮；清空按钮与 suffix 互斥。 |
-| `disabled` | `boolean` | `false` | 否 | 禁用输入。 |
-| `readOnly` | `boolean` | `false` | 否 | 输入只读。 |
+| 参数名         | 类型                                                 | 默认值         | 必填 | 说明                                         |
+| -------------- | ---------------------------------------------------- | -------------- | ---- | -------------------------------------------- |
+| `picker`       | `'date' \| 'week' \| 'month' \| 'quarter' \| 'year'` | `'date'`       | 否   | 选择粒度。                                   |
+| `value`        | `CalendarValue \| CalendarValue[] \| null`           | -              | 否   | 受控值，多选时为数组。                       |
+| `defaultValue` | `CalendarValue \| CalendarValue[] \| null`           | `null`         | 否   | 非受控初始值。                               |
+| `multiple`     | `boolean`                                            | `false`        | 否   | DatePicker 多选。                            |
+| `needConfirm`  | `boolean`                                            | `multiple`     | 否   | 是否需要确认后提交。                         |
+| `open`         | `boolean`                                            | -              | 否   | 受控 Popover 打开状态。                      |
+| `defaultOpen`  | `boolean`                                            | `false`        | 否   | 非受控打开初始值。                           |
+| `minDate`      | `CalendarDate`                                       | -              | 否   | 最小可选日期。                               |
+| `maxDate`      | `CalendarDate`                                       | -              | 否   | 最大可选日期。                               |
+| `disabledDate` | `(date: CalendarDate) => boolean`                    | -              | 否   | 禁用日期规则。                               |
+| `format`       | `string`                                             | 按 picker 推导 | 否   | 输入框展示和解析格式。                       |
+| `weekStartsOn` | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6`                    | `0`            | 否   | 周起始日。                                   |
+| `allowClear`   | `boolean`                                            | `true`         | 否   | 有值时显示清空按钮；清空按钮与 suffix 互斥。 |
+| `disabled`     | `boolean`                                            | `false`        | 否   | 禁用输入。                                   |
+| `readOnly`     | `boolean`                                            | `false`        | 否   | 输入只读。                                   |
 
 ## RangePicker Props
 
-| 参数名 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- |
-| `value` | `CalendarRange<CalendarValue>` | - | 否 | 受控范围值。 |
-| `defaultValue` | `CalendarRange<CalendarValue>` | `{}` | 否 | 非受控初始范围。 |
-| `allowEmpty` | `boolean \| { start?: boolean; end?: boolean }` | `false` | 否 | 是否允许范围端点为空。 |
-| `order` | `boolean` | `true` | 否 | start/end 是否自动排序。 |
-| `disabledDate` | `(date: CalendarDate, activePart: 'start' \| 'end') => boolean` | - | 否 | 可根据当前选择端动态禁用。 |
+| 参数名         | 类型                                                            | 默认值  | 必填 | 说明                       |
+| -------------- | --------------------------------------------------------------- | ------- | ---- | -------------------------- |
+| `value`        | `CalendarRange<CalendarValue>`                                  | -       | 否   | 受控范围值。               |
+| `defaultValue` | `CalendarRange<CalendarValue>`                                  | `{}`    | 否   | 非受控初始范围。           |
+| `allowEmpty`   | `boolean \| { start?: boolean; end?: boolean }`                 | `false` | 否   | 是否允许范围端点为空。     |
+| `order`        | `boolean`                                                       | `true`  | 否   | start/end 是否自动排序。   |
+| `disabledDate` | `(date: CalendarDate, activePart: 'start' \| 'end') => boolean` | -       | 否   | 可根据当前选择端动态禁用。 |
 
 ## 事件
 
-| 事件名 | 类型 | 说明 |
-| --- | --- | --- |
-| `onChange` | `(value) => void` | 提交值变化。单选无确认时选择后立即触发并关闭。 |
-| `onOpenChange` | `(open: boolean) => void` | Popover 打开关闭。 |
+| 事件名         | 类型                      | 说明                                           |
+| -------------- | ------------------------- | ---------------------------------------------- |
+| `onChange`     | `(value) => void`         | 提交值变化。单选无确认时选择后立即触发并关闭。 |
+| `onOpenChange` | `(open: boolean) => void` | Popover 打开关闭。                             |
 
 ## 受控与非受控
 

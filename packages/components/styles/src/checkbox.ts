@@ -32,9 +32,11 @@ export const checkboxClassName = cva(
 export const checkboxIndicatorClassName =
   'group/checkbox-indicator flex items-center justify-center text-current transition-none'
 
-export const checkboxCheckIconClassName = 'block group-data-[state=indeterminate]/checkbox-indicator:hidden'
+export const checkboxCheckIconClassName =
+  'block group-data-[state=indeterminate]/checkbox-indicator:hidden'
 
-export const checkboxMinusIconClassName = 'hidden group-data-[state=indeterminate]/checkbox-indicator:block'
+export const checkboxMinusIconClassName =
+  'hidden group-data-[state=indeterminate]/checkbox-indicator:block'
 
 export const checkboxGroupClassName = cva('grid min-w-0 gap-2', {
   variants: {

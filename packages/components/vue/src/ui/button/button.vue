@@ -9,7 +9,14 @@ import { computed, useAttrs } from 'vue'
 import { LoadingIcon } from '../../icon/loading'
 import PrimitiveButton from '../../primitive/button/button.vue'
 
-type ButtonVariant = 'default' | 'outline' | 'secondary' | 'ghost' | 'destructive' | 'link' | 'dashed'
+type ButtonVariant =
+  | 'default'
+  | 'outline'
+  | 'secondary'
+  | 'ghost'
+  | 'destructive'
+  | 'link'
+  | 'dashed'
 type ButtonSize = 'default' | 'xs' | 'sm' | 'lg' | 'icon' | 'icon-xs' | 'icon-sm' | 'icon-lg'
 type ButtonEffect =
   | 'expand-icon'

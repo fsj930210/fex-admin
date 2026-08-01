@@ -7,20 +7,29 @@ Input primitives 将值协议、原生输入、清空和附属内容拆开，供
 
 ```vue
 <script setup lang="ts">
-import { InputClear, InputControl, InputPrefix, InputRoot } from '@fex/components-vue/primitive/input'
+import {
+  InputClear,
+  InputControl,
+  InputPrefix,
+  InputRoot,
+} from '@fex/components-vue/primitive/input'
 </script>
-<template><InputRoot default-value="admin"><InputPrefix>@</InputPrefix><InputControl aria-label="账号" /><InputClear /></InputRoot></template>
+<template>
+  <InputRoot default-value="admin"
+    ><InputPrefix>@</InputPrefix><InputControl aria-label="账号" /><InputClear
+  /></InputRoot>
+</template>
 ```
 
 ## Props
 
-| 组件 | 参数 | 类型 | 默认值 | 必填 | 说明 |
-| --- | --- | --- | --- | --- | --- |
-| `InputRoot` | `value` | `string` | `undefined` | 否 | 受控值。 |
-| `InputRoot` | `defaultValue` | `string` | `''` | 否 | 非受控初值。 |
-| `InputRoot` | `disabled/readOnly/invalid` | `boolean` | `false` | 否 | 字段状态。 |
-| `InputControl` | 原生 input 属性 | `InputHTMLAttributes` | `undefined` | 否 | 透传到原生 input。 |
-| `InputClear` | `forceMount` | `boolean` | `false` | 否 | 无值时仍挂载。 |
+| 组件           | 参数                        | 类型                  | 默认值      | 必填 | 说明               |
+| -------------- | --------------------------- | --------------------- | ----------- | ---- | ------------------ |
+| `InputRoot`    | `value`                     | `string`              | `undefined` | 否   | 受控值。           |
+| `InputRoot`    | `defaultValue`              | `string`              | `''`        | 否   | 非受控初值。       |
+| `InputRoot`    | `disabled/readOnly/invalid` | `boolean`             | `false`     | 否   | 字段状态。         |
+| `InputControl` | 原生 input 属性             | `InputHTMLAttributes` | `undefined` | 否   | 透传到原生 input。 |
+| `InputClear`   | `forceMount`                | `boolean`             | `false`     | 否   | 无值时仍挂载。     |
 
 ## 事件、状态与组合
 

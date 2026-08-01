@@ -20,10 +20,11 @@ export function useDialogTrigger({ ref, onClick, ...props }: Omit<DialogTriggerP
       'aria-haspopup': 'dialog' as const,
       'aria-expanded': snapshot.open,
       'aria-controls': snapshot.open ? contentId : undefined,
-      'data-state': snapshot.open ? 'open' as const : 'closed' as const,
+      'data-state': snapshot.open ? ('open' as const) : ('closed' as const),
       onClick: (event: MouseEvent<HTMLButtonElement>) => {
         onClick?.(event)
-        if (!event.defaultPrevented) dialog.toggle({ reason: 'trigger-click', event: event.nativeEvent })
+        if (!event.defaultPrevented)
+          dialog.toggle({ reason: 'trigger-click', event: event.nativeEvent })
       },
     },
   }

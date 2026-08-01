@@ -12,4 +12,3 @@ withDefaults(defineProps<{ text?: string }>(), { text: 'Previous' })
     <span :class="paginationTextClassName">{{ text }}</span>
   </PaginationLink>
 </template>
-

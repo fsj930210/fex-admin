@@ -4,15 +4,15 @@ This project was generated with the Nest CLI and remains an independent backend 
 
 All HTTP responses use `{ code, message, data }`. Upload runtime data is created on demand under `.data`, and the complete directory can be removed between tests.
 
-| Method | Path | Purpose |
-| --- | --- | --- |
-| `GET` | `/health` | Health check |
-| `POST` | `/upload` | Stream one file |
-| `POST` | `/multipart/init` | Create a multipart session |
-| `PUT` | `/multipart/:uploadId/parts/:partNumber` | Upload a 1-based part |
-| `GET` | `/multipart/:uploadId/parts` | Query completed parts |
-| `POST` | `/multipart/:uploadId/complete` | Validate and merge parts |
-| `GET` | `/multipart/check?md5=...` | Check instant upload by MD5 |
+| Method | Path                                     | Purpose                     |
+| ------ | ---------------------------------------- | --------------------------- |
+| `GET`  | `/health`                                | Health check                |
+| `POST` | `/upload`                                | Stream one file             |
+| `POST` | `/multipart/init`                        | Create a multipart session  |
+| `PUT`  | `/multipart/:uploadId/parts/:partNumber` | Upload a 1-based part       |
+| `GET`  | `/multipart/:uploadId/parts`             | Query completed parts       |
+| `POST` | `/multipart/:uploadId/complete`          | Validate and merge parts    |
+| `GET`  | `/multipart/check?md5=...`               | Check instant upload by MD5 |
 
 The remaining sections are the standard Nest CLI project documentation.
 
