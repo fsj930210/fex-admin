@@ -1,10 +1,10 @@
 import { createResizeController } from '@fex/components-core/interactions/create-resize-controller'
 import { defaultRect as defaultCoreRect, rectToStyle } from '@fex/components-core/interactions/rect'
 import type { Rect, ResizeEdge, ResizeEdges } from '@fex/components-core/interactions/types'
-import { shallowEqualObject } from '@fex/utils'
-import { useRef, useSyncExternalStore } from 'react'
+import { useSyncExternalStore } from 'react'
 import type { CSSProperties, HTMLAttributes, RefCallback } from 'react'
 import { useControllableState } from './use-controllable-state'
+import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect'
 import { useMemoizedFn } from './use-memoized-fn'
 import { useLazyRef } from './use-lazy-ref'
 
@@ -55,7 +55,6 @@ export function useResize({
     onResize: setCurrentRect,
     onResizeEnd,
   }
-  const latestControllerOptionsRef = useRef(controllerOptions)
   const controller = useLazyRef(() => createResizeController(controllerOptions)).current
   const snapshot = useSyncExternalStore(
     controller.subscribe,
@@ -63,10 +62,9 @@ export function useResize({
     controller.getSnapshot,
   )
 
-  if (!shallowEqualObject(latestControllerOptionsRef.current, controllerOptions)) {
-    latestControllerOptionsRef.current = controllerOptions
+  useIsomorphicLayoutEffect(() => {
     controller.updateOptions(controllerOptions)
-  }
+  })
 
   const getTargetProps = useMemoizedFn(
     (): HTMLAttributes<HTMLElement> &

@@ -13,6 +13,7 @@
     "./calendar": "./src/calendar.ts",
     "./checkbox": "./src/checkbox.ts",
     "./dialog": "./src/dialog.ts",
+    "./drawer": "./src/drawer.ts",
     "./data-grid": "./src/data-grid.ts",
     "./date-picker": "./src/date-picker.ts",
     "./empty": "./src/empty.ts",

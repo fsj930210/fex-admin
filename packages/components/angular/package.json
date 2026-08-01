@@ -12,6 +12,7 @@
     "./primitive/carousel": "./src/primitive/carousel/carousel.ts",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.ts",
     "./primitive/dialog": "./src/primitive/dialog/dialog.ts",
+    "./primitive/drawer": "./src/primitive/drawer/drawer.ts",
     "./primitive/data-grid": "./src/primitive/data-grid/data-grid.ts",
     "./primitive/date-picker": "./src/primitive/date-picker/date-picker.ts",
     "./primitive/empty": "./src/primitive/empty/empty.ts",

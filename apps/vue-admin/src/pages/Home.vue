@@ -7,6 +7,7 @@ const componentLinks = [
   { to: '/card', label: 'Card' },
   { to: '/checkbox', label: 'Checkbox' },
   { to: '/dialog', label: 'Dialog' },
+  { to: '/drawer', label: 'Drawer' },
   { to: '/dropdown', label: 'Dropdown' },
   { to: '/alert', label: 'Alert' },
   { to: '/badge', label: 'Badge' },

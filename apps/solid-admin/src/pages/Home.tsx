@@ -9,6 +9,7 @@ const componentLinks = [
   { href: '/card', label: 'Card' },
   { href: '/checkbox', label: 'Checkbox' },
   { href: '/dialog', label: 'Dialog' },
+  { href: '/drawer', label: 'Drawer' },
   { href: '/dropdown', label: 'Dropdown' },
   { href: '/data-grid', label: 'Data Grid' },
   { href: '/date-picker', label: 'DatePicker' },

@@ -87,13 +87,13 @@ export function createPresence(options: PresenceOptions = {}): Presence {
       const nextPhase: OverlayPhase = snapshot.phase === 'closed' ? 'opening' : 'open'
       setPresenceSnapshot(store, { mounted: true, phase: nextPhase })
       clearOpenTimer()
-      // 用 0ms timer 把 opening 推进到 open，让 adapter 有一个稳定的 opening 帧可用于入场动画。
-      // 不直接同步改成 open，是为了避免 CSS/transition 还没来得及读取 opening 状态。
+      // 保留至少一个浏览器帧再把 opening 推进到 open，确保位移初始态已经完成绘制。
+      // 0ms timer 可能早于首次绘制执行，导致 Drawer 从 translate(100%) 直接跳到 translate(0)。
       openTimer = setTimeout(() => {
         if (presenceVersion === version && (currentOptions.open ?? false)) {
           setPresenceSnapshot(store, { mounted: true, phase: 'open' })
         }
-      }, 0)
+      }, 16)
       return
     }
 

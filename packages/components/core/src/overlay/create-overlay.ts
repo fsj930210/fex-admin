@@ -70,8 +70,6 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
     // 关闭类事件只允许最顶层处理，避免外层 Dialog 和内层 Popover 同时收到同一次 ESC/外部点击。
     if (isTopLayer(layer)) {
       close(reason)
-      // dismiss 是明确的关闭动作，可以立即结束关闭阶段，避免外部点击后 closeDelay 期间仍被当作顶层。
-      presence.finishClose()
     }
   }
 
@@ -147,7 +145,6 @@ export function createOverlay(options: OverlayOptions = {}): Overlay {
           (!layer.modal && !isTargetInsideHigherLayer(layer, event.target))
         ) {
           close({ reason: 'outside-pointer', event: event.event })
-          presence.finishClose()
         }
       },
       overlayPointer: (event) => {

@@ -1,0 +1,2 @@
+<script setup lang="ts">import { Teleport } from 'vue'; import { useDrawerContext } from './context'; defineProps<{ container?: HTMLElement | null; forceMount?: boolean }>(); const { snapshot, depth } = useDrawerContext('DrawerPortal')</script>
+<template><Teleport to="body"><div v-if="snapshot.mounted || $props.forceMount" :style="{ display: 'contents', '--drawer-z-index': 50 + depth * 2 }"><slot /></div></Teleport></template>

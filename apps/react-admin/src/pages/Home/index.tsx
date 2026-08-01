@@ -13,6 +13,7 @@ export function HomePage() {
     { to: '/data-grid', label: 'Data Grid' },
     { to: '/date-picker', label: 'DatePicker' },
     { to: '/dialog', label: 'Dialog' },
+    { to: '/drawer', label: 'Drawer' },
     { to: '/dropdown', label: 'Dropdown' },
     { to: '/empty', label: 'Empty' },
     { to: '/form', label: 'Form' },

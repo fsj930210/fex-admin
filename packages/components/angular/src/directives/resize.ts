@@ -36,6 +36,7 @@ export class FexResizeDirective implements OnInit, OnDestroy {
   @Input() maxHeight?: number
   @Input() bounds?: 'viewport' | 'parent' | HTMLElement | false
   @Input() disabled = false
+  @Input() applyStyle = true
   @Output() resize = new EventEmitter<Rect>()
   @Output() resizeEnd = new EventEmitter<Rect>()
 
@@ -70,6 +71,7 @@ export class FexResizeDirective implements OnInit, OnDestroy {
   }
 
   private applySnapshot() {
+    if (!this.applyStyle) return
     const style = rectToStyle(this.controller.getSnapshot().rect)
     const element = this.elementRef.nativeElement
     element.style.transform = style.transform
@@ -78,9 +80,9 @@ export class FexResizeDirective implements OnInit, OnDestroy {
     element.style.boxSizing = 'border-box'
   }
 
-  private readonly onPointerDown = (event: PointerEvent) => {
+  start(event: PointerEvent, explicitEdge?: ResizeEdge) {
     this.updateController()
-    const edge = getResizeEdge(event.target, this.elementRef.nativeElement) ?? this.edge
+    const edge = explicitEdge ?? getResizeEdge(event.target, this.elementRef.nativeElement) ?? this.edge
     if (this.disabled || !this.controller.start(toInput(event), edge)) {
       return
     }
@@ -94,6 +96,8 @@ export class FexResizeDirective implements OnInit, OnDestroy {
       window.removeEventListener('pointercancel', this.onPointerUp)
     }
   }
+
+  private readonly onPointerDown = (event: PointerEvent) => this.start(event)
 
   private readonly onPointerMove = (event: PointerEvent) => {
     this.controller.move(toInput(event))

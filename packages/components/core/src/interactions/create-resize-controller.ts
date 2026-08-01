@@ -71,7 +71,7 @@ export function createResizeController(options: ResizeControllerOptions) {
 
   function updateOptions(next: ResizeControllerOptions) {
     currentOptions = normalizeOptions(next)
-    if (!snapshot.resizing) {
+    if (!snapshot.resizing && !isSameRect(snapshot.rect, currentOptions.rect)) {
       setSnapshot({ rect: currentOptions.rect })
     }
   }
@@ -172,6 +172,13 @@ export function createResizeController(options: ResizeControllerOptions) {
     end,
     cancel,
   }
+}
+
+function isSameRect(previous: Rect, next: Rect) {
+  return previous.x === next.x
+    && previous.y === next.y
+    && previous.width === next.width
+    && previous.height === next.height
 }
 
 function normalizeOptions(options: ResizeControllerOptions) {

@@ -55,6 +55,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Dialog'), 'DialogPage'),
   },
   {
+    path: '/drawer',
+    element: createLazyRouteElement(() => import('../../pages/Drawer'), 'DrawerPage'),
+  },
+  {
     path: '/dropdown',
     element: createLazyRouteElement(() => import('../../pages/Dropdown'), 'DropdownPage'),
   },

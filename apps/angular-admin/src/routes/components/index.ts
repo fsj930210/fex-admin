@@ -39,6 +39,11 @@ export const componentRoutes: Routes = [
       import('../../pages/dialog/index.component').then((module) => module.DialogComponent),
   },
   {
+    path: 'drawer',
+    loadComponent: () =>
+      import('../../pages/drawer/index.component').then((module) => module.DrawerComponent),
+  },
+  {
     path: 'dropdown',
     loadComponent: () =>
       import('../../pages/dropdown/index.component').then((module) => module.DropdownComponent),

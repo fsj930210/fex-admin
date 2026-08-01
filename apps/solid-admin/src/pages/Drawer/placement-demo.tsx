@@ -1,0 +1,5 @@
+import { createSignal } from 'solid-js'
+import { Drawer, DrawerBody, DrawerClose, DrawerContent, DrawerHeader, DrawerMask, DrawerPortal, DrawerTrigger } from '@fex/components-solid/primitive/drawer'
+import { RadioGroup, Radio } from '@fex/components-solid/primitive/radio'
+import { Button } from '@fex/components-solid/ui/button'
+export function PlacementDemo(){const [placement,setPlacement]=createSignal<'top'|'right'|'bottom'|'left'>('right'); return <div class="space-y-3"><RadioGroup value={placement()} orientation="horizontal" onValueChange={(value)=>setPlacement(value as typeof placement)}>{(['top','right','bottom','left'] as const).map((item)=><label class="inline-flex cursor-pointer items-center gap-2"><Radio value={item}/><span>{item}</span></label>)}</RadioGroup><Drawer placement={placement()}><DrawerTrigger>{(slot)=><Button {...slot.props} ref={slot.ref}>Open {placement()}</Button>}</DrawerTrigger><DrawerPortal><DrawerMask/><DrawerContent aria-label="Placement drawer"><DrawerHeader>{placement()}<DrawerClose /></DrawerHeader><DrawerBody>Direction demo.</DrawerBody></DrawerContent></DrawerPortal></Drawer></div>}

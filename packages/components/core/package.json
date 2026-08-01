@@ -88,6 +88,8 @@
     "./checkbox/utils": "./src/checkbox/utils.ts",
     "./dialog/create-dialog-controller": "./src/dialog/create-dialog-controller.ts",
     "./dialog/types": "./src/dialog/types.ts",
+    "./drawer/create-drawer-controller": "./src/drawer/create-drawer-controller.ts",
+    "./drawer/types": "./src/drawer/types.ts",
     "./toast/create-toast-manager": "./src/toast/create-toast-manager.ts",
     "./toast/types": "./src/toast/types.ts",
     "./dropzone/accept": "./src/dropzone/accept.ts",

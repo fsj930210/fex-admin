@@ -14,6 +14,7 @@ export interface ResizeActionOptions {
   disabled?: boolean
   onResize?: (rect: Rect) => void
   onResizeEnd?: (rect: Rect) => void
+  applyStyle?: boolean
 }
 
 export function resizeAction(node: HTMLElement, options: ResizeActionOptions) {
@@ -89,6 +90,7 @@ export function resizeAction(node: HTMLElement, options: ResizeActionOptions) {
   }
 
   function applySnapshot() {
+    if (currentOptions.applyStyle === false) return
     const style = rectToStyle(controller.getSnapshot().rect)
     node.style.transform = style.transform
     node.style.width = style.width

@@ -1,0 +1,1 @@
+<script lang="ts">import { drawerHeaderClassName } from '@fex/components-styles/drawer'; let { children, class: className='' }: { children?: import('svelte').Snippet; class?: string }=$props();</script><div class={`${drawerHeaderClassName} ${className}`} data-slot="drawer-header">{@render children?.()}</div>
