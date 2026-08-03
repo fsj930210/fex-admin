@@ -32,6 +32,8 @@ const componentLinks = [
   { href: '/switch', label: 'Switch' },
   { href: '/table', label: 'Table' },
   { href: '/tabs', label: 'Tabs' },
+  { href: '/steps', label: 'Steps' },
+  { href: '/timeline', label: 'Timeline' },
   { href: '/transfer', label: 'Transfer' },
   { href: '/upload', label: 'Upload' },
   { href: '/tree', label: 'Tree' },

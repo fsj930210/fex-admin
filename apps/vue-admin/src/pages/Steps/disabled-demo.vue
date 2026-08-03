@@ -1,0 +1,2 @@
+<script setup lang="ts">import { ref } from 'vue';import { Steps,type StepValue } from '@fex/components-vue/primitive/steps';import Card from '@fex/components-vue/ui/card';import StepList from './step-list.vue';const value=ref<StepValue>('account')</script>
+<template><Card title="Disabled" description="Disabled nodes cannot be selected and are skipped by keyboard navigation."><Steps navigation :current="value" @change="next=>value=next"><StepList disabled/></Steps><p class="mt-space-md text-sm text-muted-foreground">Current value: {{value}}</p></Card></template>

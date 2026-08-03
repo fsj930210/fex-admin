@@ -1,0 +1,2 @@
+import { ChangeDetectionStrategy,Component } from '@angular/core';import { Timeline,TimelineContent,TimelineIndicator,TimelineItem } from '@fex/components-angular/primitive/timeline';import { Card } from '@fex/components-angular/ui/card';
+@Component({selector:'fex-timeline-reverse-demo',standalone:true,imports:[Card,Timeline,TimelineItem,TimelineIndicator,TimelineContent],changeDetection:ChangeDetectionStrategy.OnPush,host:{class:'block'},templateUrl:'./reverse-demo.component.html'}) export class ReverseDemoComponent {}

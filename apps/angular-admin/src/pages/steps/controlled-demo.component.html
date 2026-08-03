@@ -1,0 +1,1 @@
+<fex-card title="Controlled" description="Business completion updates current; navigation requests the same value through onChange."><fex-steps navigation [current]="current()" (change)="current.set($event.value)"><fex-steps-step-list/></fex-steps><button fexButton class="mt-space-md" (click)="complete()">Complete current task</button></fex-card>

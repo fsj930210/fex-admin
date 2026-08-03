@@ -1,0 +1,1 @@
+import { Steps } from '@fex/components-solid/primitive/steps';import { Card } from '@fex/components-solid/ui/card';import { StepList } from './step-list';export function BasicDemo(){return <Card title="Uncontrolled" description="defaultCurrent selects the initial step without owning later navigation state."><Steps defaultCurrent="profile"><StepList/></Steps></Card>}

@@ -40,6 +40,8 @@ export class HomeComponent {
     { to: '/switch', label: 'Switch' },
     { to: '/table', label: 'Table' },
     { to: '/tabs', label: 'Tabs' },
+    { to: '/steps', label: 'Steps' },
+    { to: '/timeline', label: 'Timeline' },
     { to: '/toast', label: 'Toast' },
     { to: '/sortable', label: 'Sortable' },
     { to: '/interactions', label: 'Interactions' },

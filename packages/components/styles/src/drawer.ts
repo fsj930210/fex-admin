@@ -24,14 +24,14 @@ export const drawerFooterClassName = 'flex shrink-0 items-center justify-end gap
 export const drawerCloseClassName = 'ms-auto inline-flex size-8 items-center justify-center rounded-md hover:bg-muted-background'
 export const drawerResizeHandleClassName = [
   'absolute z-10 touch-none select-none',
-  'before:absolute before:bg-transparent hover:before:bg-primary/60',
-  'data-[edge=left]:inset-y-0 data-[edge=left]:start-0 data-[edge=left]:w-2 data-[edge=left]:cursor-col-resize',
-  'data-[edge=left]:before:inset-y-0 data-[edge=left]:before:start-0 data-[edge=left]:before:w-px',
-  'data-[edge=right]:inset-y-0 data-[edge=right]:end-0 data-[edge=right]:w-2 data-[edge=right]:cursor-col-resize',
-  'data-[edge=right]:before:inset-y-0 data-[edge=right]:before:end-0 data-[edge=right]:before:w-px',
-  'data-[edge=top]:inset-x-0 data-[edge=top]:top-0 data-[edge=top]:h-2 data-[edge=top]:cursor-row-resize',
-  'data-[edge=top]:before:inset-x-0 data-[edge=top]:before:top-0 data-[edge=top]:before:h-px',
-  'data-[edge=bottom]:inset-x-0 data-[edge=bottom]:bottom-0 data-[edge=bottom]:h-2 data-[edge=bottom]:cursor-row-resize',
-  'data-[edge=bottom]:before:inset-x-0 data-[edge=bottom]:before:bottom-0 data-[edge=bottom]:before:h-px',
+  'before:pointer-events-none before:absolute before:bg-primary before:opacity-0 before:transition-opacity before:duration-150 hover:before:opacity-100 active:before:opacity-100',
+  'data-[edge=left]:inset-y-0 data-[edge=left]:start-0 data-[edge=left]:w-1 data-[edge=left]:cursor-ew-resize',
+  'data-[edge=left]:before:inset-y-0 data-[edge=left]:before:start-0 data-[edge=left]:before:w-1',
+  'data-[edge=right]:inset-y-0 data-[edge=right]:end-0 data-[edge=right]:w-1 data-[edge=right]:cursor-ew-resize',
+  'data-[edge=right]:before:inset-y-0 data-[edge=right]:before:end-0 data-[edge=right]:before:w-1',
+  'data-[edge=top]:inset-x-0 data-[edge=top]:top-0 data-[edge=top]:h-1 data-[edge=top]:cursor-ns-resize',
+  'data-[edge=top]:before:inset-x-0 data-[edge=top]:before:top-0 data-[edge=top]:before:h-1',
+  'data-[edge=bottom]:inset-x-0 data-[edge=bottom]:bottom-0 data-[edge=bottom]:h-1 data-[edge=bottom]:cursor-ns-resize',
+  'data-[edge=bottom]:before:inset-x-0 data-[edge=bottom]:before:bottom-0 data-[edge=bottom]:before:h-1',
 ].join(' ')
 export type DrawerStyleProps = VariantProps<typeof drawerContentClassName>

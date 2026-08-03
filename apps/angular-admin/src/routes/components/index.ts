@@ -141,6 +141,11 @@ export const componentRoutes: Routes = [
       import('../../pages/select/index.component').then((module) => module.SelectComponent),
   },
   {
+    path: 'steps',
+    loadComponent: () =>
+      import('../../pages/steps/index.component').then((module) => module.StepsComponent),
+  },
+  {
     path: 'switch',
     loadComponent: () =>
       import('../../pages/switch/index.component').then((module) => module.SwitchComponent),
@@ -154,6 +159,11 @@ export const componentRoutes: Routes = [
     path: 'tabs',
     loadComponent: () =>
       import('../../pages/tabs/index.component').then((module) => module.TabsComponent),
+  },
+  {
+    path: 'timeline',
+    loadComponent: () =>
+      import('../../pages/timeline/index.component').then((module) => module.TimelineComponent),
   },
   {
     path: 'toast',

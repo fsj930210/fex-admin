@@ -1,0 +1,1 @@
+<script lang="ts">import Steps from '@fex/components-svelte/primitive/steps-root';import Card from '@fex/components-svelte/ui/card';import StepList from './step-list.svelte'</script><Card title="Uncontrolled" description="defaultCurrent selects the initial step without owning later navigation state."><Steps defaultCurrent="profile"><StepList/></Steps></Card>

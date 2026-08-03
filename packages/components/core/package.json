@@ -45,6 +45,8 @@
     "./data-grid/features/column-grouping": "./src/data-grid/features/column-grouping.ts",
     "./calendar/value": "./src/calendar/value.ts",
     "./store/create-store": "./src/store/create-store.ts",
+    "./steps/types": "./src/steps/types.ts",
+    "./steps/create-steps-controller": "./src/steps/create-steps-controller.ts",
     "./tree/create-tree-controller": "./src/tree/create-tree-controller.ts",
     "./tree/create-feature-runtime": "./src/tree/create-feature-runtime.ts",
     "./tree/feature-types": "./src/tree/feature-types.ts",

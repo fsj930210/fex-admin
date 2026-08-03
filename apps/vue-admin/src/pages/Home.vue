@@ -28,6 +28,8 @@ const componentLinks = [
   { to: '/switch', label: 'Switch' },
   { to: '/table', label: 'Table' },
   { to: '/tabs', label: 'Tabs' },
+  { to: '/steps', label: 'Steps' },
+  { to: '/timeline', label: 'Timeline' },
   { to: '/transfer', label: 'Transfer' },
   { to: '/upload', label: 'Upload' },
   { to: '/data-grid', label: 'Data Grid' },

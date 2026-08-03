@@ -127,6 +127,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Select'), 'SelectPage'),
   },
   {
+    path: '/steps',
+    element: createLazyRouteElement(() => import('../../pages/Steps'), 'StepsPage'),
+  },
+  {
     path: '/switch',
     element: createLazyRouteElement(() => import('../../pages/Switch'), 'SwitchPage'),
   },
@@ -137,6 +141,10 @@ export const componentRoutes = [
   {
     path: '/tabs',
     element: createLazyRouteElement(() => import('../../pages/Tabs'), 'TabsPage'),
+  },
+  {
+    path: '/timeline',
+    element: createLazyRouteElement(() => import('../../pages/Timeline'), 'TimelinePage'),
   },
   {
     path: '/toast',

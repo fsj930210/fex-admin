@@ -76,6 +76,9 @@ const ScrollbarPage = lazy(() =>
 const SelectPage = lazy(() =>
   import('../../pages/Select').then((module) => ({ default: module.SelectPage })),
 )
+const StepsPage = lazy(() =>
+  import('../../pages/Steps').then((module) => ({ default: module.StepsPage })),
+)
 const SwitchPage = lazy(() =>
   import('../../pages/Switch').then((module) => ({ default: module.SwitchPage })),
 )
@@ -84,6 +87,9 @@ const TablePage = lazy(() =>
 )
 const TabsPage = lazy(() =>
   import('../../pages/Tabs').then((module) => ({ default: module.TabsPage })),
+)
+const TimelinePage = lazy(() =>
+  import('../../pages/Timeline').then((module) => ({ default: module.TimelinePage })),
 )
 const ToastPage = lazy(() =>
   import('../../pages/Toast').then((module) => ({ default: module.ToastPage })),
@@ -226,6 +232,10 @@ export const componentRoutes: AppRoute[] = [
     component: SelectPage,
   },
   {
+    path: '/steps',
+    component: StepsPage,
+  },
+  {
     path: '/switch',
     component: SwitchPage,
   },
@@ -236,6 +246,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/tabs',
     component: TabsPage,
+  },
+  {
+    path: '/timeline',
+    component: TimelinePage,
   },
   {
     path: '/toast',

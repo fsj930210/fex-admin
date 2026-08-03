@@ -124,6 +124,12 @@
       "@fex/components-core/store/create-store": [
         "packages/components/core/src/store/create-store.ts"
       ],
+      "@fex/components-core/steps/types": [
+        "packages/components/core/src/steps/types.ts"
+      ],
+      "@fex/components-core/steps/create-steps-controller": [
+        "packages/components/core/src/steps/create-steps-controller.ts"
+      ],
       "@fex/components-core/tree/create-tree-controller": [
         "packages/components/core/src/tree/create-tree-controller.ts"
       ],
@@ -454,6 +460,9 @@
       "@fex/components-angular/primitive/slider": [
         "packages/components/angular/src/primitive/slider/slider-primitive.ts"
       ],
+      "@fex/components-angular/primitive/steps": [
+        "packages/components/angular/src/primitive/steps/steps.ts"
+      ],
       "@fex/components-angular/primitive/scrollbar": [
         "packages/components/angular/src/primitive/scrollbar/scrollbar.ts"
       ],
@@ -465,6 +474,9 @@
       ],
       "@fex/components-angular/primitive/table": [
         "packages/components/angular/src/primitive/table/table.ts"
+      ],
+      "@fex/components-angular/primitive/timeline": [
+        "packages/components/angular/src/primitive/timeline/timeline.ts"
       ],
       "@fex/components-angular/primitive/tabs": [
         "packages/components/angular/src/primitive/tabs/tabs.ts"

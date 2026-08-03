@@ -1,0 +1,1 @@
+export const workflow = [{ value: 'account', label: 'Account', description: 'Create your workspace' }, { value: 'profile', label: 'Profile', description: 'Add personal details' }, { value: 'review', label: 'Review', description: 'Confirm and submit' }] as const

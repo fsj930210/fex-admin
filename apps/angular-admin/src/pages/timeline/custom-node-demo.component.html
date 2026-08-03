@@ -1,0 +1,31 @@
+<fex-card
+  title="Custom node content"
+  description="Content can compose existing components and indicators can use a larger custom surface."
+>
+  <fex-timeline>
+    <fex-timeline-item status="completed" class="[--timeline-indicator-size:2rem]">
+      <fex-timeline-opposite class="flex items-center justify-end">Aug 2</fex-timeline-opposite>
+      <fex-timeline-indicator class="!self-center shadow-sm"><fex-check-icon /></fex-timeline-indicator>
+      <fex-timeline-content class="rounded-md border border-border bg-background p-space-md shadow-sm">
+        <div class="flex items-center gap-space-sm"><strong>Version 2.4 released</strong><fex-badge>Stable</fex-badge></div>
+        <p class="mt-space-sm text-muted-foreground">Timeline primitives are now available.</p>
+      </fex-timeline-content>
+    </fex-timeline-item>
+    <fex-timeline-item status="reviewing" class="[--timeline-indicator-size:2.5rem]">
+      <fex-timeline-opposite class="flex items-center justify-end">Aug 3</fex-timeline-opposite>
+      <fex-timeline-indicator class="!self-center border-violet-600 bg-violet-100 text-violet-700 shadow-sm"><fex-clock-icon /></fex-timeline-indicator>
+      <fex-timeline-content class="rounded-md border border-violet-200 bg-violet-50 p-space-md">
+        <div class="flex items-center gap-space-sm"><strong>Design review</strong><fex-badge>Reviewing</fex-badge></div>
+        <p class="mt-space-sm text-muted-foreground">The team is reviewing the horizontal layout.</p>
+      </fex-timeline-content>
+    </fex-timeline-item>
+    <fex-timeline-item status="pending" class="[--timeline-indicator-size:2rem]">
+      <fex-timeline-opposite class="flex items-center justify-end">Next</fex-timeline-opposite>
+      <fex-timeline-indicator class="!self-center border-dashed text-[10px] font-semibold">QA</fex-timeline-indicator>
+      <fex-timeline-content class="rounded-md border border-dashed border-border p-space-md">
+        <strong>Quality verification</strong>
+        <p class="mt-space-sm text-muted-foreground">A fully custom text node marks the next milestone.</p>
+      </fex-timeline-content>
+    </fex-timeline-item>
+  </fex-timeline>
+</fex-card>

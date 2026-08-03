@@ -32,6 +32,8 @@ export function HomePage() {
     { to: '/switch', label: 'Switch' },
     { to: '/table', label: 'Table' },
     { to: '/tabs', label: 'Tabs' },
+    { to: '/steps', label: 'Steps' },
+    { to: '/timeline', label: 'Timeline' },
     { to: '/tree', label: 'Tree' },
     { to: '/transfer', label: 'Transfer' },
     { to: '/upload', label: 'Upload' },
