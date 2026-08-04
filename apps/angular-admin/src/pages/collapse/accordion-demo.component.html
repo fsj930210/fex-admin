@@ -1,0 +1,13 @@
+<fex-card title="Accordion" description="Set multiple=false to keep at most one panel expanded.">
+  <div fexCollapse [multiple]="false" [collapsible]="false" [defaultExpandedKeys]="['profile']">
+    @for (item of items; track item.value) {
+      <div [fexCollapseItem]="item.value">
+        <button fexCollapseTrigger>
+          <span class="min-w-0 flex-1">{{ item.title }}</span>
+          <fex-chevron-right-icon class="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapse-trigger:-rotate-90" />
+        </button>
+        <div fexCollapseContent>{{ item.content }}</div>
+      </div>
+    }
+  </div>
+</fex-card>

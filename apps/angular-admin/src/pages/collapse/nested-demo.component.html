@@ -1,0 +1,21 @@
+<fex-card title="Nested" description="Nested instances keep separate expansion state.">
+  <div fexCollapse [defaultExpandedKeys]="['outer']">
+    <div fexCollapseItem="outer">
+      <button fexCollapseTrigger>
+        <span class="min-w-0 flex-1">Outer panel</span>
+        <fex-chevron-right-icon class="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapse-trigger:-rotate-90" />
+      </button>
+      <div fexCollapseContent>
+        <div fexCollapse [defaultExpandedKeys]="['inner']">
+          <div fexCollapseItem="inner">
+            <button fexCollapseTrigger>
+              <span class="min-w-0 flex-1">Nested panel</span>
+              <fex-chevron-right-icon class="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapse-trigger:-rotate-90" />
+            </button>
+            <div fexCollapseContent>{{ text }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fex-card>

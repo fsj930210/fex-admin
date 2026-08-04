@@ -13,6 +13,7 @@ function toDisabledSet(keys: readonly ExpansionKey[] | undefined) {
 
 export function createExpansionController(options: ExpansionOptions = {}): ExpansionController {
   const getMultiple = () => options.multiple !== false
+  const getCollapsible = () => options.collapsible !== false
   const getDisabledKeys = () => toDisabledSet(options.disabledKeys)
   const isControlled = () => options.expandedKeys !== undefined
 
@@ -61,7 +62,15 @@ export function createExpansionController(options: ExpansionOptions = {}): Expan
 
   function commit(nextKeys: readonly ExpansionKey[]) {
     const previousSnapshot = getCurrentSnapshot()
-    const nextSnapshot = createExpansionSnapshot(withoutDisabledChanges(nextKeys), getMultiple())
+    const requestedKeys = withoutDisabledChanges(nextKeys)
+    const guardedKeys =
+      !getMultiple() &&
+      !getCollapsible() &&
+      requestedKeys.length === 0 &&
+      previousSnapshot.expandedKeys.length > 0
+        ? previousSnapshot.expandedKeys
+        : requestedKeys
+    const nextSnapshot = createExpansionSnapshot(guardedKeys, getMultiple())
 
     if (expansionKeysEqual(previousSnapshot.expandedKeys, nextSnapshot.expandedKeys)) {
       return
@@ -80,6 +89,26 @@ export function createExpansionController(options: ExpansionOptions = {}): Expan
   const controller: ExpansionController = {
     getSnapshot: getCurrentSnapshot,
     subscribe: store.subscribe,
+    refresh: () => {
+      const previousSnapshot = isControlled() ? controlledSnapshot : store.getSnapshot()
+      const nextSnapshot = createExpansionSnapshot(
+        normalizeExpansionKeys(
+          isControlled() ? options.expandedKeys : previousSnapshot.expandedKeys,
+          getMultiple(),
+        ),
+        getMultiple(),
+      )
+
+      if (
+        previousSnapshot.multiple === nextSnapshot.multiple &&
+        expansionKeysEqual(previousSnapshot.expandedKeys, nextSnapshot.expandedKeys)
+      ) {
+        return
+      }
+
+      if (isControlled()) controlledSnapshot = nextSnapshot
+      store.setSnapshot(nextSnapshot)
+    },
     isExpanded: (key) => getCurrentSnapshot().expandedKeys.includes(key),
     isDisabled: (key) => getDisabledKeys().has(key),
     expand: (key) => {

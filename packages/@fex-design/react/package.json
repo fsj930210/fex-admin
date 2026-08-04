@@ -12,6 +12,7 @@
     "./primitive/card": "./src/primitive/card/card.tsx",
     "./primitive/carousel": "./src/primitive/carousel/carousel.tsx",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.tsx",
+    "./primitive/collapse": "./src/primitive/collapse/collapse.tsx",
     "./primitive/dialog": "./src/primitive/dialog/dialog.tsx",
     "./primitive/drawer": "./src/primitive/drawer/drawer.tsx",
     "./primitive/data-table": "./src/primitive/data-table/data-table.tsx",

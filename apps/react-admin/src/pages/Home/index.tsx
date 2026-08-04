@@ -10,6 +10,7 @@ export function HomePage() {
     { to: '/calendar', label: 'Calendar' },
     { to: '/card', label: 'Card' },
     { to: '/checkbox', label: 'Checkbox' },
+    { to: '/collapse', label: 'Collapse' },
     { to: '/carousel', label: 'Carousel' },
     { to: '/data-table', label: 'Data Table' },
     { to: '/date-picker', label: 'DatePicker' },

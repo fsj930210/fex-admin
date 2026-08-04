@@ -409,6 +409,9 @@
       "@fex-design/angular/primitive/checkbox": [
         "packages/@fex-design/angular/src/primitive/checkbox/checkbox.ts"
       ],
+      "@fex-design/angular/primitive/collapse": [
+        "packages/@fex-design/angular/src/primitive/collapse/collapse.ts"
+      ],
       "@fex-design/angular/primitive/dialog": [
         "packages/@fex-design/angular/src/primitive/dialog/dialog.ts"
       ],

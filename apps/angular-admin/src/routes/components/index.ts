@@ -35,6 +35,11 @@ export const componentRoutes: Routes = [
       import('../../pages/checkbox/index.component').then((module) => module.CheckboxComponent),
   },
   {
+    path: 'collapse',
+    loadComponent: () =>
+      import('../../pages/collapse/index.component').then((module) => module.CollapseComponent),
+  },
+  {
     path: 'dialog',
     loadComponent: () =>
       import('../../pages/dialog/index.component').then((module) => module.DialogComponent),

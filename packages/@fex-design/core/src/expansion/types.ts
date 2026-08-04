@@ -10,6 +10,7 @@ export interface ExpansionOptions {
   defaultExpandedKeys?: readonly ExpansionKey[] | undefined
   disabledKeys?: readonly ExpansionKey[] | undefined
   multiple?: boolean | undefined
+  collapsible?: boolean | undefined
   onChange?: (keys: ExpansionKey[], meta: ExpansionChangeMeta) => void
 }
 
@@ -21,6 +22,7 @@ export interface ExpansionSnapshot {
 export interface ExpansionController {
   getSnapshot: () => ExpansionSnapshot
   subscribe: (listener: () => void) => () => void
+  refresh: () => void
   isExpanded: (key: ExpansionKey) => boolean
   isDisabled: (key: ExpansionKey) => boolean
   expand: (key: ExpansionKey) => void

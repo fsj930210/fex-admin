@@ -19,6 +19,9 @@ const CardPage = lazy(() =>
 const CheckboxPage = lazy(() =>
   import('../../pages/Checkbox').then((module) => ({ default: module.CheckboxPage })),
 )
+const CollapsePage = lazy(() =>
+  import('../../pages/Collapse').then((module) => ({ default: module.CollapsePage })),
+)
 const DialogPage = lazy(() =>
   import('../../pages/Dialog').then((module) => ({ default: module.DialogPage })),
 )
@@ -158,6 +161,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/checkbox',
     component: CheckboxPage,
+  },
+  {
+    path: '/collapse',
+    component: CollapsePage,
   },
   {
     path: '/dialog',

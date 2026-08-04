@@ -16,6 +16,7 @@ export class HomeComponent {
     { to: '/calendar', label: 'Calendar' },
     { to: '/card', label: 'Card' },
     { to: '/checkbox', label: 'Checkbox' },
+    { to: '/collapse', label: 'Collapse' },
     { to: '/dialog', label: 'Dialog' },
     { to: '/drawer', label: 'Drawer' },
     { to: '/dropdown', label: 'Dropdown' },

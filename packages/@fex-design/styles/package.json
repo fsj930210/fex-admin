@@ -13,6 +13,7 @@
     "./carousel": "./src/carousel.ts",
     "./calendar": "./src/calendar.ts",
     "./checkbox": "./src/checkbox.ts",
+    "./collapse": "./src/collapse.ts",
     "./dialog": "./src/dialog.ts",
     "./drawer": "./src/drawer.ts",
     "./data-table": "./src/data-table.ts",

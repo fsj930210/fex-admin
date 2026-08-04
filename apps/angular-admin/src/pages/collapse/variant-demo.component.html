@@ -1,0 +1,22 @@
+<fex-card title="Variants" description="Outlined, filled and ghost cover bordered and borderless panel styles.">
+  <div class="grid gap-space-lg lg:grid-cols-3">
+    @for (variant of variants; track variant) {
+      <div fexCollapse [variant]="variant" [defaultExpandedKeys]="['one']">
+        <div fexCollapseItem="one">
+          <button fexCollapseTrigger>
+            <span class="min-w-0 flex-1">{{ variant }}</span>
+            <fex-chevron-right-icon class="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapse-trigger:-rotate-90" />
+          </button>
+          <div fexCollapseContent>{{ text }}</div>
+        </div>
+        <div fexCollapseItem="two">
+          <button fexCollapseTrigger>
+            <span class="min-w-0 flex-1">Second panel</span>
+            <fex-chevron-right-icon class="size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapse-trigger:-rotate-90" />
+          </button>
+          <div fexCollapseContent>{{ text }}</div>
+        </div>
+      </div>
+    }
+  </div>
+</fex-card>

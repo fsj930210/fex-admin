@@ -1,0 +1,7 @@
+export { default as Collapse } from './collapse-root.vue'
+export { default as CollapseRoot } from './collapse-root.vue'
+export { default as CollapseItem } from './collapse-item.vue'
+export { default as CollapseTrigger } from './collapse-trigger.vue'
+export { default as CollapseContent } from './collapse-content.vue'
+export { useCollapse } from './use-collapse'
+export type { CollapseSize, CollapseVariant } from './context'
