@@ -1,0 +1,37 @@
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+} from '@fex-design/react/primitive/breadcrumb'
+
+export function ParallelogramBreadcrumb() {
+  return (
+    <Breadcrumb className="p-1">
+      <BreadcrumbList className="w-max items-center gap-0 overflow-hidden breadcrumb-parallelogram-list">
+        <BreadcrumbItem>
+          <BreadcrumbLink
+            className="inline-flex items-center gap-0.5 px-4 -mr-1.5 text-sm leading-[2.15] bg-muted-background hover:bg-hover-background parallelogram-breadcrumb"
+            href="/"
+          >
+            Workspace
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink
+            className="inline-flex items-center gap-0.5 px-4 -mr-1.5 text-sm leading-[2.15] bg-muted-background hover:bg-hover-background parallelogram-breadcrumb"
+            href="/projects"
+          >
+            Projects
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbPage className="inline-flex items-center gap-0.5 px-4 text-sm leading-[2.15] bg-muted-background hover:bg-hover-background parallelogram-breadcrumb">
+            Quarterly plan
+          </BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  )
+}

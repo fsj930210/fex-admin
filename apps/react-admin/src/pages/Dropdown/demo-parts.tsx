@@ -1,5 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
-import { MenuItem, MenuList, MenuRoot } from '@fex/components-react/primitive/menu'
+import { MenuItem, MenuList, MenuRoot } from '@fex-design/react/primitive/menu'
 
 export const triggerClassName =
   'inline-flex h-9 items-center justify-center gap-2 rounded-md border border-border bg-background px-4 text-sm font-medium text-foreground shadow-sm hover:bg-muted-background'

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ChevronRightIcon } from '@fex/components-vue/icon/chevron'
-import { TrashIcon } from '@fex/components-vue/icon/trash'
-import { SwitchRoot, SwitchThumb } from '@fex/components-vue/primitive/switch'
-import { Transfer } from '@fex/components-vue/primitive/transfer'
-import Button from '@fex/components-vue/ui/button'
-import Card from '@fex/components-vue/ui/card'
+import { ChevronRightIcon } from '@fex-design/vue/icon/chevron'
+import { TrashIcon } from '@fex-design/vue/icon/trash'
+import { SwitchRoot, SwitchThumb } from '@fex-design/vue/primitive/switch'
+import { Transfer } from '@fex-design/vue/primitive/transfer'
+import Button from '@fex-design/vue/ui/button'
+import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 import { fieldNames, members } from './data'
 const disabled = ref(false)

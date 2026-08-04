@@ -1,4 +1,4 @@
-import { expansionFeature } from '@fex/components-core'
+import { expansionFeature } from '@fex-design/core'
 import { departmentFieldNames, departmentTreeData } from './data'
 import { DemoTree } from './demo-tree'
 import { TreeDemoSection } from './demo-section'

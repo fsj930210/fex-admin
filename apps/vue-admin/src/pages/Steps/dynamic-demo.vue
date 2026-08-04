@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { Step, StepContent, StepIndicator, Steps } from '@fex/components-vue/primitive/steps'
-import Button from '@fex/components-vue/ui/button'
-import Card from '@fex/components-vue/ui/card'
+import { Step, StepContent, StepIndicator, Steps } from '@fex-design/vue/primitive/steps'
+import Button from '@fex-design/vue/ui/button'
+import Card from '@fex-design/vue/ui/card'
 const extra = ref(false)
 const base = [['account', 'Account'], ['profile', 'Profile'], ['review', 'Review']] as const
 const items = computed(() => extra.value ? [...base.slice(0, 2), ['approval', 'Approval'] as const, base[2]] : base)

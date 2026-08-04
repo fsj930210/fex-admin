@@ -7,13 +7,13 @@ import {
 } from '@angular/core'
 import AutoHeight from 'embla-carousel-auto-height'
 import { RouterLink } from '@angular/router'
-import { createCarousel } from '@fex/components-angular/primitive/carousel'
-import { Card } from '@fex/components-angular/ui/card'
+import { createCarousel } from '@fex-design/angular/primitive/carousel'
+import { Card } from '@fex-design/angular/ui/card'
 import {
   carouselRootClassName,
   carouselTrackClassName,
   carouselViewportClassName,
-} from '@fex/components-styles/carousel'
+} from '@fex-design/styles/carousel'
 import { CarouselControlsComponent } from './carousel-controls.component'
 
 @Component({

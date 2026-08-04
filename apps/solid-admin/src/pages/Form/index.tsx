@@ -11,12 +11,12 @@ import {
   FieldRoot,
   FieldSet,
   FieldTitle,
-} from '@fex/components-solid/primitive/field'
-import { createForm, Form, scrollToField } from '@fex/components-solid/primitive/form'
-import { InputControl, InputRoot } from '@fex/components-solid/primitive/input'
-import { Button } from '@fex/components-solid/ui/button'
-import { Card } from '@fex/components-solid/ui/card'
-import { Checkbox } from '@fex/components-solid/ui/checkbox'
+} from '@fex-design/solid/primitive/field'
+import { createForm, Form, scrollToField } from '@fex-design/solid/primitive/form'
+import { InputControl, InputRoot } from '@fex-design/solid/primitive/input'
+import { Button } from '@fex-design/solid/ui/button'
+import { Card } from '@fex-design/solid/ui/card'
+import { Checkbox } from '@fex-design/solid/ui/checkbox'
 import { A } from '@solidjs/router'
 import { createSignal, For, Show, type JSX } from 'solid-js'
 

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, viewChild } from '@angular/core'
-import type { TreeController, TreeKey, TreeOptions } from '@fex/components-core/tree/types'
-import { TreeRoot, TreeViewport, TreeVirtualViewport } from '@fex/components-angular/primitive/tree'
+import type { TreeController, TreeKey, TreeOptions } from '@fex-design/core/tree/types'
+import { TreeRoot, TreeViewport, TreeVirtualViewport } from '@fex-design/angular/primitive/tree'
 import { DemoTreeRowComponent } from './demo-tree-row.component'
 import type { DepartmentNode } from './data'
 export

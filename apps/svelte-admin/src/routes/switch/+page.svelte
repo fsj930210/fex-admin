@@ -1,7 +1,7 @@
 <script lang="ts">
-  import SwitchRoot from '@fex/components-svelte/primitive/switch'
-  import SwitchThumb from '@fex/components-svelte/primitive/switch-thumb'
-  import Card from '@fex/components-svelte/ui/card'
+  import SwitchRoot from '@fex-design/svelte/primitive/switch'
+  import SwitchThumb from '@fex-design/svelte/primitive/switch-thumb'
+  import Card from '@fex-design/svelte/ui/card'
   let checked = $state(true)
 </script>
 <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl"><div class="mx-auto w-full max-w-5xl space-y-space-xl">

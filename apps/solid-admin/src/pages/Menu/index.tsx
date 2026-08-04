@@ -1,13 +1,13 @@
 import { A } from '@solidjs/router'
-import { Card } from '@fex/components-solid/ui/card'
+import { Card } from '@fex-design/solid/ui/card'
 import {
   createMenu,
   type MenuNodeEntry,
   type MenuNodeItem,
-} from '@fex/components-solid/primitive/menu'
-import { Menu, type MenuItem, type MenuKey } from '@fex/components-solid/ui/menu'
-import { MinusIcon } from '@fex/components-solid/icon/minus'
-import { PlusIcon } from '@fex/components-solid/icon/plus'
+} from '@fex-design/solid/primitive/menu'
+import { Menu, type MenuItem, type MenuKey } from '@fex-design/solid/ui/menu'
+import { MinusIcon } from '@fex-design/solid/icon/minus'
+import { PlusIcon } from '@fex-design/solid/icon/plus'
 import { For, createSignal } from 'solid-js'
 
 const menuItems: MenuItem[] = [

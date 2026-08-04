@@ -1,5 +1,5 @@
-import { Textarea } from '@fex/components-solid/primitive/textarea'
-import { Card } from '@fex/components-solid/ui/card'
+import { Textarea } from '@fex-design/solid/primitive/textarea'
+import { Card } from '@fex-design/solid/ui/card'
 import { A } from '@solidjs/router'
 
 export function TextareaPage() {

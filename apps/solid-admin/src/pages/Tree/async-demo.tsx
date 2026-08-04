@@ -1,5 +1,5 @@
-import { asyncLoadFeature, expansionFeature } from '@fex/components-core'
-import { Card } from '@fex/components-solid/ui/card'
+import { asyncLoadFeature, expansionFeature } from '@fex-design/core'
+import { Card } from '@fex-design/solid/ui/card'
 import { DemoTree } from './demo-tree'
 import { departmentFieldNames, type DepartmentNode } from './data'
 const data: DepartmentNode[] = [{ id: 'remote-root', name: 'Remote root', childCount: 2 }]

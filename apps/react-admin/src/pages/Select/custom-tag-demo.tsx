@@ -3,8 +3,8 @@ import {
   SelectList,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-react/primitive/select'
-import { CloseIcon } from '@fex/components-react/icon/close'
+} from '@fex-design/react/primitive/select'
+import { CloseIcon } from '@fex-design/react/icon/close'
 import { frameworkOptions } from './data'
 import { SelectDemoSection } from './demo-section'
 

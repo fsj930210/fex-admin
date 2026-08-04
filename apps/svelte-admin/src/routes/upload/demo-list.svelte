@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { UploadItem, UploadItemPreview, UploadItemProgress, UploadList, useUploadContext } from '@fex/components-svelte/primitive/upload'
-  import Button from '@fex/components-svelte/ui/button'
+  import { UploadItem, UploadItemPreview, UploadItemProgress, UploadList, useUploadContext } from '@fex-design/svelte/primitive/upload'
+  import Button from '@fex-design/svelte/ui/button'
   import { readable } from 'svelte/store'
   import MultipartDetails from './multipart-details.svelte'
   let { showMultipart = false }: { showMultipart?: boolean } = $props()

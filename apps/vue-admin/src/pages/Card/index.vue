@@ -5,8 +5,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@fex/components-vue/primitive/card'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/card'
+import Card from '@fex-design/vue/ui/card'
 import { computed, ref } from 'vue'
 
 type SpacingOption = {

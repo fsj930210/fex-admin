@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import Card from '@fex/components-angular/ui/card'
+import Card from '@fex-design/angular/ui/card'
 import {
   Popover,
   PopoverArrow,
@@ -9,7 +9,7 @@ import {
   PopoverHeader,
   PopoverTitle,
   PopoverTrigger,
-} from '@fex/components-angular/primitive/popover'
+} from '@fex-design/angular/primitive/popover'
 
 @Component({
   selector: 'fex-popover-page',

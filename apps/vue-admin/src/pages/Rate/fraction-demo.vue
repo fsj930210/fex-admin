@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Rate } from '@fex/components-vue/primitive/rate'
-import Card from '@fex/components-vue/ui/card'
+import { Rate } from '@fex-design/vue/primitive/rate'
+import Card from '@fex-design/vue/ui/card'
 const value = ref(4.3)
 const previewValue = ref<number | null>(null)
 </script>

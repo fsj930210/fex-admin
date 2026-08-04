@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { draggableAction } from '@fex/components-svelte/actions/draggable'
-  import { droppableAction } from '@fex/components-svelte/actions/droppable'
-  import { dropzoneAction } from '@fex/components-svelte/actions/dropzone'
-  import { moveAction } from '@fex/components-svelte/actions/move'
-  import { resizeAction } from '@fex/components-svelte/actions/resize'
-  import Card from '@fex/components-svelte/ui/card'
+  import { draggableAction } from '@fex-design/svelte/actions/draggable'
+  import { droppableAction } from '@fex-design/svelte/actions/droppable'
+  import { dropzoneAction } from '@fex-design/svelte/actions/dropzone'
+  import { moveAction } from '@fex-design/svelte/actions/move'
+  import { resizeAction } from '@fex-design/svelte/actions/resize'
+  import Card from '@fex-design/svelte/ui/card'
 
   const draggableItems = {
     'status-card': { id: 'status-card', label: 'Status card', type: 'card' },

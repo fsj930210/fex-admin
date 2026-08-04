@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import Card from '@fex/components-angular/ui/card'
+import Card from '@fex-design/angular/ui/card'
 import { DropdownBasicDemoComponent } from './basic-demo.component'
 import { DropdownCustomPanelDemoComponent } from './custom-panel-demo.component'
 import { DropdownCustomTriggerDemoComponent } from './custom-trigger-demo.component'

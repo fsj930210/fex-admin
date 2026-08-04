@@ -2,7 +2,7 @@ import {
   createUploadMd5,
   createUploadParts,
   createUploadProgress,
-} from '@fex/components-solid/primitive/upload'
+} from '@fex-design/solid/primitive/upload'
 import { For, Show } from 'solid-js'
 const text = { pending: '等待', uploading: '上传中', success: '完成', error: '失败' } as const
 export function MultipartDetails(props: { id: string }) {

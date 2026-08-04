@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { expansionFeature, searchFeature } from '@fex/components-core'
-  import { createTreeController } from '@fex/components-core/tree/create-tree-controller'
-  import type { SearchFeatureApi } from '@fex/components-core/tree/features/search'
-  import InputRoot from '@fex/components-svelte/primitive/input'
-  import InputControl from '@fex/components-svelte/primitive/input-control'
-  import Card from '@fex/components-svelte/ui/card'
+  import { expansionFeature, searchFeature } from '@fex-design/core'
+  import { createTreeController } from '@fex-design/core/tree/create-tree-controller'
+  import type { SearchFeatureApi } from '@fex-design/core/tree/features/search'
+  import InputRoot from '@fex-design/svelte/primitive/input'
+  import InputControl from '@fex-design/svelte/primitive/input-control'
+  import Card from '@fex-design/svelte/ui/card'
   import DemoTree from './demo-tree.svelte'
   import { departmentFieldNames, departmentTreeData, type DepartmentNode } from './data'
 

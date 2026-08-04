@@ -1,5 +1,5 @@
-﻿import { Spinner } from '@fex/components-solid/ui/spinner'
-import { Card } from '@fex/components-solid/ui/card'
+﻿import { Spinner } from '@fex-design/solid/ui/spinner'
+import { Card } from '@fex-design/solid/ui/card'
 import { A } from '@solidjs/router'
 
 export function SpinnerPage() {

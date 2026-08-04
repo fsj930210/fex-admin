@@ -1,6 +1,6 @@
-import { Form, scrollToField, useForm } from '@fex/components-react/primitive/form'
-import { Button } from '@fex/components-react/ui/button'
-import { Card } from '@fex/components-react/ui/card'
+import { Form, scrollToField, useForm } from '@fex-design/react/primitive/form'
+import { Button } from '@fex-design/react/ui/button'
+import { Card } from '@fex-design/react/ui/card'
 import { TextField, type SetDemoResult } from './shared'
 
 export function ScrollDemo({ setResult }: { setResult: SetDemoResult }) {

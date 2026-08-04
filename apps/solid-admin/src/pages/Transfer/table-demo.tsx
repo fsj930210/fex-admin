@@ -1,17 +1,17 @@
-import { rowSelectionFeature } from '@fex/components-core/data-grid/features/row-selection'
+import { rowSelectionFeature } from '@fex-design/core/data-table/features/row-selection'
 import {
-  createDataGridSelectionColumn,
-  DataGrid,
+  createDataTableSelectionColumn,
+  DataTable,
   tableFeatures,
-} from '@fex/components-solid/primitive/data-grid'
-import { Transfer, type TransferPanelApi } from '@fex/components-solid/primitive/transfer'
-import { createDataGridTable } from '@fex/components-solid/primitives/create-data-grid-table'
-import { Card } from '@fex/components-solid/ui/card'
+} from '@fex-design/solid/primitive/data-table'
+import { Transfer, type TransferPanelApi } from '@fex-design/solid/primitive/transfer'
+import { createDataTable } from '@fex-design/solid/primitives/create-data-table'
+import { Card } from '@fex-design/solid/ui/card'
 import { createEffect } from 'solid-js'
 import { fieldNames, members, type Member } from './data'
 const features = tableFeatures({ rowSelectionFeature })
 const columns = [
-  createDataGridSelectionColumn({ mode: 'multiple' }),
+  createDataTableSelectionColumn({ mode: 'multiple' }),
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'department', header: 'Department' },
 ]
@@ -31,14 +31,14 @@ function Panel(props: { api: TransferPanelApi<Member> }) {
       props.api.setCheckedKeys(Object.keys(next).filter((key) => next[key]))
     },
   })
-  const table = createDataGridTable(options() as any)
-  createEffect(() => table.setDataGridOptions(options() as any))
-  return <DataGrid table={table} />
+  const table = createDataTable(options() as any)
+  createEffect(() => table.setDataTableOptions(options() as any))
+  return <DataTable table={table} />
 }
 export function TableDemo() {
   return (
     <Card
-      title="Custom DataGrid body"
+      title="Custom DataTable body"
       description="Each side can use row selection without reimplementing target-key updates or move-all filtering."
     >
       <Transfer

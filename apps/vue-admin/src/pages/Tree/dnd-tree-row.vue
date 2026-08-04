@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { TreeController, TreeKey } from '@fex/components-core/tree/types'
-import { TreeItem, TreeTitle, TreeTrigger } from '@fex/components-vue/primitive/tree'
-import { useTreeDndItem } from '@fex/components-vue/primitive/tree/use-tree-dnd-item'
+import type { TreeController, TreeKey } from '@fex-design/core/tree/types'
+import { TreeItem, TreeTitle, TreeTrigger } from '@fex-design/vue/primitive/tree'
+import { useTreeDndItem } from '@fex-design/vue/primitive/tree/use-tree-dnd-item'
 import type { ComponentPublicInstance, StyleValue } from 'vue'
 import type { DepartmentNode } from './data'
 const props = defineProps<{ controller: TreeController<DepartmentNode>; itemKey: TreeKey }>()

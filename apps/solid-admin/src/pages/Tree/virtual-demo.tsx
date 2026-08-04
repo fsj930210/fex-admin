@@ -1,7 +1,7 @@
-import { expansionFeature } from '@fex/components-core'
-import type { TreeVirtualViewportHandle } from '@fex/components-solid/primitive/tree'
-import { Button } from '@fex/components-solid/ui/button'
-import { Card } from '@fex/components-solid/ui/card'
+import { expansionFeature } from '@fex-design/core'
+import type { TreeVirtualViewportHandle } from '@fex-design/solid/primitive/tree'
+import { Button } from '@fex-design/solid/ui/button'
+import { Card } from '@fex-design/solid/ui/card'
 import { DemoTree } from './demo-tree'
 import { createLargeTreeData, departmentFieldNames } from './data'
 const data = createLargeTreeData()

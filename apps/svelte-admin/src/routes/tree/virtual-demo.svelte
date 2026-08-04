@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { expansionFeature } from '@fex/components-core'
-  import type { TreeKey } from '@fex/components-core/tree/types'
-  import Button from '@fex/components-svelte/ui/button'
-  import Card from '@fex/components-svelte/ui/card'
+  import { expansionFeature } from '@fex-design/core'
+  import type { TreeKey } from '@fex-design/core/tree/types'
+  import Button from '@fex-design/svelte/ui/button'
+  import Card from '@fex-design/svelte/ui/card'
   import DemoTree from './demo-tree.svelte'
   import { createLargeTreeData, departmentFieldNames } from './data'
 

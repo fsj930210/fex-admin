@@ -1,5 +1,5 @@
-﻿import { Kbd, KbdGroup } from '@fex/components-react/ui/kbd'
-import { Card } from '@fex/components-react/ui/card'
+﻿import { Kbd, KbdGroup } from '@fex-design/react/ui/kbd'
+import { Card } from '@fex-design/react/ui/card'
 import { Link } from 'react-router'
 
 export function KbdPage() {

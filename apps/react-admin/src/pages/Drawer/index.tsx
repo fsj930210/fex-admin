@@ -1,4 +1,4 @@
-import { Card } from '@fex/components-react/ui/card'
+import { Card } from '@fex-design/react/ui/card'
 import { BasicDemo } from './basic-demo'
 import { HeaderFooterDemo } from './header-footer-demo'
 import { NestedDemo } from './nested-demo'

@@ -2,8 +2,8 @@ import {
   createCalendarDate,
   getCalendarValueKey,
   type CalendarValue,
-} from '@fex/components-core/calendar'
-import { Button } from '@fex/components-solid/ui/button'
+} from '@fex-design/core/calendar'
+import { Button } from '@fex-design/solid/ui/button'
 import { createSignal } from 'solid-js'
 import { DemoDatePicker, DemoRangePicker, Section } from './shared'
 

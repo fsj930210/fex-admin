@@ -4,9 +4,9 @@ import type {
   TreeKey,
   TreeNodeData,
   TreeOptions,
-} from '@fex/components-core/tree/types'
-import { TreeRoot, TreeViewport, TreeVirtualViewport } from '@fex/components-vue/primitive/tree'
-import type { TreeVirtualViewportHandle } from '@fex/components-vue/primitive/tree'
+} from '@fex-design/core/tree/types'
+import { TreeRoot, TreeViewport, TreeVirtualViewport } from '@fex-design/vue/primitive/tree'
+import type { TreeVirtualViewportHandle } from '@fex-design/vue/primitive/tree'
 import { computed, ref } from 'vue'
 import DemoTreeRow from './demo-tree-row.vue'
 interface Props<T extends TreeNodeData> extends TreeOptions<T> {

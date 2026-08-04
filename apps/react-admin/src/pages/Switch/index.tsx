@@ -1,5 +1,5 @@
-import { SwitchRoot, SwitchThumb } from '@fex/components-react/primitive/switch'
-import { Card } from '@fex/components-react/ui/card'
+import { SwitchRoot, SwitchThumb } from '@fex-design/react/primitive/switch'
+import { Card } from '@fex-design/react/ui/card'
 import { useState } from 'react'
 import { Link } from 'react-router'
 

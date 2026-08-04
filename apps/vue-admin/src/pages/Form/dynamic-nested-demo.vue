@@ -12,12 +12,12 @@ import {
   FieldRoot,
   FieldSet,
   FieldTitle,
-} from '@fex/components-vue/primitive/field'
-import { Form as FormHost } from '@fex/components-vue/primitive/form'
-import { InputControl, InputRoot } from '@fex/components-vue/primitive/input'
-import Button from '@fex/components-vue/ui/button'
-import Card from '@fex/components-vue/ui/card'
-import { Checkbox } from '@fex/components-vue/ui/checkbox'
+} from '@fex-design/vue/primitive/field'
+import { Form as FormHost } from '@fex-design/vue/primitive/form'
+import { InputControl, InputRoot } from '@fex-design/vue/primitive/input'
+import Button from '@fex-design/vue/ui/button'
+import Card from '@fex-design/vue/ui/card'
+import { Checkbox } from '@fex-design/vue/ui/checkbox'
 import { useFormDemoContext } from './form-demo-context'
 
 const {

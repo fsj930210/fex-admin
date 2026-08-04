@@ -1,4 +1,4 @@
-import { analyzeTimeFormat } from '@fex/components-core/date/utils'
+import { analyzeTimeFormat } from '@fex-design/core/date/utils'
 import {
   TimePickerContent,
   TimePickerHourColumn,
@@ -10,8 +10,8 @@ import {
   TimePickerTrigger,
   type DisabledTime,
   type TimeValue,
-} from '@fex/components-react/primitive/time-picker'
-import { Button } from '@fex/components-react/ui/button'
+} from '@fex-design/react/primitive/time-picker'
+import { Button } from '@fex-design/react/ui/button'
 import { useState, type ReactNode } from 'react'
 
 export interface DemoTimePickerProps {

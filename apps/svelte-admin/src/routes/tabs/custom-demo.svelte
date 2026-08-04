@@ -1,9 +1,9 @@
 <script lang="ts">
-  import TabsRoot from '@fex/components-svelte/primitive/tabs-root'
-  import TabsList from '@fex/components-svelte/primitive/tabs-list'
-  import TabsItem from '@fex/components-svelte/primitive/tabs-item'
-  import TabsContent from '@fex/components-svelte/primitive/tabs-content'
-  import Card from '@fex/components-svelte/ui/card'
+  import TabsRoot from '@fex-design/svelte/primitive/tabs-root'
+  import TabsList from '@fex-design/svelte/primitive/tabs-list'
+  import TabsItem from '@fex-design/svelte/primitive/tabs-item'
+  import TabsContent from '@fex-design/svelte/primitive/tabs-content'
+  import Card from '@fex-design/svelte/ui/card'
   import { cn } from '@fex/utils'
   import type { HTMLAttributes } from 'svelte/elements'
 

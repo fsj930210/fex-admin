@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Badge } from '@fex/components-angular/ui/badge'
-import Card from '@fex/components-angular/ui/card'
+import { Badge } from '@fex-design/angular/ui/badge'
+import Card from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fex-badge-page',

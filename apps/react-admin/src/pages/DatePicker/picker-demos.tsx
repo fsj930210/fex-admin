@@ -2,8 +2,8 @@ import {
   createCalendarDate,
   getCalendarValueKey,
   type CalendarValue,
-} from '@fex/components-core/calendar'
-import { Button } from '@fex/components-react/ui/button'
+} from '@fex-design/core/calendar'
+import { Button } from '@fex-design/react/ui/button'
 import { useState } from 'react'
 import { DemoDatePicker, DemoRangePicker, DemoSection } from './shared'
 

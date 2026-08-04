@@ -4,6 +4,9 @@ import type { AppRoute } from '../types'
 const ButtonPage = lazy(() =>
   import('../../pages/Button').then((module) => ({ default: module.ButtonPage })),
 )
+const BreadcrumbPage = lazy(() =>
+  import('../../pages/Breadcrumb').then((module) => ({ default: module.BreadcrumbPage })),
+)
 const AutoCompletePage = lazy(() =>
   import('../../pages/AutoComplete').then((module) => ({ default: module.AutoCompletePage })),
 )
@@ -109,8 +112,8 @@ const TextareaPage = lazy(() =>
 const TimePickerPage = lazy(() =>
   import('../../pages/TimePicker').then((module) => ({ default: module.TimePickerPage })),
 )
-const DataGridPage = lazy(() =>
-  import('../../pages/DataGrid').then((module) => ({ default: module.DataGridPage })),
+const DataTablePage = lazy(() =>
+  import('../../pages/DataTable').then((module) => ({ default: module.DataTablePage })),
 )
 const DatePickerPage = lazy(() =>
   import('../../pages/DatePicker').then((module) => ({ default: module.DatePickerPage })),
@@ -129,11 +132,12 @@ const TooltipPage = lazy(() =>
 )
 
 export const componentRoutes: AppRoute[] = [
+  { path: '/breadcrumb', component: BreadcrumbPage },
   { path: '/auto-complete', component: AutoCompletePage },
   { path: '/carousel', component: CarouselPage },
   {
-    path: '/data-grid',
-    component: DataGridPage,
+    path: '/data-table',
+    component: DataTablePage,
   },
   {
     path: '/date-picker',

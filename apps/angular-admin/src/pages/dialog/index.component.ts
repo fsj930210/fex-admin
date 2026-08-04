@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Button } from '@fex/components-angular/ui/button'
-import Card from '@fex/components-angular/ui/card'
+import { Button } from '@fex-design/angular/ui/button'
+import Card from '@fex-design/angular/ui/card'
 import {
   Dialog,
   DialogBody,
@@ -14,7 +14,7 @@ import {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-} from '@fex/components-angular/primitive/dialog'
+} from '@fex-design/angular/primitive/dialog'
 
 @Component({
   selector: 'fex-dialog-page',

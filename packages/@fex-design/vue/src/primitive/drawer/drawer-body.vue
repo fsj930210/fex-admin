@@ -1,0 +1,1 @@
+<script setup lang="ts">import { drawerBodyClassName } from '@fex-design/styles/drawer'; import { cn } from '@fex/utils'; defineProps<{ class?: string }>()</script><template><div v-bind="$attrs" data-slot="drawer-body" :class="cn(drawerBodyClassName, $props.class)"><slot /></div></template>

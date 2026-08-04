@@ -3,10 +3,10 @@ import {
   AlertAction,
   AlertDescription,
   AlertTitle,
-} from '@fex/components-react/primitive/alert'
-import { Badge } from '@fex/components-react/ui/badge'
-import { InfoIcon } from '@fex/components-react/icon/info'
-import { Card } from '@fex/components-react/ui/card'
+} from '@fex-design/react/primitive/alert'
+import { Badge } from '@fex-design/react/ui/badge'
+import { InfoIcon } from '@fex-design/react/icon/info'
+import { Card } from '@fex-design/react/ui/card'
 import { Link } from 'react-router'
 
 const variants = ['default', 'success', 'warning', 'destructive'] as const

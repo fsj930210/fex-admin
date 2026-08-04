@@ -1,15 +1,15 @@
-import { dndFeature, expansionFeature } from '@fex/components-core'
-import { createTreeController } from '@fex/components-core/tree/create-tree-controller'
-import type { TreeController, TreeKey } from '@fex/components-core/tree/types'
+import { dndFeature, expansionFeature } from '@fex-design/core'
+import { createTreeController } from '@fex-design/core/tree/create-tree-controller'
+import type { TreeController, TreeKey } from '@fex-design/core/tree/types'
 import {
   TreeItem,
   TreeRoot,
   TreeTitle,
   TreeTrigger,
   TreeViewport,
-} from '@fex/components-solid/primitive/tree'
-import { createTreeDndItem } from '@fex/components-solid/primitive/tree/create-tree-dnd-item'
-import { Card } from '@fex/components-solid/ui/card'
+} from '@fex-design/solid/primitive/tree'
+import { createTreeDndItem } from '@fex-design/solid/primitive/tree/create-tree-dnd-item'
+import { Card } from '@fex-design/solid/ui/card'
 import {
   departmentFieldNames,
   departmentTreeData,

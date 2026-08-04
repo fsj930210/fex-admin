@@ -4,8 +4,8 @@ import type {
   CalendarRange,
   CalendarValue,
   CalendarWeekday,
-} from '@fex/components-core/calendar'
-import type { DatePickerPicker } from '@fex/components-angular/primitive/date-picker'
+} from '@fex-design/core/calendar'
+import type { DatePickerPicker } from '@fex-design/angular/primitive/date-picker'
 import {
   DatePickerCancel,
   DatePickerConfirm,
@@ -20,7 +20,7 @@ import {
   RangePickerRoot,
   RangePickerTrigger,
   type DatePickerSelectionValue,
-} from '@fex/components-angular/primitive/date-picker'
+} from '@fex-design/angular/primitive/date-picker'
 
 @Component({
   selector: 'demo-date-picker',

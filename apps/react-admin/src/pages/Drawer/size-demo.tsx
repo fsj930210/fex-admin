@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import type { DrawerPlacement } from '@fex/components-core/drawer/types'
-import { Radio, RadioGroup } from '@fex/components-react/primitive/radio'
-import { DrawerBody, DrawerClose, DrawerContent, DrawerHeader, DrawerMask, DrawerPortal, DrawerResizeHandle, DrawerRoot, DrawerTrigger } from '@fex/components-react/primitive/drawer'
+import type { DrawerPlacement } from '@fex-design/core/drawer/types'
+import { Radio, RadioGroup } from '@fex-design/react/primitive/radio'
+import { DrawerBody, DrawerClose, DrawerContent, DrawerHeader, DrawerMask, DrawerPortal, DrawerResizeHandle, DrawerRoot, DrawerTrigger } from '@fex-design/react/primitive/drawer'
 
 const placements: DrawerPlacement[] = ['top', 'right', 'bottom', 'left']
 

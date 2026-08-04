@@ -1,4 +1,4 @@
-import Card from '@fex/components-angular/ui/card'
+import Card from '@fex-design/angular/ui/card'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { DemoTimePickerComponent } from './demo-time-picker.component'
 @Component({

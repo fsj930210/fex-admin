@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core'
-import { Card } from '@fex/components-angular/ui/card'
+import { Card } from '@fex-design/angular/ui/card'
 @Component({
   selector: 'fex-upload-demo-section',
   standalone: true,

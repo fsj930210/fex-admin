@@ -1,8 +1,8 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@fex/components-solid/icon/chevron'
-import { Transfer } from '@fex/components-solid/primitive/transfer'
-import { Badge } from '@fex/components-solid/ui/badge'
-import { Button } from '@fex/components-solid/ui/button'
-import { Card } from '@fex/components-solid/ui/card'
+import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/solid/icon/chevron'
+import { Transfer } from '@fex-design/solid/primitive/transfer'
+import { Badge } from '@fex-design/solid/ui/badge'
+import { Button } from '@fex-design/solid/ui/button'
+import { Card } from '@fex-design/solid/ui/card'
 import { fieldNames, members } from './data'
 export function CustomDemo() {
   return (

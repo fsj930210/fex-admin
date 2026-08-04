@@ -1,12 +1,12 @@
-import { dropFeature } from '@fex/components-core/upload/features/drop'
-import { pasteFeature } from '@fex/components-core/upload/features/paste'
-import { previewFeature } from '@fex/components-core/upload/features/preview'
-import { uploadFeature } from '@fex/components-core/upload/features/upload'
+import { dropFeature } from '@fex-design/core/upload/features/drop'
+import { pasteFeature } from '@fex-design/core/upload/features/paste'
+import { previewFeature } from '@fex-design/core/upload/features/preview'
+import { uploadFeature } from '@fex-design/core/upload/features/upload'
 import {
   UploadDropzone,
   UploadRoot,
   createUploadSignals,
-} from '@fex/components-angular/primitive/upload'
+} from '@fex-design/angular/primitive/upload'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { uploadBody, uploadServerUrl } from './api'
 import { DemoUploadListComponent } from './demo-list.component'

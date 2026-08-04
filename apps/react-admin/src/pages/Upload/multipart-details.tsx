@@ -2,7 +2,7 @@ import {
   useUploadMd5,
   useUploadParts,
   useUploadProgress,
-} from '@fex/components-react/primitive/upload'
+} from '@fex-design/react/primitive/upload'
 
 const partStatusText = {
   pending: '等待',

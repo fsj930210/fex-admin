@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { SelectOption } from '@fex/components-core/select/types'
+import type { SelectOption } from '@fex-design/core/select/types'
 import {
   SelectContent,
   SelectList,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-vue/primitive/select'
+} from '@fex-design/vue/primitive/select'
 import { onBeforeUnmount, ref } from 'vue'
 import { frameworkOptions } from './data'
 import Demo from './demo-section.vue'

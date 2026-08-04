@@ -3,8 +3,8 @@ import {
   AutoCompleteList,
   AutoCompleteRoot,
   AutoCompleteTrigger,
-} from '@fex/components-react/primitive/auto-complete'
-import { Card } from '@fex/components-react/ui/card'
+} from '@fex-design/react/primitive/auto-complete'
+import { Card } from '@fex-design/react/ui/card'
 import { fieldNames, userSuggestions, type UserSuggestion } from './data'
 
 export function CustomDemo() {

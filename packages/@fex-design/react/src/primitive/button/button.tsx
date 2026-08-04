@@ -1,0 +1,26 @@
+import { buttonPrimitiveClassName } from '@fex-design/styles/button'
+import { cn } from '@fex/utils'
+import type { ButtonHTMLAttributes, Ref } from 'react'
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  'data-slot'?: string | undefined
+  ref?: Ref<HTMLButtonElement> | undefined
+}
+
+export function Button({
+  className,
+  ref,
+  type = 'button',
+  'data-slot': dataSlot = 'button',
+  ...props
+}: ButtonProps) {
+  return (
+    <button
+      {...props}
+      ref={ref}
+      type={type}
+      className={cn(buttonPrimitiveClassName, className)}
+      data-slot={dataSlot}
+    />
+  )
+}

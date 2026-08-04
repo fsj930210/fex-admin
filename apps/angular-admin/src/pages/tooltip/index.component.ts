@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import Card from '@fex/components-angular/ui/card'
+import Card from '@fex-design/angular/ui/card'
 import { TooltipBasicDemo } from './basic-demo.component'
 import { TooltipControlledDemo } from './controlled-demo.component'
 import { TooltipDisabledDemo } from './disabled-demo.component'

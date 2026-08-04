@@ -1,7 +1,7 @@
 import { A } from '@solidjs/router'
-import { createSortable } from '@fex/components-solid/primitives/create-sortable'
-import * as Sortable from '@fex/components-solid/primitive/sortable'
-import { Card } from '@fex/components-solid/ui/card'
+import { createSortable } from '@fex-design/solid/primitives/create-sortable'
+import * as Sortable from '@fex-design/solid/primitive/sortable'
+import { Card } from '@fex-design/solid/ui/card'
 import { For, Show, createSignal, type JSX } from 'solid-js'
 import { Portal } from 'solid-js/web'
 

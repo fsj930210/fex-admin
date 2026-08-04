@@ -1,17 +1,17 @@
 import AutoHeight from 'embla-carousel-auto-height'
-import { ChevronLeftIcon, ChevronRightIcon } from '@fex/components-react/icon/chevron'
+import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/react/icon/chevron'
 import {
   CarouselRoot,
   CarouselSlide,
   CarouselTrack,
   CarouselViewport,
   useCarouselContext,
-} from '@fex/components-react/primitive/carousel'
-import { Card } from '@fex/components-react/ui/card'
+} from '@fex-design/react/primitive/carousel'
+import { Card } from '@fex-design/react/ui/card'
 import {
   carouselIndicatorClassName,
   carouselIndicatorsClassName,
-} from '@fex/components-styles/carousel'
+} from '@fex-design/styles/carousel'
 import { Link } from 'react-router'
 
 const slides = ['订单概览', '待办审批', '团队动态']

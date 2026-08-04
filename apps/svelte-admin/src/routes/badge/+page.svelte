@@ -1,6 +1,6 @@
 ﻿<script lang="ts">
-  import Badge from '@fex/components-svelte/ui/badge'
-  import Card from '@fex/components-svelte/ui/card'
+  import Badge from '@fex-design/svelte/ui/badge'
+  import Card from '@fex-design/svelte/ui/card'
 
   const variants = ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] as const
 </script>

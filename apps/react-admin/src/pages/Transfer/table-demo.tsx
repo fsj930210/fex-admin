@@ -1,16 +1,16 @@
 import {
   rowSelectionFeature,
   type RowSelectionState,
-} from '@fex/components-core/data-grid/features/row-selection'
+} from '@fex-design/core/data-table/features/row-selection'
 import {
-  createDataGridSelectionColumn,
-  DataGrid,
+  createDataTableSelectionColumn,
+  DataTable,
   tableFeatures,
-  useDataGridTable,
+  useDataTable,
   type ColumnDef,
-} from '@fex/components-react/primitive/data-grid'
-import type { TransferPanelRenderApi } from '@fex/components-react/primitive/transfer'
-import { Transfer } from '@fex/components-react/primitive/transfer'
+} from '@fex-design/react/primitive/data-table'
+import type { TransferPanelRenderApi } from '@fex-design/react/primitive/transfer'
+import { Transfer } from '@fex-design/react/primitive/transfer'
 import { transferFieldNames, transferMembers, type TransferMember } from './data'
 import { TransferDemoSection } from './demo-section'
 
@@ -18,14 +18,14 @@ const features = tableFeatures({ rowSelectionFeature })
 
 function TransferTable({ panel }: { panel: TransferPanelRenderApi<TransferMember> }) {
   const columns: ColumnDef<typeof features, TransferMember>[] = [
-    createDataGridSelectionColumn<typeof features, TransferMember>({ mode: 'multiple' }),
+    createDataTableSelectionColumn<typeof features, TransferMember>({ mode: 'multiple' }),
     { accessorKey: 'name', header: 'Name' },
     { accessorKey: 'department', header: 'Department' },
   ]
   const selection: RowSelectionState = Object.fromEntries(
     panel.checkedKeys.map((key) => [String(key), true]),
   )
-  const table = useDataGridTable({
+  const table = useDataTable({
     features,
     data: panel.items,
     columns,
@@ -37,13 +37,13 @@ function TransferTable({ panel }: { panel: TransferPanelRenderApi<TransferMember
       panel.setCheckedKeys(Object.keys(next).filter((key) => next[key]))
     },
   })
-  return <DataGrid table={table} />
+  return <DataTable table={table} />
 }
 
 export function TableTransferDemo() {
   return (
     <TransferDemoSection
-      title="Custom DataGrid body"
+      title="Custom DataTable body"
       description="Each side can use row selection without reimplementing target-key updates or move-all filtering."
     >
       <Transfer

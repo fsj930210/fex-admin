@@ -1,4 +1,4 @@
-import { Card } from '@fex/components-react/ui/card'
+import { Card } from '@fex-design/react/ui/card'
 import { DemoTimePicker } from './demo-time-picker'
 export function RangeDemo() {
   return (

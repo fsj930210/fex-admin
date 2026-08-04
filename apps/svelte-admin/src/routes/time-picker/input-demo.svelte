@@ -1,1 +1,1 @@
-<script>import Card from '@fex/components-svelte/ui/card'; import DemoTimePicker from './demo-time-picker.svelte'</script><Card title="输入定位"><DemoTimePicker defaultValue={{hour:2,minute:25,second:36}}/></Card>
+<script>import Card from '@fex-design/svelte/ui/card'; import DemoTimePicker from './demo-time-picker.svelte'</script><Card title="输入定位"><DemoTimePicker defaultValue={{hour:2,minute:25,second:36}}/></Card>

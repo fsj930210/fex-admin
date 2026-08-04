@@ -1,0 +1,5 @@
+export { default as Steps } from './steps-root.vue'
+export { default as Step } from './step-item.vue'
+export { default as StepIndicator } from './step-indicator.vue'
+export { default as StepContent } from './step-content.vue'
+export type { StepBuiltinStatus, StepInfo, StepRecord, StepsChangeMeta, StepsChangeTrigger, StepsOrientation, StepStatus, StepValue } from '@fex-design/core/steps/types'

@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
-import { Badge } from '@fex/components-vue/ui/badge'
-import Card from '@fex/components-vue/ui/card'
+import { Badge } from '@fex-design/vue/ui/badge'
+import Card from '@fex-design/vue/ui/card'
 import {
   Table,
   TableBody,
@@ -9,7 +9,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@fex/components-vue/primitive/table'
+} from '@fex-design/vue/primitive/table'
 
 const invoices = [
   { id: 'INV-001', customer: 'Acme Co.', status: 'Paid', amount: '$320.00' },

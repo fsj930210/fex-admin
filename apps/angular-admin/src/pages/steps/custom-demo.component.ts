@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { ErrorIcon } from '@fex/components-angular/icon/error'
-import { Step, StepContent, StepIndicator, Steps } from '@fex/components-angular/primitive/steps'
-import { Card } from '@fex/components-angular/ui/card'
+import { ErrorIcon } from '@fex-design/angular/icon/error'
+import { Step, StepContent, StepIndicator, Steps } from '@fex-design/angular/primitive/steps'
+import { Card } from '@fex-design/angular/ui/card'
 import { StepListComponent } from './step-list.component'
 
 @Component({

@@ -6,9 +6,9 @@ import {
   InputPrefix,
   InputRoot,
   InputSuffix,
-} from '@fex/components-solid/primitive/input'
-import { Button } from '@fex/components-solid/ui/button'
-import { Card } from '@fex/components-solid/ui/card'
+} from '@fex-design/solid/primitive/input'
+import { Button } from '@fex-design/solid/ui/button'
+import { Card } from '@fex-design/solid/ui/card'
 import { A } from '@solidjs/router'
 import { createSignal } from 'solid-js'
 

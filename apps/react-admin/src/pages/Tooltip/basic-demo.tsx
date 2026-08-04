@@ -1,6 +1,6 @@
-import * as Tooltip from '@fex/components-react/primitive/tooltip'
-import { Button } from '@fex/components-react/ui/button'
-import { Kbd } from '@fex/components-react/ui/kbd'
+import * as Tooltip from '@fex-design/react/primitive/tooltip'
+import { Button } from '@fex-design/react/ui/button'
+import { Kbd } from '@fex-design/react/ui/kbd'
 
 export function BasicDemo() {
   return <div className="flex flex-wrap items-center gap-space-md">

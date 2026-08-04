@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { NgStyle } from '@angular/common'
 import { RouterLink } from '@angular/router'
-import { FexDraggableDirective } from '@fex/components-angular/directives/draggable'
-import { FexDroppableDirective } from '@fex/components-angular/directives/droppable'
-import { FexDropzoneDirective } from '@fex/components-angular/directives/dropzone'
-import { FexMoveDirective } from '@fex/components-angular/directives/move'
+import { FexDraggableDirective } from '@fex-design/angular/directives/draggable'
+import { FexDroppableDirective } from '@fex-design/angular/directives/droppable'
+import { FexDropzoneDirective } from '@fex-design/angular/directives/dropzone'
+import { FexMoveDirective } from '@fex-design/angular/directives/move'
 import {
   FexResizeDirective,
   FexResizeHandleDirective,
-} from '@fex/components-angular/directives/resize'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/directives/resize'
+import Card from '@fex-design/angular/ui/card'
 
 const draggableItems = {
   'status-card': { id: 'status-card', label: 'Status card', type: 'card' },

@@ -1,6 +1,6 @@
-import { uploadFeature } from '@fex/components-core/upload/features/upload'
-import { UploadRoot, UploadTrigger, useUpload } from '@fex/components-react/primitive/upload'
-import { Button } from '@fex/components-react/ui/button'
+import { uploadFeature } from '@fex-design/core/upload/features/upload'
+import { UploadRoot, UploadTrigger, useUpload } from '@fex-design/react/primitive/upload'
+import { Button } from '@fex-design/react/ui/button'
 import { uploadBody, uploadServerUrl } from './api'
 import { DemoUploadList } from './demo-list'
 import { UploadDemoSection } from './demo-section'
@@ -32,7 +32,7 @@ export function MultipleUploadDemo() {
             variant="outline"
             onClick={() =>
               void upload
-                .getFeature<import('@fex/components-core/upload/types').UploadFeatureApi>('upload')
+                .getFeature<import('@fex-design/core/upload/types').UploadFeatureApi>('upload')
                 ?.startAll()
             }
           >

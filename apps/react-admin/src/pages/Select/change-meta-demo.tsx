@@ -1,12 +1,12 @@
-import type { SelectOption } from '@fex/components-core/select/types'
+import type { SelectOption } from '@fex-design/core/select/types'
 import {
   SelectContent,
   SelectList,
   SelectRoot,
   SelectTrigger,
   type SelectChangeMeta,
-} from '@fex/components-react/primitive/select'
-import type { SelectionValue } from '@fex/components-core/selection/types'
+} from '@fex-design/react/primitive/select'
+import type { SelectionValue } from '@fex-design/core/selection/types'
 import { useState } from 'react'
 import { SelectDemoSection } from './demo-section'
 

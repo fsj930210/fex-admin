@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { resizePanelPair } from '@fex/components-core/resizable/layout'
-  import Card from '@fex/components-svelte/ui/card'
+  import { resizePanelPair } from '@fex-design/core/resizable/layout'
+  import Card from '@fex-design/svelte/ui/card'
 
   type Direction = 'horizontal' | 'vertical'
 

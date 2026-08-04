@@ -4,8 +4,8 @@ import {
   UploadItemProgress,
   UploadList,
   useUploadContext,
-} from '@fex/components-solid/primitive/upload'
-import { Button } from '@fex/components-solid/ui/button'
+} from '@fex-design/solid/primitive/upload'
+import { Button } from '@fex-design/solid/ui/button'
 import { For, Show, createSignal, onCleanup } from 'solid-js'
 import { MultipartDetails } from './multipart-details'
 const formatError = (value: unknown) => (value instanceof Error ? value.message : String(value))

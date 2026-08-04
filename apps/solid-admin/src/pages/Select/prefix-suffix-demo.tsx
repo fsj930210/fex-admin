@@ -1,6 +1,6 @@
-import { CheckIcon } from '@fex/components-solid/icon/check'
-import { InfoIcon } from '@fex/components-solid/icon/info'
-import { SelectContent, SelectRoot, SelectTrigger } from '@fex/components-solid/primitive/select'
+import { CheckIcon } from '@fex-design/solid/icon/check'
+import { InfoIcon } from '@fex-design/solid/icon/info'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/solid/primitive/select'
 import { frameworkOptions } from './data'
 import { SelectDemoSection as Demo } from './demo-section'
 export function PrefixSuffixDemo() {

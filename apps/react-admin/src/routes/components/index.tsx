@@ -11,8 +11,8 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Carousel'), 'CarouselPage'),
   },
   {
-    path: '/data-grid',
-    element: createLazyRouteElement(() => import('../../pages/DataGrid'), 'DataGridPage'),
+    path: '/data-table',
+    element: createLazyRouteElement(() => import('../../pages/DataTable'), 'DataTablePage'),
   },
   {
     path: '/date-picker',
@@ -33,6 +33,10 @@ export const componentRoutes = [
   {
     path: '/upload',
     element: createLazyRouteElement(() => import('../../pages/Upload'), 'UploadPage'),
+  },
+  {
+    path: '/breadcrumb',
+    element: createLazyRouteElement(() => import('../../pages/Breadcrumb'), 'BreadcrumbPage'),
   },
   {
     path: '/button',

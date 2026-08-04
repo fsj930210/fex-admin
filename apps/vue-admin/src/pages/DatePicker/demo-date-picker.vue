@@ -4,11 +4,11 @@ import type {
   CalendarRange,
   CalendarValue,
   CalendarWeekday,
-} from '@fex/components-core/calendar'
+} from '@fex-design/core/calendar'
 import type {
   DatePickerPicker,
   DatePickerSelectionValue,
-} from '@fex/components-vue/primitive/date-picker'
+} from '@fex-design/vue/primitive/date-picker'
 import {
   DatePickerCancel,
   DatePickerConfirm,
@@ -22,7 +22,7 @@ import {
   RangePickerPanelGroup,
   RangePickerRoot,
   RangePickerTrigger,
-} from '@fex/components-vue/primitive/date-picker'
+} from '@fex-design/vue/primitive/date-picker'
 import { computed, getCurrentInstance } from 'vue'
 
 const props = defineProps<{

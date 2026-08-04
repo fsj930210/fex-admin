@@ -6,8 +6,8 @@ import {
   ScrollbarThumb,
   ScrollbarTrack,
   ScrollbarViewport,
-} from '@fex/components-vue/primitive/scrollbar'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/scrollbar'
+import Card from '@fex-design/vue/ui/card'
 import { computed, ref } from 'vue'
 
 const items = Array.from({ length: 28 }, (_, index) => index + 1)

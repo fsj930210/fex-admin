@@ -1,5 +1,5 @@
-import { Rate } from '@fex/components-react/primitive/rate'
-import { Card } from '@fex/components-react/ui/card'
+import { Rate } from '@fex-design/react/primitive/rate'
+import { Card } from '@fex-design/react/ui/card'
 import { useState } from 'react'
 
 export function FractionDemo() {

@@ -36,9 +36,9 @@
             "proxyConfig": "proxy.conf.json",
             "prebundle": {
               "exclude": [
-                "@fex/components-angular",
-                "@fex/components-core",
-                "@fex/components-styles",
+                "@fex-design/angular",
+                "@fex-design/core",
+                "@fex-design/styles",
                 "@fex/utils",
                 "class-variance-authority",
                 "clsx",

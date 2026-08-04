@@ -1,5 +1,5 @@
-import { Rate } from '@fex/components-solid/primitive/rate'
-import Card from '@fex/components-solid/ui/card'
+import { Rate } from '@fex-design/solid/primitive/rate'
+import Card from '@fex-design/solid/ui/card'
 import { createSignal } from 'solid-js'
 export function IntegerDemo() {
   const [value, setValue] = createSignal(3)

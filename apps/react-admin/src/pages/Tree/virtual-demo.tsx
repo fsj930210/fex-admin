@@ -1,5 +1,5 @@
-import { Button } from '@fex/components-react/ui/button'
-import { expansionFeature } from '@fex/components-core'
+import { Button } from '@fex-design/react/ui/button'
+import { expansionFeature } from '@fex-design/core'
 import { useRef } from 'react'
 import { createLargeTreeData, departmentFieldNames } from './data'
 import { DemoTree, type TreeVirtualViewportHandle } from './demo-tree'

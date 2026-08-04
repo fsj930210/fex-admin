@@ -1,5 +1,5 @@
-<fex-data-grid [table]="table">
-  <ng-template fexDataGridHeader let-header>
+<fex-data-table [table]="table">
+  <ng-template fexDataTableHeader let-header>
     @if (header.column.id === '__select__') {
       <button
         fexCheckbox
@@ -10,7 +10,7 @@
       {{ headerLabel(header) }}
     }
   </ng-template>
-  <ng-template fexDataGridCell let-cell>
+  <ng-template fexDataTableCell let-cell>
     @if (cell.column.id === '__select__') {
       <button
         fexCheckbox
@@ -22,4 +22,4 @@
       {{ value(cell) }}
     }
   </ng-template>
-</fex-data-grid>
+</fex-data-table>

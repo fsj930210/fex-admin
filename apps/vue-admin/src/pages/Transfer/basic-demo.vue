@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Transfer } from '@fex/components-vue/primitive/transfer'
-import Card from '@fex/components-vue/ui/card'
+import { Transfer } from '@fex-design/vue/primitive/transfer'
+import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 import { fieldNames, members } from './data'
 const targetKeys = ref<readonly (string | number)[]>(['susan'])

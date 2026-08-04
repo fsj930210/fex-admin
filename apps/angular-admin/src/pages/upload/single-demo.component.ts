@@ -1,11 +1,11 @@
-import { previewFeature } from '@fex/components-core/upload/features/preview'
-import { uploadFeature } from '@fex/components-core/upload/features/upload'
+import { previewFeature } from '@fex-design/core/upload/features/preview'
+import { uploadFeature } from '@fex-design/core/upload/features/upload'
 import {
   UploadRoot,
   UploadTrigger,
   createUploadSignals,
-} from '@fex/components-angular/primitive/upload'
-import { Button } from '@fex/components-angular/ui/button'
+} from '@fex-design/angular/primitive/upload'
+import { Button } from '@fex-design/angular/ui/button'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { uploadBody, uploadServerUrl } from './api'
 import { DemoUploadListComponent } from './demo-list.component'

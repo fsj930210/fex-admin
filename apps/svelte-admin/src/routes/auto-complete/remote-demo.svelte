@@ -1,8 +1,8 @@
 <script lang="ts">
-  import AutoCompleteRoot from '@fex/components-svelte/primitive/auto-complete'
-  import AutoCompleteContent from '@fex/components-svelte/primitive/auto-complete-content'
-  import AutoCompleteTrigger from '@fex/components-svelte/primitive/auto-complete-trigger'
-  import Card from '@fex/components-svelte/ui/card'
+  import AutoCompleteRoot from '@fex-design/svelte/primitive/auto-complete'
+  import AutoCompleteContent from '@fex-design/svelte/primitive/auto-complete-content'
+  import AutoCompleteTrigger from '@fex-design/svelte/primitive/auto-complete-trigger'
+  import Card from '@fex-design/svelte/ui/card'
   import { onDestroy } from 'svelte'
   import { fieldNames, users, type UserSuggestion } from './data'
   let items = $state<UserSuggestion[]>([])

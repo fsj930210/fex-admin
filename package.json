@@ -21,18 +21,18 @@
     "dev:angular": "nx dev angular-admin"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "22.0.2",
+    "@angular/compiler-cli": "22.1.0",
     "@fex/config-oxc": "workspace:*",
     "@fex/config-tsconfig": "workspace:*",
-    "@nx/js": "23.0.1",
-    "@nx/vite": "23.0.1",
-    "nx": "23.0.1",
-    "oxfmt": "0.56.0",
-    "oxlint": "1.71.0",
+    "@nx/js": "23.1.1",
+    "@nx/vite": "23.1.1",
+    "nx": "23.1.1",
+    "oxfmt": "0.61.0",
+    "oxlint": "1.76.0",
     "svelte-check": "latest",
-    "typescript": "6.0.3",
-    "vite": "8.1.0",
+    "typescript": "catalog:",
+    "vite": "catalog:",
     "vue-tsc": "latest"
   },
-  "packageManager": "pnpm@11.15.0"
+  "packageManager": "pnpm@11.19.0"
 }

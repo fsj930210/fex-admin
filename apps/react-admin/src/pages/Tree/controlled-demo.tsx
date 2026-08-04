@@ -1,10 +1,10 @@
-import { Button } from '@fex/components-react/ui/button'
+import { Button } from '@fex-design/react/ui/button'
 import {
   expansionFeature,
   focusFeature,
   keyboardFeature,
   selectionFeature,
-} from '@fex/components-core'
+} from '@fex-design/core'
 import { useState } from 'react'
 import { departmentFieldNames, departmentTreeData } from './data'
 import { DemoTree } from './demo-tree'

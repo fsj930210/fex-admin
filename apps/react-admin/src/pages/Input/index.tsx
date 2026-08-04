@@ -6,9 +6,9 @@ import {
   InputPrefix,
   InputRoot,
   InputSuffix,
-} from '@fex/components-react/primitive/input'
-import { Button } from '@fex/components-react/ui/button'
-import { Card } from '@fex/components-react/ui/card'
+} from '@fex-design/react/primitive/input'
+import { Button } from '@fex-design/react/ui/button'
+import { Card } from '@fex-design/react/ui/card'
 import { useRef, useState } from 'react'
 import { Link } from 'react-router'
 

@@ -3,7 +3,7 @@ import {
   SelectList,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-solid/primitive/select'
+} from '@fex-design/solid/primitive/select'
 import { frameworkOptions } from './data'
 import { SelectDemoSection as Demo } from './demo-section'
 export function CustomRenderDemo() {

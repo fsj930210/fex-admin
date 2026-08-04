@@ -1,4 +1,4 @@
-import { SelectContent, SelectRoot, SelectTrigger } from '@fex/components-solid/primitive/select'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/solid/primitive/select'
 import { virtualOptions } from './data'
 import { SelectDemoSection as Demo } from './demo-section'
 export function VirtualDemo() {

@@ -2,12 +2,12 @@ import {
   AutoCompleteContent,
   AutoCompleteRoot,
   AutoCompleteTrigger,
-} from '@fex/components-react/primitive/auto-complete'
-import { Empty, EmptyDescription } from '@fex/components-react/primitive/empty'
-import { Card } from '@fex/components-react/ui/card'
-import { Spinner } from '@fex/components-react/ui/spinner'
+} from '@fex-design/react/primitive/auto-complete'
+import { Empty, EmptyDescription } from '@fex-design/react/primitive/empty'
+import { Card } from '@fex-design/react/ui/card'
+import { Spinner } from '@fex-design/react/ui/spinner'
 import { useRef, useState } from 'react'
-import useUnmount from '@fex/components-react/hooks/use-unmount'
+import useUnmount from '@fex-design/react/hooks/use-unmount'
 import { fieldNames, userSuggestions, type UserSuggestion } from './data'
 
 export function RemoteDemo() {

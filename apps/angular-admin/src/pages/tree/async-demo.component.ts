@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { asyncLoadFeature } from '@fex/components-core/tree/features/async-load'
-import { expansionFeature } from '@fex/components-core/tree/features/expansion'
-import type { TreeKey, TreeOptions } from '@fex/components-core/tree/types'
-import Card from '@fex/components-angular/ui/card'
+import { asyncLoadFeature } from '@fex-design/core/tree/features/async-load'
+import { expansionFeature } from '@fex-design/core/tree/features/expansion'
+import type { TreeKey, TreeOptions } from '@fex-design/core/tree/types'
+import Card from '@fex-design/angular/ui/card'
 import { DemoTreeComponent } from './demo-tree.component'
 import { departmentFieldNames, type DepartmentNode } from './data'
 

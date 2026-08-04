@@ -1,4 +1,4 @@
-import { Card } from '@fex/components-solid/ui/card'
+import { Card } from '@fex-design/solid/ui/card'
 import { A } from '@solidjs/router'
 import { BasicDemo } from './basic-demo'
 import { ControlledDemo } from './controlled-demo'

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ChevronLeftIcon, ChevronRightIcon } from '@fex/components-vue/icon/chevron'
-import type { CarouselController, CarouselSnapshot } from '@fex/components-core/carousel/types'
+import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/vue/icon/chevron'
+import type { CarouselController, CarouselSnapshot } from '@fex-design/core/carousel/types'
 import {
   carouselIndicatorClassName,
   carouselIndicatorsClassName,
-} from '@fex/components-styles/carousel'
+} from '@fex-design/styles/carousel'
 
 defineProps<{ controller: CarouselController; snapshot: CarouselSnapshot }>()
 </script>

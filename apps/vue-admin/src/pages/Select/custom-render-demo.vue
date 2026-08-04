@@ -4,7 +4,7 @@ import {
   SelectList,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-vue/primitive/select'
+} from '@fex-design/vue/primitive/select'
 import { frameworkOptions } from './data'
 import Demo from './demo-section.vue'
 </script>

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
-import { Transfer } from '@fex/components-angular/primitive/transfer'
-import Card from '@fex/components-angular/ui/card'
+import { Transfer } from '@fex-design/angular/primitive/transfer'
+import Card from '@fex-design/angular/ui/card'
 import { transferFieldNames, transferMembers } from './data'
 
 @Component({

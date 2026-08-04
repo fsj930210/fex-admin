@@ -1,8 +1,8 @@
 <script lang="ts">
-  import FieldRoot from '@fex/components-svelte/primitive/field'
-  import FieldDescription from '@fex/components-svelte/primitive/field-description'
-  import FieldError from '@fex/components-svelte/primitive/field-error'
-  import FieldLabel from '@fex/components-svelte/primitive/field-label'
+  import FieldRoot from '@fex-design/svelte/primitive/field'
+  import FieldDescription from '@fex-design/svelte/primitive/field-description'
+  import FieldError from '@fex-design/svelte/primitive/field-error'
+  import FieldLabel from '@fex-design/svelte/primitive/field-label'
   import {
     DatePickerContent,
     DatePickerPanel,
@@ -12,8 +12,8 @@
     RangePickerPanelGroup,
     RangePickerRoot,
     RangePickerTrigger,
-  } from '@fex/components-svelte/primitive/date-picker'
-  import Card from '@fex/components-svelte/ui/card'
+  } from '@fex-design/svelte/primitive/date-picker'
+  import Card from '@fex-design/svelte/ui/card'
 
   const demoContentClass = 'flex min-w-0 flex-wrap items-start gap-space-md'
 </script>

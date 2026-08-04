@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { checkFeature, expansionFeature } from '@fex/components-core'
-import type { TransferPanelApi } from '@fex/components-vue/primitive/transfer'
+import { checkFeature, expansionFeature } from '@fex-design/core'
+import type { TransferPanelApi } from '@fex-design/vue/primitive/transfer'
 import { computed } from 'vue'
 import DemoTree from '../Tree/demo-tree.vue'
 import type { Member } from './data'

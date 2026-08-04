@@ -1,8 +1,8 @@
-import { useMenu, type MenuNodeEntry } from '@fex/components-react/primitive/menu'
-import { Card } from '@fex/components-react/ui/card'
-import { Menu, type MenuItem, type MenuKey } from '@fex/components-react/ui/menu'
-import { MinusIcon } from '@fex/components-react/icon/minus'
-import { PlusIcon } from '@fex/components-react/icon/plus'
+import { useMenu, type MenuNodeEntry } from '@fex-design/react/primitive/menu'
+import { Card } from '@fex-design/react/ui/card'
+import { Menu, type MenuItem, type MenuKey } from '@fex-design/react/ui/menu'
+import { MinusIcon } from '@fex-design/react/icon/minus'
+import { PlusIcon } from '@fex-design/react/icon/plus'
 import { useState } from 'react'
 import { Link } from 'react-router'
 

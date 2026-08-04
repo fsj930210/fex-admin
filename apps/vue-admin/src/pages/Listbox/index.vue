@@ -4,12 +4,12 @@ import {
   ListboxGroupLabel,
   ListboxItem,
   ListboxRoot,
-} from '@fex/components-vue/ui/listbox'
+} from '@fex-design/vue/ui/listbox'
 import {
   ListboxItem as PrimitiveListboxItem,
   ListboxRoot as PrimitiveListboxRoot,
-} from '@fex/components-vue/primitive/listbox'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/listbox'
+import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 
 const tricks = [

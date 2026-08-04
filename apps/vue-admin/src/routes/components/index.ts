@@ -1,7 +1,8 @@
 export const componentRoutes = [
+  { path: '/breadcrumb', component: () => import('../../pages/Breadcrumb/index.vue') },
   { path: '/auto-complete', component: () => import('../../pages/AutoComplete/index.vue') },
   { path: '/carousel', component: () => import('../../pages/Carousel/index.vue') },
-  { path: '/data-grid', component: () => import('../../pages/DataGrid/index.vue') },
+  { path: '/data-table', component: () => import('../../pages/DataTable/index.vue') },
   { path: '/date-picker', component: () => import('../../pages/DatePicker/index.vue') },
   { path: '/button', component: () => import('../../pages/Button/index.vue') },
   { path: '/calendar', component: () => import('../../pages/Calendar/index.vue') },

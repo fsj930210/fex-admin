@@ -8,17 +8,17 @@ import {
   ToastTitle,
   ToastViewport,
   toast,
-} from '@fex/components-vue/primitive/toast'
-import { CheckIcon } from '@fex/components-vue/icon/check'
-import { CloseIcon } from '@fex/components-vue/icon/close'
-import { ErrorIcon } from '@fex/components-vue/icon/error'
-import { InfoIcon } from '@fex/components-vue/icon/info'
-import { LoadingIcon } from '@fex/components-vue/icon/loading'
-import { WarningIcon } from '@fex/components-vue/icon/warning'
-import Button from '@fex/components-vue/ui/button'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/toast'
+import { CheckIcon } from '@fex-design/vue/icon/check'
+import { CloseIcon } from '@fex-design/vue/icon/close'
+import { ErrorIcon } from '@fex-design/vue/icon/error'
+import { InfoIcon } from '@fex-design/vue/icon/info'
+import { LoadingIcon } from '@fex-design/vue/icon/loading'
+import { WarningIcon } from '@fex-design/vue/icon/warning'
+import Button from '@fex-design/vue/ui/button'
+import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
-import type { ToastPlacement } from '@fex/components-styles/toast'
+import type { ToastPlacement } from '@fex-design/styles/toast'
 
 const placements: ToastPlacement[] = [
   'top-left',

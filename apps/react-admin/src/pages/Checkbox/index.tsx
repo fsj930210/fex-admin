@@ -1,10 +1,10 @@
-import { CheckboxRoot } from '@fex/components-react/primitive/checkbox'
-import { Card } from '@fex/components-react/ui/card'
+import { CheckboxRoot } from '@fex-design/react/primitive/checkbox'
+import { Card } from '@fex-design/react/ui/card'
 import {
   Checkbox,
   CheckboxGroup,
   type CheckboxCheckedState,
-} from '@fex/components-react/ui/checkbox'
+} from '@fex-design/react/ui/checkbox'
 import { useState, type ComponentProps, type ReactNode } from 'react'
 import { Link } from 'react-router'
 

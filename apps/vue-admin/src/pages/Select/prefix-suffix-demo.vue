@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { CheckIcon } from '@fex/components-vue/icon/check'
-import { InfoIcon } from '@fex/components-vue/icon/info'
-import { SelectContent, SelectRoot, SelectTrigger } from '@fex/components-vue/primitive/select'
+import { CheckIcon } from '@fex-design/vue/icon/check'
+import { InfoIcon } from '@fex-design/vue/icon/info'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/vue/primitive/select'
 import { frameworkOptions } from './data'
 import Demo from './demo-section.vue'
 </script>

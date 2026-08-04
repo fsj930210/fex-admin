@@ -1,9 +1,9 @@
 <script lang="ts">
-  import SliderRoot from '@fex/components-svelte/primitive/slider'
-  import SliderTrack from '@fex/components-svelte/primitive/slider-track'
-  import SliderRange from '@fex/components-svelte/primitive/slider-range'
-  import SliderThumb from '@fex/components-svelte/primitive/slider-thumb'
-  import Card from '@fex/components-svelte/ui/card'
+  import SliderRoot from '@fex-design/svelte/primitive/slider'
+  import SliderTrack from '@fex-design/svelte/primitive/slider-track'
+  import SliderRange from '@fex-design/svelte/primitive/slider-range'
+  import SliderThumb from '@fex-design/svelte/primitive/slider-thumb'
+  import Card from '@fex-design/svelte/ui/card'
 
   let basicValue = $state([32])
   let controlledValue = $state([48])

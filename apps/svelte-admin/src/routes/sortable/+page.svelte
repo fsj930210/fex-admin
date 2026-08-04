@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { SortableHandle, SortableItem, SortableOverlay, SortableRoot } from '@fex/components-svelte/primitive/sortable'
-  import { createSortableAction } from '@fex/components-svelte/actions/sortable'
-  import Card from '@fex/components-svelte/ui/card'
+  import { SortableHandle, SortableItem, SortableOverlay, SortableRoot } from '@fex-design/svelte/primitive/sortable'
+  import { createSortableAction } from '@fex-design/svelte/actions/sortable'
+  import Card from '@fex-design/svelte/ui/card'
 
   const initialTasks = ['Backlog', 'Design', 'Build', 'Review']
   let tasks = $state(initialTasks)

@@ -4,10 +4,10 @@ import {
   AlertAction,
   AlertDescription,
   AlertTitle,
-} from '@fex/components-vue/primitive/alert'
-import { Badge } from '@fex/components-vue/ui/badge'
-import Card from '@fex/components-vue/ui/card'
-import { InfoIcon } from '@fex/components-vue/icon/info'
+} from '@fex-design/vue/primitive/alert'
+import { Badge } from '@fex-design/vue/ui/badge'
+import Card from '@fex-design/vue/ui/card'
+import { InfoIcon } from '@fex-design/vue/icon/info'
 
 const variants = ['default', 'success', 'warning', 'destructive'] as const
 </script>

@@ -1,0 +1,9 @@
+{
+  "name": "components-react",
+  "sourceRoot": "packages/@fex-design/react/src",
+  "projectType": "library",
+  "targets": {
+    "typecheck": { "command": "tsc --noEmit -p packages/@fex-design/react/tsconfig.json" },
+    "lint": { "command": "oxlint packages/@fex-design/react/src" }
+  }
+}

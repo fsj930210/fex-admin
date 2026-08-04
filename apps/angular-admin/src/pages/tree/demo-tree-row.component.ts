@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core'
-import type { TreeController, TreeVisibleItem } from '@fex/components-core/tree/types'
+import type { TreeController, TreeVisibleItem } from '@fex-design/core/tree/types'
 import {
   TreeItemDirective,
   TreeTitleDirective,
   TreeTriggerDirective,
-} from '@fex/components-angular/primitive/tree'
-import { ChevronDownIcon } from '@fex/components-angular/icon/chevron'
-import { Checkbox } from '@fex/components-angular/ui/checkbox'
-import { Spinner } from '@fex/components-angular/ui/spinner'
+} from '@fex-design/angular/primitive/tree'
+import { ChevronDownIcon } from '@fex-design/angular/icon/chevron'
+import { Checkbox } from '@fex-design/angular/ui/checkbox'
+import { Spinner } from '@fex-design/angular/ui/spinner'
 import type { DepartmentNode } from './data'
 export
 @Component({

@@ -5,8 +5,8 @@ import {
   ScrollbarThumb,
   ScrollbarTrack,
   ScrollbarViewport,
-} from '@fex/components-react/primitive/scrollbar'
-import { Card } from '@fex/components-react/ui/card'
+} from '@fex-design/react/primitive/scrollbar'
+import { Card } from '@fex-design/react/ui/card'
 import { Link } from 'react-router'
 import { useState } from 'react'
 

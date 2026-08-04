@@ -1,7 +1,7 @@
-import { FieldGroup, FieldLabel, FieldRoot } from '@fex/components-react/primitive/field'
-import { InputControl, InputRoot } from '@fex/components-react/primitive/input'
-import { Button } from '@fex/components-react/ui/button'
-import { Card } from '@fex/components-react/ui/card'
+import { FieldGroup, FieldLabel, FieldRoot } from '@fex-design/react/primitive/field'
+import { InputControl, InputRoot } from '@fex-design/react/primitive/input'
+import { Button } from '@fex-design/react/ui/button'
+import { Card } from '@fex-design/react/ui/card'
 import { selectClassName } from './shared'
 
 export function LayoutDemo() {

@@ -1,7 +1,7 @@
-import { Button as PrimitiveButton } from '@fex/components-react/primitive/button'
-import { Card } from '@fex/components-react/ui/card'
-import { Button } from '@fex/components-react/ui/button'
-import { PlusIcon } from '@fex/components-react/icon/plus'
+import { Button as PrimitiveButton } from '@fex-design/react/primitive/button'
+import { Card } from '@fex-design/react/ui/card'
+import { Button } from '@fex-design/react/ui/button'
+import { PlusIcon } from '@fex-design/react/icon/plus'
 import type { ReactNode } from 'react'
 import { Link } from 'react-router'
 

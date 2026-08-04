@@ -1,16 +1,16 @@
 <script lang="ts">
   import type { Snippet } from 'svelte'
-  import type { CreateCarouselControllerOptions } from '@fex/components-core/carousel/types'
-  import ChevronLeftIcon from '@fex/components-svelte/icon/chevron-left'
-  import ChevronRightIcon from '@fex/components-svelte/icon/chevron-right'
-  import { createCarousel } from '@fex/components-svelte/primitive/carousel'
+  import type { CreateCarouselControllerOptions } from '@fex-design/core/carousel/types'
+  import ChevronLeftIcon from '@fex-design/svelte/icon/chevron-left'
+  import ChevronRightIcon from '@fex-design/svelte/icon/chevron-right'
+  import { createCarousel } from '@fex-design/svelte/primitive/carousel'
   import {
     carouselIndicatorClassName,
     carouselIndicatorsClassName,
     carouselRootClassName,
     carouselTrackClassName,
     carouselViewportClassName,
-  } from '@fex/components-styles/carousel'
+  } from '@fex-design/styles/carousel'
 
   let {
     config = {},

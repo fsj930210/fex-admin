@@ -4,14 +4,14 @@ import {
   type CalendarDate,
   type CalendarRange,
   type CalendarValue,
-} from '@fex/components-core/calendar'
-import { isAfterDate, isBeforeDate } from '@fex/components-core/date/utils'
+} from '@fex-design/core/calendar'
+import { isAfterDate, isBeforeDate } from '@fex-design/core/date/utils'
 import {
   DatePickerCancel,
   DatePickerConfirm,
   DatePickerFooter,
   DatePickerToday,
-} from '@fex/components-solid/primitive/date-picker'
+} from '@fex-design/solid/primitive/date-picker'
 import { createSignal } from 'solid-js'
 import { DemoDatePicker, DemoRangePicker, RangePreview, Section, ValuePreview } from './shared'
 

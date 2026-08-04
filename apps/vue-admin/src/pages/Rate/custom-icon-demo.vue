@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Rate } from '@fex/components-vue/primitive/rate'
-import Card from '@fex/components-vue/ui/card'
+import { Rate } from '@fex-design/vue/primitive/rate'
+import Card from '@fex-design/vue/ui/card'
 import HeartIcon from './heart-icon.vue'
 </script>
 <template>

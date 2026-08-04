@@ -1,11 +1,11 @@
 <script lang="ts">
-  import ScrollbarRoot from '@fex/components-svelte/primitive/scrollbar'
-  import ScrollbarViewport from '@fex/components-svelte/primitive/scrollbar-viewport'
-  import ScrollbarBar from '@fex/components-svelte/primitive/scrollbar-bar'
-  import ScrollbarTrack from '@fex/components-svelte/primitive/scrollbar-track'
-  import ScrollbarThumb from '@fex/components-svelte/primitive/scrollbar-thumb'
-  import ScrollbarCorner from '@fex/components-svelte/primitive/scrollbar-corner'
-  import Card from '@fex/components-svelte/ui/card'
+  import ScrollbarRoot from '@fex-design/svelte/primitive/scrollbar'
+  import ScrollbarViewport from '@fex-design/svelte/primitive/scrollbar-viewport'
+  import ScrollbarBar from '@fex-design/svelte/primitive/scrollbar-bar'
+  import ScrollbarTrack from '@fex-design/svelte/primitive/scrollbar-track'
+  import ScrollbarThumb from '@fex-design/svelte/primitive/scrollbar-thumb'
+  import ScrollbarCorner from '@fex-design/svelte/primitive/scrollbar-corner'
+  import Card from '@fex-design/svelte/ui/card'
 
   const items = Array.from({ length: 30 }, (_, index) => index + 1)
   const virtualRowHeight = 40

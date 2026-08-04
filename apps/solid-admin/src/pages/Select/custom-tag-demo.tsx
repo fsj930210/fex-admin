@@ -1,5 +1,5 @@
-import { CloseIcon } from '@fex/components-solid/icon/close'
-import { SelectContent, SelectRoot, SelectTrigger } from '@fex/components-solid/primitive/select'
+import { CloseIcon } from '@fex-design/solid/icon/close'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/solid/primitive/select'
 import { frameworkOptions } from './data'
 import { SelectDemoSection as Demo } from './demo-section'
 const colors: Record<string, string> = {

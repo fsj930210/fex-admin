@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { NgTemplateOutlet } from '@angular/common'
 import { RouterLink } from '@angular/router'
-import Card from '@fex/components-angular/ui/card'
-import Menu from '@fex/components-angular/ui/menu'
-import { getMenuNodeEntries, normalizeMenuKeys } from '@fex/components-angular/primitive/menu'
+import Card from '@fex-design/angular/ui/card'
+import Menu from '@fex-design/angular/ui/menu'
+import { getMenuNodeEntries, normalizeMenuKeys } from '@fex-design/angular/primitive/menu'
 import type {
   MenuItem,
   MenuKey,
   MenuNodeEntry,
   MenuRenderItemInfo,
-} from '@fex/components-angular/primitive/menu-types'
-import { MinusIcon } from '@fex/components-angular/icon/minus'
-import { PlusIcon } from '@fex/components-angular/icon/plus'
+} from '@fex-design/angular/primitive/menu-types'
+import { MinusIcon } from '@fex-design/angular/icon/minus'
+import { PlusIcon } from '@fex-design/angular/icon/plus'
 
 @Component({
   selector: 'fex-menu-page',

@@ -7,8 +7,8 @@ import {
   ScrollbarThumb,
   ScrollbarTrack,
   ScrollbarViewport,
-} from '@fex/components-angular/primitive/scrollbar'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/scrollbar'
+import Card from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fex-scrollbar-page',

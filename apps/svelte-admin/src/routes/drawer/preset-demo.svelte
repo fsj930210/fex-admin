@@ -1,13 +1,13 @@
 <script lang="ts">
-  import Drawer from '@fex/components-svelte/primitive/drawer'
-  import DrawerBody from '@fex/components-svelte/primitive/drawer-body'
-  import DrawerClose from '@fex/components-svelte/primitive/drawer-close'
-  import DrawerContent from '@fex/components-svelte/primitive/drawer-content'
-  import DrawerHeader from '@fex/components-svelte/primitive/drawer-header'
-  import DrawerMask from '@fex/components-svelte/primitive/drawer-mask'
-  import DrawerPortal from '@fex/components-svelte/primitive/drawer-portal'
-  import DrawerTrigger from '@fex/components-svelte/primitive/drawer-trigger'
-  import Button from '@fex/components-svelte/ui/button'
+  import Drawer from '@fex-design/svelte/primitive/drawer'
+  import DrawerBody from '@fex-design/svelte/primitive/drawer-body'
+  import DrawerClose from '@fex-design/svelte/primitive/drawer-close'
+  import DrawerContent from '@fex-design/svelte/primitive/drawer-content'
+  import DrawerHeader from '@fex-design/svelte/primitive/drawer-header'
+  import DrawerMask from '@fex-design/svelte/primitive/drawer-mask'
+  import DrawerPortal from '@fex-design/svelte/primitive/drawer-portal'
+  import DrawerTrigger from '@fex-design/svelte/primitive/drawer-trigger'
+  import Button from '@fex-design/svelte/ui/button'
   const sizes = ['sm', 'md', 'lg', 'xl', 'full'] as const
 </script>
 

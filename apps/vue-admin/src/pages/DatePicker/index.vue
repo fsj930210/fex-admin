@@ -6,10 +6,10 @@ import {
   type CalendarDate,
   type CalendarRange,
   type CalendarValue,
-} from '@fex/components-core/calendar'
-import { isAfterDate, isBeforeDate } from '@fex/components-core/date/utils'
-import Button from '@fex/components-vue/ui/button'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/core/calendar'
+import { isAfterDate, isBeforeDate } from '@fex-design/core/date/utils'
+import Button from '@fex-design/vue/ui/button'
+import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 import DemoDatePicker from './demo-date-picker.vue'
 import CustomDemos from './custom-demos.vue'

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { TimeValue } from '@fex/components-vue/primitive/time-picker'
-import Card from '@fex/components-vue/ui/card'
+import type { TimeValue } from '@fex-design/vue/primitive/time-picker'
+import Card from '@fex-design/vue/ui/card'
 import DemoTimePicker from './demo-time-picker.vue'
 const value = ref<TimeValue | null>({ hour: 10, minute: 20, second: 30 })
 </script>

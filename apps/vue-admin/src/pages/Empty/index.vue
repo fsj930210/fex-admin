@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Badge } from '@fex/components-vue/ui/badge'
-import Card from '@fex/components-vue/ui/card'
+import { Badge } from '@fex-design/vue/ui/badge'
+import Card from '@fex-design/vue/ui/card'
 import {
   Empty,
   EmptyContent,
@@ -8,8 +8,8 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@fex/components-vue/primitive/empty'
-import { InfoIcon } from '@fex/components-vue/icon/info'
+} from '@fex-design/vue/primitive/empty'
+import { InfoIcon } from '@fex-design/vue/icon/info'
 </script>
 
 <template>

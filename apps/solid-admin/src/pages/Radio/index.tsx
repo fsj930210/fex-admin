@@ -3,8 +3,8 @@ import {
   RadioButton,
   RadioGroup,
   type RadioValue,
-} from '@fex/components-solid/primitive/radio'
-import { Card } from '@fex/components-solid/ui/card'
+} from '@fex-design/solid/primitive/radio'
+import { Card } from '@fex-design/solid/ui/card'
 import { A } from '@solidjs/router'
 import { For, createSignal, type JSX } from 'solid-js'
 

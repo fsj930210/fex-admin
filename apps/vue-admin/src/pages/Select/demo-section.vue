@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Card from '@fex/components-vue/ui/card'
+import Card from '@fex-design/vue/ui/card'
 defineProps<{ title: string; description: string }>()
 </script>
 <template>

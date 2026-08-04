@@ -4,8 +4,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@fex/components-react/primitive/card'
-import Card from '@fex/components-react/ui/card'
+} from '@fex-design/react/primitive/card'
+import Card from '@fex-design/react/ui/card'
 import { type CSSProperties, useState } from 'react'
 import { Link } from 'react-router'
 

@@ -1,4 +1,4 @@
-import { Card } from '@fex/components-solid/ui/card'
+import { Card } from '@fex-design/solid/ui/card'
 import { DemoTimePicker } from './demo-time-picker'
 export function DisabledTimeDemo() {
   return (

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { analyzeTimeFormat } from '@fex/components-core/date/utils'
+import { analyzeTimeFormat } from '@fex-design/core/date/utils'
 import {
   TimePickerContent,
   TimePickerHourColumn,
@@ -11,8 +11,8 @@ import {
   TimePickerTrigger,
   type DisabledTime,
   type TimeValue,
-} from '@fex/components-vue/primitive/time-picker'
-import Button from '@fex/components-vue/ui/button'
+} from '@fex-design/vue/primitive/time-picker'
+import Button from '@fex-design/vue/ui/button'
 import { computed, ref } from 'vue'
 
 const props = withDefaults(

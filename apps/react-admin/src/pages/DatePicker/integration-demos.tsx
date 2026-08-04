@@ -2,10 +2,10 @@ import {
   getCalendarToday,
   type CalendarDate,
   type CalendarRange,
-} from '@fex/components-core/calendar'
-import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
-import { endOfDate } from '@fex/components-core/date/utils'
-import { datePickerDateTimePanelClassName } from '@fex/components-styles/date-picker'
+} from '@fex-design/core/calendar'
+import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
+import { endOfDate } from '@fex-design/core/date/utils'
+import { datePickerDateTimePanelClassName } from '@fex-design/styles/date-picker'
 import {
   DatePickerConfirm,
   DatePickerContent,
@@ -16,9 +16,9 @@ import {
   RangePickerPanelGroup,
   useRangePickerContext,
   useDatePicker,
-} from '@fex/components-react/primitive/date-picker'
-import { InputControl, InputRoot, InputSuffix } from '@fex/components-react/primitive/input'
-import { PopoverRoot, PopoverTrigger } from '@fex/components-react/primitive/popover'
+} from '@fex-design/react/primitive/date-picker'
+import { InputControl, InputRoot, InputSuffix } from '@fex-design/react/primitive/input'
+import { PopoverRoot, PopoverTrigger } from '@fex-design/react/primitive/popover'
 import {
   TimePickerContext,
   TimePickerHourColumn,
@@ -27,9 +27,9 @@ import {
   TimePickerSecondColumn,
   useTimePicker,
   type TimeValue,
-} from '@fex/components-react/primitive/time-picker'
-import { CalendarIcon } from '@fex/components-react/icon/calendar'
-import { Button } from '@fex/components-react/ui/button'
+} from '@fex-design/react/primitive/time-picker'
+import { CalendarIcon } from '@fex-design/react/icon/calendar'
+import { Button } from '@fex-design/react/ui/button'
 import { useState, type ComponentProps, type ContextType } from 'react'
 import { DemoRangePicker, DemoSection, RangePreview } from './shared'
 

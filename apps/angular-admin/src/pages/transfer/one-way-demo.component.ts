@@ -3,12 +3,12 @@ import {
   Transfer,
   TransferActionsTemplate,
   TransferPanelTemplate,
-} from '@fex/components-angular/primitive/transfer'
-import { ChevronRightIcon } from '@fex/components-angular/icon/chevron'
-import { TrashIcon } from '@fex/components-angular/icon/trash'
-import { SwitchRoot, SwitchThumb } from '@fex/components-angular/primitive/switch'
-import { Button } from '@fex/components-angular/ui/button'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/transfer'
+import { ChevronRightIcon } from '@fex-design/angular/icon/chevron'
+import { TrashIcon } from '@fex-design/angular/icon/trash'
+import { SwitchRoot, SwitchThumb } from '@fex-design/angular/primitive/switch'
+import { Button } from '@fex-design/angular/ui/button'
+import Card from '@fex-design/angular/ui/card'
 import { transferFieldNames, transferMembers } from './data'
 
 @Component({

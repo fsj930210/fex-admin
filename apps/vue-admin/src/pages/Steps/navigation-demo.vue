@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Steps, type StepsChangeMeta, type StepValue } from '@fex/components-vue/primitive/steps'
-import Card from '@fex/components-vue/ui/card'
+import { Steps, type StepsChangeMeta, type StepValue } from '@fex-design/vue/primitive/steps'
+import Card from '@fex-design/vue/ui/card'
 import StepList from './step-list.vue'
 const message = ref('Use click, Enter, Space or arrow keys.')
 function change(value: StepValue, meta: StepsChangeMeta) { message.value = `${String(meta.previous?.value ?? 'none')} → ${String(value)} (${meta.trigger})` }

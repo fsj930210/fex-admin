@@ -1,11 +1,11 @@
 import {
   fileMd5Feature,
   type FileMd5FeatureApi,
-} from '@fex/components-core/upload/features/file-md5'
-import { multipartFeature } from '@fex/components-core/upload/features/multipart'
-import { UploadRoot, UploadTrigger, useUpload } from '@fex/components-react/primitive/upload'
-import { useLazyRef } from '@fex/components-react/hooks/use-lazy-ref'
-import { Button } from '@fex/components-react/ui/button'
+} from '@fex-design/core/upload/features/file-md5'
+import { multipartFeature } from '@fex-design/core/upload/features/multipart'
+import { UploadRoot, UploadTrigger, useUpload } from '@fex-design/react/primitive/upload'
+import { useLazyRef } from '@fex-design/react/hooks/use-lazy-ref'
+import { Button } from '@fex-design/react/ui/button'
 import { postJson, uploadBody, uploadServerUrl } from './api'
 import { DemoUploadList } from './demo-list'
 import { UploadDemoSection } from './demo-section'

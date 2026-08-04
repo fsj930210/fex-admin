@@ -5,10 +5,10 @@ import {
   AlertAction,
   AlertDescription,
   AlertTitle,
-} from '@fex/components-angular/primitive/alert'
-import { Badge } from '@fex/components-angular/ui/badge'
-import Card from '@fex/components-angular/ui/card'
-import { InfoIcon } from '@fex/components-angular/icon/info'
+} from '@fex-design/angular/primitive/alert'
+import { Badge } from '@fex-design/angular/ui/badge'
+import Card from '@fex-design/angular/ui/card'
+import { InfoIcon } from '@fex-design/angular/icon/info'
 
 @Component({
   selector: 'fex-alert-page',

@@ -1,5 +1,5 @@
-﻿import { Kbd, KbdGroup } from '@fex/components-solid/ui/kbd'
-import { Card } from '@fex/components-solid/ui/card'
+﻿import { Kbd, KbdGroup } from '@fex-design/solid/ui/kbd'
+import { Card } from '@fex-design/solid/ui/card'
 import { A } from '@solidjs/router'
 
 export function KbdPage() {

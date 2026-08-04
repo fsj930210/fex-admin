@@ -1,5 +1,5 @@
-import * as Tooltip from '@fex/components-react/primitive/tooltip'
-import { Button } from '@fex/components-react/ui/button'
+import * as Tooltip from '@fex-design/react/primitive/tooltip'
+import { Button } from '@fex-design/react/ui/button'
 import { useState } from 'react'
 export function ControlledDemo() {
   const [open, setOpen] = useState(false)

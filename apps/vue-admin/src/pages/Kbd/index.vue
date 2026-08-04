@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
-import { Kbd, KbdGroup } from '@fex/components-vue/ui/kbd'
-import Card from '@fex/components-vue/ui/card'
+import { Kbd, KbdGroup } from '@fex-design/vue/ui/kbd'
+import Card from '@fex-design/vue/ui/card'
 </script>
 
 <template>

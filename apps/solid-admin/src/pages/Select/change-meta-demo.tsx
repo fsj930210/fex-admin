@@ -1,5 +1,5 @@
-import type { SelectOption } from '@fex/components-core/select/types'
-import { SelectContent, SelectRoot, SelectTrigger } from '@fex/components-solid/primitive/select'
+import type { SelectOption } from '@fex-design/core/select/types'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/solid/primitive/select'
 import { createSignal } from 'solid-js'
 import { SelectDemoSection as Demo } from './demo-section'
 const options: SelectOption[] = [

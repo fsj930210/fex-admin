@@ -1,5 +1,5 @@
-import { Timeline, TimelineContent, TimelineIndicator, TimelineItem } from '@fex/components-react/primitive/timeline'
-import { Card } from '@fex/components-react/ui/card'
+import { Timeline, TimelineContent, TimelineIndicator, TimelineItem } from '@fex-design/react/primitive/timeline'
+import { Card } from '@fex-design/react/ui/card'
 
 export function PlacementDemo() {
   return (

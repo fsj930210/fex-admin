@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { getCalendarToday, type CalendarRange, type CalendarValue } from '@fex/components-core/calendar'
-  import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
-  import { datePickerDateTimePanelClassName } from '@fex/components-styles/date-picker'
+  import { getCalendarToday, type CalendarRange, type CalendarValue } from '@fex-design/core/calendar'
+  import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
+  import { datePickerDateTimePanelClassName } from '@fex-design/styles/date-picker'
   import {
     DatePickerCancel,
     DatePickerConfirm,
@@ -14,9 +14,9 @@
     RangePickerPanelGroup,
     RangePickerRoot,
     RangePickerTrigger,
-  } from '@fex/components-svelte/primitive/date-picker'
-  import { TimePickerHourColumn, TimePickerMinuteColumn, TimePickerPanel, TimePickerRoot, TimePickerSecondColumn, type TimeValue } from '@fex/components-svelte/primitive/time-picker'
-  import Card from '@fex/components-svelte/ui/card'
+  } from '@fex-design/svelte/primitive/date-picker'
+  import { TimePickerHourColumn, TimePickerMinuteColumn, TimePickerPanel, TimePickerRoot, TimePickerSecondColumn, type TimeValue } from '@fex-design/svelte/primitive/time-picker'
+  import Card from '@fex-design/svelte/ui/card'
   import PresetRangePanel from './preset-range-panel.svelte'
 
   const today = getCalendarToday()

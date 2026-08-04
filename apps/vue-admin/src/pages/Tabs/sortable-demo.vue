@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { SortableItems } from '@fex/components-core/sortable/types'
-import { EllipsisIcon } from '@fex/components-vue/icon/more'
-import { SortableItem, SortableOverlay, SortableRoot } from '@fex/components-vue/primitive/sortable'
-import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex/components-vue/primitive/tabs'
-import Card from '@fex/components-vue/ui/card'
+import type { SortableItems } from '@fex-design/core/sortable/types'
+import { EllipsisIcon } from '@fex-design/vue/icon/more'
+import { SortableItem, SortableOverlay, SortableRoot } from '@fex-design/vue/primitive/sortable'
+import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex-design/vue/primitive/tabs'
+import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 import { initialTabs } from './data'
 

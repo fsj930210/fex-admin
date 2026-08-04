@@ -1,4 +1,4 @@
-import { Transfer } from '@fex/components-react/primitive/transfer'
+import { Transfer } from '@fex-design/react/primitive/transfer'
 import { useState } from 'react'
 import { transferFieldNames, transferMembers } from './data'
 import { TransferDemoSection } from './demo-section'

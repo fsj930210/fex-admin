@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { expansionFeature } from '@fex/components-core'
-import Card from '@fex/components-vue/ui/card'
+import { expansionFeature } from '@fex-design/core'
+import Card from '@fex-design/vue/ui/card'
 import DemoTree from './demo-tree.vue'
 import { departmentFieldNames, departmentTreeData } from './data'
 </script>

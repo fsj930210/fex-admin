@@ -1,5 +1,5 @@
-﻿import { Spinner } from '@fex/components-react/ui/spinner'
-import { Card } from '@fex/components-react/ui/card'
+﻿import { Spinner } from '@fex-design/react/ui/spinner'
+import { Card } from '@fex-design/react/ui/card'
 import { Link } from 'react-router'
 
 export function SpinnerPage() {

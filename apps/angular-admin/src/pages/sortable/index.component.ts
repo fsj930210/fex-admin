@@ -6,8 +6,8 @@ import {
   FexSortableContainerDirective,
   FexSortableItemDirective,
   FexSortableRegionDirective,
-} from '@fex/components-angular/primitive/sortable'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/sortable'
+import Card from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fex-sortable-page',

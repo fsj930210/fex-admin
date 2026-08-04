@@ -8,7 +8,7 @@ import {
   type CalendarGranularity,
   type CalendarPanel,
   type CalendarValue,
-} from '@fex/components-core/calendar'
+} from '@fex-design/core/calendar'
 import {
   CalendarCellButton,
   CalendarGrid,
@@ -16,8 +16,8 @@ import {
   CalendarNavigationButton,
   CalendarRoot,
   CalendarWeekHeader,
-} from '@fex/components-angular/primitive/calendar'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/calendar'
+import Card from '@fex-design/angular/ui/card'
 
 type UnitDemo = {
   title: string

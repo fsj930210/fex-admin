@@ -1,11 +1,11 @@
 <script lang="ts">
-  import Alert from '@fex/components-svelte/primitive/alert'
-  import AlertAction from '@fex/components-svelte/primitive/alert-action'
-  import AlertDescription from '@fex/components-svelte/primitive/alert-description'
-  import AlertTitle from '@fex/components-svelte/primitive/alert-title'
-  import Badge from '@fex/components-svelte/ui/badge'
-  import Card from '@fex/components-svelte/ui/card'
-  import InfoIcon from '@fex/components-svelte/icon/info'
+  import Alert from '@fex-design/svelte/primitive/alert'
+  import AlertAction from '@fex-design/svelte/primitive/alert-action'
+  import AlertDescription from '@fex-design/svelte/primitive/alert-description'
+  import AlertTitle from '@fex-design/svelte/primitive/alert-title'
+  import Badge from '@fex-design/svelte/ui/badge'
+  import Card from '@fex-design/svelte/ui/card'
+  import InfoIcon from '@fex-design/svelte/icon/info'
 
   const variants = ['default', 'success', 'warning', 'destructive'] as const
 </script>

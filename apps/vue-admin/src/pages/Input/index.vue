@@ -7,9 +7,9 @@ import {
   InputPrefix,
   InputRoot,
   InputSuffix,
-} from '@fex/components-vue/primitive/input'
-import Button from '@fex/components-vue/ui/button'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/input'
+import Button from '@fex-design/vue/ui/button'
+import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 
 const controlledValue = ref('fex-admin')

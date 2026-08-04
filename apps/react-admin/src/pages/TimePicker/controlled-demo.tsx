@@ -1,7 +1,7 @@
-import { Card } from '@fex/components-react/ui/card'
+import { Card } from '@fex-design/react/ui/card'
 import { useState } from 'react'
 import { DemoTimePicker } from './demo-time-picker'
-import type { TimeValue } from '@fex/components-react/primitive/time-picker'
+import type { TimeValue } from '@fex-design/react/primitive/time-picker'
 export function ControlledDemo() {
   const [value, setValue] = useState<TimeValue | null>({ hour: 10, minute: 20, second: 30 })
   return (

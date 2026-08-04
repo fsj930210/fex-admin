@@ -1,8 +1,8 @@
 import { A } from '@solidjs/router'
-import { Button as PrimitiveButton } from '@fex/components-solid/primitive/button'
-import { Button } from '@fex/components-solid/ui/button'
-import { Card } from '@fex/components-solid/ui/card'
-import { PlusIcon } from '@fex/components-solid/icon/plus'
+import { Button as PrimitiveButton } from '@fex-design/solid/primitive/button'
+import { Button } from '@fex-design/solid/ui/button'
+import { Card } from '@fex-design/solid/ui/card'
+import { PlusIcon } from '@fex-design/solid/icon/plus'
 import { For, type JSX, type ParentProps } from 'solid-js'
 
 const variants = [

@@ -3,7 +3,7 @@ import {
   SelectList,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-react/primitive/select'
+} from '@fex-design/react/primitive/select'
 import { frameworkOptions } from './data'
 import { SelectDemoSection } from './demo-section'
 

@@ -5,8 +5,8 @@ import {
   RadioButton,
   RadioGroup,
   type RadioValue,
-} from '@fex/components-angular/primitive/radio'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/radio'
+import Card from '@fex-design/angular/ui/card'
 
 const options = [
   { label: 'Apple', value: 'apple' },

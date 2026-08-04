@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { CalendarDate, CalendarRange, CalendarValue, CalendarWeekday } from '@fex/components-core/calendar'
-  import type { DatePickerPicker, DatePickerSelectionValue } from '@fex/components-svelte/primitive/date-picker'
+  import type { CalendarDate, CalendarRange, CalendarValue, CalendarWeekday } from '@fex-design/core/calendar'
+  import type { DatePickerPicker, DatePickerSelectionValue } from '@fex-design/svelte/primitive/date-picker'
   import {
     DatePickerCancel,
     DatePickerConfirm,
@@ -14,7 +14,7 @@
     RangePickerPanelGroup,
     RangePickerRoot,
     RangePickerTrigger,
-  } from '@fex/components-svelte/primitive/date-picker'
+  } from '@fex-design/svelte/primitive/date-picker'
 
   interface Props {
     value?: DatePickerSelectionValue | CalendarRange<CalendarValue>

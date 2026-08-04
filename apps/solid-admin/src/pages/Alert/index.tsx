@@ -3,10 +3,10 @@ import {
   AlertAction,
   AlertDescription,
   AlertTitle,
-} from '@fex/components-solid/primitive/alert'
-import { Badge } from '@fex/components-solid/ui/badge'
-import { InfoIcon } from '@fex/components-solid/icon/info'
-import { Card } from '@fex/components-solid/ui/card'
+} from '@fex-design/solid/primitive/alert'
+import { Badge } from '@fex-design/solid/ui/badge'
+import { InfoIcon } from '@fex-design/solid/icon/info'
+import { Card } from '@fex-design/solid/ui/card'
 import { A } from '@solidjs/router'
 import { For } from 'solid-js'
 

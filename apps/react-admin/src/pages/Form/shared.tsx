@@ -7,9 +7,9 @@ import {
   FieldRequiredIndicator,
   FieldRoot,
   type FieldProps,
-} from '@fex/components-react/primitive/field'
-import { InputControl, InputRoot } from '@fex/components-react/primitive/input'
-import { type AnyFieldApi } from '@fex/components-react/primitive/form'
+} from '@fex-design/react/primitive/field'
+import { InputControl, InputRoot } from '@fex-design/react/primitive/input'
+import { type AnyFieldApi } from '@fex-design/react/primitive/form'
 import { type ReactNode } from 'react'
 
 export const locations = {

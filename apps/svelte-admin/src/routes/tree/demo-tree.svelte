@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { TreeController, TreeItem, TreeKey, TreeOptions, TreeVisibleItem } from '@fex/components-core/tree/types'
-  import { TreeRoot, TreeViewport, TreeVirtualViewport } from '@fex/components-svelte/primitive/tree'
+  import type { TreeController, TreeItem, TreeKey, TreeOptions, TreeVisibleItem } from '@fex-design/core/tree/types'
+  import { TreeRoot, TreeViewport, TreeVirtualViewport } from '@fex-design/svelte/primitive/tree'
   import { cn } from '@fex/utils'
   import type { Snippet } from 'svelte'
   import DemoTreeRow from './demo-tree-row.svelte'

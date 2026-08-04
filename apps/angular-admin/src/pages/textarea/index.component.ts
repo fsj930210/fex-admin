@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Textarea } from '@fex/components-angular/primitive/textarea'
-import Card from '@fex/components-angular/ui/card'
+import { Textarea } from '@fex-design/angular/primitive/textarea'
+import Card from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fexTextarea-page',

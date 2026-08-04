@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { checkFeature, expansionFeature, selectionFeature } from '@fex/components-core'
-import { createTreeController } from '@fex/components-core/tree/create-tree-controller'
-import type { CheckFeatureApi } from '@fex/components-core/tree/features/check'
-import type { ExpansionFeatureApi } from '@fex/components-core/tree/features/expansion'
-import type { SelectionFeatureApi } from '@fex/components-core/tree/features/selection'
-import Button from '@fex/components-vue/ui/button'
-import Card from '@fex/components-vue/ui/card'
+import { checkFeature, expansionFeature, selectionFeature } from '@fex-design/core'
+import { createTreeController } from '@fex-design/core/tree/create-tree-controller'
+import type { CheckFeatureApi } from '@fex-design/core/tree/features/check'
+import type { ExpansionFeatureApi } from '@fex-design/core/tree/features/expansion'
+import type { SelectionFeatureApi } from '@fex-design/core/tree/features/selection'
+import Button from '@fex-design/vue/ui/button'
+import Card from '@fex-design/vue/ui/card'
 import DemoTree from './demo-tree.vue'
 import { departmentFieldNames, departmentTreeData, type DepartmentNode } from './data'
 const controller = createTreeController<DepartmentNode>({

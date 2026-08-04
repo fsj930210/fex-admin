@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
-import { Drawer, DrawerBody, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerMask, DrawerPortal, DrawerTrigger } from '@fex/components-angular/primitive/drawer'
-import { Button } from '@fex/components-angular/ui/button'
+import { Drawer, DrawerBody, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerMask, DrawerPortal, DrawerTrigger } from '@fex-design/angular/primitive/drawer'
+import { Button } from '@fex-design/angular/ui/button'
 
 @Component({
   selector: 'fex-drawer-header-footer-demo',

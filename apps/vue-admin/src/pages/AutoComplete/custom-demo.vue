@@ -4,8 +4,8 @@ import {
   AutoCompleteList,
   AutoCompleteRoot,
   AutoCompleteTrigger,
-} from '@fex/components-vue/primitive/auto-complete'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/auto-complete'
+import Card from '@fex-design/vue/ui/card'
 import { fieldNames, users } from './data'
 </script>
 <template>

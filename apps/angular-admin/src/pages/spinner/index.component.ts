@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Spinner } from '@fex/components-angular/ui/spinner'
-import Card from '@fex/components-angular/ui/card'
+import { Spinner } from '@fex-design/angular/ui/spinner'
+import Card from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fex-spinner-page',

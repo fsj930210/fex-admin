@@ -1,5 +1,5 @@
-import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex/components-solid/primitive/tabs'
-import { Card } from '@fex/components-solid/ui/card'
+import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex-design/solid/primitive/tabs'
+import { Card } from '@fex-design/solid/ui/card'
 import { cn } from '@fex/utils'
 
 const itemClassName =

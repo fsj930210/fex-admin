@@ -1,8 +1,8 @@
 import { createSignal } from 'solid-js'
-import type { DrawerPlacement } from '@fex/components-core/drawer/types'
-import { Radio, RadioGroup } from '@fex/components-solid/primitive/radio'
-import { Drawer, DrawerBody, DrawerClose, DrawerContent, DrawerHeader, DrawerMask, DrawerPortal, DrawerResizeHandle, DrawerTrigger } from '@fex/components-solid/primitive/drawer'
-import { Button } from '@fex/components-solid/ui/button'
+import type { DrawerPlacement } from '@fex-design/core/drawer/types'
+import { Radio, RadioGroup } from '@fex-design/solid/primitive/radio'
+import { Drawer, DrawerBody, DrawerClose, DrawerContent, DrawerHeader, DrawerMask, DrawerPortal, DrawerResizeHandle, DrawerTrigger } from '@fex-design/solid/primitive/drawer'
+import { Button } from '@fex-design/solid/ui/button'
 
 const placements: DrawerPlacement[] = ['top', 'right', 'bottom', 'left']
 

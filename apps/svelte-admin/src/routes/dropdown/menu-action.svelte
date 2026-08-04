@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { MenuItem } from '@fex/components-svelte/primitive/menu'
+  import { MenuItem } from '@fex-design/svelte/primitive/menu'
   import type { Snippet } from 'svelte'
   import type { HTMLButtonAttributes } from 'svelte/elements'
   import { itemClassName } from './demo-classes'

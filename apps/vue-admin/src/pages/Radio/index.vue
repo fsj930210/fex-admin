@@ -5,8 +5,8 @@ import {
   RadioButton,
   RadioGroup,
   type RadioValue,
-} from '@fex/components-vue/primitive/radio'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/radio'
+import Card from '@fex-design/vue/ui/card'
 
 const options = [
   { label: 'Apple', value: 'apple' },

@@ -1,6 +1,6 @@
 <script lang="ts">
   import AutoHeight from 'embla-carousel-auto-height'
-  import Card from '@fex/components-svelte/ui/card'
+  import Card from '@fex-design/svelte/ui/card'
   import PrimitiveCarousel from './primitive-carousel.svelte'
 
   const slides = ['订单概览', '待办审批', '团队动态']

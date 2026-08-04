@@ -1,11 +1,11 @@
 <script lang="ts">
-  import EllipsisIcon from '@fex/components-svelte/icon/more'
-  import { SortableItem, SortableOverlay, SortableRoot } from '@fex/components-svelte/primitive/sortable'
-  import TabsRoot from '@fex/components-svelte/primitive/tabs-root'
-  import TabsList from '@fex/components-svelte/primitive/tabs-list'
-  import TabsItem from '@fex/components-svelte/primitive/tabs-item'
-  import TabsContent from '@fex/components-svelte/primitive/tabs-content'
-  import Card from '@fex/components-svelte/ui/card'
+  import EllipsisIcon from '@fex-design/svelte/icon/more'
+  import { SortableItem, SortableOverlay, SortableRoot } from '@fex-design/svelte/primitive/sortable'
+  import TabsRoot from '@fex-design/svelte/primitive/tabs-root'
+  import TabsList from '@fex-design/svelte/primitive/tabs-list'
+  import TabsItem from '@fex-design/svelte/primitive/tabs-item'
+  import TabsContent from '@fex-design/svelte/primitive/tabs-content'
+  import Card from '@fex-design/svelte/ui/card'
   import { initialTabs } from './data'
 
   const fixed = initialTabs[0]!

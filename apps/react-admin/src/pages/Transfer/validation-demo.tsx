@@ -1,7 +1,7 @@
-import { Field, FieldControl, FieldLabel, FieldRoot } from '@fex/components-react/primitive/field'
-import { Form, useForm } from '@fex/components-react/primitive/form'
-import { Button } from '@fex/components-react/ui/button'
-import { Transfer } from '@fex/components-react/primitive/transfer'
+import { Field, FieldControl, FieldLabel, FieldRoot } from '@fex-design/react/primitive/field'
+import { Form, useForm } from '@fex-design/react/primitive/form'
+import { Button } from '@fex-design/react/ui/button'
+import { Transfer } from '@fex-design/react/primitive/transfer'
 import { transferFieldNames, transferMembers } from './data'
 import { TransferDemoSection } from './demo-section'
 

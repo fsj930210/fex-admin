@@ -1,5 +1,5 @@
-import { UploadRoot, UploadTrigger } from '@fex/components-angular/primitive/upload'
-import { Button } from '@fex/components-angular/ui/button'
+import { UploadRoot, UploadTrigger } from '@fex-design/angular/primitive/upload'
+import { Button } from '@fex-design/angular/ui/button'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { createMultipartDemoUpload } from './create-multipart-upload'
 import { DemoUploadListComponent } from './demo-list.component'

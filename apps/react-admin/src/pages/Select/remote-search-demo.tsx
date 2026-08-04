@@ -1,5 +1,5 @@
-import type { SelectOption } from '@fex/components-core/select/types'
-import useUnmount from '@fex/components-react/hooks/use-unmount'
+import type { SelectOption } from '@fex-design/core/select/types'
+import useUnmount from '@fex-design/react/hooks/use-unmount'
 import {
   SelectContent,
   SelectEmpty,
@@ -7,7 +7,7 @@ import {
   SelectLoading,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-react/primitive/select'
+} from '@fex-design/react/primitive/select'
 import { useRef, useState } from 'react'
 import { frameworkOptions } from './data'
 import { SelectDemoSection } from './demo-section'

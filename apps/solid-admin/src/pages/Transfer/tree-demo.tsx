@@ -1,7 +1,7 @@
-import { checkFeature, expansionFeature } from '@fex/components-core'
-import type { TransferPanelApi } from '@fex/components-solid/primitive/transfer'
-import { Transfer } from '@fex/components-solid/primitive/transfer'
-import { Card } from '@fex/components-solid/ui/card'
+import { checkFeature, expansionFeature } from '@fex-design/core'
+import type { TransferPanelApi } from '@fex-design/solid/primitive/transfer'
+import { Transfer } from '@fex-design/solid/primitive/transfer'
+import { Card } from '@fex-design/solid/ui/card'
 import { DemoTree } from '../Tree/demo-tree'
 import { fieldNames, members, type Member } from './data'
 function Panel(props: { api: TransferPanelApi<Member> }) {

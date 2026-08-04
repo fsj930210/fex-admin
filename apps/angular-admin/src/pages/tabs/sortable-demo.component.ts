@@ -1,9 +1,9 @@
 import { NgStyle } from '@angular/common'
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
-import { EllipsisIcon } from '@fex/components-angular/icon/more'
-import { FexSortable, FexSortableItemDirective } from '@fex/components-angular/primitive/sortable'
-import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex/components-angular/primitive/tabs'
-import Card from '@fex/components-angular/ui/card'
+import { EllipsisIcon } from '@fex-design/angular/icon/more'
+import { FexSortable, FexSortableItemDirective } from '@fex-design/angular/primitive/sortable'
+import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex-design/angular/primitive/tabs'
+import Card from '@fex-design/angular/ui/card'
 import { initialTabs } from './data'
 
 @Component({

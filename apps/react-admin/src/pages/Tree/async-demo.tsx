@@ -1,4 +1,4 @@
-import { asyncLoadFeature, expansionFeature } from '@fex/components-core'
+import { asyncLoadFeature, expansionFeature } from '@fex-design/core'
 import type { DepartmentNode } from './data'
 import { departmentFieldNames } from './data'
 import { DemoTree } from './demo-tree'

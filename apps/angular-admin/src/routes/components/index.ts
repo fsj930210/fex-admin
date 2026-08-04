@@ -1,6 +1,7 @@
 import type { Routes } from '@angular/router'
 
 export const componentRoutes: Routes = [
+  { path: 'breadcrumb', loadComponent: () => import('../../pages/breadcrumb/index.component').then((module) => module.BreadcrumbComponent) },
   {
     path: 'auto-complete',
     loadComponent: () =>
@@ -49,9 +50,9 @@ export const componentRoutes: Routes = [
       import('../../pages/dropdown/index.component').then((module) => module.DropdownComponent),
   },
   {
-    path: 'data-grid',
+    path: 'data-table',
     loadComponent: () =>
-      import('../../pages/data-grid/index.component').then((module) => module.DataGridComponent),
+      import('../../pages/data-table/index.component').then((module) => module.DataTableComponent),
   },
   {
     path: 'date-picker',

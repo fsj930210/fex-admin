@@ -5,7 +5,7 @@ import {
   getCalendarValueKey,
   type CalendarCell as CalendarCellModel,
   type CalendarValue,
-} from '@fex/components-core/calendar'
+} from '@fex-design/core/calendar'
 import {
   CalendarCell,
   CalendarGrid,
@@ -13,8 +13,8 @@ import {
   CalendarNavigationButton,
   CalendarRoot,
   CalendarWeekHeader,
-} from '@fex/components-solid/primitive/calendar'
-import Card from '@fex/components-solid/ui/card'
+} from '@fex-design/solid/primitive/calendar'
+import Card from '@fex-design/solid/ui/card'
 import { createSignal, For, type JSX } from 'solid-js'
 
 const july = createCalendarDate(2026, 7, 1)

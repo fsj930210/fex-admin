@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDraggable } from '@fex/components-vue/composables/use-draggable'
+import { useDraggable } from '@fex-design/vue/composables/use-draggable'
 import { computed, type CSSProperties } from 'vue'
 const props = defineProps<{ id: string; label: string; type: string }>()
 const draggable = useDraggable({ id: props.id, type: props.type, data: { label: props.label } })

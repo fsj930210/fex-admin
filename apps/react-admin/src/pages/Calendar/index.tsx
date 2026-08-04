@@ -3,7 +3,7 @@ import {
   createCalendarDate,
   getCalendarValueKey,
   type CalendarValue,
-} from '@fex/components-core/calendar'
+} from '@fex-design/core/calendar'
 import {
   CalendarCell,
   CalendarGrid,
@@ -12,8 +12,8 @@ import {
   CalendarRoot,
   CalendarWeekHeader,
   type CalendarCell as CalendarCellModel,
-} from '@fex/components-react/primitive/calendar'
-import { Card } from '@fex/components-react/ui/card'
+} from '@fex-design/react/primitive/calendar'
+import { Card } from '@fex-design/react/ui/card'
 import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
 

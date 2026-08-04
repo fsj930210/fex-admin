@@ -1,6 +1,6 @@
-import { Badge } from '@fex/components-solid/ui/badge'
-import { Card } from '@fex/components-solid/ui/card'
-import { InfoIcon } from '@fex/components-solid/icon/info'
+import { Badge } from '@fex-design/solid/ui/badge'
+import { Card } from '@fex-design/solid/ui/card'
+import { InfoIcon } from '@fex-design/solid/icon/info'
 import {
   Empty,
   EmptyContent,
@@ -8,7 +8,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@fex/components-solid/primitive/empty'
+} from '@fex-design/solid/primitive/empty'
 import { A } from '@solidjs/router'
 
 export function EmptyPage() {

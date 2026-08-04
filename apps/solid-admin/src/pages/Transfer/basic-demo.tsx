@@ -1,5 +1,5 @@
-import { Transfer } from '@fex/components-solid/primitive/transfer'
-import { Card } from '@fex/components-solid/ui/card'
+import { Transfer } from '@fex-design/solid/primitive/transfer'
+import { Card } from '@fex-design/solid/ui/card'
 import { createSignal } from 'solid-js'
 import { fieldNames, members } from './data'
 export function BasicDemo() {

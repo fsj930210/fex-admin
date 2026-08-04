@@ -1,4 +1,4 @@
-import { Button } from '@fex/components-angular/ui/button'
+import { Button } from '@fex-design/angular/ui/button'
 import {
   UploadContext,
   UploadItem,
@@ -7,7 +7,7 @@ import {
   UploadItemTemplate,
   UploadList,
   UploadListTemplate,
-} from '@fex/components-angular/primitive/upload'
+} from '@fex-design/angular/primitive/upload'
 import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input } from '@angular/core'
 import { MultipartDetailsComponent } from './multipart-details.component'
 @Component({

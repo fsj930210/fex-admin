@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { rowSelectionFeature } from '@fex/components-core/data-grid/features/row-selection'
+import { rowSelectionFeature } from '@fex-design/core/data-table/features/row-selection'
 import {
-  createDataGridSelectionColumn,
-  DataGrid,
+  createDataTableSelectionColumn,
+  DataTable,
   tableFeatures,
-} from '@fex/components-vue/primitive/data-grid'
-import type { TransferPanelApi } from '@fex/components-vue/primitive/transfer'
-import { useDataGridTable } from '@fex/components-vue/composables/use-data-grid-table'
+} from '@fex-design/vue/primitive/data-table'
+import type { TransferPanelApi } from '@fex-design/vue/primitive/transfer'
+import { useDataTable } from '@fex-design/vue/composables/use-data-table'
 import { watchEffect } from 'vue'
 import type { Member } from './data'
 const props = defineProps<{ api: TransferPanelApi<Member> }>()
 const features = tableFeatures({ rowSelectionFeature })
 const columns = [
-  createDataGridSelectionColumn({ mode: 'multiple' }),
+  createDataTableSelectionColumn({ mode: 'multiple' }),
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'department', header: 'Department' },
 ]
@@ -31,7 +31,7 @@ const options = () => ({
     props.api.setCheckedKeys(Object.keys(next).filter((key) => next[key]))
   },
 })
-const table = useDataGridTable(options() as any)
-watchEffect(() => table.setDataGridOptions(options() as any))
+const table = useDataTable(options() as any)
+watchEffect(() => table.setDataTableOptions(options() as any))
 </script>
-<template><DataGrid :table="table" /></template>
+<template><DataTable :table="table" /></template>

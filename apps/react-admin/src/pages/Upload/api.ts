@@ -1,4 +1,4 @@
-import type { UploadProgress } from '@fex/components-core/upload/types'
+import type { UploadProgress } from '@fex-design/core/upload/types'
 
 export const uploadServerUrl = '/upload-api'
 

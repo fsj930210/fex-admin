@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { defaultSelectFilterOption } from '@fex/components-core/select/filter-options'
-import { SelectContent, SelectRoot, SelectTrigger } from '@fex/components-vue/primitive/select'
+import { defaultSelectFilterOption } from '@fex-design/core/select/filter-options'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/vue/primitive/select'
 import { frameworkOptions } from './data'
 import Demo from './demo-section.vue'
 </script>

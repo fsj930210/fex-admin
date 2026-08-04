@@ -1,13 +1,13 @@
 <script lang="ts">
-  import Card from '@fex/components-svelte/ui/card'
-  import Popover from '@fex/components-svelte/primitive/popover'
-  import PopoverArrow from '@fex/components-svelte/primitive/popover-arrow'
-  import PopoverContent from '@fex/components-svelte/primitive/popover-content'
-  import PopoverDescription from '@fex/components-svelte/primitive/popover-description'
-  import PopoverHeader from '@fex/components-svelte/primitive/popover-header'
-  import PopoverPortal from '@fex/components-svelte/primitive/popover-portal'
-  import PopoverTitle from '@fex/components-svelte/primitive/popover-title'
-  import PopoverTrigger from '@fex/components-svelte/primitive/popover-trigger'
+  import Card from '@fex-design/svelte/ui/card'
+  import Popover from '@fex-design/svelte/primitive/popover'
+  import PopoverArrow from '@fex-design/svelte/primitive/popover-arrow'
+  import PopoverContent from '@fex-design/svelte/primitive/popover-content'
+  import PopoverDescription from '@fex-design/svelte/primitive/popover-description'
+  import PopoverHeader from '@fex-design/svelte/primitive/popover-header'
+  import PopoverPortal from '@fex-design/svelte/primitive/popover-portal'
+  import PopoverTitle from '@fex-design/svelte/primitive/popover-title'
+  import PopoverTrigger from '@fex-design/svelte/primitive/popover-trigger'
 
   let open = $state(false)
   let container = $state<HTMLDivElement>()

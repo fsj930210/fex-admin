@@ -1,8 +1,8 @@
-import { Field, FieldControl, FieldLabel, FieldRoot } from '@fex/components-solid/primitive/field'
-import { createForm, Form } from '@fex/components-solid/primitive/form'
-import { Transfer } from '@fex/components-solid/primitive/transfer'
-import { Button } from '@fex/components-solid/ui/button'
-import { Card } from '@fex/components-solid/ui/card'
+import { Field, FieldControl, FieldLabel, FieldRoot } from '@fex-design/solid/primitive/field'
+import { createForm, Form } from '@fex-design/solid/primitive/form'
+import { Transfer } from '@fex-design/solid/primitive/transfer'
+import { Button } from '@fex-design/solid/ui/button'
+import { Card } from '@fex-design/solid/ui/card'
 import { fieldNames, members } from './data'
 export function ValidationDemo() {
   const form = createForm(() => ({

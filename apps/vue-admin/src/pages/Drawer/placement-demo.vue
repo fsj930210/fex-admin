@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerMask, DrawerContent, DrawerHeader, DrawerBody, DrawerClose } from '@fex/components-vue/primitive/drawer'
-import { RadioGroup, Radio } from '@fex/components-vue/primitive/radio'
-import Button from '@fex/components-vue/ui/button'
+import { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerMask, DrawerContent, DrawerHeader, DrawerBody, DrawerClose } from '@fex-design/vue/primitive/drawer'
+import { RadioGroup, Radio } from '@fex-design/vue/primitive/radio'
+import Button from '@fex-design/vue/ui/button'
 const placement = ref<'top' | 'right' | 'bottom' | 'left'>('right')
 </script>
 <template>

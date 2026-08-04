@@ -1,7 +1,7 @@
-import { EllipsisIcon } from '@fex/components-solid/icon/more'
-import * as Sortable from '@fex/components-solid/primitive/sortable'
-import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex/components-solid/primitive/tabs'
-import { Card } from '@fex/components-solid/ui/card'
+import { EllipsisIcon } from '@fex-design/solid/icon/more'
+import * as Sortable from '@fex-design/solid/primitive/sortable'
+import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex-design/solid/primitive/tabs'
+import { Card } from '@fex-design/solid/ui/card'
 import { For, createSignal } from 'solid-js'
 import { initialTabs } from './data'
 

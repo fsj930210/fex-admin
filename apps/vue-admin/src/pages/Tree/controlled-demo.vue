@@ -4,9 +4,9 @@ import {
   focusFeature,
   keyboardFeature,
   selectionFeature,
-} from '@fex/components-core'
-import Button from '@fex/components-vue/ui/button'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/core'
+import Button from '@fex-design/vue/ui/button'
+import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 import DemoTree from './demo-tree.vue'
 import { departmentFieldNames, departmentTreeData } from './data'

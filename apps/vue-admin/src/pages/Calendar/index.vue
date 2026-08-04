@@ -5,7 +5,7 @@ import {
   getCalendarValueKey,
   type CalendarCell,
   type CalendarValue,
-} from '@fex/components-core/calendar'
+} from '@fex-design/core/calendar'
 import {
   CalendarCell as CalendarCellButton,
   CalendarGrid,
@@ -13,8 +13,8 @@ import {
   CalendarNavigationButton,
   CalendarRoot,
   CalendarWeekHeader,
-} from '@fex/components-vue/primitive/calendar'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/calendar'
+import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 
 const july = createCalendarDate(2026, 7, 1)

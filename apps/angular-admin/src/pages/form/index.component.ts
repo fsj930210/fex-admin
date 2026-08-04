@@ -12,18 +12,18 @@ import {
   FieldRoot,
   FieldSet,
   FieldTitle,
-} from '@fex/components-angular/primitive/field'
+} from '@fex-design/angular/primitive/field'
 import {
   Form,
   FormField,
   injectForm,
   scrollToField,
   type AnyFieldApi,
-} from '@fex/components-angular/primitive/form'
-import { InputControl, InputRoot } from '@fex/components-angular/primitive/input'
-import { Button } from '@fex/components-angular/ui/button'
-import Card from '@fex/components-angular/ui/card'
-import { Checkbox } from '@fex/components-angular/ui/checkbox'
+} from '@fex-design/angular/primitive/form'
+import { InputControl, InputRoot } from '@fex-design/angular/primitive/input'
+import { Button } from '@fex-design/angular/ui/button'
+import Card from '@fex-design/angular/ui/card'
+import { Checkbox } from '@fex-design/angular/ui/checkbox'
 
 const locations = {
   浙江: ['杭州', '宁波', '温州'],

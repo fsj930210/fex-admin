@@ -5,8 +5,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@fex/components-solid/primitive/card'
-import Card from '@fex/components-solid/ui/card'
+} from '@fex-design/solid/primitive/card'
+import Card from '@fex-design/solid/ui/card'
 import { createMemo, createSignal } from 'solid-js'
 
 type SpacingOption = {

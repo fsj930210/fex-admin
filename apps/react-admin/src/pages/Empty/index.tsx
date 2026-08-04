@@ -1,6 +1,6 @@
-import { Badge } from '@fex/components-react/ui/badge'
-import { Card } from '@fex/components-react/ui/card'
-import { InfoIcon } from '@fex/components-react/icon/info'
+import { Badge } from '@fex-design/react/ui/badge'
+import { Card } from '@fex-design/react/ui/card'
+import { InfoIcon } from '@fex-design/react/icon/info'
 import {
   Empty,
   EmptyContent,
@@ -8,7 +8,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@fex/components-react/primitive/empty'
+} from '@fex-design/react/primitive/empty'
 import { Link } from 'react-router'
 
 export function EmptyPage() {

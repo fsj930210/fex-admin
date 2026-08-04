@@ -1,5 +1,5 @@
-import { Card } from '@fex/components-solid/ui/card'
-import type { TimeValue } from '@fex/components-solid/primitive/time-picker'
+import { Card } from '@fex-design/solid/ui/card'
+import type { TimeValue } from '@fex-design/solid/primitive/time-picker'
 import { createSignal } from 'solid-js'
 import { DemoTimePicker } from './demo-time-picker'
 export function ControlledDemo() {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useDroppable } from '@fex/components-vue/composables/use-droppable'
+import { useDroppable } from '@fex-design/vue/composables/use-droppable'
 import DraggableToken from './DraggableToken.vue'
 const props = defineProps<{
   accept?: string

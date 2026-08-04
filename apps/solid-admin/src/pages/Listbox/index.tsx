@@ -1,15 +1,15 @@
 import { A } from '@solidjs/router'
-import { Card } from '@fex/components-solid/ui/card'
+import { Card } from '@fex-design/solid/ui/card'
 import {
   ListboxItem as PrimitiveListboxItem,
   ListboxRoot as PrimitiveListboxRoot,
-} from '@fex/components-solid/primitive/listbox'
+} from '@fex-design/solid/primitive/listbox'
 import {
   ListboxGroup,
   ListboxGroupLabel,
   ListboxItem,
   ListboxRoot,
-} from '@fex/components-solid/ui/listbox'
+} from '@fex-design/solid/ui/listbox'
 import { createSignal, For, type JSX } from 'solid-js'
 
 const tricks = [

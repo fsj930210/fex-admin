@@ -1,5 +1,5 @@
-import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex/components-react/primitive/tabs'
-import { Card } from '@fex/components-react/ui/card'
+import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex-design/react/primitive/tabs'
+import { Card } from '@fex-design/react/ui/card'
 
 export function BasicTabsDemo() {
   return (

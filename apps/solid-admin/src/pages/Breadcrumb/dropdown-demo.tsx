@@ -1,0 +1,4 @@
+import * as Dropdown from '@fex-design/solid/primitive/dropdown'
+import { PopoverPortal } from '@fex-design/solid/primitive/popover'
+import { BreadcrumbEllipsis } from '@fex-design/solid/primitive/breadcrumb'
+export function BreadcrumbDropdownDemo() { return <Dropdown.DropdownRoot><Dropdown.DropdownTrigger>{(slot) => <button {...slot.props} ref={slot.ref} class="inline-flex size-7 items-center justify-center rounded-md hover:bg-muted-background" type="button" aria-label="Show hidden path"><BreadcrumbEllipsis /></button>}</Dropdown.DropdownTrigger><PopoverPortal><Dropdown.DropdownContent><div class="min-w-40 space-y-1 p-1" role="menu"><button class="block w-full rounded px-2 py-1 text-left hover:bg-muted-background" role="menuitem" type="button">Planning</button><button class="block w-full rounded px-2 py-1 text-left hover:bg-muted-background" role="menuitem" type="button">Archive</button></div></Dropdown.DropdownContent></PopoverPortal></Dropdown.DropdownRoot> }

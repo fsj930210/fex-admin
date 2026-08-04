@@ -7,10 +7,10 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@fex/components-angular/primitive/empty'
-import { Badge } from '@fex/components-angular/ui/badge'
-import Card from '@fex/components-angular/ui/card'
-import { InfoIcon } from '@fex/components-angular/icon/info'
+} from '@fex-design/angular/primitive/empty'
+import { Badge } from '@fex-design/angular/ui/badge'
+import Card from '@fex-design/angular/ui/card'
+import { InfoIcon } from '@fex-design/angular/icon/info'
 
 @Component({
   selector: 'fex-empty-page',

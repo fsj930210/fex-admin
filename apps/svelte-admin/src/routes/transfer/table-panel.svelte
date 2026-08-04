@@ -1,17 +1,17 @@
 <script lang="ts">
-  import { rowSelectionFeature } from '@fex/components-core/data-grid/features/row-selection'
+  import { rowSelectionFeature } from '@fex-design/core/data-table/features/row-selection'
   import {
-    DataGrid,
+    DataTable,
     tableFeatures,
     type Cell,
     type ColumnDef,
     type Header,
-    type SvelteDataGridTable,
+    type SvelteDataTable,
     type TableOptions,
-  } from '@fex/components-svelte/primitive/data-grid'
-  import type { TransferPanelApi } from '@fex/components-svelte/primitive/transfer'
-  import { createDataGridTable } from '@fex/components-svelte/stores/create-data-grid-table'
-  import Checkbox from '@fex/components-svelte/ui/checkbox'
+  } from '@fex-design/svelte/primitive/data-table'
+  import type { TransferPanelApi } from '@fex-design/svelte/primitive/transfer'
+  import { createDataTable } from '@fex-design/svelte/stores/create-data-table'
+  import Checkbox from '@fex-design/svelte/ui/checkbox'
   import type { Member } from './data'
 
   let { api }: { api: TransferPanelApi<Member> } = $props()
@@ -37,8 +37,8 @@
       api.setCheckedKeys(Object.keys(next).filter((key) => next[key]))
     },
   })
-  const table = createDataGridTable(options()) as unknown as SvelteDataGridTable<Features, Member>
-  $effect(() => table.setDataGridOptions(options()))
+  const table = createDataTable(options()) as unknown as SvelteDataTable<Features, Member>
+  $effect(() => table.setDataTableOptions(options()))
 </script>
 
 {#snippet header(item: Header<Features, Member>, _index: number)}
@@ -64,4 +64,4 @@
   {/if}
 {/snippet}
 
-<DataGrid {table} {header} {cell} />
+<DataTable {table} {header} {cell} />

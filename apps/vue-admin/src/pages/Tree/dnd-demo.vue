@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { dndFeature, expansionFeature } from '@fex/components-core'
-import { createTreeController } from '@fex/components-core/tree/create-tree-controller'
-import { TreeRoot, TreeViewport } from '@fex/components-vue/primitive/tree'
-import Card from '@fex/components-vue/ui/card'
+import { dndFeature, expansionFeature } from '@fex-design/core'
+import { createTreeController } from '@fex-design/core/tree/create-tree-controller'
+import { TreeRoot, TreeViewport } from '@fex-design/vue/primitive/tree'
+import Card from '@fex-design/vue/ui/card'
 import DndTreeRow from './dnd-tree-row.vue'
 import {
   departmentFieldNames,

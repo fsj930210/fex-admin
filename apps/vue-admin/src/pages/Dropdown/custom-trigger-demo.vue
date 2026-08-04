@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { DropdownContent, DropdownRoot, DropdownTrigger } from '@fex/components-vue/primitive/dropdown'
-import { PopoverPortal } from '@fex/components-vue/primitive/popover'
+import { DropdownContent, DropdownRoot, DropdownTrigger } from '@fex-design/vue/primitive/dropdown'
+import { PopoverPortal } from '@fex-design/vue/primitive/popover'
 import MenuAction from './menu-action.vue'
 import MenuSurface from './menu-surface.vue'
 </script>

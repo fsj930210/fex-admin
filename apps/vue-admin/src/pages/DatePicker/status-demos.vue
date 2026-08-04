@@ -4,8 +4,8 @@ import {
   FieldError,
   FieldLabel,
   FieldRoot,
-} from '@fex/components-vue/primitive/field'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/field'
+import Card from '@fex-design/vue/ui/card'
 import DemoDatePicker from './demo-date-picker.vue'
 
 const demoContentClass = 'flex min-w-0 flex-wrap items-start gap-space-md'

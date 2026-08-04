@@ -1,6 +1,6 @@
-import { ChevronRightIcon } from '@fex/components-solid/icon/chevron'
-import * as Dropdown from '@fex/components-solid/primitive/dropdown'
-import * as Popover from '@fex/components-solid/primitive/popover'
+import { ChevronRightIcon } from '@fex-design/solid/icon/chevron'
+import * as Dropdown from '@fex-design/solid/primitive/dropdown'
+import * as Popover from '@fex-design/solid/primitive/popover'
 import { MenuAction, MenuSurface, triggerClassName } from './demo-parts'
 
 const submenuProps: Popover.PopoverProps = {

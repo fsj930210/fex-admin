@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { DropdownContent, DropdownRoot, DropdownTrigger } from '@fex/components-vue/primitive/dropdown'
-import { PopoverPortal } from '@fex/components-vue/primitive/popover'
-import Checkbox from '@fex/components-vue/ui/checkbox'
+import { DropdownContent, DropdownRoot, DropdownTrigger } from '@fex-design/vue/primitive/dropdown'
+import { PopoverPortal } from '@fex-design/vue/primitive/popover'
+import Checkbox from '@fex-design/vue/ui/checkbox'
 import { triggerClassName } from './demo-classes'
 </script>
 

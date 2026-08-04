@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { CalendarIcon } from '@fex/components-vue/icon/calendar'
-import Card from '@fex/components-vue/ui/card'
+import { CalendarIcon } from '@fex-design/vue/icon/calendar'
+import Card from '@fex-design/vue/ui/card'
 import DemoTimePicker from './demo-time-picker.vue'
 </script>
 <template>

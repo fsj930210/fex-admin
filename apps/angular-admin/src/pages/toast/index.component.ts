@@ -9,17 +9,17 @@ import {
   ToastService,
   ToastTitle,
   ToastViewport,
-} from '@fex/components-angular/primitive/toast'
-import type { AngularToastItem } from '@fex/components-angular/primitive/toast'
-import { CheckIcon } from '@fex/components-angular/icon/check'
-import { CloseIcon } from '@fex/components-angular/icon/close'
-import { ErrorIcon } from '@fex/components-angular/icon/error'
-import { InfoIcon } from '@fex/components-angular/icon/info'
-import { LoadingIcon } from '@fex/components-angular/icon/loading'
-import { WarningIcon } from '@fex/components-angular/icon/warning'
-import { Button } from '@fex/components-angular/ui/button'
-import Card from '@fex/components-angular/ui/card'
-import type { ToastPlacement } from '@fex/components-styles/toast'
+} from '@fex-design/angular/primitive/toast'
+import type { AngularToastItem } from '@fex-design/angular/primitive/toast'
+import { CheckIcon } from '@fex-design/angular/icon/check'
+import { CloseIcon } from '@fex-design/angular/icon/close'
+import { ErrorIcon } from '@fex-design/angular/icon/error'
+import { InfoIcon } from '@fex-design/angular/icon/info'
+import { LoadingIcon } from '@fex-design/angular/icon/loading'
+import { WarningIcon } from '@fex-design/angular/icon/warning'
+import { Button } from '@fex-design/angular/ui/button'
+import Card from '@fex-design/angular/ui/card'
+import type { ToastPlacement } from '@fex-design/styles/toast'
 
 @Component({
   selector: 'fex-toast-page',

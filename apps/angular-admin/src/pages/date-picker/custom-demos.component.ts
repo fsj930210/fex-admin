@@ -4,15 +4,15 @@ import {
   getCalendarValueDate,
   getCalendarValueKey,
   type CalendarCell,
-} from '@fex/components-core/calendar'
-import { getGranularityByPicker } from '@fex/components-core/date-picker/panel'
-import { normalizeDatePickerValue } from '@fex/components-core/date-picker/value'
+} from '@fex-design/core/calendar'
+import { getGranularityByPicker } from '@fex-design/core/date-picker/panel'
+import { normalizeDatePickerValue } from '@fex-design/core/date-picker/value'
 import {
   CalendarCellButton,
   CalendarGrid,
   CalendarRoot,
   CalendarWeekHeader,
-} from '@fex/components-angular/primitive/calendar'
+} from '@fex-design/angular/primitive/calendar'
 import {
   DatePickerContent,
   DatePickerFooter,
@@ -20,9 +20,9 @@ import {
   DatePickerRoot,
   DatePickerState,
   DatePickerTrigger,
-} from '@fex/components-angular/primitive/date-picker'
-import { Card } from '@fex/components-angular/ui/card'
-import { Button } from '@fex/components-angular/ui/button'
+} from '@fex-design/angular/primitive/date-picker'
+import { Card } from '@fex-design/angular/ui/card'
+import { Button } from '@fex-design/angular/ui/button'
 
 @Component({
   selector: 'demo-custom-cell-panel',

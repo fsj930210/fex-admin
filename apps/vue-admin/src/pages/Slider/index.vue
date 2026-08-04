@@ -5,8 +5,8 @@ import {
   SliderRoot,
   SliderThumb,
   SliderTrack,
-} from '@fex/components-vue/primitive/slider'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/slider'
+import Card from '@fex-design/vue/ui/card'
 
 const basicValue = ref([32])
 const controlledValue = ref([48])

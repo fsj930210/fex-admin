@@ -1,4 +1,4 @@
-import type { SelectOption } from '@fex/components-core/select/types'
+import type { SelectOption } from '@fex-design/core/select/types'
 import {
   SelectContent,
   SelectEmpty,
@@ -6,7 +6,7 @@ import {
   SelectLoading,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-solid/primitive/select'
+} from '@fex-design/solid/primitive/select'
 import { createSignal, onCleanup, Show } from 'solid-js'
 import { frameworkOptions } from './data'
 import { SelectDemoSection as Demo } from './demo-section'

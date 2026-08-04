@@ -8,15 +8,15 @@
     ToastTitle,
     ToastViewport,
     toast,
-  } from '@fex/components-svelte/primitive/toast'
-  import CheckIcon from '@fex/components-svelte/icon/check'
-  import CloseIcon from '@fex/components-svelte/icon/close'
-  import ErrorIcon from '@fex/components-svelte/icon/error'
-  import InfoIcon from '@fex/components-svelte/icon/info'
-  import LoadingIcon from '@fex/components-svelte/icon/loading'
-  import WarningIcon from '@fex/components-svelte/icon/warning'
-  import Button from '@fex/components-svelte/ui/button'
-  import Card from '@fex/components-svelte/ui/card'
+  } from '@fex-design/svelte/primitive/toast'
+  import CheckIcon from '@fex-design/svelte/icon/check'
+  import CloseIcon from '@fex-design/svelte/icon/close'
+  import ErrorIcon from '@fex-design/svelte/icon/error'
+  import InfoIcon from '@fex-design/svelte/icon/info'
+  import LoadingIcon from '@fex-design/svelte/icon/loading'
+  import WarningIcon from '@fex-design/svelte/icon/warning'
+  import Button from '@fex-design/svelte/ui/button'
+  import Card from '@fex-design/svelte/ui/card'
   type ToastPlacement = 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'
 
   const placements: ToastPlacement[] = ['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right']

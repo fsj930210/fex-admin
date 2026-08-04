@@ -1,5 +1,5 @@
-﻿import { Badge } from '@fex/components-react/ui/badge'
-import { Card } from '@fex/components-react/ui/card'
+﻿import { Badge } from '@fex-design/react/ui/badge'
+import { Card } from '@fex-design/react/ui/card'
 import {
   Table,
   TableBody,
@@ -8,7 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@fex/components-react/primitive/table'
+} from '@fex-design/react/primitive/table'
 import { Link } from 'react-router'
 
 const invoices = [

@@ -5,10 +5,10 @@ import {
   FieldError,
   FieldLabel,
   FieldRoot,
-} from '@fex/components-vue/primitive/field'
-import { Form, useForm } from '@fex/components-vue/primitive/form'
-import { SelectContent, SelectRoot, SelectTrigger } from '@fex/components-vue/primitive/select'
-import Button from '@fex/components-vue/ui/button'
+} from '@fex-design/vue/primitive/field'
+import { Form, useForm } from '@fex-design/vue/primitive/form'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/vue/primitive/select'
+import Button from '@fex-design/vue/ui/button'
 import { frameworkOptions } from './data'
 import Demo from './demo-section.vue'
 const form = useForm({ defaultValues: { framework: '' }, onSubmit: () => undefined })

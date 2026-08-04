@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { UploadRoot, UploadTrigger } from '@fex/components-vue/primitive/upload'
-import Button from '@fex/components-vue/ui/button'
+import { UploadRoot, UploadTrigger } from '@fex-design/vue/primitive/upload'
+import Button from '@fex-design/vue/ui/button'
 import { createMultipartUpload } from './create-multipart-upload'
 import DemoList from './demo-list.vue'
 import DemoSection from './demo-section.vue'

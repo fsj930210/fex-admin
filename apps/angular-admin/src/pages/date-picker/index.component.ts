@@ -7,10 +7,10 @@ import {
   type CalendarDate,
   type CalendarRange,
   type CalendarValue,
-} from '@fex/components-core/calendar'
-import { isAfterDate, isBeforeDate } from '@fex/components-core/date/utils'
-import { Card } from '@fex/components-angular/ui/card'
-import { Button } from '@fex/components-angular/ui/button'
+} from '@fex-design/core/calendar'
+import { isAfterDate, isBeforeDate } from '@fex-design/core/date/utils'
+import { Card } from '@fex-design/angular/ui/card'
+import { Button } from '@fex-design/angular/ui/button'
 import { DemoDatePicker, DemoRangePicker } from './demo-date-picker.component'
 import { CustomDemos } from './custom-demos.component'
 import { IntegrationDemos } from './integration-demos.component'

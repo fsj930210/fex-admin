@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import Card from '@fex/components-vue/ui/card'
-import { useSortable } from '@fex/components-vue/composables/use-sortable'
+import Card from '@fex-design/vue/ui/card'
+import { useSortable } from '@fex-design/vue/composables/use-sortable'
 import {
   SortableHandle,
   SortableItem,
   SortableOverlay,
   SortableRoot,
-} from '@fex/components-vue/primitive/sortable'
+} from '@fex-design/vue/primitive/sortable'
 import { computed, ref } from 'vue'
-import type { SortableItems } from '@fex/components-core/sortable/types'
+import type { SortableItems } from '@fex-design/core/sortable/types'
 
 const initialTasks = ['Backlog', 'Design', 'Build', 'Review']
 const initialPanels = {

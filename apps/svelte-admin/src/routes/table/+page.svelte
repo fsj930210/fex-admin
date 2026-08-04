@@ -1,13 +1,13 @@
 ﻿<script lang="ts">
-  import Badge from '@fex/components-svelte/ui/badge'
-  import Card from '@fex/components-svelte/ui/card'
-  import Table from '@fex/components-svelte/primitive/table'
-  import TableBody from '@fex/components-svelte/primitive/table-body'
-  import TableCaption from '@fex/components-svelte/primitive/table-caption'
-  import TableCell from '@fex/components-svelte/primitive/table-cell'
-  import TableHead from '@fex/components-svelte/primitive/table-head'
-  import TableHeader from '@fex/components-svelte/primitive/table-header'
-  import TableRow from '@fex/components-svelte/primitive/table-row'
+  import Badge from '@fex-design/svelte/ui/badge'
+  import Card from '@fex-design/svelte/ui/card'
+  import Table from '@fex-design/svelte/primitive/table'
+  import TableBody from '@fex-design/svelte/primitive/table-body'
+  import TableCaption from '@fex-design/svelte/primitive/table-caption'
+  import TableCell from '@fex-design/svelte/primitive/table-cell'
+  import TableHead from '@fex-design/svelte/primitive/table-head'
+  import TableHeader from '@fex-design/svelte/primitive/table-header'
+  import TableRow from '@fex-design/svelte/primitive/table-row'
 
   const invoices = [
     { id: 'INV-001', customer: 'Acme Co.', status: 'Paid', amount: '$320.00' },

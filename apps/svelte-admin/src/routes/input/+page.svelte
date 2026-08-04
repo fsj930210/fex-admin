@@ -1,13 +1,13 @@
 <script lang="ts">
-  import InputRoot from '@fex/components-svelte/primitive/input'
-  import InputControl from '@fex/components-svelte/primitive/input-control'
-  import InputPrefix from '@fex/components-svelte/primitive/input-prefix'
-  import InputSuffix from '@fex/components-svelte/primitive/input-suffix'
-  import InputAddonBefore from '@fex/components-svelte/primitive/input-addon-before'
-  import InputAddonAfter from '@fex/components-svelte/primitive/input-addon-after'
-  import InputClear from '@fex/components-svelte/primitive/input-clear'
-  import Button from '@fex/components-svelte/ui/button'
-  import Card from '@fex/components-svelte/ui/card'
+  import InputRoot from '@fex-design/svelte/primitive/input'
+  import InputControl from '@fex-design/svelte/primitive/input-control'
+  import InputPrefix from '@fex-design/svelte/primitive/input-prefix'
+  import InputSuffix from '@fex-design/svelte/primitive/input-suffix'
+  import InputAddonBefore from '@fex-design/svelte/primitive/input-addon-before'
+  import InputAddonAfter from '@fex-design/svelte/primitive/input-addon-after'
+  import InputClear from '@fex-design/svelte/primitive/input-clear'
+  import Button from '@fex-design/svelte/ui/button'
+  import Card from '@fex-design/svelte/ui/card'
 
   let controlledValue = $state('fex-admin')
   let manualValue = $state('manual-value')

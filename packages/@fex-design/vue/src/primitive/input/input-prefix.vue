@@ -1,0 +1,11 @@
+<script setup lang="ts">
+import { inputPrefixClassName } from '@fex-design/styles/input'
+import { cn } from '@fex/utils'
+defineOptions({ inheritAttrs: false })
+const props = defineProps<{ class?: string }>()
+</script>
+<template>
+  <span v-bind="$attrs" data-slot="input-prefix" :class="cn(inputPrefixClassName, props.class)"
+    ><slot
+  /></span>
+</template>

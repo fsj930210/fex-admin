@@ -1,9 +1,9 @@
 import {
   fileMd5Feature,
   type FileMd5FeatureApi,
-} from '@fex/components-core/upload/features/file-md5'
-import { multipartFeature } from '@fex/components-core/upload/features/multipart'
-import { createUploadSignals } from '@fex/components-angular/primitive/upload'
+} from '@fex-design/core/upload/features/file-md5'
+import { multipartFeature } from '@fex-design/core/upload/features/multipart'
+import { createUploadSignals } from '@fex-design/angular/primitive/upload'
 import { getJson, postJson, uploadBody, uploadServerUrl } from './api'
 import {
   multipartPartSize,

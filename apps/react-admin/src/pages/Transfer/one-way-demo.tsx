@@ -1,13 +1,13 @@
-import { ChevronRightIcon } from '@fex/components-react/icon/chevron'
-import { TrashIcon } from '@fex/components-react/icon/trash'
-import { SwitchRoot, SwitchThumb } from '@fex/components-react/primitive/switch'
+import { ChevronRightIcon } from '@fex-design/react/icon/chevron'
+import { TrashIcon } from '@fex-design/react/icon/trash'
+import { SwitchRoot, SwitchThumb } from '@fex-design/react/primitive/switch'
 import {
   TransferActions,
   useTransfer,
   type TransferPanelRenderApi,
-} from '@fex/components-react/primitive/transfer'
-import { Button } from '@fex/components-react/ui/button'
-import { Transfer } from '@fex/components-react/primitive/transfer'
+} from '@fex-design/react/primitive/transfer'
+import { Button } from '@fex-design/react/ui/button'
+import { Transfer } from '@fex-design/react/primitive/transfer'
 import { useState } from 'react'
 import { transferFieldNames, transferMembers, type TransferMember } from './data'
 import { TransferDemoSection } from './demo-section'

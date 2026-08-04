@@ -3,16 +3,16 @@ import type {
   SelectMode,
   SelectOption,
   SelectVirtualOptions,
-} from '@fex/components-core/select/types'
-import type { SelectionValue } from '@fex/components-core/selection/types'
+} from '@fex-design/core/select/types'
+import type { SelectionValue } from '@fex-design/core/selection/types'
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import {
   SelectContent,
   SelectList,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-angular/primitive/select'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/select'
+import Card from '@fex-design/angular/ui/card'
 export
 @Component({
   selector: 'fex-select-simple-demo',

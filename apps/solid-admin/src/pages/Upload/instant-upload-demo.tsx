@@ -1,5 +1,5 @@
-import { UploadRoot, UploadTrigger } from '@fex/components-solid/primitive/upload'
-import { Button } from '@fex/components-solid/ui/button'
+import { UploadRoot, UploadTrigger } from '@fex-design/solid/primitive/upload'
+import { Button } from '@fex-design/solid/ui/button'
 import { createMultipartDemoUpload } from './create-multipart-upload'
 import { DemoUploadList } from './demo-list'
 import { UploadDemoSection } from './demo-section'

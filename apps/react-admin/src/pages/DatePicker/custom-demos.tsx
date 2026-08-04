@@ -1,15 +1,15 @@
-import { createCalendarDate, getCalendarValueKey } from '@fex/components-core/calendar'
+import { createCalendarDate, getCalendarValueKey } from '@fex-design/core/calendar'
 import {
   CalendarCell,
   CalendarGrid,
   CalendarWeekHeader,
-} from '@fex/components-react/primitive/calendar'
+} from '@fex-design/react/primitive/calendar'
 import {
   DatePickerFooter,
   DatePickerPanel,
   useDatePickerContext,
-} from '@fex/components-react/primitive/date-picker'
-import { Button } from '@fex/components-react/ui/button'
+} from '@fex-design/react/primitive/date-picker'
+import { Button } from '@fex-design/react/ui/button'
 import { DemoDatePicker, DemoSection } from './shared'
 
 const releaseDate = createCalendarDate(2026, 7, 30)

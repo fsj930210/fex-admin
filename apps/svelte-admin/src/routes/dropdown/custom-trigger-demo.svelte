@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { DropdownContent, DropdownRoot, DropdownTrigger } from '@fex/components-svelte/primitive/dropdown'
-  import PopoverPortal from '@fex/components-svelte/primitive/popover-portal'
+  import { DropdownContent, DropdownRoot, DropdownTrigger } from '@fex-design/svelte/primitive/dropdown'
+  import PopoverPortal from '@fex-design/svelte/primitive/popover-portal'
   import MenuAction from './menu-action.svelte'
   import MenuSurface from './menu-surface.svelte'
 </script>

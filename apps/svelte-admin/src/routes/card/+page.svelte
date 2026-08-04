@@ -1,10 +1,10 @@
 <script lang="ts">
-  import PrimitiveCard from '@fex/components-svelte/primitive/card'
-  import Card from '@fex/components-svelte/ui/card'
-  import CardContent from '@fex/components-svelte/ui/card-content'
-  import CardDescription from '@fex/components-svelte/ui/card-description'
-  import CardHeader from '@fex/components-svelte/ui/card-header'
-  import CardTitle from '@fex/components-svelte/ui/card-title'
+  import PrimitiveCard from '@fex-design/svelte/primitive/card'
+  import Card from '@fex-design/svelte/ui/card'
+  import CardContent from '@fex-design/svelte/ui/card-content'
+  import CardDescription from '@fex-design/svelte/ui/card-description'
+  import CardHeader from '@fex-design/svelte/ui/card-header'
+  import CardTitle from '@fex-design/svelte/ui/card-title'
 
   type SpacingOption = {
     label: string

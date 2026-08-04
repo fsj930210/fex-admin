@@ -4,8 +4,8 @@ import {
   TimelineIndicator,
   TimelineItem,
   TimelineOpposite,
-} from '@fex/components-react/primitive/timeline'
-import { Card } from '@fex/components-react/ui/card'
+} from '@fex-design/react/primitive/timeline'
+import { Card } from '@fex-design/react/ui/card'
 
 export function BasicDemo() {
   return (

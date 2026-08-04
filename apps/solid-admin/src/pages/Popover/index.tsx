@@ -1,4 +1,4 @@
-import { Card } from '@fex/components-solid/ui/card'
+import { Card } from '@fex-design/solid/ui/card'
 import {
   Popover,
   PopoverArrow,
@@ -9,7 +9,7 @@ import {
   PopoverTitle,
   PopoverTrigger,
   type PopoverTriggerRenderProps,
-} from '@fex/components-solid/primitive/popover'
+} from '@fex-design/solid/primitive/popover'
 import { For, createSignal, type JSX } from 'solid-js'
 import { A } from '@solidjs/router'
 

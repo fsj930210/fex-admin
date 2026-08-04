@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Rate from '@fex/components-svelte/primitive/rate'
-  import Card from '@fex/components-svelte/ui/card'
+  import Rate from '@fex-design/svelte/primitive/rate'
+  import Card from '@fex-design/svelte/ui/card'
   let value = $state(4.3)
   let previewValue = $state<number | null>(null)
 </script>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import PrimitiveButton from '@fex/components-vue/primitive/button'
-import Button from '@fex/components-vue/ui/button'
-import Card from '@fex/components-vue/ui/card'
-import { PlusIcon } from '@fex/components-vue/icon/plus'
+import PrimitiveButton from '@fex-design/vue/primitive/button'
+import Button from '@fex-design/vue/ui/button'
+import Card from '@fex-design/vue/ui/card'
+import { PlusIcon } from '@fex-design/vue/icon/plus'
 
 const variants = [
   'default',

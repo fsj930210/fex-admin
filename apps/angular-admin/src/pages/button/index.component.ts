@@ -1,9 +1,9 @@
 ﻿import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Button as PrimitiveButton } from '@fex/components-angular/primitive/button'
-import { Button } from '@fex/components-angular/ui/button'
-import Card from '@fex/components-angular/ui/card'
-import { PlusIcon } from '@fex/components-angular/icon/plus'
+import { Button as PrimitiveButton } from '@fex-design/angular/primitive/button'
+import { Button } from '@fex-design/angular/ui/button'
+import Card from '@fex-design/angular/ui/card'
+import { PlusIcon } from '@fex-design/angular/icon/plus'
 
 @Component({
   selector: 'fexButton-page',

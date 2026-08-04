@@ -1,5 +1,5 @@
-﻿import { Badge } from '@fex/components-solid/ui/badge'
-import { Card } from '@fex/components-solid/ui/card'
+﻿import { Badge } from '@fex-design/solid/ui/badge'
+import { Card } from '@fex-design/solid/ui/card'
 import {
   Table,
   TableBody,
@@ -8,7 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@fex/components-solid/primitive/table'
+} from '@fex-design/solid/primitive/table'
 import { A } from '@solidjs/router'
 import { For } from 'solid-js'
 

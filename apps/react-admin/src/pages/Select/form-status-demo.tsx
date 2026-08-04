@@ -5,15 +5,15 @@ import {
   FieldLabel,
   FieldRequiredIndicator,
   FieldRoot,
-} from '@fex/components-react/primitive/field'
-import { Form, useForm } from '@fex/components-react/primitive/form'
+} from '@fex-design/react/primitive/field'
+import { Form, useForm } from '@fex-design/react/primitive/form'
 import {
   SelectContent,
   SelectList,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-react/primitive/select'
-import { Button } from '@fex/components-react/ui/button'
+} from '@fex-design/react/primitive/select'
+import { Button } from '@fex-design/react/ui/button'
 import { frameworkOptions } from './data'
 import { SelectDemoSection } from './demo-section'
 

@@ -1,0 +1,10 @@
+<script lang="ts">
+  import Card from '@fex-design/svelte/ui/card'
+  import type { Snippet } from 'svelte'
+
+  let { title, description, children }: { title: string; description: string; children: Snippet } = $props()
+</script>
+
+<Card {title} {description}>
+  {@render children()}
+</Card>

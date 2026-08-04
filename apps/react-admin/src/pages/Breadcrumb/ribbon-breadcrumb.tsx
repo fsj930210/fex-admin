@@ -1,0 +1,37 @@
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+} from '@fex-design/react/primitive/breadcrumb'
+
+export function RibbonBreadcrumb() {
+  return (
+    <Breadcrumb className="p-1">
+      <BreadcrumbList className="w-max items-center border border-border rounded-sm overflow-hidden">
+        <BreadcrumbItem>
+          <BreadcrumbLink
+            className="inline-flex items-center gap-0.5 px-4 py-0.5 mr-[calc(-1*10px+-4px)] text-sm leading-[1.75] bg-muted-background hover:bg-hover-background ribbon-breadcrumb ribbon-breadcrumb-first"
+            href="/"
+          >
+            Workspace
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink
+            className="inline-flex items-center gap-0.5 px-4 py-0.5 mr-[calc(-1*10px+-4px)] text-sm leading-[1.75] bg-muted-background hover:bg-hover-background ribbon-breadcrumb"
+            href="/projects"
+          >
+            Projects
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbPage className="inline-flex items-center gap-0.5 px-4 py-0.5 text-sm leading-[1.75] bg-muted-background hover:bg-hover-background ribbon-breadcrumb-last">
+            Quarterly plan
+          </BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  )
+}

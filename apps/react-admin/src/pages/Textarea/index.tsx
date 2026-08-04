@@ -1,5 +1,5 @@
-import { Textarea } from '@fex/components-react/primitive/textarea'
-import { Card } from '@fex/components-react/ui/card'
+import { Textarea } from '@fex-design/react/primitive/textarea'
+import { Card } from '@fex-design/react/ui/card'
 import { Link } from 'react-router'
 
 export function TextareaPage() {

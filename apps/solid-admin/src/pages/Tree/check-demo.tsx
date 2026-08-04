@@ -1,5 +1,5 @@
-import { checkFeature, expansionFeature } from '@fex/components-core'
-import { Card } from '@fex/components-solid/ui/card'
+import { checkFeature, expansionFeature } from '@fex-design/core'
+import { Card } from '@fex-design/solid/ui/card'
 import { createSignal } from 'solid-js'
 import { DemoTree } from './demo-tree'
 import { departmentFieldNames, departmentTreeData } from './data'

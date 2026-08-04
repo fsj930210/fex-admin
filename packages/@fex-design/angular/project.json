@@ -1,0 +1,13 @@
+{
+  "name": "components-angular",
+  "sourceRoot": "packages/@fex-design/angular/src",
+  "projectType": "library",
+  "targets": {
+    "sync-paths": {
+      "command": "node packages/@fex-design/angular/scripts/sync-tsconfig-paths.mjs",
+      "options": { "cwd": "{workspaceRoot}" }
+    },
+    "typecheck": { "command": "ngc -p packages/@fex-design/angular/tsconfig.json --noEmit" },
+    "lint": { "command": "oxlint packages/@fex-design/angular/src" }
+  }
+}

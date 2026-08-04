@@ -1,5 +1,5 @@
-﻿import { Badge } from '@fex/components-solid/ui/badge'
-import { Card } from '@fex/components-solid/ui/card'
+﻿import { Badge } from '@fex-design/solid/ui/badge'
+import { Card } from '@fex-design/solid/ui/card'
 import { A } from '@solidjs/router'
 import { For } from 'solid-js'
 

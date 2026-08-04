@@ -1,4 +1,4 @@
-import { Card } from '@fex/components-react/ui/card'
+import { Card } from '@fex-design/react/ui/card'
 import { Link } from 'react-router'
 import { BasicDemo } from './basic-demo'
 import { ControlledDemo } from './controlled-demo'

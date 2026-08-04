@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { TreeController, TreeItem as CoreItem, TreeVisibleItem } from '@fex/components-core/tree/types'
-  import { TreeItem, TreeTitle, TreeTrigger } from '@fex/components-svelte/primitive/tree'
-  import Checkbox from '@fex/components-svelte/ui/checkbox'
-  import Spinner from '@fex/components-svelte/ui/spinner'
+  import type { TreeController, TreeItem as CoreItem, TreeVisibleItem } from '@fex-design/core/tree/types'
+  import { TreeItem, TreeTitle, TreeTrigger } from '@fex-design/svelte/primitive/tree'
+  import Checkbox from '@fex-design/svelte/ui/checkbox'
+  import Spinner from '@fex-design/svelte/ui/spinner'
   import type { Snippet } from 'svelte'
   import type { DepartmentNode } from './data'
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Card from '@fex/components-svelte/ui/card'
+  import Card from '@fex-design/svelte/ui/card'
   import BasicDemo from './basic-demo.svelte'
   import ControlledDemo from './controlled-demo.svelte'
   import DisabledDemo from './disabled-demo.svelte'

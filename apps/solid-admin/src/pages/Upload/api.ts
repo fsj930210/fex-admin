@@ -1,5 +1,5 @@
 /* oxlint-disable unicorn/prefer-add-event-listener -- Each request owns one handler per XHR lifecycle event. */
-import type { UploadProgress } from '@fex/components-core/upload/types'
+import type { UploadProgress } from '@fex-design/core/upload/types'
 export const uploadServerUrl = '/upload-api'
 async function requestJson<T>(url: string, init?: RequestInit) {
   const response = await fetch(url, init)

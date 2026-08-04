@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { CheckIcon } from '@fex/components-angular/icon/check'
-import { ClockIcon } from '@fex/components-angular/icon/clock'
+import { CheckIcon } from '@fex-design/angular/icon/check'
+import { ClockIcon } from '@fex-design/angular/icon/clock'
 import {
   Timeline,
   TimelineContent,
   TimelineIndicator,
   TimelineItem,
   TimelineOpposite,
-} from '@fex/components-angular/primitive/timeline'
-import { Badge } from '@fex/components-angular/ui/badge'
-import { Card } from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/timeline'
+import { Badge } from '@fex-design/angular/ui/badge'
+import { Card } from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fex-timeline-custom-node-demo',

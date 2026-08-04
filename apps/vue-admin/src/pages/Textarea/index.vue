@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Textarea } from '@fex/components-vue/primitive/textarea'
-import Card from '@fex/components-vue/ui/card'
+import { Textarea } from '@fex-design/vue/primitive/textarea'
+import Card from '@fex-design/vue/ui/card'
 </script>
 
 <template>

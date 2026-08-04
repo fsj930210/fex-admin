@@ -6,8 +6,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@fex/components-angular/primitive/card'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/card'
+import Card from '@fex-design/angular/ui/card'
 
 type SpacingOption = {
   label: string

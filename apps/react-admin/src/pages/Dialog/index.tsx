@@ -1,7 +1,7 @@
-import * as Dialog from '@fex/components-react/primitive/dialog'
-import { CloseIcon } from '@fex/components-react/icon/close'
-import { Button } from '@fex/components-react/ui/button'
-import { Card } from '@fex/components-react/ui/card'
+import * as Dialog from '@fex-design/react/primitive/dialog'
+import { CloseIcon } from '@fex-design/react/icon/close'
+import { Button } from '@fex-design/react/ui/button'
+import { Card } from '@fex-design/react/ui/card'
 import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
 

@@ -1,5 +1,5 @@
-import * as Dropdown from '@fex/components-react/primitive/dropdown'
-import { PopoverPortal } from '@fex/components-react/primitive/popover'
+import * as Dropdown from '@fex-design/react/primitive/dropdown'
+import { PopoverPortal } from '@fex-design/react/primitive/popover'
 import { MenuAction, MenuSurface } from './demo-parts'
 
 export function CustomTriggerDemo() {

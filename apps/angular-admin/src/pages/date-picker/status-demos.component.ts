@@ -4,8 +4,8 @@ import {
   FieldError,
   FieldLabel,
   FieldRoot,
-} from '@fex/components-angular/primitive/field'
-import { Card } from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/field'
+import { Card } from '@fex-design/angular/ui/card'
 import { DemoDatePicker, DemoRangePicker } from './demo-date-picker.component'
 
 @Component({

@@ -5,14 +5,14 @@
     getCalendarValueKey,
     type CalendarCell as CalendarCellModel,
     type CalendarValue,
-  } from '@fex/components-core/calendar'
-  import CalendarRoot from '@fex/components-svelte/primitive/calendar'
-  import CalendarCell from '@fex/components-svelte/primitive/calendar-cell'
-  import CalendarGrid from '@fex/components-svelte/primitive/calendar-grid'
-  import CalendarHeader from '@fex/components-svelte/primitive/calendar-header'
-  import CalendarNavigationButton from '@fex/components-svelte/primitive/calendar-navigation-button'
-  import CalendarWeekHeader from '@fex/components-svelte/primitive/calendar-week-header'
-  import Card from '@fex/components-svelte/ui/card'
+  } from '@fex-design/core/calendar'
+  import CalendarRoot from '@fex-design/svelte/primitive/calendar'
+  import CalendarCell from '@fex-design/svelte/primitive/calendar-cell'
+  import CalendarGrid from '@fex-design/svelte/primitive/calendar-grid'
+  import CalendarHeader from '@fex-design/svelte/primitive/calendar-header'
+  import CalendarNavigationButton from '@fex-design/svelte/primitive/calendar-navigation-button'
+  import CalendarWeekHeader from '@fex-design/svelte/primitive/calendar-week-header'
+  import Card from '@fex-design/svelte/ui/card'
   import type { Snippet } from 'svelte'
 
   const july = createCalendarDate(2026, 7, 1)

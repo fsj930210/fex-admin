@@ -1,4 +1,4 @@
-import { analyzeTimeFormat } from '@fex/components-core/date/utils'
+import { analyzeTimeFormat } from '@fex-design/core/date/utils'
 import {
   TimePickerContent,
   TimePickerHourColumn,
@@ -10,8 +10,8 @@ import {
   TimePickerTrigger,
   type DisabledTime,
   type TimeValue,
-} from '@fex/components-solid/primitive/time-picker'
-import { Button } from '@fex/components-solid/ui/button'
+} from '@fex-design/solid/primitive/time-picker'
+import { Button } from '@fex-design/solid/ui/button'
 import { createMemo, createSignal, For, Show, type JSX } from 'solid-js'
 
 export interface DemoTimePickerProps {

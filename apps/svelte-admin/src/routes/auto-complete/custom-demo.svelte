@@ -1,9 +1,9 @@
 <script lang="ts">
-  import AutoCompleteRoot from '@fex/components-svelte/primitive/auto-complete'
-  import AutoCompleteContent from '@fex/components-svelte/primitive/auto-complete-content'
-  import AutoCompleteList from '@fex/components-svelte/primitive/auto-complete-list'
-  import AutoCompleteTrigger from '@fex/components-svelte/primitive/auto-complete-trigger'
-  import Card from '@fex/components-svelte/ui/card'
+  import AutoCompleteRoot from '@fex-design/svelte/primitive/auto-complete'
+  import AutoCompleteContent from '@fex-design/svelte/primitive/auto-complete-content'
+  import AutoCompleteList from '@fex-design/svelte/primitive/auto-complete-list'
+  import AutoCompleteTrigger from '@fex-design/svelte/primitive/auto-complete-trigger'
+  import Card from '@fex-design/svelte/ui/card'
   import { fieldNames, users } from './data'
 </script>
 <div class="grid gap-space-xl md:grid-cols-2">

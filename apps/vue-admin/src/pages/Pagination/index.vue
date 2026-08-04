@@ -7,8 +7,8 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@fex/components-vue/primitive/pagination'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/pagination'
+import Card from '@fex-design/vue/ui/card'
 </script>
 
 <template>

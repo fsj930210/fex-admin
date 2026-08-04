@@ -4,7 +4,7 @@ import type {
   TreeNodeData,
   TreeOptions,
   TreeVisibleItem,
-} from '@fex/components-core/tree/types'
+} from '@fex-design/core/tree/types'
 import {
   TreeItem,
   TreeRoot,
@@ -12,14 +12,14 @@ import {
   TreeTrigger,
   TreeVirtualViewport,
   TreeViewport,
-} from '@fex/components-react/primitive/tree'
-import type { TreeVirtualViewportHandle } from '@fex/components-react/primitive/tree'
-import { Checkbox } from '@fex/components-react/ui/checkbox'
-import { Spinner } from '@fex/components-react/ui/spinner'
+} from '@fex-design/react/primitive/tree'
+import type { TreeVirtualViewportHandle } from '@fex-design/react/primitive/tree'
+import { Checkbox } from '@fex-design/react/ui/checkbox'
+import { Spinner } from '@fex-design/react/ui/spinner'
 import { cn } from '@fex/utils'
 import type { ReactNode, Ref } from 'react'
 
-export type { TreeVirtualViewportHandle } from '@fex/components-react/primitive/tree'
+export type { TreeVirtualViewportHandle } from '@fex-design/react/primitive/tree'
 
 interface DemoTreeTitleRenderContext<TNode extends TreeNodeData> {
   item: CoreTreeItem<TNode>

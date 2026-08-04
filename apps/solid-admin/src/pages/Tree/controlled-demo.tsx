@@ -3,9 +3,9 @@ import {
   focusFeature,
   keyboardFeature,
   selectionFeature,
-} from '@fex/components-core'
-import { Button } from '@fex/components-solid/ui/button'
-import { Card } from '@fex/components-solid/ui/card'
+} from '@fex-design/core'
+import { Button } from '@fex-design/solid/ui/button'
+import { Card } from '@fex-design/solid/ui/card'
 import { createSignal } from 'solid-js'
 import { DemoTree } from './demo-tree'
 import { departmentFieldNames, departmentTreeData } from './data'

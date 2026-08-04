@@ -1,4 +1,4 @@
-import { analyzeTimeFormat } from '@fex/components-core/date/utils'
+import { analyzeTimeFormat } from '@fex-design/core/date/utils'
 import {
   TimePickerContent,
   TimePickerHourColumn,
@@ -12,9 +12,9 @@ import {
   TimePickerTrigger,
   type DisabledTime,
   type TimeValue,
-} from '@fex/components-angular/primitive/time-picker'
-import { CalendarIcon } from '@fex/components-angular/icon/calendar'
-import { Button } from '@fex/components-angular/ui/button'
+} from '@fex-design/angular/primitive/time-picker'
+import { CalendarIcon } from '@fex-design/angular/icon/calendar'
+import { Button } from '@fex-design/angular/ui/button'
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core'
 
 @Component({

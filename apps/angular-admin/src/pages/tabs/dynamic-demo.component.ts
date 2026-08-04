@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
-import { CloseIcon } from '@fex/components-angular/icon/close'
-import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex/components-angular/primitive/tabs'
-import Card from '@fex/components-angular/ui/card'
+import { CloseIcon } from '@fex-design/angular/icon/close'
+import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex-design/angular/primitive/tabs'
+import Card from '@fex-design/angular/ui/card'
 import { createTab, initialTabs } from './data'
 @Component({
   selector: 'fex-dynamic-tabs-demo',

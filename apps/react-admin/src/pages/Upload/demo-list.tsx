@@ -4,8 +4,8 @@ import {
   UploadItemProgress,
   UploadList,
   useUploadContext,
-} from '@fex/components-react/primitive/upload'
-import { Button } from '@fex/components-react/ui/button'
+} from '@fex-design/react/primitive/upload'
+import { Button } from '@fex-design/react/ui/button'
 import { useSyncExternalStore } from 'react'
 import { MultipartDetails } from './multipart-details'
 

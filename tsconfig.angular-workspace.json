@@ -4,611 +4,614 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
-      "@fex/components-core/auto-complete/create-auto-complete-controller": [
-        "packages/components/core/src/auto-complete/create-auto-complete-controller.ts"
+      "@fex-design/core/auto-complete/create-auto-complete-controller": [
+        "packages/@fex-design/core/src/auto-complete/create-auto-complete-controller.ts"
       ],
-      "@fex/components-core/auto-complete/items": [
-        "packages/components/core/src/auto-complete/items.ts"
+      "@fex-design/core/auto-complete/items": [
+        "packages/@fex-design/core/src/auto-complete/items.ts"
       ],
-      "@fex/components-core/auto-complete/types": [
-        "packages/components/core/src/auto-complete/types.ts"
+      "@fex-design/core/auto-complete/types": [
+        "packages/@fex-design/core/src/auto-complete/types.ts"
       ],
-      "@fex/components-core/calendar": [
-        "packages/components/core/src/calendar/index.ts"
+      "@fex-design/core/calendar": [
+        "packages/@fex-design/core/src/calendar/index.ts"
       ],
-      "@fex/components-core/calendar/grid": [
-        "packages/components/core/src/calendar/grid.ts"
+      "@fex-design/core/calendar/grid": [
+        "packages/@fex-design/core/src/calendar/grid.ts"
       ],
-      "@fex/components-core/calendar/range": [
-        "packages/components/core/src/calendar/range.ts"
+      "@fex-design/core/calendar/range": [
+        "packages/@fex-design/core/src/calendar/range.ts"
       ],
-      "@fex/components-core/calendar/temporal": [
-        "packages/components/core/src/calendar/temporal.ts"
+      "@fex-design/core/calendar/temporal": [
+        "packages/@fex-design/core/src/calendar/temporal.ts"
       ],
-      "@fex/components-core/calendar/types": [
-        "packages/components/core/src/calendar/types.ts"
+      "@fex-design/core/calendar/types": [
+        "packages/@fex-design/core/src/calendar/types.ts"
       ],
-      "@fex/components-core/date-picker/constraints": [
-        "packages/components/core/src/date-picker/constraints.ts"
+      "@fex-design/core/date-picker/constraints": [
+        "packages/@fex-design/core/src/date-picker/constraints.ts"
       ],
-      "@fex/components-core/date-picker/input": [
-        "packages/components/core/src/date-picker/input.ts"
+      "@fex-design/core/date-picker/input": [
+        "packages/@fex-design/core/src/date-picker/input.ts"
       ],
-      "@fex/components-core/date-picker/panel": [
-        "packages/components/core/src/date-picker/panel.ts"
+      "@fex-design/core/date-picker/panel": [
+        "packages/@fex-design/core/src/date-picker/panel.ts"
       ],
-      "@fex/components-core/date-picker/range": [
-        "packages/components/core/src/date-picker/range.ts"
+      "@fex-design/core/date-picker/range": [
+        "packages/@fex-design/core/src/date-picker/range.ts"
       ],
-      "@fex/components-core/date-picker/types": [
-        "packages/components/core/src/date-picker/types.ts"
+      "@fex-design/core/date-picker/types": [
+        "packages/@fex-design/core/src/date-picker/types.ts"
       ],
-      "@fex/components-core/date-picker/value": [
-        "packages/components/core/src/date-picker/value.ts"
+      "@fex-design/core/date-picker/value": [
+        "packages/@fex-design/core/src/date-picker/value.ts"
       ],
-      "@fex/components-core/carousel/types": [
-        "packages/components/core/src/carousel/types.ts"
+      "@fex-design/core/carousel/types": [
+        "packages/@fex-design/core/src/carousel/types.ts"
       ],
-      "@fex/components-core/carousel/create-carousel-controller": [
-        "packages/components/core/src/carousel/create-carousel-controller.ts"
+      "@fex-design/core/carousel/create-carousel-controller": [
+        "packages/@fex-design/core/src/carousel/create-carousel-controller.ts"
       ],
-      "@fex/components-core/date/utils": [
-        "packages/components/core/src/date/utils.ts"
+      "@fex-design/core/date/utils": [
+        "packages/@fex-design/core/src/date/utils.ts"
       ],
-      "@fex/components-core/time-picker/types": [
-        "packages/components/core/src/time-picker/types.ts"
+      "@fex-design/core/time-picker/types": [
+        "packages/@fex-design/core/src/time-picker/types.ts"
       ],
-      "@fex/components-core/time-picker/value": [
-        "packages/components/core/src/time-picker/value.ts"
+      "@fex-design/core/time-picker/value": [
+        "packages/@fex-design/core/src/time-picker/value.ts"
       ],
-      "@fex/components-core/time-picker/options": [
-        "packages/components/core/src/time-picker/options.ts"
+      "@fex-design/core/time-picker/options": [
+        "packages/@fex-design/core/src/time-picker/options.ts"
       ],
-      "@fex/components-core/time-picker/create-time-picker-controller": [
-        "packages/components/core/src/time-picker/create-time-picker-controller.ts"
+      "@fex-design/core/time-picker/create-time-picker-controller": [
+        "packages/@fex-design/core/src/time-picker/create-time-picker-controller.ts"
       ],
-      "@fex/components-core/data-grid/types": [
-        "packages/components/core/src/data-grid/types.ts"
+      "@fex-design/core/data-table/types": [
+        "packages/@fex-design/core/src/data-table/types.ts"
       ],
-      "@fex/components-core/data-grid/layout": [
-        "packages/components/core/src/data-grid/layout.ts"
+      "@fex-design/core/data-table/layout": [
+        "packages/@fex-design/core/src/data-table/layout.ts"
       ],
-      "@fex/components-core/data-grid/rendering": [
-        "packages/components/core/src/data-grid/layout.ts"
+      "@fex-design/core/data-table/rendering": [
+        "packages/@fex-design/core/src/data-table/layout.ts"
       ],
-      "@fex/components-core/data-grid/create-data-grid-controller": [
-        "packages/components/core/src/data-grid/create-data-grid-controller.ts"
+      "@fex-design/core/data-table/create-data-table-controller": [
+        "packages/@fex-design/core/src/data-table/create-data-table-controller.ts"
       ],
-      "@fex/components-core/data-grid/prepare-columns": [
-        "packages/components/core/src/data-grid/prepare-columns.ts"
+      "@fex-design/core/data-table/prepare-columns": [
+        "packages/@fex-design/core/src/data-table/prepare-columns.ts"
       ],
-      "@fex/components-core/data-grid/features/column-filtering": [
-        "packages/components/core/src/data-grid/features/column-filtering.ts"
+      "@fex-design/core/data-table/features/column-filtering": [
+        "packages/@fex-design/core/src/data-table/features/column-filtering.ts"
       ],
-      "@fex/components-core/data-grid/features/row-sorting": [
-        "packages/components/core/src/data-grid/features/row-sorting.ts"
+      "@fex-design/core/data-table/features/row-sorting": [
+        "packages/@fex-design/core/src/data-table/features/row-sorting.ts"
       ],
-      "@fex/components-core/data-grid/features/client-pagination": [
-        "packages/components/core/src/data-grid/features/client-pagination.ts"
+      "@fex-design/core/data-table/features/client-pagination": [
+        "packages/@fex-design/core/src/data-table/features/client-pagination.ts"
       ],
-      "@fex/components-core/data-grid/features/server-pagination": [
-        "packages/components/core/src/data-grid/features/server-pagination.ts"
+      "@fex-design/core/data-table/features/server-pagination": [
+        "packages/@fex-design/core/src/data-table/features/server-pagination.ts"
       ],
-      "@fex/components-core/data-grid/features/row-selection": [
-        "packages/components/core/src/data-grid/features/row-selection.ts"
+      "@fex-design/core/data-table/features/row-selection": [
+        "packages/@fex-design/core/src/data-table/features/row-selection.ts"
       ],
-      "@fex/components-core/data-grid/features/row-expanding": [
-        "packages/components/core/src/data-grid/features/row-expanding.ts"
+      "@fex-design/core/data-table/features/row-expanding": [
+        "packages/@fex-design/core/src/data-table/features/row-expanding.ts"
       ],
-      "@fex/components-core/data-grid/features/column-visibility": [
-        "packages/components/core/src/data-grid/features/column-visibility.ts"
+      "@fex-design/core/data-table/features/column-visibility": [
+        "packages/@fex-design/core/src/data-table/features/column-visibility.ts"
       ],
-      "@fex/components-core/data-grid/features/column-ordering": [
-        "packages/components/core/src/data-grid/features/column-ordering.ts"
+      "@fex-design/core/data-table/features/column-ordering": [
+        "packages/@fex-design/core/src/data-table/features/column-ordering.ts"
       ],
-      "@fex/components-core/data-grid/features/column-pinning": [
-        "packages/components/core/src/data-grid/features/column-pinning.ts"
+      "@fex-design/core/data-table/features/column-pinning": [
+        "packages/@fex-design/core/src/data-table/features/column-pinning.ts"
       ],
-      "@fex/components-core/data-grid/features/row-pinning": [
-        "packages/components/core/src/data-grid/features/row-pinning.ts"
+      "@fex-design/core/data-table/features/row-pinning": [
+        "packages/@fex-design/core/src/data-table/features/row-pinning.ts"
       ],
-      "@fex/components-core/data-grid/features/column-sizing": [
-        "packages/components/core/src/data-grid/features/column-sizing.ts"
+      "@fex-design/core/data-table/features/column-sizing": [
+        "packages/@fex-design/core/src/data-table/features/column-sizing.ts"
       ],
-      "@fex/components-core/data-grid/features/column-grouping": [
-        "packages/components/core/src/data-grid/features/column-grouping.ts"
+      "@fex-design/core/data-table/features/column-grouping": [
+        "packages/@fex-design/core/src/data-table/features/column-grouping.ts"
       ],
-      "@fex/components-core/calendar/value": [
-        "packages/components/core/src/calendar/value.ts"
+      "@fex-design/core/calendar/value": [
+        "packages/@fex-design/core/src/calendar/value.ts"
       ],
-      "@fex/components-core/store/create-store": [
-        "packages/components/core/src/store/create-store.ts"
+      "@fex-design/core/store/create-store": [
+        "packages/@fex-design/core/src/store/create-store.ts"
       ],
-      "@fex/components-core/steps/types": [
-        "packages/components/core/src/steps/types.ts"
+      "@fex-design/core/steps/types": [
+        "packages/@fex-design/core/src/steps/types.ts"
       ],
-      "@fex/components-core/steps/create-steps-controller": [
-        "packages/components/core/src/steps/create-steps-controller.ts"
+      "@fex-design/core/steps/create-steps-controller": [
+        "packages/@fex-design/core/src/steps/create-steps-controller.ts"
       ],
-      "@fex/components-core/tree/create-tree-controller": [
-        "packages/components/core/src/tree/create-tree-controller.ts"
+      "@fex-design/core/tree/create-tree-controller": [
+        "packages/@fex-design/core/src/tree/create-tree-controller.ts"
       ],
-      "@fex/components-core/tree/create-feature-runtime": [
-        "packages/components/core/src/tree/create-feature-runtime.ts"
+      "@fex-design/core/tree/create-feature-runtime": [
+        "packages/@fex-design/core/src/tree/create-feature-runtime.ts"
       ],
-      "@fex/components-core/tree/feature-types": [
-        "packages/components/core/src/tree/feature-types.ts"
+      "@fex-design/core/tree/feature-types": [
+        "packages/@fex-design/core/src/tree/feature-types.ts"
       ],
-      "@fex/components-core/tree/features/expansion": [
-        "packages/components/core/src/tree/features/expansion.ts"
+      "@fex-design/core/tree/features/expansion": [
+        "packages/@fex-design/core/src/tree/features/expansion.ts"
       ],
-      "@fex/components-core/tree/features/selection": [
-        "packages/components/core/src/tree/features/selection.ts"
+      "@fex-design/core/tree/features/selection": [
+        "packages/@fex-design/core/src/tree/features/selection.ts"
       ],
-      "@fex/components-core/tree/features/check": [
-        "packages/components/core/src/tree/features/check.ts"
+      "@fex-design/core/tree/features/check": [
+        "packages/@fex-design/core/src/tree/features/check.ts"
       ],
-      "@fex/components-core/tree/features/async-load": [
-        "packages/components/core/src/tree/features/async-load.ts"
+      "@fex-design/core/tree/features/async-load": [
+        "packages/@fex-design/core/src/tree/features/async-load.ts"
       ],
-      "@fex/components-core/tree/features/focus": [
-        "packages/components/core/src/tree/features/focus.ts"
+      "@fex-design/core/tree/features/focus": [
+        "packages/@fex-design/core/src/tree/features/focus.ts"
       ],
-      "@fex/components-core/tree/features/search": [
-        "packages/components/core/src/tree/features/search.ts"
+      "@fex-design/core/tree/features/search": [
+        "packages/@fex-design/core/src/tree/features/search.ts"
       ],
-      "@fex/components-core/tree/features/dnd": [
-        "packages/components/core/src/tree/features/dnd.ts"
+      "@fex-design/core/tree/features/dnd": [
+        "packages/@fex-design/core/src/tree/features/dnd.ts"
       ],
-      "@fex/components-core/tree/features/keyboard": [
-        "packages/components/core/src/tree/features/keyboard.ts"
+      "@fex-design/core/tree/features/keyboard": [
+        "packages/@fex-design/core/src/tree/features/keyboard.ts"
       ],
-      "@fex/components-core/tree/get-search-subtree": [
-        "packages/components/core/src/tree/get-search-subtree.ts"
+      "@fex-design/core/tree/get-search-subtree": [
+        "packages/@fex-design/core/src/tree/get-search-subtree.ts"
       ],
-      "@fex/components-core/tree/types": [
-        "packages/components/core/src/tree/types.ts"
+      "@fex-design/core/tree/types": [
+        "packages/@fex-design/core/src/tree/types.ts"
       ],
-      "@fex/components-core/upload/create-upload-controller": [
-        "packages/components/core/src/upload/create-upload-controller.ts"
+      "@fex-design/core/upload/create-upload-controller": [
+        "packages/@fex-design/core/src/upload/create-upload-controller.ts"
       ],
-      "@fex/components-core/upload/feature-types": [
-        "packages/components/core/src/upload/feature-types.ts"
+      "@fex-design/core/upload/feature-types": [
+        "packages/@fex-design/core/src/upload/feature-types.ts"
       ],
-      "@fex/components-core/upload/get-dropped-files": [
-        "packages/components/core/src/upload/get-dropped-files.ts"
+      "@fex-design/core/upload/get-dropped-files": [
+        "packages/@fex-design/core/src/upload/get-dropped-files.ts"
       ],
-      "@fex/components-core/upload/types": [
-        "packages/components/core/src/upload/types.ts"
+      "@fex-design/core/upload/types": [
+        "packages/@fex-design/core/src/upload/types.ts"
       ],
-      "@fex/components-core/upload/features/directory": [
-        "packages/components/core/src/upload/features/directory.ts"
+      "@fex-design/core/upload/features/directory": [
+        "packages/@fex-design/core/src/upload/features/directory.ts"
       ],
-      "@fex/components-core/upload/features/drop": [
-        "packages/components/core/src/upload/features/drop.ts"
+      "@fex-design/core/upload/features/drop": [
+        "packages/@fex-design/core/src/upload/features/drop.ts"
       ],
-      "@fex/components-core/upload/features/file-md5": [
-        "packages/components/core/src/upload/features/file-md5.ts"
+      "@fex-design/core/upload/features/file-md5": [
+        "packages/@fex-design/core/src/upload/features/file-md5.ts"
       ],
-      "@fex/components-core/upload/features/multipart": [
-        "packages/components/core/src/upload/features/multipart.ts"
+      "@fex-design/core/upload/features/multipart": [
+        "packages/@fex-design/core/src/upload/features/multipart.ts"
       ],
-      "@fex/components-core/upload/features/paste": [
-        "packages/components/core/src/upload/features/paste.ts"
+      "@fex-design/core/upload/features/paste": [
+        "packages/@fex-design/core/src/upload/features/paste.ts"
       ],
-      "@fex/components-core/upload/features/preview": [
-        "packages/components/core/src/upload/features/preview.ts"
+      "@fex-design/core/upload/features/preview": [
+        "packages/@fex-design/core/src/upload/features/preview.ts"
       ],
-      "@fex/components-core/upload/features/upload": [
-        "packages/components/core/src/upload/features/upload.ts"
+      "@fex-design/core/upload/features/upload": [
+        "packages/@fex-design/core/src/upload/features/upload.ts"
       ],
-      "@fex/components-core/toggle/create-toggle-controller": [
-        "packages/components/core/src/toggle/create-toggle-controller.ts"
+      "@fex-design/core/toggle/create-toggle-controller": [
+        "packages/@fex-design/core/src/toggle/create-toggle-controller.ts"
       ],
-      "@fex/components-core/toggle/types": [
-        "packages/components/core/src/toggle/types.ts"
+      "@fex-design/core/toggle/types": [
+        "packages/@fex-design/core/src/toggle/types.ts"
       ],
-      "@fex/components-core/tabs/create-tabs-controller": [
-        "packages/components/core/src/tabs/create-tabs-controller.ts"
+      "@fex-design/core/tabs/create-tabs-controller": [
+        "packages/@fex-design/core/src/tabs/create-tabs-controller.ts"
       ],
-      "@fex/components-core/tabs/types": [
-        "packages/components/core/src/tabs/types.ts"
+      "@fex-design/core/tabs/types": [
+        "packages/@fex-design/core/src/tabs/types.ts"
       ],
-      "@fex/components-core/tooltip/create-tooltip": [
-        "packages/components/core/src/tooltip/create-tooltip.ts"
+      "@fex-design/core/tooltip/create-tooltip": [
+        "packages/@fex-design/core/src/tooltip/create-tooltip.ts"
       ],
-      "@fex/components-core/slider/create-slider-controller": [
-        "packages/components/core/src/slider/create-slider-controller.ts"
+      "@fex-design/core/slider/create-slider-controller": [
+        "packages/@fex-design/core/src/slider/create-slider-controller.ts"
       ],
-      "@fex/components-core/slider/types": [
-        "packages/components/core/src/slider/types.ts"
+      "@fex-design/core/slider/types": [
+        "packages/@fex-design/core/src/slider/types.ts"
       ],
-      "@fex/components-core/slider/utils": [
-        "packages/components/core/src/slider/utils.ts"
+      "@fex-design/core/slider/utils": [
+        "packages/@fex-design/core/src/slider/utils.ts"
       ],
-      "@fex/components-core/rate/create-rate-controller": [
-        "packages/components/core/src/rate/create-rate-controller.ts"
+      "@fex-design/core/rate/create-rate-controller": [
+        "packages/@fex-design/core/src/rate/create-rate-controller.ts"
       ],
-      "@fex/components-core/rate/types": [
-        "packages/components/core/src/rate/types.ts"
+      "@fex-design/core/rate/types": [
+        "packages/@fex-design/core/src/rate/types.ts"
       ],
-      "@fex/components-core/rate/utils": [
-        "packages/components/core/src/rate/utils.ts"
+      "@fex-design/core/rate/utils": [
+        "packages/@fex-design/core/src/rate/utils.ts"
       ],
-      "@fex/components-core/scrollbar/create-scrollbar-controller": [
-        "packages/components/core/src/scrollbar/create-scrollbar-controller.ts"
+      "@fex-design/core/scrollbar/create-scrollbar-controller": [
+        "packages/@fex-design/core/src/scrollbar/create-scrollbar-controller.ts"
       ],
-      "@fex/components-core/scrollbar/types": [
-        "packages/components/core/src/scrollbar/types.ts"
+      "@fex-design/core/scrollbar/types": [
+        "packages/@fex-design/core/src/scrollbar/types.ts"
       ],
-      "@fex/components-core/checkbox/create-checkbox-controller": [
-        "packages/components/core/src/checkbox/create-checkbox-controller.ts"
+      "@fex-design/core/checkbox/create-checkbox-controller": [
+        "packages/@fex-design/core/src/checkbox/create-checkbox-controller.ts"
       ],
-      "@fex/components-core/checkbox/create-checkbox-group-controller": [
-        "packages/components/core/src/checkbox/create-checkbox-group-controller.ts"
+      "@fex-design/core/checkbox/create-checkbox-group-controller": [
+        "packages/@fex-design/core/src/checkbox/create-checkbox-group-controller.ts"
       ],
-      "@fex/components-core/checkbox/types": [
-        "packages/components/core/src/checkbox/types.ts"
+      "@fex-design/core/checkbox/types": [
+        "packages/@fex-design/core/src/checkbox/types.ts"
       ],
-      "@fex/components-core/checkbox/utils": [
-        "packages/components/core/src/checkbox/utils.ts"
+      "@fex-design/core/checkbox/utils": [
+        "packages/@fex-design/core/src/checkbox/utils.ts"
       ],
-      "@fex/components-core/dialog/create-dialog-controller": [
-        "packages/components/core/src/dialog/create-dialog-controller.ts"
+      "@fex-design/core/dialog/create-dialog-controller": [
+        "packages/@fex-design/core/src/dialog/create-dialog-controller.ts"
       ],
-      "@fex/components-core/dialog/types": [
-        "packages/components/core/src/dialog/types.ts"
+      "@fex-design/core/dialog/types": [
+        "packages/@fex-design/core/src/dialog/types.ts"
       ],
-      "@fex/components-core/drawer/create-drawer-controller": [
-        "packages/components/core/src/drawer/create-drawer-controller.ts"
+      "@fex-design/core/drawer/create-drawer-controller": [
+        "packages/@fex-design/core/src/drawer/create-drawer-controller.ts"
       ],
-      "@fex/components-core/drawer/types": [
-        "packages/components/core/src/drawer/types.ts"
+      "@fex-design/core/drawer/types": [
+        "packages/@fex-design/core/src/drawer/types.ts"
       ],
-      "@fex/components-core/toast/create-toast-manager": [
-        "packages/components/core/src/toast/create-toast-manager.ts"
+      "@fex-design/core/toast/create-toast-manager": [
+        "packages/@fex-design/core/src/toast/create-toast-manager.ts"
       ],
-      "@fex/components-core/toast/types": [
-        "packages/components/core/src/toast/types.ts"
+      "@fex-design/core/toast/types": [
+        "packages/@fex-design/core/src/toast/types.ts"
       ],
-      "@fex/components-core/dropzone/accept": [
-        "packages/components/core/src/dropzone/accept.ts"
+      "@fex-design/core/dropzone/accept": [
+        "packages/@fex-design/core/src/dropzone/accept.ts"
       ],
-      "@fex/components-core/dropzone/create-dropzone-controller": [
-        "packages/components/core/src/dropzone/create-dropzone-controller.ts"
+      "@fex-design/core/dropzone/create-dropzone-controller": [
+        "packages/@fex-design/core/src/dropzone/create-dropzone-controller.ts"
       ],
-      "@fex/components-core/dropzone/files": [
-        "packages/components/core/src/dropzone/files.ts"
+      "@fex-design/core/dropzone/files": [
+        "packages/@fex-design/core/src/dropzone/files.ts"
       ],
-      "@fex/components-core/dropzone/types": [
-        "packages/components/core/src/dropzone/types.ts"
+      "@fex-design/core/dropzone/types": [
+        "packages/@fex-design/core/src/dropzone/types.ts"
       ],
-      "@fex/components-core/dropzone/validate": [
-        "packages/components/core/src/dropzone/validate.ts"
+      "@fex-design/core/dropzone/validate": [
+        "packages/@fex-design/core/src/dropzone/validate.ts"
       ],
-      "@fex/components-core/form/scroll-to-first-error": [
-        "packages/components/core/src/form/scroll-to-first-error.ts"
+      "@fex-design/core/form/scroll-to-first-error": [
+        "packages/@fex-design/core/src/form/scroll-to-first-error.ts"
       ],
-      "@fex/components-core/disclosure/create-disclosure": [
-        "packages/components/core/src/disclosure/create-disclosure.ts"
+      "@fex-design/core/disclosure/create-disclosure": [
+        "packages/@fex-design/core/src/disclosure/create-disclosure.ts"
       ],
-      "@fex/components-core/expansion/create-expansion-controller": [
-        "packages/components/core/src/expansion/create-expansion-controller.ts"
+      "@fex-design/core/expansion/create-expansion-controller": [
+        "packages/@fex-design/core/src/expansion/create-expansion-controller.ts"
       ],
-      "@fex/components-core/expansion/types": [
-        "packages/components/core/src/expansion/types.ts"
+      "@fex-design/core/expansion/types": [
+        "packages/@fex-design/core/src/expansion/types.ts"
       ],
-      "@fex/components-core/expansion/utils": [
-        "packages/components/core/src/expansion/utils.ts"
+      "@fex-design/core/expansion/utils": [
+        "packages/@fex-design/core/src/expansion/utils.ts"
       ],
-      "@fex/components-core/floating/create-floating": [
-        "packages/components/core/src/floating/create-floating.ts"
+      "@fex-design/core/floating/create-floating": [
+        "packages/@fex-design/core/src/floating/create-floating.ts"
       ],
-      "@fex/components-core/floating/placement": [
-        "packages/components/core/src/floating/placement.ts"
+      "@fex-design/core/floating/placement": [
+        "packages/@fex-design/core/src/floating/placement.ts"
       ],
-      "@fex/components-core/interactions/bounds": [
-        "packages/components/core/src/interactions/bounds.ts"
+      "@fex-design/core/interactions/bounds": [
+        "packages/@fex-design/core/src/interactions/bounds.ts"
       ],
-      "@fex/components-core/interactions/create-move-controller": [
-        "packages/components/core/src/interactions/create-move-controller.ts"
+      "@fex-design/core/interactions/create-move-controller": [
+        "packages/@fex-design/core/src/interactions/create-move-controller.ts"
       ],
-      "@fex/components-core/interactions/create-resize-controller": [
-        "packages/components/core/src/interactions/create-resize-controller.ts"
+      "@fex-design/core/interactions/create-resize-controller": [
+        "packages/@fex-design/core/src/interactions/create-resize-controller.ts"
       ],
-      "@fex/components-core/interactions/dnd-store": [
-        "packages/components/core/src/interactions/dnd-store.ts"
+      "@fex-design/core/interactions/dnd-store": [
+        "packages/@fex-design/core/src/interactions/dnd-store.ts"
       ],
-      "@fex/components-core/interactions/rect": [
-        "packages/components/core/src/interactions/rect.ts"
+      "@fex-design/core/interactions/rect": [
+        "packages/@fex-design/core/src/interactions/rect.ts"
       ],
-      "@fex/components-core/interactions/types": [
-        "packages/components/core/src/interactions/types.ts"
+      "@fex-design/core/interactions/types": [
+        "packages/@fex-design/core/src/interactions/types.ts"
       ],
-      "@fex/components-core/overlay/create-overlay": [
-        "packages/components/core/src/overlay/create-overlay.ts"
+      "@fex-design/core/overlay/create-overlay": [
+        "packages/@fex-design/core/src/overlay/create-overlay.ts"
       ],
-      "@fex/components-core/overlay/create-floating-overlay": [
-        "packages/components/core/src/overlay/create-floating-overlay.ts"
+      "@fex-design/core/overlay/create-floating-overlay": [
+        "packages/@fex-design/core/src/overlay/create-floating-overlay.ts"
       ],
-      "@fex/components-core/overlay/trigger/create-trigger": [
-        "packages/components/core/src/overlay/trigger/create-trigger.ts"
+      "@fex-design/core/overlay/trigger/create-trigger": [
+        "packages/@fex-design/core/src/overlay/trigger/create-trigger.ts"
       ],
-      "@fex/components-core/resizable/layout": [
-        "packages/components/core/src/resizable/layout.ts"
+      "@fex-design/core/resizable/layout": [
+        "packages/@fex-design/core/src/resizable/layout.ts"
       ],
-      "@fex/components-core/resizable/types": [
-        "packages/components/core/src/resizable/types.ts"
+      "@fex-design/core/resizable/types": [
+        "packages/@fex-design/core/src/resizable/types.ts"
       ],
-      "@fex/components-core/select/create-select-controller": [
-        "packages/components/core/src/select/create-select-controller.ts"
+      "@fex-design/core/select/create-select-controller": [
+        "packages/@fex-design/core/src/select/create-select-controller.ts"
       ],
-      "@fex/components-core/select/filter-options": [
-        "packages/components/core/src/select/filter-options.ts"
+      "@fex-design/core/select/filter-options": [
+        "packages/@fex-design/core/src/select/filter-options.ts"
       ],
-      "@fex/components-core/select/types": [
-        "packages/components/core/src/select/types.ts"
+      "@fex-design/core/select/types": [
+        "packages/@fex-design/core/src/select/types.ts"
       ],
-      "@fex/components-core/select/virtual": [
-        "packages/components/core/src/select/virtual.ts"
+      "@fex-design/core/select/virtual": [
+        "packages/@fex-design/core/src/select/virtual.ts"
       ],
-      "@fex/components-core/selection/create-selection-controller": [
-        "packages/components/core/src/selection/create-selection-controller.ts"
+      "@fex-design/core/selection/create-selection-controller": [
+        "packages/@fex-design/core/src/selection/create-selection-controller.ts"
       ],
-      "@fex/components-core/selection/types": [
-        "packages/components/core/src/selection/types.ts"
+      "@fex-design/core/selection/types": [
+        "packages/@fex-design/core/src/selection/types.ts"
       ],
-      "@fex/components-core/selection/utils": [
-        "packages/components/core/src/selection/utils.ts"
+      "@fex-design/core/selection/utils": [
+        "packages/@fex-design/core/src/selection/utils.ts"
       ],
-      "@fex/components-core/transfer/create-transfer-controller": [
-        "packages/components/core/src/transfer/create-transfer-controller.ts"
+      "@fex-design/core/transfer/create-transfer-controller": [
+        "packages/@fex-design/core/src/transfer/create-transfer-controller.ts"
       ],
-      "@fex/components-core/transfer/types": [
-        "packages/components/core/src/transfer/types.ts"
+      "@fex-design/core/transfer/types": [
+        "packages/@fex-design/core/src/transfer/types.ts"
       ],
-      "@fex/components-core/transfer/utils": [
-        "packages/components/core/src/transfer/utils.ts"
+      "@fex-design/core/transfer/utils": [
+        "packages/@fex-design/core/src/transfer/utils.ts"
       ],
-      "@fex/components-core/sortable/array-move": [
-        "packages/components/core/src/sortable/array-move.ts"
+      "@fex-design/core/sortable/array-move": [
+        "packages/@fex-design/core/src/sortable/array-move.ts"
       ],
-      "@fex/components-core/sortable/containers": [
-        "packages/components/core/src/sortable/containers.ts"
+      "@fex-design/core/sortable/containers": [
+        "packages/@fex-design/core/src/sortable/containers.ts"
       ],
-      "@fex/components-core/sortable/create-sortable-controller": [
-        "packages/components/core/src/sortable/create-sortable-controller.ts"
+      "@fex-design/core/sortable/create-sortable-controller": [
+        "packages/@fex-design/core/src/sortable/create-sortable-controller.ts"
       ],
-      "@fex/components-core/sortable/motion": [
-        "packages/components/core/src/sortable/motion.ts"
+      "@fex-design/core/sortable/motion": [
+        "packages/@fex-design/core/src/sortable/motion.ts"
       ],
-      "@fex/components-core/sortable/types": [
-        "packages/components/core/src/sortable/types.ts"
+      "@fex-design/core/sortable/types": [
+        "packages/@fex-design/core/src/sortable/types.ts"
       ],
-      "@fex/components-angular/primitive/alert": [
-        "packages/components/angular/src/primitive/alert/alert.ts"
+      "@fex-design/angular/primitive/alert": [
+        "packages/@fex-design/angular/src/primitive/alert/alert.ts"
       ],
-      "@fex/components-angular/primitive/auto-complete": [
-        "packages/components/angular/src/primitive/auto-complete/auto-complete.ts"
+      "@fex-design/angular/primitive/auto-complete": [
+        "packages/@fex-design/angular/src/primitive/auto-complete/auto-complete.ts"
       ],
-      "@fex/components-angular/primitive/button": [
-        "packages/components/angular/src/primitive/button/button.ts"
+      "@fex-design/angular/primitive/breadcrumb": [
+        "packages/@fex-design/angular/src/primitive/breadcrumb/breadcrumb.ts"
       ],
-      "@fex/components-angular/primitive/calendar": [
-        "packages/components/angular/src/primitive/calendar/calendar.ts"
+      "@fex-design/angular/primitive/button": [
+        "packages/@fex-design/angular/src/primitive/button/button.ts"
       ],
-      "@fex/components-angular/primitive/card": [
-        "packages/components/angular/src/primitive/card/card.ts"
+      "@fex-design/angular/primitive/calendar": [
+        "packages/@fex-design/angular/src/primitive/calendar/calendar.ts"
       ],
-      "@fex/components-angular/primitive/carousel": [
-        "packages/components/angular/src/primitive/carousel/carousel.ts"
+      "@fex-design/angular/primitive/card": [
+        "packages/@fex-design/angular/src/primitive/card/card.ts"
       ],
-      "@fex/components-angular/primitive/checkbox": [
-        "packages/components/angular/src/primitive/checkbox/checkbox.ts"
+      "@fex-design/angular/primitive/carousel": [
+        "packages/@fex-design/angular/src/primitive/carousel/carousel.ts"
       ],
-      "@fex/components-angular/primitive/dialog": [
-        "packages/components/angular/src/primitive/dialog/dialog.ts"
+      "@fex-design/angular/primitive/checkbox": [
+        "packages/@fex-design/angular/src/primitive/checkbox/checkbox.ts"
       ],
-      "@fex/components-angular/primitive/drawer": [
-        "packages/components/angular/src/primitive/drawer/drawer.ts"
+      "@fex-design/angular/primitive/dialog": [
+        "packages/@fex-design/angular/src/primitive/dialog/dialog.ts"
       ],
-      "@fex/components-angular/primitive/data-grid": [
-        "packages/components/angular/src/primitive/data-grid/data-grid.ts"
+      "@fex-design/angular/primitive/drawer": [
+        "packages/@fex-design/angular/src/primitive/drawer/drawer.ts"
       ],
-      "@fex/components-angular/primitive/date-picker": [
-        "packages/components/angular/src/primitive/date-picker/date-picker.ts"
+      "@fex-design/angular/primitive/data-table": [
+        "packages/@fex-design/angular/src/primitive/data-table/data-table.ts"
       ],
-      "@fex/components-angular/primitive/empty": [
-        "packages/components/angular/src/primitive/empty/empty.ts"
+      "@fex-design/angular/primitive/date-picker": [
+        "packages/@fex-design/angular/src/primitive/date-picker/date-picker.ts"
       ],
-      "@fex/components-angular/primitive/field": [
-        "packages/components/angular/src/primitive/field/field.ts"
+      "@fex-design/angular/primitive/empty": [
+        "packages/@fex-design/angular/src/primitive/empty/empty.ts"
       ],
-      "@fex/components-angular/primitive/form": [
-        "packages/components/angular/src/primitive/form/form.ts"
+      "@fex-design/angular/primitive/field": [
+        "packages/@fex-design/angular/src/primitive/field/field.ts"
       ],
-      "@fex/components-angular/primitive/input": [
-        "packages/components/angular/src/primitive/input/input.ts"
+      "@fex-design/angular/primitive/form": [
+        "packages/@fex-design/angular/src/primitive/form/form.ts"
       ],
-      "@fex/components-angular/primitive/listbox": [
-        "packages/components/angular/src/primitive/listbox/listbox.ts"
+      "@fex-design/angular/primitive/input": [
+        "packages/@fex-design/angular/src/primitive/input/input.ts"
       ],
-      "@fex/components-angular/primitive/dropdown": [
-        "packages/components/angular/src/primitive/dropdown/dropdown.ts"
+      "@fex-design/angular/primitive/listbox": [
+        "packages/@fex-design/angular/src/primitive/listbox/listbox.ts"
       ],
-      "@fex/components-angular/primitive/menu": [
-        "packages/components/angular/src/primitive/menu/menu.ts"
+      "@fex-design/angular/primitive/dropdown": [
+        "packages/@fex-design/angular/src/primitive/dropdown/dropdown.ts"
       ],
-      "@fex/components-angular/primitive/menu-types": [
-        "packages/components/angular/src/primitive/menu/menu-types.ts"
+      "@fex-design/angular/primitive/menu": [
+        "packages/@fex-design/angular/src/primitive/menu/menu.ts"
       ],
-      "@fex/components-angular/primitive/pagination": [
-        "packages/components/angular/src/primitive/pagination/pagination.ts"
+      "@fex-design/angular/primitive/menu-types": [
+        "packages/@fex-design/angular/src/primitive/menu/menu-types.ts"
       ],
-      "@fex/components-angular/primitive/popover": [
-        "packages/components/angular/src/primitive/popover/popover.ts"
+      "@fex-design/angular/primitive/pagination": [
+        "packages/@fex-design/angular/src/primitive/pagination/pagination.ts"
       ],
-      "@fex/components-angular/primitive/select": [
-        "packages/components/angular/src/primitive/select/select.ts"
+      "@fex-design/angular/primitive/popover": [
+        "packages/@fex-design/angular/src/primitive/popover/popover.ts"
       ],
-      "@fex/components-angular/primitive/radio": [
-        "packages/components/angular/src/primitive/radio/radio.ts"
+      "@fex-design/angular/primitive/select": [
+        "packages/@fex-design/angular/src/primitive/select/select.ts"
       ],
-      "@fex/components-angular/primitive/rate": [
-        "packages/components/angular/src/primitive/rate/rate.ts"
+      "@fex-design/angular/primitive/radio": [
+        "packages/@fex-design/angular/src/primitive/radio/radio.ts"
       ],
-      "@fex/components-angular/primitive/slider": [
-        "packages/components/angular/src/primitive/slider/slider-primitive.ts"
+      "@fex-design/angular/primitive/rate": [
+        "packages/@fex-design/angular/src/primitive/rate/rate.ts"
       ],
-      "@fex/components-angular/primitive/steps": [
-        "packages/components/angular/src/primitive/steps/steps.ts"
+      "@fex-design/angular/primitive/slider": [
+        "packages/@fex-design/angular/src/primitive/slider/slider-primitive.ts"
       ],
-      "@fex/components-angular/primitive/scrollbar": [
-        "packages/components/angular/src/primitive/scrollbar/scrollbar.ts"
+      "@fex-design/angular/primitive/steps": [
+        "packages/@fex-design/angular/src/primitive/steps/steps.ts"
       ],
-      "@fex/components-angular/primitive/sortable": [
-        "packages/components/angular/src/primitive/sortable/sortable.ts"
+      "@fex-design/angular/primitive/scrollbar": [
+        "packages/@fex-design/angular/src/primitive/scrollbar/scrollbar.ts"
       ],
-      "@fex/components-angular/primitive/switch": [
-        "packages/components/angular/src/primitive/switch/switch.ts"
+      "@fex-design/angular/primitive/sortable": [
+        "packages/@fex-design/angular/src/primitive/sortable/sortable.ts"
       ],
-      "@fex/components-angular/primitive/table": [
-        "packages/components/angular/src/primitive/table/table.ts"
+      "@fex-design/angular/primitive/switch": [
+        "packages/@fex-design/angular/src/primitive/switch/switch.ts"
       ],
-      "@fex/components-angular/primitive/timeline": [
-        "packages/components/angular/src/primitive/timeline/timeline.ts"
+      "@fex-design/angular/primitive/table": [
+        "packages/@fex-design/angular/src/primitive/table/table.ts"
       ],
-      "@fex/components-angular/primitive/tabs": [
-        "packages/components/angular/src/primitive/tabs/tabs.ts"
+      "@fex-design/angular/primitive/timeline": [
+        "packages/@fex-design/angular/src/primitive/timeline/timeline.ts"
       ],
-      "@fex/components-angular/primitive/transfer": [
-        "packages/components/angular/src/primitive/transfer/transfer.ts"
+      "@fex-design/angular/primitive/tabs": [
+        "packages/@fex-design/angular/src/primitive/tabs/tabs.ts"
       ],
-      "@fex/components-angular/primitive/upload": [
-        "packages/components/angular/src/primitive/upload/upload.ts"
+      "@fex-design/angular/primitive/transfer": [
+        "packages/@fex-design/angular/src/primitive/transfer/transfer.ts"
       ],
-      "@fex/components-angular/primitive/tree": [
-        "packages/components/angular/src/primitive/tree/tree.ts"
+      "@fex-design/angular/primitive/upload": [
+        "packages/@fex-design/angular/src/primitive/upload/upload.ts"
       ],
-      "@fex/components-angular/primitive/tree/tree-dnd-item": [
-        "packages/components/angular/src/primitive/tree/tree-dnd-item.ts"
+      "@fex-design/angular/primitive/tree": [
+        "packages/@fex-design/angular/src/primitive/tree/tree.ts"
       ],
-      "@fex/components-angular/primitive/toast": [
-        "packages/components/angular/src/primitive/toast/toast.ts"
+      "@fex-design/angular/primitive/tree/tree-dnd-item": [
+        "packages/@fex-design/angular/src/primitive/tree/tree-dnd-item.ts"
       ],
-      "@fex/components-angular/primitive/textarea": [
-        "packages/components/angular/src/primitive/textarea/textarea.ts"
+      "@fex-design/angular/primitive/toast": [
+        "packages/@fex-design/angular/src/primitive/toast/toast.ts"
       ],
-      "@fex/components-angular/primitive/time-picker": [
-        "packages/components/angular/src/primitive/time-picker/time-picker.ts"
+      "@fex-design/angular/primitive/textarea": [
+        "packages/@fex-design/angular/src/primitive/textarea/textarea.ts"
       ],
-      "@fex/components-angular/primitive/tooltip": [
-        "packages/components/angular/src/primitive/tooltip/tooltip.ts"
+      "@fex-design/angular/primitive/time-picker": [
+        "packages/@fex-design/angular/src/primitive/time-picker/time-picker.ts"
       ],
-      "@fex/components-angular/ui/badge": [
-        "packages/components/angular/src/ui/badge/badge.ts"
+      "@fex-design/angular/primitive/tooltip": [
+        "packages/@fex-design/angular/src/primitive/tooltip/tooltip.ts"
       ],
-      "@fex/components-angular/ui/button": [
-        "packages/components/angular/src/ui/button/button.ts"
+      "@fex-design/angular/ui/badge": [
+        "packages/@fex-design/angular/src/ui/badge/badge.ts"
       ],
-      "@fex/components-angular/ui/card": [
-        "packages/components/angular/src/ui/card/card.ts"
+      "@fex-design/angular/ui/button": [
+        "packages/@fex-design/angular/src/ui/button/button.ts"
       ],
-      "@fex/components-angular/ui/checkbox": [
-        "packages/components/angular/src/ui/checkbox/checkbox.ts"
+      "@fex-design/angular/ui/card": [
+        "packages/@fex-design/angular/src/ui/card/card.ts"
       ],
-      "@fex/components-angular/ui/kbd": [
-        "packages/components/angular/src/ui/kbd/kbd.ts"
+      "@fex-design/angular/ui/checkbox": [
+        "packages/@fex-design/angular/src/ui/checkbox/checkbox.ts"
       ],
-      "@fex/components-angular/ui/listbox": [
-        "packages/components/angular/src/ui/listbox/listbox.ts"
+      "@fex-design/angular/ui/kbd": [
+        "packages/@fex-design/angular/src/ui/kbd/kbd.ts"
       ],
-      "@fex/components-angular/ui/menu": [
-        "packages/components/angular/src/ui/menu/menu.ts"
+      "@fex-design/angular/ui/listbox": [
+        "packages/@fex-design/angular/src/ui/listbox/listbox.ts"
       ],
-      "@fex/components-angular/ui/spinner": [
-        "packages/components/angular/src/ui/spinner/spinner.ts"
+      "@fex-design/angular/ui/menu": [
+        "packages/@fex-design/angular/src/ui/menu/menu.ts"
       ],
-      "@fex/components-angular/icon/check": [
-        "packages/components/angular/src/icon/check.ts"
+      "@fex-design/angular/ui/spinner": [
+        "packages/@fex-design/angular/src/ui/spinner/spinner.ts"
       ],
-      "@fex/components-angular/icon/calendar": [
-        "packages/components/angular/src/icon/calendar.ts"
+      "@fex-design/angular/icon/check": [
+        "packages/@fex-design/angular/src/icon/check.ts"
       ],
-      "@fex/components-angular/icon/clock": [
-        "packages/components/angular/src/icon/clock.ts"
+      "@fex-design/angular/icon/calendar": [
+        "packages/@fex-design/angular/src/icon/calendar.ts"
       ],
-      "@fex/components-angular/icon/chevron": [
-        "packages/components/angular/src/icon/chevron.ts"
+      "@fex-design/angular/icon/clock": [
+        "packages/@fex-design/angular/src/icon/clock.ts"
       ],
-      "@fex/components-angular/icon/close": [
-        "packages/components/angular/src/icon/close.ts"
+      "@fex-design/angular/icon/chevron": [
+        "packages/@fex-design/angular/src/icon/chevron.ts"
       ],
-      "@fex/components-angular/icon/error": [
-        "packages/components/angular/src/icon/error.ts"
+      "@fex-design/angular/icon/close": [
+        "packages/@fex-design/angular/src/icon/close.ts"
       ],
-      "@fex/components-angular/icon/info": [
-        "packages/components/angular/src/icon/info.ts"
+      "@fex-design/angular/icon/error": [
+        "packages/@fex-design/angular/src/icon/error.ts"
       ],
-      "@fex/components-angular/icon/grip-vertical": [
-        "packages/components/angular/src/icon/grip-vertical.ts"
+      "@fex-design/angular/icon/info": [
+        "packages/@fex-design/angular/src/icon/info.ts"
       ],
-      "@fex/components-angular/icon/loading": [
-        "packages/components/angular/src/icon/loading.ts"
+      "@fex-design/angular/icon/grip-vertical": [
+        "packages/@fex-design/angular/src/icon/grip-vertical.ts"
       ],
-      "@fex/components-angular/icon/trash": [
-        "packages/components/angular/src/icon/trash.ts"
+      "@fex-design/angular/icon/loading": [
+        "packages/@fex-design/angular/src/icon/loading.ts"
       ],
-      "@fex/components-angular/icon/minus": [
-        "packages/components/angular/src/icon/minus.ts"
+      "@fex-design/angular/icon/trash": [
+        "packages/@fex-design/angular/src/icon/trash.ts"
       ],
-      "@fex/components-angular/icon/more": [
-        "packages/components/angular/src/icon/more.ts"
+      "@fex-design/angular/icon/minus": [
+        "packages/@fex-design/angular/src/icon/minus.ts"
       ],
-      "@fex/components-angular/icon/plus": [
-        "packages/components/angular/src/icon/plus.ts"
+      "@fex-design/angular/icon/more": [
+        "packages/@fex-design/angular/src/icon/more.ts"
       ],
-      "@fex/components-angular/icon/star": [
-        "packages/components/angular/src/icon/star.ts"
+      "@fex-design/angular/icon/plus": [
+        "packages/@fex-design/angular/src/icon/plus.ts"
       ],
-      "@fex/components-angular/icon/warning": [
-        "packages/components/angular/src/icon/warning.ts"
+      "@fex-design/angular/icon/star": [
+        "packages/@fex-design/angular/src/icon/star.ts"
       ],
-      "@fex/components-angular/directives/draggable": [
-        "packages/components/angular/src/directives/draggable.ts"
+      "@fex-design/angular/icon/warning": [
+        "packages/@fex-design/angular/src/icon/warning.ts"
       ],
-      "@fex/components-angular/directives/droppable": [
-        "packages/components/angular/src/directives/droppable.ts"
+      "@fex-design/angular/directives/draggable": [
+        "packages/@fex-design/angular/src/directives/draggable.ts"
       ],
-      "@fex/components-angular/directives/dropzone": [
-        "packages/components/angular/src/directives/dropzone.ts"
+      "@fex-design/angular/directives/droppable": [
+        "packages/@fex-design/angular/src/directives/droppable.ts"
       ],
-      "@fex/components-angular/directives/move": [
-        "packages/components/angular/src/directives/move.ts"
+      "@fex-design/angular/directives/dropzone": [
+        "packages/@fex-design/angular/src/directives/dropzone.ts"
       ],
-      "@fex/components-angular/directives/resize": [
-        "packages/components/angular/src/directives/resize.ts"
+      "@fex-design/angular/directives/move": [
+        "packages/@fex-design/angular/src/directives/move.ts"
       ],
-      "@fex/components-angular/directives/sortable": [
-        "packages/components/angular/src/directives/sortable.ts"
+      "@fex-design/angular/directives/resize": [
+        "packages/@fex-design/angular/src/directives/resize.ts"
       ],
-      "@fex/components-angular/signals/core-store-signal": [
-        "packages/components/angular/src/signals/core-store-signal.ts"
+      "@fex-design/angular/directives/sortable": [
+        "packages/@fex-design/angular/src/directives/sortable.ts"
       ],
-      "@fex/components-angular/signals/create-carousel": [
-        "packages/components/angular/src/signals/create-carousel.ts"
+      "@fex-design/angular/signals/core-store-signal": [
+        "packages/@fex-design/angular/src/signals/core-store-signal.ts"
       ],
-      "@fex/components-angular/signals/create-data-grid-table": [
-        "packages/components/angular/src/signals/create-data-grid-table.ts"
+      "@fex-design/angular/signals/create-carousel": [
+        "packages/@fex-design/angular/src/signals/create-carousel.ts"
       ],
-      "@fex/components-angular/signals/date-utils": [
-        "packages/components/angular/src/signals/date-utils.ts"
+      "@fex-design/angular/signals/create-data-table": [
+        "packages/@fex-design/angular/src/signals/create-data-table.ts"
       ],
-      "@fex/components-angular/signals/host-class": [
-        "packages/components/angular/src/signals/host-class.ts"
+      "@fex-design/angular/signals/date-utils": [
+        "packages/@fex-design/angular/src/signals/date-utils.ts"
       ],
-      "@fex/components-angular/services/toast": [
-        "packages/components/angular/src/services/toast.ts"
+      "@fex-design/angular/signals/host-class": [
+        "packages/@fex-design/angular/src/signals/host-class.ts"
+      ],
+      "@fex-design/angular/services/toast": [
+        "packages/@fex-design/angular/src/services/toast.ts"
       ]
     }
   }

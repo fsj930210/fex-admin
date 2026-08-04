@@ -1,14 +1,14 @@
 import {
   ListboxItem as PrimitiveListboxItem,
   ListboxRoot as PrimitiveListboxRoot,
-} from '@fex/components-react/primitive/listbox'
+} from '@fex-design/react/primitive/listbox'
 import {
   ListboxGroup,
   ListboxGroupLabel,
   ListboxItem,
   ListboxRoot,
-} from '@fex/components-react/ui/listbox'
-import { Card } from '@fex/components-react/ui/card'
+} from '@fex-design/react/ui/listbox'
+import { Card } from '@fex-design/react/ui/card'
 import { useState } from 'react'
 import { Link } from 'react-router'
 

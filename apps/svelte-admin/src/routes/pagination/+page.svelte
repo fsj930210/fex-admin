@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Pagination from '@fex/components-svelte/primitive/pagination'
-  import PaginationContent from '@fex/components-svelte/primitive/pagination-content'
-  import PaginationEllipsis from '@fex/components-svelte/primitive/pagination-ellipsis'
-  import PaginationItem from '@fex/components-svelte/primitive/pagination-item'
-  import PaginationLink from '@fex/components-svelte/primitive/pagination-link'
-  import PaginationNext from '@fex/components-svelte/primitive/pagination-next'
-  import PaginationPrevious from '@fex/components-svelte/primitive/pagination-previous'
-  import Card from '@fex/components-svelte/ui/card'
+  import Pagination from '@fex-design/svelte/primitive/pagination'
+  import PaginationContent from '@fex-design/svelte/primitive/pagination-content'
+  import PaginationEllipsis from '@fex-design/svelte/primitive/pagination-ellipsis'
+  import PaginationItem from '@fex-design/svelte/primitive/pagination-item'
+  import PaginationLink from '@fex-design/svelte/primitive/pagination-link'
+  import PaginationNext from '@fex-design/svelte/primitive/pagination-next'
+  import PaginationPrevious from '@fex-design/svelte/primitive/pagination-previous'
+  import Card from '@fex-design/svelte/ui/card'
 </script>
 
 <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import CheckboxRoot from '@fex/components-svelte/primitive/checkbox'
-  import Checkbox from '@fex/components-svelte/ui/checkbox'
-  import CheckboxGroup from '@fex/components-svelte/ui/checkbox-group'
-  import Card from '@fex/components-svelte/ui/card'
-  import type { CheckboxCheckedState } from '@fex/components-core/checkbox/types'
+  import CheckboxRoot from '@fex-design/svelte/primitive/checkbox'
+  import Checkbox from '@fex-design/svelte/ui/checkbox'
+  import CheckboxGroup from '@fex-design/svelte/ui/checkbox-group'
+  import Card from '@fex-design/svelte/ui/card'
+  import type { CheckboxCheckedState } from '@fex-design/core/checkbox/types'
 
   const options = [
     { label: 'Read records', value: 'read' },

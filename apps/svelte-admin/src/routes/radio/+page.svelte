@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Radio from '@fex/components-svelte/primitive/radio'
-  import RadioButton from '@fex/components-svelte/primitive/radio-button'
-  import RadioGroup from '@fex/components-svelte/primitive/radio-group'
-  import Card from '@fex/components-svelte/ui/card'
-  import type { SelectionValue } from '@fex/components-core/selection/types'
+  import Radio from '@fex-design/svelte/primitive/radio'
+  import RadioButton from '@fex-design/svelte/primitive/radio-button'
+  import RadioGroup from '@fex-design/svelte/primitive/radio-group'
+  import Card from '@fex-design/svelte/ui/card'
+  import type { SelectionValue } from '@fex-design/core/selection/types'
 
   const options = [
     { label: 'Apple', value: 'apple' },

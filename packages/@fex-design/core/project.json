@@ -1,0 +1,9 @@
+{
+  "name": "components-core",
+  "sourceRoot": "packages/@fex-design/core/src",
+  "projectType": "library",
+  "targets": {
+    "typecheck": { "command": "tsc --noEmit -p packages/@fex-design/core/tsconfig.json" },
+    "lint": { "command": "oxlint packages/@fex-design/core/src" }
+  }
+}

@@ -1,4 +1,4 @@
-import { checkFeature, expansionFeature } from '@fex/components-core'
+import { checkFeature, expansionFeature } from '@fex-design/core'
 import { useState } from 'react'
 import { departmentFieldNames, departmentTreeData } from './data'
 import { DemoTree } from './demo-tree'

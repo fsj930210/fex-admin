@@ -1,4 +1,4 @@
-import { Card } from '@fex/components-solid/ui/card'
+import { Card } from '@fex-design/solid/ui/card'
 import { BasicDemo } from './basic-demo'
 import { CustomPanelDemo } from './custom-panel-demo'
 import { CustomTriggerDemo } from './custom-trigger-demo'

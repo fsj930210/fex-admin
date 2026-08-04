@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { createTreeController } from '@fex/components-core/tree/create-tree-controller'
-import { dndFeature } from '@fex/components-core/tree/features/dnd'
-import { expansionFeature } from '@fex/components-core/tree/features/expansion'
-import { ChevronDownIcon } from '@fex/components-angular/icon/chevron'
+import { createTreeController } from '@fex-design/core/tree/create-tree-controller'
+import { dndFeature } from '@fex-design/core/tree/features/dnd'
+import { expansionFeature } from '@fex-design/core/tree/features/expansion'
+import { ChevronDownIcon } from '@fex-design/angular/icon/chevron'
 import {
   TreeItemDirective,
   TreeRoot,
   TreeTitleDirective,
   TreeTriggerDirective,
   TreeViewport,
-} from '@fex/components-angular/primitive/tree'
-import { TreeDndItemDirective } from '@fex/components-angular/primitive/tree/tree-dnd-item'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/tree'
+import { TreeDndItemDirective } from '@fex-design/angular/primitive/tree/tree-dnd-item'
+import Card from '@fex-design/angular/ui/card'
 import {
   departmentFieldNames,
   departmentTreeData,

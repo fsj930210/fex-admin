@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ChevronLeftIcon, ChevronRightIcon } from '@fex/components-vue/icon/chevron'
-import { Transfer } from '@fex/components-vue/primitive/transfer'
-import { Badge } from '@fex/components-vue/ui/badge'
-import Button from '@fex/components-vue/ui/button'
-import Card from '@fex/components-vue/ui/card'
+import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/vue/icon/chevron'
+import { Transfer } from '@fex-design/vue/primitive/transfer'
+import { Badge } from '@fex-design/vue/ui/badge'
+import Button from '@fex-design/vue/ui/button'
+import Card from '@fex-design/vue/ui/card'
 import { fieldNames, members } from './data'
 </script>
 <template>

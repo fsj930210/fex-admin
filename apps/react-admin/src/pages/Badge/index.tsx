@@ -1,5 +1,5 @@
-﻿import { Badge } from '@fex/components-react/ui/badge'
-import { Card } from '@fex/components-react/ui/card'
+﻿import { Badge } from '@fex-design/react/ui/badge'
+import { Card } from '@fex-design/react/ui/card'
 import { Link } from 'react-router'
 
 const variants = ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] as const

@@ -1,4 +1,4 @@
-import type { SelectOption } from '@fex/components-core/select/types'
+import type { SelectOption } from '@fex-design/core/select/types'
 export const frameworkOptions: SelectOption[] = [
   { value: 'angular', label: 'Angular', group: 'Frameworks', keywords: ['google'] },
   { value: 'react', label: 'React', group: 'Frameworks', keywords: ['meta'] },

@@ -3,8 +3,8 @@ import {
   AutoCompleteContent,
   AutoCompleteRoot,
   AutoCompleteTrigger,
-} from '@fex/components-vue/primitive/auto-complete'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/auto-complete'
+import Card from '@fex-design/vue/ui/card'
 import { onUnmounted, ref } from 'vue'
 import { fieldNames, users, type UserSuggestion } from './data'
 const items = ref<UserSuggestion[]>([])

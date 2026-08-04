@@ -1,14 +1,14 @@
-import { checkFeature, expansionFeature } from '@fex/components-core'
-import type { TransferPanelRenderApi } from '@fex/components-react/primitive/transfer'
+import { checkFeature, expansionFeature } from '@fex-design/core'
+import type { TransferPanelRenderApi } from '@fex-design/react/primitive/transfer'
 import {
   TreeItem,
   TreeRoot,
   TreeTitle,
   TreeTrigger,
   TreeViewport,
-} from '@fex/components-react/primitive/tree'
-import { Checkbox } from '@fex/components-react/ui/checkbox'
-import { Transfer } from '@fex/components-react/primitive/transfer'
+} from '@fex-design/react/primitive/tree'
+import { Checkbox } from '@fex-design/react/ui/checkbox'
+import { Transfer } from '@fex-design/react/primitive/transfer'
 import { transferFieldNames, transferMembers, type TransferMember } from './data'
 import { TransferDemoSection } from './demo-section'
 

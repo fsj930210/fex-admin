@@ -4,7 +4,7 @@ import type {
   TreeNodeData,
   TreeOptions,
   TreeVisibleItem,
-} from '@fex/components-core/tree/types'
+} from '@fex-design/core/tree/types'
 import {
   TreeItem,
   TreeRoot,
@@ -13,9 +13,9 @@ import {
   TreeVirtualViewport,
   TreeViewport,
   type TreeVirtualViewportHandle,
-} from '@fex/components-solid/primitive/tree'
-import { Checkbox } from '@fex/components-solid/ui/checkbox'
-import { Spinner } from '@fex/components-solid/ui/spinner'
+} from '@fex-design/solid/primitive/tree'
+import { Checkbox } from '@fex-design/solid/ui/checkbox'
+import { Spinner } from '@fex-design/solid/ui/spinner'
 import type { JSX } from 'solid-js'
 import { Show } from 'solid-js'
 interface TitleContext<T extends TreeNodeData> {

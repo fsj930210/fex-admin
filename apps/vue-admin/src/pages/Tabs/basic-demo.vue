@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex/components-vue/primitive/tabs'
-import Card from '@fex/components-vue/ui/card'
+import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex-design/vue/primitive/tabs'
+import Card from '@fex-design/vue/ui/card'
 </script>
 <template>
   <Card

@@ -1,5 +1,5 @@
-import type { TimeValue } from '@fex/components-angular/primitive/time-picker'
-import Card from '@fex/components-angular/ui/card'
+import type { TimeValue } from '@fex-design/angular/primitive/time-picker'
+import Card from '@fex-design/angular/ui/card'
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { DemoTimePickerComponent } from './demo-time-picker.component'
 @Component({

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Card from '@fex/components-vue/ui/card'
-import { useDropzone } from '@fex/components-vue/composables/use-dropzone'
-import { useMove } from '@fex/components-vue/composables/use-move'
-import { useResize } from '@fex/components-vue/composables/use-resize'
+import Card from '@fex-design/vue/ui/card'
+import { useDropzone } from '@fex-design/vue/composables/use-dropzone'
+import { useMove } from '@fex-design/vue/composables/use-move'
+import { useResize } from '@fex-design/vue/composables/use-resize'
 import { ref } from 'vue'
 import DraggableToken from './DraggableToken.vue'
 import DroppableZone from './DroppableZone.vue'

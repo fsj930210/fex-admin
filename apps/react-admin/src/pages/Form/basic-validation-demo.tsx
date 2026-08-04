@@ -5,11 +5,11 @@ import {
   FieldDescription,
   FieldLabel,
   FieldRoot,
-} from '@fex/components-react/primitive/field'
-import { Form, useForm } from '@fex/components-react/primitive/form'
-import { Button } from '@fex/components-react/ui/button'
-import { Card } from '@fex/components-react/ui/card'
-import { Checkbox } from '@fex/components-react/ui/checkbox'
+} from '@fex-design/react/primitive/field'
+import { Form, useForm } from '@fex-design/react/primitive/form'
+import { Button } from '@fex-design/react/ui/button'
+import { Card } from '@fex-design/react/ui/card'
+import { Checkbox } from '@fex-design/react/ui/checkbox'
 import { TextField, type SetDemoResult } from './shared'
 
 export function BasicValidationDemo({ setResult }: { setResult: SetDemoResult }) {

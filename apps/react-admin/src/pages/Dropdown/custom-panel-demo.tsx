@@ -1,6 +1,6 @@
-import * as Dropdown from '@fex/components-react/primitive/dropdown'
-import { PopoverPortal } from '@fex/components-react/primitive/popover'
-import { Checkbox } from '@fex/components-react/ui/checkbox'
+import * as Dropdown from '@fex-design/react/primitive/dropdown'
+import { PopoverPortal } from '@fex-design/react/primitive/popover'
+import { Checkbox } from '@fex-design/react/ui/checkbox'
 import { triggerClassName } from './demo-parts'
 
 export function CustomPanelDemo() {

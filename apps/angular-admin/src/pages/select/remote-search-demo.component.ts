@@ -1,4 +1,4 @@
-import type { SelectOption } from '@fex/components-core/select/types'
+import type { SelectOption } from '@fex-design/core/select/types'
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core'
 import type { OnDestroy } from '@angular/core'
 import {
@@ -6,8 +6,8 @@ import {
   SelectList,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-angular/primitive/select'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/select'
+import Card from '@fex-design/angular/ui/card'
 import { frameworkOptions } from './data'
 export
 @Component({

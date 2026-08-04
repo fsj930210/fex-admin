@@ -1,6 +1,6 @@
-import * as PrimitivePopover from '@fex/components-react/primitive/popover'
-import { Button } from '@fex/components-react/ui/button'
-import { Card } from '@fex/components-react/ui/card'
+import * as PrimitivePopover from '@fex-design/react/primitive/popover'
+import { Button } from '@fex-design/react/ui/button'
+import { Card } from '@fex-design/react/ui/card'
 import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
 

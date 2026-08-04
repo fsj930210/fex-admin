@@ -1,8 +1,8 @@
 <script setup lang="ts" generic="TNode extends TreeNodeData">
-import type { TreeController, TreeNodeData, TreeVisibleItem } from '@fex/components-core/tree/types'
-import { TreeItem, TreeTitle, TreeTrigger } from '@fex/components-vue/primitive/tree'
-import Checkbox from '@fex/components-vue/ui/checkbox'
-import { Spinner } from '@fex/components-vue/ui/spinner'
+import type { TreeController, TreeNodeData, TreeVisibleItem } from '@fex-design/core/tree/types'
+import { TreeItem, TreeTitle, TreeTrigger } from '@fex-design/vue/primitive/tree'
+import Checkbox from '@fex-design/vue/ui/checkbox'
+import { Spinner } from '@fex-design/vue/ui/spinner'
 const props = defineProps<{
   tree: TreeController<TNode>
   item: TreeVisibleItem<TNode>

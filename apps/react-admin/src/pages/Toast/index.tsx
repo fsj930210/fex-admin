@@ -9,15 +9,15 @@ import {
   ToastViewport,
   toast,
   type ReactToastItem,
-} from '@fex/components-react/primitive/toast'
-import { Button } from '@fex/components-react/ui/button'
-import { Card } from '@fex/components-react/ui/card'
-import { CheckIcon } from '@fex/components-react/icon/check'
-import { CloseIcon } from '@fex/components-react/icon/close'
-import { ErrorIcon } from '@fex/components-react/icon/error'
-import { InfoIcon } from '@fex/components-react/icon/info'
-import { LoadingIcon } from '@fex/components-react/icon/loading'
-import { WarningIcon } from '@fex/components-react/icon/warning'
+} from '@fex-design/react/primitive/toast'
+import { Button } from '@fex-design/react/ui/button'
+import { Card } from '@fex-design/react/ui/card'
+import { CheckIcon } from '@fex-design/react/icon/check'
+import { CloseIcon } from '@fex-design/react/icon/close'
+import { ErrorIcon } from '@fex-design/react/icon/error'
+import { InfoIcon } from '@fex-design/react/icon/info'
+import { LoadingIcon } from '@fex-design/react/icon/loading'
+import { WarningIcon } from '@fex-design/react/icon/warning'
 import { useState } from 'react'
 import { Link } from 'react-router'
 

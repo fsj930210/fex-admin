@@ -1,7 +1,7 @@
-import { EllipsisIcon } from '@fex/components-react/icon/more'
-import * as Sortable from '@fex/components-react/primitive/sortable'
-import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex/components-react/primitive/tabs'
-import { Card } from '@fex/components-react/ui/card'
+import { EllipsisIcon } from '@fex-design/react/icon/more'
+import * as Sortable from '@fex-design/react/primitive/sortable'
+import { TabsContent, TabsItem, TabsList, TabsRoot } from '@fex-design/react/primitive/tabs'
+import { Card } from '@fex-design/react/ui/card'
 import { useState } from 'react'
 import { initialTabs } from './data'
 

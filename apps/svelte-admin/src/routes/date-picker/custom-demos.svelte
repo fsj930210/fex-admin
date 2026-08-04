@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { createCalendarDate, getCalendarValueKey } from '@fex/components-core/calendar'
-  import CalendarCell from '@fex/components-svelte/primitive/calendar-cell'
-  import CalendarGrid from '@fex/components-svelte/primitive/calendar-grid'
-  import CalendarWeekHeader from '@fex/components-svelte/primitive/calendar-week-header'
-  import { DatePickerContent, DatePickerFooter, DatePickerPanel, DatePickerRoot, DatePickerTrigger } from '@fex/components-svelte/primitive/date-picker'
-  import Button from '@fex/components-svelte/ui/button'
-  import Card from '@fex/components-svelte/ui/card'
+  import { createCalendarDate, getCalendarValueKey } from '@fex-design/core/calendar'
+  import CalendarCell from '@fex-design/svelte/primitive/calendar-cell'
+  import CalendarGrid from '@fex-design/svelte/primitive/calendar-grid'
+  import CalendarWeekHeader from '@fex-design/svelte/primitive/calendar-week-header'
+  import { DatePickerContent, DatePickerFooter, DatePickerPanel, DatePickerRoot, DatePickerTrigger } from '@fex-design/svelte/primitive/date-picker'
+  import Button from '@fex-design/svelte/ui/button'
+  import Card from '@fex-design/svelte/ui/card'
   import CustomPanel from './custom-panel.svelte'
 
   const releaseDate = createCalendarDate(2026, 7, 30)

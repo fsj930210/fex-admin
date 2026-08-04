@@ -1,3 +1,3 @@
-import * as Tooltip from '@fex/components-solid/primitive/tooltip'
-import { Button } from '@fex/components-solid/ui/button'
+import * as Tooltip from '@fex-design/solid/primitive/tooltip'
+import { Button } from '@fex-design/solid/ui/button'
 export function DisabledDemo() { return <Tooltip.TooltipRoot><Tooltip.TooltipTrigger>{(slot) => <span ref={slot.ref} {...slot.props} tabIndex={0} class="inline-flex rounded-md focus-visible:ring-3 focus-visible:ring-focus/50"><Button disabled class="pointer-events-none" variant="outline">Disabled</Button></span>}</Tooltip.TooltipTrigger><Tooltip.TooltipPortal><Tooltip.TooltipContent>This feature is currently unavailable<Tooltip.TooltipArrow /></Tooltip.TooltipContent></Tooltip.TooltipPortal></Tooltip.TooltipRoot> }

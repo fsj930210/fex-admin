@@ -1,9 +1,9 @@
-import type { UploadController } from '@fex/components-core/upload/types'
+import type { UploadController } from '@fex-design/core/upload/types'
 import {
   createUploadMd5Signal,
   createUploadPartsSignal,
   createUploadProgressSignal,
-} from '@fex/components-angular/primitive/upload'
+} from '@fex-design/angular/primitive/upload'
 import {
   ChangeDetectionStrategy,
   Component,

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
-import { Steps, type StepValue } from '@fex/components-angular/primitive/steps'
-import { Card } from '@fex/components-angular/ui/card'
+import { Steps, type StepValue } from '@fex-design/angular/primitive/steps'
+import { Card } from '@fex-design/angular/ui/card'
 import { StepListComponent } from './step-list.component'
 
 @Component({

@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
-import { Spinner } from '@fex/components-vue/ui/spinner'
-import Card from '@fex/components-vue/ui/card'
+import { Spinner } from '@fex-design/vue/ui/spinner'
+import Card from '@fex-design/vue/ui/card'
 </script>
 
 <template>

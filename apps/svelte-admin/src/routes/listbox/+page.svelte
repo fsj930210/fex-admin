@@ -1,11 +1,11 @@
 <script lang="ts">
-  import Card from '@fex/components-svelte/ui/card'
-  import Listbox from '@fex/components-svelte/ui/listbox'
-  import ListboxGroup from '@fex/components-svelte/ui/listbox-group'
-  import ListboxGroupLabel from '@fex/components-svelte/ui/listbox-group-label'
-  import ListboxItem from '@fex/components-svelte/ui/listbox-item'
-  import PrimitiveListbox from '@fex/components-svelte/primitive/listbox'
-  import PrimitiveListboxItem from '@fex/components-svelte/primitive/listbox-item'
+  import Card from '@fex-design/svelte/ui/card'
+  import Listbox from '@fex-design/svelte/ui/listbox'
+  import ListboxGroup from '@fex-design/svelte/ui/listbox-group'
+  import ListboxGroupLabel from '@fex-design/svelte/ui/listbox-group-label'
+  import ListboxItem from '@fex-design/svelte/ui/listbox-item'
+  import PrimitiveListbox from '@fex-design/svelte/primitive/listbox'
+  import PrimitiveListboxItem from '@fex-design/svelte/primitive/listbox-item'
 
   const tricks = [
     { value: 'kickflip', title: 'Kickflip', description: 'Flip the board 360 degrees along its long axis' },

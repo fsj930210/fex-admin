@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { CheckboxRoot } from '@fex/components-vue/primitive/checkbox'
-import { Checkbox, CheckboxGroup } from '@fex/components-vue/ui/checkbox'
-import Card from '@fex/components-vue/ui/card'
-import type { CheckboxCheckedState } from '@fex/components-core/checkbox/types'
+import { CheckboxRoot } from '@fex-design/vue/primitive/checkbox'
+import { Checkbox, CheckboxGroup } from '@fex-design/vue/ui/checkbox'
+import Card from '@fex-design/vue/ui/card'
+import type { CheckboxCheckedState } from '@fex-design/core/checkbox/types'
 
 const options = [
   { label: 'Read records', value: 'read' },

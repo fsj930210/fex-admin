@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { MenuNodeEntry } from '@fex/components-vue/primitive/menu'
-import { useMenu } from '@fex/components-vue/composables/use-menu'
-import { Menu, type MenuItem, type MenuKey } from '@fex/components-vue/ui/menu'
-import { MinusIcon } from '@fex/components-vue/icon/minus'
-import { PlusIcon } from '@fex/components-vue/icon/plus'
-import Card from '@fex/components-vue/ui/card'
+import type { MenuNodeEntry } from '@fex-design/vue/primitive/menu'
+import { useMenu } from '@fex-design/vue/composables/use-menu'
+import { Menu, type MenuItem, type MenuKey } from '@fex-design/vue/ui/menu'
+import { MinusIcon } from '@fex-design/vue/icon/minus'
+import { PlusIcon } from '@fex-design/vue/icon/plus'
+import Card from '@fex-design/vue/ui/card'
 
 const menuItems: MenuItem[] = [
   { key: 'dashboard', label: 'Dashboard', icon: 'D' },

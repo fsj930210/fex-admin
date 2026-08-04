@@ -3,9 +3,9 @@ import {
   getCalendarValueDate,
   type CalendarRange,
   type CalendarValue,
-} from '@fex/components-core/calendar'
-import { isAfterDate, isBeforeDate } from '@fex/components-core/date/utils'
-import { CalendarIcon } from '@fex/components-react/icon/calendar'
+} from '@fex-design/core/calendar'
+import { isAfterDate, isBeforeDate } from '@fex-design/core/date/utils'
+import { CalendarIcon } from '@fex-design/react/icon/calendar'
 import { useState } from 'react'
 import {
   ConfirmFooter,

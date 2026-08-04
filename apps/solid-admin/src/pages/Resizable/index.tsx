@@ -1,7 +1,7 @@
 import { A } from '@solidjs/router'
 import { createSignal } from 'solid-js'
-import { resizePanelPair } from '@fex/components-core/resizable/layout'
-import { Card } from '@fex/components-solid/ui/card'
+import { resizePanelPair } from '@fex-design/core/resizable/layout'
+import { Card } from '@fex-design/solid/ui/card'
 
 type Direction = 'horizontal' | 'vertical'
 

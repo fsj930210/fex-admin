@@ -1,15 +1,15 @@
-import type { SelectOption } from '@fex/components-core/select/types'
+import type { SelectOption } from '@fex-design/core/select/types'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { PlusIcon } from '@fex/components-angular/icon/plus'
-import { InputControl, InputRoot } from '@fex/components-angular/primitive/input'
+import { PlusIcon } from '@fex-design/angular/icon/plus'
+import { InputControl, InputRoot } from '@fex-design/angular/primitive/input'
 import {
   SelectContent,
   SelectList,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-angular/primitive/select'
-import { Button } from '@fex/components-angular/ui/button'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/select'
+import { Button } from '@fex-design/angular/ui/button'
+import Card from '@fex-design/angular/ui/card'
 export
 @Component({
   selector: 'fex-select-popup-render-demo',

@@ -1,0 +1,9 @@
+{
+  "name": "components-styles",
+  "sourceRoot": "packages/@fex-design/styles/src",
+  "projectType": "library",
+  "targets": {
+    "typecheck": { "command": "tsc --noEmit -p packages/@fex-design/styles/tsconfig.json" },
+    "lint": { "command": "oxlint packages/@fex-design/styles/src" }
+  }
+}

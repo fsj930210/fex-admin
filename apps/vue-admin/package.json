@@ -3,17 +3,17 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@fex/components-core": "workspace:*",
-    "@fex/components-styles": "workspace:*",
-    "@fex/components-vue": "workspace:*",
+    "@fex-design/core": "workspace:*",
+    "@fex-design/styles": "workspace:*",
+    "@fex-design/vue": "workspace:*",
     "@fex/styles": "workspace:*",
     "@fex/utils": "workspace:*",
-    "@floating-ui/dom": "^1.7.6",
+    "@floating-ui/dom": "^1.8.0",
     "@tailwindcss/vite": "catalog:",
     "@vitejs/plugin-vue": "latest",
     "embla-carousel-auto-height": "8.6.0",
     "vite": "catalog:",
-    "vue": "3.5.38",
+    "vue": "3.5.40",
     "vue-router": "latest"
   },
   "devDependencies": {

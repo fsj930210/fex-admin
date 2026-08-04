@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SwitchRoot, SwitchThumb } from '@fex/components-vue/primitive/switch'
-import Card from '@fex/components-vue/ui/card'
+import { SwitchRoot, SwitchThumb } from '@fex-design/vue/primitive/switch'
+import Card from '@fex-design/vue/ui/card'
 const checked = ref(true)
 </script>
 

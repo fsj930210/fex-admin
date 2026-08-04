@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { getCalendarToday, type CalendarDate, type CalendarRange } from '@fex/components-core/calendar'
-  import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
-  import { endOfDate } from '@fex/components-core/date/utils'
-  import { DatePickerPreset, RangePickerPanelGroup, useRangePickerContext } from '@fex/components-svelte/primitive/date-picker'
+  import { getCalendarToday, type CalendarDate, type CalendarRange } from '@fex-design/core/calendar'
+  import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
+  import { endOfDate } from '@fex-design/core/date/utils'
+  import { DatePickerPreset, RangePickerPanelGroup, useRangePickerContext } from '@fex-design/svelte/primitive/date-picker'
 
   let { onSelect }: { onSelect: (value: CalendarRange) => void } = $props()
   const today = getCalendarToday()

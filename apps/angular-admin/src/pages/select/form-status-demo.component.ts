@@ -4,21 +4,21 @@ import {
   FieldError,
   FieldLabel,
   FieldRoot,
-} from '@fex/components-angular/primitive/field'
+} from '@fex-design/angular/primitive/field'
 import {
   Form,
   FormField,
   injectForm,
   type AnyFieldApi,
-} from '@fex/components-angular/primitive/form'
+} from '@fex-design/angular/primitive/form'
 import {
   SelectContent,
   SelectList,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-angular/primitive/select'
-import { Button } from '@fex/components-angular/ui/button'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/select'
+import { Button } from '@fex-design/angular/ui/button'
+import Card from '@fex-design/angular/ui/card'
 import { frameworkOptions } from './data'
 export
 @Component({

@@ -1,5 +1,5 @@
-import type { CalendarRange, CalendarValue } from '@fex/components-core/calendar'
-import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
+import type { CalendarRange, CalendarValue } from '@fex-design/core/calendar'
+import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
 import {
   DatePickerContent,
   DatePickerPanel,
@@ -13,8 +13,8 @@ import {
   type DatePickerTriggerProps,
   type RangePickerRootProps,
   type RangePickerTriggerProps,
-} from '@fex/components-solid/primitive/date-picker'
-import Card from '@fex/components-solid/ui/card'
+} from '@fex-design/solid/primitive/date-picker'
+import Card from '@fex-design/solid/ui/card'
 import { cn } from '@fex/utils'
 import { splitProps, type JSX } from 'solid-js'
 

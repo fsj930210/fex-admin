@@ -1,8 +1,8 @@
 <script lang="ts">
-  import PrimitiveButton from '@fex/components-svelte/primitive/button'
-  import Button from '@fex/components-svelte/ui/button'
-  import Card from '@fex/components-svelte/ui/card'
-  import PlusIcon from '@fex/components-svelte/icon/plus'
+  import PrimitiveButton from '@fex-design/svelte/primitive/button'
+  import Button from '@fex-design/svelte/ui/button'
+  import Card from '@fex-design/svelte/ui/card'
+  import PlusIcon from '@fex-design/svelte/icon/plus'
 
   const variants = ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link', 'dashed'] as const
   const sizes = ['xs', 'sm', 'default', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'] as const

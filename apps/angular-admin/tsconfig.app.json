@@ -8,7 +8,7 @@
   "files": [],
   "include": [
     "src/**/*.ts",
-    "../../packages/components/styles/src/**/*.ts",
+    "../../packages/@fex-design/styles/src/**/*.ts",
     "../../packages/utils/src/**/*.ts"
   ]
 }

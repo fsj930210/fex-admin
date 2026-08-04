@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Textarea from '@fex/components-svelte/primitive/textarea'
-  import Card from '@fex/components-svelte/ui/card'
+  import Textarea from '@fex-design/svelte/primitive/textarea'
+  import Card from '@fex-design/svelte/ui/card'
 </script>
 
 <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">

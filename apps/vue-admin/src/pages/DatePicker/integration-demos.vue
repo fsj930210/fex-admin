@@ -3,9 +3,9 @@ import {
   getCalendarToday,
   type CalendarRange,
   type CalendarValue,
-} from '@fex/components-core/calendar'
-import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
-import { datePickerDateTimePanelClassName } from '@fex/components-styles/date-picker'
+} from '@fex-design/core/calendar'
+import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
+import { datePickerDateTimePanelClassName } from '@fex-design/styles/date-picker'
 import {
   DatePickerCancel,
   DatePickerConfirm,
@@ -18,7 +18,7 @@ import {
   RangePickerPanelGroup,
   RangePickerRoot,
   RangePickerTrigger,
-} from '@fex/components-vue/primitive/date-picker'
+} from '@fex-design/vue/primitive/date-picker'
 import {
   TimePickerHourColumn,
   TimePickerMinuteColumn,
@@ -26,8 +26,8 @@ import {
   TimePickerRoot,
   TimePickerSecondColumn,
   type TimeValue,
-} from '@fex/components-vue/primitive/time-picker'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/time-picker'
+import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 import PresetRangePanel from './preset-range-panel.vue'
 

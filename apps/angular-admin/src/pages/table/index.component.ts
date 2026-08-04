@@ -8,9 +8,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@fex/components-angular/primitive/table'
-import { Badge } from '@fex/components-angular/ui/badge'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/table'
+import { Badge } from '@fex-design/angular/ui/badge'
+import Card from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fexTable-page',

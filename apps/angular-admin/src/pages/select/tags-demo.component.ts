@@ -1,4 +1,4 @@
-import { defaultSelectFilterOption } from '@fex/components-core/select/filter-options'
+import { defaultSelectFilterOption } from '@fex-design/core/select/filter-options'
 import { Component } from '@angular/core'
 import { frameworkOptions } from './data'
 import { SimpleSelectDemo } from './simple-demo.component'

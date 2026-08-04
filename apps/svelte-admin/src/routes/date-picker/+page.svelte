@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { createCalendarDate, getCalendarValueDate, getCalendarValueKey, type CalendarDate, type CalendarRange, type CalendarValue } from '@fex/components-core/calendar'
-  import { isAfterDate, isBeforeDate } from '@fex/components-core/date/utils'
-  import Button from '@fex/components-svelte/ui/button'
-  import Card from '@fex/components-svelte/ui/card'
+  import { createCalendarDate, getCalendarValueDate, getCalendarValueKey, type CalendarDate, type CalendarRange, type CalendarValue } from '@fex-design/core/calendar'
+  import { isAfterDate, isBeforeDate } from '@fex-design/core/date/utils'
+  import Button from '@fex-design/svelte/ui/button'
+  import Card from '@fex-design/svelte/ui/card'
   import DemoDatePicker from './demo-date-picker.svelte'
   import CustomDemos from './custom-demos.svelte'
   import IntegrationDemos from './integration-demos.svelte'

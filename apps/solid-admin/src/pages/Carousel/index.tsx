@@ -1,15 +1,15 @@
 import AutoHeight from 'embla-carousel-auto-height'
-import { ChevronLeftIcon, ChevronRightIcon } from '@fex/components-solid/icon/chevron'
-import { createCarousel } from '@fex/components-solid/primitives/create-carousel'
-import { Card } from '@fex/components-solid/ui/card'
+import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/solid/icon/chevron'
+import { createCarousel } from '@fex-design/solid/primitives/create-carousel'
+import { Card } from '@fex-design/solid/ui/card'
 import {
   carouselIndicatorClassName,
   carouselIndicatorsClassName,
   carouselRootClassName,
   carouselTrackClassName,
   carouselViewportClassName,
-} from '@fex/components-styles/carousel'
-import type { CreateCarouselControllerOptions } from '@fex/components-core/carousel/types'
+} from '@fex-design/styles/carousel'
+import type { CreateCarouselControllerOptions } from '@fex-design/core/carousel/types'
 import { A } from '@solidjs/router'
 import { For, type JSX } from 'solid-js'
 

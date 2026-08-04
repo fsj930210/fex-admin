@@ -1,23 +1,23 @@
 import { ChangeDetectionStrategy, Component, effect, input } from '@angular/core'
-import { rowSelectionFeature } from '@fex/components-core/data-grid/features/row-selection'
-import type { DataGridColumnMeta } from '@fex/components-core/data-grid/types'
-import type { TransferPanelApi } from '@fex/components-angular/primitive/transfer'
+import { rowSelectionFeature } from '@fex-design/core/data-table/features/row-selection'
+import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
+import type { TransferPanelApi } from '@fex-design/angular/primitive/transfer'
 import {
-  DataGrid,
-  DataGridCellTemplate,
-  DataGridHeaderTemplate,
+  DataTable,
+  DataTableCellTemplate,
+  DataTableHeaderTemplate,
   tableFeatures,
   type Cell,
   type ColumnDef,
   type Header,
-} from '@fex/components-angular/primitive/data-grid'
-import { createDataGridTable } from '@fex/components-angular/signals/create-data-grid-table'
-import { Checkbox } from '@fex/components-angular/ui/checkbox'
+} from '@fex-design/angular/primitive/data-table'
+import { createDataTable } from '@fex-design/angular/signals/create-data-table'
+import { Checkbox } from '@fex-design/angular/ui/checkbox'
 import type { TransferMember } from './data'
 
 const modules = { rowSelectionFeature }
-type Features = typeof modules & { columnMeta: DataGridColumnMeta<Features, TransferMember> }
-type SelectionTable = ReturnType<typeof createDataGridTable<Features, TransferMember>> & {
+type Features = typeof modules & { columnMeta: DataTableColumnMeta<Features, TransferMember> }
+type SelectionTable = ReturnType<typeof createDataTable<Features, TransferMember>> & {
   getIsAllRowsSelected(): boolean
   getIsSomeRowsSelected(): boolean
   toggleAllRowsSelected(value?: boolean): void
@@ -26,7 +26,7 @@ type SelectionTable = ReturnType<typeof createDataGridTable<Features, TransferMe
 @Component({
   selector: 'fex-transfer-table-panel',
   standalone: true,
-  imports: [DataGrid, DataGridCellTemplate, DataGridHeaderTemplate, Checkbox],
+  imports: [DataTable, DataTableCellTemplate, DataTableHeaderTemplate, Checkbox],
   templateUrl: './table-panel.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -38,7 +38,7 @@ export class TransferTablePanelComponent {
     { accessorKey: 'name', header: 'Name' },
     { accessorKey: 'department', header: 'Department' },
   ]
-  protected readonly table = createDataGridTable({
+  protected readonly table = createDataTable({
     features: this.features,
     data: [] as TransferMember[],
     columns: this.columns,
@@ -51,7 +51,7 @@ export class TransferTablePanelComponent {
       const selection = Object.fromEntries(
         panel.checkedKeys.map((key) => [String(key), true as const]),
       )
-      this.table.setDataGridOptions({
+      this.table.setDataTableOptions({
         features: this.features,
         data: panel.items,
         columns: this.columns,

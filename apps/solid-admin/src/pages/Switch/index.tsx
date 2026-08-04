@@ -1,5 +1,5 @@
-import { SwitchRoot, SwitchThumb } from '@fex/components-solid/primitive/switch'
-import { Card } from '@fex/components-solid/ui/card'
+import { SwitchRoot, SwitchThumb } from '@fex-design/solid/primitive/switch'
+import { Card } from '@fex-design/solid/ui/card'
 import { A } from '@solidjs/router'
 import { createSignal } from 'solid-js'
 

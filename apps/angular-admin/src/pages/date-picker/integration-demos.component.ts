@@ -12,10 +12,10 @@ import {
   getCalendarValueDate,
   type CalendarRange,
   type CalendarValue,
-} from '@fex/components-core/calendar'
-import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
-import { endOfDate } from '@fex/components-core/date/utils'
-import { datePickerDateTimePanelClassName } from '@fex/components-styles/date-picker'
+} from '@fex-design/core/calendar'
+import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
+import { endOfDate } from '@fex-design/core/date/utils'
+import { datePickerDateTimePanelClassName } from '@fex-design/styles/date-picker'
 import {
   DatePickerCancel,
   DatePickerConfirm,
@@ -30,7 +30,7 @@ import {
   RangePickerRoot,
   RangePickerState,
   RangePickerTrigger,
-} from '@fex/components-angular/primitive/date-picker'
+} from '@fex-design/angular/primitive/date-picker'
 import {
   TimePickerHourColumn,
   TimePickerMinuteColumn,
@@ -38,8 +38,8 @@ import {
   TimePickerRoot,
   TimePickerSecondColumn,
   type TimeValue,
-} from '@fex/components-angular/primitive/time-picker'
-import { Card } from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/time-picker'
+import { Card } from '@fex-design/angular/ui/card'
 
 const today = getCalendarToday()
 

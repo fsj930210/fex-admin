@@ -3,10 +3,10 @@ import {
   getCalendarValueDate,
   type CalendarRange,
   type CalendarValue,
-} from '@fex/components-core/calendar'
-import { formatDatePickerValue } from '@fex/components-core/date-picker/value'
-import { endOfDate } from '@fex/components-core/date/utils'
-import { datePickerDateTimePanelClassName } from '@fex/components-styles/date-picker'
+} from '@fex-design/core/calendar'
+import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
+import { endOfDate } from '@fex-design/core/date/utils'
+import { datePickerDateTimePanelClassName } from '@fex-design/styles/date-picker'
 import {
   DatePickerCancel,
   DatePickerConfirm,
@@ -18,7 +18,7 @@ import {
   DatePickerTrigger,
   RangePickerPanelGroup,
   useRangePickerContext,
-} from '@fex/components-solid/primitive/date-picker'
+} from '@fex-design/solid/primitive/date-picker'
 import {
   TimePickerHourColumn,
   TimePickerMinuteColumn,
@@ -26,7 +26,7 @@ import {
   TimePickerRoot,
   TimePickerSecondColumn,
   type TimeValue,
-} from '@fex/components-solid/primitive/time-picker'
+} from '@fex-design/solid/primitive/time-picker'
 import { createSignal, For } from 'solid-js'
 import { DemoRangePicker, Section } from './shared'
 

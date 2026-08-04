@@ -4,10 +4,10 @@ import {
   FieldError,
   FieldLabel,
   FieldRoot,
-} from '@fex/components-solid/primitive/field'
-import { createForm, Form } from '@fex/components-solid/primitive/form'
-import { SelectContent, SelectRoot, SelectTrigger } from '@fex/components-solid/primitive/select'
-import { Button } from '@fex/components-solid/ui/button'
+} from '@fex-design/solid/primitive/field'
+import { createForm, Form } from '@fex-design/solid/primitive/form'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/solid/primitive/select'
+import { Button } from '@fex-design/solid/ui/button'
 import { Show } from 'solid-js'
 import { frameworkOptions } from './data'
 import { SelectDemoSection as Demo } from './demo-section'

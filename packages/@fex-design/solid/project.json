@@ -1,0 +1,9 @@
+{
+  "name": "components-solid",
+  "sourceRoot": "packages/@fex-design/solid/src",
+  "projectType": "library",
+  "targets": {
+    "typecheck": { "command": "tsc --noEmit -p packages/@fex-design/solid/tsconfig.json" },
+    "lint": { "command": "oxlint packages/@fex-design/solid/src" }
+  }
+}

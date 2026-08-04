@@ -1,1 +1,1 @@
-<script>import Card from '@fex/components-svelte/ui/card'; import DemoTimePicker from './demo-time-picker.svelte'</script><Card title="范围选择"><div class="flex items-center gap-space-sm"><DemoTimePicker format="HH:mm"/><span>至</span><DemoTimePicker format="HH:mm"/></div></Card>
+<script>import Card from '@fex-design/svelte/ui/card'; import DemoTimePicker from './demo-time-picker.svelte'</script><Card title="范围选择"><div class="flex items-center gap-space-sm"><DemoTimePicker format="HH:mm"/><span>至</span><DemoTimePicker format="HH:mm"/></div></Card>

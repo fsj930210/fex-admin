@@ -3,8 +3,8 @@ import {
   RadioButton,
   RadioGroup,
   type RadioValue,
-} from '@fex/components-react/primitive/radio'
-import { Card } from '@fex/components-react/ui/card'
+} from '@fex-design/react/primitive/radio'
+import { Card } from '@fex-design/react/ui/card'
 import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
 

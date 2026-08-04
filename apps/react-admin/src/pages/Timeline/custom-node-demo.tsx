@@ -1,8 +1,8 @@
-import { CheckIcon } from '@fex/components-react/icon/check'
-import { ClockIcon } from '@fex/components-react/icon/clock'
-import { Timeline, TimelineContent, TimelineIndicator, TimelineItem, TimelineOpposite } from '@fex/components-react/primitive/timeline'
-import { Badge } from '@fex/components-react/ui/badge'
-import { Card } from '@fex/components-react/ui/card'
+import { CheckIcon } from '@fex-design/react/icon/check'
+import { ClockIcon } from '@fex-design/react/icon/clock'
+import { Timeline, TimelineContent, TimelineIndicator, TimelineItem, TimelineOpposite } from '@fex-design/react/primitive/timeline'
+import { Badge } from '@fex-design/react/ui/badge'
+import { Card } from '@fex-design/react/ui/card'
 
 export function CustomNodeDemo() {
   return (

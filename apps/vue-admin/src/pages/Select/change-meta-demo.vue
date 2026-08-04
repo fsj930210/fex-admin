@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { SelectOption } from '@fex/components-core/select/types'
-import { SelectContent, SelectRoot, SelectTrigger } from '@fex/components-vue/primitive/select'
+import type { SelectOption } from '@fex-design/core/select/types'
+import { SelectContent, SelectRoot, SelectTrigger } from '@fex-design/vue/primitive/select'
 import { ref } from 'vue'
 import Demo from './demo-section.vue'
 const options: SelectOption[] = [

@@ -4,8 +4,8 @@ import {
   AutoCompleteList,
   AutoCompleteRoot,
   AutoCompleteTrigger,
-} from '@fex/components-angular/primitive/auto-complete'
-import Card from '@fex/components-angular/ui/card'
+} from '@fex-design/angular/primitive/auto-complete'
+import Card from '@fex-design/angular/ui/card'
 import { fieldNames, users } from './data'
 
 @Component({

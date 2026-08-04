@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Kbd, KbdGroup } from '@fex/components-angular/ui/kbd'
-import Card from '@fex/components-angular/ui/card'
+import { Kbd, KbdGroup } from '@fex-design/angular/ui/kbd'
+import Card from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fexKbd-page',

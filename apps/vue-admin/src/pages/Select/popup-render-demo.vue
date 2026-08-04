@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type { SelectOption } from '@fex/components-core/select/types'
-import { PlusIcon } from '@fex/components-vue/icon/plus'
-import { InputControl, InputRoot } from '@fex/components-vue/primitive/input'
+import type { SelectOption } from '@fex-design/core/select/types'
+import { PlusIcon } from '@fex-design/vue/icon/plus'
+import { InputControl, InputRoot } from '@fex-design/vue/primitive/input'
 import {
   SelectContent,
   SelectList,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-vue/primitive/select'
-import Button from '@fex/components-vue/ui/button'
+} from '@fex-design/vue/primitive/select'
+import Button from '@fex-design/vue/ui/button'
 import { ref } from 'vue'
 import Demo from './demo-section.vue'
 const options = ref<SelectOption[]>([

@@ -3,7 +3,7 @@ import {
   FieldError,
   FieldLabel,
   FieldRoot,
-} from '@fex/components-react/primitive/field'
+} from '@fex-design/react/primitive/field'
 import { DemoDatePicker, DemoRangePicker, DemoSection } from './shared'
 
 export function StatusDemos() {

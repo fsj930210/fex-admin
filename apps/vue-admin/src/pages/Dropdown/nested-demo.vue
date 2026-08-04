@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ChevronRightIcon } from '@fex/components-vue/icon/chevron'
-import { DropdownContent, DropdownRoot, DropdownTrigger } from '@fex/components-vue/primitive/dropdown'
-import { PopoverPortal, PopoverRoot, PopoverTrigger } from '@fex/components-vue/primitive/popover'
+import { ChevronRightIcon } from '@fex-design/vue/icon/chevron'
+import { DropdownContent, DropdownRoot, DropdownTrigger } from '@fex-design/vue/primitive/dropdown'
+import { PopoverPortal, PopoverRoot, PopoverTrigger } from '@fex-design/vue/primitive/popover'
 import { triggerClassName } from './demo-classes'
 import MenuAction from './menu-action.vue'
 import MenuSurface from './menu-surface.vue'

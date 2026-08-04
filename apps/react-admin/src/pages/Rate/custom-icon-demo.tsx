@@ -1,5 +1,5 @@
-import { Rate, type RateItemRenderState } from '@fex/components-react/primitive/rate'
-import { Card } from '@fex/components-react/ui/card'
+import { Rate, type RateItemRenderState } from '@fex-design/react/primitive/rate'
+import { Card } from '@fex-design/react/ui/card'
 import type { SVGProps } from 'react'
 
 function HeartIcon(props: SVGProps<SVGSVGElement>) {

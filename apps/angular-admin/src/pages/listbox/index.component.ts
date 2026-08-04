@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import Card from '@fex/components-angular/ui/card'
+import Card from '@fex-design/angular/ui/card'
 import {
   ListboxItem as PrimitiveListboxItem,
   ListboxRoot as PrimitiveListboxRoot,
-} from '@fex/components-angular/primitive/listbox'
+} from '@fex-design/angular/primitive/listbox'
 import {
   ListboxGroup,
   ListboxGroupLabel,
   ListboxItem,
   ListboxItemIndicator,
   ListboxRoot,
-} from '@fex/components-angular/ui/listbox'
+} from '@fex-design/angular/ui/listbox'
 
 @Component({
   selector: 'fex-listbox-page',

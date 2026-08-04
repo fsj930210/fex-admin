@@ -3,7 +3,7 @@ import {
   SelectEmpty,
   SelectRoot,
   SelectTrigger,
-} from '@fex/components-react/primitive/select'
+} from '@fex-design/react/primitive/select'
 import { SelectDemoSection } from './demo-section'
 
 export function EmptyDemo() {

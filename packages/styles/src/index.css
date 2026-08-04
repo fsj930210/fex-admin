@@ -9,5 +9,5 @@
 @import './utilities.css';
 
 @source "../../../apps";
-@source "../../components";
+@source "../../@fex-design";
 @source inline("data-[selected=true]:bg-primary/15 data-[selected=true]:text-foreground data-[selected=true]:ring-1 data-[selected=true]:ring-primary/30");

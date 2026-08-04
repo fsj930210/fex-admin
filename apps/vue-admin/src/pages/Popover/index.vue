@@ -8,8 +8,8 @@ import {
   PopoverPortal,
   PopoverTitle,
   PopoverTrigger,
-} from '@fex/components-vue/primitive/popover'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/popover'
+import Card from '@fex-design/vue/ui/card'
 import { ref } from 'vue'
 
 const open = ref(false)

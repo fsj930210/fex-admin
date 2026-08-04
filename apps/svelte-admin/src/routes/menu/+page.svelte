@@ -1,9 +1,9 @@
 <script lang="ts">
-  import Card from '@fex/components-svelte/ui/card'
-  import Menu from '@fex/components-svelte/ui/menu'
-  import { getMenuNodeEntries, isMenuNodeItem, normalizeMenuKeys, type MenuItem, type MenuKey, type MenuNodeEntry, type MenuRenderItemInfo } from '@fex/components-svelte/primitive/menu'
-  import MinusIcon from '@fex/components-svelte/icon/minus'
-  import PlusIcon from '@fex/components-svelte/icon/plus'
+  import Card from '@fex-design/svelte/ui/card'
+  import Menu from '@fex-design/svelte/ui/menu'
+  import { getMenuNodeEntries, isMenuNodeItem, normalizeMenuKeys, type MenuItem, type MenuKey, type MenuNodeEntry, type MenuRenderItemInfo } from '@fex-design/svelte/primitive/menu'
+  import MinusIcon from '@fex-design/svelte/icon/minus'
+  import PlusIcon from '@fex-design/svelte/icon/plus'
 
   const menuItems: MenuItem[] = [
     { key: 'dashboard', label: 'Dashboard', icon: 'D' },

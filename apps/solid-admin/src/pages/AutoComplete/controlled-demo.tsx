@@ -2,8 +2,8 @@ import {
   AutoCompleteContent,
   AutoCompleteRoot,
   AutoCompleteTrigger,
-} from '@fex/components-solid/primitive/auto-complete'
-import Card from '@fex/components-solid/ui/card'
+} from '@fex-design/solid/primitive/auto-complete'
+import Card from '@fex-design/solid/ui/card'
 import { createSignal } from 'solid-js'
 import { fieldNames, users } from './data'
 

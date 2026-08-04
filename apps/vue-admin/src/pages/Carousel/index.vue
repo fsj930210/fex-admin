@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AutoHeight from 'embla-carousel-auto-height'
-import { Carousel } from '@fex/components-vue/primitive/carousel'
-import Card from '@fex/components-vue/ui/card'
+import { Carousel } from '@fex-design/vue/primitive/carousel'
+import Card from '@fex-design/vue/ui/card'
 import CarouselControls from './carousel-controls.vue'
 
 const slides = ['订单概览', '待办审批', '团队动态']

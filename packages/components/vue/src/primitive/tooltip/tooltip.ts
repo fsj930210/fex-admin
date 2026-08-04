@@ -1,6 +1,0 @@
-export { default as TooltipRoot } from './tooltip-root.vue'
-export { default as TooltipTrigger } from './tooltip-trigger.vue'
-export { default as TooltipPortal } from './tooltip-portal.vue'
-export { default as TooltipContent } from './tooltip-content.vue'
-export { default as TooltipArrow } from './tooltip-arrow.vue'
-export type { TooltipOptions as TooltipRootProps } from '@fex/components-core/tooltip/create-tooltip'

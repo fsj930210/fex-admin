@@ -1,6 +1,6 @@
-import { createTreeController } from '@fex/components-core/tree/create-tree-controller'
-import { dndFeature, expansionFeature } from '@fex/components-core'
-import type { TreeController } from '@fex/components-core/tree/types'
+import { createTreeController } from '@fex-design/core/tree/create-tree-controller'
+import { dndFeature, expansionFeature } from '@fex-design/core'
+import type { TreeController } from '@fex-design/core/tree/types'
 import {
   TreeDropIndicator,
   TreeItem,
@@ -8,8 +8,8 @@ import {
   TreeTitle,
   TreeTrigger,
   TreeViewport,
-} from '@fex/components-react/primitive/tree'
-import { useTreeDndItem } from '@fex/components-react/primitive/tree/use-tree-dnd-item'
+} from '@fex-design/react/primitive/tree'
+import { useTreeDndItem } from '@fex-design/react/primitive/tree/use-tree-dnd-item'
 import { useState } from 'react'
 import {
   departmentFieldNames,

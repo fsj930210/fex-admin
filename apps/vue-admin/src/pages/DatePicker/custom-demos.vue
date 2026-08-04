@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { createCalendarDate, getCalendarValueKey } from '@fex/components-core/calendar'
+import { createCalendarDate, getCalendarValueKey } from '@fex-design/core/calendar'
 import {
   CalendarCell as CalendarCellView,
   CalendarGrid,
   CalendarWeekHeader,
-} from '@fex/components-vue/primitive/calendar'
+} from '@fex-design/vue/primitive/calendar'
 import {
   DatePickerContent,
   DatePickerFooter,
   DatePickerPanel,
   DatePickerRoot,
   DatePickerTrigger,
-} from '@fex/components-vue/primitive/date-picker'
-import Button from '@fex/components-vue/ui/button'
-import Card from '@fex/components-vue/ui/card'
+} from '@fex-design/vue/primitive/date-picker'
+import Button from '@fex-design/vue/ui/button'
+import Card from '@fex-design/vue/ui/card'
 import CustomPanel from './custom-panel.vue'
 
 const releaseDate = createCalendarDate(2026, 7, 30)

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { SwitchRoot, SwitchThumb } from '@fex/components-angular/primitive/switch'
-import Card from '@fex/components-angular/ui/card'
+import { SwitchRoot, SwitchThumb } from '@fex-design/angular/primitive/switch'
+import Card from '@fex-design/angular/ui/card'
 
 @Component({
   selector: 'fex-switch-page',
