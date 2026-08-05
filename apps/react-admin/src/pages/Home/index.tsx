@@ -12,6 +12,7 @@ export function HomePage() {
     { to: '/checkbox', label: 'Checkbox' },
     { to: '/collapse', label: 'Collapse' },
     { to: '/carousel', label: 'Carousel' },
+    { to: '/context-menu', label: 'ContextMenu' },
     { to: '/data-table', label: 'Data Table' },
     { to: '/date-picker', label: 'DatePicker' },
     { to: '/dialog', label: 'Dialog' },

@@ -1,0 +1,21 @@
+<fex-context-menu>
+  <div role="tree" class="max-w-md rounded-md border border-border bg-background p-1">
+    @for (node of nodes; track node.id) {
+      <div
+        [fexContextMenuTrigger]="node.id"
+        role="treeitem"
+        tabindex="0"
+        [attr.aria-level]="node.level + 1"
+        class="flex h-8 items-center rounded-md px-2 text-sm outline-none hover:bg-muted-background focus:bg-muted-background"
+        [style.padding-left.px]="8 + node.level * 20"
+      >
+        {{ node.name }}
+      </div>
+    }
+  </div>
+  <fex-context-menu-portal>
+    <fex-context-menu-content>
+      <app-context-menu-surface label="Tree node actions" />
+    </fex-context-menu-content>
+  </fex-context-menu-portal>
+</fex-context-menu>

@@ -13,6 +13,7 @@
     "./primitive/carousel": "./src/primitive/carousel/carousel.ts",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.ts",
     "./primitive/collapse": "./src/primitive/collapse/collapse.ts",
+    "./primitive/context-menu": "./src/primitive/context-menu/context-menu.ts",
     "./primitive/dialog": "./src/primitive/dialog/dialog.ts",
     "./primitive/drawer": "./src/primitive/drawer/drawer.ts",
     "./primitive/data-table": "./src/primitive/data-table/data-table.ts",

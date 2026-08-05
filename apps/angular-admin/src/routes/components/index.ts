@@ -40,6 +40,11 @@ export const componentRoutes: Routes = [
       import('../../pages/collapse/index.component').then((module) => module.CollapseComponent),
   },
   {
+    path: 'context-menu',
+    loadComponent: () =>
+      import('../../pages/context-menu/index.component').then((module) => module.ContextMenuComponent),
+  },
+  {
     path: 'dialog',
     loadComponent: () =>
       import('../../pages/dialog/index.component').then((module) => module.DialogComponent),

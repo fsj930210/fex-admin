@@ -9,6 +9,7 @@ const componentLinks = [
     { href: '/card', label: 'Card' },
     { href: '/checkbox', label: 'Checkbox' },
     { href: '/collapse', label: 'Collapse' },
+  { href: '/context-menu', label: 'ContextMenu' },
     { href: '/dialog', label: 'Dialog' },
   { href: '/drawer', label: 'Drawer' },
   { href: '/dropdown', label: 'Dropdown' },

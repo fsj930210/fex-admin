@@ -1,0 +1,5 @@
+export { default as ContextMenuRoot } from './context-menu-root.vue'
+export { default as ContextMenuTrigger } from './context-menu-trigger.vue'
+export { default as ContextMenuContent } from './context-menu-content.vue'
+export { default as ContextMenuPortal } from './context-menu-portal.vue'
+export { default as ContextMenuItem } from './context-menu-item.vue'

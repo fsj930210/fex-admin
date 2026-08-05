@@ -1,0 +1,38 @@
+<fex-context-menu (openChange)="handleOpenChange($event)">
+  <div class="overflow-hidden rounded-md border border-border bg-background">
+    <table class="w-full border-collapse text-sm">
+      <thead class="bg-muted-background text-muted-foreground">
+        <tr>
+          @for (column of columns; track column) {
+            <th
+              [fexContextMenuTrigger]="'column:' + column"
+              scope="col"
+              tabindex="0"
+              class="border-b border-border px-3 py-2 text-left font-medium outline-none hover:bg-background focus:bg-background"
+            >
+              {{ column }}
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows; track row[0]) {
+          <tr
+            [fexContextMenuTrigger]="'row:' + row[0]"
+            tabindex="0"
+            class="outline-none hover:bg-muted-background focus:bg-muted-background"
+          >
+            @for (cell of row; track cell) {
+              <td class="border-b border-border px-3 py-2 last:text-right">{{ cell }}</td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <fex-context-menu-portal>
+    <fex-context-menu-content>
+      <app-context-menu-surface [label]="label" />
+    </fex-context-menu-content>
+  </fex-context-menu-portal>
+</fex-context-menu>

@@ -22,6 +22,9 @@ const CheckboxPage = lazy(() =>
 const CollapsePage = lazy(() =>
   import('../../pages/Collapse').then((module) => ({ default: module.CollapsePage })),
 )
+const ContextMenuPage = lazy(() =>
+  import('../../pages/ContextMenu').then((module) => ({ default: module.ContextMenuPage })),
+)
 const DialogPage = lazy(() =>
   import('../../pages/Dialog').then((module) => ({ default: module.DialogPage })),
 )
@@ -165,6 +168,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/collapse',
     component: CollapsePage,
+  },
+  {
+    path: '/context-menu',
+    component: ContextMenuPage,
   },
   {
     path: '/dialog',

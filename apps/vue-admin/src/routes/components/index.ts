@@ -9,6 +9,7 @@ export const componentRoutes = [
   { path: '/card', component: () => import('../../pages/Card/index.vue') },
   { path: '/checkbox', component: () => import('../../pages/Checkbox/index.vue') },
   { path: '/collapse', component: () => import('../../pages/Collapse/index.vue') },
+  { path: '/context-menu', component: () => import('../../pages/ContextMenu/index.vue') },
   { path: '/dialog', component: () => import('../../pages/Dialog/index.vue') },
   { path: '/drawer', component: () => import('../../pages/Drawer/index.vue') },
   { path: '/dropdown', component: () => import('../../pages/Dropdown/index.vue') },

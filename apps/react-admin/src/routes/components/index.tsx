@@ -15,6 +15,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/DataTable'), 'DataTablePage'),
   },
   {
+    path: '/context-menu',
+    element: createLazyRouteElement(() => import('../../pages/ContextMenu'), 'ContextMenuPage'),
+  },
+  {
     path: '/date-picker',
     element: createLazyRouteElement(() => import('../../pages/DatePicker'), 'DatePickerPage'),
   },

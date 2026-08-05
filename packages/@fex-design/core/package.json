@@ -114,6 +114,8 @@
     "./interactions/types": "./src/interactions/types.ts",
     "./overlay/create-overlay": "./src/overlay/create-overlay.ts",
     "./overlay/create-floating-overlay": "./src/overlay/create-floating-overlay.ts",
+    "./overlay/context-menu/create-context-menu-controller": "./src/overlay/context-menu/create-context-menu-controller.ts",
+    "./overlay/context-menu/types": "./src/overlay/context-menu/types.ts",
     "./overlay/trigger/create-trigger": "./src/overlay/trigger/create-trigger.ts",
     "./resizable/layout": "./src/resizable/layout.ts",
     "./resizable/types": "./src/resizable/types.ts",

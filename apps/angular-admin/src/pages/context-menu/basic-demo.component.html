@@ -1,0 +1,14 @@
+<fex-context-menu (openChange)="handleOpenChange($event)">
+  <div
+    [fexContextMenuTrigger]="'basic-panel'"
+    tabindex="0"
+    class="rounded-md border border-dashed border-border bg-background p-space-xl text-sm text-muted-foreground outline-none focus:ring-2 focus:ring-ring"
+  >
+    {{ last }}
+  </div>
+  <fex-context-menu-portal>
+    <fex-context-menu-content>
+      <app-context-menu-surface label="Panel actions" />
+    </fex-context-menu-content>
+  </fex-context-menu-portal>
+</fex-context-menu>
