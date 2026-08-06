@@ -136,6 +136,9 @@ const UploadPage = lazy(() =>
 const TooltipPage = lazy(() =>
   import('../../pages/Tooltip').then((module) => ({ default: module.TooltipPage })),
 )
+const TourPage = lazy(() =>
+  import('../../pages/Tour').then((module) => ({ default: module.TourPage })),
+)
 
 export const componentRoutes: AppRoute[] = [
   { path: '/breadcrumb', component: BreadcrumbPage },
@@ -291,6 +294,7 @@ export const componentRoutes: AppRoute[] = [
   },
   { path: '/time-picker', component: TimePickerPage },
   { path: '/tooltip', component: TooltipPage },
+  { path: '/tour', component: TourPage },
   {
     path: '/tree',
     component: TreePage,

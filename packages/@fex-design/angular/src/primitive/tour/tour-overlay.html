@@ -1,0 +1,5 @@
+@if (customContent) {
+  <ng-content select="[fexTourOverlayContent]" />
+} @else {
+  <svg aria-hidden="true" class="size-full" viewBox="0 0 100 100" preserveAspectRatio="none"><defs><mask [id]="maskId"><rect width="100" height="100" fill="white"></rect>@if (targetRect(); as rect) {<rect [attr.x]="rect.x / viewportWidth() * 100 + '%'" [attr.y]="rect.y / viewportHeight() * 100 + '%'" [attr.width]="rect.width / viewportWidth() * 100 + '%'" [attr.height]="rect.height / viewportHeight() * 100 + '%'" fill="black"></rect>}</mask></defs><rect width="100" height="100" [attr.fill]="color()" [attr.mask]="'url(#' + maskId + ')'" /></svg>
+}

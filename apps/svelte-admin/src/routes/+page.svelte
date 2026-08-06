@@ -45,6 +45,7 @@
     { href: '/textarea', label: 'Textarea' },
     { href: '/time-picker', label: 'TimePicker' },
     { href: '/tooltip', label: 'Tooltip' },
+    { href: '/tour', label: 'Tour' },
     // eslint-disable-next-line unicorn/no-array-sort -- this literal is newly created and not shared.
   ].sort((left, right) => left.label.localeCompare(right.label))
 </script>

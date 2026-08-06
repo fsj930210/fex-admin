@@ -132,6 +132,11 @@ export const componentRoutes: Routes = [
       import('../../pages/tooltip/index.component').then((module) => module.TooltipComponent),
   },
   {
+    path: 'tour',
+    loadComponent: () =>
+      import('../../pages/tour/index.component').then((module) => module.TourComponent),
+  },
+  {
     path: 'spinner',
     loadComponent: () =>
       import('../../pages/spinner/index.component').then((module) => module.SpinnerComponent),

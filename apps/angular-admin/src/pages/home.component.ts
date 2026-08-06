@@ -52,6 +52,7 @@ export class HomeComponent {
     { to: '/textarea', label: 'Textarea' },
     { to: '/time-picker', label: 'TimePicker' },
     { to: '/tooltip', label: 'Tooltip' },
+    { to: '/tour', label: 'Tour' },
     { to: '/tree', label: 'Tree' },
     { to: '/transfer', label: 'Transfer' },
     { to: '/upload', label: 'Upload' },

@@ -47,6 +47,7 @@
     "./primitive/textarea": "./src/primitive/textarea/textarea.ts",
     "./primitive/time-picker": "./src/primitive/time-picker/time-picker.ts",
     "./primitive/tooltip": "./src/primitive/tooltip/tooltip.ts",
+    "./primitive/tour": "./src/primitive/tour/tour.ts",
     "./ui/badge": "./src/ui/badge/badge.ts",
     "./ui/button": "./src/ui/button/button.ts",
     "./ui/card": "./src/ui/card/card.ts",

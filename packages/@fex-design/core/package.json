@@ -106,6 +106,8 @@
     "./expansion/utils": "./src/expansion/utils.ts",
     "./floating/create-floating": "./src/floating/create-floating.ts",
     "./floating/placement": "./src/floating/placement.ts",
+    "./tour/create-tour-controller": "./src/tour/create-tour-controller.ts",
+    "./tour/types": "./src/tour/types.ts",
     "./interactions/bounds": "./src/interactions/bounds.ts",
     "./interactions/create-move-controller": "./src/interactions/create-move-controller.ts",
     "./interactions/create-resize-controller": "./src/interactions/create-resize-controller.ts",
