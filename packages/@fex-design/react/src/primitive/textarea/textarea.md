@@ -87,5 +87,4 @@ Accepts native div props and renders caller-owned footer content.
 ## Notes
 
 - Primitive does not export a standalone Textarea; a future ui/textarea can wrap these parts.
-- textareaInputClassName replaces the previous textareaClassName.
 - Clear styling is local to textarea through textareaClearClassName; it does not import Input styles.

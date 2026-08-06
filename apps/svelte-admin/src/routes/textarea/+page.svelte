@@ -4,6 +4,7 @@
   import ControlledDemo from './controlled-demo.svelte'
   import CountDemo from './count-demo.svelte'
   import FooterDemo from './footer-demo.svelte'
+  import ValidationDemo from './validation-demo.svelte'
 </script>
 
 <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
@@ -22,6 +23,7 @@
       <ControlledDemo />
       <CountDemo />
       <FooterDemo />
+      <ValidationDemo />
     </div>
   </div>
 </main>

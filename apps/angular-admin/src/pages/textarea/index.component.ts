@@ -5,9 +5,10 @@ import { TextareaBasicDemo } from './basic-demo.component'
 import { TextareaControlledDemo } from './controlled-demo.component'
 import { TextareaCountDemo } from './count-demo.component'
 import { TextareaFooterDemo } from './footer-demo.component'
+import { TextareaValidationDemo } from './validation-demo.component'
 
 @Component({
-  selector: 'fexTextarea-page',
+  selector: 'fex-textarea-page',
   imports: [
     RouterLink,
     TextareaBasicDemo,
@@ -15,6 +16,7 @@ import { TextareaFooterDemo } from './footer-demo.component'
     TextareaControlledDemo,
     TextareaCountDemo,
     TextareaFooterDemo,
+    TextareaValidationDemo,
   ],
   host: { class: 'block' },
   templateUrl: './index.component.html',

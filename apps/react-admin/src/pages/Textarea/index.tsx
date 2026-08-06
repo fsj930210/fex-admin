@@ -4,6 +4,7 @@ import { AutosizeDemo } from './autosize-demo'
 import { ControlledDemo } from './controlled-demo'
 import { CountDemo } from './count-demo'
 import { FooterDemo } from './footer-demo'
+import { ValidationDemo } from './validation-demo'
 
 export function TextareaPage() {
   return (
@@ -26,6 +27,7 @@ export function TextareaPage() {
           <ControlledDemo />
           <CountDemo />
           <FooterDemo />
+          <ValidationDemo />
         </div>
       </div>
     </main>

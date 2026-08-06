@@ -1,0 +1,37 @@
+<fex-card
+  title="Form validation"
+  description="Submit the real Form empty to show Field error text and Textarea error styling."
+>
+  <form [fexForm]="form" class="grid max-w-xl gap-space-md">
+    <ng-container [fexField]="form" name="message" [validators]="validators" #messageField="field">
+      <fex-field-root
+        [required]="true"
+        [invalid]="invalid(messageField.api)"
+        [hasError]="invalid(messageField.api)"
+      >
+        <label fexFieldLabel>Message <span fexFieldRequiredIndicator>*</span></label>
+        <fex-textarea-root
+          [value]="messageField.api.state.value"
+          [invalid]="invalid(messageField.api)"
+          [autoSize]="{ minRows: 3, maxRows: 6 }"
+          (change)="messageField.api.handleChange($event)"
+        >
+          <textarea
+            fexTextareaInput
+            fexFieldControl
+            placeholder="Submit without content to see validation"
+            (blur)="messageField.api.handleBlur()"
+          ></textarea>
+        </fex-textarea-root>
+        @if (invalid(messageField.api)) {
+          <div fexFieldError>
+            @for (error of errors(messageField.api); track error) {
+              <div>{{ error }}</div>
+            }
+          </div>
+        }
+      </fex-field-root>
+    </ng-container>
+    <button fexButton type="submit">Validate message</button>
+  </form>
+</fex-card>

@@ -4,6 +4,7 @@ import AutosizeDemo from './autosize-demo.vue'
 import ControlledDemo from './controlled-demo.vue'
 import CountDemo from './count-demo.vue'
 import FooterDemo from './footer-demo.vue'
+import ValidationDemo from './validation-demo.vue'
 </script>
 
 <template>
@@ -23,6 +24,7 @@ import FooterDemo from './footer-demo.vue'
         <ControlledDemo />
         <CountDemo />
         <FooterDemo />
+        <ValidationDemo />
       </div>
     </div>
   </main>

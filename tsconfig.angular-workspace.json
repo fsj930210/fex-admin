@@ -67,6 +67,9 @@
       "@fex-design/core/time-picker/create-time-picker-controller": [
         "packages/@fex-design/core/src/time-picker/create-time-picker-controller.ts"
       ],
+      "@fex-design/core/textarea/autosize": [
+        "packages/@fex-design/core/src/textarea/autosize.ts"
+      ],
       "@fex-design/core/data-table/types": [
         "packages/@fex-design/core/src/data-table/types.ts"
       ],
@@ -307,6 +310,12 @@
       "@fex-design/core/floating/placement": [
         "packages/@fex-design/core/src/floating/placement.ts"
       ],
+      "@fex-design/core/tour/create-tour-controller": [
+        "packages/@fex-design/core/src/tour/create-tour-controller.ts"
+      ],
+      "@fex-design/core/tour/types": [
+        "packages/@fex-design/core/src/tour/types.ts"
+      ],
       "@fex-design/core/interactions/bounds": [
         "packages/@fex-design/core/src/interactions/bounds.ts"
       ],
@@ -330,6 +339,12 @@
       ],
       "@fex-design/core/overlay/create-floating-overlay": [
         "packages/@fex-design/core/src/overlay/create-floating-overlay.ts"
+      ],
+      "@fex-design/core/overlay/context-menu/create-context-menu-controller": [
+        "packages/@fex-design/core/src/overlay/context-menu/create-context-menu-controller.ts"
+      ],
+      "@fex-design/core/overlay/context-menu/types": [
+        "packages/@fex-design/core/src/overlay/context-menu/types.ts"
       ],
       "@fex-design/core/overlay/trigger/create-trigger": [
         "packages/@fex-design/core/src/overlay/trigger/create-trigger.ts"
@@ -411,6 +426,9 @@
       ],
       "@fex-design/angular/primitive/collapse": [
         "packages/@fex-design/angular/src/primitive/collapse/collapse.ts"
+      ],
+      "@fex-design/angular/primitive/context-menu": [
+        "packages/@fex-design/angular/src/primitive/context-menu/context-menu.ts"
       ],
       "@fex-design/angular/primitive/dialog": [
         "packages/@fex-design/angular/src/primitive/dialog/dialog.ts"
@@ -510,6 +528,9 @@
       ],
       "@fex-design/angular/primitive/tooltip": [
         "packages/@fex-design/angular/src/primitive/tooltip/tooltip.ts"
+      ],
+      "@fex-design/angular/primitive/tour": [
+        "packages/@fex-design/angular/src/primitive/tour/tour.ts"
       ],
       "@fex-design/angular/ui/badge": [
         "packages/@fex-design/angular/src/ui/badge/badge.ts"
