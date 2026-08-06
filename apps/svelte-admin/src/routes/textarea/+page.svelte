@@ -1,11 +1,27 @@
 <script lang="ts">
-  import Textarea from '@fex-design/svelte/primitive/textarea'
-  import Card from '@fex-design/svelte/ui/card'
+  import BasicDemo from './basic-demo.svelte'
+  import AutosizeDemo from './autosize-demo.svelte'
+  import ControlledDemo from './controlled-demo.svelte'
+  import CountDemo from './count-demo.svelte'
+  import FooterDemo from './footer-demo.svelte'
 </script>
 
 <main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
   <div class="mx-auto w-full max-w-5xl space-y-space-xl">
-    <header class="space-y-space-md"><a class="text-sm text-muted-foreground hover:text-foreground" href="/">返回首页</a><h1 class="text-2xl font-semibold text-foreground">Textarea</h1><p class="max-w-2xl text-sm leading-6 text-muted-foreground">基础多行输入控件，覆盖普通、禁用和校验态。</p></header>
-    <Card title="States" description="常用多行输入状态。"><div class="grid gap-space-lg"><Textarea placeholder="记录本次处理说明" /><Textarea value="只读多行内容" disabled /><Textarea aria-invalid placeholder="校验失败" /></div></Card>
+    <header class="space-y-space-md">
+      <a class="text-sm text-muted-foreground hover:text-foreground" href="/">Back home</a>
+      <h1 class="text-2xl font-semibold text-foreground">Textarea primitives</h1>
+      <p class="max-w-2xl text-sm leading-6 text-muted-foreground">
+        TextareaRoot coordinates value, autosize, clear and footer composition while TextareaInput remains the native textarea node.
+      </p>
+    </header>
+
+    <div class="space-y-space-xl">
+      <BasicDemo />
+      <AutosizeDemo />
+      <ControlledDemo />
+      <CountDemo />
+      <FooterDemo />
+    </div>
   </div>
 </main>

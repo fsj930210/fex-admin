@@ -1,0 +1,12 @@
+<fex-card
+  title="Autosize"
+  description="autoSize={{ minRows: 1, maxRows: 4 }}: content grows the field up to 4 rows, then the textarea scrolls."
+>
+  <fex-textarea-root class="max-w-xl" [autoSize]="autoSize" [defaultValue]="defaultValue">
+    <textarea
+      fexTextareaInput
+      aria-label="Autosize textarea"
+      placeholder="Type multiple lines to grow the input"
+    ></textarea>
+  </fex-textarea-root>
+</fex-card>

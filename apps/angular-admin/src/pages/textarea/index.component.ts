@@ -1,11 +1,21 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Textarea } from '@fex-design/angular/primitive/textarea'
-import Card from '@fex-design/angular/ui/card'
+import { TextareaAutosizeDemo } from './autosize-demo.component'
+import { TextareaBasicDemo } from './basic-demo.component'
+import { TextareaControlledDemo } from './controlled-demo.component'
+import { TextareaCountDemo } from './count-demo.component'
+import { TextareaFooterDemo } from './footer-demo.component'
 
 @Component({
   selector: 'fexTextarea-page',
-  imports: [RouterLink, Card, Textarea],
+  imports: [
+    RouterLink,
+    TextareaBasicDemo,
+    TextareaAutosizeDemo,
+    TextareaControlledDemo,
+    TextareaCountDemo,
+    TextareaFooterDemo,
+  ],
   host: { class: 'block' },
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

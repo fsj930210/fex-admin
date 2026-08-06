@@ -1,0 +1,18 @@
+<fex-card title="Footer" description="Footer is only a layout slot; actions are fully owned by the caller.">
+  <fex-textarea-root class="max-w-2xl" [value]="value" (change)="value = $event" [autoSize]="autoSize">
+    <textarea fexTextareaInput aria-label="AI message" placeholder="Ask anything"></textarea>
+    <button fexTextareaClear aria-label="Clear message"></button>
+    <div fexTextareaFooter>
+      <div class="flex min-w-0 flex-wrap items-center gap-1">
+        <button fexButton aria-label="Attach" size="icon-sm" variant="ghost"><fex-plus-icon /></button>
+        <button fexButton size="sm" variant="ghost"><fex-info-icon />Context</button>
+      </div>
+      <div class="flex shrink-0 items-center gap-2">
+        <span>{{ value.length }} / 2000</span>
+        <button fexButton aria-label="Send" [disabled]="!value.trim()" size="icon-sm">
+          <fex-check-icon />
+        </button>
+      </div>
+    </div>
+  </fex-textarea-root>
+</fex-card>

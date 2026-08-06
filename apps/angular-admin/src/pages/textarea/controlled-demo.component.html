@@ -1,0 +1,19 @@
+<fex-card
+  title="Controlled and uncontrolled"
+  description="Root owns the value protocol; callers can provide value or only defaultValue."
+>
+  <div class="grid gap-space-lg md:grid-cols-2">
+    <div class="space-y-space-sm">
+      <fex-textarea-root [value]="value" (change)="value = $event" [autoSize]="autoSize">
+        <textarea fexTextareaInput aria-label="Controlled textarea" placeholder="Controlled"></textarea>
+        <button fexTextareaClear aria-label="Clear controlled textarea"></button>
+      </fex-textarea-root>
+      <p class="text-sm text-muted-foreground">Value: {{ value || '(empty)' }}</p>
+    </div>
+
+    <fex-textarea-root defaultValue="Uncontrolled textarea value" [autoSize]="autoSize">
+      <textarea fexTextareaInput aria-label="Uncontrolled textarea" placeholder="Uncontrolled"></textarea>
+      <button fexTextareaClear aria-label="Clear uncontrolled textarea"></button>
+    </fex-textarea-root>
+  </div>
+</fex-card>

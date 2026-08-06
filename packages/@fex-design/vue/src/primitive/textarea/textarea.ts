@@ -1,1 +1,5 @@
-export { default as Textarea } from './textarea.vue'
+export { default as TextareaRoot } from './textarea-root.vue'
+export { default as TextareaInput } from './textarea-input.vue'
+export { default as TextareaClear } from './textarea-clear.vue'
+export { default as TextareaFooter } from './textarea-footer.vue'
+export { useTextarea } from './use-textarea'

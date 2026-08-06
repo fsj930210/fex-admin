@@ -1,6 +1,9 @@
-import { Textarea } from '@fex-design/solid/primitive/textarea'
-import { Card } from '@fex-design/solid/ui/card'
 import { A } from '@solidjs/router'
+import { BasicDemo } from './basic-demo'
+import { AutosizeDemo } from './autosize-demo'
+import { ControlledDemo } from './controlled-demo'
+import { CountDemo } from './count-demo'
+import { FooterDemo } from './footer-demo'
 
 export function TextareaPage() {
   return (
@@ -8,20 +11,21 @@ export function TextareaPage() {
       <div class="mx-auto w-full max-w-5xl space-y-space-xl">
         <header class="space-y-space-md">
           <A class="text-sm text-muted-foreground hover:text-foreground" href="/">
-            返回首页
+            Back home
           </A>
-          <h1 class="text-2xl font-semibold text-foreground">Textarea</h1>
+          <h1 class="text-2xl font-semibold text-foreground">Textarea primitives</h1>
           <p class="max-w-2xl text-sm leading-6 text-muted-foreground">
-            基础多行输入控件，覆盖普通、禁用和校验态。
+            TextareaRoot coordinates value, autosize, clear and footer composition while
+            TextareaInput remains the native textarea node.
           </p>
         </header>
-        <Card title="States" description="常用多行输入状态。">
-          <div class="grid gap-space-lg">
-            <Textarea placeholder="记录本次处理说明" />
-            <Textarea value="只读多行内容" disabled />
-            <Textarea aria-invalid placeholder="校验失败" />
-          </div>
-        </Card>
+        <div class="space-y-space-xl">
+          <BasicDemo />
+          <AutosizeDemo />
+          <ControlledDemo />
+          <CountDemo />
+          <FooterDemo />
+        </div>
       </div>
     </main>
   )

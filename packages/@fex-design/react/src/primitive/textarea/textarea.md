@@ -1,45 +1,91 @@
 # Textarea Primitive
 
-## 用途
+## Purpose
 
-`Textarea` 是多行文本输入的基础控件，提供统一边框、禁用和校验态样式。
+Textarea primitives expose a composable multi-line input contract. TextareaRoot owns value state, validation state, autosize, clear behavior and footer layout. TextareaInput is the only native textarea node.
 
-## 导入路径
+## Import
 
-```tsx
-import { Textarea } from '@fex-design/react/primitive/textarea'
-```
+    import {
+      TextareaClear,
+      TextareaFooter,
+      TextareaInput,
+      TextareaRoot,
+      useTextarea,
+    } from '@fex-design/react/primitive/textarea'
 
-## 核心示例
+## Basic Usage
 
-```tsx
-import { Textarea } from '@fex-design/react/primitive/textarea'
+    <TextareaRoot defaultValue="Review the latest support request.">
+      <TextareaInput aria-label="Remark" placeholder="Write a note" />
+    </TextareaRoot>
 
-export function Demo() {
-  return <Textarea name="remark" placeholder="请输入备注" />
-}
-```
+## Controlled and Uncontrolled
+
+    const [value, setValue] = useState('')
+
+    <TextareaRoot value={value} onChange={setValue}>
+      <TextareaInput aria-label="Controlled textarea" />
+      <TextareaClear />
+    </TextareaRoot>
+
+    <TextareaRoot defaultValue="Initial value">
+      <TextareaInput aria-label="Uncontrolled textarea" />
+      <TextareaClear />
+    </TextareaRoot>
+
+## Autosize
+
+    <TextareaRoot autoSize={{ minRows: 1, maxRows: 8 }}>
+      <TextareaInput aria-label="Autosize textarea" />
+    </TextareaRoot>
+
+autoSize accepts true or { minRows, maxRows }. The DOM height is synchronized from the shared core autosize utility and switches to internal scrolling after maxRows.
+
+## Footer Composition
+
+    <TextareaRoot value={message} onChange={setMessage} autoSize={{ minRows: 1, maxRows: 8 }}>
+      <TextareaInput aria-label="Message" placeholder="Ask anything" />
+      <TextareaClear />
+      <TextareaFooter>
+        <Button variant="ghost" size="icon-sm" icon={<PlusIcon />} aria-label="Attach" />
+        <Button disabled={!message.trim()}>Send</Button>
+      </TextareaFooter>
+    </TextareaRoot>
+
+TextareaFooter is only a layout slot. Count, submit, model selection, attachments and AI-specific behavior belong to the caller.
 
 ## Props
 
-| 参数名         | 类型                                    | 默认值      | 必填 | 说明                       |
-| -------------- | --------------------------------------- | ----------- | ---- | -------------------------- |
-| `value`        | `string \| readonly string[] \| number` | `undefined` | 否   | 受控值。                   |
-| `defaultValue` | `string \| readonly string[] \| number` | `undefined` | 否   | 非受控初始值。             |
-| `className`    | `string`                                | `undefined` | 否   | 合并到 textarea 的 class。 |
+### TextareaRoot
 
-## 事件/回调
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| value | string | undefined | Controlled value. |
+| defaultValue | string | empty string | Initial uncontrolled value. |
+| onChange | (value, meta) => void | undefined | Value callback for input and clear. |
+| disabled | boolean | false | Disables input and clear behavior. |
+| readOnly | boolean | false | Keeps focusable input but blocks writes and clear. |
+| invalid | boolean | false | Error state. |
+| status | error or warning | undefined | Visual status. |
+| autoSize | boolean or minRows/maxRows object | undefined | Enables height sync. |
+| allowClear | boolean or render function | undefined | Optional inline clear shortcut. |
+| onClear | (meta) => void | undefined | Fires after a clear action. |
 
-常用 `onChange`、`onInput`、`onFocus`、`onBlur`，均为原生 React textarea 事件。
+### TextareaInput
 
-## 受控/非受控
+Accepts native textarea props except value, which is supplied by TextareaRoot. Native onChange, onInput, onFocus and onBlur still pass through.
 
-支持原生受控和非受控模式。受控时传入 `value` 和 `onChange`；非受控时传入 `defaultValue`。
+### TextareaClear
 
-## 注意事项
+Accepts native button props and optional forceMount. It clears to an empty string, preserves input focus on pointer down and renders a project CloseIcon by default.
 
-校验态可使用 `aria-invalid` 触发默认错误样式。
+### TextareaFooter
 
-## 常见组合
+Accepts native div props and renders caller-owned footer content.
 
-常与表单项、字数提示、错误提示和提交按钮组合。
+## Notes
+
+- Primitive does not export a standalone Textarea; a future ui/textarea can wrap these parts.
+- textareaInputClassName replaces the previous textareaClassName.
+- Clear styling is local to textarea through textareaClearClassName; it does not import Input styles.

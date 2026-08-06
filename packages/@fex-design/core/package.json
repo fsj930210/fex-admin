@@ -26,6 +26,7 @@
     "./time-picker/value": "./src/time-picker/value.ts",
     "./time-picker/options": "./src/time-picker/options.ts",
     "./time-picker/create-time-picker-controller": "./src/time-picker/create-time-picker-controller.ts",
+    "./textarea/autosize": "./src/textarea/autosize.ts",
     "./data-table/types": "./src/data-table/types.ts",
     "./data-table/layout": "./src/data-table/layout.ts",
     "./data-table/rendering": "./src/data-table/layout.ts",
