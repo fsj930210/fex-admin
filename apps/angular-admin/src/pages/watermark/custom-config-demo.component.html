@@ -1,0 +1,102 @@
+<fex-card
+  title="Custom Config"
+  description="Adjust content, font, layering, rotation, gap, and offset."
+>
+  <div class="grid gap-space-xl lg:grid-cols-[280px_minmax(0,1fr)]">
+    <div class="grid gap-space-lg">
+      <label class="grid gap-space-sm text-sm text-foreground">
+        <span>Content</span>
+        <fex-input-root [value]="content()" (valueChange)="content.set($event)">
+          <input fexInputControl aria-label="Watermark content" />
+        </fex-input-root>
+      </label>
+      <label class="grid gap-space-sm text-sm text-foreground">
+        <span>Color</span>
+        <fex-input-root [value]="color()" (valueChange)="color.set($event)">
+          <input fexInputControl aria-label="Watermark color" />
+        </fex-input-root>
+      </label>
+      <label class="grid gap-space-sm text-sm text-foreground">
+        <span>FontSize: {{ fontSize() }}</span>
+        <div
+          fexSliderPrimitive
+          [value]="[fontSize()]"
+          min="12"
+          max="42"
+          aria-label="FontSize"
+          (valueChange)="fontSize.set($event[0] ?? fontSize())"
+        >
+          <span fexSliderTrack><span fexSliderRange></span></span>
+          <span fexSliderThumb aria-label="FontSize"></span>
+        </div>
+      </label>
+      <label class="grid gap-space-sm text-sm text-foreground">
+        <span>ZIndex: {{ zIndex() }}</span>
+        <div
+          fexSliderPrimitive
+          [value]="[zIndex()]"
+          min="1"
+          max="20"
+          aria-label="ZIndex"
+          (valueChange)="zIndex.set($event[0] ?? zIndex())"
+        >
+          <span fexSliderTrack><span fexSliderRange></span></span>
+          <span fexSliderThumb aria-label="ZIndex"></span>
+        </div>
+      </label>
+      <label class="grid gap-space-sm text-sm text-foreground">
+        <span>Rotate: {{ rotate() }}</span>
+        <div
+          fexSliderPrimitive
+          [value]="[rotate()]"
+          min="-45"
+          max="45"
+          aria-label="Rotate"
+          (valueChange)="rotate.set($event[0] ?? rotate())"
+        >
+          <span fexSliderTrack><span fexSliderRange></span></span>
+          <span fexSliderThumb aria-label="Rotate"></span>
+        </div>
+      </label>
+      <div class="grid grid-cols-2 gap-space-sm">
+        <label class="grid gap-space-sm text-sm text-foreground">
+          <span>Gap X</span>
+          <fex-input-root [value]="gapX().toString()" (valueChange)="setNumber(gapX, $event)">
+            <input fexInputControl inputmode="numeric" aria-label="Gap X" />
+          </fex-input-root>
+        </label>
+        <label class="grid gap-space-sm text-sm text-foreground">
+          <span>Gap Y</span>
+          <fex-input-root [value]="gapY().toString()" (valueChange)="setNumber(gapY, $event)">
+            <input fexInputControl inputmode="numeric" aria-label="Gap Y" />
+          </fex-input-root>
+        </label>
+        <label class="grid gap-space-sm text-sm text-foreground">
+          <span>Offset X</span>
+          <fex-input-root [value]="offsetX().toString()" (valueChange)="setNumber(offsetX, $event)">
+            <input fexInputControl inputmode="numeric" aria-label="Offset X" />
+          </fex-input-root>
+        </label>
+        <label class="grid gap-space-sm text-sm text-foreground">
+          <span>Offset Y</span>
+          <fex-input-root [value]="offsetY().toString()" (valueChange)="setNumber(offsetY, $event)">
+            <input fexInputControl inputmode="numeric" aria-label="Offset Y" />
+          </fex-input-root>
+        </label>
+      </div>
+    </div>
+    <fex-watermark
+      [content]="content()"
+      [font]="font()"
+      [zIndex]="zIndex()"
+      [rotate]="rotate()"
+      [gap]="gap()"
+      [offset]="offset()"
+      class="min-h-96 rounded-md border border-border bg-background"
+    >
+      <div class="grid min-h-96 place-items-center p-space-xl text-center text-sm text-muted-foreground">
+        Config changes update the generated canvas tile.
+      </div>
+    </fex-watermark>
+  </div>
+</fex-card>

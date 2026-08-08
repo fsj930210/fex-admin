@@ -1,0 +1,19 @@
+<fex-card title="Parameter-only selection" description="Selection stores params without writing mention text.">
+  <fex-mentions-root [value]="value" prefix="#" (change)="update($event)" (itemSelect)="select($event)">
+    <fex-mentions-trigger placeholder="Type # to attach knowledge context" />
+    <fex-mentions-content>
+      <fex-mentions-list>
+        @for (doc of docs; track doc.id) {
+          <fex-mentions-item [itemKey]="doc.id" [value]="doc.title">{{ doc.title }}</fex-mentions-item>
+        }
+      </fex-mentions-list>
+    </fex-mentions-content>
+  </fex-mentions-root>
+  <div class="mt-space-sm flex flex-wrap gap-space-xs text-xs text-muted-foreground">
+    @if (params.length) {
+      @for (param of params; track param) { <span>#{{ param }}</span> }
+    } @else {
+      <span>No params yet</span>
+    }
+  </div>
+</fex-card>

@@ -1,0 +1,143 @@
+<main class="min-h-screen bg-secondary-background px-page-padding py-space-xl">
+  <div class="mx-auto w-full max-w-5xl space-y-space-xl">
+    <header class="space-y-space-xl">
+      <a class="text-sm text-muted-foreground hover:text-foreground" routerLink="/">Back home</a>
+      <div>
+        <h1 class="text-2xl font-semibold text-foreground">ThemeProvider</h1>
+        <p class="mt-space-md max-w-2xl text-sm leading-6 text-muted-foreground">
+          ThemeProvider supports local scopes, inherited scopes, custom local themes, multiple
+          themes on the same page, and a forcedTheme override with the highest priority.
+        </p>
+      </div>
+    </header>
+
+    <fex-card title="Local Scope" description="A local provider applies theme variables to its own wrapper.">
+      <fex-theme-provider
+        #localProvider
+        scope="local"
+        storageKey="fex-theme-provider-local-demo"
+        class="rounded-md bg-background p-space-lg text-foreground"
+      >
+        <fex-theme-status-card [provider]="localProvider" title="Interactive local theme" />
+      </fex-theme-provider>
+    </fex-card>
+
+    <fex-card
+      title="Multiple Themes"
+      description="Independent local scopes can render light and dark together."
+    >
+      <div class="grid gap-space-lg md:grid-cols-2">
+        <fex-theme-provider
+          #lightProvider
+          scope="local"
+          [forcedTheme]="'light'"
+          class="rounded-md bg-background p-space-lg text-foreground"
+        >
+          <fex-theme-status-card [provider]="lightProvider" title="Forced light scope" />
+        </fex-theme-provider>
+        <fex-theme-provider
+          #darkProvider
+          scope="local"
+          [forcedTheme]="'dark'"
+          class="rounded-md bg-background p-space-lg text-foreground"
+        >
+          <fex-theme-status-card [provider]="darkProvider" title="Forced dark scope" />
+        </fex-theme-provider>
+      </div>
+    </fex-card>
+
+    <fex-card
+      title="Inherited Scope"
+      description="Three nested providers: parent can switch, inherited child follows it, inner local scope stays independent."
+    >
+      <fex-theme-provider
+        #parentProvider
+        scope="local"
+        [forcedTheme]="inheritedTheme()"
+        class="rounded-md bg-background p-space-lg text-foreground"
+      >
+        <button
+          class="mb-space-lg rounded-md border border-border bg-card-background px-space-lg py-space-sm text-sm text-card-foreground transition-colors hover:bg-hover-background"
+          type="button"
+          (click)="toggleInheritedTheme()"
+        >
+          Switch parent to {{ inheritedTheme() === 'dark' ? 'light' : 'dark' }}
+        </button>
+        <div class="grid gap-space-lg lg:grid-cols-3">
+          <fex-theme-status-card
+            [provider]="parentProvider"
+            [title]="'Parent local ' + inheritedTheme() + ' scope'"
+          />
+          <fex-theme-provider #inheritedProvider scope="inherit">
+            <div class="space-y-space-lg rounded-md border border-border bg-background p-space-lg">
+              <fex-theme-status-card [provider]="inheritedProvider" title="Inherited middle scope" />
+              <fex-theme-provider
+                #innerProvider
+                scope="local"
+                [forcedTheme]="innerTheme()"
+                class="rounded-md bg-background p-space-lg text-foreground"
+              >
+                <button
+                  class="mb-space-lg rounded-md border border-border bg-card-background px-space-lg py-space-sm text-sm text-card-foreground transition-colors hover:bg-hover-background"
+                  type="button"
+                  (click)="toggleInnerTheme()"
+                >
+                  Switch inner to {{ innerTheme() === 'dark' ? 'light' : 'dark' }}
+                </button>
+                <fex-theme-status-card
+                  [provider]="innerProvider"
+                  [title]="'Inner independent ' + innerTheme() + ' scope'"
+                />
+              </fex-theme-provider>
+            </div>
+          </fex-theme-provider>
+        </div>
+      </fex-theme-provider>
+    </fex-card>
+
+    <fex-card
+      title="Custom Local Theme"
+      description="A local provider can resolve a non-global theme name and expose it through data-theme."
+    >
+      <fex-theme-provider
+        #customProvider
+        scope="local"
+        attribute="data-theme"
+        [themes]="['light', 'dark', 'admin-blue']"
+        defaultTheme="admin-blue"
+        [forcedTheme]="customTheme()"
+        [colorSchemeMap]="customColorSchemeMap"
+        class="rounded-md border border-border bg-background p-space-lg text-foreground data-[theme=admin-blue]:[--background:oklch(0.97_0.04_245)] data-[theme=admin-blue]:[--card-background:oklch(0.99_0.025_245)] data-[theme=admin-blue]:[--card-foreground:oklch(0.25_0.08_250)] data-[theme=admin-blue]:[--foreground:oklch(0.22_0.08_250)] data-[theme=admin-blue]:[--muted-foreground:oklch(0.45_0.06_250)] data-[theme=admin-blue]:[--border:oklch(0.82_0.07_245)]"
+      >
+        <div class="mb-space-lg flex flex-wrap gap-space-sm">
+          @for (theme of customThemeOptions; track theme) {
+          <button
+            class="rounded-md border border-border bg-card-background px-space-md py-space-sm text-sm text-card-foreground transition-colors hover:bg-hover-background disabled:cursor-default disabled:bg-selected-background"
+            [disabled]="customTheme() === theme"
+            type="button"
+            (click)="setCustomTheme(theme)"
+          >
+            {{ theme }}
+          </button>
+          }
+        </div>
+        <fex-theme-status-card [provider]="customProvider" [title]="'Local ' + customTheme() + ' theme'" />
+      </fex-theme-provider>
+    </fex-card>
+
+    <fex-card
+      title="Forced Theme Priority"
+      description="When forcedTheme is set, setTheme is ignored and the resolved theme remains locked."
+    >
+      <fex-theme-provider
+        #lockedProvider
+        scope="local"
+        defaultTheme="light"
+        forcedTheme="dark"
+        class="rounded-md bg-background p-space-lg text-foreground"
+      >
+        <fex-theme-status-card [provider]="lockedProvider" title="Locked dark theme" />
+      </fex-theme-provider>
+    </fex-card>
+  </div>
+</main>

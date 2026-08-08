@@ -138,6 +138,9 @@ export class TextareaInput implements OnDestroy {
   @HostListener('input', ['$event']) onInput(event: Event) {
     this.root.setValue((event.currentTarget as HTMLTextAreaElement).value)
   }
+  @HostListener('change', ['$event']) onChange(event: Event) {
+    event.stopPropagation()
+  }
 }
 
 @Directive({

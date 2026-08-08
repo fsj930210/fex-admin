@@ -61,6 +61,9 @@ const ListboxPage = lazy(() =>
 const MenuPage = lazy(() =>
   import('../../pages/Menu').then((module) => ({ default: module.MenuPage })),
 )
+const MentionsPage = lazy(() =>
+  import('../../pages/Mentions').then((module) => ({ default: module.MentionsPage })),
+)
 const PaginationPage = lazy(() =>
   import('../../pages/Pagination').then((module) => ({ default: module.PaginationPage })),
 )
@@ -69,6 +72,9 @@ const PopoverPage = lazy(() =>
 )
 const RadioPage = lazy(() =>
   import('../../pages/Radio').then((module) => ({ default: module.RadioPage })),
+)
+const QRCodePage = lazy(() =>
+  import('../../pages/QRCode').then((module) => ({ default: module.QRCodePage })),
 )
 const RatePage = lazy(() =>
   import('../../pages/Rate').then((module) => ({ default: module.RatePage })),
@@ -138,6 +144,12 @@ const TooltipPage = lazy(() =>
 )
 const TourPage = lazy(() =>
   import('../../pages/Tour').then((module) => ({ default: module.TourPage })),
+)
+const WatermarkPage = lazy(() =>
+  import('../../pages/Watermark').then((module) => ({ default: module.WatermarkPage })),
+)
+const ThemeProviderPage = lazy(() =>
+  import('../../pages/ThemeProvider').then((module) => ({ default: module.ThemeProviderPage })),
 )
 
 export const componentRoutes: AppRoute[] = [
@@ -221,6 +233,10 @@ export const componentRoutes: AppRoute[] = [
     component: MenuPage,
   },
   {
+    path: '/mentions',
+    component: MentionsPage,
+  },
+  {
     path: '/pagination',
     component: PaginationPage,
   },
@@ -231,6 +247,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/radio',
     component: RadioPage,
+  },
+  {
+    path: '/qrcode',
+    component: QRCodePage,
   },
   {
     path: '/rate',
@@ -295,6 +315,8 @@ export const componentRoutes: AppRoute[] = [
   { path: '/time-picker', component: TimePickerPage },
   { path: '/tooltip', component: TooltipPage },
   { path: '/tour', component: TourPage },
+  { path: '/watermark', component: WatermarkPage },
+  { path: '/theme-provider', component: ThemeProviderPage },
   {
     path: '/tree',
     component: TreePage,

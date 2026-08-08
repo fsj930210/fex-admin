@@ -22,9 +22,11 @@
     { href: '/kbd', label: 'Kbd' },
     { href: '/listbox', label: 'Listbox' },
     { href: '/menu', label: 'Menu' },
+    { href: '/mentions', label: 'Mentions' },
     { href: '/pagination', label: 'Pagination' },
     { href: '/popover', label: 'Popover' },
-    { href: '/radio', label: 'Radio' },
+  { href: '/radio', label: 'Radio' },
+  { href: '/qrcode', label: 'QRCode' },
     { href: '/rate', label: 'Rate' },
     { href: '/timeline', label: 'Timeline' },
     { href: '/spinner', label: 'Spinner' },
@@ -43,9 +45,11 @@
     { href: '/interactions', label: 'Interactions' },
     { href: '/resizable', label: 'Resizable' },
     { href: '/textarea', label: 'Textarea' },
+    { href: '/theme-provider', label: 'ThemeProvider' },
     { href: '/time-picker', label: 'TimePicker' },
     { href: '/tooltip', label: 'Tooltip' },
     { href: '/tour', label: 'Tour' },
+    { href: '/watermark', label: 'Watermark' },
     // eslint-disable-next-line unicorn/no-array-sort -- this literal is newly created and not shared.
   ].sort((left, right) => left.label.localeCompare(right.label))
 </script>

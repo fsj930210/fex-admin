@@ -4,10 +4,23 @@
 
   let { class: className = '' }: { class?: string } = $props()
   const { drawer, snapshot, mask } = useDrawer('DrawerMask')
+  let registeredElement: HTMLDivElement | null = null
 
   function maskAction(element: HTMLDivElement) {
-    drawer.setOverlayElement(element)
-    return { destroy: () => drawer.setOverlayElement(null) }
+    let active = true
+    queueMicrotask(() => {
+      if (!active) return
+      registeredElement = element
+      drawer.setOverlayElement(element)
+    })
+    return {
+      destroy() {
+        active = false
+        if (registeredElement !== element) return
+        registeredElement = null
+        queueMicrotask(() => drawer.setOverlayElement(null))
+      },
+    }
   }
 </script>
 

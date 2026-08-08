@@ -18,9 +18,23 @@
   const configuredSize = $derived(size ?? context.size() ?? 'md')
   const numericSize = $derived(typeof configuredSize === 'number' ? configuredSize : Number.parseInt(sizes[configuredSize] ?? configuredSize, 10) || 400)
   const edge = $derived(({ left: 'right', right: 'left', top: 'bottom', bottom: 'top' } as const)[currentPlacement])
+  let registeredElement: HTMLDivElement | null = null
+
   function contentAction(node: HTMLDivElement) {
-    drawer.setLayerElement(node)
-    return { destroy: () => drawer.setLayerElement(null) }
+    let active = true
+    queueMicrotask(() => {
+      if (!active) return
+      registeredElement = node
+      drawer.setLayerElement(node)
+    })
+    return {
+      destroy() {
+        active = false
+        if (registeredElement !== node) return
+        registeredElement = null
+        queueMicrotask(() => drawer.setLayerElement(null))
+      },
+    }
   }
 </script>
 

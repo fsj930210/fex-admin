@@ -1,0 +1,43 @@
+<fex-card title="Modal and Drawer" description="Watermark can wrap modal and drawer content.">
+  <div class="flex flex-wrap gap-space-md">
+    <fex-dialog>
+      <button fexButton fexDialogTrigger>Open modal</button>
+      <fex-dialog-portal>
+        <fex-dialog-overlay />
+        <fex-dialog-content aria-label="Watermarked modal">
+          <fex-watermark [content]="'FEX Admin'">
+            <fex-dialog-header>
+              <fex-dialog-title>Watermarked modal</fex-dialog-title>
+              <fex-dialog-description>
+                Dialog content is covered by the watermark layer.
+              </fex-dialog-description>
+            </fex-dialog-header>
+            <fex-dialog-body class="min-h-36">
+              This modal body is wrapped by Watermark.
+            </fex-dialog-body>
+            <fex-dialog-footer>
+              <button fexButton fexDialogClose>Close</button>
+            </fex-dialog-footer>
+          </fex-watermark>
+        </fex-dialog-content>
+      </fex-dialog-portal>
+    </fex-dialog>
+    <fex-drawer>
+      <button fexButton fexDrawerTrigger variant="outline">Open drawer</button>
+      <fex-drawer-portal>
+        <fex-drawer-mask />
+        <fex-drawer-content aria-label="Watermarked drawer">
+          <fex-watermark [content]="'FEX Admin'">
+            <fex-drawer-header>
+              <span class="font-medium">Watermarked drawer</span>
+              <button fexDrawerClose></button>
+            </fex-drawer-header>
+            <fex-drawer-body>
+              <div class="min-h-40">Drawer content is wrapped by Watermark.</div>
+            </fex-drawer-body>
+          </fex-watermark>
+        </fex-drawer-content>
+      </fex-drawer-portal>
+    </fex-drawer>
+  </div>
+</fex-card>

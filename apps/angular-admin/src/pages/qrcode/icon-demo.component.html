@@ -1,0 +1,24 @@
+<fex-card
+  title="带 Icon 的例子"
+  description="通过 Center 放置小 Logo，Modules 只为 Logo 背板留出必要空间。"
+>
+  <fex-qrcode-root value="https://fex.design/qrcode/icon" [size]="176" errorLevel="H">
+    <svg fexQrCodeSvg>
+      <rect fexQrCodeBackground />
+      <path fexQrCodeModules [centerSize]="44" />
+      <svg fexQrCodeCenter [size]="44" aria-label="Fex Design">
+        <circle cx="50" cy="50" r="48" class="fill-background stroke-border" stroke-width="2" />
+        <text
+          x="50"
+          y="52"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          font-size="28"
+          class="fill-foreground font-semibold"
+        >
+          FEX
+        </text>
+      </svg>
+    </svg>
+  </fex-qrcode-root>
+</fex-card>

@@ -1,0 +1,29 @@
+<fex-card title="Trigger characters" description="Each prefix renders a caller-owned list.">
+  <fex-mentions-root [value]="value" [prefix]="prefixes" (change)="update($event)" (itemSelect)="select($event)">
+    <fex-mentions-trigger placeholder="Try @Ada, #Pricing, or /summarize" />
+    <fex-mentions-content>
+      <fex-mentions-prefix-case prefix="@">
+        <fex-mentions-list>
+          @for (user of users; track user.id) {
+            <fex-mentions-item [itemKey]="user.id" [value]="user.name">@{{ user.name }}</fex-mentions-item>
+          }
+        </fex-mentions-list>
+      </fex-mentions-prefix-case>
+      <fex-mentions-prefix-case prefix="#">
+        <fex-mentions-list>
+          @for (doc of docs; track doc.id) {
+            <fex-mentions-item [itemKey]="doc.id" [value]="doc.title">#{{ doc.title }}</fex-mentions-item>
+          }
+        </fex-mentions-list>
+      </fex-mentions-prefix-case>
+      <fex-mentions-prefix-case prefix="/">
+        <fex-mentions-list>
+          @for (command of commands; track command.id) {
+            <fex-mentions-item [itemKey]="command.id" [value]="command.id">/{{ command.label }}</fex-mentions-item>
+          }
+        </fex-mentions-list>
+      </fex-mentions-prefix-case>
+    </fex-mentions-content>
+  </fex-mentions-root>
+  <p class="mt-space-sm text-xs text-muted-foreground">{{ selected }}</p>
+</fex-card>

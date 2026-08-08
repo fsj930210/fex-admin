@@ -32,9 +32,11 @@ export class HomeComponent {
     { to: '/kbd', label: 'Kbd' },
     { to: '/listbox', label: 'Listbox' },
     { to: '/menu', label: 'Menu' },
+    { to: '/mentions', label: 'Mentions' },
     { to: '/pagination', label: 'Pagination' },
     { to: '/popover', label: 'Popover' },
     { to: '/radio', label: 'Radio' },
+    { to: '/qrcode', label: 'QRCode' },
     { to: '/rate', label: 'Rate' },
     { to: '/spinner', label: 'Spinner' },
     { to: '/slider', label: 'Slider' },
@@ -50,12 +52,14 @@ export class HomeComponent {
     { to: '/interactions', label: 'Interactions' },
     { to: '/resizable', label: 'Resizable' },
     { to: '/textarea', label: 'Textarea' },
+    { to: '/theme-provider', label: 'ThemeProvider' },
     { to: '/time-picker', label: 'TimePicker' },
     { to: '/tooltip', label: 'Tooltip' },
     { to: '/tour', label: 'Tour' },
     { to: '/tree', label: 'Tree' },
     { to: '/transfer', label: 'Transfer' },
     { to: '/upload', label: 'Upload' },
+    { to: '/watermark', label: 'Watermark' },
     // eslint-disable-next-line unicorn/no-array-sort -- this literal is newly created and not shared.
   ].sort((left, right) => left.label.localeCompare(right.label))
 }

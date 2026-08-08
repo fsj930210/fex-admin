@@ -112,6 +112,11 @@ export const componentRoutes: Routes = [
       import('../../pages/menu/index.component').then((module) => module.MenuComponent),
   },
   {
+    path: 'mentions',
+    loadComponent: () =>
+      import('../../pages/mentions/index.component').then((module) => module.MentionsComponent),
+  },
+  {
     path: 'pagination',
     loadComponent: () =>
       import('../../pages/pagination/index.component').then((module) => module.PaginationComponent),
@@ -125,6 +130,11 @@ export const componentRoutes: Routes = [
     path: 'radio',
     loadComponent: () =>
       import('../../pages/radio/index.component').then((module) => module.RadioComponent),
+  },
+  {
+    path: 'qrcode',
+    loadComponent: () =>
+      import('../../pages/qrcode/index.component').then((module) => module.QRCodeComponent),
   },
   {
     path: 'tooltip',
@@ -209,6 +219,13 @@ export const componentRoutes: Routes = [
       import('../../pages/textarea/index.component').then((module) => module.TextareaComponent),
   },
   {
+    path: 'theme-provider',
+    loadComponent: () =>
+      import('../../pages/theme-provider/index.component').then(
+        (module) => module.ThemeProviderComponent,
+      ),
+  },
+  {
     path: 'time-picker',
     loadComponent: () =>
       import('../../pages/time-picker/index.component').then(
@@ -224,6 +241,11 @@ export const componentRoutes: Routes = [
     path: 'upload',
     loadComponent: () =>
       import('../../pages/upload/index.component').then((module) => module.UploadComponent),
+  },
+  {
+    path: 'watermark',
+    loadComponent: () =>
+      import('../../pages/watermark/index.component').then((module) => module.WatermarkComponent),
   },
   {
     path: 'tree',

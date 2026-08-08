@@ -1,0 +1,8 @@
+<fex-card title="下载二维码" description="下载不是 QRCode 内置能力，这里演示业务侧基于 Canvas 组合导出 PNG。">
+  <div #container class="flex flex-wrap items-center gap-space-md">
+    <fex-qrcode-root value="https://fex.design/qrcode/download" [size]="176">
+      <canvas fexQrCodeCanvas aria-label="Downloadable QR code"></canvas>
+    </fex-qrcode-root>
+    <button fexButton (click)="download()">下载 PNG</button>
+  </div>
+</fex-card>

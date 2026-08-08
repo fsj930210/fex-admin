@@ -1,0 +1,15 @@
+<fex-card title="不同的状态" description="状态不是 primitive 内建枚举，通过 Overlay 和业务按钮组合。">
+  <div class="flex flex-wrap gap-space-lg">
+    <fex-qrcode-root value="https://fex.design/qrcode/active" [size]="144">
+      <svg fexQrCodeSvg><rect fexQrCodeBackground /><path fexQrCodeModules /></svg>
+    </fex-qrcode-root>
+    <fex-qrcode-root value="https://fex.design/qrcode/loading" [size]="144">
+      <svg fexQrCodeSvg><rect fexQrCodeBackground /><path fexQrCodeModules /></svg>
+      <fex-qrcode-overlay>Loading...</fex-qrcode-overlay>
+    </fex-qrcode-root>
+    <fex-qrcode-root value="https://fex.design/qrcode/expired" [size]="144">
+      <svg fexQrCodeSvg><rect fexQrCodeBackground /><path fexQrCodeModules /></svg>
+      <fex-qrcode-overlay><button fexButton size="sm">Refresh</button></fex-qrcode-overlay>
+    </fex-qrcode-root>
+  </div>
+</fex-card>

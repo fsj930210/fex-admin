@@ -43,6 +43,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Upload'), 'UploadPage'),
   },
   {
+    path: '/watermark',
+    element: createLazyRouteElement(() => import('../../pages/Watermark'), 'WatermarkPage'),
+  },
+  {
     path: '/breadcrumb',
     element: createLazyRouteElement(() => import('../../pages/Breadcrumb'), 'BreadcrumbPage'),
   },
@@ -111,6 +115,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Menu'), 'MenuPage'),
   },
   {
+    path: '/mentions',
+    element: createLazyRouteElement(() => import('../../pages/Mentions'), 'MentionsPage'),
+  },
+  {
     path: '/pagination',
     element: createLazyRouteElement(() => import('../../pages/Pagination'), 'PaginationPage'),
   },
@@ -121,6 +129,10 @@ export const componentRoutes = [
   {
     path: '/radio',
     element: createLazyRouteElement(() => import('../../pages/Radio'), 'RadioPage'),
+  },
+  {
+    path: '/qrcode',
+    element: createLazyRouteElement(() => import('../../pages/QRCode'), 'QRCodePage'),
   },
   {
     path: '/rate',
@@ -185,5 +197,9 @@ export const componentRoutes = [
   {
     path: '/textarea',
     element: createLazyRouteElement(() => import('../../pages/Textarea'), 'TextareaPage'),
+  },
+  {
+    path: '/theme-provider',
+    element: createLazyRouteElement(() => import('../../pages/ThemeProvider'), 'ThemeProviderPage'),
   },
 ].sort((left, right) => left.path.localeCompare(right.path))

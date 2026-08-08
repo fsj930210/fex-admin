@@ -1,0 +1,18 @@
+<fex-card title="Basic @" description="Default prefix is @ and selection only notifies the caller.">
+  <fex-mentions-root [value]="value" (change)="update($event)" (itemSelect)="select($event)">
+    <fex-mentions-trigger placeholder="Type @ to mention a teammate" />
+    <fex-mentions-content>
+      <fex-mentions-list>
+        @for (user of users; track user.id) {
+          <fex-mentions-item [itemKey]="user.id" [value]="user.name" [data]="user">
+            <span class="flex min-w-0 flex-col">
+              <span class="truncate font-medium">{{ user.name }}</span>
+              <span class="text-xs text-muted-foreground">{{ user.role }}</span>
+            </span>
+          </fex-mentions-item>
+        }
+      </fex-mentions-list>
+    </fex-mentions-content>
+  </fex-mentions-root>
+  <p class="mt-space-sm text-xs text-muted-foreground">{{ selected }}</p>
+</fex-card>

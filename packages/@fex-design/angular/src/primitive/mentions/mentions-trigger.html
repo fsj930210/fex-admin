@@ -1,0 +1,24 @@
+<fex-textarea-root
+  [class]="className"
+  [value]="root.snapshot().value"
+  [disabled]="root.disabled"
+  [readOnly]="root.readOnly"
+  [invalid]="root.resolvedInvalid"
+  [status]="root.status"
+  (change)="valueChange($event)"
+>
+  <textarea
+    fexTextareaInput
+    #input
+    role="combobox"
+    [attr.placeholder]="placeholder || null"
+    [attr.aria-expanded]="root.snapshot().open"
+    [attr.aria-controls]="root.listId"
+    [attr.aria-activedescendant]="activeId"
+    [attr.aria-required]="root.required || null"
+    (keydown)="keydown($event)"
+    (blur)="blur()"
+    (compositionstart)="composing = true"
+    (compositionend)="compositionEnd($event, input)"
+  ></textarea>
+</fex-textarea-root>

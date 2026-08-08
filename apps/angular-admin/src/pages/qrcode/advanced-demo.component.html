@@ -1,0 +1,27 @@
+<fex-card title="高级用法" description="通过 Center 和 Modules 的 centerSize 组合，在二维码中心叠加任意内容。">
+  <fex-qrcode-root
+    value="https://fex.design/qrcode/advanced"
+    [size]="192"
+    errorLevel="H"
+    color="#111827"
+    bgColor="#f8fafc"
+  >
+    <svg fexQrCodeSvg>
+      <rect fexQrCodeBackground />
+      <path fexQrCodeModules [centerSize]="56" />
+      <svg fexQrCodeCenter [size]="56">
+        <circle cx="50" cy="50" r="48" class="fill-background stroke-border" stroke-width="2" />
+        <text
+          x="50"
+          y="52"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          font-size="26"
+          class="fill-foreground font-semibold"
+        >
+          FEX
+        </text>
+      </svg>
+    </svg>
+  </fex-qrcode-root>
+</fex-card>

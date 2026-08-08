@@ -1,0 +1,13 @@
+<fex-card title="基本使用" description="使用 SVG 部件渲染最基础的二维码。">
+  <fex-qrcode-root
+    value="https://fex.design/components/qrcode"
+    [size]="176"
+    [margin]="4"
+    errorLevel="M"
+  >
+    <svg fexQrCodeSvg aria-label="Fex Design QR code">
+      <rect fexQrCodeBackground />
+      <path fexQrCodeModules />
+    </svg>
+  </fex-qrcode-root>
+</fex-card>

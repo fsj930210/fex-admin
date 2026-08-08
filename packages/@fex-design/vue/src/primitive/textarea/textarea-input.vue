@@ -6,13 +6,14 @@ import { textareaContextKey } from './context'
 
 defineOptions({ name: 'FexTextareaInput', inheritAttrs: false })
 const props = defineProps<{ class?: string | undefined }>()
-const emit = defineEmits<{ change: [event: Event] }>()
+const emit = defineEmits<{ change: [event: Event]; input: [value: string, event: Event] }>()
 const textarea = inject(textareaContextKey)
 if (!textarea) throw new Error('TextareaInput must be used inside TextareaRoot.')
 const textareaContext = textarea
 const element = ref<HTMLTextAreaElement | null>(null)
 let observer: ResizeObserver | undefined
 const className = computed(() => cn(textareaInputClassName, props.class))
+defineExpose({ element })
 
 watch(
   () => [textareaContext.value.value, textareaContext.autoSize.value] as const,
@@ -31,7 +32,9 @@ watch(element, (node) => {
 onBeforeUnmount(() => observer?.disconnect())
 
 function input(event: Event) {
-  textareaContext.setValue((event.currentTarget as HTMLTextAreaElement).value, 'input', event)
+  const value = (event.currentTarget as HTMLTextAreaElement).value
+  textareaContext.setValue(value, 'input', event)
+  emit('input', value, event)
 }
 </script>
 

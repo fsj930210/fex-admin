@@ -12,12 +12,21 @@
   let { class: className, ...rest }: DialogOverlayProps = $props()
   const { dialog, snapshot } = getContext<DialogContext>(dialogContextKey)
   const classList = $derived(cn(dialogOverlayClassName, className))
+  let registeredElement: HTMLDivElement | null = null
 
   function overlayAction(element: HTMLDivElement) {
-    dialog.setOverlayElement(element)
+    let active = true
+    queueMicrotask(() => {
+      if (!active) return
+      registeredElement = element
+      dialog.setOverlayElement(element)
+    })
     return {
       destroy() {
-        dialog.setOverlayElement(null)
+        active = false
+        if (registeredElement !== element) return
+        registeredElement = null
+        queueMicrotask(() => dialog.setOverlayElement(null))
       },
     }
   }

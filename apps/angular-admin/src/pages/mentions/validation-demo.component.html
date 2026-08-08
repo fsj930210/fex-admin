@@ -1,0 +1,30 @@
+<fex-card title="Form validation" description="Invalid state drives the default Textarea styling.">
+  <form [fexForm]="form" class="grid max-w-xl gap-space-md">
+    <ng-container [fexField]="form" name="prompt" [validators]="validators" #promptField="field">
+      <fex-field-root [required]="true" [invalid]="invalid(promptField.api)" [hasError]="invalid(promptField.api)">
+        <label fexFieldLabel>Prompt <span fexFieldRequiredIndicator>*</span></label>
+        <fex-mentions-root
+          [value]="promptField.api.state.value"
+          [invalid]="invalid(promptField.api)"
+          [required]="true"
+          (change)="promptField.api.handleChange($event.value)"
+        >
+          <fex-mentions-trigger placeholder="Submit empty content to see validation" />
+          <fex-mentions-content>
+            <fex-mentions-list>
+              @for (user of users; track user.id) {
+                <fex-mentions-item [itemKey]="user.id" [value]="user.name">{{ user.name }}</fex-mentions-item>
+              }
+            </fex-mentions-list>
+          </fex-mentions-content>
+        </fex-mentions-root>
+        @if (invalid(promptField.api)) {
+          <div fexFieldError>
+            @for (error of errors(promptField.api); track error) { <div>{{ error }}</div> }
+          </div>
+        }
+      </fex-field-root>
+    </ng-container>
+    <button fexButton type="submit">Validate</button>
+  </form>
+</fex-card>

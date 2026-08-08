@@ -20,9 +20,11 @@ const componentLinks = [
   { to: '/kbd', label: 'Kbd' },
   { to: '/listbox', label: 'Listbox' },
   { to: '/menu', label: 'Menu' },
+  { to: '/mentions', label: 'Mentions' },
   { to: '/pagination', label: 'Pagination' },
   { to: '/popover', label: 'Popover' },
   { to: '/radio', label: 'Radio' },
+  { to: '/qrcode', label: 'QRCode' },
   { to: '/rate', label: 'Rate' },
   { to: '/spinner', label: 'Spinner' },
   { to: '/slider', label: 'Slider' },
@@ -43,9 +45,11 @@ const componentLinks = [
   { to: '/interactions', label: 'Interactions' },
   { to: '/resizable', label: 'Resizable' },
   { to: '/textarea', label: 'Textarea' },
+  { to: '/theme-provider', label: 'ThemeProvider' },
   { to: '/time-picker', label: 'TimePicker' },
   { to: '/tooltip', label: 'Tooltip' },
   { to: '/tour', label: 'Tour' },
+  { to: '/watermark', label: 'Watermark' },
 ].sort((left, right) => left.label.localeCompare(right.label))
 </script>
 

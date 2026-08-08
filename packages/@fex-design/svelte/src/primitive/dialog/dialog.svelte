@@ -46,10 +46,9 @@
   const dialog = createDialogController(createOptions())
   const snapshot = readableCoreStore(dialog)
 
-  function syncOptions() {
+  $effect(() => {
     dialog.setOptions(createOptions())
-    return ''
-  }
+  })
 
   setContext(dialogContextKey, {
     contentId: `fex-dialog-content-${dialogId}`,
@@ -63,4 +62,4 @@
   onDestroy(() => dialog.destroy())
 </script>
 
-{syncOptions()}{@render children?.()}
+{@render children?.()}

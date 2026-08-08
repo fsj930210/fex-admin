@@ -1,5 +1,5 @@
 export const cardClassName = [
-  'group/card flex flex-col gap-[var(--card-spacing)] overflow-hidden',
+  'group/card flex flex-col gap-[var(--card-spacing)] overflow-visible',
   '[--card-spacing:16px]',
   'data-[size=sm]:[--card-spacing:12px] data-[size=md]:[--card-spacing:16px] data-[size=lg]:[--card-spacing:24px]',
   'rounded-md bg-card-background py-[var(--card-spacing)] text-sm text-card-foreground ring-1 ring-foreground/10',

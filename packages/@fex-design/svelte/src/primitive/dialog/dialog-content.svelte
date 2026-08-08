@@ -15,12 +15,21 @@
   let { class: className, children, size, ...rest }: DialogContentProps = $props()
   const { contentId, descriptionId, dialog, snapshot, titleId } = getContext<DialogContext>(dialogContextKey)
   const classList = $derived(cn(dialogContentClassName({ size }), className))
+  let registeredElement: HTMLDivElement | null = null
 
   function contentAction(element: HTMLDivElement) {
-    dialog.setLayerElement(element)
+    let active = true
+    queueMicrotask(() => {
+      if (!active) return
+      registeredElement = element
+      dialog.setLayerElement(element)
+    })
     return {
       destroy() {
-        dialog.setLayerElement(null)
+        active = false
+        if (registeredElement !== element) return
+        registeredElement = null
+        queueMicrotask(() => dialog.setLayerElement(null))
       },
     }
   }

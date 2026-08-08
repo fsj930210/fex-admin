@@ -1,0 +1,12 @@
+<fex-card title="纠错比例" description="errorLevel 透传给编码层，适合 Logo 或污损容错场景。">
+  <div class="flex flex-wrap gap-space-lg">
+    @for (level of levels; track level) {
+    <div class="grid gap-space-xs text-center text-sm text-muted-foreground">
+      <fex-qrcode-root [value]="'https://fex.design/qrcode/error/' + level" [size]="128" [errorLevel]="level">
+        <svg fexQrCodeSvg><rect fexQrCodeBackground /><path fexQrCodeModules /></svg>
+      </fex-qrcode-root>
+      <span>{{ level }}</span>
+    </div>
+    }
+  </div>
+</fex-card>

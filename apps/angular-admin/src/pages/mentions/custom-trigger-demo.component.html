@@ -1,0 +1,16 @@
+<fex-card title="Custom trigger" description="The trigger keeps system Textarea semantics while callers customize sizing.">
+  <fex-mentions-root [value]="value" (change)="update($event)">
+    <textarea
+      fexMentionsTrigger
+      class="min-h-24 w-full resize-y rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus-visible:border-focus focus-visible:ring-3 focus-visible:ring-focus/50"
+      placeholder="Custom composer; type @"
+    ></textarea>
+    <fex-mentions-content>
+      <fex-mentions-list>
+        @for (user of users; track user.id) {
+          <fex-mentions-item [itemKey]="user.id" [value]="user.name">{{ user.name }}</fex-mentions-item>
+        }
+      </fex-mentions-list>
+    </fex-mentions-content>
+  </fex-mentions-root>
+</fex-card>
