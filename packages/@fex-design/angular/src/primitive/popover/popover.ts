@@ -212,6 +212,7 @@ export class Popover implements OnChanges, OnDestroy {
   standalone: true,
   host: {
     type: 'button',
+    '[attr.aria-expanded]': 'popover.snapshot().open',
     '[attr.data-state]': "popover.snapshot().open ? 'open' : 'closed'",
   },
 })

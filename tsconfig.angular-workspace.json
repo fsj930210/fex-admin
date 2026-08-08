@@ -46,6 +46,12 @@
       "@fex-design/core/date-picker/value": [
         "packages/@fex-design/core/src/date-picker/value.ts"
       ],
+      "@fex-design/core/qrcode": [
+        "packages/@fex-design/core/src/qrcode/qrcode.ts"
+      ],
+      "@fex-design/core/qrcode/types": [
+        "packages/@fex-design/core/src/qrcode/types.ts"
+      ],
       "@fex-design/core/carousel/types": [
         "packages/@fex-design/core/src/carousel/types.ts"
       ],
@@ -127,6 +133,27 @@
       "@fex-design/core/store/create-store": [
         "packages/@fex-design/core/src/store/create-store.ts"
       ],
+      "@fex-design/core/theme/apply-theme": [
+        "packages/@fex-design/core/src/theme/apply-theme.ts"
+      ],
+      "@fex-design/core/theme/constants": [
+        "packages/@fex-design/core/src/theme/constants.ts"
+      ],
+      "@fex-design/core/theme/create-theme-controller": [
+        "packages/@fex-design/core/src/theme/create-theme-controller.ts"
+      ],
+      "@fex-design/core/theme/resolve-theme": [
+        "packages/@fex-design/core/src/theme/resolve-theme.ts"
+      ],
+      "@fex-design/core/theme/storage": [
+        "packages/@fex-design/core/src/theme/storage.ts"
+      ],
+      "@fex-design/core/theme/system-theme": [
+        "packages/@fex-design/core/src/theme/system-theme.ts"
+      ],
+      "@fex-design/core/theme/types": [
+        "packages/@fex-design/core/src/theme/types.ts"
+      ],
       "@fex-design/core/steps/types": [
         "packages/@fex-design/core/src/steps/types.ts"
       ],
@@ -204,6 +231,15 @@
       ],
       "@fex-design/core/upload/features/upload": [
         "packages/@fex-design/core/src/upload/features/upload.ts"
+      ],
+      "@fex-design/core/watermark/create-watermark-controller": [
+        "packages/@fex-design/core/src/watermark/create-watermark-controller.ts"
+      ],
+      "@fex-design/core/watermark/create-watermark-image": [
+        "packages/@fex-design/core/src/watermark/create-watermark-image.ts"
+      ],
+      "@fex-design/core/watermark/types": [
+        "packages/@fex-design/core/src/watermark/types.ts"
       ],
       "@fex-design/core/toggle/create-toggle-controller": [
         "packages/@fex-design/core/src/toggle/create-toggle-controller.ts"
@@ -291,6 +327,21 @@
       ],
       "@fex-design/core/form/scroll-to-first-error": [
         "packages/@fex-design/core/src/form/scroll-to-first-error.ts"
+      ],
+      "@fex-design/core/mentions/create-mentions-controller": [
+        "packages/@fex-design/core/src/mentions/create-mentions-controller.ts"
+      ],
+      "@fex-design/core/mentions/query": [
+        "packages/@fex-design/core/src/mentions/query.ts"
+      ],
+      "@fex-design/core/mentions/replace-query": [
+        "packages/@fex-design/core/src/mentions/replace-query.ts"
+      ],
+      "@fex-design/core/mentions/types": [
+        "packages/@fex-design/core/src/mentions/types.ts"
+      ],
+      "@fex-design/core/menu/navigation": [
+        "packages/@fex-design/core/src/menu/navigation.ts"
       ],
       "@fex-design/core/disclosure/create-disclosure": [
         "packages/@fex-design/core/src/disclosure/create-disclosure.ts"
@@ -463,11 +514,35 @@
       "@fex-design/angular/primitive/menu": [
         "packages/@fex-design/angular/src/primitive/menu/menu.ts"
       ],
-      "@fex-design/angular/primitive/menu-types": [
-        "packages/@fex-design/angular/src/primitive/menu/menu-types.ts"
+      "@fex-design/angular/primitive/theme-provider": [
+        "packages/@fex-design/angular/src/primitive/theme-provider/theme-provider.ts"
+      ],
+      "@fex-design/angular/primitive/mentions/root": [
+        "packages/@fex-design/angular/src/primitive/mentions/mentions.ts"
+      ],
+      "@fex-design/angular/primitive/mentions/trigger": [
+        "packages/@fex-design/angular/src/primitive/mentions/mentions.ts"
+      ],
+      "@fex-design/angular/primitive/mentions/content": [
+        "packages/@fex-design/angular/src/primitive/mentions/mentions.ts"
+      ],
+      "@fex-design/angular/primitive/mentions/list": [
+        "packages/@fex-design/angular/src/primitive/mentions/mentions.ts"
+      ],
+      "@fex-design/angular/primitive/mentions/item": [
+        "packages/@fex-design/angular/src/primitive/mentions/mentions.ts"
+      ],
+      "@fex-design/angular/primitive/mentions/prefix-case": [
+        "packages/@fex-design/angular/src/primitive/mentions/mentions.ts"
+      ],
+      "@fex-design/angular/primitive/mentions/trigger-input": [
+        "packages/@fex-design/angular/src/primitive/mentions/mentions-trigger-input.ts"
       ],
       "@fex-design/angular/primitive/pagination": [
         "packages/@fex-design/angular/src/primitive/pagination/pagination.ts"
+      ],
+      "@fex-design/angular/primitive/qrcode": [
+        "packages/@fex-design/angular/src/primitive/qrcode/qrcode.ts"
       ],
       "@fex-design/angular/primitive/popover": [
         "packages/@fex-design/angular/src/primitive/popover/popover.ts"
@@ -511,6 +586,9 @@
       "@fex-design/angular/primitive/upload": [
         "packages/@fex-design/angular/src/primitive/upload/upload.ts"
       ],
+      "@fex-design/angular/primitive/watermark": [
+        "packages/@fex-design/angular/src/primitive/watermark/watermark.ts"
+      ],
       "@fex-design/angular/primitive/tree": [
         "packages/@fex-design/angular/src/primitive/tree/tree.ts"
       ],
@@ -549,9 +627,6 @@
       ],
       "@fex-design/angular/ui/listbox": [
         "packages/@fex-design/angular/src/ui/listbox/listbox.ts"
-      ],
-      "@fex-design/angular/ui/menu": [
-        "packages/@fex-design/angular/src/ui/menu/menu.ts"
       ],
       "@fex-design/angular/ui/spinner": [
         "packages/@fex-design/angular/src/ui/spinner/spinner.ts"

@@ -1,7 +1,10 @@
 # Menu primitive
 
-Import `MenuRoot`, `MenuList`, and `MenuItem` from
-`@fex-design/angular/primitive/menu`. Compose them as `fex-menu-root`, `fex-menu-list`, and
-`button[fexMenuItem]`; none accepts menu data. Existing data traversal helpers remain independent.
-For a floating submenu, apply both `fexMenuItem` and `fexPopoverTrigger` to the parent button and
-project another Menu into the nested Popover content.
+Import `MenuRoot`, `MenuList`, and `MenuItem` from `@fex-design/angular/primitive/menu`. Apply
+`fexMenuItem` to the caller's button, anchor or custom focusable host. MenuList accepts
+`orientation="vertical|horizontal"` and optional `parentValue`.
+
+A floating submenu places `fexMenuItem` and `fexPopoverTrigger` on the same trigger element, then
+renders another vertical MenuList inside PopoverContent. Menu owns keyboard direction and focus;
+Popover owns trigger policy, placement, Portal and dismissal. No items-array or search API is part
+of the primitive.

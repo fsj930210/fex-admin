@@ -1,0 +1,17 @@
+<fex-menu-root role="navigation" aria-label="Nested navigation" [class]="rootClassName">
+  <fex-menu-list orientation="horizontal" [class]="horizontalListClassName">
+    <button fexMenuItem value="home" [class]="horizontalItemClassName">Home</button>
+    <fex-popover [trigger]="['hover', 'click']" side="bottom" align="start">
+      <button fexMenuItem fexPopoverTrigger value="products" [submenu]="true" aria-haspopup="menu" [class]="horizontalItemClassName"><span>Products</span><fex-chevron-down-icon class="size-3.5 shrink-0" /></button>
+      <fex-popover-portal><fex-dropdown-content [class]="popupClassName"><fex-menu-list orientation="vertical" parentValue="products" [class]="verticalListClassName">
+        <button fexMenuItem value="analytics" [class]="verticalItemClassName">Analytics</button>
+        <fex-popover [trigger]="['hover', 'click']" side="right" align="start">
+          <button fexMenuItem fexPopoverTrigger value="platform" [submenu]="true" aria-haspopup="menu" [class]="verticalItemClassName"><span class="flex-1 text-left">Platform</span><fex-chevron-right-icon class="size-4" /></button>
+          <fex-popover-portal><fex-dropdown-content [class]="popupClassName"><fex-menu-list orientation="vertical" parentValue="platform" [class]="verticalListClassName"><button fexMenuItem value="api" [class]="verticalItemClassName">API</button><button fexMenuItem value="automation" [class]="verticalItemClassName">Automation</button><button fexMenuItem value="integrations" [class]="verticalItemClassName">Integrations</button></fex-menu-list></fex-dropdown-content></fex-popover-portal>
+        </fex-popover>
+        <button fexMenuItem value="security" [class]="verticalItemClassName">Security</button>
+      </fex-menu-list></fex-dropdown-content></fex-popover-portal>
+    </fex-popover>
+    <button fexMenuItem value="pricing" [class]="horizontalItemClassName">Pricing</button>
+  </fex-menu-list>
+</fex-menu-root>

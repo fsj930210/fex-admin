@@ -227,7 +227,6 @@
     "./ui/listbox-group-label": "./src/ui/listbox/listbox-group-label.svelte",
     "./ui/listbox-item": "./src/ui/listbox/listbox-item.svelte",
     "./ui/listbox-item-indicator": "./src/ui/listbox/listbox-item-indicator.svelte",
-    "./ui/menu": "./src/ui/menu/menu.svelte",
     "./ui/spinner": "./src/ui/spinner/spinner.svelte",
     "./icon/check": "./src/icon/check.svelte",
     "./icon/calendar": "./src/icon/calendar.svelte",

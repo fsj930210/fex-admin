@@ -1,0 +1,12 @@
+<fex-menu-root role="menubar" aria-label="Editor commands" [class]="rootClassName">
+  <fex-menu-list orientation="horizontal" [class]="horizontalListClassName">
+    @for (menu of menus; track menu.name) {
+      <fex-popover [trigger]="['click']" side="bottom" align="start">
+        <button fexMenuItem fexPopoverTrigger [value]="menu.name" [submenu]="true" aria-haspopup="menu" [class]="horizontalItemClassName">{{ menu.name }}</button>
+        <fex-popover-portal><fex-dropdown-content [class]="popupClassName"><fex-menu-list orientation="vertical" [parentValue]="menu.name" [class]="verticalListClassName">
+          @for (item of menu.items; track item) { <button fexMenuItem [value]="menu.name + '-' + item" [class]="verticalItemClassName">{{ item }}</button> }
+        </fex-menu-list></fex-dropdown-content></fex-popover-portal>
+      </fex-popover>
+    }
+  </fex-menu-list>
+</fex-menu-root>

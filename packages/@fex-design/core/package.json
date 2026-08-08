@@ -117,6 +117,7 @@
     "./mentions/query": "./src/mentions/query.ts",
     "./mentions/replace-query": "./src/mentions/replace-query.ts",
     "./mentions/types": "./src/mentions/types.ts",
+    "./menu/navigation": "./src/menu/navigation.ts",
     "./disclosure/create-disclosure": "./src/disclosure/create-disclosure.ts",
     "./expansion/create-expansion-controller": "./src/expansion/create-expansion-controller.ts",
     "./expansion/types": "./src/expansion/types.ts",

@@ -1,0 +1,13 @@
+<script lang="ts">
+  import { MenuItem, MenuList, MenuRoot } from '@fex-design/svelte/primitive/menu'
+  import Card from '@fex-design/svelte/ui/card'
+  import { verticalItemClassName, verticalListClassName } from './demo-styles'
+  let selected = $state('Dashboard'); let open = $state(true); let multiple = $state(new Set(['Users', 'Articles']))
+  const rows = ['Dashboard', 'System', 'Users', 'Roles', 'Permissions']
+  function toggle(value: string) { const next = new Set(multiple); next.has(value) ? next.delete(value) : next.add(value); multiple = next }
+</script>
+<Card title="Basic" description="Items, nested children, group, divider and disabled state."><MenuRoot><MenuList class={verticalListClassName}>{#each rows as value}<MenuItem {value} disabled={value === 'Permissions'} selected={selected === value} class={verticalItemClassName} onclick={() => selected = value}>{value}</MenuItem>{/each}</MenuList></MenuRoot></Card>
+<Card title="Controlled" description="Expanded and selected state are owned by the caller."><MenuRoot><MenuList class={verticalListClassName}><MenuItem value="system" class={verticalItemClassName} onclick={() => open = !open}><span class="flex-1">System</span><span>{open ? 'open' : 'closed'}</span></MenuItem>{#if open}<MenuItem value="users" class={verticalItemClassName}>Users</MenuItem><MenuItem value="roles" class={verticalItemClassName}>Roles</MenuItem>{/if}</MenuList></MenuRoot></Card>
+<Card title="Multiple Selection" description="The caller composes multiple selected items with the same primitive."><MenuRoot><MenuList class={verticalListClassName}>{#each ['Users','Roles','Articles','Comments'] as value}<MenuItem {value} selected={multiple.has(value)} class={verticalItemClassName} onclick={() => toggle(value)}><span class="flex-1">{value}</span><span>{multiple.has(value) ? '✓' : ''}</span></MenuItem>{/each}</MenuList></MenuRoot></Card>
+<Card title="Suffix" description="Items accept arbitrary right-side content."><MenuRoot><MenuList class={verticalListClassName}><MenuItem value="users" class={verticalItemClassName}><span class="flex-1">Users</span><span>24</span></MenuItem><MenuItem value="settings" class={verticalItemClassName}><span class="flex-1">Settings</span><span>new</span></MenuItem></MenuList></MenuRoot></Card>
+<Card title="Custom Item" description="Snippet props bind menu behavior to custom DOM."><MenuRoot><MenuList><MenuItem value="profile">{#snippet trigger(slot)}<a {...slot.props} href="#profile" class={verticalItemClassName}>Custom link item <span class="ml-auto">open →</span></a>{/snippet}</MenuItem></MenuList></MenuRoot></Card>

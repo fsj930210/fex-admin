@@ -1,6 +1,7 @@
 import type { Routes } from '@angular/router'
 
 export const componentRoutes: Routes = [
+  // Component demos stay lazy so each primitive route remains independently reloadable.
   { path: 'breadcrumb', loadComponent: () => import('../../pages/breadcrumb/index.component').then((module) => module.BreadcrumbComponent) },
   {
     path: 'auto-complete',

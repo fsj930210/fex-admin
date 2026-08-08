@@ -1,82 +1,81 @@
-import type { MenuItem as MenuDataItem, MenuKey, MenuNodeEntry, MenuNodeItem } from './menu-types'
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import {
+  handleMenuListFocus,
+  handleMenuListKeyDown,
+  syncMenuListTabStops,
+  type MenuOrientation,
+} from '@fex-design/core/menu/navigation'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  inject,
+} from '@angular/core'
+import type { AfterContentInit } from '@angular/core'
 
-@Component({ selector: 'fex-menu-root', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { role: 'menu', 'data-slot': 'menu' }, template: '<ng-content />' })
-export class MenuRoot {}
+@Component({ selector: 'fex-menu-root', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { '[attr.role]': 'role', 'data-slot': 'menu' }, template: '<ng-content />' })
+export class MenuRoot { @Input() role = 'menu' }
 
-@Component({ selector: 'fex-menu-list', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { role: 'group', 'data-slot': 'menu-list' }, template: '<ng-content />' })
-export class MenuList {}
+@Component({
+  selector: 'fex-menu-list',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    role: 'group',
+    'data-slot': 'menu-list',
+    '[attr.aria-orientation]': 'orientation',
+    '[attr.data-orientation]': 'orientation',
+    '[attr.data-parent-value]': 'parentValue',
+  },
+  template: '<ng-content />',
+})
+export class MenuList implements AfterContentInit {
+  @Input() orientation: MenuOrientation = 'vertical'
+  @Input() parentValue?: string | number
+  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef)
 
-@Component({ selector: 'button[fexMenuItem]', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { type: 'button', role: 'menuitem', 'data-slot': 'menu-item' }, template: '<ng-content />' })
-export class MenuItem {}
-
-export function isMenuNodeItem(item: MenuDataItem): item is MenuNodeItem {
-  return !('type' in item)
-}
-
-function getMenuItemKey(item: MenuDataItem): MenuKey {
-  return isMenuNodeItem(item) ? item.key : (item.key ?? item.type)
-}
-
-function getMenuItemChildren(item: MenuDataItem): readonly MenuDataItem[] | undefined {
-  return isMenuNodeItem(item) || item.type === 'group' ? item.children : undefined
-}
-
-export function getMenuNodeEntries(items: readonly MenuDataItem[]): MenuNodeEntry[] {
-  const entries: MenuNodeEntry[] = []
-
-  function visit(
-    nodes: readonly MenuDataItem[],
-    parent: MenuDataItem | undefined,
-    parentKey: MenuKey | undefined,
-    level: number,
-    path: MenuDataItem[],
-    keyPath: MenuKey[],
-  ) {
-    for (const [index, node] of nodes.entries()) {
-      const key = getMenuItemKey(node)
-      const children = getMenuItemChildren(node)
-      const entryPath = [...path, node]
-      const entryKeyPath = [...keyPath, key]
-
-      if (isMenuNodeItem(node)) {
-        const entry: MenuNodeEntry = {
-          node,
-          key,
-          level,
-          index,
-          path: entryPath,
-          keyPath: entryKeyPath,
-          hasChildren: Boolean(children?.length),
-        }
-
-        if (parent !== undefined) {
-          entry.parent = parent
-        }
-        if (parentKey !== undefined) {
-          entry.parentKey = parentKey
-        }
-        entries.push(entry)
-      }
-
-      if (children?.length) {
-        visit(children, node, key, level + 1, entryPath, entryKeyPath)
-      }
-    }
+  ngAfterContentInit() {
+    queueMicrotask(() => syncMenuListTabStops(this.elementRef.nativeElement))
   }
 
-  visit(items, undefined, undefined, 0, [], [])
-  return entries
+  @HostListener('focusin', ['$event'])
+  focus(event: FocusEvent) {
+    handleMenuListFocus(event)
+  }
+
+  @HostListener('keydown', ['$event'])
+  keydown(event: KeyboardEvent) {
+    handleMenuListKeyDown(event, this.elementRef.nativeElement, this.orientation)
+  }
 }
 
-export function normalizeMenuKeys(keys: readonly MenuKey[] | undefined, multiple: boolean) {
-  const result: MenuKey[] = []
-  const seen = new Set<MenuKey>()
-  for (const key of keys ?? []) {
-    if (seen.has(key)) continue
-    seen.add(key)
-    result.push(key)
-    if (!multiple) break
-  }
-  return result
+@Directive({
+  selector: '[fexMenuItem]',
+  standalone: true,
+  host: {
+    role: 'menuitem',
+    tabindex: '-1',
+    'data-slot': 'menu-item',
+    '[attr.aria-disabled]': 'disabled || null',
+    '[attr.aria-haspopup]': "submenu ? 'menu' : null",
+    '[attr.data-menu-value]': 'value',
+    '[attr.data-selected]': "selected ? 'true' : null",
+  },
+})
+export class MenuItem {
+  @Input() value?: string | number
+  @Input() disabled = false
+  @Input() selected = false
+  @Input() submenu = false
 }
+
+@Component({ selector: 'fex-menu-group', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { role: 'group', 'data-slot': 'menu-group' }, template: '<ng-content />' })
+export class MenuGroup {}
+
+@Component({ selector: 'fex-menu-group-label', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { 'data-slot': 'menu-group-label' }, template: '<ng-content />' })
+export class MenuGroupLabel {}
+
+@Component({ selector: 'fex-menu-divider', standalone: true, changeDetection: ChangeDetectionStrategy.OnPush, host: { role: 'separator', 'data-slot': 'menu-divider' }, template: '' })
+export class MenuDivider {}

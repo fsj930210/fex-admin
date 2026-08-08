@@ -67,7 +67,6 @@
     "./ui/dialog": "./src/ui/dialog/index.ts",
     "./ui/kbd": "./src/ui/kbd/kbd.tsx",
     "./ui/listbox": "./src/ui/listbox/listbox.tsx",
-    "./ui/menu": "./src/ui/menu/menu.tsx",
     "./ui/resizable": "./src/ui/resizable/resizable.tsx",
     "./ui/spinner": "./src/ui/spinner/spinner.tsx",
     "./pro/dialog": "./src/pro/dialog/index.ts",

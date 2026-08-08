@@ -192,8 +192,12 @@ export function PopoverTrigger(props: PopoverTriggerProps) {
       type: 'button',
       class: local.class,
       'aria-haspopup': 'dialog',
-      'aria-expanded': snapshot().open,
-      'data-state': snapshot().open ? 'open' : 'closed',
+      get 'aria-expanded'() {
+        return snapshot().open
+      },
+      get 'data-state'() {
+        return snapshot().open ? 'open' : 'closed'
+      },
       onClick: (event) => {
         dismissOpenPopovers(event, overlay)
         overlay.trigger.click(eventInfo(event))

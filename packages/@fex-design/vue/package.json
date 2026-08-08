@@ -65,7 +65,6 @@
     "./ui/checkbox": "./src/ui/checkbox/checkbox.ts",
     "./ui/kbd": "./src/ui/kbd/kbd.ts",
     "./ui/listbox": "./src/ui/listbox/listbox.ts",
-    "./ui/menu": "./src/ui/menu/menu.ts",
     "./ui/spinner": "./src/ui/spinner/spinner.ts",
     "./icon/check": "./src/icon/check.ts",
     "./icon/calendar": "./src/icon/calendar.ts",
@@ -90,7 +89,6 @@
     "./composables/use-droppable": "./src/composables/use-droppable.ts",
     "./composables/use-dropzone": "./src/composables/use-dropzone.ts",
     "./composables/use-move": "./src/composables/use-move.ts",
-    "./composables/use-menu": "./src/primitive/menu/use-menu.ts",
     "./composables/use-resize": "./src/composables/use-resize.ts",
     "./composables/use-sortable": "./src/composables/use-sortable.ts",
     "./composables/use-toasts": "./src/composables/use-toasts.ts"

@@ -1,52 +1,45 @@
-# Menu Primitive
+# Menu primitive
 
-The primitive Menu API exposes `useMenu` and small structural parts for custom rendering. `useMenu` combines shared expansion, shared selection and tree traversal metadata; it does not include styling, popups, triggers or sidebar layout.
+Menu provides one compositional foundation for vertical action menus, horizontal navigation,
+menubars, inline trees and Popover-backed nested menus. It does not accept an `items` array and it
+does not duplicate Dropdown, ContextMenu or Popover behavior.
 
 ## Import
 
 ```tsx
-import { MenuItem, MenuList, MenuRoot, useMenu } from '@fex-design/react/primitive/menu'
+import { MenuItem, MenuList, MenuRoot } from '@fex-design/react/primitive/menu'
 ```
 
-## Structural usage
+## Direction
 
-`MenuRoot`, `MenuList`, and `MenuItem` are children-based primitives and never accept `items`.
+`MenuList` defaults to `vertical`. Set `orientation="horizontal"` for a navigation row. Arrow keys,
+Home, End, disabled-item skipping and roving tabindex follow the current list orientation. Nested
+lists declare their own orientation.
 
 ```tsx
-<MenuRoot>
-  <MenuList>
-    <MenuItem>Rename</MenuItem>
-    <MenuItem disabled>Archive</MenuItem>
+<MenuRoot role="navigation">
+  <MenuList orientation="horizontal">
+    <MenuItem value="home">{({ props }) => <a {...props} href="/">Home</a>}</MenuItem>
   </MenuList>
 </MenuRoot>
 ```
 
-Use the independent `useMenu({ items })` logic API only when building a data-driven renderer.
+## Nested menus
 
-## Headless Usage
+Inline nesting renders another `MenuList` in the document flow. Floating nesting composes the same
+list with `PopoverRoot`, `PopoverTrigger`, `PopoverPortal` and `PopoverContent`. Popover owns trigger
+strategy, delays, placement and dismissal; Menu owns item focus and parent/child keyboard movement.
+Set `submenu` on the trigger item and match its `value` with the child list `parentValue`.
 
-```tsx
-import { useMenu } from '@fex-design/react/primitive/menu'
+## Parts
 
-export function CustomMenu({ items }) {
-  const menu = useMenu({ items, defaultExpandKeys: ['system'] })
+| Part | Purpose |
+| --- | --- |
+| `MenuRoot` | Semantic container; its native `role` can be `menu`, `menubar` or `navigation`. |
+| `MenuList` | One focus/navigation level with `orientation` and optional `parentValue`. |
+| `MenuItem` | Default button or render-prop binding for a custom link/button trigger. |
+| `MenuGroup` | Semantic item group. |
+| `MenuGroupLabel` | Accessible group label content. |
+| `MenuDivider` | Separator between groups. |
 
-  return (
-    <nav {...menu.getRootProps()}>
-      {menu.nodeItems.map((entry) => {
-        const info = menu.getItemInfo(entry)
-
-        return (
-          <button key={info.key} {...menu.getItemProps(entry)}>
-            {info.item.label}
-          </button>
-        )
-      })}
-    </nav>
-  )
-}
-```
-
-## Controlled And Uncontrolled
-
-`expandKeys/defaultExpandKeys` control expansion. `selectedKeys/defaultSelectedKeys` control selection. `expandMultiple` and `selectMultiple` keep common array-key behavior inside the shared logic instead of forcing every app to repeat it.
+Menu does not implement text search. Command-style filtering belongs to the composing component.

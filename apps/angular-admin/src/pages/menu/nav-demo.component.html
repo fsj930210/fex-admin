@@ -1,0 +1,14 @@
+<fex-menu-root role="navigation" aria-label="Product navigation">
+  <fex-menu-list orientation="horizontal" [class]="navListClassName">
+    <a fexMenuItem value="getting-started" [class]="navTriggerClassName" href="#getting-started">Getting started</a>
+    <fex-popover [trigger]="['hover', 'click']" side="bottom" align="center">
+      <button fexMenuItem fexPopoverTrigger value="components" [submenu]="true" [class]="navTriggerClassName"><span>Components</span><fex-chevron-down-icon class="size-3.5 shrink-0 [&_svg]:size-3.5" /></button>
+      <fex-popover-portal><fex-dropdown-content [class]="navPanelClassName"><fex-menu-list orientation="vertical" parentValue="components" class="grid grid-cols-2 gap-1">
+        @for (item of components; track item[0]) {
+          <a fexMenuItem [value]="item[0]" [href]="anchor(item[0])" class="block rounded-md p-3 outline-none transition-colors hover:bg-muted-background focus-visible:bg-muted-background"><div class="text-sm font-medium">{{ item[0] }}</div><p class="mt-1 line-clamp-2 text-xs leading-5 text-muted-foreground">{{ item[1] }}</p></a>
+        }
+      </fex-menu-list></fex-dropdown-content></fex-popover-portal>
+    </fex-popover>
+    <a fexMenuItem value="documentation" [class]="navTriggerClassName" href="#documentation">Documentation</a>
+  </fex-menu-list>
+</fex-menu-root>
