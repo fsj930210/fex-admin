@@ -130,6 +130,18 @@
       "@fex-design/core/calendar/value": [
         "packages/@fex-design/core/src/calendar/value.ts"
       ],
+      "@fex-design/core/cascader/create-cascader-controller": [
+        "packages/@fex-design/core/src/cascader/create-cascader-controller.ts"
+      ],
+      "@fex-design/core/cascader/model": [
+        "packages/@fex-design/core/src/cascader/model.ts"
+      ],
+      "@fex-design/core/cascader/search": [
+        "packages/@fex-design/core/src/cascader/search.ts"
+      ],
+      "@fex-design/core/cascader/types": [
+        "packages/@fex-design/core/src/cascader/types.ts"
+      ],
       "@fex-design/core/store/create-store": [
         "packages/@fex-design/core/src/store/create-store.ts"
       ],
@@ -385,6 +397,12 @@
       "@fex-design/core/interactions/types": [
         "packages/@fex-design/core/src/interactions/types.ts"
       ],
+      "@fex-design/core/input-number/types": [
+        "packages/@fex-design/core/src/input-number/types.ts"
+      ],
+      "@fex-design/core/input-number/value": [
+        "packages/@fex-design/core/src/input-number/value.ts"
+      ],
       "@fex-design/core/overlay/create-overlay": [
         "packages/@fex-design/core/src/overlay/create-overlay.ts"
       ],
@@ -466,6 +484,9 @@
       "@fex-design/angular/primitive/calendar": [
         "packages/@fex-design/angular/src/primitive/calendar/calendar.ts"
       ],
+      "@fex-design/angular/primitive/cascader": [
+        "packages/@fex-design/angular/src/primitive/cascader/cascader.ts"
+      ],
       "@fex-design/angular/primitive/card": [
         "packages/@fex-design/angular/src/primitive/card/card.ts"
       ],
@@ -504,6 +525,9 @@
       ],
       "@fex-design/angular/primitive/input": [
         "packages/@fex-design/angular/src/primitive/input/input.ts"
+      ],
+      "@fex-design/angular/primitive/input-number": [
+        "packages/@fex-design/angular/src/primitive/input-number/input-number.ts"
       ],
       "@fex-design/angular/primitive/listbox": [
         "packages/@fex-design/angular/src/primitive/listbox/listbox.ts"

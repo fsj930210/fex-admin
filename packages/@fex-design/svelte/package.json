@@ -100,6 +100,7 @@
     "./primitive/input-addon-before": "./src/primitive/input/input-addon-before.svelte",
     "./primitive/input-addon-after": "./src/primitive/input/input-addon-after.svelte",
     "./primitive/input-clear": "./src/primitive/input/input-clear.svelte",
+    "./primitive/input-number": "./src/primitive/input-number/input-number.svelte",
     "./primitive/listbox": "./src/primitive/listbox/listbox.svelte",
     "./primitive/listbox-group": "./src/primitive/listbox/listbox-group.svelte",
     "./primitive/listbox-group-label": "./src/primitive/listbox/listbox-group-label.svelte",

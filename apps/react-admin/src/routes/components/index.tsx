@@ -103,6 +103,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Input'), 'InputPage'),
   },
   {
+    path: '/input-number',
+    element: createLazyRouteElement(() => import('../../pages/InputNumber'), 'InputNumberPage'),
+  },
+  {
     path: '/form',
     element: createLazyRouteElement(() => import('../../pages/Form'), 'FormPage'),
   },

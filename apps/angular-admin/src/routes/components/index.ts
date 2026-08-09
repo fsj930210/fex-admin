@@ -2,7 +2,11 @@ import type { Routes } from '@angular/router'
 
 export const componentRoutes: Routes = [
   // Component demos stay lazy so each primitive route remains independently reloadable.
-  { path: 'breadcrumb', loadComponent: () => import('../../pages/breadcrumb/index.component').then((module) => module.BreadcrumbComponent) },
+  {
+    path: 'breadcrumb',
+    loadComponent: () =>
+      import('../../pages/breadcrumb/index.component').then((module) => module.BreadcrumbComponent),
+  },
   {
     path: 'auto-complete',
     loadComponent: () =>
@@ -43,7 +47,9 @@ export const componentRoutes: Routes = [
   {
     path: 'context-menu',
     loadComponent: () =>
-      import('../../pages/context-menu/index.component').then((module) => module.ContextMenuComponent),
+      import('../../pages/context-menu/index.component').then(
+        (module) => module.ContextMenuComponent,
+      ),
   },
   {
     path: 'dialog',
@@ -88,14 +94,19 @@ export const componentRoutes: Routes = [
       import('../../pages/empty/index.component').then((module) => module.EmptyComponent),
   },
   {
+    path: 'form',
+    loadComponent: () =>
+      import('../../pages/form/index.component').then((module) => module.FormComponent),
+  },
+  {
     path: 'input',
     loadComponent: () =>
       import('../../pages/input/index.component').then((module) => module.InputComponent),
   },
   {
-    path: 'form',
+    path: 'input-number',
     loadComponent: () =>
-      import('../../pages/form/index.component').then((module) => module.FormComponent),
+      import('../../pages/input-number/index.component').then((module) => module.InputNumberPage),
   },
   {
     path: 'kbd',

@@ -24,6 +24,7 @@
     "./primitive/form": "./src/primitive/form/form.tsx",
     "./primitive/input": "./src/primitive/input/input.tsx",
     "./primitive/input/create-input": "./src/primitive/input/create-input.ts",
+    "./primitive/input-number": "./src/primitive/input-number/input-number.tsx",
     "./primitive/listbox": "./src/primitive/listbox/listbox.tsx",
     "./primitive/dropdown": "./src/primitive/dropdown/dropdown.tsx",
     "./primitive/menu": "./src/primitive/menu/menu.tsx",

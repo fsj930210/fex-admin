@@ -22,6 +22,7 @@ export function HomePage() {
     { to: '/empty', label: 'Empty' },
     { to: '/form', label: 'Form' },
     { to: '/input', label: 'Input' },
+    { to: '/input-number', label: 'InputNumber' },
     { to: '/interactions', label: 'Interactions' },
     { to: '/kbd', label: 'Kbd' },
     { to: '/listbox', label: 'Listbox' },

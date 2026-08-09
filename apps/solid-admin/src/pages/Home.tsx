@@ -22,6 +22,7 @@ const componentLinks = [
   { href: '/empty', label: 'Empty' },
   { href: '/form', label: 'Form' },
   { href: '/input', label: 'Input' },
+  { href: '/input-number', label: 'InputNumber' },
   { href: '/kbd', label: 'Kbd' },
   { href: '/listbox', label: 'Listbox' },
   { href: '/menu', label: 'Menu' },

@@ -1,0 +1,9 @@
+<fex-card title="Basic" description="Controlled and uncontrolled numeric values use icon actions.">
+  <div class="grid gap-space-lg md:grid-cols-2">
+    <fex-input-number [defaultValue]="3" />
+    <div>
+      <fex-input-number [value]="value" (change)="change($event)" />
+      <p class="text-sm text-muted-foreground">Value: {{ value ?? 'empty' }}</p>
+    </div>
+  </div>
+</fex-card>

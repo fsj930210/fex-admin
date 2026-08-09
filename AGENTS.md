@@ -201,6 +201,7 @@
 - 当前约定不把同一框架内的 `primitive`、`ui`、`hooks`、`icon` 拆成多个 package；按框架一个 package 管理，包内按类别目录分层。边界以该框架 package 的公开 `exports` 为准，业务侧和示例侧都只能通过公开子路径导入。
 - 跨框架 primitive 中凡是需要把行为挂到调用方元素上的能力，例如 Trigger、Close、Item、Anchor 等，统一使用 render prop / slot props / template context 传出 `props`、`ref` 或框架等价绑定能力、`state`；禁止把 `asChild` 作为公共 API，也不要用 clone child、隐式增强子节点或要求用户组件转发 ref 作为基础范式。
 - 组件的 demo 和文档必须覆盖本次实际实现且已公开的层级；如果用户明确要求并实际实现了 `ui` 或 `pro`，对应 demo 和文档也必须一并覆盖。不能为了满足 demo 覆盖而擅自新增用户未要求的 `ui` / `pro` 层；demo 页面要用统一的 `Card` 容器承载各段示例，不能再手写散落的 section 容器。
+- Demo 页面中承载多个示例 `Card` 的直接父容器必须统一使用 `grid gap-space-xl`；禁止使用 `space-y-*` 给 Demo Card 列表制造间距。`space-y-*` 依赖直接子节点 margin，在 Angular 自定义元素、`display: contents` 宿主和不同框架组件边界下表现不一致，不能作为跨框架 Demo 列表布局方案。此规则适用于 React、Vue、Solid、Svelte、Angular 所有新增或修改的组件示例页。
 - `ui` 层的结构化 API 要优先采用显式对象形态来承载部件级样式与状态，例如 `partClassName`、`partStyle`、`slotProps` 之类的清晰结构，不要把 header/content/footer 等部件的样式塞进扁平 props，也不要让调用方依赖 DOM 深层 class。
 - `ui` 组件如果暴露多个部件的 class/style，必须使用结构化对象 API，不要新增 `headerClassName`、`contentClassName`、`footerClassName`、`headerStyle`、`contentStyle` 这类扁平 props。统一优先使用类似 `className={{ header, content, footer }}` / `class={{ header, content, footer }}`、`style={{ header, content, footer }}`、`partClassName`、`partStyle` 的对象形态；具体命名按框架习惯保持一致。primitive 层优先只承载宿主元素 class/style 合并，复杂部件定制主要放在 ui 层。
 - 新增组件样式前必须先参考 `packages/@fex-design/styles/src/button.ts` 的组织方式：基础 class 用数组拼接，variant/size/effect 等用 `cva` 表达，组件包实现只消费样式函数，不把默认样式散落在 React/Vue/Solid/Svelte/Angular 文件里。
@@ -270,5 +271,6 @@
 - 开发阶段默认不要运行 `build`。除非用户明确要求构建、发布前验证、排查仅生产构建出现的问题，或者用户直接要求运行对应命令，否则不要主动执行 `pnpm build`、`nx build` 或各 app/package 的 build target。
 - 修改组件、样式和示例页后的优先验证方式是使用固定本地端口打开真实页面，直接在浏览器里检查 DOM、computed style、动画和交互表现。
 - 新增或修改组件 demo、示例路由、导航入口后，必须在对应固定端口用浏览器实际打开页面验证，不能只依赖 typecheck 或凭代码判断。验证至少包括：页面能打开且无运行时红屏/控制台错误；示例入口能点击；弹窗、浮层、菜单等交互组件必须实际触发一次打开和关闭；React/Vue/Solid/Svelte/Angular 多框架同步 demo 时，必须抽查各框架页面的关键样式规格是否一致，例如按钮尺寸、间距、弹层位置、footer 布局和遮罩效果。发现任一框架打不开或视觉明显不一致，必须先修复并重新浏览器验证后再交付。
+- Demo 页面布局验证必须读取真实 DOM 的 bounding box：至少计算前两个相邻 `Card` 的 `second.top - first.bottom`，确认结果等于当前 `gap-space-xl` 的实际像素值且大于 `0`。只检查源码里存在 `gap`/`space-y` class、只看截图大概有空隙、或只验证组件交互，均不能证明 Demo Card 间距合格。多框架同步时五个框架必须分别测量。
 - 需要做类型层面的快速确认时，优先只跑受影响项目的 `typecheck`；不要把 `build` 当作日常开发验证手段。
 - `@fex/styles` 的 Tailwind `@source` 必须统一配置在 `packages/styles/src/index.css`，覆盖 apps 和 packages/@fex-design 下所有会书写 class 的源码文件类型，例如 `ts`、`tsx`、`vue`、`svelte`、`html`。不要在具体组件、具体组件样式文件或 `packages/@fex-design/styles` 里维护人工 `@source inline(...)` 清单。

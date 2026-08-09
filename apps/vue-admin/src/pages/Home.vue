@@ -18,6 +18,7 @@ const componentLinks = [
   { to: '/empty', label: 'Empty' },
   { to: '/form', label: 'Form' },
   { to: '/input', label: 'Input' },
+  { to: '/input-number', label: 'InputNumber' },
   { to: '/kbd', label: 'Kbd' },
   { to: '/listbox', label: 'Listbox' },
   { to: '/menu', label: 'Menu' },

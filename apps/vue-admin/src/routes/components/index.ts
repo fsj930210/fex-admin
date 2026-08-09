@@ -19,6 +19,7 @@ export const componentRoutes = [
   { path: '/empty', component: () => import('../../pages/Empty/index.vue') },
   { path: '/form', component: () => import('../../pages/Form/index.vue') },
   { path: '/input', component: () => import('../../pages/Input/index.vue') },
+  { path: '/input-number', component: () => import('../../pages/InputNumber/index.vue') },
   { path: '/kbd', component: () => import('../../pages/Kbd/index.vue') },
   { path: '/listbox', component: () => import('../../pages/Listbox/index.vue') },
   { path: '/menu', component: () => import('../../pages/Menu/index.vue') },

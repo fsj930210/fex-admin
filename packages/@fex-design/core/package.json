@@ -136,6 +136,8 @@
     "./interactions/dnd-store": "./src/interactions/dnd-store.ts",
     "./interactions/rect": "./src/interactions/rect.ts",
     "./interactions/types": "./src/interactions/types.ts",
+    "./input-number/types": "./src/input-number/types.ts",
+    "./input-number/value": "./src/input-number/value.ts",
     "./overlay/create-overlay": "./src/overlay/create-overlay.ts",
     "./overlay/create-floating-overlay": "./src/overlay/create-floating-overlay.ts",
     "./overlay/context-menu/create-context-menu-controller": "./src/overlay/context-menu/create-context-menu-controller.ts",

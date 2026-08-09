@@ -22,6 +22,7 @@
     "./empty": "./src/empty.ts",
     "./field": "./src/field.ts",
     "./input": "./src/input.ts",
+    "./input-number": "./src/input-number.ts",
     "./kbd": "./src/kbd.ts",
     "./listbox": "./src/listbox.ts",
     "./menu": "./src/menu.ts",

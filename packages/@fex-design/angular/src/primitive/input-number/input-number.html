@@ -1,0 +1,55 @@
+<fex-input-root
+  [value]="draft()"
+  [disabled]="disabled"
+  [readOnly]="readOnly"
+  [invalid]="invalid"
+  [status]="status"
+  [class]="className"
+  [attr.data-out-of-range]="outOfRange || null"
+>
+  <input
+    fexInputControl
+    type="text"
+    role="spinbutton"
+    [attr.name]="name || null"
+    [attr.placeholder]="placeholder || null"
+    [required]="required"
+    [attr.aria-valuemin]="min ?? null"
+    [attr.aria-valuemax]="max ?? null"
+    [attr.aria-valuenow]="currentValue ?? null"
+    (input)="handleInput($event)"
+    (blur)="handleBlur($event)"
+    (keydown)="handleKeydown($event)"
+  />
+  @if (clearable) {
+  <button fexInputClear aria-label="Clear input" (click)="clear($event)"></button>
+  }
+  <span fexInputSuffix [class]="customSuffix ? '' : inputNumberActionsClassName">
+    @if (customSuffix) {
+    <ng-content select="[fexInputNumberSuffix]" />
+    } @else {
+    <button
+      type="button"
+      aria-label="Increase value"
+      data-action="increment"
+      [disabled]="!canIncrement"
+      [class]="inputNumberIncrementClassName"
+      (pointerdown)="$event.preventDefault()"
+      (click)="stepBy($event, 'increment')"
+    >
+      <fex-plus-icon />
+    </button>
+    <button
+      type="button"
+      aria-label="Decrease value"
+      data-action="decrement"
+      [disabled]="!canDecrement"
+      [class]="inputNumberDecrementClassName"
+      (pointerdown)="$event.preventDefault()"
+      (click)="stepBy($event, 'decrement')"
+    >
+      <fex-minus-icon />
+    </button>
+    }
+  </span>
+</fex-input-root>

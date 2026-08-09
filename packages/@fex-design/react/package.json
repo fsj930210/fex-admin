@@ -24,6 +24,8 @@
     "./primitive/form": "./src/primitive/form/form.tsx",
     "./primitive/input": "./src/primitive/input/input.tsx",
     "./primitive/input/use-input": "./src/primitive/input/use-input.ts",
+    "./primitive/input-number": "./src/primitive/input-number/input-number.tsx",
+    "./primitive/input-number/use-input-number": "./src/primitive/input-number/use-input-number.ts",
     "./primitive/listbox": "./src/primitive/listbox/listbox.tsx",
     "./primitive/select": "./src/primitive/select/select.tsx",
     "./primitive/select/use-select": "./src/primitive/select/use-select.ts",
