@@ -1,0 +1,1 @@
+import{regionOptions}from'./data';import{DemoCascader}from'./demo-cascader';import{DemoSection}from'./demo-section';export function HoverDemo(){return <DemoSection title="Hover expansion" description="Move across independently scrolling columns."><DemoCascader expandTrigger="hover" options={regionOptions}/></DemoSection>}

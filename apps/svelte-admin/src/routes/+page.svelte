@@ -33,6 +33,7 @@
     { href: '/slider', label: 'Slider' },
     { href: '/scrollbar', label: 'Scrollbar' },
     { href: '/select', label: 'Select' },
+    { href: '/cascader', label: 'Cascader' },
     { href: '/switch', label: 'Switch' },
     { href: '/table', label: 'Table' },
     { href: '/tabs', label: 'Tabs' },

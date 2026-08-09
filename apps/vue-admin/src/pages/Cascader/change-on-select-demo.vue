@@ -1,0 +1,1 @@
+<script setup lang="ts">import{regionOptions}from'./data';import DemoCascader from'./demo-cascader.vue';import Demo from'./demo-section.vue'</script><template><Demo title="Change on select" description="Intermediate paths can be submitted while leaves still close the popup."><DemoCascader change-on-select :options="regionOptions"/></Demo></template>

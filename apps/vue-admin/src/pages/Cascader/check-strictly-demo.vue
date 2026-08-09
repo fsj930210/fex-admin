@@ -1,0 +1,1 @@
+<script setup lang="ts">import{regionOptions}from'./data';import DemoCascader from'./demo-cascader.vue';import Demo from'./demo-section.vue'</script><template><Demo title="Check strictly" description="Every node is selected independently."><DemoCascader multiple check-strictly :options="regionOptions"/></Demo></template>

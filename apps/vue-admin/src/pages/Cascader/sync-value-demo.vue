@@ -1,0 +1,1 @@
+<script setup lang="ts">import{regionOptions}from'./data';import DemoCascader from'./demo-cascader.vue';import Demo from'./demo-section.vue'</script><template><Demo title="Synchronous value display" description="Options and initial path resolve together."><DemoCascader :options="regionOptions" :default-value="['jiangsu','suzhou','industrial-park','loufeng']"/></Demo></template>

@@ -1,0 +1,1 @@
+<script setup lang="ts">import{CascaderContent,CascaderPanel,CascaderRoot,CascaderTrigger}from'@fex-design/vue/primitive/cascader';defineOptions({inheritAttrs:false})</script><template><CascaderRoot v-bind="$attrs" clearable placeholder="请选择地区"><CascaderTrigger/><CascaderContent><CascaderPanel/></CascaderContent></CascaderRoot></template>

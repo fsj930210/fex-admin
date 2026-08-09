@@ -1,0 +1,2 @@
+import{regionOptions}from'./data';import{DemoCascader}from'./demo-cascader';import{DemoSection}from'./demo-section'
+export function CheckStrictlyDemo(){return <DemoSection title="Check strictly" description="Every node is selected independently without parent-child conduction."><DemoCascader multiple checkStrictly options={regionOptions}/></DemoSection>}

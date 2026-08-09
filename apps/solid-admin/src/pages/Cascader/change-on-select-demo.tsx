@@ -1,0 +1,1 @@
+import{regionOptions}from'./data';import{DemoCascader}from'./demo-cascader';import{DemoSection}from'./demo-section';export function ChangeOnSelectDemo(){return <DemoSection title="Change on select" description="Intermediate paths can be submitted."><DemoCascader changeOnSelect options={regionOptions}/></DemoSection>}

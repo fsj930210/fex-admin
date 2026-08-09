@@ -2,6 +2,7 @@ export const componentRoutes = [
   { path: '/breadcrumb', component: () => import('../../pages/Breadcrumb/index.vue') },
   { path: '/auto-complete', component: () => import('../../pages/AutoComplete/index.vue') },
   { path: '/carousel', component: () => import('../../pages/Carousel/index.vue') },
+  { path: '/cascader', component: () => import('../../pages/Cascader/index.vue') },
   { path: '/data-table', component: () => import('../../pages/DataTable/index.vue') },
   { path: '/date-picker', component: () => import('../../pages/DatePicker/index.vue') },
   { path: '/button', component: () => import('../../pages/Button/index.vue') },

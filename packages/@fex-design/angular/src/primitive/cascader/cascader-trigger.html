@@ -1,0 +1,10 @@
+<div fexPopoverTrigger role="presentation" [attr.data-disabled]="cascader.disabled || null" [attr.data-status]="cascader.status" [attr.aria-invalid]="cascader.status === 'error' || null" [class]="triggerClass" (keydown)="keydown($event)">
+  <div [class]="valueContainerClass">
+    @if (cascader.selectedPaths.length) {
+      @if (cascader.multiple) { @for (path of cascader.selectedPaths; track path.at(-1)?.key) { <span [class]="tagClass">{{ cascader.display(path) }}<button type="button" [class]="tagRemoveClass" (click)="$event.stopPropagation(); cascader.controller.removePath(path.at(-1)!.key)"><fex-close-icon /></button></span> } }
+      @else { <div [class]="valueClass">{{ cascader.display(cascader.selectedPaths[0]!) }}</div> }
+    } @else if (!cascader.snapshot().searchValue && !cascader.showSearch) { <span [class]="placeholderClass">{{ cascader.placeholder }}</span> }
+    <input role="combobox" [attr.aria-expanded]="cascader.snapshot().open" [disabled]="cascader.disabled" [readOnly]="!cascader.showSearch" [value]="cascader.snapshot().searchValue" [placeholder]="cascader.showSearch && !cascader.selectedPaths.length ? cascader.placeholder : ''" [class]="inputClass" (focus)="focus()" (click)="$event.stopPropagation()" (input)="input($event)" />
+  </div>
+  <span [class]="suffixClass">@if(cascader.loading){<fex-loading-icon class="animate-spin"/>}@else if(cascader.clearable&&cascader.selectedPaths.length){<button fexButtonPrimitive type="button" [class]="clearClass" (click)="$event.stopPropagation();cascader.controller.clear()"><fex-close-icon/></button>}@else{<span [attr.data-state]="cascader.snapshot().open?'open':'closed'" [class]="indicatorClass"><fex-chevron-down-icon/></span>}</span>
+</div>

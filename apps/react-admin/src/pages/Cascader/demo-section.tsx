@@ -1,0 +1,3 @@
+import { Card } from '@fex-design/react/ui/card'
+import type { ReactNode } from 'react'
+export function DemoSection(props:{title:string;description:string;children:ReactNode}){return <Card title={props.title} description={props.description}><div className="max-w-xl space-y-space-md">{props.children}</div></Card>}

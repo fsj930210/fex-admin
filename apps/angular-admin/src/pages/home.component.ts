@@ -42,6 +42,7 @@ export class HomeComponent {
     { to: '/slider', label: 'Slider' },
     { to: '/scrollbar', label: 'Scrollbar' },
     { to: '/select', label: 'Select' },
+    { to: '/cascader', label: 'Cascader' },
     { to: '/switch', label: 'Switch' },
     { to: '/table', label: 'Table' },
     { to: '/tabs', label: 'Tabs' },

@@ -1,0 +1,1 @@
+<script lang="ts">import{regionOptions}from'./data';import DemoCascader from'./demo-cascader.svelte';import Demo from'./demo-section.svelte'</script><Demo title="Basic" description="Leaf selection, disabled nodes and project Scrollbar tracks."><DemoCascader options={regionOptions}/></Demo>

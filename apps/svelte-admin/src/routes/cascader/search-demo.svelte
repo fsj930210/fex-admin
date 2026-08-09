@@ -1,0 +1,1 @@
+<script lang="ts">import{regionOptions}from'./data';import DemoCascader from'./demo-cascader.svelte';import Demo from'./demo-section.svelte'</script><Demo title="Full-path search" description="Try 浙江, 杭州, 西湖, 工业园区, 娄葑街道, or 苏州 娄葑."><DemoCascader showSearch options={regionOptions}/></Demo>

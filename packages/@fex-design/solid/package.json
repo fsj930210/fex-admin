@@ -9,6 +9,7 @@
     "./primitive/breadcrumb": "./src/primitive/breadcrumb/breadcrumb.tsx",
     "./primitive/button": "./src/primitive/button/button.tsx",
     "./primitive/calendar": "./src/primitive/calendar/calendar.tsx",
+    "./primitive/cascader": "./src/primitive/cascader/cascader.tsx",
     "./primitive/card": "./src/primitive/card/card.tsx",
     "./primitive/carousel": "./src/primitives/create-carousel.ts",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.tsx",

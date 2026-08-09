@@ -168,6 +168,11 @@ export const componentRoutes: Routes = [
       import('../../pages/select/index.component').then((module) => module.SelectComponent),
   },
   {
+    path: 'cascader',
+    loadComponent: () =>
+      import('../../pages/cascader/index.component').then((module) => module.CascaderComponent),
+  },
+  {
     path: 'steps',
     loadComponent: () =>
       import('../../pages/steps/index.component').then((module) => module.StepsComponent),

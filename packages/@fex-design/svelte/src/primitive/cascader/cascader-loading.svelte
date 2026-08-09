@@ -1,0 +1,1 @@
+<script lang="ts">import{cascaderLoadingClassName}from'@fex-design/styles/cascader';import type{Snippet}from'svelte';import LoadingIcon from'../../icon/loading.svelte';let{children}:{children?:Snippet}=$props()</script><div class={cascaderLoadingClassName}><LoadingIcon class="animate-spin"/>{#if children}{@render children()}{:else}Loading...{/if}</div>

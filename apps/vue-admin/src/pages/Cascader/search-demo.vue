@@ -1,0 +1,1 @@
+<script setup lang="ts">import{regionOptions}from'./data';import DemoCascader from'./demo-cascader.vue';import Demo from'./demo-section.vue'</script><template><Demo title="Full-path search" description="Try 浙江, 杭州, 西湖, 工业园区, 娄葑街道, or 苏州 娄葑."><DemoCascader show-search :options="regionOptions"/></Demo></template>

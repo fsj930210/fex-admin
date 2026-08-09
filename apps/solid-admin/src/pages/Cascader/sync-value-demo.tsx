@@ -1,0 +1,1 @@
+import{regionOptions}from'./data';import{DemoCascader}from'./demo-cascader';import{DemoSection}from'./demo-section';export function SyncValueDemo(){return <DemoSection title="Synchronous value display" description="Options and initial path resolve together."><DemoCascader options={regionOptions} defaultValue={['jiangsu','suzhou','industrial-park','loufeng']}/></DemoSection>}

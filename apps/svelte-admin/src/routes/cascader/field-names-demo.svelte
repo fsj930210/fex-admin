@@ -1,0 +1,1 @@
+<script lang="ts">import{customFieldOptions}from'./data';import DemoCascader from'./demo-cascader.svelte';import Demo from'./demo-section.svelte'</script><Demo title="Field names" description="One declarative mapping adapts backend data."><DemoCascader options={customFieldOptions} fieldNames={{value:'id',label:'name',children:'nodes',disabled:'unavailable'}}/></Demo>

@@ -1,0 +1,1 @@
+<script lang="ts">import{regionOptions}from'./data';import DemoCascader from'./demo-cascader.svelte';import Demo from'./demo-section.svelte'</script><Demo title="Multiple" description="Parent-child conduction and indeterminate states."><DemoCascader multiple options={regionOptions}/></Demo>

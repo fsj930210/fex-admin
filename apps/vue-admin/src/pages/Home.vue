@@ -2,6 +2,7 @@
 const componentLinks = [
   { to: '/auto-complete', label: 'AutoComplete' },
   { to: '/carousel', label: 'Carousel' },
+  { to: '/cascader', label: 'Cascader' },
   { to: '/button', label: 'Button' },
   { to: '/calendar', label: 'Calendar' },
     { to: '/card', label: 'Card' },

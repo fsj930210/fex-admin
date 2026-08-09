@@ -1,0 +1,1 @@
+<script setup lang="ts">import{cascaderLoadingClassName}from'@fex-design/styles/cascader';import{LoadingIcon}from'../../icon/loading'</script><template><div :class="cascaderLoadingClassName"><LoadingIcon class="animate-spin"/><slot>Loading...</slot></div></template>

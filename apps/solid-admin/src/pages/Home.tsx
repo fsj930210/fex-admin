@@ -4,6 +4,7 @@ import { For } from 'solid-js'
 const componentLinks = [
   { href: '/auto-complete', label: 'AutoComplete' },
   { href: '/carousel', label: 'Carousel' },
+  { href: '/cascader', label: 'Cascader' },
   { href: '/button', label: 'Button' },
   { href: '/calendar', label: 'Calendar' },
     { href: '/card', label: 'Card' },

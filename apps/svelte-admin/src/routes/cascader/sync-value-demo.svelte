@@ -1,0 +1,1 @@
+<script lang="ts">import{regionOptions}from'./data';import DemoCascader from'./demo-cascader.svelte';import Demo from'./demo-section.svelte'</script><Demo title="Synchronous value display" description="Options and initial path resolve together."><DemoCascader options={regionOptions} defaultValue={['jiangsu','suzhou','industrial-park','loufeng']}/></Demo>

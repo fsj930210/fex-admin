@@ -1,0 +1,1 @@
+<script setup lang="ts">import{regionOptions}from'./data';import DemoCascader from'./demo-cascader.vue';import Demo from'./demo-section.vue'</script><template><Demo title="Hover expansion" description="Move across columns without losing independent Scrollbar positions."><DemoCascader expand-trigger="hover" :options="regionOptions"/></Demo></template>

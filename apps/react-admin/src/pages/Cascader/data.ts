@@ -1,0 +1,15 @@
+import type { CascaderOption } from '@fex-design/core/cascader/types'
+
+export const regionOptions: readonly CascaderOption[] = [
+  { value:'zhejiang',label:'浙江',children:[{value:'hangzhou',label:'杭州',children:[{value:'xihu',label:'西湖'},{value:'yuhang',label:'余杭'}]},{value:'ningbo',label:'宁波',children:[{value:'yinzhou',label:'鄞州'}]}] },
+  { value:'jiangsu',label:'江苏',children:[{value:'nanjing',label:'南京'},{value:'suzhou',label:'苏州',children:[{value:'industrial-park',label:'工业园区',children:[{value:'loufeng',label:'娄葑街道'}]}]}] },
+  { value:'anhui',label:'安徽',disabled:true,children:[{value:'hefei',label:'合肥'}] },
+]
+export const customFieldOptions: readonly CascaderOption[] = [
+  { id:'product',name:'产品',nodes:[{id:'design',name:'设计',nodes:[{id:'interaction',name:'交互设计'}]},{id:'research',name:'用户研究',unavailable:true}] },
+  { id:'engineering',name:'工程',nodes:[{id:'frontend',name:'前端工程'}] },
+]
+export const lazyInitialOptions: readonly CascaderOption[] = [
+  { value:'asia',label:'亚洲',isLeaf:false },{ value:'europe',label:'欧洲',isLeaf:false },
+]
+export function remoteRegionSearch(keyword:string){const value=keyword.trim().toLocaleLowerCase();if(!value)return[];const filter=(items:readonly CascaderOption[],parents:CascaderOption[]=[]):CascaderOption[]=>items.flatMap(item=>{const path=[...parents,item];const children=Array.isArray(item.children)?filter(item.children as CascaderOption[],path):[];const hit=path.some(node=>String(node.label).toLocaleLowerCase().includes(value));return hit||children.length?[{...item,...(children.length?{children}:Array.isArray(item.children)?{children:[]}:{})}]:[]});return filter(regionOptions)}

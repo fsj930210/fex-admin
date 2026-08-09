@@ -11,6 +11,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Carousel'), 'CarouselPage'),
   },
   {
+    path: '/cascader',
+    element: createLazyRouteElement(() => import('../../pages/Cascader'), 'CascaderPage'),
+  },
+  {
     path: '/data-table',
     element: createLazyRouteElement(() => import('../../pages/DataTable'), 'DataTablePage'),
   },

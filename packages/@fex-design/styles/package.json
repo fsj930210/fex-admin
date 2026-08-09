@@ -12,6 +12,7 @@
     "./card": "./src/card.ts",
     "./carousel": "./src/carousel.ts",
     "./calendar": "./src/calendar.ts",
+    "./cascader": "./src/cascader.ts",
     "./checkbox": "./src/checkbox.ts",
     "./collapse": "./src/collapse.ts",
     "./dialog": "./src/dialog.ts",

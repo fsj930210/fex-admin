@@ -1,0 +1,24 @@
+<div [class]="panelClass" [style.--cascader-column-count]="columnCount()" [style.--cascader-panel-height]="panelHeight()">
+  @if (cascader.snapshot().searchValue && cascader.showSearch) {
+    <div [class]="columnClass + ' w-full min-w-full border-r-0'">
+      <div fexScrollbarRoot class="h-full"><div fexScrollbarViewport overflowX="hidden" overflowY="auto" [class]="viewportClass">
+        @if(cascader.loading){<div [class]="loadingClass"><fex-loading-icon class="animate-spin"/>Loading...</div>}
+        @else {@for (path of cascader.controller.getSearchResults(); track path.at(-1)!.key) {
+          @let node = path.at(-1)!; @let itemState = state(node);
+          <div role="option" [attr.data-active]="itemState.active || null" [class]="optionClass" (click)="cascader.controller.select(node.key)"><span [class]="optionLabelClass">{{ cascader.display(path) }}</span>@if(itemState.selected){<fex-check-icon [class]="optionIconClass"/>}</div>
+        } @empty { <div [class]="emptyClass">No options</div> }}
+      </div><div fexScrollbarBar axis="y"><div fexScrollbarTrack><div fexScrollbarThumb axis="y"></div></div></div></div>
+    </div>
+  } @else {
+    @for (column of cascader.controller.getColumns(); track column.parentKey ?? 'root'; let index = $index) {
+      <div role="listbox" [attr.aria-label]="'Level ' + (index + 1)" [class]="columnClass"><div fexScrollbarRoot class="h-full"><div fexScrollbarViewport overflowX="hidden" overflowY="auto" [class]="viewportClass">
+        @for (node of column.nodes; track node.key) { @let itemState = state(node);
+          <div role="option" [attr.aria-selected]="itemState.selected" [attr.aria-disabled]="node.disabled || null" [attr.data-active]="itemState.active || null" [attr.data-selected]="itemState.selected || null" [attr.data-disabled]="node.disabled || null" [class]="optionClass" (pointerenter)="enter(node)" (click)="cascader.controller.select(node.key)">
+            @if(cascader.multiple){<button fexCheckboxPrimitive [checked]="itemState.indeterminate ? 'indeterminate' : itemState.checked" [disabled]="node.disabled" [class]="checkboxClass" (click)="$event.stopPropagation();cascader.controller.toggleCheck(node.key)">@if(itemState.checked || itemState.indeterminate){<span fexCheckboxIndicator [checked]="itemState.indeterminate ? 'indeterminate' : true" [class]="checkboxIndicatorClass">@if(itemState.indeterminate){<fex-minus-icon/>}@else{<fex-check-icon/>}</span>}</button>}
+            <span [class]="optionLabelClass">{{ node.label }}</span><span [class]="optionIconClass">@if(itemState.loading){<fex-loading-icon class="animate-spin"/>}@else if(!node.leaf){<fex-chevron-right-icon/>}@else if(itemState.selected){<fex-check-icon/>}</span>
+          </div>
+        }
+      </div><div fexScrollbarBar axis="y"><div fexScrollbarTrack><div fexScrollbarThumb axis="y"></div></div></div></div></div>
+    }
+  }
+</div>

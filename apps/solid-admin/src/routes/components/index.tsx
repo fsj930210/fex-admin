@@ -13,6 +13,9 @@ const AutoCompletePage = lazy(() =>
 const CalendarPage = lazy(() =>
   import('../../pages/Calendar').then((module) => ({ default: module.CalendarPage })),
 )
+const CascaderPage = lazy(() =>
+  import('../../pages/Cascader').then((module) => ({ default: module.CascaderPage })),
+)
 const CardPage = lazy(() =>
   import('../../pages/Card').then((module) => ({ default: module.CardPage })),
 )
@@ -171,6 +174,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/calendar',
     component: CalendarPage,
+  },
+  {
+    path: '/cascader',
+    component: CascaderPage,
   },
   {
     path: '/card',

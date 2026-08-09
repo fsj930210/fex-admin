@@ -1,0 +1,1 @@
+<script setup lang="ts">import{regionOptions}from'./data';import DemoCascader from'./demo-cascader.vue';import Demo from'./demo-section.vue'</script><template><Demo title="Basic" description="Select a leaf with disabled-node handling and project Scrollbar tracks."><DemoCascader :options="regionOptions"/></Demo></template>
