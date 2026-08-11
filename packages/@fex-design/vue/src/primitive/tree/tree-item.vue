@@ -40,6 +40,7 @@ const itemProps = computed(() => {
     'aria-posinset': item.index + 1,
     'data-key': String(item.key),
     'data-selected': state.value.selected || undefined,
+    'data-selectable': tree.hasFeature('selection') || undefined,
     'data-expanded': state.value.expanded || undefined,
     'data-checked': state.value.checked || undefined,
     'data-disabled': item.disabled || undefined,

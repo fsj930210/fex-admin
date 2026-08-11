@@ -2,19 +2,22 @@ import { createStore } from '../store/create-store'
 import type { ToggleChangeMeta, ToggleController, ToggleOptions, ToggleSnapshot } from './types'
 
 function createToggleSnapshot(
-  checked: boolean | undefined,
+  pressed: boolean | undefined,
   disabled: boolean | undefined,
 ): ToggleSnapshot {
   return {
-    checked: checked === true,
+    pressed: pressed === true,
+    checked: pressed === true,
     disabled: disabled === true,
   }
 }
 
 export function createToggleController(options: ToggleOptions = {}): ToggleController {
-  const isControlled = () => options.checked !== undefined
+  const isControlled = () => options.pressed !== undefined || options.checked !== undefined
+  const getPressed = () => options.pressed ?? options.checked
+  const getDefaultPressed = () => options.defaultPressed ?? options.defaultChecked
   const store = createStore(
-    createToggleSnapshot(options.checked ?? options.defaultChecked, options.disabled),
+    createToggleSnapshot(getPressed() ?? getDefaultPressed(), options.disabled),
   )
   let controlledSnapshot = store.getSnapshot()
 
@@ -24,12 +27,12 @@ export function createToggleController(options: ToggleOptions = {}): ToggleContr
       if (snapshot.disabled === (options.disabled === true)) {
         return snapshot
       }
-      return createToggleSnapshot(snapshot.checked, options.disabled)
+      return createToggleSnapshot(snapshot.pressed, options.disabled)
     }
 
-    const nextSnapshot = createToggleSnapshot(options.checked, options.disabled)
+    const nextSnapshot = createToggleSnapshot(getPressed(), options.disabled)
     if (
-      controlledSnapshot.checked === nextSnapshot.checked &&
+      controlledSnapshot.pressed === nextSnapshot.pressed &&
       controlledSnapshot.disabled === nextSnapshot.disabled
     ) {
       return controlledSnapshot
@@ -38,30 +41,33 @@ export function createToggleController(options: ToggleOptions = {}): ToggleContr
     return controlledSnapshot
   }
 
-  function commit(checked: boolean) {
+  function commit(pressed: boolean) {
     const previousSnapshot = getCurrentSnapshot()
-    if (previousSnapshot.disabled || previousSnapshot.checked === checked) {
+    if (previousSnapshot.disabled || previousSnapshot.pressed === pressed) {
       return undefined
     }
 
-    const nextSnapshot = createToggleSnapshot(checked, options.disabled)
+    const nextSnapshot = createToggleSnapshot(pressed, options.disabled)
     const meta: ToggleChangeMeta = {
-      previousChecked: previousSnapshot.checked,
-      checked: nextSnapshot.checked,
+      previousPressed: previousSnapshot.pressed,
+      pressed: nextSnapshot.pressed,
+      previousChecked: previousSnapshot.pressed,
+      checked: nextSnapshot.pressed,
     }
 
     if (!isControlled()) {
       store.setSnapshot(nextSnapshot)
     }
 
-    options.onChange?.(nextSnapshot.checked, meta)
+    options.onChange?.(nextSnapshot.pressed, meta)
     return meta
   }
 
   return {
     getSnapshot: getCurrentSnapshot,
     subscribe: store.subscribe,
+    setPressed: commit,
     setChecked: commit,
-    toggle: () => commit(!getCurrentSnapshot().checked),
+    toggle: () => commit(!getCurrentSnapshot().pressed),
   }
 }

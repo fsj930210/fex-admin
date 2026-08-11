@@ -14,6 +14,11 @@ export default defineConfig({
     // linked packages and their worker/assets behave like installed packages.
     fs: { allow: [searchForWorkspaceRoot(appRoot)] },
     proxy: {
+      '/tree-api': {
+        target: 'http://127.0.0.1:4310',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/tree-api/, ''),
+      },
       '/upload-api': {
         target: 'http://127.0.0.1:4310',
         changeOrigin: true,

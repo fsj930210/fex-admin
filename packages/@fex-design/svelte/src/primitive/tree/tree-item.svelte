@@ -98,6 +98,7 @@
       'aria-posinset': item.index + 1,
       'data-key': String(item.key),
       'data-selected': selected || undefined,
+      'data-selectable': tree.hasFeature('selection') || undefined,
       'data-expanded': expanded || undefined,
       'data-checked': checked || undefined,
       'data-disabled': item.disabled || undefined,

@@ -157,14 +157,15 @@ export class InputAddonAfter {
   host: {
     '[class]': 'hostClassName()',
     'data-slot': 'input-clear',
-    '[hidden]': '!root.canClear',
-    '[disabled]': '!root.canClear',
+    '[hidden]': '!forceMount && !root.canClear',
+    '[disabled]': '!forceMount && !root.canClear',
     '(pointerdown)': '$event.preventDefault()',
     '(click)': 'root.clearValue()',
   },
   template: '<ng-content><fex-close-icon /></ng-content>',
 })
 export class InputClear {
+  @Input() forceMount = false
   readonly root = inject(InputRoot)
   protected readonly hostClassName = createHostClassName(
     buttonPrimitiveClassName(inputClearClassName),

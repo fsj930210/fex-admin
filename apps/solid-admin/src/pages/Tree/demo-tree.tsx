@@ -83,6 +83,7 @@ export function DemoTree<T extends TreeNodeData>(props: Props<T>) {
     ...(props.features === undefined ? {} : { features: props.features }),
     ...(props.fieldNames === undefined ? {} : { fieldNames: props.fieldNames }),
     ...(props.isLeaf === undefined ? {} : { isLeaf: props.isLeaf }),
+    ...(props.asyncLoader === undefined ? {} : { asyncLoader: props.asyncLoader }),
     ...(props.expandedKeys === undefined ? {} : { expandedKeys: props.expandedKeys }),
     ...(props.onExpandedKeysChange === undefined
       ? {}

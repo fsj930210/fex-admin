@@ -3,18 +3,25 @@ import type { DepartmentNode } from './data'
 import { departmentFieldNames } from './data'
 import { DemoTree } from './demo-tree'
 import { TreeDemoSection } from './demo-section'
+import { getDemoTreeChildren, getDemoTreeRoots, type DemoDepartmentNode } from '@fex/mock/tree-api'
+import { useState } from 'react'
+import useMount from '@fex-design/react/hooks/use-mount'
 
-const asyncTreeData: DepartmentNode[] = [{ id: 'remote-root', name: 'Remote root', childCount: 2 }]
-
-async function loadChildren(node: { key: string | number; node: DepartmentNode }) {
-  await new Promise<void>((resolve) => window.setTimeout(resolve, 800))
-  return [
-    { id: `${node.key}-a`, name: `${node.node.name} child A`, childCount: 0 },
-    { id: `${node.key}-b`, name: `${node.node.name} child B`, childCount: 0 },
-  ] satisfies DepartmentNode[]
+const convert = (nodes: readonly DemoDepartmentNode[]): DepartmentNode[] => nodes.map((node) => ({ id: node.id, name: node.name, childCount: node.childCount, ...(node.disabled === undefined ? {} : { disabled: node.disabled }) }))
+const loadChildren = async (node: { key: string | number }, context: { signal: AbortSignal }) => {
+  try { return convert(await getDemoTreeChildren(node.key, context.signal)) }
+  catch (error) { if (error instanceof DOMException && error.name === 'AbortError') return []; throw error }
 }
 
 export function AsyncTreeDemo() {
+  const [asyncTreeData, setAsyncTreeData] = useState<DepartmentNode[]>([])
+  useMount(() => {
+    const request = new AbortController()
+    void getDemoTreeRoots(request.signal)
+      .then((nodes) => setAsyncTreeData(convert(nodes)))
+      .catch((error) => { if (error.name !== 'AbortError') throw error })
+    return () => request.abort()
+  })
   return (
     <TreeDemoSection
       title="Async children"

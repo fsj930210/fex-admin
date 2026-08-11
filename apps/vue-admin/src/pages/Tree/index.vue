@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AsyncDemo from './async-demo.vue'
+import AsyncSearchDemo from './async-search-demo.vue'
 import BasicDemo from './basic-demo.vue'
 import BatchActionsDemo from './batch-actions-demo.vue'
 import CheckDemo from './check-demo.vue'
@@ -25,7 +26,7 @@ import VirtualDemo from './virtual-demo.vue'
         </div>
       </header>
       <div class="space-y-space-xl">
-        <BasicDemo /><ControlledDemo /><BatchActionsDemo /><MutationDemo /><DndDemo /><CheckDemo /><AsyncDemo /><SearchDemo /><VirtualDemo />
+        <BasicDemo /><ControlledDemo /><BatchActionsDemo /><MutationDemo /><DndDemo /><CheckDemo /><AsyncDemo /><AsyncSearchDemo /><SearchDemo /><VirtualDemo />
       </div>
     </div>
   </main>

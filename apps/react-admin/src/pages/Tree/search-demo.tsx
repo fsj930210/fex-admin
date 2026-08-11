@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { departmentFieldNames, departmentTreeData, type DepartmentNode } from './data'
 import { DemoTree } from './demo-tree'
 import { TreeDemoSection } from './demo-section'
+import { highlightTreeTitle } from './highlight-tree-title'
 
 const searchController = createTreeController<DepartmentNode>({
   treeData: departmentTreeData,
@@ -16,21 +17,6 @@ const searchController = createTreeController<DepartmentNode>({
     searchFeature(),
   ],
 })
-
-function highlight(title: string, keyword: string) {
-  if (!keyword) return title
-  const index = title.toLowerCase().indexOf(keyword.toLowerCase())
-  if (index < 0) return title
-  return (
-    <>
-      {title.slice(0, index)}
-      <mark className="rounded-sm bg-warning/20 px-0.5 text-inherit">
-        {title.slice(index, index + keyword.length)}
-      </mark>
-      {title.slice(index + keyword.length)}
-    </>
-  )
-}
 
 export function SearchTreeDemo() {
   const [keyword, setKeyword] = useState('')
@@ -73,7 +59,7 @@ export function SearchTreeDemo() {
             expansionFeature({ defaultExpandedKeys: ['company', 'engineering', 'product'] }),
           ]}
           searchKeyword={keyword}
-          titleRender={({ item, searchKeyword }) => highlight(item.node.name, searchKeyword)}
+          titleRender={({ item, searchKeyword }) => highlightTreeTitle(item.node.name, searchKeyword)}
           className="max-w-xl rounded-md border border-border bg-background p-space-sm"
         />
       ) : null}

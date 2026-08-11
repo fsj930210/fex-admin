@@ -6,9 +6,10 @@ export const treeViewportClassName = 'min-w-0'
 
 export const treeItemClassName = cva(
   [
-    'group/tree-item relative flex w-fit max-w-full min-w-0 items-center gap-1 rounded-md px-1 text-sm outline-none data-[block=true]:w-full',
+    'group/tree-item relative flex w-fit max-w-full min-w-0 items-center gap-1 rounded-md px-1 py-0.5 text-sm outline-none data-[block=true]:w-full',
     'focus-visible:ring-3 focus-visible:ring-focus/50',
-    'data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50',
+    'data-[selectable=true]:cursor-pointer',
+    'data-[disabled=true]:cursor-not-allowed data-[selectable=true]:data-[disabled=true]:cursor-not-allowed data-[disabled=true]:opacity-50',
     'data-[dnd-enabled=true]:cursor-grab data-[dnd-enabled=true]:touch-none data-[dnd-enabled=true]:select-none data-[dragging=true]:opacity-35',
     'data-[drag-preview=true]:gap-0 data-[drag-preview=true]:shadow-lg [&[data-drag-preview=true]>[data-slot=tree-trigger]]:hidden [&[data-drag-preview=true]>[data-slot=tree-trigger-placeholder]]:hidden',
     'data-[drag-preview=true]:border data-[drag-preview=true]:border-border data-[drag-preview=true]:bg-background data-[drag-preview=true]:text-foreground data-[drag-preview=true]:opacity-75 data-[drag-preview=true]:shadow-xl data-[drag-preview=true]:ring-1 data-[drag-preview=true]:ring-border/70',
@@ -37,7 +38,7 @@ export const treeTriggerClassName = [
 ].join(' ')
 
 export const treeTitleClassName = [
-  'min-w-0 w-max max-w-full truncate rounded-md px-1',
+  'inline-flex min-w-0 w-max max-w-full items-center truncate rounded-md px-2 py-1 transition-colors group-hover/tree-item:bg-muted-background [&_button]:cursor-pointer [&_button:disabled]:cursor-not-allowed',
   'group-data-[selected=true]/tree-item:bg-primary/10 group-data-[selected=true]/tree-item:text-primary',
   'group-data-[block=true]/tree-item:flex-1',
 ].join(' ')

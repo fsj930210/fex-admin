@@ -1,0 +1,8 @@
+<script setup lang="ts">
+import BasicDemo from './basic-demo.vue'
+import ControlledDemo from './controlled-demo.vue'
+import MixedRulesDemo from './mixed-rules-demo.vue'
+import PasteDemo from './paste-demo.vue'
+import VariableLengthDemo from './variable-length-demo.vue'
+</script>
+<template><main class="min-h-screen bg-secondary-background px-page-padding py-space-xl"><div class="mx-auto w-full max-w-5xl space-y-space-xl"><header class="space-y-space-md"><RouterLink class="text-sm text-muted-foreground hover:text-foreground" to="/">返回首页</RouterLink><h1 class="text-2xl font-semibold">InputOTP 基础组件</h1><p class="text-sm text-muted-foreground">支持独立分段长度、输入规则和跨段粘贴的验证码输入组件。</p></header><div class="grid gap-space-xl"><BasicDemo/><VariableLengthDemo/><MixedRulesDemo/><PasteDemo/><ControlledDemo/></div></div></main></template>

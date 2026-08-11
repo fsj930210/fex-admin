@@ -14,6 +14,7 @@ import {
   TreeViewport,
 } from '@fex-design/react/primitive/tree'
 import type { TreeVirtualViewportHandle } from '@fex-design/react/primitive/tree'
+import type { TreeItemRenderState } from '@fex-design/react/primitive/tree'
 import { Checkbox } from '@fex-design/react/ui/checkbox'
 import { Spinner } from '@fex-design/react/ui/spinner'
 import { cn } from '@fex/utils'
@@ -32,6 +33,11 @@ interface DemoTreeRenderItemContext<
   TNode extends TreeNodeData,
 > extends DemoTreeTitleRenderContext<TNode> {
   defaultNode: ReactNode
+  itemProps: TreeItemRenderState<TNode>['itemProps']
+  leadingNode: ReactNode
+  titleNode: ReactNode
+  checkedState: TreeItemRenderState<TNode>['checkedState']
+  actions: TreeItemRenderState<TNode>['actions']
 }
 
 interface DemoTreeProps<TNode extends TreeNodeData> extends TreeOptions<TNode> {
@@ -77,13 +83,20 @@ function DemoTreeRow<TNode extends TreeNodeData>({
           isSearching: Boolean(searchKeyword),
           searchKeyword,
         }
-        const defaultNode = (
-          <div {...itemProps}>
-            {loadState === 'loading' ? (
+        const leadingNode = loadState === 'loading' ? (
               <Spinner size="sm" aria-label="Loading children" />
             ) : (
               <TreeTrigger itemKey={currentItem.key} />
-            )}
+            )
+        const titleNode = (
+          <TreeTitle>
+            {titleRender?.(titleContext) ??
+              String(currentItem.node[titleField] ?? currentItem.key)}
+          </TreeTitle>
+        )
+        const defaultNode = (
+          <div {...itemProps}>
+            {leadingNode}
             {checkable && tree.hasFeature('check') ? (
               <Checkbox
                 checked={checkedState}
@@ -92,13 +105,10 @@ function DemoTreeRow<TNode extends TreeNodeData>({
                 onCheckedChange={() => actions.toggleChecked()}
               />
             ) : null}
-            <TreeTitle>
-              {titleRender?.(titleContext) ??
-                String(currentItem.node[titleField] ?? currentItem.key)}
-            </TreeTitle>
+            {titleNode}
           </div>
         )
-        return renderItem?.({ ...titleContext, defaultNode }) ?? defaultNode
+        return renderItem?.({ ...titleContext, defaultNode, itemProps, leadingNode, titleNode, checkedState, actions }) ?? defaultNode
       }}
     </TreeItem>
   )

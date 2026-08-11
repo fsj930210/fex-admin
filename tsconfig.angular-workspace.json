@@ -46,6 +46,18 @@
       "@fex-design/core/date-picker/value": [
         "packages/@fex-design/core/src/date-picker/value.ts"
       ],
+      "@fex-design/core/input-otp/completion": [
+        "packages/@fex-design/core/src/input-otp/completion.ts"
+      ],
+      "@fex-design/core/input-otp/create-input-otp-controller": [
+        "packages/@fex-design/core/src/input-otp/create-input-otp-controller.ts"
+      ],
+      "@fex-design/core/input-otp/types": [
+        "packages/@fex-design/core/src/input-otp/types.ts"
+      ],
+      "@fex-design/core/input-otp/value": [
+        "packages/@fex-design/core/src/input-otp/value.ts"
+      ],
       "@fex-design/core/qrcode": [
         "packages/@fex-design/core/src/qrcode/qrcode.ts"
       ],
@@ -211,6 +223,12 @@
       "@fex-design/core/tree/types": [
         "packages/@fex-design/core/src/tree/types.ts"
       ],
+      "@fex-design/core/tree-select/create-tree-select-controller": [
+        "packages/@fex-design/core/src/tree-select/create-tree-select-controller.ts"
+      ],
+      "@fex-design/core/tree-select/types": [
+        "packages/@fex-design/core/src/tree-select/types.ts"
+      ],
       "@fex-design/core/upload/create-upload-controller": [
         "packages/@fex-design/core/src/upload/create-upload-controller.ts"
       ],
@@ -255,6 +273,9 @@
       ],
       "@fex-design/core/toggle/create-toggle-controller": [
         "packages/@fex-design/core/src/toggle/create-toggle-controller.ts"
+      ],
+      "@fex-design/core/toggle/create-toggle-group-controller": [
+        "packages/@fex-design/core/src/toggle/create-toggle-group-controller.ts"
       ],
       "@fex-design/core/toggle/types": [
         "packages/@fex-design/core/src/toggle/types.ts"
@@ -526,6 +547,9 @@
       "@fex-design/angular/primitive/input": [
         "packages/@fex-design/angular/src/primitive/input/input.ts"
       ],
+      "@fex-design/angular/primitive/input-otp": [
+        "packages/@fex-design/angular/src/primitive/input-otp/input-otp.ts"
+      ],
       "@fex-design/angular/primitive/input-number": [
         "packages/@fex-design/angular/src/primitive/input-number/input-number.ts"
       ],
@@ -601,6 +625,9 @@
       "@fex-design/angular/primitive/timeline": [
         "packages/@fex-design/angular/src/primitive/timeline/timeline.ts"
       ],
+      "@fex-design/angular/primitive/toggle": [
+        "packages/@fex-design/angular/src/primitive/toggle/toggle.ts"
+      ],
       "@fex-design/angular/primitive/tabs": [
         "packages/@fex-design/angular/src/primitive/tabs/tabs.ts"
       ],
@@ -618,6 +645,9 @@
       ],
       "@fex-design/angular/primitive/tree/tree-dnd-item": [
         "packages/@fex-design/angular/src/primitive/tree/tree-dnd-item.ts"
+      ],
+      "@fex-design/angular/primitive/tree-select": [
+        "packages/@fex-design/angular/src/primitive/tree-select/tree-select.ts"
       ],
       "@fex-design/angular/primitive/toast": [
         "packages/@fex-design/angular/src/primitive/toast/toast.ts"

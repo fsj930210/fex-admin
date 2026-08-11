@@ -1,5 +1,6 @@
 <script lang="ts">
   import AsyncDemo from './async-demo.svelte'
+  import AsyncSearchDemo from './async-search-demo.svelte'
   import BasicDemo from './basic-demo.svelte'
   import BatchActionsDemo from './batch-actions-demo.svelte'
   import CheckDemo from './check-demo.svelte'
@@ -30,6 +31,7 @@
       <DndDemo />
       <CheckDemo />
       <AsyncDemo />
+      <AsyncSearchDemo />
       <SearchDemo />
       <VirtualDemo />
     </div>

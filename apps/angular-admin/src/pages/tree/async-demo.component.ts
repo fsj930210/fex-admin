@@ -5,16 +5,11 @@ import type { TreeKey, TreeOptions } from '@fex-design/core/tree/types'
 import Card from '@fex-design/angular/ui/card'
 import { DemoTreeComponent } from './demo-tree.component'
 import { departmentFieldNames, type DepartmentNode } from './data'
+import { getDemoTreeChildren, getDemoTreeRoots, type DemoDepartmentNode } from '@fex/mock/tree-api'
+import { signal } from '@angular/core'
 
-const data: DepartmentNode[] = [{ id: 'remote-root', name: 'Remote root', childCount: 2 }]
-
-async function loadChildren(item: { key: TreeKey; node: DepartmentNode }) {
-  await new Promise<void>((resolve) => window.setTimeout(resolve, 800))
-  return [
-    { id: `${item.key}-a`, name: `${item.node.name} child A`, childCount: 0 },
-    { id: `${item.key}-b`, name: `${item.node.name} child B`, childCount: 0 },
-  ]
-}
+const convert = (nodes: readonly DemoDepartmentNode[]): DepartmentNode[] => nodes.map((node) => ({ id: node.id, name: node.name, childCount: node.childCount, ...(node.disabled === undefined ? {} : { disabled: node.disabled }) }))
+const loadChildren = async (item: { key: TreeKey }, context: { signal: AbortSignal }) => convert(await getDemoTreeChildren(item.key, context.signal))
 
 @Component({
   selector: 'fex-async-tree-demo',
@@ -24,10 +19,12 @@ async function loadChildren(item: { key: TreeKey; node: DepartmentNode }) {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AsyncTreeDemoComponent {
-  protected readonly options: TreeOptions<DepartmentNode> = {
-    treeData: data,
+  private readonly data = signal<DepartmentNode[]>([])
+  protected readonly options = (): TreeOptions<DepartmentNode> => ({
+    treeData: this.data(),
     fieldNames: departmentFieldNames,
     isLeaf: (node) => node.childCount === 0,
     features: [expansionFeature(), asyncLoadFeature<DepartmentNode>({ loadChildren })],
-  }
+  })
+  constructor() { void getDemoTreeRoots().then((nodes) => this.data.set(convert(nodes))) }
 }

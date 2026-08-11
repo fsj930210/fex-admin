@@ -3,14 +3,12 @@ import { asyncLoadFeature, expansionFeature } from '@fex-design/core'
 import Card from '@fex-design/vue/ui/card'
 import DemoTree from './demo-tree.vue'
 import { departmentFieldNames, type DepartmentNode } from './data'
-const asyncTreeData: DepartmentNode[] = [{ id: 'remote-root', name: 'Remote root', childCount: 2 }]
-async function loadChildren(item: { key: string | number; node: DepartmentNode }) {
-  await new Promise<void>((resolve) => window.setTimeout(resolve, 800))
-  return [
-    { id: `${item.key}-a`, name: `${item.node.name} child A`, childCount: 0 },
-    { id: `${item.key}-b`, name: `${item.node.name} child B`, childCount: 0 },
-  ]
-}
+import { getDemoTreeChildren, getDemoTreeRoots, type DemoDepartmentNode } from '@fex/mock/tree-api'
+import { onMounted, ref } from 'vue'
+const convert = (nodes: readonly DemoDepartmentNode[]): DepartmentNode[] => nodes.map((node) => ({ id: node.id, name: node.name, childCount: node.childCount, ...(node.disabled === undefined ? {} : { disabled: node.disabled }) }))
+const asyncTreeData = ref<DepartmentNode[]>([])
+const loadChildren = async (item: { key: string | number }, context: { signal: AbortSignal }) => convert(await getDemoTreeChildren(item.key, context.signal))
+onMounted(async () => { asyncTreeData.value = convert(await getDemoTreeRoots()) })
 </script>
 <template>
   <Card

@@ -7,6 +7,7 @@
     "@fex-design/react": "workspace:*",
     "@fex-design/styles": "workspace:*",
     "@fex/styles": "workspace:*",
+    "@fex/mock": "workspace:*",
     "@fex/utils": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "@vitejs/plugin-react": "latest",

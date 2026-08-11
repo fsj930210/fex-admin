@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
 import { AsyncTreeDemoComponent } from './async-demo.component'
+import { AsyncSearchTreeDemoComponent } from './async-search-demo.component'
 import { BasicTreeDemoComponent } from './basic-demo.component'
 import { BatchActionsTreeDemoComponent } from './batch-actions-demo.component'
 import { CheckTreeDemoComponent } from './check-demo.component'
@@ -22,6 +23,7 @@ import { VirtualTreeDemoComponent } from './virtual-demo.component'
     DndTreeDemoComponent,
     CheckTreeDemoComponent,
     AsyncTreeDemoComponent,
+    AsyncSearchTreeDemoComponent,
     SearchTreeDemoComponent,
     VirtualTreeDemoComponent,
   ],

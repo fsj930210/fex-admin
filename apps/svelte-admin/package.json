@@ -7,6 +7,7 @@
     "@fex-design/styles": "workspace:*",
     "@fex-design/svelte": "workspace:*",
     "@fex/styles": "workspace:*",
+    "@fex/mock": "workspace:*",
     "@fex/utils": "workspace:*",
     "@sveltejs/kit": "latest",
     "@tailwindcss/vite": "catalog:",

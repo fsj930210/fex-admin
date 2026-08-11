@@ -1,0 +1,4 @@
+<fex-card title="Async search and locate" description="The real server returns path-aware matches and an ancestor subtree.">
+  <fex-input-root [value]="inputValue()" (valueChange)="search($event)" (clear)="clear()" class="mb-space-md max-w-sm"><input fexInputControl placeholder="Search remote departments" /><button fexInputClear></button></fex-input-root>
+  @if (keyword()) {<fex-listbox>@for (result of results(); track result.node.id) {<fex-listbox-item [value]="result.node.id" class="cursor-pointer rounded-md px-space-sm py-space-xs" (click)="choose(result)"><span class="block text-sm font-medium">{{ result.node.name }}</span><span class="block text-xs text-muted-foreground">@for (part of result.path; track part.key; let last = $last) {{{ part.label }}{{ last ? '' : ' / ' }}}</span></fex-listbox-item>}</fex-listbox>} @else if (treeData().length) {<fex-demo-tree [options]="options()" />}
+</fex-card>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { AsyncTreeDemo } from './async-demo'
+import { AsyncSearchTreeDemo } from './async-search-demo'
 import { BasicTreeDemo } from './basic-demo'
 import { TreeBatchActionsDemo } from './batch-actions-demo'
 import { CheckTreeDemo } from './check-demo'
@@ -33,6 +34,7 @@ export function TreePage() {
           <TreeDndDemo />
           <CheckTreeDemo />
           <AsyncTreeDemo />
+          <AsyncSearchTreeDemo />
           <SearchTreeDemo />
           <VirtualTreeDemo />
         </div>

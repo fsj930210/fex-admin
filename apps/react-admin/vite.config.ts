@@ -8,6 +8,11 @@ export default defineConfig({
     port: 4001,
     strictPort: true,
     proxy: {
+      '/tree-api': {
+        target: 'http://127.0.0.1:4310',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/tree-api/, ''),
+      },
       '/upload-api': {
         target: 'http://127.0.0.1:4310',
         changeOrigin: true,

@@ -95,6 +95,9 @@ importers:
       '@fex-design/styles':
         specifier: workspace:*
         version: link:../../packages/@fex-design/styles
+      '@fex/mock':
+        specifier: workspace:*
+        version: link:../../packages/mock
       '@fex/styles':
         specifier: workspace:*
         version: link:../../packages/styles
@@ -150,6 +153,9 @@ importers:
       '@fex-design/styles':
         specifier: workspace:*
         version: link:../../packages/@fex-design/styles
+      '@fex/mock':
+        specifier: workspace:*
+        version: link:../../packages/mock
       '@fex/styles':
         specifier: workspace:*
         version: link:../../packages/styles
@@ -199,6 +205,9 @@ importers:
       '@fex-design/styles':
         specifier: workspace:*
         version: link:../../packages/@fex-design/styles
+      '@fex/mock':
+        specifier: workspace:*
+        version: link:../../packages/mock
       '@fex/styles':
         specifier: workspace:*
         version: link:../../packages/styles
@@ -239,6 +248,9 @@ importers:
       '@fex-design/svelte':
         specifier: workspace:*
         version: link:../../packages/@fex-design/svelte
+      '@fex/mock':
+        specifier: workspace:*
+        version: link:../../packages/mock
       '@fex/styles':
         specifier: workspace:*
         version: link:../../packages/styles
@@ -282,6 +294,9 @@ importers:
       '@fex-design/vue':
         specifier: workspace:*
         version: link:../../packages/@fex-design/vue
+      '@fex/mock':
+        specifier: workspace:*
+        version: link:../../packages/mock
       '@fex/styles':
         specifier: workspace:*
         version: link:../../packages/styles

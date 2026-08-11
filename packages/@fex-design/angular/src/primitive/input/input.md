@@ -21,6 +21,6 @@ export class Demo {}
 | `InputRoot`    | `valueChange`               | `EventEmitter<string>` | —              | 否   | 输入和清空后的值。              |
 | `InputRoot`    | `clear`                     | `EventEmitter<void>`   | —              | 否   | 清空成功。                      |
 | `InputControl` | 原生 input 属性             | 原生属性               | —              | 否   | 使用 `input[fexInputControl]`。 |
-| `InputClear`   | 原生 button 属性            | 原生属性               | —              | 否   | 使用 `button[fexInputClear]`。  |
+| `InputClear`   | `forceMount`、原生 button 属性 | `boolean`、原生属性 | `false` | 否 | 使用 `button[fexInputClear]`；`forceMount` 可在输入值为空时保持显示。 |
 
 Prefix、Suffix、AddonBefore、AddonAfter 是宿主 class 自动合并的独立指令。Field 仍独立负责标签、说明、错误和 ARIA 关联。清空遵守 disabled/readOnly 并恢复焦点。

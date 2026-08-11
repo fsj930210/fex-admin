@@ -1,5 +1,6 @@
 import { A } from '@solidjs/router'
 import { AsyncDemo } from './async-demo'
+import { AsyncSearchDemo } from './async-search-demo'
 import { BasicDemo } from './basic-demo'
 import { BatchActionsDemo } from './batch-actions-demo'
 import { CheckDemo } from './check-demo'
@@ -32,6 +33,7 @@ export function TreePage() {
           <DndDemo />
           <CheckDemo />
           <AsyncDemo />
+          <AsyncSearchDemo />
           <SearchDemo />
           <VirtualDemo />
         </div>

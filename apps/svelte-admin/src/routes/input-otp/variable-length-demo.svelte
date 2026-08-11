@@ -1,0 +1,8 @@
+<script lang="ts">
+  import InputOTPRoot from '@fex-design/svelte/primitive/input-otp'
+  import InputOTPGroup from '@fex-design/svelte/primitive/input-otp-group'
+  import InputOTPInput from '@fex-design/svelte/primitive/input-otp-input'
+  import InputOTPSeparator from '@fex-design/svelte/primitive/input-otp-separator'
+  import Card from '@fex-design/svelte/ui/card'
+</script>
+<Card title="多字符分段" description="每段可设置不同最大长度，填满前保持当前焦点。"><InputOTPRoot><InputOTPGroup><InputOTPInput index={0} maxLength={3} class="w-16" aria-label="银行代码"/><InputOTPInput index={1} maxLength={3} class="w-16" aria-label="分行代码"/></InputOTPGroup><InputOTPSeparator>/</InputOTPSeparator><InputOTPGroup><InputOTPInput index={2} maxLength={4} class="w-20" aria-label="账户前缀"/><InputOTPInput index={3} maxLength={4} class="w-20" aria-label="账户后缀"/></InputOTPGroup></InputOTPRoot></Card>

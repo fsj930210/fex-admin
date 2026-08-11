@@ -306,6 +306,7 @@ export function TreeItem<TNode extends TreeNodeData>(props: TreeItemProps<TNode>
       'aria-posinset': item.index + 1,
       'data-key': String(item.key),
       'data-selected': state().selected || undefined,
+      'data-selectable': tree.hasFeature('selection') || undefined,
       'data-expanded': state().expanded || undefined,
       'data-checked': state().checked || undefined,
       'data-disabled': item.disabled || undefined,

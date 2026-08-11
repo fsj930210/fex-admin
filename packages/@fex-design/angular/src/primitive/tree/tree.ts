@@ -215,6 +215,7 @@ export class TreeVirtualViewport<TNode extends TreeNodeData = TreeNodeData> {
     '[attr.aria-posinset]': 'item() ? item()!.index + 1 : null',
     '[attr.data-key]': 'item()?.key',
     '[attr.data-selected]': 'selected() || null',
+    '[attr.data-selectable]': 'selectable() || null',
     '[attr.data-expanded]': 'expanded() || null',
     '[attr.data-checked]': 'checked() || null',
     '[attr.data-disabled]': 'item()?.disabled || null',
@@ -243,6 +244,7 @@ export class TreeItemDirective<TNode extends TreeNodeData = TreeNodeData> {
     this.version()
     return this.root.tree().getSnapshot().selectedKeys.includes(this.key())
   })
+  readonly selectable = computed(() => this.root.tree().hasFeature('selection'))
   readonly checked = computed(() => {
     this.version()
     return this.root.tree().getSnapshot().checkedKeys.includes(this.key())

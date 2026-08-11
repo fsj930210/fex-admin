@@ -31,6 +31,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Tree'), 'TreePage'),
   },
   {
+    path: '/tree-select',
+    element: createLazyRouteElement(() => import('../../pages/TreeSelect'), 'TreeSelectPage'),
+  },
+  {
     path: '/tour',
     element: createLazyRouteElement(() => import('../../pages/Tour'), 'TourPage'),
   },
@@ -105,6 +109,10 @@ export const componentRoutes = [
   {
     path: '/input-number',
     element: createLazyRouteElement(() => import('../../pages/InputNumber'), 'InputNumberPage'),
+  },
+  {
+    path: '/input-otp',
+    element: createLazyRouteElement(() => import('../../pages/InputOTP'), 'InputOTPPage'),
   },
   {
     path: '/form',
@@ -185,6 +193,10 @@ export const componentRoutes = [
   {
     path: '/toast',
     element: createLazyRouteElement(() => import('../../pages/Toast'), 'ToastPage'),
+  },
+  {
+    path: '/toggle',
+    element: createLazyRouteElement(() => import('../../pages/Toggle'), 'TogglePage'),
   },
   {
     path: '/time-picker',

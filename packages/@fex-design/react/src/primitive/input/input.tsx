@@ -229,7 +229,7 @@ export function InputClear({
       ref={ref}
       aria-label={ariaLabel}
       data-visible={input.canClear ? 'true' : 'false'}
-      disabled={!input.canClear}
+      disabled={!forceMount && !input.canClear}
       className={className}
       onPointerDown={onPointerDown}
       onClick={(event: MouseEvent<HTMLButtonElement>) => {

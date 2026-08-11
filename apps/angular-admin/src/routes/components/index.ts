@@ -109,6 +109,11 @@ export const componentRoutes: Routes = [
       import('../../pages/input-number/index.component').then((module) => module.InputNumberPage),
   },
   {
+    path: 'input-otp',
+    loadComponent: () =>
+      import('../../pages/input-otp/index.component').then((module) => module.InputOTPPage),
+  },
+  {
     path: 'kbd',
     loadComponent: () =>
       import('../../pages/kbd/index.component').then((module) => module.KbdComponent),
@@ -214,6 +219,11 @@ export const componentRoutes: Routes = [
       import('../../pages/toast/index.component').then((module) => module.ToastComponent),
   },
   {
+    path: 'toggle',
+    loadComponent: () =>
+      import('../../pages/toggle/index.component').then((module) => module.ToggleComponent),
+  },
+  {
     path: 'sortable',
     loadComponent: () =>
       import('../../pages/sortable/index.component').then((module) => module.SortableComponent),
@@ -268,6 +278,13 @@ export const componentRoutes: Routes = [
     path: 'tree',
     loadComponent: () =>
       import('../../pages/tree/index.component').then((module) => module.TreeComponent),
+  },
+  {
+    path: 'tree-select',
+    loadComponent: () =>
+      import('../../pages/tree-select/index.component').then(
+        (module) => module.TreeSelectComponent,
+      ),
   },
   {
     path: 'rate',

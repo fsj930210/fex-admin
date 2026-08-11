@@ -1,0 +1,5 @@
+export { default as TreeSelectRoot } from './tree-select-root.vue'
+export { default as TreeSelectTrigger } from './tree-select-trigger.vue'
+export { default as TreeSelectContent } from './tree-select-content.vue'
+export { default as TreeSelectOption } from './tree-select-option.vue'
+export type { TreeSelectItem, TreeSelectValue } from '@fex-design/core/tree-select/types'

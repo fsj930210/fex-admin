@@ -7,6 +7,7 @@
     "@fex-design/styles": "workspace:*",
     "@fex-design/vue": "workspace:*",
     "@fex/styles": "workspace:*",
+    "@fex/mock": "workspace:*",
     "@fex/utils": "workspace:*",
     "@floating-ui/dom": "^1.8.0",
     "@tailwindcss/vite": "catalog:",

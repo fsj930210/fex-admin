@@ -52,6 +52,9 @@ const InputPage = lazy(() =>
 const InputNumberPage = lazy(() =>
   import('../../pages/InputNumber').then((module) => ({ default: module.InputNumberPage })),
 )
+const InputOTPPage = lazy(() =>
+  import('../../pages/InputOTP').then((module) => ({ default: module.InputOTPPage })),
+)
 const FormPage = lazy(() =>
   import('../../pages/Form').then((module) => ({ default: module.FormPage })),
 )
@@ -115,6 +118,9 @@ const TimelinePage = lazy(() =>
 const ToastPage = lazy(() =>
   import('../../pages/Toast').then((module) => ({ default: module.ToastPage })),
 )
+const TogglePage = lazy(() =>
+  import('../../pages/Toggle').then((module) => ({ default: module.TogglePage })),
+)
 const SortablePage = lazy(() =>
   import('../../pages/Sortable').then((module) => ({ default: module.SortablePage })),
 )
@@ -138,6 +144,9 @@ const DatePickerPage = lazy(() =>
 )
 const TreePage = lazy(() =>
   import('../../pages/Tree').then((module) => ({ default: module.TreePage })),
+)
+const TreeSelectPage = lazy(() =>
+  import('../../pages/TreeSelect').then((module) => ({ default: module.TreeSelectPage })),
 )
 const CarouselPage = lazy(() =>
   import('../../pages/Carousel').then((module) => ({ default: module.CarouselPage })),
@@ -231,6 +240,10 @@ export const componentRoutes: AppRoute[] = [
     component: InputNumberPage,
   },
   {
+    path: '/input-otp',
+    component: InputOTPPage,
+  },
+  {
     path: '/form',
     component: FormPage,
   },
@@ -311,6 +324,10 @@ export const componentRoutes: AppRoute[] = [
     component: ToastPage,
   },
   {
+    path: '/toggle',
+    component: TogglePage,
+  },
+  {
     path: '/sortable',
     component: SortablePage,
   },
@@ -335,6 +352,7 @@ export const componentRoutes: AppRoute[] = [
     path: '/tree',
     component: TreePage,
   },
+  { path: '/tree-select', component: TreeSelectPage },
   { path: '/transfer', component: TransferPage },
   { path: '/upload', component: UploadPage },
   // eslint-disable-next-line unicorn/no-array-sort -- this literal is newly created and not shared.
