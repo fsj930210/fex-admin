@@ -1,5 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { selectableItemSelectedClassName } from './selectable-item'
+import { tagClassName, tagCloseClassName } from './tag'
 
 export const selectTriggerClassName = cva(
   [
@@ -25,18 +26,18 @@ export const selectValueClassName = 'contents'
 export const selectInputClassName =
   'min-w-8 flex-1 bg-transparent outline-none placeholder:text-muted-foreground'
 export const selectPlaceholderClassName = 'truncate text-muted-foreground'
-export const selectTagClassName =
-  'inline-flex h-6 max-w-full items-center gap-1 rounded-md bg-muted-background px-2 text-xs leading-none text-foreground'
-export const selectTagRemoveClassName =
-  '-mr-1 inline-flex size-4 items-center justify-center rounded-sm text-muted-foreground hover:bg-background hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary [&_svg]:size-3'
-export const selectTagOverflowClassName =
-  'inline-flex h-6 shrink-0 items-center rounded-md bg-muted-background px-2 text-xs font-medium leading-none text-muted-foreground'
-export const treeSelectTagClassName =
-  'inline-flex h-7 max-w-full shrink-0 self-center items-center gap-1 rounded-[4px] bg-muted-background px-2 text-xs leading-none text-foreground'
-export const treeSelectTagRemoveClassName =
-  '-mr-1 inline-flex size-4 items-center justify-center rounded-sm text-muted-foreground hover:bg-background hover:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary [&_svg]:size-3'
-export const treeSelectTagOverflowClassName =
-  'inline-flex h-7 shrink-0 self-center items-center rounded-[4px] bg-muted-background px-2 text-xs font-medium leading-none text-muted-foreground'
+/** @deprecated Use the Tag primitive. */
+export const selectTagClassName = tagClassName({ size: 'sm' })
+/** @deprecated Use the Tag primitive. */
+export const selectTagRemoveClassName = tagCloseClassName
+/** @deprecated Use the Tag primitive. */
+export const selectTagOverflowClassName = tagClassName({ size: 'sm' })
+/** @deprecated Use the Tag primitive. */
+export const treeSelectTagClassName = tagClassName({ size: 'sm' })
+/** @deprecated Use the Tag primitive. */
+export const treeSelectTagRemoveClassName = tagCloseClassName
+/** @deprecated Use the Tag primitive. */
+export const treeSelectTagOverflowClassName = tagClassName({ size: 'sm' })
 export const selectSuffixClassName =
   'ml-auto inline-flex h-5 shrink-0 items-center justify-center pr-2.5 text-muted-foreground [&_svg]:size-4'
 export const selectIndicatorClassName =

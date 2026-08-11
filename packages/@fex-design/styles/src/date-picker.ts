@@ -1,3 +1,5 @@
+import { tagClassName, tagCloseClassName } from './tag'
+
 // The Angular host adapter retains Popover's default padding and max-width in
 // its host class. Important utilities keep the picker panel contract intact.
 export const datePickerContentClassName =
@@ -18,16 +20,12 @@ export const datePickerRangeSeparatorClassName =
 export const datePickerMultipleTagsClassName =
   'flex min-w-0 max-w-[calc(100%-4rem)] flex-none items-center gap-1 overflow-hidden pl-2'
 
-export const datePickerTagClassName =
-  'inline-flex h-5 max-w-full shrink-0 items-center rounded bg-muted-background px-1.5 text-xs leading-none'
-
-export const datePickerTagRemoveClassName = [
-  'ml-1 inline-flex size-3 shrink-0 items-center justify-center rounded-none border-0 bg-transparent p-0 text-muted-foreground shadow-none outline-none',
-  'hover:bg-transparent hover:text-foreground focus-visible:bg-transparent focus-visible:text-foreground [&_svg]:size-3',
-].join(' ')
-
-export const datePickerTagOverflowClassName =
-  'inline-flex h-5 shrink-0 cursor-default items-center rounded bg-muted-background px-1.5 text-xs leading-none text-muted-foreground'
+/** @deprecated Use the Tag primitive. */
+export const datePickerTagClassName = tagClassName({ size: 'sm' })
+/** @deprecated Use the Tag primitive. */
+export const datePickerTagRemoveClassName = tagCloseClassName
+/** @deprecated Use the Tag primitive. */
+export const datePickerTagOverflowClassName = tagClassName({ size: 'sm' })
 
 export const datePickerMultipleInputClassName = 'w-6 min-w-6 flex-none px-0 caret-foreground'
 

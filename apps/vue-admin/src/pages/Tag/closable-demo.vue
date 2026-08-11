@@ -1,0 +1,2 @@
+<script setup lang="ts">import Tag from '@fex-design/vue/primitive/tag';import Card from '@fex-design/vue/ui/card';import{ref}from'vue';const items=ref(['React','Vue','Solid']);const remove=(item:string)=>items.value=items.value.filter(value=>value!==item)</script>
+<template><Card title="可关闭" description="closable 只展示关闭按钮，外部通过 close 事件决定是否移除。"><div class="flex flex-wrap items-center gap-space-md"><Tag v-for="item in items" :key="item" closable @close="remove(item)">{{ item }}</Tag><Tag closable>无回调</Tag><Tag closable disabled>禁用</Tag></div></Card></template>

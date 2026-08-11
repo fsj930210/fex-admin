@@ -1,0 +1,2 @@
+<script lang="ts">import Tag from'@fex-design/svelte/primitive/tag';import Card from'@fex-design/svelte/ui/card';let items=$state(['React','Vue','Solid']);const remove=(item:string)=>items=items.filter(value=>value!==item)</script>
+<Card title="可关闭" description="closable 只展示关闭按钮，外部通过 onClose 决定是否移除。"><div class="flex flex-wrap items-center gap-space-md">{#each items as item(item)}<Tag closable onClose={()=>remove(item)}>{item}</Tag>{/each}<Tag closable>无回调</Tag><Tag closable disabled>禁用</Tag></div></Card>

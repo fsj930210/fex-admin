@@ -5,11 +5,10 @@ import { getSearchSubtree } from '@fex-design/core/tree/get-search-subtree'
 import type { TreeKey, TreeOptions } from '@fex-design/core/tree/types'
 import type { TreeSelectItem, TreeSelectValue } from '@fex-design/core/tree-select/types'
 import { InputClear, InputControl, InputRoot } from '@fex-design/angular/primitive/input'
+import { Tag } from '@fex-design/angular/primitive/tag'
 import { TreeSelectContent, TreeSelectOption, TreeSelectPortal, TreeSelectRoot, TreeSelectTrigger } from '@fex-design/angular/primitive/tree-select'
 import Card from '@fex-design/angular/ui/card'
 import { Checkbox } from '@fex-design/angular/ui/checkbox'
-import { treeSelectTagClassName, treeSelectTagOverflowClassName, treeSelectTagRemoveClassName } from '@fex-design/styles/select'
-import { CloseIcon } from '@fex-design/angular/icon/close'
 import { getDemoTreeChildren, getDemoTreeExpandedKeys, getDemoTreeRoots, getDemoTreeSubtree, getDemoTreeSubtrees, searchDemoTree, searchDemoTreeAsTree, type DemoDepartmentNode, type DemoTreeSearchResult } from '@fex/mock/tree-api'
 import { DemoTreeComponent } from '../tree/demo-tree.component'
 import { departmentFieldNames, departmentTreeData, type DepartmentNode } from '../tree/data'
@@ -21,16 +20,13 @@ function toItems(nodes: readonly DepartmentNode[]): TreeSelectItem<DepartmentNod
 @Component({
   selector: 'fex-tree-select-page',
   standalone: true,
-  imports: [RouterLink, Card, Checkbox, CloseIcon, DemoTreeComponent, InputRoot, InputControl, InputClear, TreeSelectRoot, TreeSelectTrigger, TreeSelectPortal, TreeSelectContent, TreeSelectOption],
+  imports: [RouterLink, Card, Checkbox, Tag, DemoTreeComponent, InputRoot, InputControl, InputClear, TreeSelectRoot, TreeSelectTrigger, TreeSelectPortal, TreeSelectContent, TreeSelectOption],
   host: { class: 'block' },
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeSelectComponent {
   readonly maxTagCount = 2
-  readonly tagClassName = treeSelectTagClassName
-  readonly tagRemoveClassName = treeSelectTagRemoveClassName
-  readonly tagOverflowClassName = treeSelectTagOverflowClassName
   readonly basic = viewChild<TreeSelectRoot<DepartmentNode>>('basic')
   readonly controlledRoot = viewChild<TreeSelectRoot<DepartmentNode>>('controlledRoot')
   readonly multipleRoot = viewChild<TreeSelectRoot<DepartmentNode>>('multipleRoot')

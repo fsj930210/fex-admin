@@ -1,1 +1,10 @@
-<script lang="ts">import CloseIcon from'@fex-design/svelte/icon/close';import SelectRoot from'@fex-design/svelte/primitive/select';import SelectContent from'@fex-design/svelte/primitive/select-content';import SelectTrigger from'@fex-design/svelte/primitive/select-trigger';import{frameworkOptions}from'./data';import Demo from'./demo-section.svelte';const colors:Record<string,string>={react:'bg-sky-100 text-sky-700',vue:'bg-emerald-100 text-emerald-700',angular:'bg-red-100 text-red-700'}</script><Demo title="Custom selected tags" description="The tag snippet controls each selected value."><SelectRoot multiple options={frameworkOptions} defaultValue={['react','vue','angular']}><SelectTrigger placeholder="请选择">{#snippet tag(item,remove)}<span class={`inline-flex h-6 items-center gap-1 rounded-md px-2 text-xs ${colors[String(item.value)]??'bg-muted-background'}`}>{item.label}<button type="button" class="size-4" onclick={remove}><CloseIcon/></button></span>{/snippet}</SelectTrigger><SelectContent/></SelectRoot></Demo>
+<script lang="ts">
+  import SelectRoot from '@fex-design/svelte/primitive/select'
+  import SelectContent from '@fex-design/svelte/primitive/select-content'
+  import SelectTrigger from '@fex-design/svelte/primitive/select-trigger'
+  import Tag from '@fex-design/svelte/primitive/tag'
+  import { frameworkOptions } from './data'
+  import Demo from './demo-section.svelte'
+  const colors: Record<string,string> = { react:'#0284c7', vue:'#059669', angular:'#dc2626' }
+</script>
+<Demo title="Custom selected tags" description="The tag snippet controls each selected value."><SelectRoot multiple options={frameworkOptions} defaultValue={['react','vue','angular']}><SelectTrigger placeholder="请选择">{#snippet tag(item,remove)}<Tag size="sm" closable color={colors[String(item.value)]??'neutral'} onpointerdown={event=>event.preventDefault()} onClose={event=>{event.stopPropagation();remove()}}>{item.label}</Tag>{/snippet}</SelectTrigger><SelectContent/></SelectRoot></Demo>

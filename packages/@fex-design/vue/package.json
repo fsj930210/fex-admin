@@ -49,6 +49,7 @@
     "./primitive/scrollbar": "./src/primitive/scrollbar/scrollbar.ts",
     "./primitive/sortable": "./src/primitive/sortable/sortable.ts",
     "./primitive/switch": "./src/primitive/switch/switch.ts",
+    "./primitive/tag": "./src/primitive/tag/tag.ts",
     "./primitive/table": "./src/primitive/table/table.ts",
     "./primitive/timeline": "./src/primitive/timeline/timeline.ts",
     "./primitive/toggle": "./src/primitive/toggle/toggle.ts",

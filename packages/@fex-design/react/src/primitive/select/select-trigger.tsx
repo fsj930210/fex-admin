@@ -5,9 +5,6 @@ import {
   selectInputClassName,
   selectPlaceholderClassName,
   selectSuffixClassName,
-  selectTagClassName,
-  selectTagOverflowClassName,
-  selectTagRemoveClassName,
   selectTriggerClassName,
   selectValueClassName,
   selectValueContainerClassName,
@@ -17,6 +14,7 @@ import { type ComponentProps, type KeyboardEvent, type ReactNode } from 'react'
 import { ChevronDownIcon } from '../../icon/chevron'
 import { LoadingIcon } from '../../icon/loading'
 import { CloseIcon } from '../../icon/close'
+import { Tag } from '../tag/tag'
 import { InputClearButton } from '../input/input'
 import { PopoverTrigger } from '../popover/popover'
 import { useSelect } from './use-select'
@@ -195,24 +193,16 @@ export function SelectValue({
             })}
           </span>
         ) : (
-          <span key={option.value} className={selectTagClassName}>
+          <Tag key={option.value} size="sm" closable closeLabel={`Remove ${String(option.label)}`} onPointerDownCapture={(event) => event.preventDefault()} onClose={(event) => {
+            event.stopPropagation()
+            select.removeValue(option.value)
+          }}>
             {option.label}
-            <button
-              type="button"
-              className={selectTagRemoveClassName}
-              onPointerDown={(event) => event.preventDefault()}
-              onClick={(event) => {
-                event.stopPropagation()
-                select.removeValue(option.value)
-              }}
-            >
-              <CloseIcon />
-            </button>
-          </span>
+          </Tag>
         ),
       )}
       {overflowCount > 0 ? (
-        <span className={selectTagOverflowClassName}>+{overflowCount}</span>
+        <Tag size="sm">+{overflowCount}</Tag>
       ) : null}
     </div>
   )

@@ -3,13 +3,10 @@ import type { CalendarValue } from '@fex-design/core/calendar'
 import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
 import {
   datePickerMultipleTagsClassName,
-  datePickerTagClassName,
-  datePickerTagOverflowClassName,
-  datePickerTagRemoveClassName,
 } from '@fex-design/styles/date-picker'
 import { cn } from '@fex/utils'
 import { computed } from 'vue'
-import { CloseIcon } from '../../icon/close'
+import Tag from '../tag/tag.vue'
 import { useDatePickerContext } from './context'
 
 const props = withDefaults(defineProps<{ class?: string; maxTagCount?: number }>(), {
@@ -33,28 +30,22 @@ function remove(value: CalendarValue, event: Event) {
 
 <template>
   <div data-slot="date-picker-tags" :class="className">
-    <span
+    <Tag
       v-for="value in visibleValues"
       :key="label(value)"
       data-slot="date-picker-tag"
-      :class="datePickerTagClassName"
+      size="sm"
+      closable
+      @pointerdown.stop
+      @close="remove(value, $event)"
     >
       {{ label(value) }}
-      <button
-        type="button"
-        :aria-label="`移除 ${label(value)}`"
-        :class="datePickerTagRemoveClassName"
-        @pointerdown.stop
-        @click="remove(value, $event)"
-      >
-        <CloseIcon />
-      </button>
-    </span>
-    <span
+    </Tag>
+    <Tag
       v-if="overflowCount > 0"
       data-slot="date-picker-tag-overflow"
-      :class="datePickerTagOverflowClassName"
-      >+{{ overflowCount }}</span
+      size="sm"
+      >+{{ overflowCount }}</Tag
     >
   </div>
 </template>

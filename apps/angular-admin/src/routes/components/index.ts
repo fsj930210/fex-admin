@@ -209,6 +209,11 @@ export const componentRoutes: Routes = [
       import('../../pages/tabs/index.component').then((module) => module.TabsComponent),
   },
   {
+    path: 'tag',
+    loadComponent: () =>
+      import('../../pages/tag/index.component').then((module) => module.TagComponent),
+  },
+  {
     path: 'timeline',
     loadComponent: () =>
       import('../../pages/timeline/index.component').then((module) => module.TimelineComponent),

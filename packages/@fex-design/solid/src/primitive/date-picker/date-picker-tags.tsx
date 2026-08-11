@@ -1,12 +1,9 @@
 import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
 import {
-  datePickerTagClassName,
-  datePickerTagOverflowClassName,
-  datePickerTagRemoveClassName,
 } from '@fex-design/styles/date-picker'
 import { cn } from '@fex/utils'
 import { For, Show, splitProps, type JSX } from 'solid-js'
-import { CloseIcon } from '../../icon/close'
+import { Tag } from '../tag/tag'
 import { useDatePickerContext } from './context'
 
 export interface DatePickerTagsProps extends JSX.HTMLAttributes<HTMLDivElement> {
@@ -25,25 +22,13 @@ export function DatePickerTags(props: DatePickerTagsProps) {
     <div {...rest} class={cn('flex min-w-0 items-center gap-1', local.class)}>
       <For each={visibleValues()}>
         {(item) => (
-          <span class={datePickerTagClassName}>
+          <Tag size="sm" closable onPointerDownCapture={(event) => event.stopPropagation()} onClose={(event) => { event.stopPropagation(); context.select(item as never) }}>
             <span class="truncate">{formatDatePickerValue(item, context)}</span>
-            <button
-              type="button"
-              aria-label={`移除 ${formatDatePickerValue(item, context)}`}
-              class={datePickerTagRemoveClassName}
-              onPointerDown={(event) => event.stopPropagation()}
-              onClick={(event) => {
-                event.stopPropagation()
-                context.select(item as never)
-              }}
-            >
-              <CloseIcon />
-            </button>
-          </span>
+          </Tag>
         )}
       </For>
       <Show when={overflow() > 0}>
-        <span class={datePickerTagOverflowClassName}>+{overflow()}</span>
+        <Tag size="sm">+{overflow()}</Tag>
       </Show>
     </div>
   )

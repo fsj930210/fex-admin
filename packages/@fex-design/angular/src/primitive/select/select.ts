@@ -18,9 +18,6 @@ import {
   selectInputClassName,
   selectListClassName,
   selectSuffixClassName,
-  selectTagClassName,
-  selectTagOverflowClassName,
-  selectTagRemoveClassName,
   selectTriggerClassName,
   selectValueClassName,
   selectValueContainerClassName,
@@ -45,6 +42,7 @@ import {
 import { CheckIcon } from '../../icon/check'
 import { ChevronDownIcon } from '../../icon/chevron'
 import { CloseIcon } from '../../icon/close'
+import { Tag } from '../tag/tag'
 import { LoadingIcon } from '../../icon/loading'
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
 import { Button } from '../button/button'
@@ -229,7 +227,7 @@ export class SelectRoot implements OnChanges {
 @Component({
   selector: 'fex-select-trigger',
   standalone: true,
-  imports: [NgTemplateOutlet, PopoverTrigger, Button, ChevronDownIcon, CloseIcon, LoadingIcon],
+  imports: [NgTemplateOutlet, PopoverTrigger, Button, ChevronDownIcon, CloseIcon, LoadingIcon, Tag],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './select-trigger.html',
 })
@@ -243,9 +241,6 @@ export class SelectTrigger {
   readonly triggerClass = selectTriggerClassName()
   readonly valueContainerClass = selectValueContainerClassName
   readonly valueClass = selectValueClassName
-  readonly tagClass = selectTagClassName
-  readonly tagRemoveClass = selectTagRemoveClassName
-  readonly tagOverflowClass = selectTagOverflowClassName
   readonly inputClass = selectInputClassName
   readonly suffixClass = selectSuffixClassName
   readonly indicatorClass = selectIndicatorClassName

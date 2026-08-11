@@ -51,6 +51,7 @@
     "./primitive/scrollbar": "./src/primitive/scrollbar/scrollbar.tsx",
     "./primitive/sortable": "./src/primitive/sortable/sortable.tsx",
     "./primitive/switch": "./src/primitive/switch/switch.tsx",
+    "./primitive/tag": "./src/primitive/tag/tag.tsx",
     "./primitive/table": "./src/primitive/table/table.tsx",
     "./primitive/timeline": "./src/primitive/timeline/timeline.tsx",
     "./primitive/toggle": "./src/primitive/toggle/toggle.tsx",

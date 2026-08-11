@@ -187,6 +187,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Tabs'), 'TabsPage'),
   },
   {
+    path: '/tag',
+    element: createLazyRouteElement(() => import('../../pages/Tag'), 'TagPage'),
+  },
+  {
     path: '/timeline',
     element: createLazyRouteElement(() => import('../../pages/Timeline'), 'TimelinePage'),
   },

@@ -1,0 +1,1 @@
+<fex-card title="可关闭" description="closable 只展示关闭按钮，外部通过 close 事件决定是否移除。"><div class="flex flex-wrap items-center gap-space-md">@for(item of items();track item){<fex-tag closable (close)="remove(item)">{{item}}</fex-tag>}<fex-tag closable>无回调</fex-tag><fex-tag closable disabled>禁用</fex-tag></div></fex-card>

@@ -18,17 +18,9 @@
         *ngTemplateOutlet="tag; context: { $implicit: item, remove: remove(item.value) }"
       />
       } @else {
-      <span [class]="tagClass"
-        >{{ item.label }}<button
-          type="button"
-          [class]="tagRemoveClass"
-          (pointerdown)="$event.preventDefault()"
-          (click)="$event.stopPropagation(); select.removeValue(item.value)"
-        >
-          <fex-close-icon /></button
-      ></span>
+      <fex-tag size="sm" closable [closeLabel]="'Remove ' + item.label" (pointerdown)="$event.preventDefault()" (close)="$event.stopPropagation(); select.removeValue(item.value)">{{ item.label }}</fex-tag>
       } } @if (overflow > 0) {
-      <span [class]="tagOverflowClass">+{{ overflow }}</span>
+      <fex-tag size="sm">+{{ overflow }}</fex-tag>
       }
     </div>
     } @else {

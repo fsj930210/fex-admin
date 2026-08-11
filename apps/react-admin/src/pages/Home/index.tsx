@@ -40,6 +40,7 @@ export function HomePage() {
     { to: '/switch', label: 'Switch' },
     { to: '/table', label: 'Table' },
     { to: '/tabs', label: 'Tabs' },
+    { to: '/tag', label: 'Tag' },
     { to: '/steps', label: 'Steps' },
     { to: '/timeline', label: 'Timeline' },
     { to: '/toggle', label: 'Toggle' },

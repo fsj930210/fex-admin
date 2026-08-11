@@ -18,6 +18,7 @@ const componentLinks = [
   { href: '/date-picker', label: 'DatePicker' },
   { href: '/alert', label: 'Alert' },
   { href: '/badge', label: 'Badge' },
+  { href: '/tag', label: 'Tag' },
   { href: '/breadcrumb', label: 'Breadcrumb' },
   { href: '/empty', label: 'Empty' },
   { href: '/form', label: 'Form' },

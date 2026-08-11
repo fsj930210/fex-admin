@@ -39,6 +39,7 @@
     "./tour": "./src/tour.ts",
     "./select": "./src/select.ts",
     "./selectable-item": "./src/selectable-item.ts",
+    "./tag": "./src/tag.ts",
     "./dropzone": "./src/dropzone.ts",
     "./sortable": "./src/sortable.ts",
     "./spinner": "./src/spinner.ts",

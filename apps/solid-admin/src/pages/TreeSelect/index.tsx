@@ -4,12 +4,11 @@ import type { SearchFeatureApi } from '@fex-design/core/tree/features/search'
 import type { TreeItem, TreeKey } from '@fex-design/core/tree/types'
 import type { TreeSelectItem, TreeSelectValue } from '@fex-design/core/tree-select/types'
 import { InputClear, InputControl, InputRoot } from '@fex-design/solid/primitive/input'
+import { Tag } from '@fex-design/solid/primitive/tag'
 import { ListboxItem, ListboxRoot } from '@fex-design/solid/primitive/listbox'
 import { TreeSelectContent, TreeSelectOption, TreeSelectRoot, TreeSelectTrigger, useTreeSelect } from '@fex-design/solid/primitive/tree-select'
 import { Card } from '@fex-design/solid/ui/card'
 import { Checkbox } from '@fex-design/solid/ui/checkbox'
-import { treeSelectTagClassName, treeSelectTagOverflowClassName, treeSelectTagRemoveClassName } from '@fex-design/styles/select'
-import { CloseIcon } from '@fex-design/solid/icon/close'
 import { inputControlClassName } from '@fex-design/styles/input'
 import { getDemoTreeChildren, getDemoTreeExpandedKeys, getDemoTreeRoots, getDemoTreeSubtree, getDemoTreeSubtrees, searchDemoTree, searchDemoTreeAsTree, type DemoDepartmentNode, type DemoTreeSearchResult } from '@fex/mock/tree-api'
 import { A } from '@solidjs/router'
@@ -34,7 +33,7 @@ function Highlight(props: { label: string; keyword?: string }) {
   })
   return <Show when={range()} fallback={props.label}>{(match) => <>{props.label.slice(0, match()[0])}<mark>{props.label.slice(match()[0], match()[1])}</mark>{props.label.slice(match()[1])}</>}</Show>
 }
-function SelectedTags(props: { max: number }) { const treeSelect = useTreeSelect<DepartmentNode>(); return <Show when={treeSelect.snapshot().selectedItems.length <= props.max} fallback={<span class={`${treeSelectTagOverflowClassName} ml-1.5`}>已选择 {treeSelect.snapshot().selectedItems.length} 项</span>}><For each={treeSelect.snapshot().selectedItems}>{(item) => <span class={`${treeSelectTagClassName} ml-1.5`}>{item.label}<button type="button" aria-label={`删除 ${item.label}`} class={treeSelectTagRemoveClassName} onPointerDown={(event) => event.preventDefault()} onClick={(event) => { event.stopPropagation(); treeSelect.controller.setValues(treeSelect.snapshot().values.filter((value) => value !== item.value)) }}><CloseIcon /></button></span>}</For></Show> }
+function SelectedTags(props: { max: number }) { const treeSelect = useTreeSelect<DepartmentNode>(); return <Show when={treeSelect.snapshot().selectedItems.length <= props.max} fallback={<Tag size="sm" class="ml-1.5">已选择 {treeSelect.snapshot().selectedItems.length} 项</Tag>}><For each={treeSelect.snapshot().selectedItems}>{(item) => <Tag size="sm" closable class="ml-1.5" onPointerDownCapture={(event) => event.preventDefault()} onClose={(event) => { event.stopPropagation(); treeSelect.controller.setValues(treeSelect.snapshot().values.filter((value) => value !== item.value)) }}>{item.label}</Tag>}</For></Show> }
 function DemoClear(props: { onClear?: () => void }) {
   const treeSelect = useTreeSelect<DepartmentNode>()
   return <Show when={treeSelect.snapshot().selectedItems.length > 0 || Boolean(treeSelect.searchValue())}>

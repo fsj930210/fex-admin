@@ -4,8 +4,6 @@ import {
   cascaderInputClassName,
   cascaderPlaceholderClassName,
   cascaderSuffixClassName,
-  cascaderTagClassName,
-  cascaderTagRemoveClassName,
   cascaderTriggerClassName,
   cascaderValueClassName,
   cascaderValueContainerClassName,
@@ -17,6 +15,7 @@ import { CloseIcon } from '../../icon/close'
 import { LoadingIcon } from '../../icon/loading'
 import { InputClearButton } from '../input/input'
 import { PopoverTrigger } from '../popover/popover'
+import { Tag } from '../tag/tag'
 import { useCascader } from './cascader-context'
 
 export interface CascaderTriggerProps extends Omit<ComponentProps<'div'>, 'children'> { children?: ReactNode }
@@ -81,5 +80,5 @@ export function CascaderValue({ className, ...props }: ComponentProps<'div'>) {
   if (!cascader.selectedPaths.length) return cascader.snapshot.searchValue || cascader.showSearch ? null : <span className={cascaderPlaceholderClassName}>{cascader.placeholder}</span>
   const render = (path: (typeof cascader.selectedPaths)[number]) => cascader.displayRender?.(path.map((node) => node.label), path.map((node) => node.option)) ?? path.map((node) => node.label).join(' / ')
   if (!cascader.multiple) return <div {...props} className={cn(cascaderValueClassName, className)}>{render(cascader.selectedPaths[0]!)}</div>
-  return <div {...props} className={cn('contents', className)}>{cascader.selectedPaths.map((path) => <span key={path.at(-1)!.key} className={cascaderTagClassName}>{render(path)}<button type="button" className={cascaderTagRemoveClassName} onClick={(event) => { event.stopPropagation(); cascader.controller.removePath(path.at(-1)!.key) }}><CloseIcon /></button></span>)}</div>
+  return <div {...props} className={cn('contents', className)}>{cascader.selectedPaths.map((path) => <Tag key={path.at(-1)!.key} size="sm" closable onClose={(event) => { event.stopPropagation(); cascader.controller.removePath(path.at(-1)!.key) }}>{render(path)}</Tag>)}</div>
 }

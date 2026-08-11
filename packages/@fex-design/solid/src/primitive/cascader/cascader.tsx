@@ -1,6 +1,6 @@
 import { createCascaderController } from '@fex-design/core/cascader/create-cascader-controller'
 import type { CascaderChangeMeta, CascaderFieldNames, CascaderFilterOption, CascaderNode, CascaderOption, CascaderValue } from '@fex-design/core/cascader/types'
-import { cascaderClearClassName, cascaderColumnClassName, cascaderColumnViewportClassName, cascaderContentClassName, cascaderEmptyClassName, cascaderIndicatorClassName, cascaderInputClassName, cascaderLoadingClassName, cascaderOptionClassName, cascaderOptionIconClassName, cascaderOptionLabelClassName, cascaderPanelClassName, cascaderPanelHeight, cascaderPlaceholderClassName, cascaderSuffixClassName, cascaderTagClassName, cascaderTagRemoveClassName, cascaderTriggerClassName, cascaderValueClassName, cascaderValueContainerClassName } from '@fex-design/styles/cascader'
+import { cascaderClearClassName, cascaderColumnClassName, cascaderColumnViewportClassName, cascaderContentClassName, cascaderEmptyClassName, cascaderIndicatorClassName, cascaderInputClassName, cascaderLoadingClassName, cascaderOptionClassName, cascaderOptionIconClassName, cascaderOptionLabelClassName, cascaderPanelClassName, cascaderPanelHeight, cascaderPlaceholderClassName, cascaderSuffixClassName, cascaderTriggerClassName, cascaderValueClassName, cascaderValueContainerClassName } from '@fex-design/styles/cascader'
 import { checkboxCheckIconClassName, checkboxClassName, checkboxIndicatorClassName, checkboxMinusIconClassName } from '@fex-design/styles/checkbox'
 import { cn } from '@fex/utils'
 import { createContext, createMemo, For, Show, splitProps, useContext, type JSX, type ParentProps } from 'solid-js'
@@ -14,6 +14,7 @@ import { Button } from '../button/button'
 import { CheckboxIndicator, CheckboxRoot } from '../checkbox/checkbox'
 import { Popover, PopoverContent, PopoverPortal, PopoverTrigger } from '../popover/popover'
 import { ScrollbarBar, ScrollbarRoot, ScrollbarViewport } from '../scrollbar/scrollbar'
+import { Tag } from '../tag/tag'
 
 interface ContextValue {
   controller: ReturnType<typeof createCascaderController>; snapshot: ReturnType<typeof createCoreStoreSignal>; selectedPaths: () => readonly (readonly CascaderNode[])[]
@@ -63,7 +64,7 @@ export function CascaderTrigger(props: ParentProps<JSX.HTMLAttributes<HTMLDivEle
 export function CascaderValue() {
   const cascader = useCascader('CascaderValue')
   const display = (path: readonly CascaderNode[]) => cascader.displayRender?.(path.map((node) => node.label), path.map((node) => node.option)) ?? path.map((node) => node.label).join(' / ')
-  return <Show when={cascader.selectedPaths().length} fallback={<Show when={!cascader.snapshot().searchValue && !cascader.showSearch()}><span class={cascaderPlaceholderClassName}>{cascader.placeholder()}</span></Show>}><Show when={cascader.multiple()} fallback={<div class={cascaderValueClassName}>{display(cascader.selectedPaths()[0]!)}</div>}><For each={cascader.selectedPaths()}>{(path) => <span class={cascaderTagClassName}>{display(path)}<button type="button" class={cascaderTagRemoveClassName} onClick={(event) => { event.stopPropagation(); cascader.controller.removePath(path.at(-1)!.key) }}><CloseIcon /></button></span>}</For></Show></Show>
+  return <Show when={cascader.selectedPaths().length} fallback={<Show when={!cascader.snapshot().searchValue && !cascader.showSearch()}><span class={cascaderPlaceholderClassName}>{cascader.placeholder()}</span></Show>}><Show when={cascader.multiple()} fallback={<div class={cascaderValueClassName}>{display(cascader.selectedPaths()[0]!)}</div>}><For each={cascader.selectedPaths()}>{(path) => <Tag size="sm" closable onClose={(event) => { event.stopPropagation(); cascader.controller.removePath(path.at(-1)!.key) }}>{display(path)}</Tag>}</For></Show></Show>
 }
 
 export function CascaderContent(props: ParentProps<JSX.HTMLAttributes<HTMLDivElement>>) {

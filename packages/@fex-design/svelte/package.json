@@ -179,6 +179,7 @@
     "./primitive/sortable-handle": "./src/primitive/sortable/sortable-handle.svelte",
     "./primitive/sortable-overlay": "./src/primitive/sortable/sortable-overlay.svelte",
     "./primitive/switch": "./src/primitive/switch/switch.svelte",
+    "./primitive/tag": "./src/primitive/tag/tag.svelte",
     "./primitive/switch-thumb": "./src/primitive/switch/switch-thumb.svelte",
     "./primitive/table": "./src/primitive/table/table.svelte",
     "./primitive/tabs": "./src/primitive/tabs/create-tabs.svelte.ts",

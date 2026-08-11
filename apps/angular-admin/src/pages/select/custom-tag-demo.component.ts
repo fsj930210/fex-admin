@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { CloseIcon } from '@fex-design/angular/icon/close'
+import { Tag } from '@fex-design/angular/primitive/tag'
 import {
   SelectContent,
   SelectList,
@@ -12,7 +12,7 @@ export
 @Component({
   selector: 'fex-select-custom-tag-demo',
   standalone: true,
-  imports: [Card, CloseIcon, SelectRoot, SelectTrigger, SelectContent, SelectList],
+  imports: [Card, Tag, SelectRoot, SelectTrigger, SelectContent, SelectList],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './custom-tag-demo.component.html',
 })
@@ -22,10 +22,8 @@ class CustomTagDemo {
   protected color(value: string) {
     return (
       {
-        react: 'bg-sky-100 text-sky-700',
-        vue: 'bg-emerald-100 text-emerald-700',
-        angular: 'bg-red-100 text-red-700',
-      }[value] ?? 'bg-muted-background'
+        react: '#0284c7', vue: '#059669', angular: '#dc2626',
+      }[value] ?? 'neutral'
     )
   }
 }

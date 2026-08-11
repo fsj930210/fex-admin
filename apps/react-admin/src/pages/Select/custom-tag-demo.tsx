@@ -4,14 +4,12 @@ import {
   SelectRoot,
   SelectTrigger,
 } from '@fex-design/react/primitive/select'
-import { CloseIcon } from '@fex-design/react/icon/close'
+import { Tag } from '@fex-design/react/primitive/tag'
 import { frameworkOptions } from './data'
 import { SelectDemoSection } from './demo-section'
 
 const tagColors: Record<string, string> = {
-  react: 'bg-sky-100 text-sky-700',
-  vue: 'bg-emerald-100 text-emerald-700',
-  angular: 'bg-red-100 text-red-700',
+  react: '#0284c7', vue: '#059669', angular: '#dc2626',
 }
 
 export function CustomTagDemo() {
@@ -24,22 +22,9 @@ export function CustomTagDemo() {
         <SelectTrigger
           placeholder="请选择框架"
           tagRender={(option, context) => (
-            <span
-              className={`inline-flex h-6 items-center gap-1 rounded-md px-2 text-xs ${tagColors[String(option.value)] ?? 'bg-muted-background'}`}
-            >
+            <Tag size="sm" closable color={tagColors[String(option.value)] ?? 'neutral'} onPointerDownCapture={(event) => event.preventDefault()} onClose={(event) => { event.stopPropagation(); context.remove() }}>
               {option.label}
-              <button
-                type="button"
-                aria-label={`Remove ${option.label}`}
-                onPointerDown={(event) => event.preventDefault()}
-                onClick={(event) => {
-                  event.stopPropagation()
-                  context.remove()
-                }}
-              >
-                <CloseIcon className="size-3" />
-              </button>
-            </span>
+            </Tag>
           )}
         />
         <SelectContent>

@@ -2,11 +2,9 @@ import { asyncLoadFeature, checkFeature, expansionFeature, selectionFeature } fr
 import type { TreeItem, TreeKey } from '@fex-design/core/tree/types'
 import type { TreeSelectItem, TreeSelectValue } from '@fex-design/core/tree-select/types'
 import { InputClear, InputControl, InputRoot, type InputRootProps } from '@fex-design/react/primitive/input'
+import { Tag } from '@fex-design/react/primitive/tag'
 import { TreeSelectContent, TreeSelectOption, TreeSelectRoot, TreeSelectTrigger, useTreeSelect } from '@fex-design/react/primitive/tree-select'
 import { Checkbox } from '@fex-design/react/ui/checkbox'
-import { treeSelectTagClassName, treeSelectTagOverflowClassName, treeSelectTagRemoveClassName } from '@fex-design/styles/select'
-import { CloseIcon } from '@fex-design/react/icon/close'
-import { cn } from '@fex/utils'
 import type { ReactNode } from 'react'
 import { DemoTree } from '../Tree/demo-tree'
 import { highlightTreeTitle } from '../Tree/highlight-tree-title'
@@ -48,8 +46,8 @@ function TreeSelectPanelState({ children }: { children: (selectedKeys: readonly 
 function SelectedTags({ maxTagCount }: { maxTagCount: number }) {
   const treeSelect = useTreeSelect<DepartmentNode>()
   const items = treeSelect.snapshot.selectedItems
-  if (items.length > maxTagCount) return <span className={cn(treeSelectTagOverflowClassName, 'ml-1.5')}>已选择 {items.length} 项</span>
-  return <>{items.map((item) => <span key={item.value} className={cn(treeSelectTagClassName, 'ml-1.5')}>{item.label}<button type="button" aria-label={`删除 ${item.label}`} className={treeSelectTagRemoveClassName} onPointerDown={(event) => event.preventDefault()} onClick={(event) => { event.stopPropagation(); treeSelect.controller.setValues(treeSelect.snapshot.values.filter((value) => value !== item.value)) }}><CloseIcon /></button></span>)}</>
+  if (items.length > maxTagCount) return <Tag size="sm" className="ml-1.5">已选择 {items.length} 项</Tag>
+  return <>{items.map((item) => <Tag key={item.value} size="sm" closable className="ml-1.5" onPointerDownCapture={(event) => event.preventDefault()} onClose={(event) => { event.stopPropagation(); treeSelect.controller.setValues(treeSelect.snapshot.values.filter((value) => value !== item.value)) }}>{item.label}</Tag>)}</>
 }
 
 export function DemoTreeSelect({ treeData, value, defaultValue, multiple, checkStrictly, maxTagCount = 2, searchable, searchValue, onSearchValueChange, onChange, onClear, children, expandedKeys, onExpandedKeysChange, asyncLoader, onTreeDataChange, locatedTreeData, locatedExpandedKeys }: Props) {

@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { CalendarValue } from '@fex-design/core/calendar'
   import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
-  import { datePickerMultipleTagsClassName, datePickerTagClassName, datePickerTagOverflowClassName, datePickerTagRemoveClassName } from '@fex-design/styles/date-picker'
+  import { datePickerMultipleTagsClassName } from '@fex-design/styles/date-picker'
   import { cn } from '@fex/utils'
   import { getContext } from 'svelte'
-  import CloseIcon from '../../icon/close.svelte'
+  import Tag from '../tag/tag.svelte'
   import { datePickerContextKey, type DatePickerContextValue } from './context'
 
   interface Props { class?: string; maxTagCount?: number }
@@ -24,20 +24,9 @@
 
 <div data-slot="date-picker-tags" class={rootClassName}>
   {#each visibleValues as value (label(value))}
-    <span data-slot="date-picker-tag" class={datePickerTagClassName}>
-      {label(value)}
-      <button
-        type="button"
-        aria-label={`移除 ${label(value)}`}
-        class={datePickerTagRemoveClassName}
-        onpointerdown={(event) => event.stopPropagation()}
-        onclick={(event) => remove(value, event)}
-      >
-        <CloseIcon />
-      </button>
-    </span>
+    <Tag data-slot="date-picker-tag" size="sm" closable onpointerdown={(event) => event.stopPropagation()} onClose={(event) => remove(value, event)}>{label(value)}</Tag>
   {/each}
   {#if overflowCount > 0}
-    <span data-slot="date-picker-tag-overflow" class={datePickerTagOverflowClassName}>+{overflowCount}</span>
+    <Tag data-slot="date-picker-tag-overflow" size="sm">+{overflowCount}</Tag>
   {/if}
 </div>

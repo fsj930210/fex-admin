@@ -1,4 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority'
+import { tagClassName, tagCloseClassName } from './tag'
 
 export const cascaderTriggerClassName = cva(
   [
@@ -19,8 +20,10 @@ export const cascaderValueContainerClassName = 'flex min-w-0 flex-1 flex-wrap it
 export const cascaderValueClassName = 'min-w-0 flex-1 truncate'
 export const cascaderPlaceholderClassName = 'truncate text-muted-foreground'
 export const cascaderInputClassName = 'min-w-8 flex-1 bg-transparent outline-none placeholder:text-muted-foreground'
-export const cascaderTagClassName = 'inline-flex h-6 max-w-full items-center gap-1 rounded-md bg-muted-background px-2 text-xs leading-none'
-export const cascaderTagRemoveClassName = '-mr-1 inline-flex size-4 items-center justify-center rounded-sm text-muted-foreground hover:bg-background hover:text-foreground [&_svg]:size-3'
+/** @deprecated Use the Tag primitive. */
+export const cascaderTagClassName = tagClassName({ size: 'sm' })
+/** @deprecated Use the Tag primitive. */
+export const cascaderTagRemoveClassName = tagCloseClassName
 export const cascaderSuffixClassName = 'ml-auto inline-flex h-5 shrink-0 items-center justify-center pr-2.5 text-muted-foreground [&_svg]:size-4'
 export const cascaderIndicatorClassName = 'inline-flex size-4 items-center justify-center transition-transform data-[state=open]:rotate-180'
 export const cascaderClearClassName = 'size-4 px-0 py-0'

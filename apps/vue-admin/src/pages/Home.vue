@@ -14,6 +14,7 @@ const componentLinks = [
   { to: '/dropdown', label: 'Dropdown' },
   { to: '/alert', label: 'Alert' },
   { to: '/badge', label: 'Badge' },
+  { to: '/tag', label: 'Tag' },
   { to: '/breadcrumb', label: 'Breadcrumb' },
   { to: '/empty', label: 'Empty' },
   { to: '/form', label: 'Form' },

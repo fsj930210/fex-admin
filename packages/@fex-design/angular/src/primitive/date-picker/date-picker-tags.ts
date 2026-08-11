@@ -3,18 +3,15 @@ import type { CalendarValue } from '@fex-design/core/calendar'
 import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
 import {
   datePickerMultipleTagsClassName,
-  datePickerTagClassName,
-  datePickerTagOverflowClassName,
-  datePickerTagRemoveClassName,
 } from '@fex-design/styles/date-picker'
-import { CloseIcon } from '../../icon/close'
+import { Tag } from '../tag/tag'
 import { createHostClassName } from '../../signals/host-class'
 import { DatePickerState } from './use-date-picker'
 
 @Component({
   selector: 'fex-date-picker-tags',
   standalone: true,
-  imports: [CloseIcon],
+  imports: [Tag],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'data-slot': 'date-picker-tags',
@@ -25,9 +22,6 @@ import { DatePickerState } from './use-date-picker'
 export class DatePickerTags {
   @Input() maxTagCount = 1
   protected readonly hostClassName = createHostClassName(datePickerMultipleTagsClassName)
-  protected readonly tagClassName = datePickerTagClassName
-  protected readonly tagRemoveClassName = datePickerTagRemoveClassName
-  protected readonly tagOverflowClassName = datePickerTagOverflowClassName
 
   constructor(readonly state: DatePickerState) {}
 

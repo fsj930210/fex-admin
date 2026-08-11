@@ -1,0 +1,2 @@
+<script lang="ts">import Tag from'@fex-design/svelte/primitive/tag';import Card from'@fex-design/svelte/ui/card';const presets=['neutral','primary','success','warning','danger'] as const</script>
+<Card title="颜色" description="内置名称选择可覆盖变量，color 也接受任意 CSS 颜色。"><div class="flex flex-wrap items-center gap-space-md">{#each presets as color}<Tag {color}>{color}</Tag>{/each}<Tag color="#7c3aed">#7c3aed</Tag><Tag color="oklch(0.7 0.18 190)">OKLCH</Tag></div></Card>

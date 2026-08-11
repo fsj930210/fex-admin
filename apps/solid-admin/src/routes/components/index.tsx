@@ -112,6 +112,9 @@ const TablePage = lazy(() =>
 const TabsPage = lazy(() =>
   import('../../pages/Tabs').then((module) => ({ default: module.TabsPage })),
 )
+const TagPage = lazy(() =>
+  import('../../pages/Tag').then((module) => ({ default: module.TagPage })),
+)
 const TimelinePage = lazy(() =>
   import('../../pages/Timeline').then((module) => ({ default: module.TimelinePage })),
 )
@@ -314,6 +317,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/tabs',
     component: TabsPage,
+  },
+  {
+    path: '/tag',
+    component: TagPage,
   },
   {
     path: '/timeline',

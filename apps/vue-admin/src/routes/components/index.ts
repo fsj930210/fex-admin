@@ -38,6 +38,7 @@ export const componentRoutes = [
   { path: '/switch', component: () => import('../../pages/Switch/index.vue') },
   { path: '/table', component: () => import('../../pages/Table/index.vue') },
   { path: '/tabs', component: () => import('../../pages/Tabs/index.vue') },
+  { path: '/tag', component: () => import('../../pages/Tag/index.vue') },
   { path: '/timeline', component: () => import('../../pages/Timeline/index.vue') },
   { path: '/transfer', component: () => import('../../pages/Transfer/index.vue') },
   { path: '/upload', component: () => import('../../pages/Upload/index.vue') },

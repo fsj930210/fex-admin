@@ -1,12 +1,7 @@
 import { formatDatePickerValue } from '@fex-design/core/date-picker/value'
-import {
-  datePickerTagClassName,
-  datePickerTagOverflowClassName,
-  datePickerTagRemoveClassName,
-} from '@fex-design/styles/date-picker'
 import { cn } from '@fex/utils'
-import type { ComponentProps, MouseEvent } from 'react'
-import { CloseIcon } from '../../icon/close'
+import type { ComponentProps } from 'react'
+import { Tag } from '../tag/tag'
 import { useDatePickerContext } from './context'
 
 export interface DatePickerTagsProps extends ComponentProps<'div'> {
@@ -31,41 +26,19 @@ export function DatePickerTags({ className, maxVisible = 1, ...props }: DatePick
         return <DatePickerTag key={label} value={label} onRemove={() => context.select(value)} />
       })}
       {hiddenCount > 0 ? (
-        <span
-          data-slot="date-picker-tag-overflow"
-          title={labels.join(', ')}
-          className={datePickerTagOverflowClassName}
-        >
+        <Tag data-slot="date-picker-tag-overflow" size="sm" title={labels.join(', ')}>
           +{hiddenCount}
-        </span>
+        </Tag>
       ) : null}
     </div>
   )
 }
 
-export interface DatePickerTagProps extends ComponentProps<'span'> {
+export interface DatePickerTagProps extends Omit<ComponentProps<'span'>, 'onClose'> {
   value: string
   onRemove?: () => void
 }
 
 export function DatePickerTag({ value, className, onRemove, ...props }: DatePickerTagProps) {
-  return (
-    <span {...props} data-slot="date-picker-tag" className={cn(datePickerTagClassName, className)}>
-      {value}
-      {onRemove ? (
-        <button
-          type="button"
-          aria-label={`移除 ${value}`}
-          className={datePickerTagRemoveClassName}
-          onPointerDown={(event) => event.stopPropagation()}
-          onClick={(event: MouseEvent<HTMLButtonElement>) => {
-            event.stopPropagation()
-            onRemove()
-          }}
-        >
-          <CloseIcon />
-        </button>
-      ) : null}
-    </span>
-  )
+  return <Tag {...props} data-slot="date-picker-tag" size="sm" closable={Boolean(onRemove)} className={className} onPointerDownCapture={(event) => event.stopPropagation()} onClose={(event) => { event.stopPropagation(); onRemove?.() }}>{value}</Tag>
 }

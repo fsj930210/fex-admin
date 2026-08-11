@@ -3,9 +3,8 @@ import { asyncLoadFeature, checkFeature, expansionFeature, selectionFeature } fr
 import type { TreeItem, TreeKey } from '@fex-design/core/tree/types'
 import type { TreeSelectItem, TreeSelectValue } from '@fex-design/core/tree-select/types'
 import { InputClear, InputControl, InputRoot } from '@fex-design/vue/primitive/input'
+import Tag from '@fex-design/vue/primitive/tag'
 import { TreeSelectContent, TreeSelectOption, TreeSelectRoot, TreeSelectTrigger } from '@fex-design/vue/primitive/tree-select'
-import { treeSelectTagClassName, treeSelectTagOverflowClassName, treeSelectTagRemoveClassName } from '@fex-design/styles/select'
-import { CloseIcon } from '@fex-design/vue/icon/close'
 import { computed, ref, useSlots } from 'vue'
 import DemoTree from '../Tree/demo-tree.vue'
 import { departmentFieldNames, type DepartmentNode } from '../Tree/data'
@@ -77,7 +76,7 @@ function highlightParts(label: string) {
     <TreeSelectTrigger v-slot="{ triggerProps, triggerRef, inputProps, selectedItems, clear }">
       <div :ref="triggerRef" v-bind="inputRootTriggerProps(triggerProps)" class="w-80" @click="panelOpen = true" @focusin="panelOpen = true">
         <InputRoot :value="String(inputProps.value)" class="w-full" @clear="clear(); emit('clear')">
-          <template v-if="props.multiple"><template v-if="selectedItems.length <= (props.maxTagCount ?? 2)"><span v-for="item in selectedItems" :key="item.value" :class="[treeSelectTagClassName, 'ml-1.5']">{{ item.label }}<button type="button" :aria-label="`删除 ${item.label}`" :class="treeSelectTagRemoveClassName" @pointerdown.prevent @click.stop="root.controller.setValues(root.state.values.filter((value: TreeSelectValue) => value !== item.value))"><CloseIcon /></button></span></template><span v-else :class="[treeSelectTagOverflowClassName, 'ml-1.5']">已选择 {{ selectedItems.length }} 项</span></template>
+          <template v-if="props.multiple"><template v-if="selectedItems.length <= (props.maxTagCount ?? 2)"><Tag v-for="item in selectedItems" :key="item.value" size="sm" closable class="ml-1.5" @pointerdown.capture.prevent @close.stop="root.controller.setValues(root.state.values.filter((value: TreeSelectValue) => value !== item.value))">{{ item.label }}</Tag></template><Tag v-else size="sm" class="ml-1.5">已选择 {{ selectedItems.length }} 项</Tag></template>
           <InputControl
             :read-only="Boolean(inputProps.readonly)"
             :placeholder="selectedItems.length ? undefined : props.searchable ? '搜索部门' : '请选择部门'"

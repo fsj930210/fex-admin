@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import {
   selectPlaceholderClassName,
-  selectTagClassName,
-  selectTagOverflowClassName,
-  selectTagRemoveClassName,
   selectValueClassName,
 } from '@fex-design/styles/select'
-import { CloseIcon } from '../../icon/close'
+import Tag from '../tag/tag.vue'
 import { useSelect } from './use-select'
 
 const props = defineProps<{ placeholder?: string | undefined; maxTagCount?: number | undefined }>()
@@ -20,24 +17,15 @@ const select = useSelect('SelectValue')
         :key="option.value"
       >
         <slot name="tag" :option="option" :remove="() => select.removeValue(option.value)">
-          <span :class="selectTagClassName"
-            >{{ option.label
-            }}<button
-              type="button"
-              :class="selectTagRemoveClassName"
-              @pointerdown.prevent
-              @click.stop="select.removeValue(option.value)"
-            >
-              <CloseIcon /></button
-          ></span>
+          <Tag size="sm" closable :close-label="`Remove ${String(option.label)}`" @pointerdown.capture.prevent @close.stop="select.removeValue(option.value)">{{ option.label }}</Tag>
         </slot>
       </template>
-      <span
+      <Tag
         v-if="
           props.maxTagCount !== undefined && select.selectedOptions.value.length > props.maxTagCount
         "
-        :class="selectTagOverflowClassName"
-        >+{{ select.selectedOptions.value.length - props.maxTagCount }}</span
+        size="sm"
+        >+{{ select.selectedOptions.value.length - props.maxTagCount }}</Tag
       >
     </template>
     <slot

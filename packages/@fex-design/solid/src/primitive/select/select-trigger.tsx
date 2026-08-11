@@ -5,9 +5,6 @@ import {
   selectInputClassName,
   selectPlaceholderClassName,
   selectSuffixClassName,
-  selectTagClassName,
-  selectTagOverflowClassName,
-  selectTagRemoveClassName,
   selectTriggerClassName,
   selectValueClassName,
   selectValueContainerClassName,
@@ -16,6 +13,7 @@ import { cn } from '@fex/utils'
 import { For, Show, splitProps, type JSX, type ParentProps } from 'solid-js'
 import { ChevronDownIcon } from '../../icon/chevron'
 import { CloseIcon } from '../../icon/close'
+import { Tag } from '../tag/tag'
 import { LoadingIcon } from '../../icon/loading'
 import { Button } from '../button/button'
 import { PopoverTrigger } from '../popover/popover'
@@ -188,27 +186,19 @@ export function SelectValue(props: {
                     })}
                   </span>
                 ) : (
-                  <span class={selectTagClassName}>
+                  <Tag size="sm" closable closeLabel={`Remove ${String(option.label)}`} onPointerDownCapture={(event) => event.preventDefault()} onClose={(event) => {
+                    event.stopPropagation()
+                    select.removeValue(option.value)
+                  }}>
                     {option.label}
-                    <button
-                      type="button"
-                      class={selectTagRemoveClassName}
-                      onPointerDown={(event) => event.preventDefault()}
-                      onClick={(event) => {
-                        event.stopPropagation()
-                        select.removeValue(option.value)
-                      }}
-                    >
-                      <CloseIcon />
-                    </button>
-                  </span>
+                  </Tag>
                 )
               }
             </For>
             <Show when={select.selectedOptions().length - visible().length > 0}>
-              <span class={selectTagOverflowClassName}>
+              <Tag size="sm">
                 +{select.selectedOptions().length - visible().length}
-              </span>
+              </Tag>
             </Show>
           </div>
         </Show>

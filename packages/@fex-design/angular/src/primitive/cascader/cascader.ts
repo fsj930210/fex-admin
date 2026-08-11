@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common'
 import { createCascaderController } from '@fex-design/core/cascader/create-cascader-controller'
 import type { CascaderChangeMeta, CascaderFieldNames, CascaderFilterOption, CascaderNode, CascaderOption, CascaderSnapshot, CascaderValue } from '@fex-design/core/cascader/types'
-import { cascaderClearClassName, cascaderColumnClassName, cascaderColumnViewportClassName, cascaderContentClassName, cascaderEmptyClassName, cascaderIndicatorClassName, cascaderInputClassName, cascaderLoadingClassName, cascaderOptionClassName, cascaderOptionIconClassName, cascaderOptionLabelClassName, cascaderPanelClassName, cascaderPanelHeight, cascaderPlaceholderClassName, cascaderSuffixClassName, cascaderTagClassName, cascaderTagRemoveClassName, cascaderTriggerClassName, cascaderValueClassName, cascaderValueContainerClassName } from '@fex-design/styles/cascader'
+import { cascaderClearClassName, cascaderColumnClassName, cascaderColumnViewportClassName, cascaderContentClassName, cascaderEmptyClassName, cascaderIndicatorClassName, cascaderInputClassName, cascaderLoadingClassName, cascaderOptionClassName, cascaderOptionIconClassName, cascaderOptionLabelClassName, cascaderPanelClassName, cascaderPanelHeight, cascaderPlaceholderClassName, cascaderSuffixClassName, cascaderTriggerClassName, cascaderValueClassName, cascaderValueContainerClassName } from '@fex-design/styles/cascader'
 import { checkboxClassName, checkboxIndicatorClassName } from '@fex-design/styles/checkbox'
 import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Input, Output, forwardRef, inject, signal, type OnChanges, type Signal } from '@angular/core'
 import { CheckIcon } from '../../icon/check'
 import { ChevronDownIcon, ChevronRightIcon } from '../../icon/chevron'
 import { CloseIcon } from '../../icon/close'
+import { Tag } from '../tag/tag'
 import { LoadingIcon } from '../../icon/loading'
 import { MinusIcon } from '../../icon/minus'
 import { createCoreStoreSignal } from '../../signals/core-store-signal'
@@ -28,9 +29,9 @@ export class CascaderRoot implements OnChanges {
   display(path:readonly CascaderNode[]){return this.displayRender?.(path.map(node=>node.label),path.map(node=>node.option))??path.map(node=>node.label).join(' / ')}
 }
 
-@Component({selector:'fex-cascader-trigger',standalone:true,imports:[CommonModule,PopoverTrigger,Button,ChevronDownIcon,CloseIcon,LoadingIcon],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./cascader-trigger.html'})
+@Component({selector:'fex-cascader-trigger',standalone:true,imports:[CommonModule,PopoverTrigger,Button,ChevronDownIcon,CloseIcon,LoadingIcon,Tag],changeDetection:ChangeDetectionStrategy.OnPush,templateUrl:'./cascader-trigger.html'})
 export class CascaderTrigger {
-  readonly cascader=inject(CascaderRoot);readonly triggerClass=cascaderTriggerClassName();readonly valueContainerClass=cascaderValueContainerClassName;readonly valueClass=cascaderValueClassName;readonly placeholderClass=cascaderPlaceholderClassName;readonly tagClass=cascaderTagClassName;readonly tagRemoveClass=cascaderTagRemoveClassName;readonly inputClass=cascaderInputClassName;readonly suffixClass=cascaderSuffixClassName;readonly indicatorClass=cascaderIndicatorClassName;readonly clearClass=cascaderClearClassName
+  readonly cascader=inject(CascaderRoot);readonly triggerClass=cascaderTriggerClassName();readonly valueContainerClass=cascaderValueContainerClassName;readonly valueClass=cascaderValueClassName;readonly placeholderClass=cascaderPlaceholderClassName;readonly inputClass=cascaderInputClassName;readonly suffixClass=cascaderSuffixClassName;readonly indicatorClass=cascaderIndicatorClassName;readonly clearClass=cascaderClearClassName
   focus(){if(!this.cascader.showSearch)this.cascader.controller.open()}
   input(event:Event){const keyword=(event.currentTarget as HTMLInputElement).value;this.cascader.controller.setSearchValue(keyword);keyword.trim()?this.cascader.controller.open():this.cascader.controller.close()}
   keydown(event:KeyboardEvent){const c=this.cascader.controller;if(event.key==='ArrowDown'||event.key==='ArrowUp')c.moveActive(event.key==='ArrowDown'?1:-1);else if(event.key==='ArrowRight')c.moveToChild();else if(event.key==='ArrowLeft')c.moveToParent();else if(event.key==='Home'||event.key==='End')c.moveToBoundary(event.key==='Home'?'first':'last');else if(event.key==='Enter'||event.key===' ')c.selectActive();else if(event.key==='Escape')c.close();else return;event.preventDefault();c.open()}

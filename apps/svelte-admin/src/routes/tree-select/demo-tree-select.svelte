@@ -3,14 +3,13 @@
   import type { TreeItem, TreeKey } from '@fex-design/core/tree/types'
   import type { TreeSelectItem, TreeSelectValue } from '@fex-design/core/tree-select/types'
   import InputRoot from '@fex-design/svelte/primitive/input'
+  import Tag from '@fex-design/svelte/primitive/tag'
   import InputControl from '@fex-design/svelte/primitive/input-control'
   import InputClear from '@fex-design/svelte/primitive/input-clear'
   import TreeSelectRoot from '@fex-design/svelte/primitive/tree-select'
   import TreeSelectTrigger from '@fex-design/svelte/primitive/tree-select-trigger'
   import TreeSelectContent from '@fex-design/svelte/primitive/tree-select-content'
   import TreeSelectOption from '@fex-design/svelte/primitive/tree-select-option'
-  import { treeSelectTagClassName, treeSelectTagOverflowClassName, treeSelectTagRemoveClassName } from '@fex-design/styles/select'
-  import CloseIcon from '@fex-design/svelte/icon/close'
   import type { Snippet } from 'svelte'
   import DemoTree from '../tree/demo-tree.svelte'
   import { departmentFieldNames, type DepartmentNode } from '../tree/data'
@@ -49,7 +48,7 @@
       {#snippet children(state)}
         <div use:state.trigger.action {...state.trigger.props} class="w-80">
           <InputRoot value={state.inputProps.value} onClear={() => { state.clear(); onClear?.() }}>
-            {#if multiple}{#if state.selectedItems.length <= maxTagCount}{#each state.selectedItems as item (item.value)}<span class={`${treeSelectTagClassName} ml-1.5`}>{item.label}<button type="button" aria-label={`删除 ${item.label}`} class={treeSelectTagRemoveClassName} onpointerdown={event => event.preventDefault()} onclick={event => { event.stopPropagation(); root.controller.setValues(root.state.values.filter(value => value !== item.value)) }}><CloseIcon /></button></span>{/each}{:else}<span class={`${treeSelectTagOverflowClassName} ml-1.5`}>已选择 {state.selectedItems.length} 项</span>{/if}{/if}
+            {#if multiple}{#if state.selectedItems.length <= maxTagCount}{#each state.selectedItems as item (item.value)}<Tag size="sm" closable class="ml-1.5" onpointerdown={event => event.preventDefault()} onClose={event => { event.stopPropagation(); root.controller.setValues(root.state.values.filter(value => value !== item.value)) }}>{item.label}</Tag>{/each}{:else}<Tag size="sm" class="ml-1.5">已选择 {state.selectedItems.length} 项</Tag>{/if}{/if}
             <InputControl readonly={state.inputProps.readonly} placeholder={state.selectedItems.length ? undefined : searchable ? '搜索部门' : '请选择部门'} oninput={state.inputProps.oninput} onfocus={state.inputProps.onfocus} onclick={state.inputProps.onclick} />
             <InputClear forceMount={state.selectedItems.length > 0 || Boolean(searchValue)} aria-label="清除" onclick={(event) => { event.stopPropagation(); event.preventDefault(); state.clear(); onClear?.() }} />
           </InputRoot>

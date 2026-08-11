@@ -1,7 +1,7 @@
 <div fexPopoverTrigger role="presentation" [attr.data-disabled]="cascader.disabled || null" [attr.data-status]="cascader.status" [attr.aria-invalid]="cascader.status === 'error' || null" [class]="triggerClass" (keydown)="keydown($event)">
   <div [class]="valueContainerClass">
     @if (cascader.selectedPaths.length) {
-      @if (cascader.multiple) { @for (path of cascader.selectedPaths; track path.at(-1)?.key) { <span [class]="tagClass">{{ cascader.display(path) }}<button type="button" [class]="tagRemoveClass" (click)="$event.stopPropagation(); cascader.controller.removePath(path.at(-1)!.key)"><fex-close-icon /></button></span> } }
+      @if (cascader.multiple) { @for (path of cascader.selectedPaths; track path.at(-1)?.key) { <fex-tag size="sm" closable (close)="$event.stopPropagation(); cascader.controller.removePath(path.at(-1)!.key)">{{ cascader.display(path) }}</fex-tag> } }
       @else { <div [class]="valueClass">{{ cascader.display(cascader.selectedPaths[0]!) }}</div> }
     } @else if (!cascader.snapshot().searchValue && !cascader.showSearch) { <span [class]="placeholderClass">{{ cascader.placeholder }}</span> }
     <input role="combobox" [attr.aria-expanded]="cascader.snapshot().open" [disabled]="cascader.disabled" [readOnly]="!cascader.showSearch" [value]="cascader.snapshot().searchValue" [placeholder]="cascader.showSearch && !cascader.selectedPaths.length ? cascader.placeholder : ''" [class]="inputClass" (focus)="focus()" (click)="$event.stopPropagation()" (input)="input($event)" />

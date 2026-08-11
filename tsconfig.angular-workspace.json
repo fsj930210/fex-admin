@@ -619,6 +619,9 @@
       "@fex-design/angular/primitive/switch": [
         "packages/@fex-design/angular/src/primitive/switch/switch.ts"
       ],
+      "@fex-design/angular/primitive/tag": [
+        "packages/@fex-design/angular/src/primitive/tag/tag.ts"
+      ],
       "@fex-design/angular/primitive/table": [
         "packages/@fex-design/angular/src/primitive/table/table.ts"
       ],
