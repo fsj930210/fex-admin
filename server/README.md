@@ -13,6 +13,10 @@ All HTTP responses use `{ code, message, data }`. Upload runtime data is created
 | `GET`  | `/multipart/:uploadId/parts`             | Query completed parts       |
 | `POST` | `/multipart/:uploadId/complete`          | Validate and merge parts    |
 | `GET`  | `/multipart/check?md5=...`               | Check instant upload by MD5 |
+| `GET`  | `/tree/roots`                            | Get lazy tree roots         |
+| `GET`  | `/tree/nodes/:key/children`              | Load direct child nodes     |
+| `GET`  | `/tree/search?keyword=...`               | Search nodes with paths     |
+| `GET`  | `/tree/nodes/:key/subtree`               | Locate one ancestor subtree |
 
 The remaining sections are the standard Nest CLI project documentation.
 
