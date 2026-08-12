@@ -3,6 +3,10 @@ import { ListboxPage } from '../../pages/Listbox'
 
 export const componentRoutes = [
   {
+    path: '/anchor',
+    element: createLazyRouteElement(() => import('../../pages/Anchor'), 'AnchorPage'),
+  },
+  {
     path: '/auto-complete',
     element: createLazyRouteElement(() => import('../../pages/AutoComplete'), 'AutoCompletePage'),
   },

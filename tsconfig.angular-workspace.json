@@ -4,6 +4,18 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
+      "@fex-design/core/anchor/dom": [
+        "packages/@fex-design/core/src/anchor/dom.ts"
+      ],
+      "@fex-design/core/anchor/create-anchor-controller": [
+        "packages/@fex-design/core/src/anchor/create-anchor-controller.ts"
+      ],
+      "@fex-design/core/anchor/model": [
+        "packages/@fex-design/core/src/anchor/model.ts"
+      ],
+      "@fex-design/core/anchor/types": [
+        "packages/@fex-design/core/src/anchor/types.ts"
+      ],
       "@fex-design/core/auto-complete/create-auto-complete-controller": [
         "packages/@fex-design/core/src/auto-complete/create-auto-complete-controller.ts"
       ],
@@ -492,6 +504,9 @@
       ],
       "@fex-design/angular/primitive/alert": [
         "packages/@fex-design/angular/src/primitive/alert/alert.ts"
+      ],
+      "@fex-design/angular/primitive/anchor": [
+        "packages/@fex-design/angular/src/primitive/anchor/anchor.ts"
       ],
       "@fex-design/angular/primitive/auto-complete": [
         "packages/@fex-design/angular/src/primitive/auto-complete/auto-complete.ts"

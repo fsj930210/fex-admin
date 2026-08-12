@@ -1,0 +1,40 @@
+<div aria-hidden="true" data-slot="anchor-rail" [class]="railClassName()">
+  @for (inkStyle of inkStyles(); track $index) {
+    <span data-slot="anchor-indicator" [class]="indicatorClassName()" [style.top.px]="inkStyle.top" [style.left.px]="inkStyle.left" [style.width.px]="inkStyle.width" [style.height.px]="inkStyle.height"></span>
+  }
+</div>
+<ng-template #list let-anchorItems let-level="level">
+  <ul data-slot="anchor-list" [attr.data-level]="level" [class]="listClassName(level)">
+    @for (item of anchorItems; track item.key) {
+      <li data-slot="anchor-item" [attr.data-active]="currentKeys().includes(item.key) || null">
+        <button
+          type="button"
+          data-slot="anchor-link"
+          [attr.data-anchor-key]="item.key"
+          [attr.data-state]="currentKeys().includes(item.key) ? 'active' : 'inactive'"
+          [class]="linkClassName(item.key)"
+          (click)="activate(item)"
+        >
+          @if (itemTemplate(); as template) {
+            <ng-container
+              [ngTemplateOutlet]="template"
+              [ngTemplateOutletContext]="{ $implicit: item, active: currentKeys().includes(item.key) }"
+            />
+          } @else {
+            {{ item.title }}
+          }
+        </button>
+        @if (orientation() === 'vertical' && item.children?.length) {
+          <ng-container
+            [ngTemplateOutlet]="list"
+            [ngTemplateOutletContext]="{ $implicit: item.children, level: level + 1 }"
+          />
+        }
+      </li>
+    }
+  </ul>
+</ng-template>
+<ng-container
+  [ngTemplateOutlet]="list"
+  [ngTemplateOutletContext]="{ $implicit: items(), level: 0 }"
+/>

@@ -5,6 +5,7 @@
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.tsx",
+    "./primitive/anchor": "./src/primitive/anchor/anchor.tsx",
     "./primitive/auto-complete": "./src/primitive/auto-complete/auto-complete.tsx",
     "./primitive/breadcrumb": "./src/primitive/breadcrumb/breadcrumb.tsx",
     "./primitive/button": "./src/primitive/button/button.tsx",

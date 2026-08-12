@@ -5,6 +5,10 @@
   "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
+    "./anchor/dom": "./src/anchor/dom.ts",
+    "./anchor/create-anchor-controller": "./src/anchor/create-anchor-controller.ts",
+    "./anchor/model": "./src/anchor/model.ts",
+    "./anchor/types": "./src/anchor/types.ts",
     "./auto-complete/create-auto-complete-controller": "./src/auto-complete/create-auto-complete-controller.ts",
     "./auto-complete/items": "./src/auto-complete/items.ts",
     "./auto-complete/types": "./src/auto-complete/types.ts",

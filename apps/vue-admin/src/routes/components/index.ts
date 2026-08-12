@@ -1,4 +1,5 @@
 export const componentRoutes = [
+  { path: '/anchor', component: () => import('../../pages/Anchor/index.vue') },
   { path: '/breadcrumb', component: () => import('../../pages/Breadcrumb/index.vue') },
   { path: '/auto-complete', component: () => import('../../pages/AutoComplete/index.vue') },
   { path: '/carousel', component: () => import('../../pages/Carousel/index.vue') },

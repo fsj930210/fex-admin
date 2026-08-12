@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const componentLinks = [
+  { to: '/anchor', label: 'Anchor' },
   { to: '/auto-complete', label: 'AutoComplete' },
   { to: '/carousel', label: 'Carousel' },
   { to: '/cascader', label: 'Cascader' },

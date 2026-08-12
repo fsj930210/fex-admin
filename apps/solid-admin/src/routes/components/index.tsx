@@ -1,6 +1,8 @@
 import { lazy } from 'solid-js'
 import type { AppRoute } from '../types'
 
+const AnchorPage = lazy(() => import('../../pages/Anchor').then((module) => ({ default: module.AnchorPage })))
+
 const ButtonPage = lazy(() =>
   import('../../pages/Button').then((module) => ({ default: module.ButtonPage })),
 )
@@ -171,6 +173,7 @@ const ThemeProviderPage = lazy(() =>
 )
 
 export const componentRoutes: AppRoute[] = [
+  { path: '/anchor', component: AnchorPage },
   { path: '/breadcrumb', component: BreadcrumbPage },
   { path: '/auto-complete', component: AutoCompletePage },
   { path: '/carousel', component: CarouselPage },

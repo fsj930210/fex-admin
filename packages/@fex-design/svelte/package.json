@@ -5,6 +5,7 @@
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.svelte",
+    "./primitive/anchor": "./src/primitive/anchor/anchor.ts",
     "./primitive/auto-complete": "./src/primitive/auto-complete/auto-complete-root.svelte",
     "./primitive/breadcrumb": "./src/primitive/breadcrumb/breadcrumb.ts",
     "./primitive/auto-complete-trigger": "./src/primitive/auto-complete/auto-complete-trigger.svelte",

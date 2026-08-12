@@ -1,6 +1,11 @@
 import type { Routes } from '@angular/router'
 
 export const componentRoutes: Routes = [
+  // Anchor stays lazy like the rest of the component catalog.
+  {
+    path: 'anchor',
+    loadComponent: () => import('../../pages/anchor/index.component').then((module) => module.AnchorComponent),
+  },
   // Component demos stay lazy so each primitive route remains independently reloadable.
   {
     path: 'breadcrumb',

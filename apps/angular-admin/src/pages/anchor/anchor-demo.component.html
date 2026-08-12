@@ -1,0 +1,12 @@
+<fex-card title="Current and progress" description="Switch between a single current anchor and all anchors passed so far.">
+  <div class="grid gap-space-lg lg:grid-cols-[10rem_10rem_1fr]">
+    <div><p class="mb-space-sm text-xs font-medium text-muted-foreground">Current</p><fex-anchor [items]="items" [activeKeys]="currentKeys()" [activeOffset]="80" [container]="getContainer" (change)="currentKeys.set($event.activeKeys)" /></div>
+    <div><p class="mb-space-sm text-xs font-medium text-muted-foreground">Progress</p><fex-anchor [items]="items" activeMode="progress" [activeKeys]="activeKeys()" [activeOffset]="80" [container]="getContainer" (change)="activeKeys.set($event.activeKeys)" /></div>
+    <div #container class="h-72 overflow-y-auto rounded-md border border-border p-space-lg">
+      <section id="anchor-overview" class="min-h-48"><h3 class="font-medium">Overview</h3><p class="mt-2 text-sm text-muted-foreground">Anchor tracks content inside any scroll container.</p></section>
+      <section id="anchor-api" class="min-h-48"><h3 class="font-medium">API</h3><p class="mt-2 text-sm text-muted-foreground">Progress mode keeps previously passed anchors active.</p></section>
+      <section id="anchor-props" class="min-h-48"><h3 class="font-medium">Props</h3><p class="mt-2 text-sm text-muted-foreground">Nested headings preserve their real hierarchy.</p></section>
+      <section id="anchor-examples" class="min-h-48"><h3 class="font-medium">Examples</h3><p class="mt-2 text-sm text-muted-foreground">Click an item or scroll this panel.</p></section>
+    </div>
+  </div><p class="mt-space-md text-xs text-muted-foreground">current: {{ currentKeys().join(', ') || 'none' }} · progress: {{ activeKeys().join(', ') || 'none' }}</p>
+</fex-card>

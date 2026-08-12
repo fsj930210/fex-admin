@@ -1,7 +1,8 @@
 import { A } from '@solidjs/router'
 import { For } from 'solid-js'
 
-const componentLinks = [
+  const componentLinks = [
+    { href: '/anchor', label: 'Anchor' },
   { href: '/auto-complete', label: 'AutoComplete' },
   { href: '/carousel', label: 'Carousel' },
   { href: '/cascader', label: 'Cascader' },

@@ -6,6 +6,7 @@
   "exports": {
     "./auto-complete": "./src/auto-complete.ts",
     "./alert": "./src/alert.ts",
+    "./anchor": "./src/anchor.ts",
     "./badge": "./src/badge.ts",
     "./breadcrumb": "./src/breadcrumb.ts",
     "./button": "./src/button.ts",

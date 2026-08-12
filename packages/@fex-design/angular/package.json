@@ -5,6 +5,7 @@
   "sideEffects": false,
   "exports": {
     "./primitive/alert": "./src/primitive/alert/alert.ts",
+    "./primitive/anchor": "./src/primitive/anchor/anchor.ts",
     "./primitive/auto-complete": "./src/primitive/auto-complete/auto-complete.ts",
     "./primitive/breadcrumb": "./src/primitive/breadcrumb/breadcrumb.ts",
     "./primitive/button": "./src/primitive/button/button.ts",
