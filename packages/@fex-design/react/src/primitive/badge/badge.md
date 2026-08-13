@@ -1,4 +1,4 @@
-# Badge UI
+# Badge Primitive
 
 ## 用途
 
@@ -7,7 +7,7 @@
 ## 导入路径
 
 ```tsx
-import { Badge } from '@fex-design/react/ui/badge'
+import { Badge } from '@fex-design/react/primitive/badge'
 ```
 
 ## 核心示例

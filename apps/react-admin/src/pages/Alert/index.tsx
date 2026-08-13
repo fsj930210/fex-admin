@@ -4,7 +4,7 @@ import {
   AlertDescription,
   AlertTitle,
 } from '@fex-design/react/primitive/alert'
-import { Badge } from '@fex-design/react/ui/badge'
+import { Badge } from '@fex-design/react/primitive/badge'
 import { InfoIcon } from '@fex-design/react/icon/info'
 import { Card } from '@fex-design/react/ui/card'
 import { Link } from 'react-router'

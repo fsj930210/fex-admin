@@ -1,0 +1,65 @@
+<main class="grid gap-space-xl p-page-padding">
+  <fex-card title="Basic" description="A single placeholder with a custom size."
+    ><fex-skeleton class="h-5 max-w-sm"
+  /></fex-card>
+  <fex-card title="Avatar" description="Compose circular and text placeholders."
+    ><div class="flex max-w-md items-center gap-space-lg">
+      <fex-skeleton class="size-12 rounded-full" />
+      <div class="grid flex-1 gap-space-sm">
+        <fex-skeleton class="h-4 w-2/5" /><fex-skeleton class="h-4 w-4/5" />
+      </div></div
+  ></fex-card>
+  <fex-card title="Card" description="Preserve a media card layout while loading."
+    ><div class="grid max-w-sm gap-space-md">
+      <fex-skeleton class="aspect-video w-full" /><fex-skeleton class="h-5 w-3/5" /><fex-skeleton
+        class="h-4 w-full"
+      /><fex-skeleton class="h-4 w-4/5" /></div
+  ></fex-card>
+  <fex-card title="Text" description="Use varied widths to suggest paragraph rhythm."
+    ><div class="grid max-w-xl gap-space-sm">
+      <fex-skeleton class="h-4 w-full" /><fex-skeleton class="h-4 w-full" /><fex-skeleton
+        class="h-4 w-2/3"
+      /></div
+  ></fex-card>
+  <fex-card title="Form" description="Match labels, controls and actions."
+    ><div class="grid max-w-md gap-space-lg">
+      <div class="grid gap-space-sm">
+        <fex-skeleton class="h-4 w-24" /><fex-skeleton class="h-9 w-full" />
+      </div>
+      <div class="grid gap-space-sm">
+        <fex-skeleton class="h-4 w-32" /><fex-skeleton class="h-9 w-full" />
+      </div>
+      <fex-skeleton class="h-9 w-24" /></div
+  ></fex-card>
+  <fex-card title="Table" description="Repeat stable row shapes for data loading."
+    ><div class="grid max-w-2xl gap-space-md">
+      <div class="grid grid-cols-3 gap-space-lg border-b pb-space-md">
+        <fex-skeleton class="h-4 w-24" /><fex-skeleton class="h-4 w-20" /><fex-skeleton
+          class="h-4 w-16"
+        />
+      </div>
+      @for (width of widths; track width) {
+        <div class="grid grid-cols-3 gap-space-lg">
+          <div class="flex items-center gap-space-sm">
+            <fex-skeleton class="size-8 rounded-full" /><fex-skeleton
+              class="h-4"
+              [style.width.%]="width"
+            />
+          </div>
+          <fex-skeleton class="h-4 w-2/3" /><fex-skeleton class="h-4 w-1/2" />
+        </div>
+      }</div
+  ></fex-card>
+  <fex-card
+    title="Animation"
+    description="Apply the built-in animation class when loading should be emphasized."
+    ><div class="grid max-w-sm gap-space-md">
+      <fex-skeleton class="h-5 w-full" [class]="animationClassName" /><fex-skeleton
+        class="h-5 w-11/12"
+        [class]="animationClassName"
+      /><fex-skeleton class="h-5 w-4/5" [class]="animationClassName" /><fex-skeleton
+        class="h-5 w-2/3"
+        [class]="animationClassName"
+      /><fex-skeleton class="h-5 w-1/2" [class]="animationClassName" /></div
+  ></fex-card>
+</main>

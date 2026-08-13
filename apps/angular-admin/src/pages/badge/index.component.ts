@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Badge } from '@fex-design/angular/ui/badge'
+import { Badge } from '@fex-design/angular/primitive/badge'
 import Card from '@fex-design/angular/ui/card'
 
 @Component({

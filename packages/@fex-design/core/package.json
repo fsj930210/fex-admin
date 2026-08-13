@@ -29,6 +29,8 @@
     "./input-otp/value": "./src/input-otp/value.ts",
     "./qrcode": "./src/qrcode/qrcode.ts",
     "./qrcode/types": "./src/qrcode/types.ts",
+    "./progress/progress": "./src/progress/progress.ts",
+    "./progress/types": "./src/progress/types.ts",
     "./carousel/types": "./src/carousel/types.ts",
     "./carousel/create-carousel-controller": "./src/carousel/create-carousel-controller.ts",
     "./date/utils": "./src/date/utils.ts",

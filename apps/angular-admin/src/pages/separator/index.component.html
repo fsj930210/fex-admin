@@ -1,0 +1,72 @@
+<main class="grid gap-space-xl p-page-padding">
+  <fex-card title="Basic" description="Separate related sections with a semantic horizontal rule."
+    ><div class="grid max-w-xl gap-space-md">
+      <div>
+        <div class="font-medium">Fex Design</div>
+        <div class="text-sm text-muted-foreground">Composable components for five frameworks.</div>
+      </div>
+      <fex-separator [decorative]="false" />
+      <div class="text-sm">React · Vue · Solid · Svelte · Angular</div>
+    </div></fex-card
+  ><fex-card title="Vertical" description="Use vertical separators between compact inline items."
+    ><div class="flex h-5 items-center gap-space-md">
+      <span>Blog</span><fex-separator orientation="vertical" /><span>Docs</span
+      ><fex-separator orientation="vertical" /><span>Source</span>
+    </div></fex-card
+  ><fex-card title="Menu" description="Divide groups without splitting related menu items."
+    ><div class="grid max-w-sm gap-space-sm">
+      <div>
+        <div class="font-medium">Settings</div>
+        <div class="text-sm text-muted-foreground">Manage preferences</div>
+      </div>
+      <div>
+        <div class="font-medium">Account</div>
+        <div class="text-sm text-muted-foreground">Profile and security</div>
+      </div>
+      <fex-separator />
+      <div>
+        <div class="font-medium">Sign out</div>
+        <div class="text-sm text-muted-foreground">End the current session</div>
+      </div>
+    </div></fex-card
+  ><fex-card title="List" description="Place separators between rows, not after the final item."
+    ><div class="grid max-w-lg">
+      @for (item of items; track item.label; let last = $last) {
+        <div>
+          <div class="flex justify-between py-space-md">
+            <span>{{ item.label }}</span
+            ><span class="text-muted-foreground">{{ item.value }}</span>
+          </div>
+          @if (!last) {
+            <fex-separator />
+          }
+        </div>
+      }</div></fex-card
+  ><fex-card
+    title="With Text"
+    description="Compose a label between two separators and control its placement."
+    ><div class="grid max-w-xl gap-space-xl">
+      @for (placement of placements; track placement) {
+        <div class="flex items-center gap-space-md">
+          <fex-separator
+            [class.w-12]="placement === 'Start'"
+            [class.flex-1]="placement !== 'Start'"
+          /><span class="shrink-0 text-sm text-muted-foreground">{{ placement }}</span
+          ><fex-separator [class.w-12]="placement === 'End'" [class.flex-1]="placement !== 'End'" />
+        </div>
+      }</div></fex-card
+  ><fex-card
+    title="Variants"
+    description="Use class composition for solid, dashed and dotted rules."
+    ><div class="grid max-w-xl gap-space-lg">
+      <div class="grid gap-space-sm"><span class="text-sm">Solid</span><fex-separator /></div>
+      <div class="grid gap-space-sm">
+        <span class="text-sm">Dashed</span
+        ><fex-separator class="h-0 border-t border-dashed bg-transparent" />
+      </div>
+      <div class="grid gap-space-sm">
+        <span class="text-sm">Dotted</span
+        ><fex-separator class="h-0 border-t border-dotted bg-transparent" />
+      </div></div
+  ></fex-card>
+</main>

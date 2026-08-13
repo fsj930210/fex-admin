@@ -4,7 +4,7 @@ import {
   AlertDescription,
   AlertTitle,
 } from '@fex-design/solid/primitive/alert'
-import { Badge } from '@fex-design/solid/ui/badge'
+import { Badge } from '@fex-design/solid/primitive/badge'
 import { InfoIcon } from '@fex-design/solid/icon/info'
 import { Card } from '@fex-design/solid/ui/card'
 import { A } from '@solidjs/router'

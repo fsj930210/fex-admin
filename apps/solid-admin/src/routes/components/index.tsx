@@ -2,6 +2,11 @@ import { lazy } from 'solid-js'
 import type { AppRoute } from '../types'
 
 const AnchorPage = lazy(() => import('../../pages/Anchor').then((module) => ({ default: module.AnchorPage })))
+const AspectRatioPage = lazy(() => import('../../pages/AspectRatio').then((module) => ({ default: module.AspectRatioPage })))
+const AvatarPage = lazy(() => import('../../pages/Avatar').then((module) => ({ default: module.AvatarPage })))
+const ProgressPage = lazy(() => import('../../pages/Progress').then((module) => ({ default: module.ProgressPage })))
+const SeparatorPage = lazy(() => import('../../pages/Separator').then((module) => ({ default: module.SeparatorPage })))
+const SkeletonPage = lazy(() => import('../../pages/Skeleton').then((module) => ({ default: module.SkeletonPage })))
 
 const ButtonPage = lazy(() =>
   import('../../pages/Button').then((module) => ({ default: module.ButtonPage })),
@@ -174,6 +179,8 @@ const ThemeProviderPage = lazy(() =>
 
 export const componentRoutes: AppRoute[] = [
   { path: '/anchor', component: AnchorPage },
+  { path: '/aspect-ratio', component: AspectRatioPage },
+  { path: '/avatar', component: AvatarPage },
   { path: '/breadcrumb', component: BreadcrumbPage },
   { path: '/auto-complete', component: AutoCompletePage },
   { path: '/carousel', component: CarouselPage },
@@ -277,6 +284,9 @@ export const componentRoutes: AppRoute[] = [
     path: '/popover',
     component: PopoverPage,
   },
+  { path: '/progress', component: ProgressPage },
+  { path: '/separator', component: SeparatorPage },
+  { path: '/skeleton', component: SkeletonPage },
   {
     path: '/radio',
     component: RadioPage,

@@ -51,6 +51,33 @@
   }
 }
 
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@keyframes progress-indeterminate {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(400%);
+  }
+}
+
+@keyframes progress-circle-indeterminate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes gradient-flow {
   0% {
     background-position: 0% 50%;
@@ -64,43 +91,75 @@
 }
 
 @keyframes drawer-in-left {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes drawer-in-right {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes drawer-in-top {
-  from { transform: translateY(-100%); }
-  to { transform: translateY(0); }
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 @keyframes drawer-in-bottom {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 @keyframes drawer-out-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 @keyframes drawer-out-right {
-  from { transform: translateX(0); }
-  to { transform: translateX(100%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
 
 @keyframes drawer-out-top {
-  from { transform: translateY(0); }
-  to { transform: translateY(-100%); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
 }
 
 @keyframes drawer-out-bottom {
-  from { transform: translateY(0); }
-  to { transform: translateY(100%); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
 }
 
 @utility animate-fade-in {
@@ -128,35 +187,43 @@
 }
 
 @utility animate-drawer-in-left {
-  animation: drawer-in-left var(--drawer-motion-duration, 300ms) var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
+  animation: drawer-in-left var(--drawer-motion-duration, 300ms)
+    var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
 }
 
 @utility animate-drawer-in-right {
-  animation: drawer-in-right var(--drawer-motion-duration, 300ms) var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
+  animation: drawer-in-right var(--drawer-motion-duration, 300ms)
+    var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
 }
 
 @utility animate-drawer-in-top {
-  animation: drawer-in-top var(--drawer-motion-duration, 300ms) var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
+  animation: drawer-in-top var(--drawer-motion-duration, 300ms)
+    var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
 }
 
 @utility animate-drawer-in-bottom {
-  animation: drawer-in-bottom var(--drawer-motion-duration, 300ms) var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
+  animation: drawer-in-bottom var(--drawer-motion-duration, 300ms)
+    var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
 }
 
 @utility animate-drawer-out-left {
-  animation: drawer-out-left var(--drawer-motion-duration, 300ms) var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
+  animation: drawer-out-left var(--drawer-motion-duration, 300ms)
+    var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
 }
 
 @utility animate-drawer-out-right {
-  animation: drawer-out-right var(--drawer-motion-duration, 300ms) var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
+  animation: drawer-out-right var(--drawer-motion-duration, 300ms)
+    var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
 }
 
 @utility animate-drawer-out-top {
-  animation: drawer-out-top var(--drawer-motion-duration, 300ms) var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
+  animation: drawer-out-top var(--drawer-motion-duration, 300ms)
+    var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
 }
 
 @utility animate-drawer-out-bottom {
-  animation: drawer-out-bottom var(--drawer-motion-duration, 300ms) var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
+  animation: drawer-out-bottom var(--drawer-motion-duration, 300ms)
+    var(--drawer-motion-ease, cubic-bezier(0.78, 0.14, 0.15, 0.86)) both;
 }
 
 @media (prefers-reduced-motion: reduce) {

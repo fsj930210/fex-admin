@@ -11,6 +11,8 @@ import { RouterLink } from '@angular/router'
 export class HomeComponent {
   protected readonly componentLinks = [
     { to: '/anchor', label: 'Anchor' },
+    { to: '/aspect-ratio', label: 'AspectRatio' },
+    { to: '/avatar', label: 'Avatar' },
     { to: '/auto-complete', label: 'AutoComplete' },
     { to: '/carousel', label: 'Carousel' },
     { to: '/button', label: 'Button' },
@@ -38,6 +40,9 @@ export class HomeComponent {
     { to: '/mentions', label: 'Mentions' },
     { to: '/pagination', label: 'Pagination' },
     { to: '/popover', label: 'Popover' },
+    { to: '/progress', label: 'Progress' },
+    { to: '/separator', label: 'Separator' },
+    { to: '/skeleton', label: 'Skeleton' },
     { to: '/radio', label: 'Radio' },
     { to: '/qrcode', label: 'QRCode' },
     { to: '/rate', label: 'Rate' },

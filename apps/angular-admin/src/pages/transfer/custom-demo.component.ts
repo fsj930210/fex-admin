@@ -6,7 +6,7 @@ import {
   TransferPanelTemplate,
 } from '@fex-design/angular/primitive/transfer'
 import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/angular/icon/chevron'
-import { Badge } from '@fex-design/angular/ui/badge'
+import { Badge } from '@fex-design/angular/primitive/badge'
 import { Button } from '@fex-design/angular/ui/button'
 import Card from '@fex-design/angular/ui/card'
 import { transferFieldNames, transferMembers } from './data'

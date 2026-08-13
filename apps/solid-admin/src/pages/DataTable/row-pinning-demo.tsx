@@ -2,7 +2,7 @@ import { rowPinningFeature } from '@fex-design/core/data-table/features/row-pinn
 import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
 import { DataTable, tableFeatures, type ColumnDef } from '@fex-design/solid/primitive/data-table'
 import { createDataTable } from '@fex-design/solid/primitives/create-data-table'
-import { Badge } from '@fex-design/solid/ui/badge'
+import { Badge } from '@fex-design/solid/primitive/badge'
 import { Button } from '@fex-design/solid/ui/button'
 import { people, type Person } from './data'
 import { DataTableDemoSection, DemoBranch } from './demo-section'

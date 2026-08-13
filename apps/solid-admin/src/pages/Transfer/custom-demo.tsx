@@ -1,6 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/solid/icon/chevron'
 import { Transfer } from '@fex-design/solid/primitive/transfer'
-import { Badge } from '@fex-design/solid/ui/badge'
+import { Badge } from '@fex-design/solid/primitive/badge'
 import { Button } from '@fex-design/solid/ui/button'
 import { Card } from '@fex-design/solid/ui/card'
 import { fieldNames, members } from './data'

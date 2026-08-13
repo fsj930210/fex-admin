@@ -1,6 +1,8 @@
 <script lang="ts">
   const componentLinks = [
     { href: '/anchor', label: 'Anchor' },
+    { href: '/aspect-ratio', label: 'AspectRatio' },
+    { href: '/avatar', label: 'Avatar' },
     { href: '/auto-complete', label: 'AutoComplete' },
     { href: '/carousel', label: 'Carousel' },
     { href: '/button', label: 'Button' },
@@ -29,6 +31,9 @@
     { href: '/mentions', label: 'Mentions' },
     { href: '/pagination', label: 'Pagination' },
     { href: '/popover', label: 'Popover' },
+    { href: '/progress', label: 'Progress' },
+    { href: '/separator', label: 'Separator' },
+    { href: '/skeleton', label: 'Skeleton' },
   { href: '/radio', label: 'Radio' },
   { href: '/qrcode', label: 'QRCode' },
     { href: '/rate', label: 'Rate' },

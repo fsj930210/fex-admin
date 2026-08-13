@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@fex-design/react/icon/chevron'
 import { TransferActions } from '@fex-design/react/primitive/transfer'
 import { Transfer } from '@fex-design/react/primitive/transfer'
-import { Badge } from '@fex-design/react/ui/badge'
+import { Badge } from '@fex-design/react/primitive/badge'
 import { Button } from '@fex-design/react/ui/button'
 import { transferFieldNames, transferMembers } from './data'
 import { TransferDemoSection } from './demo-section'

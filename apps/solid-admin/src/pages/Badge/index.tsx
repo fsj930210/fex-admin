@@ -1,4 +1,4 @@
-﻿import { Badge } from '@fex-design/solid/ui/badge'
+﻿import { Badge } from '@fex-design/solid/primitive/badge'
 import { Card } from '@fex-design/solid/ui/card'
 import { A } from '@solidjs/router'
 import { For } from 'solid-js'

@@ -6,6 +6,9 @@
   --background: oklch(1 0 0);
   --secondary-background: oklch(0.97 0 0);
   --muted-background: oklch(0.97 0 0);
+  --progress-remaining: oklch(0.86 0 0);
+  --skeleton-gradient-from: oklch(0.97 0 0);
+  --skeleton-gradient-to: oklch(0.89 0 0);
   --hover-background: oklch(0.94 0 0);
   --selected-background: color-mix(in oklch, var(--primary) 10%, var(--background));
   --disabled-background: oklch(0.97 0 0);
@@ -32,7 +35,7 @@
   --link-hover: oklch(0.55 0.24 264);
   --danger: oklch(0.577 0.245 27.325);
   --danger-foreground: oklch(0.985 0 0);
-  --success: oklch(0.6 0.118 184.704);
+  --success: oklch(0.726 0.218 138.5);
   --warning: oklch(0.828 0.189 84.429);
   --tag-color-neutral: var(--muted-foreground);
   --tag-color-primary: var(--primary);

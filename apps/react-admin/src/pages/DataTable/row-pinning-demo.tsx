@@ -8,7 +8,7 @@ import {
   useDataTable,
   type ColumnDef,
 } from '@fex-design/react/primitive/data-table'
-import { Badge } from '@fex-design/react/ui/badge'
+import { Badge } from '@fex-design/react/primitive/badge'
 import { Button } from '@fex-design/react/ui/button'
 import { DataTableDemoSection, DemoBranch } from './demo-section'
 import { people7, type Person } from './data'

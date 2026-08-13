@@ -3,6 +3,8 @@ import { Link } from 'react-router'
 export function HomePage() {
   const componentLinks = [
     { to: '/anchor', label: 'Anchor' },
+    { to: '/aspect-ratio', label: 'AspectRatio' },
+    { to: '/avatar', label: 'Avatar' },
     { to: '/auto-complete', label: 'AutoComplete' },
     { to: '/alert', label: 'Alert' },
     { to: '/badge', label: 'Badge' },
@@ -32,6 +34,9 @@ export function HomePage() {
     { to: '/mentions', label: 'Mentions' },
     { to: '/pagination', label: 'Pagination' },
     { to: '/popover', label: 'Popover' },
+    { to: '/progress', label: 'Progress' },
+    { to: '/separator', label: 'Separator' },
+    { to: '/skeleton', label: 'Skeleton' },
     { to: '/radio', label: 'Radio' },
     { to: '/qrcode', label: 'QRCode' },
     { to: '/rate', label: 'Rate' },

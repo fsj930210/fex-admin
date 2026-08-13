@@ -8,7 +8,7 @@ import {
   TimelineItem,
   TimelineOpposite,
 } from '@fex-design/angular/primitive/timeline'
-import { Badge } from '@fex-design/angular/ui/badge'
+import { Badge } from '@fex-design/angular/primitive/badge'
 import { Card } from '@fex-design/angular/ui/card'
 
 @Component({

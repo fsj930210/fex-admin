@@ -1,4 +1,4 @@
-﻿import { Badge } from '@fex-design/react/ui/badge'
+﻿import { Badge } from '@fex-design/react/primitive/badge'
 import { Card } from '@fex-design/react/ui/card'
 import {
   Table,

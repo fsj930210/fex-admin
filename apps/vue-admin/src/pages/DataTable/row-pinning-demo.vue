@@ -3,7 +3,7 @@ import { rowPinningFeature } from '@fex-design/core/data-table/features/row-pinn
 import type { DataTableColumnMeta } from '@fex-design/core/data-table/types'
 import { DataTable, tableFeatures, type ColumnDef } from '@fex-design/vue/primitive/data-table'
 import { useDataTable } from '@fex-design/vue/composables/use-data-table'
-import { Badge } from '@fex-design/vue/ui/badge'
+import { Badge } from '@fex-design/vue/primitive/badge'
 import Button from '@fex-design/vue/ui/button'
 import { h, type Component } from 'vue'
 import { people, type Person } from './data'

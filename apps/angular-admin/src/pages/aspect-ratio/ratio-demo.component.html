@@ -1,0 +1,12 @@
+<fex-card [title]="title()" [description]="description()"
+  ><fex-aspect-ratio
+    [ratio]="ratio()"
+    class="rounded-md"
+    [class.max-w-2xl]="sizeClass() === 'max-w-2xl'"
+    [class.max-w-64]="sizeClass() === 'max-w-64'"
+    [class.max-w-48]="sizeClass() === 'max-w-48'"
+    ><img
+      src="/aspect-ratio-demo.svg"
+      alt="Mountain landscape"
+      class="size-full object-cover" /></fex-aspect-ratio
+></fex-card>

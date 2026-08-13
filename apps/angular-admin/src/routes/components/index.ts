@@ -1,6 +1,8 @@
 import type { Routes } from '@angular/router'
 
 export const componentRoutes: Routes = [
+  { path: 'aspect-ratio', loadComponent: () => import('../../pages/aspect-ratio/index.component').then((module) => module.AspectRatioComponent) },
+  { path: 'avatar', loadComponent: () => import('../../pages/avatar/index.component').then((module) => module.AvatarComponent) },
   // Anchor stays lazy like the rest of the component catalog.
   {
     path: 'anchor',
@@ -148,6 +150,9 @@ export const componentRoutes: Routes = [
     loadComponent: () =>
       import('../../pages/popover/index.component').then((module) => module.PopoverComponent),
   },
+  { path: 'progress', loadComponent: () => import('../../pages/progress/index.component').then((module) => module.ProgressComponent) },
+  { path: 'separator', loadComponent: () => import('../../pages/separator/index.component').then((module) => module.SeparatorComponent) },
+  { path: 'skeleton', loadComponent: () => import('../../pages/skeleton/index.component').then((module) => module.SkeletonComponent) },
   {
     path: 'radio',
     loadComponent: () =>

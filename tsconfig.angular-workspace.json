@@ -76,6 +76,12 @@
       "@fex-design/core/qrcode/types": [
         "packages/@fex-design/core/src/qrcode/types.ts"
       ],
+      "@fex-design/core/progress/progress": [
+        "packages/@fex-design/core/src/progress/progress.ts"
+      ],
+      "@fex-design/core/progress/types": [
+        "packages/@fex-design/core/src/progress/types.ts"
+      ],
       "@fex-design/core/carousel/types": [
         "packages/@fex-design/core/src/carousel/types.ts"
       ],
@@ -682,8 +688,23 @@
       "@fex-design/angular/primitive/tour": [
         "packages/@fex-design/angular/src/primitive/tour/tour.ts"
       ],
-      "@fex-design/angular/ui/badge": [
-        "packages/@fex-design/angular/src/ui/badge/badge.ts"
+      "@fex-design/angular/primitive/badge": [
+        "packages/@fex-design/angular/src/primitive/badge/badge.ts"
+      ],
+      "@fex-design/angular/primitive/aspect-ratio": [
+        "packages/@fex-design/angular/src/primitive/aspect-ratio/aspect-ratio.ts"
+      ],
+      "@fex-design/angular/primitive/avatar": [
+        "packages/@fex-design/angular/src/primitive/avatar/avatar.ts"
+      ],
+      "@fex-design/angular/primitive/progress": [
+        "packages/@fex-design/angular/src/primitive/progress/progress.ts"
+      ],
+      "@fex-design/angular/primitive/separator": [
+        "packages/@fex-design/angular/src/primitive/separator/separator.ts"
+      ],
+      "@fex-design/angular/primitive/skeleton": [
+        "packages/@fex-design/angular/src/primitive/skeleton/skeleton.ts"
       ],
       "@fex-design/angular/ui/button": [
         "packages/@fex-design/angular/src/ui/button/button.ts"

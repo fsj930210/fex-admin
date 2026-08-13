@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Badge from '@fex-design/svelte/ui/badge'
+  import Badge from '@fex-design/svelte/primitive/badge'
   import Card from '@fex-design/svelte/ui/card'
   import Empty from '@fex-design/svelte/primitive/empty'
   import EmptyContent from '@fex-design/svelte/primitive/empty-content'

@@ -3,7 +3,7 @@
   import AlertAction from '@fex-design/svelte/primitive/alert-action'
   import AlertDescription from '@fex-design/svelte/primitive/alert-description'
   import AlertTitle from '@fex-design/svelte/primitive/alert-title'
-  import Badge from '@fex-design/svelte/ui/badge'
+  import Badge from '@fex-design/svelte/primitive/badge'
   import Card from '@fex-design/svelte/ui/card'
   import InfoIcon from '@fex-design/svelte/icon/info'
 

@@ -1,0 +1,9 @@
+<img
+  [src]="src()"
+  [alt]="alt()"
+  [class]="imageClass()"
+  [hidden]="!context.loaded()"
+  data-slot="avatar-image"
+  (load)="load()"
+  (error)="error()"
+/>

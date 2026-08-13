@@ -2,6 +2,8 @@ import { createLazyRouteElement } from '../lazy'
 import { ListboxPage } from '../../pages/Listbox'
 
 export const componentRoutes = [
+  { path: '/aspect-ratio', element: createLazyRouteElement(() => import('../../pages/AspectRatio'), 'AspectRatioPage') },
+  { path: '/avatar', element: createLazyRouteElement(() => import('../../pages/Avatar'), 'AvatarPage') },
   {
     path: '/anchor',
     element: createLazyRouteElement(() => import('../../pages/Anchor'), 'AnchorPage'),
@@ -146,6 +148,7 @@ export const componentRoutes = [
     path: '/popover',
     element: createLazyRouteElement(() => import('../../pages/Popover'), 'PopoverPage'),
   },
+  { path: '/progress', element: createLazyRouteElement(() => import('../../pages/Progress'), 'ProgressPage') },
   {
     path: '/radio',
     element: createLazyRouteElement(() => import('../../pages/Radio'), 'RadioPage'),
@@ -162,6 +165,8 @@ export const componentRoutes = [
     path: '/spinner',
     element: createLazyRouteElement(() => import('../../pages/Spinner'), 'SpinnerPage'),
   },
+  { path: '/separator', element: createLazyRouteElement(() => import('../../pages/Separator'), 'SeparatorPage') },
+  { path: '/skeleton', element: createLazyRouteElement(() => import('../../pages/Skeleton'), 'SkeletonPage') },
   {
     path: '/slider',
     element: createLazyRouteElement(() => import('../../pages/Slider'), 'SliderPage'),

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Badge } from '@fex-design/vue/ui/badge'
+import { Badge } from '@fex-design/vue/primitive/badge'
 import Card from '@fex-design/vue/ui/card'
 import {
   Empty,

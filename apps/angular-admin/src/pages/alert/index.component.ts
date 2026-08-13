@@ -6,7 +6,7 @@ import {
   AlertDescription,
   AlertTitle,
 } from '@fex-design/angular/primitive/alert'
-import { Badge } from '@fex-design/angular/ui/badge'
+import { Badge } from '@fex-design/angular/primitive/badge'
 import Card from '@fex-design/angular/ui/card'
 import { InfoIcon } from '@fex-design/angular/icon/info'
 

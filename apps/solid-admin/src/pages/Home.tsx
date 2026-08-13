@@ -3,6 +3,8 @@ import { For } from 'solid-js'
 
   const componentLinks = [
     { href: '/anchor', label: 'Anchor' },
+  { href: '/aspect-ratio', label: 'AspectRatio' },
+  { href: '/avatar', label: 'Avatar' },
   { href: '/auto-complete', label: 'AutoComplete' },
   { href: '/carousel', label: 'Carousel' },
   { href: '/cascader', label: 'Cascader' },
@@ -32,6 +34,9 @@ import { For } from 'solid-js'
   { href: '/mentions', label: 'Mentions' },
   { href: '/pagination', label: 'Pagination' },
   { href: '/popover', label: 'Popover' },
+  { href: '/progress', label: 'Progress' },
+  { href: '/separator', label: 'Separator' },
+  { href: '/skeleton', label: 'Skeleton' },
   { href: '/radio', label: 'Radio' },
   { href: '/qrcode', label: 'QRCode' },
   { href: '/rate', label: 'Rate' },

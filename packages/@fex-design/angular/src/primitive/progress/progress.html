@@ -1,0 +1,96 @@
+@if (variant() === 'line') {
+<div
+  data-slot="progress-track"
+  [class]="lineClass"
+  [style.background]="trackColor()"
+  [style.height.px]="thickness()"
+  [style.border-radius]="lineTrackRadius()"
+>
+  <div
+    data-slot="progress-range"
+    [attr.data-state]="geometry().state"
+    [attr.data-status]="status()"
+    [class]="lineRangeClass"
+    [style.width]="lineWidth()"
+    [style.border-radius]="lineRangeRadius()"
+    [style.background]="lineBackground()"
+  ></div>
+</div>
+@if (showValue()) { <span class="ms-2 shrink-0"><ng-content />{{ display() }}</span> } } @else {
+<svg
+  aria-hidden="true"
+  [class]="circleClass"
+  [attr.width]="size()"
+  [attr.height]="size()"
+  [attr.viewBox]="'0 0 ' + size() + ' ' + size()"
+  [style.transform]="'rotate(' + rotation() + 'deg)'"
+>
+  <defs>
+    @if (stops(); as values) {
+    <linearGradient [attr.id]="gradientId">
+      @for (stop of values; track stop[0]) {
+      <stop [attr.offset]="stop[0]" [attr.stop-color]="stop[1]" />
+      }
+    </linearGradient>
+    }
+  </defs>
+  <circle
+    [class]="circleTrackClass"
+    [attr.cx]="geometry().center"
+    [attr.cy]="geometry().center"
+    [attr.r]="geometry().radius"
+    fill="none"
+    [attr.stroke]="trackStroke()"
+    [attr.stroke-width]="thickness()"
+    [attr.stroke-linecap]="resolvedTrackLinecap()"
+    pathLength="100"
+    [attr.stroke-dasharray]="geometry().trackDasharray"
+    [attr.transform]="'rotate(' + geometry().rotation + ' ' + geometry().center + ' ' + geometry().center + ')'"
+  />
+  <circle
+    [attr.data-state]="geometry().state"
+    [attr.data-status]="status()"
+    [class]="circleRangeClass"
+    [attr.cx]="geometry().center"
+    [attr.cy]="geometry().center"
+    [attr.r]="geometry().radius"
+    fill="none"
+    [attr.stroke]="stroke()"
+    [attr.stroke-width]="thickness()"
+    [attr.stroke-linecap]="linecap()"
+    pathLength="100"
+    [attr.stroke-dasharray]="geometry().rangeDasharray"
+    [attr.stroke-dashoffset]="geometry().dashOffset"
+    [attr.transform]="'rotate(' + geometry().rotation + ' ' + geometry().center + ' ' + geometry().center + ')'"
+  />
+</svg>
+@if (geometry().percentage !== null) {
+<span
+  aria-hidden="true"
+  class="pointer-events-none absolute rounded-full"
+  [style.width.px]="size()"
+  [style.height.px]="size()"
+  [style.background]="circleBackground()"
+  [style.mask]="'radial-gradient(farthest-side, transparent calc(100% - ' + thickness() + 'px), #000 calc(100% - ' + thickness() + 'px))'"
+  [style.-webkit-mask]="'radial-gradient(farthest-side, transparent calc(100% - ' + thickness() + 'px), #000 calc(100% - ' + thickness() + 'px))'"
+></span>
+@if (linecap() === 'round' && geometry().percentage !== null && circlePercentage() > 0) {
+<span
+  aria-hidden="true"
+  class="pointer-events-none absolute rounded-full"
+  [style.left.px]="circlePoint(circleStartAngle()).left"
+  [style.top.px]="circlePoint(circleStartAngle()).top"
+  [style.width.px]="thickness()"
+  [style.height.px]="thickness()"
+  [style.background]="circleStartColor()"
+></span>
+<span
+  aria-hidden="true"
+  class="pointer-events-none absolute rounded-full"
+  [style.left.px]="circlePoint(circleEndAngle()).left"
+  [style.top.px]="circlePoint(circleEndAngle()).top"
+  [style.width.px]="thickness()"
+  [style.height.px]="thickness()"
+  [style.background]="circleEndColor()"
+></span>
+} } @if (showValue()) { <span [class]="valueClass"><ng-content />{{ display() }}</span> } }
