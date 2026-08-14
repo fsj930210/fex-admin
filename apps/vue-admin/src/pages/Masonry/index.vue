@@ -1,0 +1,12 @@
+<script setup lang="ts">
+import Card from '@fex-design/vue/ui/card'
+import BasicDemo from './basic-demo.vue'
+import CollectionDemo from './collection-demo.vue'
+import DynamicDemo from './dynamic-demo.vue'
+import ImageDemo from './image-demo.vue'
+import ResponsiveDemo from './responsive-demo.vue'
+import RtlHiddenDemo from './rtl-hidden-demo.vue'
+import StrategyDemo from './strategy-demo.vue'
+import VirtualDemo from './virtual-demo.vue'
+</script>
+<template><main class="grid gap-space-xl p-page-padding"><Card title="基础瀑布流" description="固定三列，展示输入序号、稳定 key 和最终列；默认按当前最短列分配。"><BasicDemo /></Card><Card title="图片加载与失败" description="不同宽高比图片使用 aspect-ratio 占位；加载成功或失败都会触发真实尺寸重测。"><ImageDemo /></Card><Card title="动态内容高度" description="展开、追加内容和连续更新后重新测量，不把动态内容逻辑绑定到 Masonry。"><DynamicDemo /></Card><Card title="动态增删与排序" description="覆盖添加、删除、中间插入、打乱和恢复，所有项目使用稳定 key。"><CollectionDemo /></Card><Card title="响应式列数" description="同时验证最小列宽和容器断点；拖动控制的是组件容器宽度，不依赖窗口断点。"><ResponsiveDemo /></Card><Card title="排布策略与指定列" description="同一数据对照 ordered、shortest，并展示自动项目与固定列项目混排。"><StrategyDemo /></Card><Card title="RTL 与隐藏容器恢复" description="验证 inline-start 方向、DOM 顺序，以及容器宽度从 0 恢复后的重新布局。"><RtlHiddenDemo /></Card><Card title="虚拟瀑布流" description="5,000 条数据使用 TanStack Virtual lanes；展示挂载量、动态测量和滚动定位。"><VirtualDemo /></Card></main></template>

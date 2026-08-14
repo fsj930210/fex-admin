@@ -29,6 +29,7 @@ export const componentRoutes = [
   { path: '/kbd', component: () => import('../../pages/Kbd/index.vue') },
   { path: '/listbox', component: () => import('../../pages/Listbox/index.vue') },
   { path: '/menu', component: () => import('../../pages/Menu/index.vue') },
+  { path: '/masonry', component: () => import('../../pages/Masonry/index.vue') },
   { path: '/message', component: () => import('../../pages/Message/index.vue') },
   { path: '/mentions', component: () => import('../../pages/Mentions/index.vue') },
   { path: '/pagination', component: () => import('../../pages/Pagination/index.vue') },

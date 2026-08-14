@@ -82,6 +82,9 @@ const ListboxPage = lazy(() =>
 const MenuPage = lazy(() =>
   import('../../pages/Menu').then((module) => ({ default: module.MenuPage })),
 )
+const MasonryPage = lazy(() =>
+  import('../../pages/Masonry').then((module) => ({ default: module.MasonryPage })),
+)
 const MentionsPage = lazy(() =>
   import('../../pages/Mentions').then((module) => ({ default: module.MentionsPage })),
 )
@@ -282,6 +285,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/menu',
     component: MenuPage,
+  },
+  {
+    path: '/masonry',
+    component: MasonryPage,
   },
   {
     path: '/mentions',

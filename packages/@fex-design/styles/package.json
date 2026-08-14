@@ -4,6 +4,7 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    "./masonry": "./src/masonry.ts",
     "./auto-complete": "./src/auto-complete.ts",
     "./alert": "./src/alert.ts",
     "./anchor": "./src/anchor.ts",

@@ -30,6 +30,7 @@
     "./primitive/input/create-input": "./src/primitive/input/create-input.ts",
     "./primitive/input-number": "./src/primitive/input-number/input-number.tsx",
     "./primitive/listbox": "./src/primitive/listbox/listbox.tsx",
+    "./primitive/masonry": "./src/primitive/masonry/masonry.tsx",
     "./primitive/dropdown": "./src/primitive/dropdown/dropdown.tsx",
     "./primitive/menu": "./src/primitive/menu/menu.tsx",
     "./primitive/message": "./src/primitive/message/message.tsx",

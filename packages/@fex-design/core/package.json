@@ -4,6 +4,9 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    "./masonry/create-masonry-controller": "./src/masonry/create-masonry-controller.ts",
+    "./masonry/layout": "./src/masonry/layout.ts",
+    "./masonry/types": "./src/masonry/types.ts",
     ".": "./src/index.ts",
     "./anchor/dom": "./src/anchor/dom.ts",
     "./anchor/create-anchor-controller": "./src/anchor/create-anchor-controller.ts",

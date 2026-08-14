@@ -109,6 +109,7 @@
     "./primitive/input-clear": "./src/primitive/input/input-clear.svelte",
     "./primitive/input-number": "./src/primitive/input-number/input-number.svelte",
     "./primitive/listbox": "./src/primitive/listbox/listbox.svelte",
+    "./primitive/masonry": "./src/primitive/masonry/masonry.ts",
     "./primitive/listbox-group": "./src/primitive/listbox/listbox-group.svelte",
     "./primitive/listbox-group-label": "./src/primitive/listbox/listbox-group-label.svelte",
     "./primitive/listbox-item": "./src/primitive/listbox/listbox-item.svelte",

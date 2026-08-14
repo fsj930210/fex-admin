@@ -1,0 +1,19 @@
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
+import type { MasonryColumns, MasonryLayoutDetail } from '@fex-design/angular/primitive/masonry'
+import { MasonryItem, MasonryRoot, MasonryViewport, MasonryVirtualViewport } from '@fex-design/angular/primitive/masonry'
+import { Button } from '@fex-design/angular/ui/button'
+import Card from '@fex-design/angular/ui/card'
+interface DemoItem { id: string; height: number; title: string }
+@Component({selector:'fex-masonry-page',standalone:true,imports:[Card,Button,MasonryRoot,MasonryViewport,MasonryItem,MasonryVirtualViewport],host:{class:'block'},templateUrl:'./index.component.html',changeDetection:ChangeDetectionStrategy.OnPush})
+export class MasonryComponent {
+  protected readonly items:DemoItem[]=[140,220,168,280,190,250,156,236,180,264,148,208].map((height,index)=>({id:`item-${index+1}`,height,title:`Card ${index+1}`}))
+  protected readonly images=[[10,4,3],[20,3,4],[40,1,1],[30,16,9],[60,4,5],[50,5,4],[70,3,2]] as const
+  protected readonly initial=this.items.slice(0,8);protected readonly collection=signal<DemoItem[]>([...this.initial]);protected readonly dynamicTarget=signal(0);protected readonly detailCount=signal(0);protected readonly summaries=['待确认需求范围','正在整理交互状态','已完成视觉走查','等待接口数据','正在补充异常分支','已进入回归验证','准备发布说明','等待最终确认'];protected readonly details=['补充响应式宽度变化后的验收结果。','记录图片加载完成后的重新测量过程。','确认动态内容不会覆盖相邻项目。'];protected readonly basicColumns=signal<Record<string,number>>({});protected readonly orderedColumns=signal<Record<string,number>>({});protected readonly shortestColumns=signal<Record<string,number>>({});protected readonly widths=signal([720,720]);protected readonly counts=signal([0,0]);protected readonly rtl=signal(false);protected readonly visible=signal(true);protected readonly virtualItems:DemoItem[]=Array.from({length:5000},(_,index)=>({id:`virtual-${index+1}`,height:96+index*47%180,title:`Item ${index+1}`}));protected readonly minColumns:MasonryColumns={minColumnWidth:180,max:5};protected readonly breakpointColumns:MasonryColumns=[{minWidth:0,columns:1},{minWidth:480,columns:2},{minWidth:700,columns:3},{minWidth:900,columns:4}];private serial=1
+  protected readonly getItemKey=(item:DemoItem)=>item.id;protected readonly estimateSize=(item:DemoItem)=>item.height
+  protected setColumns(target:'basic'|'ordered'|'shortest',layout:MasonryLayoutDetail){const value=Object.fromEntries(layout.items.map(item=>[String(item.key),item.column+1]));({basic:this.basicColumns,ordered:this.orderedColumns,shortest:this.shortestColumns}[target]).set(value)}
+  protected switchDynamicTarget(){this.dynamicTarget.update(value=>(value+1)%this.initial.length);this.detailCount.set(0)}
+  protected addDynamicDetail(){this.detailCount.update(value=>Math.min(this.details.length,value+1))}protected removeDynamicDetail(){this.detailCount.update(value=>Math.max(0,value-1))}protected showAllDynamicDetails(){this.detailCount.set(this.details.length)}protected imageHeight(image:readonly [number,number,number]){return Math.round(640*image[2]/image[1])}
+  protected add(middle=false){const serial=this.serial++;const item={id:`added-${serial}`,title:`新增 ${serial}`,height:120+serial%3*40};this.collection.update(value=>{const next=[...value];next.splice(middle?Math.floor(next.length/2):next.length,0,item);return next})}
+  protected shuffle(){this.collection.update(value=>[...value].sort(()=>Math.random()-.5))}protected remove(id:string){this.collection.update(value=>value.filter(item=>item.id!==id))}protected restore(){this.collection.set([...this.initial])}
+  protected resize(index:number,event:Event){const widths=[...this.widths()];widths[index]=Number((event.target as HTMLInputElement).value);this.widths.set(widths)}protected count(index:number,layout:MasonryLayoutDetail){const counts=[...this.counts()];counts[index]=layout.columnCount;this.counts.set(counts)}
+}

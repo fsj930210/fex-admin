@@ -1,0 +1,9 @@
+<div #scrollElement class="overflow-auto" [style.height.px]="height()">
+  <div class="relative w-full" [style.height.px]="virtualizer.getTotalSize()">
+    @for (virtualItem of virtualizer.getVirtualItems(); track virtualItem.key) {
+      <div #itemElement class="absolute start-0 top-0 min-w-0" [attr.data-index]="virtualItem.index" [attr.data-column]="virtualItem.lane" [style.width.px]="columnWidth()" [style.transform]="'translate3d(' + (directionSign() * (virtualItem.lane ?? 0) * (columnWidth() + gap().column)) + 'px,' + virtualItem.start + 'px,0)'">
+        <ng-container *ngTemplateOutlet="template(); context: { $implicit: items()[virtualItem.index], index: virtualItem.index }" />
+      </div>
+    }
+  </div>
+</div>

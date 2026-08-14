@@ -1,0 +1,12 @@
+import { MasonryRoot, MasonryVirtualViewport } from '@fex-design/react/primitive/masonry'
+import { Button } from '@fex-design/react/ui/button'
+import { useEffect, useRef, useState } from 'react'
+import { virtualMasonryItems } from './data'
+
+export function VirtualMasonryDemo() {
+  const hostRef = useRef<HTMLDivElement>(null); const [expanded, setExpanded] = useState<string[]>([]); const [mounted, setMounted] = useState(0); const [offset, setOffset] = useState(0)
+  const scrollTo = (index: number) => { const viewport = hostRef.current?.querySelector<HTMLElement>('[data-slot="masonry-virtual-viewport"]'); if (viewport) viewport.scrollTo({ top: index / virtualMasonryItems.length * (viewport.scrollHeight - viewport.clientHeight), behavior: 'smooth' }) }
+  // The mounted-node count is external DOM state produced by TanStack Virtual after the first frame.
+  useEffect(() => { const frame = requestAnimationFrame(() => setMounted(hostRef.current?.querySelectorAll('[data-index]').length ?? 0)); return () => cancelAnimationFrame(frame) }, [])
+  return <div ref={hostRef} className="grid gap-space-md"><div className="flex flex-wrap items-center gap-space-sm"><span className="text-sm">总数 5,000 · 当前挂载 {mounted || '…'} · scrollTop {Math.round(offset)}</span><Button size="sm" variant="outline" onClick={() => scrollTo(0)}>首项</Button><Button size="sm" variant="outline" onClick={() => scrollTo(499)}>第 500 项</Button><Button size="sm" variant="outline" onClick={() => scrollTo(4999)}>末项</Button></div><MasonryRoot columns={{ minColumnWidth: 180, max: 4 }} gap={12}><MasonryVirtualViewport items={virtualMasonryItems} getItemKey={item => item.id} estimateSize={item => item.height} height={420} className="rounded-md border border-border" aria-label="5,000 条虚拟瀑布流" onScroll={event => { setOffset(event.currentTarget.scrollTop); requestAnimationFrame(() => setMounted(event.currentTarget.querySelectorAll('[data-index]').length)) }}>{(item, index) => <article className="rounded-md border border-border bg-background p-space-md" style={{ minHeight: expanded.includes(item.id) ? item.height + 100 : item.height }}><strong>{item.title}</strong><p className="mt-2 text-xs text-muted-foreground">索引 {index} · TanStack measured lane</p><Button className="mt-2" size="sm" variant="outline" onClick={() => setExpanded(value => value.includes(item.id) ? value.filter(id => id !== item.id) : [...value, item.id])}>{expanded.includes(item.id) ? '收起动态内容' : '展开动态内容'}</Button></article>}</MasonryVirtualViewport></MasonryRoot></div>
+}

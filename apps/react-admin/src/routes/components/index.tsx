@@ -141,6 +141,7 @@ export const componentRoutes = [
     path: '/menu',
     element: createLazyRouteElement(() => import('../../pages/Menu'), 'MenuPage'),
   },
+  { path: '/masonry', element: createLazyRouteElement(() => import('../../pages/Masonry'), 'MasonryPage') },
   { path: '/message', element: createLazyRouteElement(() => import('../../pages/Message'), 'MessagePage') },
   {
     path: '/mentions',

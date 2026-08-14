@@ -4,6 +4,15 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
+      "@fex-design/core/masonry/create-masonry-controller": [
+        "packages/@fex-design/core/src/masonry/create-masonry-controller.ts"
+      ],
+      "@fex-design/core/masonry/layout": [
+        "packages/@fex-design/core/src/masonry/layout.ts"
+      ],
+      "@fex-design/core/masonry/types": [
+        "packages/@fex-design/core/src/masonry/types.ts"
+      ],
       "@fex-design/core/anchor/dom": [
         "packages/@fex-design/core/src/anchor/dom.ts"
       ],
@@ -615,6 +624,9 @@
       ],
       "@fex-design/angular/primitive/listbox": [
         "packages/@fex-design/angular/src/primitive/listbox/listbox.ts"
+      ],
+      "@fex-design/angular/primitive/masonry": [
+        "packages/@fex-design/angular/src/primitive/masonry/masonry.ts"
       ],
       "@fex-design/angular/primitive/dropdown": [
         "packages/@fex-design/angular/src/primitive/dropdown/dropdown.ts"

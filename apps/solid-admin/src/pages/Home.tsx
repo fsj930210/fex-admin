@@ -33,6 +33,7 @@ import { For } from 'solid-js'
   { href: '/kbd', label: 'Kbd' },
   { href: '/listbox', label: 'Listbox' },
   { href: '/menu', label: 'Menu' },
+  { href: '/masonry', label: 'Masonry' },
   { href: '/message', label: 'Message' },
   { href: '/mentions', label: 'Mentions' },
   { href: '/pagination', label: 'Pagination' },

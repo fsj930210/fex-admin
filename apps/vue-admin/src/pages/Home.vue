@@ -29,6 +29,7 @@ const componentLinks = [
   { to: '/kbd', label: 'Kbd' },
   { to: '/listbox', label: 'Listbox' },
   { to: '/menu', label: 'Menu' },
+  { to: '/masonry', label: 'Masonry' },
   { to: '/message', label: 'Message' },
   { to: '/mentions', label: 'Mentions' },
   { to: '/pagination', label: 'Pagination' },

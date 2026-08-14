@@ -141,6 +141,7 @@ export const componentRoutes: Routes = [
     loadComponent: () =>
       import('../../pages/menu/index.component').then((module) => module.MenuComponent),
   },
+  { path: 'masonry', loadComponent: () => import('../../pages/masonry/index.component').then((module) => module.MasonryComponent) },
   { path: 'message', loadComponent: () => import('../../pages/message/index.component').then((module) => module.MessageComponent) },
   {
     path: 'mentions',
