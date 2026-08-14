@@ -52,6 +52,11 @@ export const componentRoutes: Routes = [
       import('../../pages/collapse/index.component').then((module) => module.CollapseComponent),
   },
   {
+    path: 'color-picker',
+    loadComponent: () =>
+      import('../../pages/color-picker/index.component').then((module) => module.ColorPickerComponent),
+  },
+  {
     path: 'context-menu',
     loadComponent: () =>
       import('../../pages/context-menu/index.component').then(

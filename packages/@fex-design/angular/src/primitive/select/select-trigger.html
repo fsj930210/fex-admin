@@ -35,7 +35,7 @@
       [readOnly]="!select.canSearch"
       [attr.placeholder]="select.canSearch && !select.selectedOptions.length ? placeholder : null"
       [value]="select.snapshot().searchValue"
-      [class]="inputClass"
+      [class]="select.canSearch ? inputClass : inputClass + ' absolute size-px min-w-0 overflow-hidden opacity-0'"
       (focus)="select.controller.open()"
       (pointerdown)="inputPointerdown($event)"
       (click)="$event.stopPropagation()"

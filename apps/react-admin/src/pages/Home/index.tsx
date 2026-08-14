@@ -14,6 +14,7 @@ export function HomePage() {
     { to: '/card', label: 'Card' },
     { to: '/checkbox', label: 'Checkbox' },
     { to: '/collapse', label: 'Collapse' },
+    { to: '/color-picker', label: 'ColorPicker' },
     { to: '/carousel', label: 'Carousel' },
     { to: '/cascader', label: 'Cascader' },
     { to: '/context-menu', label: 'ContextMenu' },

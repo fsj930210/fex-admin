@@ -1,0 +1,1 @@
+import {Card} from'@fex-design/react/ui/card';import{PopupPicker}from'./demo-picker';export function DisabledAlphaDemo(){return <Card title="禁用透明度" description="不组合 Alpha 通道即可限制为不透明颜色。"><PopupPicker alpha={false}/></Card>}

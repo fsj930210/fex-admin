@@ -118,6 +118,12 @@
     "./checkbox/create-checkbox-group-controller": "./src/checkbox/create-checkbox-group-controller.ts",
     "./checkbox/types": "./src/checkbox/types.ts",
     "./checkbox/utils": "./src/checkbox/utils.ts",
+    "./color/color": "./src/color/color.ts",
+    "./color/types": "./src/color/types.ts",
+    "./color-picker/channels": "./src/color-picker/channels.ts",
+    "./color-picker/coordinates": "./src/color-picker/coordinates.ts",
+    "./color-picker/create-color-picker-controller": "./src/color-picker/create-color-picker-controller.ts",
+    "./color-picker/types": "./src/color-picker/types.ts",
     "./dialog/create-dialog-controller": "./src/dialog/create-dialog-controller.ts",
     "./dialog/types": "./src/dialog/types.ts",
     "./drawer/create-drawer-controller": "./src/drawer/create-drawer-controller.ts",
@@ -130,6 +136,9 @@
     "./dropzone/types": "./src/dropzone/types.ts",
     "./dropzone/validate": "./src/dropzone/validate.ts",
     "./form/scroll-to-first-error": "./src/form/scroll-to-first-error.ts",
+    "./gradient/create-gradient-controller": "./src/gradient/create-gradient-controller.ts",
+    "./gradient/gradient": "./src/gradient/gradient.ts",
+    "./gradient/types": "./src/gradient/types.ts",
     "./mentions/create-mentions-controller": "./src/mentions/create-mentions-controller.ts",
     "./mentions/query": "./src/mentions/query.ts",
     "./mentions/replace-query": "./src/mentions/replace-query.ts",
@@ -178,12 +187,14 @@
     "@floating-ui/dom": "^1.8.0",
     "@tanstack/form-core": "1.33.3",
     "@tanstack/table-core": "9.0.0-beta.47",
+    "culori": "^4.0.2",
     "embla-carousel": "8.6.0",
     "embla-carousel-autoplay": "8.6.0",
     "spark-md5": "3.0.2",
     "uqr": "^0.1.3"
   },
   "devDependencies": {
+    "@types/culori": "^4.0.1",
     "@types/spark-md5": "3.0.5"
   }
 }

@@ -97,7 +97,10 @@ export function SelectTrigger({
               readOnly={!select.showSearch}
               placeholder={select.showSearch && !hasValue ? placeholder : undefined}
               value={select.snapshot.searchValue}
-              className={selectInputClassName}
+              className={cn(
+                selectInputClassName,
+                !select.showSearch && 'absolute size-px min-w-0 overflow-hidden opacity-0',
+              )}
               onFocus={() => select.controller.open()}
               onPointerDown={(event) => {
                 if (document.activeElement === event.currentTarget) select.controller.toggleOpen()

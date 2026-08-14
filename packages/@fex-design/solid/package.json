@@ -15,6 +15,7 @@
     "./primitive/carousel": "./src/primitives/create-carousel.ts",
     "./primitive/checkbox": "./src/primitive/checkbox/checkbox.tsx",
     "./primitive/collapse": "./src/primitive/collapse/collapse.tsx",
+    "./primitive/color-picker": "./src/primitive/color-picker/color-picker.tsx",
     "./primitive/context-menu": "./src/primitive/context-menu/context-menu.tsx",
     "./primitive/dialog": "./src/primitive/dialog/dialog.tsx",
     "./primitive/drawer": "./src/primitive/drawer/drawer.tsx",

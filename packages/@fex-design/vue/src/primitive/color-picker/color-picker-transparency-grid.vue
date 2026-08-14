@@ -1,0 +1,1 @@
+<script setup lang="ts">import{colorPickerTransparencyGridClassName}from'@fex-design/styles/color-picker';import{cn}from'@fex/utils';import{useAttrs}from'vue';defineOptions({inheritAttrs:false});const attrs=useAttrs()</script><template><span v-bind="attrs" :class="cn(colorPickerTransparencyGridClassName,attrs.class as string|undefined)"/></template>

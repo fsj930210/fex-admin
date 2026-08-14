@@ -78,3 +78,9 @@
 </script>
 
 {@render children?.()}
+<script module lang="ts">
+  export { default as PopoverContent } from './popover-content.svelte'
+  export { default as PopoverPortal } from './popover-portal.svelte'
+  export { default as PopoverRoot } from './popover.svelte'
+  export { default as PopoverTrigger } from './popover-trigger.svelte'
+</script>

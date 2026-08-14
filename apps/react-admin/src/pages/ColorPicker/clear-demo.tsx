@@ -1,0 +1,1 @@
+import {Card} from'@fex-design/react/ui/card';import{PopupPicker}from'./demo-picker';export function ClearDemo(){return <Card title="清除颜色" description="清除后的值为 null，与完全透明色保持区分。"><PopupPicker clear/></Card>}

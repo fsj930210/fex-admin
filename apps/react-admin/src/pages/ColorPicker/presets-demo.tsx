@@ -1,0 +1,1 @@
+import {Card} from'@fex-design/react/ui/card';import{PresetPicker}from'./demo-picker';export function PresetsDemo(){return <Card title="预设颜色" description="打开面板后，可从预设分组选择颜色，也可使用右侧完整选择器编辑。"><PresetPicker/></Card>}

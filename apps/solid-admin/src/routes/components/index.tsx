@@ -32,6 +32,9 @@ const CheckboxPage = lazy(() =>
 const CollapsePage = lazy(() =>
   import('../../pages/Collapse').then((module) => ({ default: module.CollapsePage })),
 )
+const ColorPickerPage = lazy(() =>
+  import('../../pages/ColorPicker').then((module) => ({ default: module.ColorPickerPage })),
+)
 const ContextMenuPage = lazy(() =>
   import('../../pages/ContextMenu').then((module) => ({ default: module.ContextMenuPage })),
 )
@@ -215,6 +218,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/collapse',
     component: CollapsePage,
+  },
+  {
+    path: '/color-picker',
+    component: ColorPickerPage,
   },
   {
     path: '/context-menu',

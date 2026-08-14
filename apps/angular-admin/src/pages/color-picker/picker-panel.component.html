@@ -1,0 +1,12 @@
+<div class="grid w-80 max-w-full min-w-0 content-start gap-3">
+  @if (clear()) {<div class="flex justify-end"><button type="button" aria-label="清除颜色" class="relative size-7 cursor-pointer overflow-hidden rounded-md border border-border bg-background after:absolute after:left-1/2 after:top-1/2 after:h-px after:w-8 after:-translate-x-1/2 after:-translate-y-1/2 after:-rotate-45 after:bg-danger after:content-['']" (click)="picker.controller.clear()"></button></div>}
+  <div fexColorPickerArea [xChannel]="oklch()?'oklch-chroma':'hsb-saturation'" [yChannel]="oklch()?'oklch-lightness':'hsb-brightness'"><span fexColorPickerAreaThumb></span></div>
+  <div fexColorPickerChannel [channel]="oklch()?'oklch-hue':'hsb-hue'"><span fexColorPickerChannelTrack></span><span fexColorPickerChannelThumb></span></div>
+  @if(alpha()){<div class="grid grid-cols-[minmax(0,1fr)_28px] items-center gap-3"><div fexColorPickerChannel channel="alpha"><span fexColorPickerChannelTrack></span><span fexColorPickerChannelThumb></span></div><span fexColorPickerSwatch></span></div>}
+  <fex-select [options]="options" [value]="picker.snapshot().format" (change)="setFormat($event)"><fex-select-trigger/><fex-select-content><fex-select-list/></fex-select-content></fex-select>
+  <div class="flex min-w-0 items-center gap-2">
+    @if(picker.snapshot().format==='hex'){<fex-input-root class="min-w-0 flex-1" [value]="text()" (valueChange)="editText($event)"><input fexInputControl aria-label="颜色值" (focus)="beginText()" (blur)="commitText()" (keydown.enter)="$any($event.target).blur()"></fex-input-root>}
+    @else{<div class="grid min-w-0 flex-1 grid-flow-col auto-cols-fr gap-2">@for(channel of fields();track channel){<fex-input-number class="min-w-0" [min]="config(channel).min" [max]="config(channel).max" [step]="config(channel).step" [value]="channelValue(channel)" (change)="changeChannel(channel,$event)" (blur)="picker.controller.completeInteraction()"/>}</div>}
+    @if(alpha()){<fex-input-number class="w-20 shrink-0" [value]="(picker.snapshot().value?.alpha??1)*100" [readOnly]="true"><span fexInputNumberSuffix>%</span></fex-input-number>}
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<fex-card
+  title="预设颜色"
+  description="打开面板后，可从预设分组选择颜色，也可使用右侧完整选择器编辑。"
+  ><fex-color-picker-root
+    [value]="value()"
+    (change)="value.set($event.value?.toString('oklch') ?? value())"
+    ><fex-popover placement="bottomLeft"
+      ><button
+        fexPopoverTrigger
+        class="inline-flex h-9 w-fit max-w-full self-start items-center rounded-md border border-border bg-background px-2"
+      >
+        <span fexColorPickerSwatch></span></button
+      ><fex-popover-content
+        class="w-max max-w-[calc(100vw-24px)] overflow-visible [--popover-content-max-width:calc(100vw-24px)]"
+        ><div class="grid gap-3 sm:grid-cols-[max-content_minmax(0,1fr)]">
+          <div
+            class="grid content-start gap-3 border-b border-border pb-3 sm:border-r sm:border-b-0 sm:pr-3 sm:pb-0"
+          >
+            @for (group of groups; track group[0]) {
+              <section>
+                <button
+                  type="button"
+                  class="mb-2 flex h-5 cursor-pointer items-center gap-2 text-xs text-muted-foreground"
+                >
+                  <fex-chevron-down-icon class="size-3" /><span>{{ group[0] }}</span>
+                </button>
+                <div class="grid w-max grid-cols-7 gap-2">
+                  @for (color of group[1]; track color) {
+                    <button
+                      class="size-6 cursor-pointer rounded border border-border"
+                      [style.background]="color"
+                      [attr.aria-label]="color"
+                      (click)="value.set(color)"
+                    ></button>
+                  }
+                </div>
+              </section>
+            }
+          </div>
+          <fex-color-picker-panel-demo /></div></fex-popover-content></fex-popover></fex-color-picker-root
+></fex-card>

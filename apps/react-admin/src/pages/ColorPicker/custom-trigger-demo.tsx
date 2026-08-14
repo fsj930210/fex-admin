@@ -1,0 +1,1 @@
+import {Card} from'@fex-design/react/ui/card';import{PopupPicker}from'./demo-picker';export function CustomTriggerDemo(){return <Card title="自定义触发器" description="使用 PopoverTrigger 自由组合色块和文字。"><PopupPicker text/></Card>}

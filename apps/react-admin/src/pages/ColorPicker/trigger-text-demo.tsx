@@ -1,0 +1,1 @@
+import {Card} from'@fex-design/react/ui/card';import{PopupPicker}from'./demo-picker';export function TriggerTextDemo(){return <Card title="渲染触发器文本" description="触发器可以组合当前颜色编码文本。"><PopupPicker text/></Card>}

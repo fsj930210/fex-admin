@@ -1,0 +1,11 @@
+<script setup lang="ts">
+import { getColorChannelConfig } from '@fex-design/core/color-picker/channels'
+import { positionToValue } from '@fex-design/core/color-picker/coordinates'
+import type { ColorChannel } from '@fex-design/core/color-picker/types'
+import { colorPickerAreaClassName } from '@fex-design/styles/color-picker'
+import { cn } from '@fex/utils';import { computed,provide,ref,useAttrs } from 'vue';import { colorAreaKey,useColorPicker } from './context'
+defineOptions({inheritAttrs:false});const props=defineProps<{xChannel:ColorChannel;yChannel:ColorChannel}>();const attrs=useAttrs();const root=ref<HTMLDivElement>();const context=useColorPicker();provide(colorAreaKey,{xChannel:computed(()=>props.xChannel),yChannel:computed(()=>props.yChannel)})
+const background=computed(()=>{const color=context.snapshot.value.value?.toString('oklch')??'transparent';return`linear-gradient(to top,black,transparent),linear-gradient(to right,white,transparent),${color}`})
+function update(e:PointerEvent){if(!root.value)return;const r=root.value.getBoundingClientRect(),x=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width)),y=Math.min(1,Math.max(0,(e.clientY-r.top)/r.height)),xc=getColorChannelConfig(props.xChannel),yc=getColorChannelConfig(props.yChannel);context.controller.setAreaChannels(props.xChannel,positionToValue(x,xc.min,xc.max),props.yChannel,positionToValue(y,yc.min,yc.max,true))}
+function down(e:PointerEvent){if(context.snapshot.value.disabled)return;e.currentTarget instanceof HTMLElement&&e.currentTarget.setPointerCapture(e.pointerId);context.controller.beginInteraction({source:'area'});update(e)}function move(e:PointerEvent){if(e.currentTarget instanceof HTMLElement&&e.currentTarget.hasPointerCapture(e.pointerId))update(e)}function up(e:PointerEvent){if(e.currentTarget instanceof HTMLElement&&e.currentTarget.hasPointerCapture(e.pointerId)){e.currentTarget.releasePointerCapture(e.pointerId);context.controller.completeInteraction()}}
+</script><template><div v-bind="attrs" ref="root" :data-disabled="context.snapshot.value.disabled||undefined" :class="cn(colorPickerAreaClassName,attrs.class as string|undefined)" :style="[{ '--color-picker-area-background':background },attrs.style]" @pointerdown="down" @pointermove="move" @pointerup="up"><slot /></div></template>

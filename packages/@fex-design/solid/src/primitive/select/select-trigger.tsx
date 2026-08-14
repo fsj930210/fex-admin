@@ -96,7 +96,7 @@ export function SelectTrigger(props: SelectTriggerProps) {
                   : undefined
               }
               value={select.snapshot().searchValue}
-              class={selectInputClassName}
+              class={cn(selectInputClassName,!select.showSearch()&&'absolute size-px min-w-0 overflow-hidden opacity-0')}
               onFocus={() => select.controller.open()}
               onPointerDown={(event) => {
                 if (document.activeElement === event.currentTarget) select.controller.toggleOpen()

@@ -11,6 +11,7 @@ const componentLinks = [
     { to: '/card', label: 'Card' },
     { to: '/checkbox', label: 'Checkbox' },
     { to: '/collapse', label: 'Collapse' },
+    { to: '/color-picker', label: 'ColorPicker' },
   { to: '/context-menu', label: 'ContextMenu' },
     { to: '/dialog', label: 'Dialog' },
   { to: '/drawer', label: 'Drawer' },

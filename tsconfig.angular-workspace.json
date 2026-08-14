@@ -343,6 +343,24 @@
       "@fex-design/core/checkbox/utils": [
         "packages/@fex-design/core/src/checkbox/utils.ts"
       ],
+      "@fex-design/core/color/color": [
+        "packages/@fex-design/core/src/color/color.ts"
+      ],
+      "@fex-design/core/color/types": [
+        "packages/@fex-design/core/src/color/types.ts"
+      ],
+      "@fex-design/core/color-picker/channels": [
+        "packages/@fex-design/core/src/color-picker/channels.ts"
+      ],
+      "@fex-design/core/color-picker/coordinates": [
+        "packages/@fex-design/core/src/color-picker/coordinates.ts"
+      ],
+      "@fex-design/core/color-picker/create-color-picker-controller": [
+        "packages/@fex-design/core/src/color-picker/create-color-picker-controller.ts"
+      ],
+      "@fex-design/core/color-picker/types": [
+        "packages/@fex-design/core/src/color-picker/types.ts"
+      ],
       "@fex-design/core/dialog/create-dialog-controller": [
         "packages/@fex-design/core/src/dialog/create-dialog-controller.ts"
       ],
@@ -378,6 +396,15 @@
       ],
       "@fex-design/core/form/scroll-to-first-error": [
         "packages/@fex-design/core/src/form/scroll-to-first-error.ts"
+      ],
+      "@fex-design/core/gradient/create-gradient-controller": [
+        "packages/@fex-design/core/src/gradient/create-gradient-controller.ts"
+      ],
+      "@fex-design/core/gradient/gradient": [
+        "packages/@fex-design/core/src/gradient/gradient.ts"
+      ],
+      "@fex-design/core/gradient/types": [
+        "packages/@fex-design/core/src/gradient/types.ts"
       ],
       "@fex-design/core/mentions/create-mentions-controller": [
         "packages/@fex-design/core/src/mentions/create-mentions-controller.ts"
@@ -540,6 +567,9 @@
       ],
       "@fex-design/angular/primitive/collapse": [
         "packages/@fex-design/angular/src/primitive/collapse/collapse.ts"
+      ],
+      "@fex-design/angular/primitive/color-picker": [
+        "packages/@fex-design/angular/src/primitive/color-picker/color-picker.ts"
       ],
       "@fex-design/angular/primitive/context-menu": [
         "packages/@fex-design/angular/src/primitive/context-menu/context-menu.ts"

@@ -10,6 +10,7 @@
     { href: '/card', label: 'Card' },
     { href: '/checkbox', label: 'Checkbox' },
     { href: '/collapse', label: 'Collapse' },
+    { href: '/color-picker', label: 'ColorPicker' },
     { href: '/context-menu', label: 'ContextMenu' },
     { href: '/dialog', label: 'Dialog' },
     { href: '/drawer', label: 'Drawer' },

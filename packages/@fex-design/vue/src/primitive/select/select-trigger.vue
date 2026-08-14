@@ -85,7 +85,7 @@ function inputPointerdown(event: PointerEvent) {
               : undefined
           "
           :value="select.snapshot.value.searchValue"
-          :class="selectInputClassName"
+          :class="cn(selectInputClassName,!select.showSearch.value&&'absolute size-px min-w-0 overflow-hidden opacity-0')"
           @focus="select.controller.open()"
           @pointerdown="inputPointerdown"
           @click.stop

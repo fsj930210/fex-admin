@@ -1,0 +1,1 @@
+import {Card} from'@fex-design/react/ui/card';import{PopupPicker}from'./demo-picker';export function CustomTriggerEventDemo(){return <Card title="自定义触发事件" description="触发行为复用 Popover，这里使用 hover。"><PopupPicker trigger="hover" text/></Card>}

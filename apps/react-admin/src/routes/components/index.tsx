@@ -85,6 +85,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Collapse'), 'CollapsePage'),
   },
   {
+    path: '/color-picker',
+    element: createLazyRouteElement(() => import('../../pages/ColorPicker'), 'ColorPickerPage'),
+  },
+  {
     path: '/dialog',
     element: createLazyRouteElement(() => import('../../pages/Dialog'), 'DialogPage'),
   },
