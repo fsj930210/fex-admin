@@ -1,0 +1,4 @@
+import { Bubble, BubbleContent } from '@fex-design/react/primitive/bubble'
+import { Collapse, CollapseContent, CollapseItem, CollapseTrigger } from '@fex-design/react/primitive/collapse'
+import { Card } from '@fex-design/react/ui/card'
+export function CollapsibleDemo() { return <Card title="Show more / Collapsible" description="Long content composes the existing Collapse primitive instead of adding collapse state to Bubble."><Bubble variant="outline"><BubbleContent><Collapse collapsible defaultExpandedKeys={[]}><CollapseItem value="details"><p>The accessibility review found two subtle focus states in dark mode.</p><CollapseTrigger>Show more</CollapseTrigger><CollapseContent><p className="pt-2">Dialog, Menu, Drawer, and Popover were checked so keyboard users retain a visible focus indicator.</p></CollapseContent></CollapseItem></Collapse></BubbleContent></Bubble></Card> }

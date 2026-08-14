@@ -16,6 +16,9 @@
       "@fex-design/core/anchor/types": [
         "packages/@fex-design/core/src/anchor/types.ts"
       ],
+      "@fex-design/core/bubble/types": [
+        "packages/@fex-design/core/src/bubble/types.ts"
+      ],
       "@fex-design/core/auto-complete/create-auto-complete-controller": [
         "packages/@fex-design/core/src/auto-complete/create-auto-complete-controller.ts"
       ],
@@ -421,6 +424,9 @@
       "@fex-design/core/menu/navigation": [
         "packages/@fex-design/core/src/menu/navigation.ts"
       ],
+      "@fex-design/core/message/types": [
+        "packages/@fex-design/core/src/message/types.ts"
+      ],
       "@fex-design/core/disclosure/create-disclosure": [
         "packages/@fex-design/core/src/disclosure/create-disclosure.ts"
       ],
@@ -547,6 +553,9 @@
       "@fex-design/angular/primitive/breadcrumb": [
         "packages/@fex-design/angular/src/primitive/breadcrumb/breadcrumb.ts"
       ],
+      "@fex-design/angular/primitive/bubble": [
+        "packages/@fex-design/angular/src/primitive/bubble/bubble.ts"
+      ],
       "@fex-design/angular/primitive/button": [
         "packages/@fex-design/angular/src/primitive/button/button.ts"
       ],
@@ -612,6 +621,9 @@
       ],
       "@fex-design/angular/primitive/menu": [
         "packages/@fex-design/angular/src/primitive/menu/menu.ts"
+      ],
+      "@fex-design/angular/primitive/message": [
+        "packages/@fex-design/angular/src/primitive/message/message.ts"
       ],
       "@fex-design/angular/primitive/theme-provider": [
         "packages/@fex-design/angular/src/primitive/theme-provider/theme-provider.ts"

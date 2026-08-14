@@ -3,6 +3,7 @@ import type { Routes } from '@angular/router'
 export const componentRoutes: Routes = [
   { path: 'aspect-ratio', loadComponent: () => import('../../pages/aspect-ratio/index.component').then((module) => module.AspectRatioComponent) },
   { path: 'avatar', loadComponent: () => import('../../pages/avatar/index.component').then((module) => module.AvatarComponent) },
+  { path: 'bubble', loadComponent: () => import('../../pages/bubble/index.component').then((module) => module.BubbleComponent) },
   // Anchor stays lazy like the rest of the component catalog.
   {
     path: 'anchor',
@@ -140,6 +141,7 @@ export const componentRoutes: Routes = [
     loadComponent: () =>
       import('../../pages/menu/index.component').then((module) => module.MenuComponent),
   },
+  { path: 'message', loadComponent: () => import('../../pages/message/index.component').then((module) => module.MessageComponent) },
   {
     path: 'mentions',
     loadComponent: () =>

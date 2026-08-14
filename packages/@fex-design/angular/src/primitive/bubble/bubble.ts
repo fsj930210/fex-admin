@@ -1,0 +1,29 @@
+import{resolveConversationSide,type BubbleAttachmentSide,type BubbleGroupSpacing,type BubbleSize,type BubbleVariant,type BubbleVisibility,type ConversationSide}from'@fex-design/core/bubble/types'
+import{createToggleController}from'@fex-design/core/toggle/create-toggle-controller';import type{ToggleController,ToggleSnapshot}from'@fex-design/core/toggle/types'
+import{bubbleActionClassName,bubbleActionsClassName,bubbleClassName,bubbleContentClassName,bubbleGroupClassName,bubbleReactionClassName,bubbleReactionCountClassName,bubbleReactionsClassName}from'@fex-design/styles/bubble';import{cn}from'@fex/utils'
+import{booleanAttribute,ChangeDetectionStrategy,Component,computed,Directive,HostListener,inject,input,output,type Signal}from'@angular/core';import{createCoreStoreSignal}from'../../signals/core-store-signal';import{createHostClassName}from'../../signals/host-class';import{BUBBLE_CONTEXT,MESSAGE_SIDE_CONTEXT}from'./context'
+
+@Component({selector:'fex-bubble',standalone:true,changeDetection:ChangeDetectionStrategy.OnPush,providers:[{provide:BUBBLE_CONTEXT,useFactory:()=>inject(Bubble)}],host:{'[class]':'hostClassName()','data-slot':'bubble','[attr.data-side]':'resolvedSide()','[attr.data-variant]':'variant()','[attr.data-size]':'size()'},template:'<ng-content />'})
+export class Bubble{private inherited=inject(MESSAGE_SIDE_CONTEXT,{optional:true});side=input<ConversationSide|undefined>();variant=input<BubbleVariant>('soft');size=input<BubbleSize>('md');readonly resolvedSide=computed(()=>resolveConversationSide(this.side(),this.inherited?.()));protected hostClassName=createHostClassName(()=>bubbleClassName({size:this.size()}))}
+
+@Directive({selector:'fex-bubble-content,[fexBubbleContent]',standalone:true,host:{'[class]':'hostClassName()','data-slot':'bubble-content','[attr.data-side]':'resolvedSide()'}})
+export class BubbleContent{readonly context=inject(Bubble,{optional:true});protected resolvedSide=computed(()=>this.context?.resolvedSide()??'start');protected hostClassName=createHostClassName(()=>bubbleContentClassName({size:this.context?.size()??'md',variant:this.context?.variant()??'soft'}))}
+
+@Component({selector:'fex-bubble-group',standalone:true,changeDetection:ChangeDetectionStrategy.OnPush,host:{'[class]':'hostClassName()','data-slot':'bubble-group','[attr.data-side]':'resolvedSide()','[attr.data-spacing]':'spacing()'},template:'<ng-content />'})
+export class BubbleGroup{private inherited=inject(MESSAGE_SIDE_CONTEXT,{optional:true});side=input<ConversationSide|undefined>();spacing=input<BubbleGroupSpacing>('default');protected resolvedSide=computed(()=>resolveConversationSide(this.side(),this.inherited?.()));protected hostClassName=createHostClassName(()=>bubbleGroupClassName({spacing:this.spacing()}))}
+
+@Component({selector:'fex-bubble-actions',standalone:true,changeDetection:ChangeDetectionStrategy.OnPush,host:{'[class]':'hostClassName()','data-slot':'bubble-actions','[attr.data-side]':'side()','[attr.data-align]':'resolvedAlign()','[attr.data-visibility]':'visibility()'},template:'<ng-content />'})
+export class BubbleActions{private bubble=inject(Bubble,{optional:true});side=input<BubbleAttachmentSide>('bottom');align=input<ConversationSide|undefined>();visibility=input<BubbleVisibility>('always');protected resolvedAlign=computed(()=>this.align()??this.bubble?.resolvedSide()??'start');protected hostClassName=createHostClassName(()=>bubbleActionsClassName({side:this.side()}))}
+
+@Directive()
+abstract class ToggleActionBase{pressed=input<boolean|undefined>();defaultPressed=input(false,{transform:booleanAttribute});disabled=input(false,{transform:booleanAttribute});change=output<boolean>();protected abstract baseClass:string;private controller:ToggleController;private snapshot:Signal<ToggleSnapshot>;protected currentPressed=computed(()=>this.pressed()??this.snapshot().pressed);protected hostClassName=createHostClassName(()=>this.baseClass);constructor(){const owner=this;this.controller=createToggleController({get pressed(){return owner.pressed()},get defaultPressed(){return owner.defaultPressed()},get disabled(){return owner.disabled()},onChange(value){owner.change.emit(value)}});this.snapshot=createCoreStoreSignal(this.controller)}@HostListener('click',['$event'])onClick(event:MouseEvent){if(event.defaultPrevented||this.disabled())return;this.controller.toggle()}}
+
+@Directive({selector:'[fexBubbleAction]',standalone:true,host:{'[class]':'hostClassName()','data-slot':'bubble-action','[attr.aria-pressed]':'currentPressed()','[attr.data-state]':"currentPressed()?'on':'off'",'[attr.data-disabled]':"disabled()?'true':null"}})
+export class BubbleAction extends ToggleActionBase{protected baseClass=bubbleActionClassName()}
+
+@Component({selector:'fex-bubble-reactions',standalone:true,changeDetection:ChangeDetectionStrategy.OnPush,host:{'[class]':'hostClassName()','data-slot':'bubble-reactions','[attr.data-side]':'side()','[attr.data-align]':'resolvedAlign()'},template:'<ng-content />'})
+export class BubbleReactions{private bubble=inject(Bubble,{optional:true});side=input<BubbleAttachmentSide>('bottom');align=input<ConversationSide|undefined>();protected resolvedAlign=computed(()=>this.align()??this.bubble?.resolvedSide()??'start');protected hostClassName=createHostClassName(()=>bubbleReactionsClassName({side:this.side()}))}
+
+@Directive({selector:'[fexBubbleReaction]',standalone:true,host:{'[class]':'hostClassName()','data-slot':'bubble-reaction','[attr.aria-pressed]':'currentPressed()','[attr.data-state]':"currentPressed()?'on':'off'",'[attr.data-disabled]':"disabled()?'true':null"}})
+export class BubbleReaction extends ToggleActionBase{protected baseClass=bubbleReactionClassName()}
+@Directive({selector:'[fexBubbleReactionCount]',standalone:true,host:{'[class]':'hostClassName','data-slot':'bubble-reaction-count'}})export class BubbleReactionCount{protected hostClassName=bubbleReactionCountClassName}

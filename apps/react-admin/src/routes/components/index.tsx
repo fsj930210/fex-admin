@@ -4,6 +4,7 @@ import { ListboxPage } from '../../pages/Listbox'
 export const componentRoutes = [
   { path: '/aspect-ratio', element: createLazyRouteElement(() => import('../../pages/AspectRatio'), 'AspectRatioPage') },
   { path: '/avatar', element: createLazyRouteElement(() => import('../../pages/Avatar'), 'AvatarPage') },
+  { path: '/bubble', element: createLazyRouteElement(() => import('../../pages/Bubble'), 'BubblePage') },
   {
     path: '/anchor',
     element: createLazyRouteElement(() => import('../../pages/Anchor'), 'AnchorPage'),
@@ -140,6 +141,7 @@ export const componentRoutes = [
     path: '/menu',
     element: createLazyRouteElement(() => import('../../pages/Menu'), 'MenuPage'),
   },
+  { path: '/message', element: createLazyRouteElement(() => import('../../pages/Message'), 'MessagePage') },
   {
     path: '/mentions',
     element: createLazyRouteElement(() => import('../../pages/Mentions'), 'MentionsPage'),

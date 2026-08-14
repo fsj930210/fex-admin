@@ -1,6 +1,7 @@
 export const componentRoutes = [
   { path: '/aspect-ratio', component: () => import('../../pages/AspectRatio/index.vue') },
   { path: '/avatar', component: () => import('../../pages/Avatar/index.vue') },
+  { path: '/bubble', component: () => import('../../pages/Bubble/index.vue') },
   { path: '/anchor', component: () => import('../../pages/Anchor/index.vue') },
   { path: '/breadcrumb', component: () => import('../../pages/Breadcrumb/index.vue') },
   { path: '/auto-complete', component: () => import('../../pages/AutoComplete/index.vue') },
@@ -28,6 +29,7 @@ export const componentRoutes = [
   { path: '/kbd', component: () => import('../../pages/Kbd/index.vue') },
   { path: '/listbox', component: () => import('../../pages/Listbox/index.vue') },
   { path: '/menu', component: () => import('../../pages/Menu/index.vue') },
+  { path: '/message', component: () => import('../../pages/Message/index.vue') },
   { path: '/mentions', component: () => import('../../pages/Mentions/index.vue') },
   { path: '/pagination', component: () => import('../../pages/Pagination/index.vue') },
   { path: '/popover', component: () => import('../../pages/Popover/index.vue') },

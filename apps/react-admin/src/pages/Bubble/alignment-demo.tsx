@@ -1,0 +1,3 @@
+import { Bubble, BubbleContent } from '@fex-design/react/primitive/bubble'
+import { Card } from '@fex-design/react/ui/card'
+export function AlignmentDemo() { return <Card title="Alignment" description="Standalone bubbles own logical start/end alignment and inherit Message side when nested."><div className="grid gap-3"><Bubble side="start"><BubbleContent>Aligned to the start.</BubbleContent></Bubble><Bubble side="end" variant="solid"><BubbleContent>Aligned to the end.</BubbleContent></Bubble><div dir="rtl"><Bubble side="start"><BubbleContent>RTL logical start.</BubbleContent></Bubble></div></div></Card> }

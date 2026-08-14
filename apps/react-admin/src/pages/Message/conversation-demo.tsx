@@ -1,0 +1,6 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@fex-design/react/primitive/avatar'
+import { Bubble, BubbleContent } from '@fex-design/react/primitive/bubble'
+import { Message, MessageAvatar, MessageBody, MessageContent, MessageFooter, MessageHeader } from '@fex-design/react/primitive/message'
+import { Card } from '@fex-design/react/ui/card'
+
+export function ConversationDemo() { return <Card title="Conversation" description="Message owns the row, avatar, metadata, and side while Bubble owns the content surface."><div role="log" className="grid gap-4"><Message><MessageAvatar><Avatar><AvatarImage src="/avatar-demo.svg" alt="Assistant" /><AvatarFallback>AI</AvatarFallback></Avatar></MessageAvatar><MessageBody><MessageHeader>Assistant · 10:24</MessageHeader><MessageContent><Bubble variant="plain"><BubbleContent>I checked the report. Revenue grew 18% compared with last month.</BubbleContent></Bubble></MessageContent><MessageFooter>Generated just now</MessageFooter></MessageBody></Message><Message side="end"><MessageAvatar><Avatar><AvatarFallback>ME</AvatarFallback></Avatar></MessageAvatar><MessageBody><MessageContent><Bubble variant="solid"><BubbleContent>Great, break that down by region.</BubbleContent></Bubble></MessageContent><MessageFooter>Delivered</MessageFooter></MessageBody></Message></div></Card> }

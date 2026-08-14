@@ -1,0 +1,2 @@
+import { AvatarDemo } from './avatar-demo';import { ConversationDemo } from './conversation-demo';import { CustomContentDemo } from './custom-content-demo';import { GroupDemo } from './group-demo';import { HeaderFooterDemo } from './header-footer-demo';import { StatusActionsDemo } from './status-actions-demo'
+export function MessagePage(){return <main className="grid gap-space-xl p-page-padding"><ConversationDemo/><AvatarDemo/><GroupDemo/><HeaderFooterDemo/><StatusActionsDemo/><CustomContentDemo/></main>}

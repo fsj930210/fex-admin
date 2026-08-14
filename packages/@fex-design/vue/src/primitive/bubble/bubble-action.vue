@@ -1,0 +1,5 @@
+<script setup lang="ts">
+import { bubbleActionClassName } from '@fex-design/styles/bubble'; import { cn } from '@fex/utils'; import { computed, useAttrs } from 'vue'; import { Toggle } from '../toggle/toggle'
+defineOptions({inheritAttrs:false}); const props=withDefaults(defineProps<{pressed?:boolean;defaultPressed?:boolean;disabled?:boolean}>(),{pressed:undefined,defaultPressed:false,disabled:false}); const emit=defineEmits<{change:[boolean]}>(); const attrs=useAttrs(); const state=computed(()=>({pressed:props.pressed??props.defaultPressed,disabled:props.disabled})); const binding=computed(()=>({'data-slot':'bubble-action','data-state':state.value.pressed?'on':'off',class:cn(bubbleActionClassName(),attrs.class as string|undefined)}))
+</script>
+<template><slot name="render" :props="binding" :state="state"><Toggle v-bind="attrs" :pressed="pressed" :default-pressed="defaultPressed" :disabled="disabled" variant="default" size="sm" data-slot="bubble-action" :class="cn(bubbleActionClassName(), attrs.class as string | undefined)" @change="emit('change',$event)"><slot /></Toggle></slot></template>

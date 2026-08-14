@@ -4,6 +4,8 @@ import type { AppRoute } from '../types'
 const AnchorPage = lazy(() => import('../../pages/Anchor').then((module) => ({ default: module.AnchorPage })))
 const AspectRatioPage = lazy(() => import('../../pages/AspectRatio').then((module) => ({ default: module.AspectRatioPage })))
 const AvatarPage = lazy(() => import('../../pages/Avatar').then((module) => ({ default: module.AvatarPage })))
+const BubblePage = lazy(() => import('../../pages/Bubble').then((module) => ({ default: module.BubblePage })))
+const MessagePage = lazy(() => import('../../pages/Message').then((module) => ({ default: module.MessagePage })))
 const ProgressPage = lazy(() => import('../../pages/Progress').then((module) => ({ default: module.ProgressPage })))
 const SeparatorPage = lazy(() => import('../../pages/Separator').then((module) => ({ default: module.SeparatorPage })))
 const SkeletonPage = lazy(() => import('../../pages/Skeleton').then((module) => ({ default: module.SkeletonPage })))
@@ -184,7 +186,9 @@ export const componentRoutes: AppRoute[] = [
   { path: '/anchor', component: AnchorPage },
   { path: '/aspect-ratio', component: AspectRatioPage },
   { path: '/avatar', component: AvatarPage },
+  { path: '/bubble', component: BubblePage },
   { path: '/breadcrumb', component: BreadcrumbPage },
+  { path: '/message', component: MessagePage },
   { path: '/auto-complete', component: AutoCompletePage },
   { path: '/carousel', component: CarouselPage },
   {
