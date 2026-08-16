@@ -1,5 +1,7 @@
 # Badge Primitive
 
+`BadgeOverflow` belongs to the Badge family. `maxCount` keeps the first badges visible and summarizes the remainder; `renderOverflow` customizes that summary.
+
 ## 用途
 
 `Badge` 用于状态、分类、标签和短计数展示，不内置业务映射。

@@ -1,15 +1,10 @@
 import type { SelectionValue } from '../selection/types'
 import type { SelectFilterOption, SelectOption } from './types'
-
-function normalizeSearchText(value: string) {
-  return value.trim().toLocaleLowerCase()
-}
+import { filterBySearchText, matchSearchText } from '../search/filter-by-search-text'
 
 export const defaultSelectFilterOption: SelectFilterOption = (keyword, option) => {
-  const normalizedKeyword = normalizeSearchText(keyword)
-  if (!normalizedKeyword) return true
   const haystack = [option.searchText ?? option.label, ...(option.keywords ?? [])]
-  return haystack.some((value) => normalizeSearchText(value).includes(normalizedKeyword))
+  return matchSearchText(keyword, haystack)
 }
 
 export function filterSelectOptions<TValue extends SelectionValue>(
@@ -18,7 +13,12 @@ export function filterSelectOptions<TValue extends SelectionValue>(
   filterOption?: SelectFilterOption<TValue>,
 ) {
   if (!filterOption || !keyword) return options
-  return options.filter((option) => filterOption(keyword, option))
+  return filterOption === defaultSelectFilterOption
+    ? filterBySearchText(options, keyword, (option) => [
+        option.searchText ?? option.label,
+        ...(option.keywords ?? []),
+      ])
+    : options.filter((option) => filterOption(keyword, option))
 }
 
 export function groupSelectOptions<TValue extends SelectionValue>(

@@ -1,4 +1,4 @@
-import { Button as PrimitiveButton } from '@fex-design/react/primitive/button'
+import { Button as PrimitiveButton, ButtonGroup } from '@fex-design/react/primitive/button'
 import { Card } from '@fex-design/react/ui/card'
 import { Button } from '@fex-design/react/ui/button'
 import { PlusIcon } from '@fex-design/react/icon/plus'
@@ -57,10 +57,18 @@ export function ButtonPage() {
           </div>
         </header>
 
-        <div className="space-y-space-xl">
+        <div className="grid gap-space-xl">
           <Card title="Primitive" description="按钮底层骨架与最小行为。">
             <div className="flex min-w-0 flex-wrap items-center gap-space-md">
               <PrimitiveButton>Primitive button</PrimitiveButton>
+            </div>
+          </Card>
+
+          <Card title="Button group" description="Groups related actions without owning their value.">
+            <div className="flex flex-wrap items-start gap-space-lg">
+              <ButtonGroup><Button variant="outline">Previous</Button><Button variant="outline">Current</Button><Button variant="outline">Next</Button></ButtonGroup>
+              <ButtonGroup spacing={8}><Button>Save</Button><Button>Publish</Button></ButtonGroup>
+              <ButtonGroup orientation="vertical"><Button variant="outline">Move up</Button><Button variant="outline">Move down</Button></ButtonGroup>
             </div>
           </Card>
 

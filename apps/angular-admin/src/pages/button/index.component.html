@@ -11,7 +11,14 @@
       </div>
     </header>
 
-    <div class="space-y-space-xl">
+    <div class="grid gap-space-xl">
+      <fex-card title="Button group" description="Groups related actions without owning their value.">
+        <div class="flex flex-wrap items-start gap-space-lg">
+          <fex-button-group><button fexButton variant="outline">Previous</button><button fexButton variant="outline">Current</button><button fexButton variant="outline">Next</button></fex-button-group>
+          <fex-button-group [spacing]="8"><button fexButton>Save</button><button fexButton>Publish</button></fex-button-group>
+          <fex-button-group orientation="vertical"><button fexButton variant="outline">Move up</button><button fexButton variant="outline">Move down</button></fex-button-group>
+        </div>
+      </fex-card>
       <fex-card title="Primitive" description="Low-level button structure and minimal behavior.">
         <div class="flex min-w-0 flex-wrap items-center gap-space-md">
           <button fexButtonPrimitive>Primitive button</button>

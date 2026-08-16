@@ -3,6 +3,8 @@ import {
   inputAddonBeforeClassName,
   inputClearClassName,
   inputControlClassName,
+  inputGroupAddonClassName,
+  inputGroupClassName,
   inputPrefixClassName,
   inputRootClassName,
   inputSuffixClassName,
@@ -28,6 +30,37 @@ export interface InputRootProps
   invalid?: boolean
   status?: 'error' | 'warning' | undefined
   ref?: Ref<HTMLDivElement> | undefined
+}
+
+export interface InputGroupProps extends HTMLAttributes<HTMLDivElement> {
+  ref?: Ref<HTMLDivElement> | undefined
+}
+
+export function InputGroup({ className, ref, ...props }: InputGroupProps) {
+  return (
+    <div
+      {...props}
+      ref={ref}
+      role="group"
+      data-slot="input-group"
+      className={cn(inputGroupClassName, className)}
+    />
+  )
+}
+
+export interface InputGroupAddonProps extends ComponentProps<'span'> {
+  ref?: Ref<HTMLSpanElement> | undefined
+}
+
+export function InputGroupAddon({ className, ref, ...props }: InputGroupAddonProps) {
+  return (
+    <span
+      {...props}
+      ref={ref}
+      data-slot="input-group-addon"
+      className={cn(inputGroupAddonClassName, className)}
+    />
+  )
 }
 
 export function InputRoot({

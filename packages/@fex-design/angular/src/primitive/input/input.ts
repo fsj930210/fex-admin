@@ -3,6 +3,8 @@ import {
   inputAddonBeforeClassName,
   inputClearClassName,
   inputControlClassName,
+  inputGroupAddonClassName,
+  inputGroupClassName,
   inputPrefixClassName,
   inputRootClassName,
   inputSuffixClassName,
@@ -84,6 +86,26 @@ export class InputRoot implements OnChanges {
     this.clear.emit()
     this.focusElement?.focus()
   }
+}
+
+@Component({
+  selector: 'fex-input-group',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[class]': 'hostClassName()', role: 'group', 'data-slot': 'input-group' },
+  template: '<ng-content />',
+})
+export class InputGroup {
+  protected readonly hostClassName = createHostClassName(inputGroupClassName)
+}
+
+@Directive({
+  selector: '[fexInputGroupAddon]',
+  standalone: true,
+  host: { '[class]': 'hostClassName()', 'data-slot': 'input-group-addon' },
+})
+export class InputGroupAddon {
+  protected readonly hostClassName = createHostClassName(inputGroupAddonClassName)
 }
 
 @Directive({

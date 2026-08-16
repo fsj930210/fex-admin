@@ -1,5 +1,7 @@
 # Vue Primitive Button
 
+`ButtonGroup` is exported from the same entry. It groups related actions, supports horizontal or vertical orientation, and uses `spacing="0"` for connected controls without owning a selection value.
+
 ## Import
 
 ```vue

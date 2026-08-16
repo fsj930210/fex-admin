@@ -4,9 +4,13 @@ import {
   avatarFallbackClassName,
   avatarImageClassName,
   avatarImageHostClassName,
+  avatarGroupClassName,
+  avatarGroupOverflowClassName,
   type AvatarStyleProps,
 } from '@fex-design/styles/avatar'
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core'
+import { splitOverflowItems } from '@fex-design/core/collection/split-overflow-items'
+import { NgTemplateOutlet } from '@angular/common'
+import { ChangeDetectionStrategy, Component, ElementRef, TemplateRef, computed, contentChildren, effect, inject, input } from '@angular/core'
 import { createHostClassName } from '../../signals/host-class'
 import { AvatarContext } from './avatar-context'
 @Component({
@@ -23,11 +27,37 @@ import { AvatarContext } from './avatar-context'
   template: '<ng-content />',
 })
 export class Avatar {
+  readonly element = inject<ElementRef<HTMLElement>>(ElementRef)
   readonly size = input<AvatarStyleProps['size']>('md')
   readonly shape = input<AvatarStyleProps['shape']>('circle')
   protected readonly hostClassName = createHostClassName(() =>
     avatarClassName({ size: this.size(), shape: this.shape() }),
   )
+}
+
+@Component({
+  selector: 'fex-avatar-group',
+  standalone: true,
+  imports: [NgTemplateOutlet],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[class]': 'hostClassName()', role: 'group', 'data-slot': 'avatar-group' },
+  templateUrl: './avatar-group.html',
+})
+export class AvatarGroup {
+  readonly maxCount = input<number | undefined>()
+  readonly overflow = input<TemplateRef<{ $implicit: number; items: readonly Avatar[] }> | undefined>()
+  private readonly avatars = contentChildren(Avatar)
+  protected readonly hostClassName = createHostClassName(avatarGroupClassName)
+  protected readonly overflowCount = computed(() => splitOverflowItems(this.avatars(), this.maxCount()).overflowCount)
+  protected readonly overflowItems = computed(() => splitOverflowItems(this.avatars(), this.maxCount()).overflowItems)
+  protected readonly overflowClassName = `${avatarClassName({ size: 'md', shape: 'circle' })} ${avatarGroupOverflowClassName}`
+  constructor() {
+    effect(() => {
+      const split = splitOverflowItems(this.avatars(), this.maxCount())
+      const visible = new Set(split.visibleItems)
+      for (const avatar of this.avatars()) avatar.element.nativeElement.hidden = !visible.has(avatar)
+    })
+  }
 }
 @Component({
   selector: 'fex-avatar-image',

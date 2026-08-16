@@ -1,0 +1,5 @@
+<fex-card title="Avatar group" description="Keep the first avatars visible and summarize the rest.">
+  <fex-avatar-group [maxCount]="3">
+    @for (name of names; track name) { <fex-avatar><fex-avatar-fallback>{{ name }}</fex-avatar-fallback></fex-avatar> }
+  </fex-avatar-group>
+</fex-card>

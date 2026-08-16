@@ -89,4 +89,24 @@ export function buttonIconClassName({
 
 export const buttonSpinnerClassName = 'size-[1em] animate-spin'
 
+export const buttonGroupClassName = cva('inline-flex w-fit items-stretch', {
+  variants: {
+    orientation: {
+      horizontal: 'flex-row',
+      vertical: 'flex-col',
+    },
+    connected: {
+      true: [
+        '[&>[data-slot=button]]:rounded-none',
+        'data-[orientation=horizontal]:[&>[data-slot=button]:first-child]:rounded-s-md data-[orientation=horizontal]:[&>[data-slot=button]:last-child]:rounded-e-md',
+        'data-[orientation=vertical]:[&>[data-slot=button]:first-child]:rounded-t-md data-[orientation=vertical]:[&>[data-slot=button]:last-child]:rounded-b-md',
+        'data-[orientation=horizontal]:[&>[data-slot=button]+[data-slot=button]]:-ms-px data-[orientation=vertical]:[&>[data-slot=button]+[data-slot=button]]:-mt-px',
+      ].join(' '),
+      false: '',
+    },
+  },
+  defaultVariants: { orientation: 'horizontal', connected: true },
+})
+
 export type ButtonStyleProps = VariantProps<typeof buttonClassName>
+export type ButtonGroupStyleProps = VariantProps<typeof buttonGroupClassName>

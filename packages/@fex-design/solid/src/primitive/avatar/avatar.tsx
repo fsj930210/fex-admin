@@ -3,11 +3,17 @@ import {
   avatarClassName,
   avatarFallbackClassName,
   avatarImageClassName,
+  avatarGroupClassName,
+  avatarGroupOverflowClassName,
   type AvatarStyleProps,
 } from '@fex-design/styles/avatar'
+import { splitOverflowItems } from '@fex-design/core/collection/split-overflow-items'
 import { cn } from '@fex/utils'
 import {
   createContext,
+  children,
+  createMemo,
+  For,
   createSignal,
   Show,
   splitProps,
@@ -32,6 +38,24 @@ export function Avatar(props: ParentProps<JSX.HTMLAttributes<HTMLSpanElement>> &
       </span>
     </Context.Provider>
   )
+}
+
+export interface AvatarGroupProps extends ParentProps<JSX.HTMLAttributes<HTMLDivElement>> {
+  maxCount?: number
+  overflow?: (count: number, items: readonly JSX.Element[]) => JSX.Element
+}
+export function AvatarGroup(props: AvatarGroupProps) {
+  const [local, rest] = splitProps(props, ['class', 'children', 'maxCount', 'overflow'])
+  const resolved = children(() => local.children)
+  const split = createMemo(() => splitOverflowItems(resolved.toArray(), local.maxCount))
+  return <div {...rest} role="group" data-slot="avatar-group" class={cn(avatarGroupClassName, local.class)}>
+    <For each={split().visibleItems}>{(item) => item}</For>
+    <Show when={split().overflowCount > 0}>{local.overflow?.(split().overflowCount, split().overflowItems) ?? <AvatarGroupOverflow>+{split().overflowCount}</AvatarGroupOverflow>}</Show>
+  </div>
+}
+export function AvatarGroupOverflow(props: ParentProps<JSX.HTMLAttributes<HTMLSpanElement>>) {
+  const [local, rest] = splitProps(props, ['class', 'children'])
+  return <span {...rest} data-slot="avatar-group-overflow" class={cn(avatarClassName({ size: 'md', shape: 'circle' }), avatarGroupOverflowClassName, local.class)}>{local.children}</span>
 }
 export function AvatarImage(props: JSX.ImgHTMLAttributes<HTMLImageElement>) {
   const [local, rest] = splitProps(props, ['class', 'onLoad', 'onError'])

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import InputRoot from '@fex-design/svelte/primitive/input'
+  import InputRoot, { InputGroup, InputGroupAddon } from '@fex-design/svelte/primitive/input'
   import InputControl from '@fex-design/svelte/primitive/input-control'
   import InputPrefix from '@fex-design/svelte/primitive/input-prefix'
   import InputSuffix from '@fex-design/svelte/primitive/input-suffix'
@@ -18,7 +18,8 @@
   <div class="mx-auto w-full max-w-5xl space-y-space-xl">
     <header class="space-y-space-md"><a class="text-sm text-muted-foreground hover:text-foreground" href="/">返回首页</a><h1 class="text-2xl font-semibold text-foreground">Input primitives</h1><p class="max-w-2xl text-sm leading-6 text-muted-foreground">原生输入、值状态、前后缀、附加内容与清空行为均由独立 primitive 显式组合。</p></header>
 
-    <div class="space-y-space-xl">
+    <div class="grid gap-space-xl">
+      <Card title="Input group" description="Connects related inputs, addons, and actions while each control keeps its own value."><InputGroup class="max-w-xl"><InputGroupAddon>https://</InputGroupAddon><InputRoot><InputControl aria-label="Domain" placeholder="example.com" /></InputRoot><Button>Open</Button></InputGroup></Card>
       <Card title="Basic" description="InputRoot 管理输入协议，InputControl 保留原生 input 语义。"><InputRoot class="max-w-md"><InputControl name="email" placeholder="admin@example.com" type="email" /></InputRoot></Card>
       <Card title="Controlled and uncontrolled" description="受控值由调用方维护；非受控值只声明初始值。"><div class="grid gap-space-lg md:grid-cols-2"><div class="space-y-space-sm"><InputRoot value={controlledValue} onValueChange={next => controlledValue = next}><InputControl aria-label="受控输入" placeholder="受控输入" /></InputRoot><p class="text-sm text-muted-foreground">受控值：{controlledValue || '（空）'}</p></div><InputRoot defaultValue="uncontrolled-value"><InputControl aria-label="非受控输入" placeholder="非受控输入" /></InputRoot></div></Card>
       <Card title="Prefix" description="InputPrefix 位于输入框内部、原生输入内容之前。"><InputRoot class="max-w-md"><InputPrefix aria-hidden="true">@</InputPrefix><InputControl aria-label="用户名" placeholder="username" /></InputRoot></Card>

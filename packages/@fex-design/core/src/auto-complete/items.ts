@@ -4,6 +4,7 @@ import type {
   AutoCompleteKey,
   ResolvedAutoCompleteItem,
 } from './types'
+import { filterBySearchText } from '../search/filter-by-search-text'
 
 const defaultFieldNames = {
   key: 'key',
@@ -40,9 +41,7 @@ export function filterAutoCompleteItems<TItem>(
   if (typeof filterOption === 'function') {
     return items.filter((entry) => filterOption(keyword, entry.item))
   }
-  const normalized = keyword.trim().toLocaleLowerCase()
-  if (!normalized) return items
-  return items.filter((entry) => entry.value.toLocaleLowerCase().includes(normalized))
+  return filterBySearchText(items, keyword, (entry) => [entry.label, entry.value])
 }
 
 export type { AutoCompleteItem }

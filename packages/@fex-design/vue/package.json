@@ -9,7 +9,7 @@
     "./primitive/auto-complete": "./src/primitive/auto-complete/auto-complete.ts",
     "./primitive/breadcrumb": "./src/primitive/breadcrumb/breadcrumb.ts",
     "./primitive/bubble": "./src/primitive/bubble/bubble.ts",
-    "./primitive/button": "./src/primitive/button/button.vue",
+    "./primitive/button": "./src/primitive/button/button.ts",
     "./primitive/calendar": "./src/primitive/calendar/calendar.ts",
     "./primitive/cascader": "./src/primitive/cascader/cascader.ts",
     "./primitive/card": "./src/primitive/card/card.ts",

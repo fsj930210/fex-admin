@@ -1,13 +1,13 @@
 ﻿import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Button as PrimitiveButton } from '@fex-design/angular/primitive/button'
+import { Button as PrimitiveButton, ButtonGroup } from '@fex-design/angular/primitive/button'
 import { Button } from '@fex-design/angular/ui/button'
 import Card from '@fex-design/angular/ui/card'
 import { PlusIcon } from '@fex-design/angular/icon/plus'
 
 @Component({
   selector: 'fexButton-page',
-  imports: [PrimitiveButton, Button, Card, RouterLink, PlusIcon],
+  imports: [PrimitiveButton, ButtonGroup, Button, Card, RouterLink, PlusIcon],
   host: { class: 'block' },
   templateUrl: './index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

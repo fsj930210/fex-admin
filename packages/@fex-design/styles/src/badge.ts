@@ -26,4 +26,6 @@ export const badgeClassName = cva(
   },
 )
 
+export const badgeOverflowClassName = 'inline-flex flex-wrap items-center gap-1.5'
+
 export type BadgeStyleProps = VariantProps<typeof badgeClassName>

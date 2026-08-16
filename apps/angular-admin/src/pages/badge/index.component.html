@@ -7,12 +7,12 @@
         Use badges for compact status, category, and count labels.
       </p>
     </header>
-    <fex-card title="Variants" description="Badge visual styles."
+    <div class="grid gap-space-xl"><fex-card title="Variants" description="Badge visual styles."
       ><div class="flex min-w-0 flex-wrap items-center gap-space-md">
         @for (variant of variants; track variant) {
           <fex-badge [variant]="variant">{{ variant }}</fex-badge>
         }
       </div></fex-card
-    >
+    ><fex-card title="Overflow" description="Keeps the collection compact without changing its values."><fex-badge-overflow [maxCount]="3">@for (item of overflowItems; track item) { <fex-badge variant="secondary">{{ item }}</fex-badge> }</fex-badge-overflow></fex-card></div>
   </div>
 </main>

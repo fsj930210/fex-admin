@@ -1,5 +1,7 @@
 # Vue Input Primitives
 
+`InputGroup` and `InputGroupAddon` are exported from this family entry. They connect independently owned Input, Button, Select, and addon elements without introducing another value state.
+
 ## 用途与导入
 
 Input primitives 将值协议、原生输入、清空和附属内容拆开，供表单、Select、DatePicker 等组合使用。

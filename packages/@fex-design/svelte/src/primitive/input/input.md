@@ -1,5 +1,7 @@
 # Svelte Input Primitives
 
+`InputGroup` and `InputGroupAddon` are exported from this family entry. They connect independently owned Input, Button, Select, and addon elements without introducing another value state.
+
 ## 用途与导入
 
 ```svelte

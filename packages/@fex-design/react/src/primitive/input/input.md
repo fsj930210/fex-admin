@@ -1,5 +1,7 @@
 # React Input Primitives
 
+`InputGroup` and `InputGroupAddon` are exported from this family entry. They connect independently owned Input, Button, Select, and addon elements without introducing another value state.
+
 ## 用途
 
 Input primitives 将原生 input、输入值协议、清空操作和附属内容拆为可组合的原子组件。`InputRoot` 管理受控或非受控值；`InputControl` 是唯一的原生 `<input>`；DatePicker、Select 等输入型组件也可直接复用 `useInput` 的值与清空协议。

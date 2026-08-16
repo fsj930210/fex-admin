@@ -4,6 +4,8 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    "./collection/split-overflow-items": "./src/collection/split-overflow-items.ts",
+    "./search/filter-by-search-text": "./src/search/filter-by-search-text.ts",
     "./masonry/create-masonry-controller": "./src/masonry/create-masonry-controller.ts",
     "./masonry/layout": "./src/masonry/layout.ts",
     "./masonry/types": "./src/masonry/types.ts",

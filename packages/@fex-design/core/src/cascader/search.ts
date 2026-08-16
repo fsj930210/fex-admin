@@ -1,10 +1,9 @@
 import { getCascaderPath, type CascaderModel } from './model'
 import type { CascaderFilterOption, CascaderNode } from './types'
+import { matchSearchText } from '../search/filter-by-search-text'
 
 function defaultFilter(keyword: string, path: readonly CascaderNode[]): boolean {
-  const tokens = keyword.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean)
-  const labels = path.map((node) => node.label.toLocaleLowerCase())
-  return tokens.every((token) => labels.some((label) => label.includes(token)))
+  return matchSearchText(keyword, path.map((node) => node.label))
 }
 
 export function searchCascaderPaths(

@@ -27,3 +27,19 @@ export const inputClearClassName = [
   'flex shrink-0 items-center justify-center px-2 text-muted-foreground outline-none transition-colors hover:text-foreground',
   'focus-visible:bg-muted-background focus-visible:text-foreground disabled:pointer-events-none disabled:opacity-0 [&_svg]:size-4',
 ].join(' ')
+
+export const inputGroupClassName = [
+  'flex w-full min-w-0 items-stretch',
+  '[&>[data-slot=input-root]]:rounded-none [&>[data-slot=input-root]]:relative [&>[data-slot=input-root]]:z-0',
+  '[&>[data-slot=input-root]:focus-within]:z-10 [&>[data-slot=input-root]+[data-slot=input-root]]:-ms-px',
+  '[&>[data-slot=input-root]:first-child]:rounded-s-md [&>[data-slot=input-root]:last-child]:rounded-e-md',
+  '[&>[data-slot=button]]:rounded-none [&>[data-slot=button]]:relative [&>[data-slot=button]]:z-0',
+  '[&>[data-slot=button]:focus-visible]:z-10 [&>[data-slot=button]+*]:-ms-px',
+  '[&>[data-slot=button]:first-child]:rounded-s-md [&>[data-slot=button]:last-child]:rounded-e-md',
+  '[&>[data-slot=input-group-addon]+*]:-ms-px',
+].join(' ')
+
+export const inputGroupAddonClassName = [
+  'inline-flex h-8 shrink-0 items-center border border-border bg-muted-background px-2.5 text-sm text-muted-foreground',
+  'first:rounded-s-md last:rounded-e-md',
+].join(' ')

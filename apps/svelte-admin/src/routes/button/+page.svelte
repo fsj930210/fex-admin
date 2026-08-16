@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PrimitiveButton from '@fex-design/svelte/primitive/button'
+  import PrimitiveButton, { ButtonGroup } from '@fex-design/svelte/primitive/button'
   import Button from '@fex-design/svelte/ui/button'
   import Card from '@fex-design/svelte/ui/card'
   import PlusIcon from '@fex-design/svelte/icon/plus'
@@ -33,7 +33,8 @@
       </div>
     </header>
 
-    <div class="space-y-space-xl">
+    <div class="grid gap-space-xl">
+      <Card title="Button group" description="Groups related actions without owning their value."><div class="flex flex-wrap items-start gap-space-lg"><ButtonGroup><Button variant="outline">Previous</Button><Button variant="outline">Current</Button><Button variant="outline">Next</Button></ButtonGroup><ButtonGroup spacing={8}><Button>Save</Button><Button>Publish</Button></ButtonGroup><ButtonGroup orientation="vertical"><Button variant="outline">Move up</Button><Button variant="outline">Move down</Button></ButtonGroup></div></Card>
       <Card title="Primitive" description="按钮底层骨架与最小行为。">
         <div class="flex min-w-0 flex-wrap items-center gap-space-md">
           <PrimitiveButton>Primitive button</PrimitiveButton>

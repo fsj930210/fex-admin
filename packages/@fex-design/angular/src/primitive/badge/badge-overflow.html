@@ -1,0 +1,8 @@
+<ng-content />
+@if (overflowCount() > 0) {
+  @if (overflow(); as overflowTemplate) {
+    <ng-container *ngTemplateOutlet="overflowTemplate; context: { $implicit: overflowCount(), items: overflowItems() }" />
+  } @else {
+    <span data-slot="badge-overflow-count" [class]="overflowClassName">+{{ overflowCount() }}</span>
+  }
+}
