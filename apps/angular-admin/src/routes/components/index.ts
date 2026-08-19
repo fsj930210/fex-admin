@@ -1,13 +1,28 @@
 import type { Routes } from '@angular/router'
 
 export const componentRoutes: Routes = [
-  { path: 'aspect-ratio', loadComponent: () => import('../../pages/aspect-ratio/index.component').then((module) => module.AspectRatioComponent) },
-  { path: 'avatar', loadComponent: () => import('../../pages/avatar/index.component').then((module) => module.AvatarComponent) },
-  { path: 'bubble', loadComponent: () => import('../../pages/bubble/index.component').then((module) => module.BubbleComponent) },
+  {
+    path: 'aspect-ratio',
+    loadComponent: () =>
+      import('../../pages/aspect-ratio/index.component').then(
+        (module) => module.AspectRatioComponent,
+      ),
+  },
+  {
+    path: 'avatar',
+    loadComponent: () =>
+      import('../../pages/avatar/index.component').then((module) => module.AvatarComponent),
+  },
+  {
+    path: 'bubble',
+    loadComponent: () =>
+      import('../../pages/bubble/index.component').then((module) => module.BubbleComponent),
+  },
   // Anchor stays lazy like the rest of the component catalog.
   {
     path: 'anchor',
-    loadComponent: () => import('../../pages/anchor/index.component').then((module) => module.AnchorComponent),
+    loadComponent: () =>
+      import('../../pages/anchor/index.component').then((module) => module.AnchorComponent),
   },
   // Component demos stay lazy so each primitive route remains independently reloadable.
   {
@@ -55,7 +70,9 @@ export const componentRoutes: Routes = [
   {
     path: 'color-picker',
     loadComponent: () =>
-      import('../../pages/color-picker/index.component').then((module) => module.ColorPickerComponent),
+      import('../../pages/color-picker/index.component').then(
+        (module) => module.ColorPickerComponent,
+      ),
   },
   {
     path: 'context-menu',
@@ -122,6 +139,11 @@ export const componentRoutes: Routes = [
       import('../../pages/input-number/index.component').then((module) => module.InputNumberPage),
   },
   {
+    path: 'i18n',
+    loadComponent: () =>
+      import('../../pages/i18n/index.component').then((module) => module.I18nPage),
+  },
+  {
     path: 'input-otp',
     loadComponent: () =>
       import('../../pages/input-otp/index.component').then((module) => module.InputOTPPage),
@@ -141,8 +163,16 @@ export const componentRoutes: Routes = [
     loadComponent: () =>
       import('../../pages/menu/index.component').then((module) => module.MenuComponent),
   },
-  { path: 'masonry', loadComponent: () => import('../../pages/masonry/index.component').then((module) => module.MasonryComponent) },
-  { path: 'message', loadComponent: () => import('../../pages/message/index.component').then((module) => module.MessageComponent) },
+  {
+    path: 'masonry',
+    loadComponent: () =>
+      import('../../pages/masonry/index.component').then((module) => module.MasonryComponent),
+  },
+  {
+    path: 'message',
+    loadComponent: () =>
+      import('../../pages/message/index.component').then((module) => module.MessageComponent),
+  },
   {
     path: 'mentions',
     loadComponent: () =>
@@ -158,9 +188,21 @@ export const componentRoutes: Routes = [
     loadComponent: () =>
       import('../../pages/popover/index.component').then((module) => module.PopoverComponent),
   },
-  { path: 'progress', loadComponent: () => import('../../pages/progress/index.component').then((module) => module.ProgressComponent) },
-  { path: 'separator', loadComponent: () => import('../../pages/separator/index.component').then((module) => module.SeparatorComponent) },
-  { path: 'skeleton', loadComponent: () => import('../../pages/skeleton/index.component').then((module) => module.SkeletonComponent) },
+  {
+    path: 'progress',
+    loadComponent: () =>
+      import('../../pages/progress/index.component').then((module) => module.ProgressComponent),
+  },
+  {
+    path: 'separator',
+    loadComponent: () =>
+      import('../../pages/separator/index.component').then((module) => module.SeparatorComponent),
+  },
+  {
+    path: 'skeleton',
+    loadComponent: () =>
+      import('../../pages/skeleton/index.component').then((module) => module.SkeletonComponent),
+  },
   {
     path: 'radio',
     loadComponent: () =>

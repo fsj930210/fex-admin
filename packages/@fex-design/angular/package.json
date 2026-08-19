@@ -106,7 +106,8 @@
     "./signals/create-data-table": "./src/signals/create-data-table.ts",
     "./signals/date-utils": "./src/signals/date-utils.ts",
     "./signals/host-class": "./src/signals/host-class.ts",
-    "./services/toast": "./src/services/toast.ts"
+    "./services/toast": "./src/services/toast.ts",
+    "./i18n": "./src/i18n/i18n.ts"
   },
   "dependencies": {
     "@fex-design/core": "workspace:*",

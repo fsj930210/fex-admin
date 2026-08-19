@@ -1,14 +1,30 @@
 import { lazy } from 'solid-js'
 import type { AppRoute } from '../types'
 
-const AnchorPage = lazy(() => import('../../pages/Anchor').then((module) => ({ default: module.AnchorPage })))
-const AspectRatioPage = lazy(() => import('../../pages/AspectRatio').then((module) => ({ default: module.AspectRatioPage })))
-const AvatarPage = lazy(() => import('../../pages/Avatar').then((module) => ({ default: module.AvatarPage })))
-const BubblePage = lazy(() => import('../../pages/Bubble').then((module) => ({ default: module.BubblePage })))
-const MessagePage = lazy(() => import('../../pages/Message').then((module) => ({ default: module.MessagePage })))
-const ProgressPage = lazy(() => import('../../pages/Progress').then((module) => ({ default: module.ProgressPage })))
-const SeparatorPage = lazy(() => import('../../pages/Separator').then((module) => ({ default: module.SeparatorPage })))
-const SkeletonPage = lazy(() => import('../../pages/Skeleton').then((module) => ({ default: module.SkeletonPage })))
+const AnchorPage = lazy(() =>
+  import('../../pages/Anchor').then((module) => ({ default: module.AnchorPage })),
+)
+const AspectRatioPage = lazy(() =>
+  import('../../pages/AspectRatio').then((module) => ({ default: module.AspectRatioPage })),
+)
+const AvatarPage = lazy(() =>
+  import('../../pages/Avatar').then((module) => ({ default: module.AvatarPage })),
+)
+const BubblePage = lazy(() =>
+  import('../../pages/Bubble').then((module) => ({ default: module.BubblePage })),
+)
+const MessagePage = lazy(() =>
+  import('../../pages/Message').then((module) => ({ default: module.MessagePage })),
+)
+const ProgressPage = lazy(() =>
+  import('../../pages/Progress').then((module) => ({ default: module.ProgressPage })),
+)
+const SeparatorPage = lazy(() =>
+  import('../../pages/Separator').then((module) => ({ default: module.SeparatorPage })),
+)
+const SkeletonPage = lazy(() =>
+  import('../../pages/Skeleton').then((module) => ({ default: module.SkeletonPage })),
+)
 
 const ButtonPage = lazy(() =>
   import('../../pages/Button').then((module) => ({ default: module.ButtonPage })),
@@ -60,6 +76,9 @@ const EmptyPage = lazy(() =>
 )
 const InputPage = lazy(() =>
   import('../../pages/Input').then((module) => ({ default: module.InputPage })),
+)
+const I18nPage = lazy(() =>
+  import('../../pages/I18n').then((module) => ({ default: module.I18nPage })),
 )
 const InputNumberPage = lazy(() =>
   import('../../pages/InputNumber').then((module) => ({ default: module.InputNumberPage })),
@@ -261,6 +280,10 @@ export const componentRoutes: AppRoute[] = [
   {
     path: '/input',
     component: InputPage,
+  },
+  {
+    path: '/i18n',
+    component: I18nPage,
   },
   {
     path: '/input-number',

@@ -68,6 +68,8 @@
     "./cascader/search": "./src/cascader/search.ts",
     "./cascader/types": "./src/cascader/types.ts",
     "./store/create-store": "./src/store/create-store.ts",
+    "./i18n/create-i18n-controller": "./src/i18n/create-i18n-controller.ts",
+    "./i18n/types": "./src/i18n/types.ts",
     "./theme/apply-theme": "./src/theme/apply-theme.ts",
     "./theme/constants": "./src/theme/constants.ts",
     "./theme/create-theme-controller": "./src/theme/create-theme-controller.ts",
@@ -197,6 +199,7 @@
     "culori": "^4.0.2",
     "embla-carousel": "8.6.0",
     "embla-carousel-autoplay": "8.6.0",
+    "i18next": "^26.3.6",
     "spark-md5": "3.0.2",
     "uqr": "^0.1.3"
   },

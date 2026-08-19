@@ -25,6 +25,7 @@
     { href: '/empty', label: 'Empty' },
     { href: '/form', label: 'Form' },
     { href: '/input', label: 'Input' },
+    { href: '/i18n', label: 'I18n' },
     { href: '/input-number', label: 'InputNumber' },
     { href: '/input-otp', label: 'InputOTP' },
     { href: '/kbd', label: 'Kbd' },

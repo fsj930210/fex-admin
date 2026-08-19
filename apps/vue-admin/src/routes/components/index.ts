@@ -24,6 +24,7 @@ export const componentRoutes = [
   { path: '/empty', component: () => import('../../pages/Empty/index.vue') },
   { path: '/form', component: () => import('../../pages/Form/index.vue') },
   { path: '/input', component: () => import('../../pages/Input/index.vue') },
+  { path: '/i18n', component: () => import('../../pages/I18n/index.vue') },
   { path: '/input-number', component: () => import('../../pages/InputNumber/index.vue') },
   { path: '/input-otp', component: () => import('../../pages/InputOTP/index.vue') },
   { path: '/kbd', component: () => import('../../pages/Kbd/index.vue') },

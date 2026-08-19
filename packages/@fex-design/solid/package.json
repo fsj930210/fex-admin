@@ -106,7 +106,8 @@
     "./primitives/create-move": "./src/primitives/create-move.ts",
     "./primitives/create-resize": "./src/primitives/create-resize.ts",
     "./primitives/create-sortable": "./src/primitives/create-sortable.ts",
-    "./primitives/create-toasts": "./src/primitives/create-toasts.ts"
+    "./primitives/create-toasts": "./src/primitives/create-toasts.ts",
+    "./i18n": "./src/i18n/index.tsx"
   },
   "dependencies": {
     "@fex-design/core": "workspace:*",

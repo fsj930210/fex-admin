@@ -4,6 +4,12 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
+      "@fex-design/core/collection/split-overflow-items": [
+        "packages/@fex-design/core/src/collection/split-overflow-items.ts"
+      ],
+      "@fex-design/core/search/filter-by-search-text": [
+        "packages/@fex-design/core/src/search/filter-by-search-text.ts"
+      ],
       "@fex-design/core/masonry/create-masonry-controller": [
         "packages/@fex-design/core/src/masonry/create-masonry-controller.ts"
       ],
@@ -186,6 +192,12 @@
       ],
       "@fex-design/core/store/create-store": [
         "packages/@fex-design/core/src/store/create-store.ts"
+      ],
+      "@fex-design/core/i18n/create-i18n-controller": [
+        "packages/@fex-design/core/src/i18n/create-i18n-controller.ts"
+      ],
+      "@fex-design/core/i18n/types": [
+        "packages/@fex-design/core/src/i18n/types.ts"
       ],
       "@fex-design/core/theme/apply-theme": [
         "packages/@fex-design/core/src/theme/apply-theme.ts"
@@ -858,6 +870,9 @@
       ],
       "@fex-design/angular/services/toast": [
         "packages/@fex-design/angular/src/services/toast.ts"
+      ],
+      "@fex-design/angular/i18n": [
+        "packages/@fex-design/angular/src/i18n/i18n.ts"
       ]
     }
   }

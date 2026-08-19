@@ -107,7 +107,8 @@
     "./composables/use-move": "./src/composables/use-move.ts",
     "./composables/use-resize": "./src/composables/use-resize.ts",
     "./composables/use-sortable": "./src/composables/use-sortable.ts",
-    "./composables/use-toasts": "./src/composables/use-toasts.ts"
+    "./composables/use-toasts": "./src/composables/use-toasts.ts",
+    "./i18n": "./src/i18n/index.ts"
   },
   "dependencies": {
     "@fex-design/core": "workspace:*",

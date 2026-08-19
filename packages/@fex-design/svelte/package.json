@@ -290,7 +290,8 @@
     "./actions/dropzone": "./src/actions/dropzone.ts",
     "./actions/move": "./src/actions/move.ts",
     "./actions/resize": "./src/actions/resize.ts",
-    "./actions/sortable": "./src/actions/sortable.ts"
+    "./actions/sortable": "./src/actions/sortable.ts",
+    "./i18n": "./src/i18n/index.ts"
   },
   "dependencies": {
     "@fex-design/core": "workspace:*",

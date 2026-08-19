@@ -119,7 +119,8 @@
     "./hooks/use-toasts": "./src/hooks/use-toasts.ts",
     "./hooks/use-tooltip": "./src/primitive/tooltip/use-tooltip.ts",
     "./hooks/use-tour": "./src/primitive/tour/use-tour.ts",
-    "./hooks/use-unmount": "./src/hooks/use-unmount.ts"
+    "./hooks/use-unmount": "./src/hooks/use-unmount.ts",
+    "./i18n": "./src/i18n/index.tsx"
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^2.0.1",

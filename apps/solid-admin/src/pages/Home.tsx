@@ -1,8 +1,8 @@
 import { A } from '@solidjs/router'
 import { For } from 'solid-js'
 
-  const componentLinks = [
-    { href: '/anchor', label: 'Anchor' },
+const componentLinks = [
+  { href: '/anchor', label: 'Anchor' },
   { href: '/aspect-ratio', label: 'AspectRatio' },
   { href: '/avatar', label: 'Avatar' },
   { href: '/auto-complete', label: 'AutoComplete' },
@@ -10,12 +10,12 @@ import { For } from 'solid-js'
   { href: '/cascader', label: 'Cascader' },
   { href: '/button', label: 'Button' },
   { href: '/calendar', label: 'Calendar' },
-    { href: '/card', label: 'Card' },
-    { href: '/checkbox', label: 'Checkbox' },
-    { href: '/collapse', label: 'Collapse' },
-    { href: '/color-picker', label: 'ColorPicker' },
+  { href: '/card', label: 'Card' },
+  { href: '/checkbox', label: 'Checkbox' },
+  { href: '/collapse', label: 'Collapse' },
+  { href: '/color-picker', label: 'ColorPicker' },
   { href: '/context-menu', label: 'ContextMenu' },
-    { href: '/dialog', label: 'Dialog' },
+  { href: '/dialog', label: 'Dialog' },
   { href: '/drawer', label: 'Drawer' },
   { href: '/dropdown', label: 'Dropdown' },
   { href: '/data-table', label: 'Data Table' },
@@ -28,6 +28,7 @@ import { For } from 'solid-js'
   { href: '/empty', label: 'Empty' },
   { href: '/form', label: 'Form' },
   { href: '/input', label: 'Input' },
+  { href: '/i18n', label: 'I18n' },
   { href: '/input-number', label: 'InputNumber' },
   { href: '/input-otp', label: 'InputOTP' },
   { href: '/kbd', label: 'Kbd' },
@@ -64,8 +65,8 @@ import { For } from 'solid-js'
   { href: '/resizable', label: 'Resizable' },
   { href: '/textarea', label: 'Textarea' },
   { href: '/theme-provider', label: 'ThemeProvider' },
-    { href: '/time-picker', label: 'TimePicker' },
-    { href: '/tooltip', label: 'Tooltip' },
+  { href: '/time-picker', label: 'TimePicker' },
+  { href: '/tooltip', label: 'Tooltip' },
   { href: '/tour', label: 'Tour' },
   { href: '/watermark', label: 'Watermark' },
   // eslint-disable-next-line unicorn/no-array-sort -- this literal is newly created and not shared.

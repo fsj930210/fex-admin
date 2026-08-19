@@ -34,6 +34,7 @@ export class HomeComponent {
     { to: '/empty', label: 'Empty' },
     { to: '/form', label: 'Form' },
     { to: '/input', label: 'Input' },
+    { to: '/i18n', label: 'I18n' },
     { to: '/input-number', label: 'InputNumber' },
     { to: '/input-otp', label: 'InputOTP' },
     { to: '/kbd', label: 'Kbd' },

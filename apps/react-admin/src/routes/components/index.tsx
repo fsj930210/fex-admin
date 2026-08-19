@@ -2,9 +2,18 @@ import { createLazyRouteElement } from '../lazy'
 import { ListboxPage } from '../../pages/Listbox'
 
 export const componentRoutes = [
-  { path: '/aspect-ratio', element: createLazyRouteElement(() => import('../../pages/AspectRatio'), 'AspectRatioPage') },
-  { path: '/avatar', element: createLazyRouteElement(() => import('../../pages/Avatar'), 'AvatarPage') },
-  { path: '/bubble', element: createLazyRouteElement(() => import('../../pages/Bubble'), 'BubblePage') },
+  {
+    path: '/aspect-ratio',
+    element: createLazyRouteElement(() => import('../../pages/AspectRatio'), 'AspectRatioPage'),
+  },
+  {
+    path: '/avatar',
+    element: createLazyRouteElement(() => import('../../pages/Avatar'), 'AvatarPage'),
+  },
+  {
+    path: '/bubble',
+    element: createLazyRouteElement(() => import('../../pages/Bubble'), 'BubblePage'),
+  },
   {
     path: '/anchor',
     element: createLazyRouteElement(() => import('../../pages/Anchor'), 'AnchorPage'),
@@ -118,6 +127,10 @@ export const componentRoutes = [
     element: createLazyRouteElement(() => import('../../pages/Input'), 'InputPage'),
   },
   {
+    path: '/i18n',
+    element: createLazyRouteElement(() => import('../../pages/I18n'), 'I18nPage'),
+  },
+  {
     path: '/input-number',
     element: createLazyRouteElement(() => import('../../pages/InputNumber'), 'InputNumberPage'),
   },
@@ -141,8 +154,14 @@ export const componentRoutes = [
     path: '/menu',
     element: createLazyRouteElement(() => import('../../pages/Menu'), 'MenuPage'),
   },
-  { path: '/masonry', element: createLazyRouteElement(() => import('../../pages/Masonry'), 'MasonryPage') },
-  { path: '/message', element: createLazyRouteElement(() => import('../../pages/Message'), 'MessagePage') },
+  {
+    path: '/masonry',
+    element: createLazyRouteElement(() => import('../../pages/Masonry'), 'MasonryPage'),
+  },
+  {
+    path: '/message',
+    element: createLazyRouteElement(() => import('../../pages/Message'), 'MessagePage'),
+  },
   {
     path: '/mentions',
     element: createLazyRouteElement(() => import('../../pages/Mentions'), 'MentionsPage'),
@@ -155,7 +174,10 @@ export const componentRoutes = [
     path: '/popover',
     element: createLazyRouteElement(() => import('../../pages/Popover'), 'PopoverPage'),
   },
-  { path: '/progress', element: createLazyRouteElement(() => import('../../pages/Progress'), 'ProgressPage') },
+  {
+    path: '/progress',
+    element: createLazyRouteElement(() => import('../../pages/Progress'), 'ProgressPage'),
+  },
   {
     path: '/radio',
     element: createLazyRouteElement(() => import('../../pages/Radio'), 'RadioPage'),
@@ -172,8 +194,14 @@ export const componentRoutes = [
     path: '/spinner',
     element: createLazyRouteElement(() => import('../../pages/Spinner'), 'SpinnerPage'),
   },
-  { path: '/separator', element: createLazyRouteElement(() => import('../../pages/Separator'), 'SeparatorPage') },
-  { path: '/skeleton', element: createLazyRouteElement(() => import('../../pages/Skeleton'), 'SkeletonPage') },
+  {
+    path: '/separator',
+    element: createLazyRouteElement(() => import('../../pages/Separator'), 'SeparatorPage'),
+  },
+  {
+    path: '/skeleton',
+    element: createLazyRouteElement(() => import('../../pages/Skeleton'), 'SkeletonPage'),
+  },
   {
     path: '/slider',
     element: createLazyRouteElement(() => import('../../pages/Slider'), 'SliderPage'),

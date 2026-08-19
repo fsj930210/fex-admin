@@ -18,6 +18,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/upload-api/, ''),
       },
+      '/i18n-api': {
+        target: 'http://127.0.0.1:4310',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/i18n-api/, '/i18n'),
+      },
     },
   },
 })
