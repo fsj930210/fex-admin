@@ -35,7 +35,7 @@ import { SearchIcon } from './search-icon'
 
 export function Example() {
   return (
-    <InputRoot defaultValue="fex-admin">
+    <InputRoot defaultValue="fex-design">
       <InputAddonBefore>https://</InputAddonBefore>
       <InputPrefix>
         <SearchIcon aria-hidden />

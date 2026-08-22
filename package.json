@@ -1,5 +1,5 @@
 {
-  "name": "fex-admin",
+  "name": "fex-design",
   "private": true,
   "type": "module",
   "scripts": {
@@ -14,11 +14,11 @@
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
     "check": "nx run-many -t lint,typecheck,build",
-    "dev:react": "nx dev react-admin",
-    "dev:vue": "nx dev vue-admin",
-    "dev:solid": "nx dev solid-admin",
-    "dev:svelte": "nx dev svelte-admin",
-    "dev:angular": "nx dev angular-admin"
+    "dev:react": "nx dev react-app",
+    "dev:vue": "nx dev vue-app",
+    "dev:solid": "nx dev solid-app",
+    "dev:svelte": "nx dev svelte-app",
+    "dev:angular": "nx dev angular-app"
   },
   "devDependencies": {
     "@angular/compiler-cli": "22.1.0",

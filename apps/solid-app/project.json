@@ -1,0 +1,21 @@
+{
+  "name": "solid-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/solid-app/src",
+  "projectType": "application",
+  "targets": {
+    "dev": {
+      "command": "vite --host 127.0.0.1 --port 4002 --strictPort",
+      "options": { "cwd": "apps/solid-app" }
+    },
+    "build": {
+      "command": "vite build",
+      "options": { "cwd": "apps/solid-app" },
+      "outputs": ["{projectRoot}/dist"]
+    },
+    "typecheck": { "command": "tsc --noEmit -p apps/solid-app/tsconfig.json" },
+    "lint": {
+      "command": "oxlint apps/solid-app/src apps/solid-app/vite.config.ts"
+    }
+  }
+}

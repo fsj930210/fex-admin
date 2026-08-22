@@ -15,11 +15,11 @@
 
 ## 目录约定
 
-- `apps/react-admin`：React 管理端应用，React 19，Vite。
-- `apps/vue-admin`：Vue 管理端应用。
-- `apps/solid-admin`：Solid 管理端应用。
-- `apps/svelte-admin`：Svelte 管理端应用。
-- `apps/angular-admin`：Angular 管理端应用。
+- `apps/react-app`：React 管理端应用，React 19，Vite。
+- `apps/vue-app`：Vue 管理端应用。
+- `apps/solid-app`：Solid 管理端应用。
+- `apps/svelte-app`：Svelte 管理端应用。
+- `apps/angular-app`：Angular 管理端应用。
 - `apps/docs`：项目文档站。
 - `packages/@fex-design/core`：跨框架组件内核、类型、纯逻辑能力。
 - `packages/@fex-design/react`：React 组件库，对外导入前缀使用 `@fex-design/react/*`。

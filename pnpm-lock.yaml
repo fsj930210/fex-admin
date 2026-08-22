@@ -63,7 +63,7 @@ importers:
         specifier: latest
         version: 3.3.10(typescript@6.0.3)
 
-  apps/angular-admin:
+  apps/angular-app:
     dependencies:
       '@angular/animations':
         specifier: 22.1.0
@@ -148,7 +148,7 @@ importers:
         specifier: 'catalog:'
         version: 6.0.3
 
-  apps/react-admin:
+  apps/react-app:
     dependencies:
       '@fex-design/core':
         specifier: workspace:*
@@ -200,7 +200,7 @@ importers:
         specifier: 'catalog:'
         version: 6.0.3
 
-  apps/solid-admin:
+  apps/solid-app:
     dependencies:
       '@fex-design/core':
         specifier: workspace:*
@@ -243,7 +243,7 @@ importers:
         specifier: 'catalog:'
         version: 6.0.3
 
-  apps/svelte-admin:
+  apps/svelte-app:
     dependencies:
       '@fex-design/core':
         specifier: workspace:*
@@ -289,7 +289,7 @@ importers:
         specifier: 'catalog:'
         version: 6.0.3
 
-  apps/vue-admin:
+  apps/vue-app:
     dependencies:
       '@fex-design/core':
         specifier: workspace:*

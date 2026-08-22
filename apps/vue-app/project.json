@@ -1,0 +1,19 @@
+{
+  "name": "vue-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/vue-app/src",
+  "projectType": "application",
+  "targets": {
+    "dev": {
+      "command": "vite --host 127.0.0.1 --port 4004 --strictPort",
+      "options": { "cwd": "apps/vue-app" }
+    },
+    "build": {
+      "command": "vite build",
+      "options": { "cwd": "apps/vue-app" },
+      "outputs": ["{projectRoot}/dist"]
+    },
+    "typecheck": { "command": "vue-tsc --noEmit -p apps/vue-app/tsconfig.json" },
+    "lint": { "command": "oxlint apps/vue-app/src apps/vue-app/vite.config.ts" }
+  }
+}
